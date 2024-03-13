@@ -17,6 +17,7 @@ function mainLayout({
   children,
   title = 'Pocket',
   canonical,
+  noIndex,
   noNav = false,
   selectedNavLink,
   isFullWidthLayout = false,
@@ -28,6 +29,7 @@ function mainLayout({
     <>
       <PocketHead
         title={title}
+        noIndex={noIndex}
         canonical={canonical}
         metaData={metaData}
         forceWebView={forceWebView}
