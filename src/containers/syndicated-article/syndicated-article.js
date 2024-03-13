@@ -99,7 +99,10 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
     image: mainImage,
     type: 'article'
   }
-  const canonical = publisher?.attributeCanonicalToPublisher ? false : url
+
+  // We don't provide canonical, we simply noIndex our syndicated articles
+  // This means we don't inadvertently clobber or steal publisher SEO
+  const canonical = false
   const noIndex = publisher?.attributeCanonicalToPublisher
 
   const ArticleLayout = isMobileWebView ? MobileLayout : Layout
