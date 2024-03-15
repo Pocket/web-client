@@ -15,6 +15,7 @@
     "postcss-preset-env": "^9.3.0"
   },
   "dependencies": {
-    "@ui/icons": "workspace:*"
+    "@ui/icons": "workspace:*",
+    "@common/state": "workspace:*"
   }
 }
