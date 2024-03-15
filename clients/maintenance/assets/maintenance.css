@@ -1,0 +1,177 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Set core body defaults */
+body {
+  margin: 0;
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  text-align: center;
+  color: #1a1a1a;
+  font-family:
+    'Graphik Web',
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Open Sans',
+    'Helvetica Neue',
+    sans-serif;
+}
+
+a,
+a:active,
+a:visited {
+  color: #1a1a1a;
+}
+a:hover {
+  color: #008078;
+}
+p {
+  margin: 0;
+}
+main,
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 40px;
+}
+
+main .visuals {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 64px;
+}
+main .animated {
+  display: block;
+  width: 60%;
+  max-width: 236px;
+}
+main .static {
+  display: none;
+  width: 160px;
+}
+
+main .content {
+  padding: 140px 0;
+  max-width: 572px;
+  font-size: 19px;
+  line-height: 28px;
+}
+
+h2 {
+  margin: 16px 0;
+  font-size: 28px;
+  line-height: 36px;
+}
+
+footer {
+  border-top: 1px solid #cdcdcd;
+  padding: 40px 0;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+footer .content {
+  max-width: 452px;
+  color: #676767;
+}
+
+footer .stores {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+footer .stores > div:first-of-type {
+  margin-right: 20px;
+}
+footer .stores > div:last-of-type {
+  margin-left: 20px;
+}
+
+footer .QRcode {
+  margin-bottom: 18px;
+}
+
+@media (max-width: 550px) {
+  main .visuals {
+    margin-bottom: 40px;
+  }
+
+  main .content {
+    padding: 56px 0 28px;
+  }
+  footer {
+    padding: 28px 0;
+  }
+  footer .QRcode {
+    display: none;
+  }
+}
+@media (max-width: 360px) {
+  main .visuals {
+    display: none;
+  }
+}
+@media (max-width: 280px) {
+  main .visuals {
+    display: none;
+  }
+  main,
+  footer {
+    padding: 0 10px;
+  }
+  footer .content {
+    margin-top: 24px;
+  }
+  footer .stores > div:first-of-type {
+    margin-right: 2px;
+  }
+  footer .stores > div:last-of-type {
+    margin-left: 2px;
+  }
+}
+@media (max-height: 1024px) {
+  main .visuals {
+    margin-bottom: 40px;
+  }
+
+  main .content {
+    padding: 56px 0 28px;
+  }
+}
+@media (max-height: 800px) {
+  main .content {
+    padding-top: 30px;
+  }
+  main .visuals {
+    margin-bottom: 20px;
+  }
+  main .animated {
+    width: 40%;
+  }
+}
+@media (max-height: 680px) {
+  main .visuals {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion) {
+  main .animated {
+    display: none;
+  }
+  main .static {
+    display: block;
+  }
+}
