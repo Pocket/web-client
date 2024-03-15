@@ -103,6 +103,7 @@
     "@popperjs/core": "2.11.8",
     "@sentry/integrations": "7.106.1",
     "@sentry/nextjs": "7.106.1",
+    "@storybook/react": "8.0.0",
     "@types/jest": "^29.5.12",
     "@ui/icons": "workspace:*",
     "body-scroll-lock": "4.0.0-beta.0",
