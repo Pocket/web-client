@@ -9,7 +9,10 @@
   "license": "ISC",
   "devDependencies": {
     "@config/typescript-config": "workspace:*",
-    "@types/react": "18.2.65"
+    "@types/react": "18.2.65",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-nested": "^6.0.1",
+    "postcss-preset-env": "^9.3.0"
   },
   "dependencies": {
     "@ui/icons": "workspace:*"
