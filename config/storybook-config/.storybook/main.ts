@@ -1,7 +1,7 @@
 import type { StorybookConfig } from '@storybook/nextjs'
 import path from 'node:path'
 
-const rootDirectory = '../'
+const rootDirectory = '../../../'
 const config: StorybookConfig = {
   stories: [
     path.join(__dirname, rootDirectory, 'ui/**/*.story.@(js|jsx|ts|tsx)'),

@@ -1,9 +1,9 @@
 import i18n from './i18n' // This just needs to be present
-import '../public/static/pocket-web-ui.css' // This is our base styles
+import '../../../public/static/pocket-web-ui.css' // This is our base styles
 import { I18nextProvider } from 'react-i18next'
 
 import React, { Suspense } from 'react'
-import { Preview } from '@storybook/react'
+import type { Preview } from '@storybook/react'
 
 const customViewports = {
   screenTinyHandset: {

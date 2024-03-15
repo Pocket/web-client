@@ -120,3 +120,5 @@ cdktf.out/
 # Typescript
 next-env.d.ts
 
+
+*storybook.log
