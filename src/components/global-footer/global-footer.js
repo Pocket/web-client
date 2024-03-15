@@ -364,7 +364,7 @@ export const GlobalFooter = (props) => {
                   </li>
 
                   <li>
-                    <a href="https://getpocket.com/welcome?src=footer_v2">
+                    <a href="https://support.mozilla.org/en-US/products/pocket/pocket-browser-extensions?src=footer_v2">
                       {t('global-footer:save-to-pocket-extensions', 'Save to Pocket extensions')}
                     </a>
                   </li>
@@ -378,11 +378,6 @@ export const GlobalFooter = (props) => {
                   <li>
                     <a href="https://getpocket.com/about?src=footer_v2">
                       {t('global-footer:about', 'About')}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://getpocket.com/jobs?src=footer_v2">
-                      {t('global-footer:careers', 'Careers')}
                     </a>
                   </li>
                   <li>
@@ -402,17 +397,6 @@ export const GlobalFooter = (props) => {
                       {t('global-footer:get-help', 'Get help')}
                     </a>
                   </li>
-                  <li>
-                    <a href="https://getpocket.com/developer?src=footer_v2">
-                      {t('global-footer:developer-api', 'Developer API')}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://getpocket.com/publisher?src=footer_v2">
-                      {t('global-footer:pocket-for-publishers', 'Pocket for publishers')}
-                    </a>
-                  </li>
-
                   <li>
                     <a href="https://getpocket.com/sponsor?src=footer_v2">
                       {t('global-footer:advertise', 'Advertise')}
