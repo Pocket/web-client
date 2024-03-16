@@ -461,6 +461,10 @@ importers:
         version: 9.5.1(postcss@8.4.35)
 
   ui/icons:
+    dependencies:
+      '@emotion/react':
+        specifier: 11.11.4
+        version: 11.11.4(@types/react@18.2.65)(react@18.2.0)
     devDependencies:
       '@config/typescript-config':
         specifier: workspace:*
