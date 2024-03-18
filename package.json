@@ -39,20 +39,20 @@
     "url": "https://github.com/Pocket/web-client/issues"
   },
   "devDependencies": {
-    "@config/eslint-config": "workspace:*",
-    "@config/typescript-config": "workspace:*",
     "@commitlint/cli": "^19.1.0",
     "@commitlint/config-conventional": "^19.1.0",
+    "@config/eslint-config": "workspace:*",
+    "@config/typescript-config": "workspace:*",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "11.1.0",
     "@semantic-release/exec": "6.0.3",
     "@semantic-release/git": "10.0.1",
     "@semantic-release/release-notes-generator": "12.1.0",
-    "lint-staged": "15.2.2",
     "husky": "9.0.11",
-    "prettier": "^3.2.5"
+    "lint-staged": "15.2.2",
+    "prettier": "^3.2.5",
+    "typescript": "5.4.2"
   },
-  "dependencies": {},
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
