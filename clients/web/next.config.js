@@ -10,6 +10,7 @@ const SentryWebpackPluginOptions = {
 }
 
 const nextOptions = {
+  transpilePackages: ['@ui/icons', '@ui/components', '@common/i18n'],
   i18n,
   env: {
     SHOW_DEV: process.env.SHOW_DEV,
