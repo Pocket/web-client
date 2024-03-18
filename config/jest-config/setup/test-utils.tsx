@@ -1,8 +1,8 @@
 import { RenderOptions, render } from '@testing-library/react'
-import { ViewportProvider } from '../../../src/components/viewport-provider/viewport-provider'
+import { ViewportProvider } from '../../../clients/web/src/components/viewport-provider/viewport-provider'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { rootReducer, initializeStore } from '../../../src/store'
+import { rootReducer, initializeStore } from '../../../clients/web/src/store'
 
 import { i18n } from './test-i18n'
 import { I18nextProvider } from 'react-i18next'
