@@ -10,6 +10,7 @@
   "packageManager": "pnpm@8.15.4",
   "scripts": {
     "dev": "RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included node ./server.local.js",
+    "dev:snowplow": "RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included TEST_SNOWPLOW=included node ./server.local.js",
     "analyze": "ANALYZE=true next build",
     "build": "next build",
     "start": "next start -p 80",
@@ -18,7 +19,6 @@
     "test": "jest --reporters='default'",
     "test:ci": "jest --ci",
     "test:update": "jest --u",
-    "test:snowplow": "RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included TEST_SNOWPLOW=included node ./server.local.js",
     "locale:inject": "node ./common/localization/locale-inject.mjs",
     "locale:parse": "cd common/localization/ && pnpm extract",
     "schema": "rover graph fetch pocket-client-api@current >| schema.graphql"

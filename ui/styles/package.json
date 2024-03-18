@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "postcss index.pcss -o global.css",
-    "build": "postcss index.pcss -o ../../public/static/pocket-web-ui.css"
+    "postinstall": "postcss index.pcss -o global.css"
   },
   "keywords": [],
   "author": "",
