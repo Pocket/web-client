@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall": "postcss index.pcss -o global.css",
     "build": "postcss index.pcss -o ../../public/static/pocket-web-ui.css"
   },
   "keywords": [],
@@ -14,6 +15,7 @@
     "postcss": "8.4.35",
     "postcss-cli": "11.0.0",
     "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-import": "16.0.1",
     "postcss-nested": "6.0.1",
     "postcss-preset-env": "^9.5.1"
   }

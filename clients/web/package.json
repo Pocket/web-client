@@ -19,9 +19,6 @@
     "test:ci": "jest --ci",
     "test:update": "jest --u",
     "test:snowplow": "RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included TEST_SNOWPLOW=included node ./server.local.js",
-    "storybook": "cd config/storybook-config && pnpm storybook",
-    "storybook:build": "cd config/storybook-config && pnpm storybook-build",
-    "storybook:start": "pnpm dlx serve config/storybook-config/storybook-static",
     "locale:inject": "node ./common/localization/locale-inject.mjs",
     "locale:parse": "cd common/localization/ && pnpm extract",
     "schema": "rover graph fetch pocket-client-api@current >| schema.graphql"
@@ -73,6 +70,7 @@
     "@storybook/react": "8.0.0",
     "@types/jest": "^29.5.12",
     "@ui/icons": "workspace:*",
+    "@ui/styles": "workspace:*",
     "body-scroll-lock": "4.0.0-beta.0",
     "clipboard-copy": "4.0.1",
     "dayjs": "1.11.10",
