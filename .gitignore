@@ -114,8 +114,8 @@ cdktf.out/
 .aws/dist/
 
 # Certificates 
-/localhost.web-client.getpocket.com-key.pem
-/localhost.web-client.getpocket.com.pem
+localhost.web-client.getpocket.com-key.pem
+localhost.web-client.getpocket.com.pem
 
 # Typescript
 next-env.d.ts
