@@ -10,6 +10,7 @@
   "packageManager": "pnpm@8.15.4",
   "scripts": {
     "dev": "RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included node ./server.local.js",
+    "dev:snowplow": "TEST_SNOWPLOW=included pnpm dev",
     "analyze": "ANALYZE=true next build",
     "build": "next build",
     "start": "next start -p 80",
@@ -18,10 +19,6 @@
     "test": "jest --reporters='default'",
     "test:ci": "jest --ci",
     "test:update": "jest --u",
-    "test:snowplow": "RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included TEST_SNOWPLOW=included node ./server.local.js",
-    "storybook": "cd config/storybook-config && pnpm storybook",
-    "storybook:build": "cd config/storybook-config && pnpm storybook-build",
-    "storybook:start": "pnpm dlx serve config/storybook-config/storybook-static",
     "locale:inject": "node ./common/localization/locale-inject.mjs",
     "locale:parse": "cd common/localization/ && pnpm extract",
     "schema": "rover graph fetch pocket-client-api@current >| schema.graphql"
@@ -29,16 +26,7 @@
   "jest-junit": {
     "addFileAttribute": "true"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Pocket/web-client.git"
-  },
-  "author": "",
   "license": "ISC",
-  "homepage": "https://github.com/Pocket/web-client#readme",
-  "bugs": {
-    "url": "https://github.com/Pocket/web-client/issues"
-  },
   "devDependencies": {
     "@apollo/rover": "0.22.0",
     "@config/eslint-config": "workspace:*",
