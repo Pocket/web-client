@@ -71,10 +71,10 @@ jobs:
       - run:
           name: Run unit tests
           command: |
-              TEST=$(circleci tests glob src/**/*.spec.js | circleci tests split --split-by=timings)
+              TEST=$(circleci tests glob clients/web/src/**/*.spec.js | circleci tests split --split-by=timings)
               pnpm test:ci $TEST -- -w=50%
       - run:
-          command: cp junit.xml ~/junit/
+          command: cp clients/web/junit.xml ~/junit/
           when: always
       - store_test_results:
           path: ~/junit
@@ -157,7 +157,9 @@ jobs:
           name: Setup workspace
           command: |
             mkdir -p /tmp/workspace/app_prod
-            cp -r . /tmp/workspace/app_prod
+            cp ./Dockerfile /tmp/workspace/app_prod/Dockerfile
+            cp ./.dockerignore /tmp/workspace/app_prod/.dockerignore
+            cp -r ./clients/web/.next /tmp/workspace/app_prod/.next
       # Persist built files to workspace
       - persist_to_workspace:
           root: /tmp/workspace
