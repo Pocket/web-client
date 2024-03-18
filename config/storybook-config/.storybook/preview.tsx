@@ -1,8 +1,8 @@
+import '@ui/styles/global.css' // This is our base styles
 import i18n from './i18n' // This just needs to be present
-import '../../../public/static/pocket-web-ui.css' // This is our base styles
 import { I18nextProvider } from 'react-i18next'
 
-import React, { Suspense } from 'react'
+import React from 'react'
 import type { Preview } from '@storybook/react'
 
 const customViewports = {
@@ -115,11 +115,9 @@ const preview: Preview = {
       document.body.classList.add(`colormode-${context.globals.theme}`)
 
       return (
-        <Suspense fallback={<div>loading translations...</div>}>
-          <I18nextProvider i18n={i18n}>
-            <Story {...context} />
-          </I18nextProvider>
-        </Suspense>
+        <I18nextProvider i18n={i18n}>
+          <Story {...context} />
+        </I18nextProvider>
       )
     }
   ]

@@ -15,7 +15,10 @@
     "postcss-preset-env": "^9.3.0"
   },
   "dependencies": {
+    "@common/state": "workspace:*",
+    "@storybook/react": "8.0.0",
     "@ui/icons": "workspace:*",
-    "@common/state": "workspace:*"
+    "@ui/styles": "workspace:*",
+    "next": "14.1.3"
   }
 }

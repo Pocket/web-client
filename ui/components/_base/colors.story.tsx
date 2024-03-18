@@ -8,13 +8,16 @@ const meta: Meta = {
 
 export default meta
 
+/**
+ *
+ */
 export function Colors() {
   return (
     <div className={style.colorGrid}>
       {semanticColors.map((colorName) => {
         const colorStyle = { backgroundColor: `var(--${colorName})` }
         return (
-          <div className={style.colorBlock} key={colorName}>
+          <div key={colorName} className={style.colorBlock}>
             <div style={colorStyle} />
             {colorName}
           </div>
