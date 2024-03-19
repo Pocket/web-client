@@ -157,9 +157,7 @@ jobs:
           name: Setup workspace
           command: |
             mkdir -p /tmp/workspace/app_prod
-            cp ./Dockerfile /tmp/workspace/app_prod/Dockerfile
-            cp ./.dockerignore /tmp/workspace/app_prod/.dockerignore
-            cp -r ./clients/web/.next /tmp/workspace/app_prod/.next
+            cp -r . /tmp/workspace/app_prod
       # Persist built files to workspace
       - persist_to_workspace:
           root: /tmp/workspace
@@ -196,7 +194,7 @@ jobs:
             --cache-control max-age=31536000 \
             --include "*" \
             --exclude "BUILD_ID" \
-            app_prod/.next s3://readitlater-deploy/web-client/_next
+            app_prod/clients/web/.next s3://readitlater-deploy/web-client/_next
 
   # ——————————————————————————————————————————————————————————————
   # !! NEW ALB
