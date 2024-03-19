@@ -7,6 +7,7 @@ ARG RELEASE_VERSION
 ## Add pnpm to all followup builder images
 RUN yarn global add pnpm
 
+## Copy relative to the dockerfile into the workdir
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED 1
