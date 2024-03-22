@@ -46,6 +46,9 @@
     "jest-junit": "16.0.0",
     "next-router-mock": "0.9.12",
     "prettier": "3.2.5",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-nested": "^6.0.1",
+    "postcss-preset-env": "^9.3.0",
     "typescript": "5.4.2"
   },
   "dependencies": {

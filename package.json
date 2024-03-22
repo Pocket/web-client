@@ -5,9 +5,9 @@
   "main": "index.js",
   "engines": {
     "node": ">=20.0.0",
-    "pnpm": ">=8.15.4"
+    "pnpm": ">=8.15.5"
   },
-  "packageManager": "pnpm@8.15.4",
+  "packageManager": "pnpm@8.15.5",
   "scripts": {
     "dev": "pnpm --filter @client/web dev",
     "dev:snowplow": "pnpm --filter @client/web dev:snowplow",
