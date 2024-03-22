@@ -12,6 +12,7 @@ import { InstagramMonoIcon } from '@ui/icons/InstagramMonoIcon'
 import { Trans, useTranslation } from 'next-i18next'
 import { Languages } from 'connectors/languages/languages'
 import { PREMIUM_URL } from 'common/constants'
+import Link from 'next/link'
 
 const appStoreBadge =
   'https://assets.getpocket.com/web-ui/assets/apple-app-store-badge.2928664fe1fc6aca88583a6f606d60ba.svg'
@@ -380,11 +381,6 @@ export const GlobalFooter = (props) => {
                       {t('global-footer:about', 'About')}
                     </a>
                   </li>
-                  <li>
-                    <a href="https://blog.getpocket.com?src=footer_v2">
-                      {t('global-footer:blog', 'Blog')}
-                    </a>
-                  </li>
                 </ul>
               </nav>
             </div>
@@ -428,12 +424,12 @@ export const GlobalFooter = (props) => {
                 &copy; {new Date().getFullYear()}{' '}
                 {t('global-footer:read-it-later-inc', 'Read It Later, Inc.')}
               </span>
-              <a href="https://getpocket.com/privacy?src=footer_v2">
+              <Link href="privacy?src=footer_v2">
                 {t('global-footer:privacy-policy', 'Privacy policy')}
-              </a>
-              <a href="https://getpocket.com/tos?src=footer_v2">
+              </Link>
+              <Link href="/tos?src=footer_v2">
                 {t('global-footer:terms-of-service', 'Terms of service')}
-              </a>
+              </Link>
               <button
                 onClick={oneTrustClickHandler}
                 id="ot-sdk-btn"
@@ -465,13 +461,6 @@ export const GlobalFooter = (props) => {
                       id="twitter-footer-icon"
                       title="Twitter"
                       description={t('global-footer:view-twitter', 'View our Twitter profile')}
-                    />
-                  </a>
-                  <a href="https://instagram.com/pocket" target="_blank" rel="noopener noreferrer">
-                    <InstagramMonoIcon
-                      id="instagram-footer-icon"
-                      title="Instagram"
-                      description={t('global-footer:view-instagram', 'Find us on Instagram')}
                     />
                   </a>
                 </div>

@@ -1,0 +1,58 @@
+.base {
+  padding: 56px 80px 96px 80px;
+  color: var(--color-textSecondary);
+  line-height: 1.5;
+
+  h1,
+  h2,
+  h3 {
+    color: var(--color-textPrimary);
+    font-weight: 600;
+  }
+  h1 {
+    font-size: 3rem;
+    line-height: 1;
+  }
+  h2 {
+    font-size: 1.5rem;
+    line-height: 1.08;
+    text-transform: uppercase;
+    margin-top: 48px;
+  }
+  h3 {
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }
+
+  section {
+    max-width: 745px;
+  }
+
+  p {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  ul {
+    padding-left: 24px;
+  }
+
+  li {
+    font-size: 1rem;
+  }
+
+  a {
+    color: var(--color-textSecondary);
+    font-size: 1rem;
+    &:hover {
+      color: var(--color-actionPrimary);
+    }
+  }
+}
+
+.effectiveDate {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-textSecondary);
+}
