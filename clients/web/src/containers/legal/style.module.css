@@ -1,7 +1,19 @@
 .base {
-  padding: 56px 80px 96px 80px;
+  padding: 56px 8px 96px 8px;
+
+  @media (min-width: 720px) {
+    padding: 56px 24px 96px 24px;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 56px 80px 96px 80px;
+  }
+
   color: var(--color-textSecondary);
   line-height: 1.5;
+  & > div {
+    max-width: 745px;
+  }
 
   h1,
   h2,
@@ -24,8 +36,11 @@
     line-height: 1.5;
   }
 
-  section {
-    max-width: 745px;
+  h1 + p > em {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--color-textSecondary);
   }
 
   p {
@@ -48,10 +63,4 @@
       color: var(--color-actionPrimary);
     }
   }
-}
-.effectiveDate {
-  font-size: 1.5rem;
-  font-weight: 600;
-  line-height: 1.25;
-  color: var(--color-textSecondary);
 }
