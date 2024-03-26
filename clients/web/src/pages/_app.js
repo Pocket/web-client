@@ -1,4 +1,4 @@
-import '../../public/static/pocket-web-ui.css'
+import '@ui/styles/global.css'
 import { GOOGLE_ANALYTICS_ID } from 'common/constants'
 import { LOGIN_URL } from 'common/constants'
 
