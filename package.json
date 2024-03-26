@@ -16,7 +16,7 @@
     "start": "pnpm --filter @client/web start",
     "start:local": "pnpm --filter @client/web start:local",
     "lint": "pnpm --filter @client/web lint",
-    "test": "pnpm --filter @client/web test",
+    "test": "pnpm --filter @client/web test && pnpm --filter @ui/components test",
     "test:ci": "pnpm --filter @client/web test:ci",
     "test:update": "pnpm --filter @client/web test:update",
     "storybook": "pnpm --filter @config/storybook storybook",
