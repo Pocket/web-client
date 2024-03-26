@@ -1,24 +1,6 @@
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
-
-const LANGUAGE_BY_LOCALE = {
-  'zh-TW': 'Chinese (Taiwan)',
-  zh: 'Chinese',
-  nl: 'Dutch',
-  en: 'English',
-  fr: 'French',
-  'fr-CA': 'French (Canada)',
-  de: 'German',
-  it: 'Italian',
-  ja: 'Japanese',
-  ko: 'Korean',
-  pl: 'Polish',
-  pt: 'Portuguese',
-  'pt-BR': 'Portuguese (Brazil)',
-  ru: 'Russian',
-  es: 'Spanish (Spain)',
-  'es-LA': 'Spanish (Latin America)'
-}
+import { LANGUAGE_BY_LOCALE } from '@common/localization'
 
 export function Languages() {
   const translation = useTranslation()
