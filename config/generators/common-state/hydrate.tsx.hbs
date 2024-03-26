@@ -1,0 +1,29 @@
+'use client'
+
+// Types
+import type { {{pascalCase stateType}}{{pascalCase stateName}}State } from '.'
+
+// Components
+import { useRef } from 'react'
+
+//State
+import { use{{pascalCase stateType}}{{pascalCase stateName}} } from '.'
+
+/**
+ * Hydrate{{pascalCase stateType}}{{pascalCase stateName}}
+ * ---
+ * This is what we use to hydrate state on the client.  
+ * As it is marked `use client` it will only run once the 
+ * page is rendered on the client
+ */
+export function Hydrate{{pascalCase stateType}}{{pascalCase stateName}}({ state }: { state: {{pascalCase stateType}}{{pascalCase stateName}}State }) {
+  // We only want to do this once so we set a ref to make sure of that
+  const initialized = useRef(false)
+  if (!initialized.current) {
+    use{{pascalCase stateType}}{{pascalCase stateName}}.setState(state)
+    initialized.current = true
+  }
+  // Since this is a component we want to make sure
+  // we aren't rendering anything
+  return null
+}

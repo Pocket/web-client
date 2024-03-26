@@ -1,0 +1,84 @@
+// Test Setup
+import { act, renderHook } from '@testing-library/react'
+
+// Config
+import config from '@config/env'
+import { server } from '@config/jest/setup/server'
+import { HttpResponse, http } from 'msw'
+
+// Component
+import { use{{pascalCase stateType}}{{pascalCase stateName}} } from './'
+
+const API_URL = 'some.api.url'
+const id = '123abc'
+
+describe('use{{pascalCase stateType}}{{pascalCase stateName}}', () => {
+  it('starts an empty follow ids array', () => {
+    const { result } = renderHook(() => use{{pascalCase stateType}}{{pascalCase stateName}}())
+    expect(result.current.{{camelCase stateName}}Ids).toEqual([])
+  })
+})
+
+describe('use{{pascalCase stateType}}{{pascalCase stateName}} — adding a {{pascalCase stateName}}', () => {
+  it('adds an id to the {{ stateName }} ids with a positive server response', async () => {
+    server.use(
+      http.put(`${API_URL}/{{ stateType }}-{{ stateName }}`, async () => {
+        return HttpResponse.json({ id, following: true }, { status: 200 })
+      })
+    )
+
+    const { result } = renderHook(() => use{{pascalCase stateType}}{{pascalCase stateName}}())
+    expect(result.current.{{camelCase stateName}}Ids).toEqual([])
+
+    await act(() => result.current.add{{pascalCase stateName}}(id))
+    expect(result.current.{{camelCase stateName}}Ids).toEqual([id])
+  })
+
+  it('falls back to prior state on bad response', async () => {
+    server.use(
+      http.put(`${API_URL}/{{ stateType }}-{{ stateName }}`, async () => {
+        return HttpResponse.error()
+      })
+    )
+
+    const { result } = renderHook(() => use{{pascalCase stateType}}{{pascalCase stateName}}())
+    expect(result.current.{{camelCase stateName}}Ids).toEqual([])
+
+    await act(() => result.current.add{{pascalCase stateName}}(id))
+    expect(result.current.{{camelCase stateName}}Ids).toEqual([])
+  })
+})
+
+describe('use{{pascalCase stateType}}{{pascalCase stateName}} — removing a follow', () => {
+  it('removes {{pascalCase stateName}} state if response is good', async () => {
+    server.use(
+      http.delete(`${API_URL}/{{ stateType }}-{{ stateName }}`, async () => {
+        return HttpResponse.json({}, { status: 200 })
+      })
+    )
+
+    const { result } = renderHook(() => use{{pascalCase stateType}}{{pascalCase stateName}}())
+
+    await act(() => use{{pascalCase stateType}}{{pascalCase stateName}}.setState({ {{camelCase stateName}}Ids: [id] }))
+    expect(result.current.{{camelCase stateName}}Ids).toEqual([id])
+
+    await act(() => result.current.remove{{pascalCase stateName}}(id))
+    expect(result.current.{{camelCase stateName}}Ids).toEqual([])
+  })
+
+  it('keeps {{pascalCase stateName}} state if response is bad', async () => {
+    server.use(
+      http.delete(`${API_URL}/{{ stateType }}-{{ stateName }}`, async () => {
+        return HttpResponse.error()
+      })
+    )
+
+    const { result } = renderHook(() => use{{pascalCase stateType}}{{pascalCase stateName}}())
+
+    await act(() => use{{pascalCase stateType}}{{pascalCase stateName}}.setState({ {{camelCase stateName}}Ids: [id] }))
+    expect(result.current.{{camelCase stateName}}Ids).toEqual([id])
+
+    await act(() => result.current.remove{{pascalCase stateName}}(id))
+    expect(result.current.{{camelCase stateName}}Ids).toEqual([id])
+  })
+})

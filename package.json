@@ -22,6 +22,7 @@
     "storybook": "pnpm --filter @config/storybook storybook",
     "storybook:build": "pnpm --filter @config/storybook build-storybook",
     "storybook:start": "pnpm --filter @config/storybook start-storybook",
+    "gen": "pnpm --filter @config/generators gen",
     "locale:inject": "node ./common/localization/locale-inject.mjs",
     "locale:parse": "cd common/localization/ && pnpm extract",
     "schema": "rover graph fetch pocket-client-api@current >| schema.graphql",

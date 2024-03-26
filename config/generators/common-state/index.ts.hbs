@@ -1,0 +1,116 @@
+// Libraries
+import config from '@config/env'
+import { create } from 'zustand'
+import { devtools } from 'zustand/middleware'
+
+// Types
+export type {{pascalCase stateType}}{{pascalCase stateName}}State = {
+  {{camelCase stateName}}Ids: string[] // Array of ids that track {{ stateType}} that are {{stateName}}
+}
+
+export type {{pascalCase stateType}}{{pascalCase stateName}} = {
+  isUpdating: boolean // Flag indicating whether the state is in transition
+  add{{pascalCase stateName }}: (id: string) => void // Action to add {{stateName }}
+  remove{{pascalCase stateName }}: (id: string) => void // Action to remove {{stateName }}
+  is{{pascalCase stateName }}: (id: string) => boolean // Helper to know if {{stateType }} is {{stateName }}
+} & {{pascalCase stateType}}{{pascalCase stateName}}State
+
+const MASTODON_API_URL = config.mastodon.client.url
+
+/**
+ * use{{pascalCase stateType}}{{pascalCase stateName}}
+ * ---
+ * The state for {{stateType}} {{stateName}}
+ * @function add{{pascalCase stateName }} — add {{stateType}} {{stateName}}
+ * @function remove{{pascalCase stateName }} — remove {{stateType}} {{stateName}}
+ * @function is{{pascalCase stateName}} — helper to get {{stateType}} {{stateName}} status
+ */
+export const use{{pascalCase stateType}}{{pascalCase stateName}} = create<{{pascalCase stateType}}{{pascalCase stateName}}>()(
+  devtools((set, get) => ({
+    /** State Values */
+    {{camelCase stateName}}Ids: [],
+    isUpdating: false,
+
+    /** State Action — add{{pascalCase stateName }} */
+    add{{pascalCase stateName }}: async (id: string): Promise<void> => {
+      try {
+        // Adding id to {{ stateName }}Ids optimistically
+        set((state) => {
+          const updatedIds = Array.from(new Set([...state.{{camelCase stateName}}Ids, id]))
+          return { {{camelCase stateName}}Ids: updatedIds, isUpdating: true }
+        })
+
+        // Send a signal to the server
+        const response = await fetch(`${MASTODON_API_URL}/{{ stateType }}-{{ stateName }}`, {
+          method: 'PUT',
+          body: JSON.stringify({ id})
+        })
+
+        // If the response is not okay, throw an error which to be handled in the catch statement
+        if ('error' in response) {
+          const errorString = response.error as string
+          throw new {{pascalCase stateType}}{{pascalCase stateName}}StateError(errorString)
+        }
+
+        // Otherwise, assuming things came back proper, we are no longer updating
+        set({ isUpdating: false })
+      } catch (error) {
+        // If we are NOT successful we set things back to where they were
+        set((state) => {
+          const updatedIds = state.{{camelCase stateName}}Ids.filter((currentId) => currentId !== id)
+          return { {{camelCase stateName}}Ids: updatedIds, isUpdating: false }
+        })
+      }
+    },
+
+    /** State Action — remove{{pascalCase stateName }} */
+    remove{{pascalCase stateName }}: async (id: string): Promise<void> => {
+      try {
+        // Removing id from {{ stateName }}Ids optimistically
+        set((state) => {
+          const updatedIds = state.{{camelCase stateName}}Ids.filter((currentId) => currentId !== id)
+          return { {{camelCase stateName}}Ids: updatedIds, isUpdating: false }
+        })
+
+        // Send a signal to the server to follow this user
+        const response = await fetch(`${MASTODON_API_URL}/{{ stateType }}-{{ stateName }}`, {
+          method: 'DELETE',
+          body: JSON.stringify({ id})
+        })
+
+        // If the response is not okay, throw an error which to be handled in the catch statement
+        if ('error' in response) {
+          const errorString = response.error as string
+          throw new {{pascalCase stateType}}{{pascalCase stateName}}StateError(errorString)
+        }
+
+        // Otherwise, assuming things came back proper, we are no longer updating
+        set({ isUpdating: false })
+      } catch (error) {
+        // If we are NOT successful we set things back to where they were
+        set((state) => {
+          const updatedIds = Array.from(new Set([...state.{{camelCase stateName}}Ids, id]))
+          return { {{camelCase stateName}}Ids: updatedIds, isUpdating: true }
+        })
+      }
+    },
+
+    /** State Utility: is{{pascalCase stateName}} */
+    is{{pascalCase stateName}}: (id: string): boolean => get().{{camelCase stateName}}Ids.includes(id)
+  }))
+)
+
+
+/**
+ * {{pascalCase stateType}}{{pascalCase stateName}}StateError
+ * ---
+ * Custom error for better visual grepping in observability
+ */
+class {{pascalCase stateType}}{{pascalCase stateName}}StateError extends Error {
+  name = '{{pascalCase stateType}}{{pascalCase stateName}}StateError'
+  constructor(message: string) {
+    super(message)
+    // 👇️ because we are extending a built-in class
+    Object.setPrototypeOf(this, {{pascalCase stateType}}{{pascalCase stateName}}StateError.prototype)
+  }
+}

@@ -1,0 +1,15 @@
+// Test Utilities
+import { render, screen } from '@config/jest'
+import '@testing-library/jest-dom'
+
+// Components
+import { {{pascalCase componentName}} as Component } from '.'
+
+describe('renders {{pascalCase componentName}}', () => {
+  it('with defaults', () => {
+    const rendered = render(<Component/>)
+    const renderedComponent = screen.getByTestId('{{kebabCase componentName}}')
+    expect(renderedComponent).toBeInTheDocument()
+    expect(rendered.container).toMatchSnapshot()
+  })
+})
