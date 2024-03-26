@@ -112,6 +112,15 @@ importers:
       jsonwebtoken:
         specifier: 9.0.2
         version: 9.0.2
+      legal-docs:
+        specifier: https://github.com/mozilla/legal-docs.git#1913c916a522934c1e159313806bee717e87f7f0
+        version: github.com/mozilla/legal-docs/1913c916a522934c1e159313806bee717e87f7f0
+      marked:
+        specifier: 12.0.1
+        version: 12.0.1
+      marked-custom-heading-id:
+        specifier: 2.0.7
+        version: 2.0.7(marked@12.0.1)
       match-sorter:
         specifier: 6.3.4
         version: 6.3.4
@@ -3752,7 +3761,7 @@ packages:
       '@types/react': '>=16'
       react: '>=16'
     dependencies:
-      '@types/mdx': 2.0.11
+      '@types/mdx': 2.0.12
       '@types/react': 18.2.65
       react: 18.2.0
     dev: true
@@ -5735,8 +5744,8 @@ packages:
       '@types/unist': 3.0.2
     dev: false
 
-  /@types/mdx@2.0.11:
-    resolution: {integrity: sha512-HM5bwOaIQJIQbAYfax35HCKxx7a3KrK3nBtIqJgSOitivTD1y3oW9P3rxY9RkXYPUk7y/AjAohfHKmFpGE79zw==}
+  /@types/mdx@2.0.12:
+    resolution: {integrity: sha512-H9VZ9YqE+H28FQVchC83RCs5xQ2J7mAAv6qdDEaWmXEVl3OpdH+xfrSUzQ1lp7U7oSTRZ0RvW08ASPJsYBi7Cw==}
     dev: true
 
   /@types/mime@1.3.5:
@@ -12677,6 +12686,14 @@ packages:
       react: 18.2.0
     dev: true
 
+  /marked-custom-heading-id@2.0.7(marked@12.0.1):
+    resolution: {integrity: sha512-/UcmA6ZaGRVcTAhhXpXZ8ZaSCN39U/511lWa0po3GY3cTHx8J/CgeUWnBriF+IXkMa67w6UXBhrwR1iEdUEwag==}
+    peerDependencies:
+      marked: '>=1 <13'
+    dependencies:
+      marked: 12.0.1
+    dev: false
+
   /marked-terminal@7.0.0(marked@12.0.1):
     resolution: {integrity: sha512-sNEx8nn9Ktcm6pL0TnRz8tnXq/mSS0Q1FRSwJOAqw4lAB4l49UeDf85Gm1n9RPFm5qurCPjwi1StAQT2XExhZw==}
     engines: {node: '>=16.0.0'}
@@ -12696,7 +12713,6 @@ packages:
     resolution: {integrity: sha512-Y1/V2yafOcOdWQCX0XpAKXzDakPOpn6U0YLxTJs3cww6VxOzZV1BTOOYWLvH3gX38cq+iLwljHHTnMtlDfg01Q==}
     engines: {node: '>= 18'}
     hasBin: true
-    dev: true
 
   /match-sorter@6.3.4:
     resolution: {integrity: sha512-jfZW7cWS5y/1xswZo8VBOdudUiSd9nifYRWphc9M5D/ee4w4AoXLgBEdRbgVaxbMuagBPeUC5y2Hi8DO6o9aDg==}
@@ -17902,6 +17918,7 @@ packages:
 
   /wcwidth@1.0.1:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}
+    requiresBuild: true
     dependencies:
       defaults: 1.0.4
     dev: true
@@ -18270,4 +18287,10 @@ packages:
 
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
+    dev: false
+
+  github.com/mozilla/legal-docs/1913c916a522934c1e159313806bee717e87f7f0:
+    resolution: {tarball: https://codeload.github.com/mozilla/legal-docs/tar.gz/1913c916a522934c1e159313806bee717e87f7f0}
+    name: legal-docs
+    version: 1.0.0
     dev: false
