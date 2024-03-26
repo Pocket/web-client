@@ -1,0 +1,98 @@
+/** Remove this file if we don't have styles for the component **/
+.base {
+  a,
+  button {
+    padding: 0;
+    display: inline-block;
+    color: var(--color-textSecondary);
+    text-decoration: none;
+    &:hover {
+      color: var(--color-textLinkHover);
+      text-decoration: underline;
+    }
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    font-size: 1rem;
+  }
+  li {
+    margin-bottom: 10px;
+  }
+}
+
+.mainContent {
+  box-sizing: content-box;
+  margin: 0 auto;
+  max-width: 1128px;
+  padding: 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 1rem;
+  row-gap: 1.5rem;
+
+  @media (max-width: 839px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 719px) {
+    padding: 2.5rem 1.5rem;
+  }
+
+  @media (max-width: 599px) {
+    grid-template-columns: repeat(1, 1fr);
+    padding: 1.5rem 1rem;
+  }
+}
+
+.subContent {
+  grid-column: 1/-1;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-dividerTertiary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.5rem;
+
+  @media (max-width: 690px) {
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-direction: column-reverse;
+    align-items: stretch;
+    .languageSelector {
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+
+.partOf {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.appLinks {
+  a {
+    display: block;
+    margin-bottom: 1rem;
+  }
+}
+
+.socialTitle {
+  color: var(--color-textSecondary);
+}
+.social {
+  white-space: nowrap;
+  padding-top: 0.5rem;
+  a {
+    display: inline-block;
+    margin-right: 1rem;
+    &:hover {
+      color: var(--color-textPrimary);
+    }
+  }
+}
+
+.symbols {
+  height: 0;
+}

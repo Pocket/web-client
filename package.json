@@ -18,7 +18,7 @@
     "lint": "pnpm --filter @client/web lint",
     "test": "pnpm --filter @client/web test && pnpm --filter @ui/components test",
     "test:ci": "pnpm --filter @client/web test:ci",
-    "test:update": "pnpm --filter @client/web test:update",
+    "test:update": "pnpm --filter @client/web test:update && pnpm --filter @ui/components test:update",
     "storybook": "pnpm --filter @config/storybook storybook",
     "storybook:build": "pnpm --filter @config/storybook build-storybook",
     "storybook:start": "pnpm --filter @config/storybook start-storybook",
