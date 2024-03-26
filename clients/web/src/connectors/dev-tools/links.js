@@ -7,6 +7,16 @@ export const Links = ({ toggleDevMode }) => {
       title: 'FXA Learn More',
       src: '/learn-more',
       description: 'future blockade for non-fxa users'
+    },
+    {
+      title: 'Privacy Policy',
+      src: '/privacy',
+      description: 'Switching from marketing control'
+    },
+    {
+      title: 'TOS',
+      src: '/tos',
+      description: 'Switching from marketing control'
     }
   ]
 
