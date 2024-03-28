@@ -2,7 +2,8 @@ import style from './style.module.css'
 
 import { PremiumIcon } from '@ui/icons/PremiumIcon'
 
-import type { Meta } from '@storybook/react'
+// Types
+import type { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta = {
   title: 'UI/Button'
@@ -10,84 +11,60 @@ const meta: Meta = {
 
 export default meta
 
-export const Button = () => {
+// Stories
+const buttonTypes = ['default', 'secondary', 'brand', 'outline', 'transparent', 'text']
+const buttonSizes = ['large', 'default', 'small', 'tiny']
+export const Button: StoryObj<typeof ButtonComponent> = {
+  render: (args) => {
+    return <ButtonComponent {...args} />
+  },
+  argTypes: {
+    mixedSize: {
+      options: buttonSizes,
+      control: { type: 'inline-radio' }
+    }
+  },
+  args: { withIcon: false, mixedSize: 'default', isNew: false }
+}
+
+const ButtonComponent = ({
+  withIcon,
+  mixedSize,
+  isNew
+}: {
+  withIcon: boolean
+  mixedSize: string
+  isNew: boolean
+}) => {
   return (
-    <div className={style.buttonContainer}>
-      <h4>large</h4>
-      <div className={style.buttonList}>
-        <button className="primary large" type="button">
-          Primary
-        </button>
-        <button className="secondary large" type="button">
-          Secondary
-        </button>
-        <button className="brand large" type="button">
-          Brand
-        </button>
-        <button className="primary large" type="button">
-          <PremiumIcon /> With Icon
-        </button>
-        <button className="text large" type="button">
-          Button as text
-        </button>
+    <>
+      {' '}
+      {buttonSizes.map((buttonSize) => (
+        <div key={buttonSize} className={style.buttonContainer}>
+          <h4>{buttonSize}</h4>
+          <div className={style.buttonList}>
+            {buttonTypes.map((buttonType) => (
+              <button
+                key={`${buttonSize}-${buttonType}`}
+                className={`${buttonSize} ${buttonType} ${isNew && 'new'}`}
+                type="button">
+                {withIcon ? <PremiumIcon /> : null} {buttonType}
+              </button>
+            ))}
+          </div>
+        </div>
+      ))}
+      <div className={`${style.buttonContainer} ${style.buttonListMixed}`}>
+        <h4>mixed</h4>
+        {buttonTypes.map((buttonType) => (
+          <button
+            key={buttonType}
+            className={`${buttonType} ${mixedSize}  ${isNew && 'new'}`}
+            type="button">
+            {withIcon && buttonType == 'secondary' ? <PremiumIcon /> : null} {buttonType}
+          </button>
+        ))}
       </div>
-
-      <h4>standard</h4>
-      <div className={style.buttonList}>
-        <button className="primary" type="button">
-          Primary
-        </button>
-        <button className="secondary" type="button">
-          Secondary
-        </button>
-        <button className="brand" type="button">
-          Brand
-        </button>
-        <button className="primary" type="button">
-          <PremiumIcon /> With Icon
-        </button>
-        <button className="text " type="button">
-          Button as text
-        </button>
-      </div>
-
-      <h4>small</h4>
-      <div className={style.buttonList}>
-        <button className="primary small" type="button">
-          Primary
-        </button>
-        <button className="secondary small" type="button">
-          Secondary
-        </button>
-        <button className="brand small" type="button">
-          Brand
-        </button>
-        <button className="primary small" type="button">
-          <PremiumIcon /> With Icon
-        </button>
-        <button className="text small" type="button">
-          Button as text
-        </button>
-      </div>
-
-      <h4>tiny</h4>
-      <div className={style.buttonList}>
-        <button className="primary tiny" type="button">
-          Primary
-        </button>
-        <button className="secondary tiny" type="button">
-          Secondary
-        </button>
-        <button className="brand tiny" type="button">
-          Brand
-        </button>
-        <button className="primary tiny" type="button">
-          <PremiumIcon /> With Icon
-        </button>
-        <button className="text tiny" type="button">
-          Button as text
-        </button>
-      </div>
-    </div>
+    </>
   )
 }
