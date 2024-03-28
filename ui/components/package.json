@@ -30,6 +30,7 @@
   "dependencies": {
     "@common/localization": "workspace:*",
     "@common/state": "workspace:*",
+    "@common/constants": "workspace:*",
     "@storybook/react": "8.0.5",
     "@ui/icons": "workspace:*",
     "@ui/styles": "workspace:*",

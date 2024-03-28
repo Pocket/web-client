@@ -273,6 +273,15 @@ importers:
         specifier: 5.4.3
         version: 5.4.3
 
+  common/constants:
+    devDependencies:
+      '@config/typescript-config':
+        specifier: workspace:*
+        version: link:../../config/typescript-config
+      typescript:
+        specifier: 5.4.2
+        version: 5.4.2
+
   common/localization:
     dependencies:
       cli-progress:
@@ -500,6 +509,9 @@ importers:
 
   ui/components:
     dependencies:
+      '@common/constants':
+        specifier: workspace:*
+        version: link:../../common/constants
       '@common/localization':
         specifier: workspace:*
         version: link:../../common/localization
@@ -15934,6 +15946,7 @@ packages:
 
   /queue-tick@1.0.1:
     resolution: {integrity: sha512-kJt5qhMxoszgU/62PLP1CJytzd2NKetjSRnyuj31fDd3Rlcz3fzlFdFLD1SItunPwyqEOkca6GbV612BWfaBag==}
+    requiresBuild: true
 
   /queue@6.0.2:
     resolution: {integrity: sha512-iHZWu+q3IdFZFX36ro/lKBkSvfkztY5Y7HMiPlOUjhupPcG2JMfst2KKEpu5XndviX/3UhFbRngUPNKtgvtZiA==}
