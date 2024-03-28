@@ -7,7 +7,10 @@ import type { Meta, StoryObj } from '@storybook/react'
 // Storybook Meta
 const meta: Meta<typeof Component> = {
   title: 'Nav - Footer / Complete',
-  component: Component
+  component: Component,
+  parameters: {
+    layout: 'fullscreen'
+  }
 }
 export default meta
 

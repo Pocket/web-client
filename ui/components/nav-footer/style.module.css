@@ -23,7 +23,6 @@
 }
 
 .mainContent {
-  box-sizing: content-box;
   margin: 0 auto;
   max-width: 1128px;
   padding: 2.5rem;
