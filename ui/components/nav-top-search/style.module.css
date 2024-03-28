@@ -1,0 +1,18 @@
+/** Remove this file if we don't have styles for the component **/
+.base {
+  flex-grow: 2;
+  input[type='search'] {
+    border-radius: 1000rem;
+    padding: 4px 20px;
+    &:focus {
+      box-shadow: 0 0 0 1px #444;
+    }
+  }
+  input[type='search']::-webkit-search-decoration,
+  input[type='search']::-webkit-search-cancel-button,
+  input[type='search']::-webkit-search-results-button,
+  input[type='search']::-webkit-search-results-decoration {
+    display: none;
+    -webkit-appearance: none;
+  }
+}

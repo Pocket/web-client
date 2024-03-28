@@ -1,0 +1,18 @@
+/** Remove this file if we don't have styles for the component **/
+.base {
+}
+.avatar {
+  padding: 0;
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  &:hover {
+    outline: 2px solid var(--color-navCurrentTabText);
+    outline-offset: 2px;
+  }
+  img {
+    border-radius: 100%;
+    width: 100%;
+    height: 100%;
+  }
+}

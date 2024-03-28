@@ -1,0 +1,28 @@
+.base {
+  container-type: inline-size;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+}
+.mark {
+  display: none;
+  svg {
+    height: 24px;
+  }
+}
+
+.full {
+  svg {
+    height: 32px;
+  }
+}
+
+@container (max-width: 129px) {
+  .mark {
+    display: block;
+  }
+
+  .full {
+    display: none;
+  }
+}
