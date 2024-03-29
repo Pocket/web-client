@@ -60,6 +60,8 @@
 
 .buttonContainer {
   font-family: var(--fontSansSerif);
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--color-dividerTertiary);
   h4 {
     font-size: 1.5rem;
     font-weight: 600;
@@ -70,9 +72,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 0 1.5rem;
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--color-dividerTertiary);
 }
 
 .inputContainer {
