@@ -9,7 +9,7 @@ exports[`SideNav renders the Account side nav 1`] = `
     role="navigation"
   >
     <a
-      class="css-gcpn2c  "
+      class="css-1rd9wjg   action"
       data-testid="side-nav-home"
       href="/home?src=sidebar"
     >
@@ -30,7 +30,7 @@ exports[`SideNav renders the Account side nav 1`] = `
       nav:home
     </a>
     <a
-      class="css-gcpn2c  "
+      class="css-1rd9wjg   action"
       data-testid="side-nav-saves"
       href="/saves?src=sidebar"
     >
@@ -68,7 +68,7 @@ exports[`SideNav renders the Account side nav 1`] = `
       nav:saves
     </a>
     <a
-      class="css-gcpn2c  "
+      class="css-1rd9wjg   action"
       data-testid="side-nav-discover"
       href="/explore?src=sidebar"
     >
@@ -94,7 +94,7 @@ exports[`SideNav renders the Account side nav 1`] = `
       nav:discover
     </a>
     <a
-      class="css-gcpn2c  "
+      class="css-1rd9wjg   action"
       data-testid="side-nav-collections"
       href="/collections?src=sidebar"
     >
@@ -173,7 +173,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
     role="navigation"
   >
     <a
-      class="css-gcpn2c  "
+      class="css-1rd9wjg   action"
       data-testid="side-nav-home"
       href="/home?src=sidebar"
     >
@@ -194,7 +194,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:home
     </a>
     <a
-      class="css-gcpn2c  "
+      class="css-1rd9wjg   action"
       data-testid="side-nav-saves"
       href="/saves?src=sidebar"
     >
@@ -232,7 +232,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:saves
     </a>
     <a
-      class="css-gcpn2c  "
+      class="css-1rd9wjg   action"
       data-testid="side-nav-discover"
       href="/explore?src=sidebar"
     >
@@ -258,7 +258,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:discover
     </a>
     <a
-      class="css-gcpn2c  "
+      class="css-1rd9wjg   action"
       data-testid="side-nav-collections"
       href="/collections?src=sidebar"
     >
@@ -326,7 +326,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       </button>
     </div>
     <button
-      class="css-gcpn2c  "
+      class="css-1rd9wjg   action"
       data-testid="side-nav-all-lists"
     >
       <svg
@@ -359,7 +359,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:filters
     </h4>
     <button
-      class="css-gcpn2c  "
+      class="css-1rd9wjg   action"
       data-testid="side-nav-archive"
     >
       <svg
@@ -389,7 +389,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:archive
     </button>
     <button
-      class="css-gcpn2c  "
+      class="css-1rd9wjg   action"
       data-testid="side-nav-favorites"
     >
       <svg
@@ -409,7 +409,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:favorites
     </button>
     <button
-      class="css-gcpn2c  "
+      class="css-1rd9wjg   action"
       data-testid="side-nav-highlights"
     >
       <svg
@@ -429,7 +429,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:highlights
     </button>
     <button
-      class="css-gcpn2c  "
+      class="css-1rd9wjg   action"
       data-testid="side-nav-articles"
     >
       <svg
@@ -454,7 +454,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:articles
     </button>
     <button
-      class="css-gcpn2c  "
+      class="css-1rd9wjg   action"
       data-testid="side-nav-videos"
     >
       <svg
@@ -487,7 +487,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:tags
     </h4>
     <button
-      class="css-gcpn2c  "
+      class="css-1rd9wjg   action"
       data-testid="side-nav-all-tags"
     >
       <svg
@@ -510,13 +510,13 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:all-tags
     </button>
     <button
-      class="css-gcpn2c  tag-class"
+      class="css-1rd9wjg  tag-class action"
       data-testid="side-nav-tags-home"
     >
       home
     </button>
     <button
-      class="css-gcpn2c  tag-class"
+      class="css-1rd9wjg  tag-class action"
       data-testid="side-nav-tags-space"
     >
       space
