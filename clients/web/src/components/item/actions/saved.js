@@ -20,11 +20,9 @@ export const savedActionStyles = css`
     align-items: center;
     background-color: transparent;
     border-color: transparent;
-    font-size: 1.5rem;
     line-height: 1em;
     color: var(--color-actionSecondary);
     padding: 0;
-    margin-right: 0.5rem;
 
     &:last-of-type {
       margin-right: 0;

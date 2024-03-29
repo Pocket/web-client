@@ -18,7 +18,6 @@ const listSettingStyle = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
     padding: var(--size050);
   }
   .backing {

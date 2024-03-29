@@ -257,8 +257,6 @@ export const itemStyles = css`
       grid-column-gap: 0;
 
       .save {
-        padding: 0 0.5rem;
-
         .copy {
           color: var(--color-textPrimary);
         }
@@ -388,9 +386,9 @@ export const itemStyles = css`
 
   .syndicated .icon {
     display: inline-block;
-    margin: -0.25rem 0 0 0.25rem;
-    font-size: 1rem;
-    height: 1rem;
+    font-size: 0.875rem;
+    margin-left: 0.5rem;
+    margin-right: 0;
   }
 
   .tags-container {
@@ -408,11 +406,6 @@ export const itemStyles = css`
     background-color: var(--color-popoverCanvas);
     z-index: var(--zIndexTooltip);
     box-shadow: var(--tag-box-shadow);
-
-    .icon {
-      height: 24px;
-      width: 24px;
-    }
 
     .tags-list {
       padding-left: 1rem;

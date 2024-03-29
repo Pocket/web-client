@@ -16,13 +16,12 @@ const sortStyles = css`
   border-radius: var(--borderRadius);
   border: 2px solid var(--color-canvas);
 
-  &:hover {
-    color: var(--color-textLinkHover);
+  button {
+    font-size: 1rem;
   }
 
-  .icon {
-    height: 1.5rem;
-    width: 1.5rem;
+  &:hover {
+    color: var(--color-textLinkHover);
   }
 `
 

@@ -236,7 +236,7 @@ const GlobalNavAdd = ({
           </div>
         ) : null}
       </div>
-      <button className="add-button" onClick={handleSubmit} data-testid="add-submit">
+      <button className="add-button primary" onClick={handleSubmit} data-testid="add-submit">
         <Trans i18nKey="nav:add">Add</Trans>
       </button>
       <input type="submit" className="mobile-submit" />

@@ -292,7 +292,7 @@ const GlobalNavSearch = ({
           </div>
         ) : null}
       </div>
-      <button className="search-button" data-testid="search-submit">
+      <button className="search-button primary" data-testid="search-submit">
         <Trans i18nKey="nav:search">Search</Trans>
       </button>
       <input type="submit" className="mobile-submit" />

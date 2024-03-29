@@ -10,9 +10,7 @@ import { DeleteIcon } from '@ui/icons/DeleteIcon'
 import { FavoriteIcon } from '@ui/icons/FavoriteIcon'
 import { FavoriteFilledIcon } from '@ui/icons/FavoriteFilledIcon'
 import { TagIcon } from '@ui/icons/TagIcon'
-import { breakpointMediumHandset } from 'common/constants'
 import { breakpointTinyTablet } from 'common/constants'
-import { bottomTooltip } from 'components/tooltip/tooltip'
 
 import { useTranslation } from 'next-i18next'
 import Mousetrap from 'mousetrap'
@@ -21,6 +19,9 @@ const bulkStyle = css`
   width: 100%;
   display: flex;
   align-items: center;
+  button {
+    font-size: 1.125rem;
+  }
 
   .bulk-container {
     width: 100%;
@@ -31,14 +32,13 @@ const bulkStyle = css`
     display: flex;
     align-items: center;
     align-content: center;
-    font-family: 'Graphik Web';
     font-style: normal;
-    font-size: var(--fontSize100);
+
     button {
       margin-right: 2px;
     }
     .labelText {
-      padding-left: var(--spacing100);
+      padding-left: 1rem;
       ${breakpointTinyTablet} {
         display: none;
       }
@@ -52,66 +52,13 @@ const bulkStyle = css`
   }
 `
 
-const bulkIconActions = css`
-  width: 24px;
-  height: 24px;
-  margin: 0;
-  color: var(--color-textSecondary);
-  &:hover {
-    color: var(--color-textLinkHover);
-    cursor: pointer;
-  }
-`
-
-const navIconStyle = css`
-  width: 20px;
-  height: 20px;
-`
-
 const closeLabelStyle = css`
   display: none;
-  font-family: var(--fontSansSerif);
-  font-size: var(--fontSize085);
+  font-size: 0.85rem;
   color: var(--color-textSecondary);
 `
 
 const CloseLabel = ({ children }) => <span className={closeLabelStyle}>{children}</span>
-
-const buttonStyle = css`
-  margin-left: auto;
-  background-color: transparent;
-  color: var(--color-actionSecondary);
-  &:hover {
-    color: var(--color-actionPrimary);
-    background-color: transparent;
-  }
-  &:active,
-  &:focus {
-    transition: none;
-    color: var(--color-navCurrentTabText);
-    outline: 1px auto var(--color-navCurrentTab);
-  }
-  &.active {
-    color: var(--color-navCurrentTabText);
-    background-color: var(--color-navCurrentTab);
-  }
-
-  ${breakpointMediumHandset} {
-    padding-left: var(--size025);
-    padding-right: var(--size025);
-  }
-`
-
-const fullButtonStyle = css`
-  margin-left: 4px;
-  font-size: 14px;
-  padding: 10px;
-
-  .icon {
-    width: 22px;
-    height: 22px;
-  }
-`
 
 const mobileOnly = css`
   display: none;
@@ -133,8 +80,8 @@ const CloseButton = ({ onClick }) => {
   const { t } = useTranslation()
 
   return (
-    <button className={`${buttonStyle} cancel-button`} onClick={onClick} data-testid="bulk-close">
-      <CrossIcon className={navIconStyle} />
+    <button className={`cancel-button action`} onClick={onClick} data-testid="bulk-close">
+      <CrossIcon />
       <CloseLabel>{t('nav:cancel', 'Cancel')}</CloseLabel>
     </button>
   )
@@ -180,10 +127,11 @@ function GlobalNavBulkEdit({
             <button
               aria-label={t('nav:tag', 'Tag')}
               data-tooltip={t('nav:tag', 'Tag')}
+              data-tooltip-position="bottom"
               data-testid="bulk-tag"
-              className={cx(buttonStyle, bottomTooltip)}
+              className="action"
               onClick={tagAction}>
-              <TagIcon className={bulkIconActions} />
+              <TagIcon />
             </button>
 
             <button
@@ -193,14 +141,11 @@ function GlobalNavBulkEdit({
               data-tooltip={
                 shouldFavorite ? t('nav:favorite', 'Favorite') : t('nav:unfavorite', 'Unfavorite')
               }
+              data-tooltip-position="bottom"
               data-testid="bulk-favorite"
-              className={cx(buttonStyle, bottomTooltip)}
+              className="action"
               onClick={favoriteAction}>
-              {shouldFavorite ? (
-                <FavoriteIcon className={bulkIconActions} />
-              ) : (
-                <FavoriteFilledIcon className={bulkIconActions} />
-              )}
+              {shouldFavorite ? <FavoriteIcon /> : <FavoriteFilledIcon />}
             </button>
 
             <button
@@ -210,40 +155,31 @@ function GlobalNavBulkEdit({
               data-tooltip={
                 shouldArchive ? t('nav:archive-tooltip', 'Archive') : t('nav:add-tooltip', 'Add')
               }
+              data-tooltip-position="bottom"
               data-testid="bulk-archive"
-              className={cx(buttonStyle, bottomTooltip)}
+              className="action"
               onClick={archiveAction}>
-              {shouldArchive ? (
-                <ArchiveIcon className={bulkIconActions} />
-              ) : (
-                <AddIcon className={bulkIconActions} />
-              )}
+              {shouldArchive ? <ArchiveIcon /> : <AddIcon />}
             </button>
 
             <button
               aria-label={t('nav:delete', 'Delete')}
               data-tooltip={t('nav:delete', 'Delete')}
+              data-tooltip-position="bottom"
               data-testid="bulk-delete"
-              className={cx(buttonStyle, bottomTooltip)}
+              className="action"
               onClick={deleteAction}>
-              <DeleteIcon className={bulkIconActions} />
+              <DeleteIcon />
             </button>
 
             <button
               aria-label={t('list:add-items-to-a-list', 'Add items to a List')}
               data-tooltip={t('list:add-items-to-a-list', 'Add items to a List')}
+              data-tooltip-position="bottom"
               data-testid="bulk-add-to-list-mobile"
-              className={cx(buttonStyle, bottomTooltip, mobileOnly)}
+              className={'action'}
               onClick={addToListAction}>
-              <ListAddIcon className={bulkIconActions} />
-            </button>
-
-            <button
-              aria-label={t('list:add-items-to-a-list', 'Add items to a List')}
-              data-testid="bulk-add-to-list"
-              className={cx(fullButtonStyle, desktopOnly)}
-              onClick={addToListAction}>
-              <ListAddIcon /> {t('nav:add-to-list', 'Add to List')}
+              <ListAddIcon />
             </button>
 
             <div className="labelText">
@@ -253,7 +189,10 @@ function GlobalNavBulkEdit({
             </div>
           </div>
         </div>
-        <button className="bulk-cancel secondary" onClick={clearAction} data-testid="clear-button">
+        <button
+          className="bulk-cancel outline small"
+          onClick={clearAction}
+          data-testid="clear-button">
           {clearCopy}
         </button>
         {onClose ? <CloseButton onClick={onClose} data-testid="add-close" /> : null}

@@ -7,34 +7,16 @@ import { useTranslation, Trans } from 'next-i18next'
 
 const transitionalActionStyles = css`
   button {
-    display: inline-flex;
-    align-content: center;
-    align-items: center;
-    background-color: var(--color-canvas);
-    font-size: 1.5rem;
-    line-height: 1em;
     color: var(--color-textSecondary);
-    padding: 0.25rem;
-    .copy {
-      font-size: 1rem;
-      padding-left: 0.25rem;
-    }
 
     .saveIcon {
       color: var(--color-actionBrand);
-      display: block;
-      margin-top: 0;
+      margin-left: 0;
+      margin-right: 0.5em;
     }
 
     &:hover {
-      text-decoration: none;
       color: var(--color-textPrimary);
-    }
-    &:focus {
-      outline: 1px solid var(--color-formFieldBorder);
-    }
-    &:focus:not(:focus-visible) {
-      outline: none;
     }
   }
 `
@@ -70,7 +52,7 @@ export function TransitionalActions({
     <div className={`${transitionalActionStyles} status-${saveStatus}`}>
       {isSaved ? (
         <button
-          className="saved"
+          className="action saved"
           ref={popTrigger}
           onClick={onUnSave}
           data-testid="article-save-btn-saved">
@@ -79,7 +61,7 @@ export function TransitionalActions({
         </button>
       ) : (
         <button
-          className="save"
+          className="action save"
           ref={popTrigger}
           onClick={onSave}
           data-testid="article-save-btn-save">

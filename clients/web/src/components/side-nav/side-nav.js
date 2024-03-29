@@ -100,8 +100,7 @@ export const sideNavItem = css`
   align-items: center;
   align-content: center;
   width: 100%;
-  padding: 0 var(--size050);
-  font-size: var(--fontSize100);
+  padding: 0 0.5rem;
   font-weight: 400;
   line-height: 24px;
   height: 40px;
@@ -130,7 +129,6 @@ export const sideNavItem = css`
   }
 
   .side-nav-icon {
-    height: 24px;
     padding-right: 10px;
     margin-top: 0;
 
@@ -190,7 +188,7 @@ export function SideNav({
     const isActive = tag ? active === tag : active === subset
     const activeClass = isActive ? 'active' : ''
     const tagClass = isTag ? 'tag-class' : ''
-    return `${sideNavItem} ${activeClass} ${tagClass}`
+    return `${sideNavItem} ${activeClass} ${tagClass} action`
   }
 
   const scrollToTop = () => window.scroll({ top: 0, left: 0 })

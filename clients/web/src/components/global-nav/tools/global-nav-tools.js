@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/css'
-import { bottomTooltip } from 'components/tooltip/tooltip'
 
 const listStyle = css`
   list-style-type: none;
@@ -15,28 +14,6 @@ const listStyle = css`
 
     &:first-child {
       margin-left: 0;
-    }
-  }
-
-  button {
-    background: none;
-    color: var(--color-textPrimary);
-    font-size: 1.5rem;
-    line-height: 1;
-    padding: var(--spacing050);
-
-    &:hover {
-      color: var(--color-textLinkHover);
-    }
-
-    &:focus {
-      transition: none;
-      color: var(--color-navCurrentTabText);
-      outline: 1px auto var(--color-navCurrentTab);
-    }
-
-    &:active {
-      color: var(--color-textLinkPressed);
     }
   }
 `
@@ -66,10 +43,11 @@ const GlobalNavTools = ({ tools = [], onToolClick = () => {} }) => {
               data-testid={`global-nav-tool-${tool.name}`}
               aria-label={tool.label}
               data-tooltip={tool.label}
+              data-tooltip-position="bottom"
               onClick={(event) => {
                 handleToolClick(event, tool.name)
               }}
-              className={bottomTooltip}>
+              className="action">
               {tool.icon}
             </button>
           </li>

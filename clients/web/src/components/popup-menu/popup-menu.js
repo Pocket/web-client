@@ -173,7 +173,7 @@ export const PopupMenuItem = ({
       {href ? (
         <>{getLink()}</>
       ) : (
-        <button type="button" id={id} {...remaining}>
+        <button type="button" id={id} className="action" {...remaining}>
           {getContent()}
         </button>
       )}

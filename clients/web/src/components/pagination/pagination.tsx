@@ -184,33 +184,4 @@ const paginationStyle = css`
   a {
     text-decoration: none;
   }
-
-  a.pagination,
-  button.pagination {
-    margin-right: 0.25rem;
-    padding: 0;
-    display: flex;
-    align-content: center;
-    align-items: center;
-    border-radius: 50%;
-    font-size: 0.875rem;
-    line-height: 0;
-    width: 40px;
-    height: 40px;
-    display: block;
-    color: var(--color-paginationText);
-    background-color: transparent;
-    &:focus,
-    &:hover {
-      outline: 1px solid var(--color-dividerTertiary);
-      outline-offset: -1px;
-    }
-    &.active {
-      background-color: var(--color-paginationActive);
-      color: var(--color-paginationActiveText);
-    }
-    .icon {
-      margin-top: 0;
-    }
-  }
 `
