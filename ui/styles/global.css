@@ -1,5 +1,5 @@
 /* BROWSER RESETS --------------------------------------------- */
-*,:after,:before{box-sizing:border-box}
+*,:after,:before{box-sizing:border-box;shape-rendering:geometricPrecision}
 html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}
 article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}
 body{background-color:#fff;color:#212529;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-size:1rem;font-weight:400;line-height:1.5;margin:0;text-align:left}
@@ -36,7 +36,7 @@ caption{caption-side:bottom;color:#6c757d;padding-bottom:.75rem;padding-top:.75r
 th{text-align:inherit}
 label{display:inline-block;margin-bottom:.5rem}
 button{border-radius:0}
-button:focus{outline:1px dotted;outline:5px auto -webkit-focus-ring-color}
+button:focus{outline:none}
 button,input,optgroup,select,textarea{font-family:inherit;font-size:inherit;line-height:inherit;margin:0}
 button,input{overflow:visible}
 button,select{text-transform:none}
@@ -133,39 +133,43 @@ option{color:var(--color-textPrimary)}
 /* BUTTONS --------------------------------------------- */
 a{color:inherit;text-decoration:underline;transition:color .1s ease-out}
 @media (hover:hover) and (pointer:fine){a:hover{color:var(--color-textLinkHover)}}
-a.button,button,input[type=button],input[type=reset],input[type=submit]{background-color:var(--color-actionPrimary);border:1px solid var(--color-actionPrimary);border-radius:var(--buttonBorderRadius);color:var(--color-actionPrimaryText);display:inline-block;font-family:var(--fontSansSerif);font-size:1rem;line-height:1.25;padding:.75rem;text-decoration:none;white-space:nowrap}
+a.button,button,input[type=button],input[type=reset],input[type=submit]{background-color:transparent;border:1px solid transparent;border-radius:var(--buttonBorderRadius);color:var(--color-textPrimary);display:inline-block;font-family:var(--fontSansSerif);font-size:1rem;line-height:1.5em;padding:.75rem 1.25rem;text-decoration:none;white-space:nowrap}
 a.button.new,button.new,input[type=button].new,input[type=reset].new,input[type=submit].new{border-radius:1000rem;padding:.75rem 1.25rem}
-a.button:hover,button:hover,input[type=button]:hover,input[type=reset]:hover,input[type=submit]:hover{background-color:var(--color-actionPrimaryHover);border-color:var(--color-actionPrimaryHover);text-decoration:none}
-a.button:focus,button:focus,input[type=button]:focus,input[type=reset]:focus,input[type=submit]:focus{outline:1px auto var(--color-actionFocus);outline-offset:4px}
+a.button:active,a.button:hover,button:active,button:hover,input[type=button]:active,input[type=button]:hover,input[type=reset]:active,input[type=reset]:hover,input[type=submit]:active,input[type=submit]:hover{color:var(--color-actionFocus);text-decoration:none}
+a.button:focus-visible,button:focus-visible,input[type=button]:focus-visible,input[type=reset]:focus-visible,input[type=submit]:focus-visible{outline:1px auto var(--color-actionFocus);outline-offset:4px}
+a.button[data-tooltip]:focus-visible,button[data-tooltip]:focus-visible,input[type=button][data-tooltip]:focus-visible,input[type=reset][data-tooltip]:focus-visible,input[type=submit][data-tooltip]:focus-visible{box-shadow:0 0 0 2px var(--color-actionFocus);outline:none}
 a.button:disabled,button:disabled,input[type=button]:disabled,input[type=reset]:disabled,input[type=submit]:disabled{opacity:.5;pointer-events:none}
-a.button[data-tooltip],button[data-tooltip],input[type=button][data-tooltip],input[type=reset][data-tooltip],input[type=submit][data-tooltip]{border:2px solid var(--color-canvas)}
-a.button[data-tooltip]:focus,button[data-tooltip]:focus,input[type=button][data-tooltip]:focus,input[type=reset][data-tooltip]:focus,input[type=submit][data-tooltip]:focus{box-shadow:0 0 0 2px var(--color-actionFocus);outline:none}
-a.button.large,button.large,input[type=button].large,input[type=reset].large,input[type=submit].large{font-size:1.25rem;line-height:1.5rem;padding:1rem 1.5rem}
-a.button.small,button.small,input[type=button].small,input[type=reset].small,input[type=submit].small{font-size:.85rem;line-height:1.25rem;padding:.5rem 1rem}
-a.button.tiny,button.tiny,input[type=button].tiny,input[type=reset].tiny,input[type=submit].tiny{font-size:.85rem;line-height:1rem;padding:.375rem .75rem}
+a.button.large,button.large,input[type=button].large,input[type=reset].large,input[type=submit].large{font-size:1.25rem;padding:1rem 1.5rem}
+a.button.small,button.small,input[type=button].small,input[type=reset].small,input[type=submit].small{font-size:.85rem;padding:.5rem 1rem}
+a.button.tiny,button.tiny,input[type=button].tiny,input[type=reset].tiny,input[type=submit].tiny{font-size:.85rem;padding:.375rem .75rem}
 .colormode-dark a.button,.colormode-dark button,.colormode-dark input[type=button],.colormode-dark input[type=reset],.colormode-dark input[type=submit]{font-weight:500}
+a.button.action,button.action,input[type=button].action,input[type=reset].action,input[type=submit].action{color:var(--color-textSecondary);padding:.25rem .5rem}
+a.button.action:hover,button.action:hover,input[type=button].action:hover,input[type=reset].action:hover,input[type=submit].action:hover{color:var(--color-textLinkHover)}
+a.button.primary,button.primary,input[type=button].primary,input[type=reset].primary,input[type=submit].primary{background-color:var(--color-actionPrimary);border:1px solid var(--color-actionPrimary);color:var(--color-actionPrimaryText)}
+a.button.primary:hover,button.primary:hover,input[type=button].primary:hover,input[type=reset].primary:hover,input[type=submit].primary:hover{background-color:var(--color-actionPrimaryHover);border-color:var(--color-actionPrimaryHover);text-decoration:none}
 a.button.secondary,button.secondary,input[type=button].secondary,input[type=reset].secondary,input[type=submit].secondary{background-color:var(--color-canvas);border:1px solid var(--color-actionSecondary);color:var(--color-actionSecondaryText)}
 a.button.secondary:hover,button.secondary:hover,input[type=button].secondary:hover,input[type=reset].secondary:hover,input[type=submit].secondary:hover{background-color:var(--color-actionSecondaryHover);border-color:var(--color-actionSecondaryHover);color:var(--color-actionSecondaryHoverText)}
 a.button.brand,button.brand,input[type=button].brand,input[type=reset].brand,input[type=submit].brand{background-color:var(--color-actionBrand);border-color:var(--color-actionBrand);color:var(--color-actionBrandText)}
 a.button.brand:hover,button.brand:hover,input[type=button].brand:hover,input[type=reset].brand:hover,input[type=submit].brand:hover{background-color:var(--color-actionBrandHover);border-color:var(--color-actionBrandHover)}
 a.button.text,button.text,input[type=button].text,input[type=reset].text,input[type=submit].text{background-color:transparent;border-color:transparent;color:var(--color-textPrimary)}
 a.button.text:hover,button.text:hover,input[type=button].text:hover,input[type=reset].text:hover,input[type=submit].text:hover{background-color:transparent;border-color:transparent;color:var(--color-textLinkHover);text-decoration:underline}
-a.button.text:focus,button.text:focus,input[type=button].text:focus,input[type=reset].text:focus,input[type=submit].text:focus{outline:none;outline-offset:3px}
+a.button.text:focus,button.text:focus,input[type=button].text:focus,input[type=reset].text:focus,input[type=submit].text:focus{outline:none}
 a.button.inline,button.inline,input[type=button].inline,input[type=reset].inline,input[type=submit].inline{background:none;color:var(--color-textPrimary);display:inline;font-family:inherit;font-size:inherit;padding:0;text-decoration:underline}
 a.button.inline:focus,button.inline:focus,input[type=button].inline:focus,input[type=reset].inline:focus,input[type=submit].inline:focus{outline:inherit}
 a.button.inline:focus:before,button.inline:focus:before,input[type=button].inline:focus:before,input[type=reset].inline:focus:before,input[type=submit].inline:focus:before{display:none}
 a.button.inline:hover,button.inline:hover,input[type=button].inline:hover,input[type=reset].inline:hover,input[type=submit].inline:hover{color:var(--color-textLinkHover)}
-a.button.outline,button.outline,input[type=button].outline,input[type=reset].outline,input[type=submit].outline{background:transparent;border:1px solid var(--color-dividerTertiary);color:var(--color-textPrimary)}
-a.button.outline:active,a.button.outline:hover,button.outline:active,button.outline:hover,input[type=button].outline:active,input[type=button].outline:hover,input[type=reset].outline:active,input[type=reset].outline:hover,input[type=submit].outline:active,input[type=submit].outline:hover{border-color:var(--color-actionFocus);color:var(--color-actionFocus)}
-a.button.transparent,button.transparent,input[type=button].transparent,input[type=reset].transparent,input[type=submit].transparent{background:transparent;border:1px solid transparent;color:var(--color-textPrimary)}
-a.button.transparent:active,a.button.transparent:hover,button.transparent:active,button.transparent:hover,input[type=button].transparent:active,input[type=button].transparent:hover,input[type=reset].transparent:active,input[type=reset].transparent:hover,input[type=submit].transparent:active,input[type=submit].transparent:hover{border-color:var(--color-actionFocus);color:var(--color-actionFocus)}
-a.button+a.button,a.button+button,a.button+input[type=button],a.button+input[type=reset],a.button+input[type=submit],button+a.button,button+button,button+input[type=button],button+input[type=reset],button+input[type=submit],input[type=button]+a.button,input[type=button]+button,input[type=button]+input[type=button],input[type=button]+input[type=reset],input[type=button]+input[type=submit],input[type=reset]+a.button,input[type=reset]+button,input[type=reset]+input[type=button],input[type=reset]+input[type=reset],input[type=reset]+input[type=submit],input[type=submit]+a.button,input[type=submit]+button,input[type=submit]+input[type=button],input[type=submit]+input[type=reset],input[type=submit]+input[type=submit]{margin-left:1rem}
+a.button.outline,button.outline,input[type=button].outline,input[type=reset].outline,input[type=submit].outline{background:transparent;border:1px solid var(--color-dividerSecondary);color:var(--color-textPrimary)}
+a.button.outline:active,a.button.outline:hover,button.outline:active,button.outline:hover,input[type=button].outline:active,input[type=button].outline:hover,input[type=reset].outline:active,input[type=reset].outline:hover,input[type=submit].outline:active,input[type=submit].outline:hover{background-color:var(--color-paginationActive);border-color:var(--color-actionFocus);color:var(--color-textPrimary)}
+a.button.pagination,button.pagination,input[type=button].pagination,input[type=reset].pagination,input[type=submit].pagination{align-content:center;align-items:center;background-color:transparent;border-radius:50%;color:var(--color-paginationText);display:flex;display:block;font-size:.875rem;height:40px;line-height:0;margin-right:.25rem;padding:0;width:40px}
+a.button.pagination:hover,button.pagination:hover,input[type=button].pagination:hover,input[type=reset].pagination:hover,input[type=submit].pagination:hover{border-color:var(--color-dividerTertiary)}
+a.button.pagination.active,button.pagination.active,input[type=button].pagination.active,input[type=reset].pagination.active,input[type=submit].pagination.active{background-color:var(--color-paginationActive);color:var(--color-paginationActiveText)}
+a.button:not(.action)+a.button,a.button:not(.action)+button,a.button:not(.action)+input[type=button],a.button:not(.action)+input[type=reset],a.button:not(.action)+input[type=submit],button:not(.action)+a.button,button:not(.action)+button,button:not(.action)+input[type=button],button:not(.action)+input[type=reset],button:not(.action)+input[type=submit],input[type=button]:not(.action)+a.button,input[type=button]:not(.action)+button,input[type=button]:not(.action)+input[type=button],input[type=button]:not(.action)+input[type=reset],input[type=button]:not(.action)+input[type=submit],input[type=reset]:not(.action)+a.button,input[type=reset]:not(.action)+button,input[type=reset]:not(.action)+input[type=button],input[type=reset]:not(.action)+input[type=reset],input[type=reset]:not(.action)+input[type=submit],input[type=submit]:not(.action)+a.button,input[type=submit]:not(.action)+button,input[type=submit]:not(.action)+input[type=button],input[type=submit]:not(.action)+input[type=reset],input[type=submit]:not(.action)+input[type=submit]{margin-left:1rem}
 #ot-sdk-btn.optanon-show-settings,#ot-sdk-btn.ot-sdk-show-settings{align-items:center;background-color:transparent;border:none;cursor:pointer;display:inline-flex;font-family:inherit;font-size:1rem;font-weight:400;justify-content:center;line-height:1.5;padding:0}
 @media screen and (-ms-high-contrast:active){#ot-sdk-btn.optanon-show-settings,#ot-sdk-btn.ot-sdk-show-settings{border:2px solid}}
 #ot-sdk-btn.optanon-show-settings,#ot-sdk-btn.ot-sdk-show-settings{color:var(--color-textPrimary);text-decoration:underline}
 #ot-sdk-btn.optanon-show-settings:hover,#ot-sdk-btn.ot-sdk-show-settings:hover{color:var(--color-textLinkHover)}
 #ot-sdk-btn.optanon-show-settings:focus,#ot-sdk-btn.ot-sdk-show-settings:focus{outline:none}
-.icon{height:1em;margin:0 .125em;transform:scale(1.25) translateY(-.125em)}
+.icon{height:1.5em;margin-right:.25rem;transform:translateY(-4%)}
 /* APP FONTS --------------------------------------------- */
 @font-face{font-family:Blanco OSF;src:url(https://assets.getpocket.com/web-ui/assets/BlancoOSFWeb-Regular.7d5a8216b7607638e81feb748552a702.woff2)}
 @font-face{font-family:Blanco OSF;font-weight:700;src:url(https://assets.getpocket.com/web-ui/assets/BlancoOSFWeb-Bold.5597c92771d64715fcfc7af63ba976e9.woff2)}
@@ -214,6 +218,27 @@ a.button+a.button,a.button+button,a.button+input[type=button],a.button+input[typ
 @font-face{font-family:Whitney;font-weight:700;src:url(https://assets.getpocket.com/web-ui/assets/Whitney-BookItal_Web.80efdde5b097eda872e1754487ce68fc.woff2)}
 @font-face{font-family:Whitney;font-style:italic;src:url(https://assets.getpocket.com/web-ui/assets/Whitney-Semibld_Web.de2dee03c81082edf5341031656ea505.woff2)}
 @font-face{font-family:Whitney;font-style:italic;font-weight:700;src:url(https://assets.getpocket.com/web-ui/assets/Whitney-SemibldItal_Web.fdd7d75fa8fa59d56cc3c402c5bccb55.woff2)}
+/* TOOLTIPS STYLES --------------------------------------------- */
+@keyframes tooltipFadeawayHorizontal{0%{opacity:0;transform:scale(.8)}9%,to{opacity:1;transform:scale(1)}}
+@keyframes tooltipFadeawayBottom{0%{opacity:0;transform:translate(-50%,.2em) scale(.8)}9%,to{opacity:1;transform:translate(-50%) scale(1)}}
+@keyframes tooltipFadeawayTop{0%{opacity:0;transform:translate(-50%,-.2em) scale(.8)}9%,to{opacity:1;transform:translate(-50%) scale(1)}}
+a[data-tooltip],button[data-tooltip]{position:relative}
+a[data-tooltip]:after,a[data-tooltip]:before,button[data-tooltip]:after,button[data-tooltip]:before{line-height:1;opacity:0;pointer-events:none;position:absolute;user-select:none}
+a[data-tooltip]:before,button[data-tooltip]:before{border:4px solid transparent;content:"";z-index:var(--zIndexTooltip)}
+a[data-tooltip]:after,button[data-tooltip]:after{background-color:var(--color-tooltipCanvas);border-radius:4px;color:var(--color-tooltipText);content:attr(data-tooltip);font-size:.85rem;line-height:143%;max-width:20rem;min-width:3rem;overflow:hidden;padding:.25rem .5rem;text-align:center;text-overflow:ellipsis;white-space:nowrap;width:0;z-index:var(--zIndexTooltip)}
+a[data-tooltip]:hover:after,button[data-tooltip]:hover:after{width:unset}
+a[data-tooltip]:hover:after,a[data-tooltip]:hover:before,button[data-tooltip]:hover:after,button[data-tooltip]:hover:before{animation-direction:normal;animation-duration:calc(var(--dialogsDurationEnterMS) + 1.5s + var(--dialogsDurationExitMS));animation-fill-mode:forwards;animation-timing-function:var(--easingAccelerate)}
+a[data-tooltip]:active:after,a[data-tooltip]:active:before,a[data-tooltip]:focus:after,a[data-tooltip]:focus:before,button[data-tooltip]:active:after,button[data-tooltip]:active:before,button[data-tooltip]:focus:after,button[data-tooltip]:focus:before{display:none}
+a[data-tooltip]:focus:hover:after,a[data-tooltip]:focus:hover:before,button[data-tooltip]:focus:hover:after,button[data-tooltip]:focus:hover:before{display:inline-block}
+a[data-tooltip-position=bottom]:after,a[data-tooltip-position=bottom]:before,button[data-tooltip-position=bottom]:after,button[data-tooltip-position=bottom]:before{left:50%;transform:translate(-50%)}
+a[data-tooltip-position=bottom]:before,button[data-tooltip-position=bottom]:before{border-bottom-color:var(--color-tooltipCanvas);border-top-width:0;top:calc(100% + .5rem)}
+a[data-tooltip-position=bottom]:after,button[data-tooltip-position=bottom]:after{top:calc(100% + 3px + .5rem)}
+a[data-tooltip-position=bottom]:hover:after,a[data-tooltip-position=bottom]:hover:before,button[data-tooltip-position=bottom]:hover:after,button[data-tooltip-position=bottom]:hover:before{animation-name:tooltipFadeawayBottom;transform-origin:top}
+a[data-tooltip-position=top]:after,a[data-tooltip-position=top]:before,button[data-tooltip-position=top]:after,button[data-tooltip-position=top]:before{left:50%;transform:translate(-50%)}
+a[data-tooltip-position=top]:before,button[data-tooltip-position=top]:before{border-bottom-width:0;border-top-color:var(--color-tooltipCanvas);bottom:calc(100% + .5rem)}
+a[data-tooltip-position=top]:after,button[data-tooltip-position=top]:after{bottom:calc(100% + 3px + .5rem)}
+a[data-tooltip-position=top]:hover:after,a[data-tooltip-position=top]:hover:before,button[data-tooltip-position=top]:hover:after,button[data-tooltip-position=top]:hover:before{animation-name:tooltipFadeawayTop;transform-origin:bottom}
+a[data-tooltip-delay]:hover:after,a[data-tooltip-delay]:hover:before,button[data-tooltip-delay]:hover:after,button[data-tooltip-delay]:hover:before{animation-delay:1s}
 /* BRAZE STYLES --------------------------------------------- */
 .ab-iam-root .ab-in-app-message.ab-background{background-color:var(--color-canvas)!important;border:1px solid rgba(0,0,0,.12)!important;border-radius:var(--borderRadius)!important;box-shadow:0 8px 24px rgba(0,0,0,.12)!important}
 .ab-iam-root .ab-message-text{color:var(--color-textPrimary)!important;font-family:var(--fontSansSerif)!important;font-weight:400!important}
