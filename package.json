@@ -45,14 +45,14 @@
     "@config/eslint-config": "workspace:*",
     "@config/typescript-config": "workspace:*",
     "@semantic-release/changelog": "6.0.3",
-    "@semantic-release/commit-analyzer": "11.1.0",
+    "@semantic-release/commit-analyzer": "12.0.0",
     "@semantic-release/exec": "6.0.3",
     "@semantic-release/git": "10.0.1",
-    "@semantic-release/release-notes-generator": "12.1.0",
+    "@semantic-release/release-notes-generator": "13.0.0",
     "husky": "9.0.11",
     "lint-staged": "15.2.2",
     "prettier": "^3.2.5",
-    "typescript": "5.4.2"
+    "typescript": "5.4.3"
   },
   "commitlint": {
     "extends": [
