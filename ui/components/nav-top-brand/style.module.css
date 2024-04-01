@@ -1,6 +1,5 @@
 .base {
   container-type: inline-size;
-  height: 4rem;
   display: flex;
   align-items: center;
 }
