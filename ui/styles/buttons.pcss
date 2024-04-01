@@ -3,6 +3,12 @@ a {
   text-decoration: underline;
   transition: color 0.1s ease-out;
 
+  &:focus-visible {
+    border-radius: 5px;
+    outline: 1px auto var(--color-actionFocus);
+    outline-offset: 4px;
+  }
+
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       color: var(--color-textLinkHover);
@@ -27,11 +33,6 @@ input[type='reset'] {
   border: 1px solid transparent;
   padding: 0.75rem 1.25rem;
 
-  &.new {
-    border-radius: 1000rem;
-    padding: 0.75rem 1.25rem;
-  }
-
   &:active,
   &:hover {
     color: var(--color-actionFocus);
@@ -40,13 +41,13 @@ input[type='reset'] {
 
   &:focus-visible {
     outline: 1px auto var(--color-actionFocus);
-    outline-offset: 4px;
+    outline-offset: 1px;
   }
 
   &[data-tooltip] {
     &:focus-visible {
       outline: none;
-      box-shadow: 0 0 0 2px var(--color-actionFocus);
+      box-shadow: 0 0 0 1px var(--color-actionFocus);
     }
   }
 

@@ -29,16 +29,13 @@ select {
   color: var(--color-textPrimary);
   display: block;
   outline: none;
-  border: none;
+  border: 1px solid var(--color-formFieldBorder);
   border-radius: var(--borderRadius);
   line-height: 160%;
-  padding: var(--spacing050) var(--spacing075);
+  padding: 0.375rem 0.75rem;
   width: 100%;
   background: none;
   -webkit-appearance: none;
-  /* box shadow is used to simulate border so that on focus we can increase
-  the thickness to 2px without shifting elements on the page. */
-  box-shadow: 0px 0px 0px 1px var(--color-formFieldBorder);
 
   &:disabled {
     opacity: 0.5;
@@ -46,11 +43,12 @@ select {
   }
 
   &:hover:enabled {
-    box-shadow: 0px 0px 0px 1px var(--color-formFieldBorderHover);
+    border: 1px solid var(--color-formFieldBorderHover);
   }
 
-  &:focus:enabled {
-    box-shadow: 0px 0px 0px 2px var(--color-actionPrimary);
+  &:focus-visible {
+    outline: 1px auto var(--color-actionFocus);
+    outline-offset: 1px;
   }
 }
 
