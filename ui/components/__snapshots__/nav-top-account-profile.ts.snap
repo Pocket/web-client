@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders NavTopAccountProfile with defaults 1`] = `
+<div>
+  <div
+    class="base"
+    data-testid="nav-top-account-profile"
+  >
+    <button
+      class="avatar text"
+      type="button"
+    >
+      <img
+        alt=""
+        src="https://i.pravatar.cc/300?img=38"
+      />
+    </button>
+  </div>
+</div>
+`;

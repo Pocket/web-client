@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders NavTopAccountAuth with defaults 1`] = `
+<div>
+  <div
+    class="base"
+    data-testid="nav-top-account-auth"
+  >
+    <a
+      class="button new small outline"
+      data-testid="nav-top-account-signup-link"
+      href="https://getpocket.com/signup?src=web-nav&utm_source=http://localhost/"
+      id="global-nav-signup-link"
+    >
+      <span
+        class="label"
+      >
+        Sign up
+      </span>
+    </a>
+    <a
+      class="button new small primary"
+      data-testid="nav-top-account-login-link"
+      href="https://getpocket.com/login?src=web-nav&utm_source=http://localhost/"
+      id="global-nav-login-link"
+    >
+      Log in
+    </a>
+  </div>
+</div>
+`;

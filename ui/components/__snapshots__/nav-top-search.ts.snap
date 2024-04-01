@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders NavTopSearch with defaults 1`] = `
+<div>
+  <div
+    class="base"
+    data-testid="nav-top-search"
+  >
+    <input
+      id="search"
+      name="search"
+      placeholder="Search"
+      type="search"
+    />
+  </div>
+</div>
+`;

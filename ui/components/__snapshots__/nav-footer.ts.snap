@@ -7,7 +7,7 @@ exports[`renders NavFooter with defaults 1`] = `
     data-testid="nav-footer"
   >
     <div
-      class="mainContent"
+      class="container page-container"
     >
       <section>
         <h6>
