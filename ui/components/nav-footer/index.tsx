@@ -23,7 +23,7 @@ export function NavFooter() {
 
   return (
     <footer className={style.base} data-testid="nav-footer">
-      <div className={style.mainContent}>
+      <div className={`${style.container} page-container`}>
         <section>
           <h6>{t('global-footer:products', 'Products')}</h6>
           <nav aria-label="Products">

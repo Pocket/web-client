@@ -9,13 +9,13 @@ import { NavTopSearch } from '../nav-top-search'
  * ---
  * Main nav for the Pocket website. Includes primary links, auth/profile and additional tools
  */
-export function NavTop() {
+export function NavTop({ isLoggedIn }: { isLoggedIn?: boolean }) {
   return (
     <header className={style.base} data-testid="nav-top">
-      <div className={style.container}>
+      <div className={`${style.container} page-container`}>
         <NavTopBrand />
         <NavTopSearch />
-        <NavTopAccount />
+        <NavTopAccount isLoggedIn={isLoggedIn} />
       </div>
     </header>
   )
