@@ -19,6 +19,7 @@
     "test": "jest --reporters='default'",
     "test:ci": "jest --ci",
     "test:update": "jest --u",
+    "clean": "rm -rf .turbo && rm -rf node_modules",
     "locale:inject": "node ./common/localization/locale-inject.mjs",
     "locale:parse": "cd common/localization/ && pnpm extract",
     "schema": "rover graph fetch pocket-client-api@current >| schema.graphql"

@@ -1,4 +1,4 @@
-import '@ui/styles/global.css' // This is our base styles
+import '@ui/styles/index.css' // This is our base styles
 import i18n from './i18n' // This just needs to be present
 import { I18nextProvider } from 'react-i18next'
 

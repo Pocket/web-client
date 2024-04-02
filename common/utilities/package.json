@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "clean": "rm -rf node_modules"
+    "clean": "rm -rf .turbo && rm -rf node_modules"
   },
   "keywords": [],
   "author": "",

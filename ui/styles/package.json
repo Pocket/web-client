@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "postcss index.pcss -o global.css"
+    "postinstall": "postcss index.pcss -o global.css",
+    "build": "postcss index.pcss -o global.css"
   },
   "keywords": [],
   "author": "",

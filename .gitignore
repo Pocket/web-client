@@ -44,6 +44,7 @@ node_modules/
 # Storybook
 .cache
 storybook-static
+*storybook.log
 
 ### OSX ###
 *.DS_Store
@@ -120,5 +121,5 @@ localhost.web-client.getpocket.com.pem
 # Typescript
 next-env.d.ts
 
-
-*storybook.log
+# turbo
+.turbo
