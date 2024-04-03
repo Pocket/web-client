@@ -17,6 +17,11 @@ export const Links = ({ toggleDevMode }) => {
       title: 'TOS',
       src: '/tos',
       description: 'Switching from marketing control'
+    },
+    {
+      title: 'Pocket and Firefox',
+      src: '/pocket-and-firefox',
+      description: 'Switching from marketing control'
     }
   ]
 
