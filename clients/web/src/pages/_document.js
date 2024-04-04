@@ -2,6 +2,11 @@ import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { COLOR_MODE_PREFIX, CACHE_KEY_COLOR_MODE } from 'common/constants'
 import { GOOGLE_ANALYTICS_ID } from 'common/constants'
 
+const isDev = process.env.NODE_ENV !== 'production'
+const ONE_TRUST_ID = isDev
+  ? 'a7ff9c31-9f59-421f-9a8e-49b11a3eb24e-test'
+  : 'a7ff9c31-9f59-421f-9a8e-49b11a3eb24e'
+
 class ClientDocument extends Document {
   render() {
     return (
@@ -47,7 +52,7 @@ class ClientDocument extends Document {
             src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
             type="text/javascript"
             charSet="UTF-8"
-            data-domain-script="a7ff9c31-9f59-421f-9a8e-49b11a3eb24e"></script>
+            data-domain-script={ONE_TRUST_ID}></script>
           {/* <!-- OneTrust Cookies Consent Notice end for getpocket.com --> */}
 
           <script
