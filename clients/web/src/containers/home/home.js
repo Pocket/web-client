@@ -9,16 +9,19 @@ import { Toasts } from 'connectors/toasts/toast-list'
 
 export const Home = ({ metaData }) => {
   const userStatus = useSelector((state) => state.user.user_status)
-  const shouldRender = userStatus !== 'pending'
-  if (!shouldRender) return null
+  const isAuthenticated = useSelector((state) => state.user.auth)
+  if (isAuthenticated) {
+    const shouldRender = isAuthenticated && userStatus !== 'pending'
+    if (!shouldRender) return null
+  }
 
   return (
     <Layout metaData={metaData} isFullWidthLayout={true} noContainer={true}>
-      <SuccessFXA type="home" />
+      {isAuthenticated && <SuccessFXA type="home" />}
 
       <HomeSetup />
       <HomeGreeting />
-      <HomeRecentSaves />
+      {isAuthenticated && <HomeRecentSaves />}
       <HomeContent />
 
       <Toasts surface="home" />
