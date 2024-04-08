@@ -1,9 +1,9 @@
 import Layout from 'layouts/main'
 import { useSelector } from 'react-redux'
 import { HomeRecentSaves } from 'containers/home/recent-saves/recent-saves'
+import { HomeSetup } from './setup/setup'
 import { HomeContent } from './content'
 import { SuccessFXA } from 'components/snackbar/success-fxa'
-import { HomeSetup } from './setup/setup'
 import { HomeGreeting } from './recent-saves/greeting'
 import { Toasts } from 'connectors/toasts/toast-list'
 
@@ -17,11 +17,10 @@ export const Home = ({ metaData }) => {
 
   return (
     <Layout metaData={metaData} isFullWidthLayout={true} noContainer={true}>
-      {isAuthenticated && <SuccessFXA type="home" />}
-
-      <HomeSetup />
+      {isAuthenticated ? <SuccessFXA type="home" /> : null}
+      {isAuthenticated ? <HomeSetup /> : null}
       <HomeGreeting />
-      {isAuthenticated && <HomeRecentSaves />}
+      {isAuthenticated ? <HomeRecentSaves /> : null}
       <HomeContent />
 
       <Toasts surface="home" />
