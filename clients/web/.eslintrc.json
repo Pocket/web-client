@@ -1,0 +1,4 @@
+{
+  "root": true,
+  "extends": "@config/eslint-config/base.js"
+}
