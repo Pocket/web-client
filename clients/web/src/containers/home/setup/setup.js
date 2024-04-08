@@ -20,6 +20,9 @@ import { breakpointTinyTablet } from 'common/constants'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 const homeSetupStyles = css`
+  position: sticky;
+  top: 60px;
+  z-index: var(--zIndexHeader);
   margin: 0 0 2rem;
   background-color: var(--color-apricotLightest);
 

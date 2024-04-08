@@ -64,6 +64,7 @@ function StaticSlate({ slateId, firstSlate, Card }) {
   const viewport = useViewport()
   const dispatch = useDispatch()
   const slate = useSelector((state) => state.pageHome.slatesById[slateId])
+  const recentSaves = useSelector((state) => state.pageSavedIds)
 
   const { headline, subheadline, moreLink, recommendations, recommendationReasonType } = slate
 
@@ -86,8 +87,10 @@ function StaticSlate({ slateId, firstSlate, Card }) {
 
   const testId = headline.toLowerCase().replaceAll(' ', '-')
 
+  const sectionClass = firstSlate && recentSaves.length === 0 ? '' : 'homeSection'
+
   return (
-    <SectionWrapper className="homeSection" data-testid={`home-section-${testId}`}>
+    <SectionWrapper className={sectionClass} data-testid={`home-section-${testId}`}>
       <HomeHeader
         headline={headline}
         subheadline={subheadline}
