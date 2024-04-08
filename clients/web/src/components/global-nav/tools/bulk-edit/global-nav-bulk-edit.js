@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { css, cx } from '@emotion/css'
+import { css } from '@emotion/css'
 
 import { CrossIcon } from '@ui/icons/CrossIcon'
 
@@ -59,23 +59,6 @@ const closeLabelStyle = css`
 `
 
 const CloseLabel = ({ children }) => <span className={closeLabelStyle}>{children}</span>
-
-const mobileOnly = css`
-  display: none;
-
-  ${breakpointTinyTablet} {
-    display: block;
-  }
-`
-
-const desktopOnly = css`
-  display: block;
-
-  ${breakpointTinyTablet} {
-    display: none;
-  }
-`
-
 const CloseButton = ({ onClick }) => {
   const { t } = useTranslation()
 
