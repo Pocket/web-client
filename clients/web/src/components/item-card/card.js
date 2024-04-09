@@ -213,7 +213,6 @@ export const Card = (props) => {
                     onClick={onOpenOriginalUrl}
                     data-testid="publisher-link"
                     tabIndex={0}
-                    target="_blank"
                     rel="noopener">
                     {publisher}
                   </a>

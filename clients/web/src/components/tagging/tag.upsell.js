@@ -43,8 +43,7 @@ export const TagUpsell = ({ onVisible }) => {
           id="suggested-tags.upgrade-link"
           dataCy="suggested-tags-upgrade"
           margin="10px 0"
-          href={`${PREMIUM_URL}&utm_campaign=suggested-tags`}
-          target="_blank">
+          href={`${PREMIUM_URL}&utm_campaign=suggested-tags`}>
           <Trans i18nKey="tags:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
       </div>

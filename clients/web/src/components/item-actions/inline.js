@@ -26,7 +26,6 @@ export const MenuItem = ({
           data-testid={label}
           onClick={onClick}
           href={href}
-          target="_blank"
           aria-label={label}
           tabIndex={0}
           data-tooltip={label}>

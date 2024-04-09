@@ -21,21 +21,21 @@ const RssLinks = ({ userName }) => {
       <label htmlFor="something" className="connectionLabel">
         {t('account:rss-view-unread', 'View RSS feed of unread items')}
       </label>
-      <a href={unreadLink} className="button secondary actionInline" target="_blank" rel="noopener">
+      <a href={unreadLink} className="button secondary actionInline" rel="noopener">
         {t('account:rss-open-feed', 'Open Feed')}
       </a>
 
       <label htmlFor="something" className="connectionLabel">
         {t('account:rss-view-archived', 'View RSS feed of archived items')}
       </label>
-      <a href={readLink} className="button secondary actionInline" target="_blank" rel="noopener">
+      <a href={readLink} className="button secondary actionInline" rel="noopener">
         {t('account:rss-open-feed', 'Open Feed')}
       </a>
 
       <label htmlFor="something" className="connectionLabel">
         {t('account:rss-view-all', 'View RSS feed of all items')}
       </label>
-      <a href={allLink} className="button secondary actionInline" target="_blank" rel="noopener">
+      <a href={allLink} className="button secondary actionInline" rel="noopener">
         {t('account:rss-open-feed', 'Open Feed')}
       </a>
       <div className="helperText full">

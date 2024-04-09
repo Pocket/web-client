@@ -226,7 +226,6 @@ exports[`renders LayoutMain with defaults 1`] = `
                   <a
                     href="https://facebook.com/pocket"
                     rel="noopener"
-                    target="_blank"
                     title="Visit our Facebook page"
                   >
                     <svg
@@ -246,7 +245,6 @@ exports[`renders LayoutMain with defaults 1`] = `
                   <a
                     href="https://twitter.com/pocket"
                     rel="noopener"
-                    target="_blank"
                     title="View our Twitter profile"
                   >
                     <svg
@@ -266,7 +264,6 @@ exports[`renders LayoutMain with defaults 1`] = `
                   <a
                     href="https://instagram.com/pocket"
                     rel="noopener"
-                    target="_blank"
                     title="Find us on Instagram"
                   >
                     <svg
@@ -302,7 +299,6 @@ exports[`renders LayoutMain with defaults 1`] = `
           <a
             href="https://apps.apple.com/us/app/pocket-save-read-grow/id309601447"
             rel="noopener"
-            target="_blank"
             title="Download On the Apple App Store"
           >
             <svg
@@ -318,7 +314,6 @@ exports[`renders LayoutMain with defaults 1`] = `
             class="google-play-badge"
             href="https://play.google.com/store/apps/details?id=com.ideashower.readitlater.pro"
             rel="noopener"
-            target="_blank"
             title="Get It On Google Play"
           >
             <svg
@@ -343,7 +338,6 @@ exports[`renders LayoutMain with defaults 1`] = `
               <a
                 href="https://www.mozilla.org/about/"
                 rel="noopener"
-                target="_blank"
               >
                 Mozilla
               </a>

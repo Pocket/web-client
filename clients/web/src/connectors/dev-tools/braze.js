@@ -56,7 +56,7 @@ export const BrazeTools = () => {
             <br />
             <a
               href="https://support.mozilla.org/en-US/kb/push-notifications-firefox#w_upgraded-notifications"
-              target="_blank">
+              rel="noopener">
               Please update your settings
             </a>
           </div>

@@ -147,7 +147,7 @@ export function CallOutStartLibrary({
           </p>
           <a
             className="button primary start-button"
-            target="_blank"
+            rel="noopener"
             onClick={handleButtonClick}
             href={`${SIGNUP_URL}?src=web-library-callout&utm_source=${global.location.href}&utm_medium=web`}>
             {t('discover:start-your-library', 'Start your library')}

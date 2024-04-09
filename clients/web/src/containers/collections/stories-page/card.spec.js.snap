@@ -80,7 +80,6 @@ exports[`ItemCard renders a story 1`] = `
           href="https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html?utm_source=pocket_collection_story"
           rel="noopener"
           tabindex="0"
-          target="_blank"
         >
           New York Times
         </a>

@@ -215,8 +215,7 @@ const LibraryAd = () => (
         <ArrowLink
           id="reader.bottom.premium.library"
           dataCy="reader-bottom-premium"
-          href={premiumURL}
-          target="_blank">
+          href={premiumURL}>
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
       </p>
@@ -227,7 +226,7 @@ const LibraryAd = () => (
         id="reader.bottom.premium.library"
         data-testid="reader-bottom-premium"
         className="button primary"
-        target="_blank"
+        rel="noopener"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
       </a>
@@ -258,8 +257,7 @@ const SearchAd = () => (
         <ArrowLink
           id="reader.bottom.premium.search"
           dataCy="reader-bottom-premium"
-          href={premiumURL}
-          target="_blank">
+          href={premiumURL}>
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
       </p>
@@ -270,7 +268,7 @@ const SearchAd = () => (
         id="reader.bottom.premium.search"
         data-testid="reader-bottom-premium"
         className="button primary"
-        target="_blank"
+        rel="noopener"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
       </a>
@@ -301,8 +299,7 @@ const FocusedAd = () => (
         <ArrowLink
           id="reader.bottom.premium.focused"
           dataCy="reader-bottom-premium"
-          href={premiumURL}
-          target="_blank">
+          href={premiumURL}>
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
       </p>
@@ -313,7 +310,7 @@ const FocusedAd = () => (
         id="reader.bottom.premium.focused"
         data-testid="reader-bottom-premium"
         className="button primary"
-        target="_blank"
+        rel="noopener"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
       </a>
@@ -345,7 +342,7 @@ const TypeAd = () => (
           id="reader.bottom.premium.type"
           dataCy="reader-bottom-premium"
           href={premiumURL}
-          target="_blank">
+          rel="noopener">
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
       </p>
@@ -356,7 +353,7 @@ const TypeAd = () => (
         id="reader.bottom.premium.type"
         data-testid="reader-bottom-premium"
         className="button primary"
-        target="_blank"
+        rel="noopener"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
       </a>
@@ -388,7 +385,7 @@ const BigDiamondAd = () => (
           id="reader.bottom.premium.features"
           dataCy="reader-bottom-premium"
           href={premiumURL}
-          target="_blank">
+          rel="noopener">
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
       </p>
@@ -399,7 +396,7 @@ const BigDiamondAd = () => (
         id="reader.bottom.premium.features"
         data-testid="reader-bottom-premium"
         className="button primary"
-        target="_blank"
+        rel="noopener"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
       </a>
@@ -430,8 +427,7 @@ const HighlightAd = () => (
         <ArrowLink
           id="reader.bottom.premium.highlights"
           dataCy="reader-bottom-premium"
-          href={premiumURL}
-          target="_blank">
+          href={premiumURL}>
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
       </p>
@@ -442,7 +438,7 @@ const HighlightAd = () => (
         id="reader.bottom.premium.highlights"
         data-testid="reader-bottom-premium"
         className="button primary"
-        target="_blank"
+        rel="noopener"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
       </a>
@@ -470,11 +466,7 @@ const TagsAd = () => (
         <Trans i18nKey="reader:save-time-tagging-small">
           Tag stories faster than ever. Get tag suggestions with
         </Trans>{' '}
-        <ArrowLink
-          id="reader.bottom.premium.tags"
-          dataCy="reader-bottom-premium"
-          href={premiumURL}
-          target="_blank">
+        <ArrowLink id="reader.bottom.premium.tags" dataCy="reader-bottom-premium" href={premiumURL}>
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
       </p>
@@ -485,7 +477,7 @@ const TagsAd = () => (
         id="reader.bottom.premium.tags"
         data-testid="reader-bottom-premium"
         className="button primary"
-        target="_blank"
+        rel="noopener"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
       </a>

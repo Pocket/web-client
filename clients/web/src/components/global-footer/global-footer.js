@@ -309,7 +309,6 @@ export const GlobalFooter = (props) => {
       href="https://apps.apple.com/us/app/pocket-save-read-grow/id309601447"
       className={appStoreBadgeStyle}
       key="footer-app-store-badge"
-      target="_blank"
       rel="noopener">
       <img
         src={appStoreBadge}
@@ -320,7 +319,6 @@ export const GlobalFooter = (props) => {
       href="https://play.google.com/store/apps/details?id=com.ideashower.readitlater.pro"
       className={`${appStoreBadgeStyle} google-play-badge`}
       key="footer-google-play-badge"
-      target="_blank"
       rel="noopener">
       <img src={googlePlayBadge} alt={t('global-footer:google-play', 'Get It On Google Play')} />
     </a>
@@ -412,7 +410,7 @@ export const GlobalFooter = (props) => {
             <span>
               <Trans i18nKey="global-footer:pocket-is-part-of">
                 Pocket is part of the{' '}
-                <a href="https://www.mozilla.org/about/" target="_blank" rel="noopener">
+                <a href="https://www.mozilla.org/about/" rel="noopener">
                   Mozilla
                 </a>{' '}
                 family of products.
@@ -448,21 +446,21 @@ export const GlobalFooter = (props) => {
               <div className="social-wrapper">
                 {t('global-footer:follow-pocket', 'Follow Pocket')}
                 <div className="social">
-                  <a href="https://facebook.com/pocket" target="_blank" rel="noopener">
+                  <a href="https://facebook.com/pocket" rel="noopener">
                     <FacebookMonoIcon
                       id="facebook-footer-icon"
                       title="Facebook"
                       description={t('global-footer:visit-facebook', 'Visit our Facebook page')}
                     />
                   </a>
-                  <a href="https://twitter.com/pocket" target="_blank" rel="noopener">
+                  <a href="https://twitter.com/pocket" rel="noopener">
                     <TwitterMonoIcon
                       id="twitter-footer-icon"
                       title="Twitter"
                       description={t('global-footer:view-twitter', 'View our Twitter profile')}
                     />
                   </a>
-                  <a href="https://instagram.com/pocket" target="_blank" rel="noopener">
+                  <a href="https://instagram.com/pocket" rel="noopener">
                     <InstagramMonoIcon
                       id="instagram-footer-icon"
                       title="Instagram"

@@ -142,7 +142,7 @@ export function VisibleAction({ actions }) {
         aria-label={label}
         data-testid={label}
         onClick={onClick}
-        target="_blank">
+        rel="noopener">
         {icon}
       </a>
     ) : (

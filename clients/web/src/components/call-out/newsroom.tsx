@@ -92,17 +92,13 @@ export function CallOutNewsroom() {
         <ol>
           <li>
             Find your local newsroom using{' '}
-            <a href="https://findyournews.org/campaign/inn-network-directory" target="_blank">
-              this&nbsp;database
-            </a>
+            <a href="https://findyournews.org/campaign/inn-network-directory">this&nbsp;database</a>
           </li>
           <li>If they have a newsletter, subscribe and share it with friends</li>
           <li>Support your local news organization with a recurring donation</li>
           <li>
             Learn more about the{' '}
-            <a href="https://www.theajp.org/why-local-news/" target="_blank">
-              state of local news
-            </a>
+            <a href="https://www.theajp.org/why-local-news/">state of local news</a>
           </li>
           <li>Save local stories in Pocket to read whenever, wherever</li>
         </ol>

@@ -204,8 +204,7 @@ export default function LearnMore() {
               <a
                 onClick={handleFaq}
                 className="button secondary"
-                href="https://help.getpocket.com/article/1187-pocket-migration-to-firefox-accounts"
-                target="_blank">
+                href="https://help.getpocket.com/article/1187-pocket-migration-to-firefox-accounts">
                 {t('learn-more:faq-button', 'Learn more')}
               </a>
             </li>

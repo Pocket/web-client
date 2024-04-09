@@ -302,11 +302,11 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
 
                     <div className={formSubtextWrapper}>
                       <span className={formSubtextLinks}>
-                        <a href="/privacy" target="_blank" rel="noopener">
+                        <a href="/privacy" rel="noopener">
                           Privacy
                         </a>
                         <span>·</span>
-                        <a href="/tos" target="_blank" rel="noopener">
+                        <a href="/tos" rel="noopener">
                           Terms
                         </a>
                       </span>

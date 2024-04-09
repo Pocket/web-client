@@ -70,7 +70,7 @@ function FollowPublisher({ leadIn, text, url, handleImpression, handleClick }) {
           onClick={onClick}
           href={url}
           /* eslint-disable-next-line */
-          target="_blank">
+          rel="noopener">
           {text}
         </a>
       </div>

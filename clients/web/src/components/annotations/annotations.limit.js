@@ -34,8 +34,7 @@ export const LimitNotice = ({ onVisible }) => {
         </p>
         <ArrowLink
           id="highlights.limit.sidebar"
-          href={`${PREMIUM_URL}&utm_campaign=highlights-limit-sidebar`}
-          target="_blank">
+          href={`${PREMIUM_URL}&utm_campaign=highlights-limit-sidebar`}>
           <Trans i18nKey="annotations:upgrade-now">Upgrade now</Trans>
         </ArrowLink>
       </div>
@@ -66,8 +65,7 @@ export const ModalLimitNotice = ({ showModal, closeModal, onVisible }) => {
             </Trans>{' '}
             <ArrowLink
               id="reader.highlights.limit"
-              href={`${PREMIUM_URL}&utm_campaign=highlights-limit-modal`}
-              target="_blank">
+              href={`${PREMIUM_URL}&utm_campaign=highlights-limit-modal`}>
               <Trans i18nKey="annotations:upgrade-now">Upgrade now</Trans>
             </ArrowLink>
           </p>

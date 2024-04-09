@@ -58,10 +58,7 @@ const PopoverAction = function ({ popoverOptions, copy }) {
     /*eslint-disable*/
   }
   return (
-    <a
-      className={wrapperLink}
-      href="https://www.merriam-webster.com/dictionary/oops"
-      target="_blank">
+    <a className={wrapperLink} href="https://www.merriam-webster.com/dictionary/oops">
       <div> {copy}</div>
       <div className="trigger" onClick={handleClick} ref={popTrigger}>
         Click me

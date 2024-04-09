@@ -234,7 +234,6 @@ const Publisher = ({ publisher, externalUrl, onOpenOriginalUrl, isSyndicated }) 
           onClick={onOpenOriginalUrl}
           data-testid="publisher-link"
           tabIndex={0}
-          target="_blank"
           rel="noopener">
           {publisher}
         </a>
