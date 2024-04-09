@@ -96,21 +96,21 @@ export function NavFooter() {
                 <div className={style.social}>
                   <a
                     href="https://facebook.com/pocket"
-                    rel="noopener noreferrer"
+                    rel="noopener"
                     target="_blank"
                     title={t('global-footer:visit-facebook', 'Visit our Facebook page')}>
                     <FacebookMonoIcon />
                   </a>
                   <a
                     href="https://twitter.com/pocket"
-                    rel="noopener noreferrer"
+                    rel="noopener"
                     target="_blank"
                     title={t('global-footer:view-twitter', 'View our Twitter profile')}>
                     <TwitterMonoIcon />
                   </a>
                   <a
                     href="https://instagram.com/pocket"
-                    rel="noopener noreferrer"
+                    rel="noopener"
                     target="_blank"
                     title={t('global-footer:view-instagram', 'Find us on Instagram')}>
                     <InstagramMonoIcon />
@@ -124,7 +124,7 @@ export function NavFooter() {
           <h6>{t('global-footer:get-the-app', 'Get the app')}</h6>
           <a
             href="https://apps.apple.com/us/app/pocket-save-read-grow/id309601447"
-            rel="noopener noreferrer"
+            rel="noopener"
             target="_blank"
             title={t('global-footer:app-store', 'Download On the Apple App Store')}>
             <svg height="40" width="119.664">
@@ -134,7 +134,7 @@ export function NavFooter() {
           <a
             className="google-play-badge"
             href="https://play.google.com/store/apps/details?id=com.ideashower.readitlater.pro"
-            rel="noopener noreferrer"
+            rel="noopener"
             target="_blank"
             title={t('global-footer:google-play', 'Get It On Google Play')}>
             <svg height="40.37" width="135.12">
@@ -147,7 +147,7 @@ export function NavFooter() {
             <div className={style.partOf}>
               <Trans i18nKey="global-footer:pocket-is-part-of">
                 Pocket is part of the{' '}
-                <a href="https://www.mozilla.org/about/" rel="noopener noreferrer" target="_blank">
+                <a href="https://www.mozilla.org/about/" rel="noopener" target="_blank">
                   Mozilla
                 </a>{' '}
                 family of products.

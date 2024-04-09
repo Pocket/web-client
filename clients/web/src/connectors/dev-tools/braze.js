@@ -12,7 +12,7 @@ export const BrazeTools = () => {
   const brazeToken = useSelector((state) => state.userBraze?.token)
 
   useEffect(() => {
-    if (!brazeInitialized) return () => {} 
+    if (!brazeInitialized) return () => {}
     import('common/utilities/braze/braze-lazy-load').then(
       ({ isPushBlocked, isPushPermissionGranted }) => {
         if (isPushBlocked()) setPushDenied(true)
@@ -56,8 +56,7 @@ export const BrazeTools = () => {
             <br />
             <a
               href="https://support.mozilla.org/en-US/kb/push-notifications-firefox#w_upgraded-notifications"
-              target="_blank"
-              rel="noreferrer">
+              target="_blank">
               Please update your settings
             </a>
           </div>

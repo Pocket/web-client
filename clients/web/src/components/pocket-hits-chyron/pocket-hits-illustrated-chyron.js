@@ -262,17 +262,11 @@ const PocketHitsIllustratedChyron = ({
               <div className={captchaDisclaimer}>
                 This site is protected by reCAPTCHA.&nbsp;
                 <span>
-                  <a
-                    href="https://policies.google.com/privacy"
-                    target="_blank"
-                    rel="noopener noreferrer">
+                  <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">
                     Privacy
                   </a>
                   &nbsp;·&nbsp;
-                  <a
-                    href="https://policies.google.com/terms"
-                    target="_blank"
-                    rel="noopener noreferrer">
+                  <a href="https://policies.google.com/terms" target="_blank" rel="noopener">
                     Terms
                   </a>
                 </span>

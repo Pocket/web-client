@@ -284,17 +284,11 @@ const CallOutPocketHitsSignup = ({
                   <div className="captchaDisclaimer">
                     {t('call-out:pocket-hits-description', 'This site is protected by reCAPTCHA.')}
                     <span>
-                      <a
-                        href="https://policies.google.com/privacy"
-                        target="_blank"
-                        rel="noopener noreferrer">
+                      <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">
                         {t('call-out:privacy', 'Privacy')}
                       </a>
                       &nbsp;·&nbsp;
-                      <a
-                        href="https://policies.google.com/terms"
-                        target="_blank"
-                        rel="noopener noreferrer">
+                      <a href="https://policies.google.com/terms" target="_blank" rel="noopener">
                         {t('call-out:terms', 'Terms')}
                       </a>
                     </span>

@@ -47,7 +47,7 @@ export function Partner({ partnerInfo }) {
   return (
     <div className={partnerStyles}>
       <div>{attribution}</div>
-      <a href={partnerInfo.url} target="_blank" rel="noopener noreferrer">
+      <a href={partnerInfo.url} target="_blank" rel="noopener">
         <img src={partnerInfo.imageUrl} alt={partnerInfo.name} />
       </a>
     </div>

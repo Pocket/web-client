@@ -142,8 +142,7 @@ export function VisibleAction({ actions }) {
         aria-label={label}
         data-testid={label}
         onClick={onClick}
-        target="_blank"
-        rel="noreferrer">
+        target="_blank">
         {icon}
       </a>
     ) : (

@@ -123,7 +123,7 @@ exports[`renders NavFooter with defaults 1`] = `
               >
                 <a
                   href="https://facebook.com/pocket"
-                  rel="noopener noreferrer"
+                  rel="noopener"
                   target="_blank"
                   title="Visit our Facebook page"
                 >
@@ -143,7 +143,7 @@ exports[`renders NavFooter with defaults 1`] = `
                 </a>
                 <a
                   href="https://twitter.com/pocket"
-                  rel="noopener noreferrer"
+                  rel="noopener"
                   target="_blank"
                   title="View our Twitter profile"
                 >
@@ -163,7 +163,7 @@ exports[`renders NavFooter with defaults 1`] = `
                 </a>
                 <a
                   href="https://instagram.com/pocket"
-                  rel="noopener noreferrer"
+                  rel="noopener"
                   target="_blank"
                   title="Find us on Instagram"
                 >
@@ -199,7 +199,7 @@ exports[`renders NavFooter with defaults 1`] = `
         </h6>
         <a
           href="https://apps.apple.com/us/app/pocket-save-read-grow/id309601447"
-          rel="noopener noreferrer"
+          rel="noopener"
           target="_blank"
           title="Download On the Apple App Store"
         >
@@ -215,7 +215,7 @@ exports[`renders NavFooter with defaults 1`] = `
         <a
           class="google-play-badge"
           href="https://play.google.com/store/apps/details?id=com.ideashower.readitlater.pro"
-          rel="noopener noreferrer"
+          rel="noopener"
           target="_blank"
           title="Get It On Google Play"
         >
@@ -240,7 +240,7 @@ exports[`renders NavFooter with defaults 1`] = `
              
             <a
               href="https://www.mozilla.org/about/"
-              rel="noopener noreferrer"
+              rel="noopener"
               target="_blank"
             >
               Mozilla

@@ -66,8 +66,7 @@ const MenuPopover = function ({ popoverRef, menuItems }) {
             data-testid={label}
             className={popoverMenuItem}
             onClick={onClick}
-            target="_blank"
-            rel="noreferrer">
+            target="_blank">
             {icon ? icon : null}
             {label}
           </a>

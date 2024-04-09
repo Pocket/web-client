@@ -95,7 +95,7 @@ export const Item = (props) => {
 
   const openInNewTab = !isInternalItem
   const linkTarget = openInNewTab ? '_blank' : undefined
-  const linkRel = openInNewTab ? 'noopener noreferrer' : undefined
+  const linkRel = openInNewTab ? 'noopener' : undefined
   const [tagsShown, setTagsShown] = useState(false)
 
   const viewRef = useRef(null)
@@ -291,7 +291,7 @@ const Publisher = ({ publisher, externalUrl, onOpenOriginalUrl, isSyndicated }) 
           data-testid="publisher-link"
           tabIndex={0}
           target="_blank"
-          rel="noopener noreferrer">
+          rel="noopener">
           {publisher}
         </a>
       ) : (

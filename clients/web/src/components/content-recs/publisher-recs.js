@@ -85,12 +85,7 @@ const RecommendedArticle = ({
   return (
     <VisibilitySensor onVisible={handleVisible}>
       <li className={recommendedArticleStyles} data-testid="publisher-recs-article">
-        <a
-          onClick={handleClick}
-          className="title"
-          href={url}
-          target="_blank"
-          rel="noopener noreferrer">
+        <a onClick={handleClick} className="title" href={url} target="_blank" rel="noopener">
           {title}
         </a>
       </li>

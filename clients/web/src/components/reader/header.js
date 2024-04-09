@@ -163,7 +163,7 @@ export const ItemHeader = ({
           onClick={viewOriginalEvent}
           href={externalUrl}
           target="_blank"
-          rel="noopener noreferrer">
+          rel="noopener">
           <Trans i18nKey="reader:view-original">View Original</Trans>
           <NewViewIcon />
         </a>

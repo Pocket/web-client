@@ -123,7 +123,7 @@ export const CardMedia = function ({
 
   const { t } = useTranslation()
   const linkTarget = openInNewTab ? '_blank' : ''
-  const linkRel = openInNewTab ? 'noopener noreferrer' : ''
+  const linkRel = openInNewTab ? 'noopener' : ''
 
   const MediaImage = () => {
     return hasImage ? (
