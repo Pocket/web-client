@@ -163,10 +163,7 @@ export const ItemHeader = ({
           onClick={viewOriginalEvent}
           href={externalUrl}
           target="_blank"
-          rel="noopener">
-          <Trans i18nKey="reader:view-original">View Original</Trans>
-          <NewViewIcon />
-        </a>
+          rel="noopener"></a>
         {tags && (
           <div className={cx(tagsWrapper, pillboxStyle)}>
             <ul className="list">

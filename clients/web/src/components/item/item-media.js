@@ -2,7 +2,6 @@ import { css } from '@emotion/css'
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 import { getImageCacheUrl } from 'common/utilities/urls/urls'
-import { NewViewIcon } from '@ui/icons/NewViewIcon'
 import { ListViewAltIcon } from '@ui/icons/ListViewAltIcon'
 
 const cardMediaStyles = css`
@@ -79,8 +78,7 @@ export const CardMedia = function ({
   isUserList,
   openUrl,
   onOpen,
-  openInNewTab,
-  showViewOriginal = true
+  openInNewTab
 }) {
   /**
    * Fallback images:
@@ -155,26 +153,10 @@ export const CardMedia = function ({
           target={linkTarget}
           rel={linkRel}>
           <MediaImage />
-          {openInNewTab && showViewOriginal ? (
-            <span className="view-original" data-testid="view-original">
-              <span className="view-original-text">
-                {t('item-action:view-original', 'View Original')}
-              </span>
-              <NewViewIcon />
-            </span>
-          ) : null}
         </Link>
       ) : (
         <span className="no-link">
           <MediaImage />
-          {openInNewTab && showViewOriginal ? (
-            <span className="view-original" data-testid="view-original">
-              <span className="view-original-text">
-                {t('item-action:view-original', 'View Original')}
-              </span>
-              <NewViewIcon />
-            </span>
-          ) : null}
         </span>
       )}
     </div>

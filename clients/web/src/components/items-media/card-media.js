@@ -156,26 +156,10 @@ export const CardMedia = function ({
           target={linkTarget}
           rel={linkRel}>
           <MediaImage />
-          {openInNewTab ? (
-            <span className="view-original" data-testid="view-original">
-              <span className="view-original-text">
-                {t('item-action:view-original', 'View Original')}
-              </span>
-              <NewViewIcon />
-            </span>
-          ) : null}
         </Link>
       ) : (
         <span className="no-link">
           <MediaImage />
-          {openInNewTab ? (
-            <span className="view-original" data-testid="view-original">
-              <span className="view-original-text">
-                {t('item-action:view-original', 'View Original')}
-              </span>
-              <NewViewIcon />
-            </span>
-          ) : null}
         </span>
       )}
     </div>

@@ -27,34 +27,6 @@ exports[`ItemCard renders a story 1`] = `
           srcset=" https://pocket-image-cache.com/1280x720/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F914953af-15fd-46b9-ba3c-eed3ed278f9a.jpeg 2x "
           style="--fallbackBackground: #FCB64380; --fallbackColor: #FCB643; --fallbackLetter: 'I';"
         />
-        <span
-          class="view-original"
-          data-testid="view-original"
-        >
-          <span
-            class="view-original-text"
-          >
-            item-action:view-original
-          </span>
-          <svg
-            aria-hidden="true"
-            class="icon "
-            fill="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              clip-rule="evenodd"
-              d="M6 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3a1 1 0 1 1 2 0v3a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4h3a1 1 0 0 1 0 2z"
-              fill-rule="evenodd"
-            />
-            <path
-              clip-rule="evenodd"
-              d="M13 3a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v7a1 1 0 1 1-2 0V5.414l-7.293 7.293a1 1 0 0 1-1.414-1.414L18.586 4H14a1 1 0 0 1-1-1"
-              fill-rule="evenodd"
-            />
-          </svg>
-        </span>
       </a>
     </div>
     <div
