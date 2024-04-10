@@ -5,6 +5,7 @@ import { Pill } from 'components/pill/pill'
 import { pillboxStyle } from 'components/topics-pillbox/topics-pillbox'
 import { Trans } from 'next-i18next'
 import dayjs from 'dayjs'
+import { NewViewIcon } from '@ui/icons/NewViewIcon'
 
 /* COMPONENTS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -161,7 +162,10 @@ export const ItemHeader = ({
           className={viewOriginal}
           onClick={viewOriginalEvent}
           href={externalUrl}
-          rel="noopener"></a>
+          rel="noopener">
+          <Trans i18nKey="reader:view-original">View Original</Trans>
+          <NewViewIcon />
+        </a>
         {tags && (
           <div className={cx(tagsWrapper, pillboxStyle)}>
             <ul className="list">
