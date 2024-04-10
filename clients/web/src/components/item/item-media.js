@@ -114,8 +114,6 @@ export const CardMedia = function ({
   }
 
   const { t } = useTranslation()
-  const linkTarget = openInNewTab ? '_blank' : ''
-  const linkRel = openInNewTab ? 'noopener' : ''
 
   const MediaImage = () => {
     return hasImage ? (
@@ -145,13 +143,7 @@ export const CardMedia = function ({
         </div>
       ) : null}
       {openUrl ? (
-        <Link
-          href={openUrl}
-          tabIndex="-1"
-          data-testid="image-link"
-          onClick={onOpen}
-          target={linkTarget}
-          rel={linkRel}>
+        <Link href={openUrl} tabIndex="-1" data-testid="image-link" onClick={onOpen} rel="noopner">
           <MediaImage />
         </Link>
       ) : (

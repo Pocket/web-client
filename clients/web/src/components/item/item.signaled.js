@@ -29,7 +29,6 @@ export const ItemSignaled = (props) => {
     isSyndicated,
     isCollection,
     authors,
-    isInternalItem,
     saveStatus,
     externalUrl,
     openUrl,
@@ -82,10 +81,6 @@ export const ItemSignaled = (props) => {
     (bulkSelected || shortcutSelected) && 'selected'
   ) //prettier-ignore
 
-  const openInNewTab = !isInternalItem
-  const linkTarget = openInNewTab ? '_blank' : undefined
-  const linkRel = openInNewTab ? 'noopener' : undefined
-
   const viewRef = useRef(null)
   const linkRef = useRef(null)
   const footerRef = useRef(null)
@@ -135,7 +130,6 @@ export const ItemSignaled = (props) => {
           onOpen={onOpen}
           showViewOriginal={false}
           onImageFail={onImageFail}
-          openInNewTab={openInNewTab}
           openUrl={openUrl}
         />
         {onReport ? (
@@ -169,15 +163,9 @@ export const ItemSignaled = (props) => {
             onClick={onOpen}
             className="content-block"
             data-testid="content-block"
-            target={linkTarget}
             ref={linkRef}
-            rel={linkRel}>
-            <h2 className={cx('title withTopDetails', openInNewTab && 'open-external')}>
-              {title}
-              {openInNewTab ? (
-                <NewViewIcon className="mobile-view-original" data-testid="view-original-icon" />
-              ) : null}
-            </h2>
+            rel="noopener">
+            <h2 className={cx('title withTopDetails')}>{title}</h2>
             <Excerpt useMarkdown={useMarkdown} excerpt={excerpt} />
           </Link>
         </div>
