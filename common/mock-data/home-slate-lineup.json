@@ -1,0 +1,767 @@
+{
+  "data": {
+    "homeSlateLineup": {
+      "slates": [
+        {
+          "recommendations": [
+            {
+              "item": {
+                "excerpt": "‘Natural’ isn’t the same thing as healthful.",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/3b6582e4-f253-4978-b6af-ae00dd01a1d6.jpeg"
+                },
+                "publisher": "The Conversation",
+                "timeToRead": 4,
+                "title": "A Natural Deception: 3 Marketing Myths the Supplement Industry Wants You to Swallow",
+                "topic": "HEALTH_FITNESS",
+                "url": "https://getpocket.com/explore/item/a-natural-deception-3-marketing-myths-the-supplement-industry-wants-you-to-swallow",
+                "id": "d5872d31-8d0c-4711-b11c-b390d32d4b93",
+                "authors": [
+                  {
+                    "name": "Katie Suleta"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "It’s gained a cult audience all over the world—and is especially popular in Germany.",
+                "image": {
+                  "url": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/e26910f7-1cad-471b-b1d6-a8d3ee3baf44.jpeg"
+                },
+                "publisher": "Mental Floss",
+                "timeToRead": 4,
+                "title": "How An Obscure British Comedy Sketch Became The World’s Most Repeated TV Program",
+                "topic": "ENTERTAINMENT",
+                "url": "https://getpocket.com/explore/item/how-an-obscure-british-comedy-sketch-became-the-world-s-most-repeated-tv-program",
+                "id": "99080950-0d14-4a08-9ba9-081000b6d659",
+                "authors": [
+                  {
+                    "name": "Paul Anthony Jones"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "After years of avoiding love, I found a match that seemed almost too perfect. We were practically walking down the aisle before I realized it really was too good to be true.",
+                "image": {
+                  "url": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/9020533d-0fe3-4d62-b18a-a74e55dc9394.jpeg"
+                },
+                "publisher": "Narratively",
+                "timeToRead": 21,
+                "title": "A Super Strange True Love Story: My Disappearing Fiancé",
+                "topic": "TRAVEL",
+                "url": "https://getpocket.com/explore/item/a-super-strange-true-love-story-my-disappearing-fianc",
+                "id": "3cb3ddca-978c-48ad-a825-5c095a67c872",
+                "authors": [
+                  {
+                    "name": "Annalisa Merelli"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "Around the world, children are far more likely than ever before to develop food allergies.",
+                "image": {
+                  "url": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/72f59e0f-a9d5-4451-810a-b8c326322b16.jpeg"
+                },
+                "publisher": "BBC News",
+                "timeToRead": 5,
+                "title": "Why the World Is Becoming More Allergic to Food",
+                "topic": "SCIENCE",
+                "url": "https://getpocket.com/explore/item/why-the-world-is-becoming-more-allergic-to-food",
+                "id": "4ae723f0-0dbb-436f-9b66-de14fc208ace",
+                "authors": [
+                  {
+                    "name": "Dr. Alexandra Santos"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "And I’m done pretending otherwise.",
+                "image": {
+                  "url": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/13d82769-5bce-41f9-b4d5-0230eb33637c.jpeg"
+                },
+                "publisher": "Elle",
+                "timeToRead": 9,
+                "title": "There’s Nothing Effortless About Being a Woman",
+                "topic": "HEALTH_FITNESS",
+                "url": "https://getpocket.com/explore/item/there-s-nothing-effortless-about-being-a-woman",
+                "id": "06c5ad31-7c58-48ae-bd3c-2a693c1fd7cf",
+                "authors": [
+                  {
+                    "name": "Amy S. Choi"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "Handle awkward date silences, end a conversation with a stranger – plus chat with your children, your parents, and your boss. Our panel shares their secrets.",
+                "image": {
+                  "url": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/4ab92950-21c1-47fd-b886-ff5be84e9aba.jpeg"
+                },
+                "publisher": "The Guardian",
+                "timeToRead": 10,
+                "title": "How to Talk to Anyone: The Experts’ Guide",
+                "topic": "SELF_IMPROVEMENT",
+                "url": "https://getpocket.com/explore/item/how-to-talk-to-anyone-the-experts-guide",
+                "id": "0db97a42-76a8-4b08-8ac7-c37591c74962",
+                "authors": [
+                  {
+                    "name": "Interviews by Rosie Ifould"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "If you think everyone around you is terrible, the joke may be on you.",
+                "image": {
+                  "url": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/afc211e8-631e-43e6-85ff-17051af7003e.jpeg"
+                },
+                "publisher": "Nautilus",
+                "timeToRead": 10,
+                "title": "How to Tell If You’re a Jerk",
+                "topic": "SELF_IMPROVEMENT",
+                "url": "https://getpocket.com/explore/item/how-to-tell-if-you-re-a-jerk",
+                "id": "ee39248a-4d5d-461b-aa57-0d995c60a807",
+                "authors": [
+                  {
+                    "name": "Eric Schwitzgebel"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "We survey the full arc of the iconic singer’s five-decade pop odyssey, from her Ronettes classics to team-ups with everyone from Eddie Money to Joey Ramone.",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/94b62f83-fc1e-46ef-a344-4296f862302e.jpeg"
+                },
+                "publisher": "Rolling Stone",
+                "timeToRead": 10,
+                "title": "Ronnie Spector: 15 Essential Songs",
+                "topic": "ENTERTAINMENT",
+                "url": "https://getpocket.com/explore/item/ronnie-spector-15-essential-songs",
+                "id": "884d9598-975d-459d-be5a-dc6a74d58642",
+                "authors": [
+                  {
+                    "name": "Jon Dolan"
+                  },
+                  {
+                    "name": "Jon Freeman"
+                  },
+                  {
+                    "name": "Elisabeth Garber-Paul"
+                  },
+                  {
+                    "name": "Kory Grow"
+                  },
+                  {
+                    "name": "Joseph Hudak"
+                  },
+                  {
+                    "name": "Daniel Kreps"
+                  },
+                  {
+                    "name": "Elias Leight"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "Everyone is disliked by someone. Don’t let it slow you down.",
+                "image": {
+                  "url": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/e033e729-d784-422c-ad6b-ef4f9288a3e8.jpeg"
+                },
+                "publisher": "Lifehacker",
+                "timeToRead": 9,
+                "title": "How Not to Care When People Don’t Like You",
+                "topic": "SELF_IMPROVEMENT",
+                "url": "https://getpocket.com/explore/item/how-not-to-care-when-people-don-t-like-you",
+                "id": "a243b0bb-b6fa-4fc5-a801-0657b7534c50",
+                "authors": [
+                  {
+                    "name": "Rebecca Fishbein"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "Parents are increasingly rethinking what it means to create an online footprint their child can’t actively consent to.",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/dcda7542-0f60-4ea5-b5a3-8e8aec612090.jpeg"
+                },
+                "publisher": "The Washington Post",
+                "timeToRead": 5,
+                "title": "As the Internet Gets Scarier, More Parents Keep Their Kids’ Photos Offline",
+                "topic": "PARENTING",
+                "url": "https://getpocket.com/explore/item/as-the-internet-gets-scarier-more-parents-keep-their-kids-photos-offline",
+                "id": "26e7e5d9-4ff8-4574-90fa-46dd79b2758b",
+                "authors": [
+                  {
+                    "name": "Fortesa Latifi"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "recommendations": [
+            {
+              "item": {
+                "excerpt": "Three experts break down the controversy behind this TikTok viral jawline-defining technique.",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/f5b80390-a505-4481-bd47-170dbdb04449.jpeg"
+                },
+                "publisher": "Essence",
+                "timeToRead": 4,
+                "title": "Does Mewing Really Sculpt Your Jawline?",
+                "topic": "HEALTH_FITNESS",
+                "url": "https://www.essence.com/beauty/mewing-controversial-experts-tiktok-jawline/",
+                "id": "cace9791-e553-459b-a8ae-900f80ae5360",
+                "authors": [
+                  {
+                    "name": "India Espy-Jones"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "Some companies let you opt out of allowing your content to be used for generative AI. Here’s how to take back (at least a little) control from ChatGPT, Google’s Gemini, and more.",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/a54a91de-e187-419a-8feb-0a3a421fba93.jpeg"
+                },
+                "publisher": "WIRED",
+                "timeToRead": 11,
+                "title": "How to Stop Your Data From Being Used to Train AI",
+                "topic": "TECHNOLOGY",
+                "url": "https://www.wired.com/story/how-to-stop-your-data-from-being-used-to-train-ai/",
+                "id": "e77a2ae3-fce5-41dc-ac73-afa3ce70587b",
+                "authors": [
+                  {
+                    "name": "Matt Burgess"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "Ground zero for the rigged-election conspiracy, the border state could decide both the fate of the Senate and the presidency.",
+                "image": {
+                  "url": "https://pyxis.nymag.com/v1/imgs/a36/aea/b78cc1345d08b8a143952a96c5ad4a3f0c-arizona-race-olivia.1x.rsocial.w1200.jpg"
+                },
+                "publisher": "New York Magazine",
+                "timeToRead": 42,
+                "title": "Arizona’s Split Reality",
+                "topic": "POLITICS",
+                "url": "https://nymag.com/intelligencer/article/arizona-senate-race-2024-election-swing-state.html",
+                "id": "d12def0c-5cfa-4185-9212-5838c5288554",
+                "authors": [
+                  {
+                    "name": "Olivia Nuzzi"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "Mocked and hampered at every turn, and paid 73 cents on the dollar, America’s first policewoman Alice Wells tracks a missing heiress to an insidious cult — and transforms policing.",
+                "image": {
+                  "url": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/71cad295-130b-461f-8ee8-c34e2e2d75b1.jpeg"
+                },
+                "publisher": "Truly*Adventurous",
+                "timeToRead": 27,
+                "title": "How America’s First Policewoman Took Down an Insidious L.A. Cult",
+                "topic": "EDUCATION",
+                "url": "https://getpocket.com/explore/item/pillars-of-fire-truly-adventurous",
+                "id": "73b1f750-a511-4fc7-9304-dfffe79c8b52",
+                "authors": [
+                  {
+                    "name": "Nathan Masters"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "When an aid organization hired agents to investigate her father's violence, the resulting probe became her new nightmare.",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/d5e79ad8-c38b-4b9f-9859-be2bab9583b4.jpeg"
+                },
+                "publisher": "Mother Jones",
+                "timeToRead": 30,
+                "title": "“Independent” Investigations Into Sexual Abuse Are Big Business. Can Survivors Really Trust Them?",
+                "topic": "POLITICS",
+                "url": "https://www.motherjones.com/politics/2024/02/mercy-corps-me-too-sexual-abuse-harassment-independent-investigation/",
+                "id": "45d8da24-f3ef-4eb7-b895-8a5cd48cf27d",
+                "authors": [
+                  {
+                    "name": "Madison Pauly"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "Have something difficult to say? These are the exact words you should use.",
+                "image": {
+                  "url": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/97b62fde-d340-4aac-ad55-e38a387c6c57.jpeg"
+                },
+                "publisher": "Fast Company",
+                "timeToRead": 3,
+                "title": "Why The “Velvet Hammer” Is a Better Way to Give Constructive Criticism",
+                "topic": "CAREER",
+                "url": "https://getpocket.com/explore/item/why-the-velvet-hammer-is-a-better-way-to-give-constructive-criticism",
+                "id": "7b381dc7-cdae-4b0c-a62f-cff4db50ea95",
+                "authors": [
+                  {
+                    "name": "Stephanie Vozza"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "Stuck in his research, a cosmologist finds a hint in an intricate drawing.",
+                "image": {
+                  "url": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/6c7c25e7-db68-4ec9-b416-3a995b9276d8.jpeg"
+                },
+                "publisher": "Nautilus",
+                "timeToRead": 10,
+                "title": "What This Drawing Taught Me About Four-Dimensional Spacetime",
+                "topic": "SCIENCE",
+                "url": "https://getpocket.com/explore/item/what-this-drawing-taught-me-about-four-dimensional-spacetime",
+                "id": "369b56f9-b62a-46d1-babb-41ab6914c3ef",
+                "authors": [
+                  {
+                    "name": "Stephon Alexander"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "Every day, they slowly accumulate. Plates covered in sauces and crumbs. Bowls with a fine layer of sticky who-knows-what. Forks, knives, and spoons all gummed with bits of this and that.",
+                "image": {
+                  "url": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/b4a8fced-a663-408e-b2f9-55b3db676786.jpeg"
+                },
+                "publisher": "The Atlantic",
+                "timeToRead": 3,
+                "title": "Doing Dishes Is the Worst",
+                "topic": "HEALTH_FITNESS",
+                "url": "https://getpocket.com/explore/item/doing-dishes-is-the-worst",
+                "id": "fb5f4074-938f-4bd0-abb6-96140764160a",
+                "authors": [
+                  {
+                    "name": "Caroline Kitchener"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "recommendations": [
+            {
+              "item": {
+                "excerpt": "Cancer used to be a disease of the old. Not anymore.",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/c7f0a16e-9ec0-435d-8c9f-b468ef746cf3.jpeg"
+                },
+                "publisher": "Vox",
+                "timeToRead": 11,
+                "title": "Why Are So Many Young People Getting Cancer?",
+                "topic": "HEALTH_FITNESS",
+                "url": "https://www.vox.com/the-highlight/24093360/early-cancer-young-adults-colon-stomach-research",
+                "id": "065c4bb3-530d-4dfa-b0b6-a80f5318982d",
+                "authors": [
+                  {
+                    "name": "Dylan Scott"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "Discover nine tried-and-true techniques for “popping” your ears and relieving pressure during a flight.",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/0d4bc5fd-00f9-44b5-bdb6-c116a18ebfe6.jpeg"
+                },
+                "publisher": "Condé Nast Traveler",
+                "timeToRead": null,
+                "title": "How to Pop Your Ears on a Plane—And Why They Pop, Anyway",
+                "topic": "TRAVEL",
+                "url": "https://www.cntraveler.com/stories/2016-02-23/why-your-ears-pop-on-planes-and-how-to-fix-it",
+                "id": "1ec94ddc-f424-4bc4-964e-c77ec521ede9",
+                "authors": [
+                  {
+                    "name": "Brian Sumers"
+                  },
+                  {
+                    "name": "Kristi Kellogg"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "If the anomaly does not stabilise by August, ‘the world will be in uncharted territory’, says climate expert.",
+                "image": {
+                  "url": "https://i.guim.co.uk/img/media/1d17085a14a7ae43df183cd68fb54990e8054e6f/0_0_2000_1200/master/2000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=66458cd93c36c415730d78754ee9e6d0"
+                },
+                "publisher": "The Guardian",
+                "timeToRead": 3,
+                "title": "Tenth Consecutive Monthly Heat Record Alarms and Confounds Climate Scientists",
+                "topic": "SCIENCE",
+                "url": "https://www.theguardian.com/global/2024/apr/09/tenth-consecutive-monthly-heat-record-alarms-confounds-climate-scientists",
+                "id": "8e0f3912-8f06-4eb3-aa77-652ec32c0da4",
+                "authors": [
+                  {
+                    "name": "Jonathan Watts"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "It’s time to start learning about Native history from museums and cultural centers that are run by Native nations.",
+                "image": {
+                  "url": "https://api.time.com/wp-content/uploads/2024/04/denver-art-museum-Tlingit-tribe.jpg?quality=85"
+                },
+                "publisher": "Time",
+                "timeToRead": 5,
+                "title": "Why Indigenous Artifacts Should Be Returned to Indigenous Communities",
+                "topic": "EDUCATION",
+                "url": "https://time.com/6964733/indigenous-artifacts-museums-essay/",
+                "id": "0342215d-1955-48f3-979f-60e538e5e348",
+                "authors": [
+                  {
+                    "name": "Kathleen DuVal"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "The Biden administration approved the largest expansion of background checks for gun purchases in decades on Thursday.",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/08eddf59-6419-451c-9783-0f5f87a58b27.png"
+                },
+                "publisher": "Axios",
+                "timeToRead": null,
+                "title": "Biden Administration Expands Background Checks for Gun Sales",
+                "topic": "POLITICS",
+                "url": "https://www.axios.com/2024/04/11/biden-administration-gun-purchases-background-check",
+                "id": "048e5b4a-7e05-44ba-9869-dfb6a0336cdc",
+                "authors": [
+                  {
+                    "name": "Jacob Knutson"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "Weak tour sales, a baffling album-movie-documentary, and general online mockery—why does everyone seem to have a problem with Jennifer Lopez?",
+                "image": {
+                  "url": "https://cdn.vox-cdn.com/thumbor/TiWo7sKJa7F5U2dHh89i6ekTCFA=/0x0:1200x628/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/25382786/Jlow_getty_ringer.jpg"
+                },
+                "publisher": "The Ringer",
+                "timeToRead": 5,
+                "title": "Where Did It All Go Wrong for J.Lo?",
+                "topic": "ENTERTAINMENT",
+                "url": "https://www.theringer.com/music/2024/4/10/24125732/jennifer-lopez-this-is-me-now-tour-documentary-controversy",
+                "id": "b5cd4bf8-02f1-4669-8fba-096c516f45b8",
+                "authors": [
+                  {
+                    "name": "Justin Charity"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "Paramount is up for sale. Here’s why Shari Redstone alone could get $2 billion, how other shareholders are reacting, and more.",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/562bc7c6-279c-444e-9e02-716daf292a6e.jpeg"
+                },
+                "publisher": "Vanity Fair",
+                "timeToRead": 5,
+                "title": "Inside the Controversial Bid to Buy the Studio Behind ‘The Godfather’ and ‘Top Gun : Maverick’",
+                "topic": "ENTERTAINMENT",
+                "url": "https://www.vanityfair.com/hollywood/inside-the-controversial-bid-to-buy-the-studio-behind-the-godfather-and-top-gun-maverick",
+                "id": "7fd9dbe1-136c-44ae-ac4c-f2b0f7a3dcf1",
+                "authors": [
+                  {
+                    "name": "Sean McNulty"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "Whether you are 20 or 90, each moment of life presents an opportunity to focus on what really matters to you.",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/e6ff8c83-cb52-4919-9ee3-1fe3b1485bf4.jpeg"
+                },
+                "publisher": "Psyche",
+                "timeToRead": null,
+                "title": "Rather Than Fearing Getting Old, Here’s How to Embrace It",
+                "topic": "SELF_IMPROVEMENT",
+                "url": "https://psyche.co/ideas/rather-than-fearing-getting-old-heres-how-to-embrace-it",
+                "id": "562cfeee-3507-48d1-91fb-7a0cf1e68d80",
+                "authors": [
+                  {
+                    "name": "Berit Lewis"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "Mental health experts reveal how birth order affects well-being and how you can prioritize your joy.",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/7ad856a3-e848-475e-ab24-87b29f0fb657.jpeg"
+                },
+                "publisher": "HuffPost",
+                "timeToRead": 7,
+                "title": "The 1 Thing Therapists Say Harms Eldest Daughters’ Happiness the Most",
+                "topic": "SELF_IMPROVEMENT",
+                "url": "https://www.huffpost.com/entry/eldest-daughters-happiness-therapist_l_660ebb16e4b078af1447adc6",
+                "id": "57d2fb9f-3bac-4d50-86b0-14dda109ba28",
+                "authors": [
+                  {
+                    "name": "Jillian Wilson"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "Look to the restaurant world and local thrift shops to inspire your next plate purchase.",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/83428b72-46a8-40fd-8d4b-ece49d429415.jpeg"
+                },
+                "publisher": "Eater",
+                "timeToRead": 2,
+                "title": "I’m a Grownup Now. How Should I Buy Dinnerware?",
+                "topic": "FOOD",
+                "url": "https://www.eater.com/24119382/dinnerware-shopping-guide-plates-bowls-blates",
+                "id": "e4c737c3-a702-4495-99a0-b52321701e68",
+                "authors": [
+                  {
+                    "name": "Amy McCarthy"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "recommendations": [
+            {
+              "item": {
+                "excerpt": "Credit card companies are about to see limits on late fees and swipe fees, which means they’re going to make that money up in other ways.",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/65d682a7-b4c5-4b9b-a80f-0e207749b4da.jpeg"
+                },
+                "publisher": "Business Insider",
+                "timeToRead": 6,
+                "title": "Next Time You Get Your Credit Card Statement, You May Want to Give It a Close Look ",
+                "topic": "PERSONAL_FINANCE",
+                "url": "https://www.businessinsider.com/credit-card-late-fees-cap-swipe-mastercard-visa-jpmorgan-rewards-2024-4",
+                "id": "65444a85-afa9-4635-b305-f3083f6f92df",
+                "authors": [
+                  {
+                    "name": "Emily Stewart"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "There are times when cash really is king; after all, it's important to have an easily accessible emergency fund to cover unexpected expenses. However, having excess cash beyond those six to nine months worth of expenses can mean missing out on major returns.",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/ed3ad45b-e449-4f19-b4f5-b5fa0a6efe73.jpeg"
+                },
+                "publisher": "Lifehacker",
+                "timeToRead": 3,
+                "title": "Yes, You Can Have Too Much Cash",
+                "topic": "PERSONAL_FINANCE",
+                "url": "https://lifehacker.com/money/yes-you-can-have-too-much-cash",
+                "id": "85c0d846-2759-442d-9605-08f2bf852463",
+                "authors": [
+                  {
+                    "name": "Meredith Dietz"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "Why saving for retirement has never felt scarier — or more confusing.",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/252fe1cb-a639-40a2-9a9a-ec58d73c1cfe.jpeg"
+                },
+                "publisher": "Business Insider",
+                "timeToRead": 7,
+                "title": "America’s New Age of Retirement Anxiety",
+                "topic": "PERSONAL_FINANCE",
+                "url": "https://www.businessinsider.com/retirement-social-security-gen-z-millennials-uncertainty-fears-pensions-2024-4",
+                "id": "956a815e-0190-4664-be8b-4c4cab9ce6d0",
+                "authors": [
+                  {
+                    "name": "Emily Stewart"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "The Bureau of Labor Statistics released a report showing inflation rose in March by 0.4% compared to the previous month, and 3.5% on a yearly basis.",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/be5219ce-dc19-4ecc-9392-630809b2dc6d.jpeg"
+                },
+                "publisher": "NBC News",
+                "timeToRead": null,
+                "title": "VIDEO: March Inflation Report Shows Costs Rose 0.4% on a Monthly Basis",
+                "topic": "PERSONAL_FINANCE",
+                "url": "https://www.nbcnews.com/now/video/march-inflation-report-shows-costs-rose-0-4-on-a-monthly-basis-208695877581",
+                "id": "11b5b403-65f2-450f-9b2e-012f55424ad8",
+                "authors": [
+                  {
+                    "name": "Staff"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "To live a long and healthy life, you need plenty of muscle. But we all start losing it in our 50s. Can a 60-year-old man build himself up – and maybe even get a little ripped?",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/e992e28c-462c-48e3-aae5-bad6099dac49.jpeg"
+                },
+                "publisher": "The Guardian",
+                "timeToRead": 11,
+                "title": "The Muscle Miracle: Can I Build Enough in My 60s to Make It to 100 – Even Though I’ve Never Weight-Trained?",
+                "topic": "HEALTH_FITNESS",
+                "url": "https://www.theguardian.com/lifeandstyle/2024/apr/07/the-muscle-miracle-can-i-build-enough-in-my-60s-to-make-it-to-100-even-though-ive-never-weight-trained",
+                "id": "8ee0f109-147d-4652-83e0-5bd6430eed8b",
+                "authors": [
+                  {
+                    "name": "Phil Daoust"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "During the pandemic, many workers discovered they liked working from home, but CEOs want them in the office, and it’s created tension.",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/61d9ed2c-679d-4836-9663-5876dd33fb80.jpeg"
+                },
+                "publisher": "TechCrunch",
+                "timeToRead": 5,
+                "title": "Working From Home Isn’t Going Away, Even If Some CEOs Wish It Would",
+                "topic": "CAREER",
+                "url": "https://techcrunch.com/2024/04/07/working-from-home-isnt-going-away-even-if-some-ceos-wish-it-would/",
+                "id": "94d454fb-7a2f-4e44-bd11-746f81677254",
+                "authors": [
+                  {
+                    "name": "Ron Miller"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "Receiving compliments can be distracting, and lead to a self-conscious state that’s cognitively draining.",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/ddb11bb5-6c4f-41f6-a7da-0a7f6054b30d.jpeg"
+                },
+                "publisher": "BBC",
+                "timeToRead": null,
+                "title": "Why It’s so Hard for Some People to Accept Compliments",
+                "topic": "SELF_IMPROVEMENT",
+                "url": "https://www.bbc.com/future/article/20240403-why-its-so-hard-for-some-people-to-accept-compliments",
+                "id": "7c1f28ef-4860-4f4b-b046-73e2002d9afc",
+                "authors": [
+                  {
+                    "name": "Christine Ro"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "Make your home more efficient, and get a little back from the government.",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/9edb2baa-5338-48c2-9884-368c7e4f73f9.jpeg"
+                },
+                "publisher": "Lifehacker",
+                "timeToRead": 3,
+                "title": "Eight Energy-saving Home Renovations That Are Tax Deductible",
+                "topic": "PERSONAL_FINANCE",
+                "url": "https://lifehacker.com/money/the-biggest-energy-saving-tax-deductible-home-renovations",
+                "id": "c07bd417-4dee-4cb1-b5ef-9e20592e71b5",
+                "authors": [
+                  {
+                    "name": "Becca Lewis"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "What truly good listeners do is work collaboratively with other people to understand them.",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/16cf5e0e-09d9-47b8-9d6b-bdd86e38771d.jpeg"
+                },
+                "publisher": "Harvard Business Review",
+                "timeToRead": null,
+                "title": "How to Become a More Empathetic Listener",
+                "topic": "SELF_IMPROVEMENT",
+                "url": "https://hbr.org/2024/04/how-to-become-a-more-empathetic-listener",
+                "id": "5c0c75e1-3d2e-4d6a-b2c3-29043cf27b6a",
+                "authors": [
+                  {
+                    "name": "Jamil Zaki"
+                  }
+                ]
+              }
+            },
+            {
+              "item": {
+                "excerpt": "The civilization developed the world’s first known tax system around 3000 B.C.E.",
+                "image": {
+                  "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/738cd4c1-53e8-457b-b45f-7325c51c9b78.jpeg"
+                },
+                "publisher": "Smithsonian Magazine",
+                "timeToRead": 8,
+                "title": "Stressed About Taxes? Blame the Ancient Egyptians",
+                "topic": "PERSONAL_FINANCE",
+                "url": "https://www.smithsonianmag.com/history/stressed-about-taxes-blame-the-ancient-egyptians-180984059/",
+                "id": "1af8573a-59f2-4968-85ef-4d39f9b85892",
+                "authors": [
+                  {
+                    "name": "Kate McMahon"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
