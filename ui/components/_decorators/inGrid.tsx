@@ -21,4 +21,4 @@ export function inGrid(Story: StoryFn, gridCount: GridCount) {
   )
 }
 
-export type GridCount = 1 | 2 | 3 | 4 | 'lockup'
+export type GridCount = 1 | 2 | 3 | 4 | 5 | 'lockup'

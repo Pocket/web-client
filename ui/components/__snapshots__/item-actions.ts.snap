@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders ItemActions with defaults 1`] = `
+<div>
+  <div
+    class="base"
+    data-testid="item-actions"
+  >
+    <svg
+      aria-hidden="true"
+      class="icon "
+      fill="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M14 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0M6 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0M22 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0"
+      />
+    </svg>
+  </div>
+</div>
+`;

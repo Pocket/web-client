@@ -9,6 +9,7 @@
 
 /* STYLE VARIABLES  --------------------------------------------- */
 @import url('./global-variables.pcss');
+@import url('./future-variables.pcss');
 
 /* CONTAINER STYLES --------------------------------------------- */
 @import url('./containers.pcss');

@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders Item with defaults 1`] = `
+<div>
+  <article
+    class="base"
+    data-testid="item"
+  >
+    <div>
+      <figure>
+        <div
+          class="base"
+          data-color="coral"
+          data-testid="item-media"
+        >
+          <img
+            alt=""
+            src="https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/3b6582e4-f253-4978-b6af-ae00dd01a1d6.jpeg"
+          />
+        </div>
+      </figure>
+      <div
+        class="contentContainer"
+      >
+        <div
+          class="copy"
+        >
+          <cite>
+            The Conversation
+          </cite>
+          <h3>
+            A Natural Deception: 3 Marketing Myths the Supplement Industry Wants You to Swallow
+          </h3>
+          <p>
+            ‘Natural’ isn’t the same thing as healthful.
+          </p>
+        </div>
+        <footer>
+          <cite>
+            The Conversation
+          </cite>
+          <div
+            class="base"
+            data-testid="item-actions"
+          >
+            <svg
+              aria-hidden="true"
+              class="icon "
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M14 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0M6 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0M22 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0"
+              />
+            </svg>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </article>
+</div>
+`;

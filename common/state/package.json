@@ -8,9 +8,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@common/utilities": "workspace:*",
+    "@types/react": "18.2.77",
+    "react": "18.2.0",
     "zustand": "4.5.2"
   },
   "devDependencies": {
+    "@common/types": "workspace:*",
     "@config/eslint-config": "workspace:*",
     "@config/jest": "workspace:*",
     "@config/typescript-config": "workspace:*",

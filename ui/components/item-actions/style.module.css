@@ -1,0 +1,6 @@
+/** Remove this file if we don't have styles for the component **/
+.base {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}

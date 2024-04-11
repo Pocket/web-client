@@ -20,7 +20,7 @@
 export function arrayToObject(objectArray, key) {
   var arrayObject = {}
   for (var i = 0; i < objectArray.length; ++i) {
-    if (objectArray[i] !== undefined && objectArray[i][key]) {
+    if (objectArray && objectArray[i] !== undefined && objectArray[i][key]) {
       arrayObject[objectArray[i][key]] = objectArray[i]
     }
   }
@@ -74,7 +74,6 @@ export function chunk(array, size = 1) {
 }
 
 export function arraysAreEqual(arrayOne, arrayTwo) {
-
   //If one is an array and the other is not they are not equal
   if (!Array.isArray(arrayOne) || !Array.isArray(arrayTwo)) return false
 
@@ -93,7 +92,7 @@ export function arraysAreEqual(arrayOne, arrayTwo) {
 export function existsInArray(arr, val) {
   if (!Array.isArray(arr) || !val) return false
 
-  return arr.some(name => name.toLowerCase() === val.toLowerCase())
+  return arr.some((name) => name.toLowerCase() === val.toLowerCase())
 }
 
 // Reorders an array taking the item at the startIndex and moving it to the endIndex
