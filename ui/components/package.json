@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@common/mock-data": "workspace:*",
     "@config/eslint-config": "workspace:*",
     "@config/jest": "workspace:*",
     "@config/typescript-config": "workspace:*",
@@ -32,6 +33,7 @@
     "@common/constants": "workspace:*",
     "@common/localization": "workspace:*",
     "@common/state": "workspace:*",
+    "@common/types": "workspace:*",
     "@storybook/react": "8.0.5",
     "@ui/icons": "workspace:*",
     "@ui/styles": "workspace:*",
