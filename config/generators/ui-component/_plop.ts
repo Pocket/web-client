@@ -1,11 +1,12 @@
 import { validateFilename } from '../utilities'
+import type { PlopTypes } from '@turbo/gen'
 
 type UIAnswers = {
   componentMain: string
   componentSubs: string
 }
 
-export const uiPlop = {
+export const uiPlop: PlopTypes.PlopGeneratorConfig = {
   description: 'Static UI Component',
   prompts: async (inquirer) => {
     // Asking some questions
@@ -38,12 +39,12 @@ export const uiPlop = {
       componentMain
     })
   },
-  actions: function (data) {
-    const { componentMain, componentSubs } = data as UIAnswers
+  actions: function (data: UIAnswers) {
+    const { componentMain, componentSubs } = data
     const addMain = {
       type: 'addMany',
       skipIfExists: true,
-      destination: '../../ui/components/{{ componentName }}/',
+      destination: '{{ turbo.paths.root }}/ui/components/{{ componentName }}/',
       data: {
         componentName: componentMain,
         storyName: 'Complete'
@@ -62,7 +63,7 @@ export const uiPlop = {
         const componentName = `${componentMain}-${subName.trim()}`
         return {
           type: 'addMany',
-          destination: '../../ui/components/{{ componentName }}/',
+          destination: '{{ turbo.paths.root }}/ui/components/{{ componentName }}/',
           data: {
             componentName,
             storyName: subName

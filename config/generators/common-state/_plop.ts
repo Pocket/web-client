@@ -20,7 +20,7 @@ export const statePlop = {
     {
       type: 'addMany',
       skipIfExists: true,
-      destination: '../../common/state/{{ stateType }}-{{ stateName }}/',
+      destination: '{{ turbo.paths.root }}/common/state/{{ stateType }}-{{ stateName }}/',
       templateFiles: [
         'common-state/hydrate.tsx.hbs',
         'common-state/index.ts.hbs',
