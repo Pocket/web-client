@@ -1,25 +1,18 @@
 // Decorators
 import { type GridCount, inGrid } from '../_decorators/inGrid'
 
-// Utilities
-import { arrayToObject } from '@common/utilities/object-array'
-
 // Components
 import { Item as Component } from '.'
 
 import { HydrateItemDisplay } from '@common/state/item-display/hydrate'
 
 // Mock Data
-import homeSlate from '@common/mock-data/home-slate-lineup.json'
+import itemsById from '@common/mock-data/in-state/itemsById.json'
 
 // Types
 import type { Meta, StoryFn, StoryObj } from '@storybook/react'
 
 // With State — Sets up the slice of state we need to render an item properly
-// !! NOTE: We are only using title here for storybook purposes. We use `id` in production
-const slate = homeSlate.data?.homeSlateLineup?.slates[0]?.recommendations || []
-const items = slate.map((rec) => rec?.item)
-const itemsById = arrayToObject(items, 'title')
 const state = { itemsById }
 const withState = (Story: StoryFn) => {
   return (
