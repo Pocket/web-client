@@ -1,20 +1,21 @@
 export type Item = {
-  id: string
-  publisher: string
-  topic: string
-  url: string
-  excerpt: string
   authors?: ItemAuthor[]
-  title: string
+  excerpt: string
+  id: string
   image: ItemImage
+  publisher: string
+  timeToRead?: number | null
+  title: string
+  topic?: string
+  url: string
 }
 
 export type ItemAuthor = {
-  name?: string
+  name?: string | null
 }
 
 export type ItemImage = {
-  url: string
+  url?: string | null
   width?: number
   height?: number
 }
