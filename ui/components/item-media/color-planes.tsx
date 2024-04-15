@@ -13,15 +13,15 @@ export function ColorPlanes({
   height: number
   lineWidth?: number
 }) {
-  const coords = Array.from({ length: 5 }, () => getLineCoords(width * 2, height * 2, lineWidth))
-
+  const coords = Array.from({ length: 5 }, () => getLineCoords(width, height, lineWidth))
+  const midPoint = getRandomInt(2, 500)
   return (
     <svg viewBox={`0 0 ${width * 2} ${height * 2}`}>
-      <rect height={height * 2} style={{ opacity: 0.3 }} width={width * 2} />
+      <rect height="200%" style={{ opacity: 0.3 }} width="200%" x="-50%" y="-50%" />
       {coords.map((coord, index) => (
-        <polygon
+        <polyline
           key={index}
-          points={`${coord} ${width},${height} 0,${height}`}
+          points={`${coord} ${width},${height * index} ${midPoint},${height}`}
           style={{ opacity: 0.2 }}
         />
       ))}
@@ -35,6 +35,7 @@ export function ColorPlanes({
  * Gives us random line coordinates
  */
 function getLineCoords(width: number, height: number, lineWidth: number) {
+  const seed = getRandomInt(2, 30)
   const length = getRandomInt(2, 5)
   const values = Array.from({ length }, () => Math.floor(Math.random() * 1000))
   const MAX_X_COORD = values.length - 1
@@ -42,10 +43,10 @@ function getLineCoords(width: number, height: number, lineWidth: number) {
 
   return values
     .map((value, index) => {
-      const x = generateX(index, width * 1.5, MAX_X_COORD)
-      const y = generateY(value, height * 1.5, MAX_Y_COORD + lineWidth)
+      const x = generateX(index, width * 3, MAX_X_COORD)
+      const y = generateY(value, height * 3, MAX_Y_COORD + lineWidth)
 
-      return `${x},${y}`
+      return index ? `${x},${y}` : `-${width}, ${(index + seed) * seed}`
     })
     .join(' ')
 }
