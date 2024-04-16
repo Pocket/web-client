@@ -8,11 +8,11 @@ import { HydrateItemDisplay } from '@common/state/item-display/hydrate'
 
 // Mock Data
 import itemsById from '@common/mock-data/in-state/itemsById.json'
+import savedItemsById from '@common/mock-data/in-state/itemsRaw.json'
 
 // Types
 import type { Meta, StoryFn, StoryObj } from '@storybook/react'
 
-// With State — Sets up the slice of state we need to render an item properly
 const state = { itemsById }
 const withState = (Story: StoryFn) => {
   return (

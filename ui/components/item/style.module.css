@@ -77,19 +77,14 @@
 
   /* Berry tiny card: no image, no excerpt, no actions, no mercy */
   @container (max-width: 215px) {
-    cite,
-    footer cite {
-      font-size: 0.75rem;
-    }
     h3 {
       -webkit-line-clamp: 5;
-      font-size: 0.875rem;
     }
     figure {
       display: none;
     }
     p {
-      display: block;
+      display: none;
     }
     footer {
       display: none;
@@ -98,8 +93,17 @@
 
   /* Slightly smaller than normal card: no excerpt */
   @container (max-width: 270px) {
+    cite,
+    footer cite {
+      font-size: 0.75rem;
+    }
+    h3 {
+      -webkit-line-clamp: 2;
+      font-size: 0.875rem;
+    }
     p {
-      display: none;
+      -webkit-line-clamp: 2;
+      font-size: 0.875rem;
     }
   }
 
