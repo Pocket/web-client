@@ -49,7 +49,7 @@
     "next-router-mock": "0.9.13",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-nested": "^6.0.1",
-    "postcss-preset-env": "^9.5.4",
+    "postcss-preset-env": "^9.5.5",
     "prettier": "3.2.5",
     "typescript": "5.4.3"
   },
@@ -74,7 +74,7 @@
     "dompurify": "3.0.11",
     "intersection-observer": "0.12.2",
     "jsonwebtoken": "9.0.2",
-    "legal-docs": "https://github.com/mozilla/legal-docs.git#1913c916a522934c1e159313806bee717e87f7f0",
+    "legal-docs": "github:mozilla/legal-docs#1913c916a522934c1e159313806bee717e87f7f0",
     "marked": "12.0.1",
     "marked-custom-heading-id": "2.0.7",
     "match-sorter": "6.3.4",
