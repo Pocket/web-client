@@ -1,11 +1,15 @@
 {
-  "comment" : "Commentaire",
   "copy-link" : "Copier le lien",
   "recommend" : "Recommandés",
+  "share-confirm" : "Confirmer",
   "share-item" : "Partager l'élément",
+  "share-mastodon" : "Partager sur Mastodon",
+  "share-mastodon-remember-instance" : "Se souvenir de mon instance",
+  "share-mastodon-which-instance" : "Sur quelle instance souhaiteriez-vous effectuer ce partage?",
   "share-to-buffer" : "Partager sur Buffer",
   "share-to-facebook" : "Partager sur Facebook",
   "share-to-linkedin" : "Partager sur LinkedIn",
+  "share-to-mastodon" : "Partager sur Mastodon",
   "share-to-reddit" : "Partager sur Reddit",
   "share-to-twitter" : "Partager sur Twitter",
   "social-media" : "Médias sociaux"
