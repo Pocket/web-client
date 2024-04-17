@@ -1,11 +1,15 @@
 {
-  "comment" : "Комментарий",
   "copy-link" : "Скопировать ссылку",
   "recommend" : "Рекомендовать",
+  "share-confirm" : "Подтвердить",
   "share-item" : "Поделиться материалом",
+  "share-mastodon" : "Поделиться в Mastodon",
+  "share-mastodon-remember-instance" : "Запомнить мой выбор",
+  "share-mastodon-which-instance" : "Где вы бы хотели поделиться этим?",
   "share-to-buffer" : "Поделиться в Buffer",
   "share-to-facebook" : "Поделиться в Facebook",
   "share-to-linkedin" : "Поделиться в LinkedIn",
+  "share-to-mastodon" : "Поделиться в Mastodon",
   "share-to-reddit" : "Поделиться в Reddit",
   "share-to-twitter" : "Поделиться в Twitter",
   "social-media" : "Социальные сети"
