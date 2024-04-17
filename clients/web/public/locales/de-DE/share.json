@@ -1,11 +1,15 @@
 {
-  "comment" : "Kommentar",
   "copy-link" : "Link kopieren",
   "recommend" : "Empfehlen",
+  "share-confirm" : "Bestätigen",
   "share-item" : "Artikel teilen",
+  "share-mastodon" : "Auf Mastodon teilen",
+  "share-mastodon-remember-instance" : "Meine Instanz merken",
+  "share-mastodon-which-instance" : "Auf welcher Instanz möchtest du das teilen?",
   "share-to-buffer" : "Auf Buffer teilen",
   "share-to-facebook" : "Auf Facebook teilen",
   "share-to-linkedin" : "Auf LinkedIn teilen",
+  "share-to-mastodon" : "Auf Mastodon teilen",
   "share-to-reddit" : "Auf Reddit teilen",
   "share-to-twitter" : "Auf Twitter teilen",
   "social-media" : "Social Media"
