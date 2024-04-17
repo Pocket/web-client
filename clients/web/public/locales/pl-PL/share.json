@@ -1,11 +1,15 @@
 {
-  "comment" : "Komentarz",
   "copy-link" : "Kopiuj łącze",
   "recommend" : "Rekomenduj",
+  "share-confirm" : "Potwierdź",
   "share-item" : "Udostępnij element",
+  "share-mastodon" : "Udostępnij w serwisie Mastodon",
+  "share-mastodon-remember-instance" : "Zapamiętaj moją instancję",
+  "share-mastodon-which-instance" : "Której instancji chcesz to udostępnić?",
   "share-to-buffer" : "Udostępnij w Buffer",
   "share-to-facebook" : "Udostępnij na Facebooku",
   "share-to-linkedin" : "Udostępnij w LinkedIn",
+  "share-to-mastodon" : "Udostępnij w serwisie Mastodon",
   "share-to-reddit" : "Udostępnij w Reddit",
   "share-to-twitter" : "Udostępnij na Twitterze",
   "social-media" : "Media społecznościowe"
