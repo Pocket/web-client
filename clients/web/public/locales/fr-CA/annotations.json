@@ -1,7 +1,7 @@
 {
   "added-date" : "Ajouté le {{date}}",
   "added-many-days-ago" : "Ajouté il y a {{date}} jours",
-  "added-one-day-ago" : "Ajouté il y a {{date}} jour",
+  "added-one-day-ago" : "Ajouté {{date}} il y a jour",
   "added-today" : "Ajouté aujourd'hui",
   "close" : "Fermer",
   "highlight" : "Highlight",
