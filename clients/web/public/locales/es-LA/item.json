@@ -1,5 +1,5 @@
 {
-  "item-count_one" : "{{count}} enlace",
+  "item-count_one" : "{{count}} artículo",
   "item-count_other" : "{{count}} enlaces",
   "list" : "Lista",
   "story-count_one" : "{{count}} historia",
