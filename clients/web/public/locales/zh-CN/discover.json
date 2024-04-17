@@ -11,7 +11,7 @@
   "pocket-cta" : "发现更多精彩故事 — 获取 <2>Pocket</2>。",
   "pocket-worthy" : "对 Pocket 具有价值",
   "popular-with-readers" : "受到 Pocket 读者的欢迎",
-  "publisher-attribution" : "此帖子最初出现在 {{name}} 上，发布于 publishedDate}}。本文经允许在此处重新发布。",
+  "publisher-attribution" : "此帖子最初出现在 {{name}} 上，发布于 {{publishedDate}}。本文经允许在此处重新发布。",
   "save-these-to-personal-library" : "将这些故事保存在个人存储库中",
   "start-your-library" : "开始您的存储库",
   "stories-from-the-web" : "网络上的故事",
