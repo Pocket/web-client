@@ -1,11 +1,15 @@
 {
-  "comment" : "Opmerking",
   "copy-link" : "Kopieer link",
   "recommend" : "Aanbevelen",
+  "share-confirm" : "Bevestigen",
   "share-item" : "Item delen",
+  "share-mastodon" : "Delen met Mastodon",
+  "share-mastodon-remember-instance" : "Onthoud mijn instance",
+  "share-mastodon-which-instance" : "Met welke instances wil je dit delen?",
   "share-to-buffer" : "Op Buffer delen",
   "share-to-facebook" : "Op Facebook delen",
   "share-to-linkedin" : "Op LinkedIn delen",
+  "share-to-mastodon" : "Delen met Mastodon",
   "share-to-reddit" : "Op Reddit delen",
   "share-to-twitter" : "Op Twitter delen",
   "social-media" : "Sociale media"
