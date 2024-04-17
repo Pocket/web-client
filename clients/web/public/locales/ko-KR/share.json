@@ -1,11 +1,15 @@
 {
-  "comment" : "코멘트",
   "copy-link" : "링크 복사",
   "recommend" : "권장",
+  "share-confirm" : "확인",
   "share-item" : "항목 공유",
+  "share-mastodon" : "Mastodon에 공유",
+  "share-mastodon-remember-instance" : "내 인스턴스 기억하기",
+  "share-mastodon-which-instance" : "어떤 인스턴스에 공유하시겠습니까?",
   "share-to-buffer" : "버퍼에 공유",
   "share-to-facebook" : "Facebook에 공유",
   "share-to-linkedin" : "LinkedIn에 공유",
+  "share-to-mastodon" : "Mastodon에 공유",
   "share-to-reddit" : "Reddit에 공유",
   "share-to-twitter" : "Twitter에 공유",
   "social-media" : "소셜 미디어"
