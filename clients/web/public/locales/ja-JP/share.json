@@ -1,11 +1,15 @@
 {
-  "comment" : "コメント",
   "copy-link" : "リンクをコピー",
   "recommend" : "おすすめ",
+  "share-confirm" : "確認",
   "share-item" : "アイテムを共有",
+  "share-mastodon" : "Mastodon に共有",
+  "share-mastodon-remember-instance" : "インスタンスを保存する",
+  "share-mastodon-which-instance" : "どのインスタンスと共有しますか？",
   "share-to-buffer" : "Buffer に共有",
   "share-to-facebook" : "Facebook に共有",
   "share-to-linkedin" : "LinkedIn に共有",
+  "share-to-mastodon" : "Mastodon に共有",
   "share-to-reddit" : "Reddit に共有",
   "share-to-twitter" : "Twitter に共有",
   "social-media" : "ソーシャルメディア"
