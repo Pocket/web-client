@@ -1,11 +1,15 @@
 {
-  "comment" : "評論",
   "copy-link" : "複製連結",
   "recommend" : "推薦",
+  "share-confirm" : "確認",
   "share-item" : "分享項目",
+  "share-mastodon" : "分享到 Mastodon",
+  "share-mastodon-remember-instance" : "記住我的平台",
+  "share-mastodon-which-instance" : "您想將此分享到哪個平台？",
   "share-to-buffer" : "分享至 Buffer",
   "share-to-facebook" : "分享至 Facebook",
   "share-to-linkedin" : "分享至 LinkedIn",
+  "share-to-mastodon" : "分享到 Mastodon",
   "share-to-reddit" : "分享至 Reddit",
   "share-to-twitter" : "分享至 Twitter",
   "social-media" : "社交媒體"
