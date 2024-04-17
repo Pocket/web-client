@@ -1,11 +1,15 @@
 {
-  "comment" : "Commento",
   "copy-link" : "Copia link",
   "recommend" : "Raccomanda",
+  "share-confirm" : "Conferma",
   "share-item" : "Condividi elemento",
+  "share-mastodon" : "Condividi su Mastodon",
+  "share-mastodon-remember-instance" : "Ricorda la mia istanza",
+  "share-mastodon-which-instance" : "Con quale istanza vorresti condividerlo?",
   "share-to-buffer" : "Condividi su Buffer",
   "share-to-facebook" : "Condividi su Facebook",
   "share-to-linkedin" : "Condividi su LinkedIn",
+  "share-to-mastodon" : "Condividi su Mastodon",
   "share-to-reddit" : "Condividi su Reddit",
   "share-to-twitter" : "Condividi su Twitter",
   "social-media" : "Social"
