@@ -8,7 +8,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 // Storybook Meta
 const meta: Meta<typeof Component> = {
-  title: 'Layout / Main',
+  title: 'Site Layout / Main',
   component: Component,
   parameters: {
     layout: 'fullscreen'
