@@ -5,7 +5,7 @@ export const FRAGMENT_ITEM = gql`
     isArticle
     title
     itemId
-    uuidSlug: id
+    readerSlug
     resolvedId
     resolvedUrl
     domain

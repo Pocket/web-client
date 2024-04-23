@@ -15,9 +15,9 @@ export const idMapReducers = (state = initialState, action) => {
     case ITEMS_SUCCESS: {
       const { itemsById = {} } = action
       const stateUpdates = Object.values(itemsById).reduce((previous, current) => {
-        const { itemId, uuidSlug } = current
-        if (!itemId || !uuidSlug) return previous
-        return { ...previous, [uuidSlug]: itemId }
+        const { itemId, readerSlug } = current
+        if (!itemId || !readerSlug) return previous
+        return { ...previous, [readerSlug]: itemId }
       }, {})
       return { ...state, ...stateUpdates }
     }

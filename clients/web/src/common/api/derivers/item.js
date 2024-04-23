@@ -366,7 +366,7 @@ export function readUrl({ item, node, itemEnrichment, status }) {
   if (!readable) return external
 
   // Otherwise we are gonna open it in reader view
-  const itemId = item?.uuidSlug || node?.id || item?.itemId
+  const itemId = item?.readerSlug || node?.id || item?.itemId
   return `/read/${itemId}`
 }
 
