@@ -48,7 +48,7 @@ const modalStyles = css`
   border: 1px solid rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
   box-shadow: 0 var(--spacing150) 32px rgba(0, 0, 0, 0.16);
-  border-radius: 4px;
+  border-radius: 8px;
   max-height: calc(100vh - (calc(var(--spacing650) + var(--spacing400))));
   min-height: 200px; /* handle edge case of header and footer clashing */
   top: var(--spacing650);

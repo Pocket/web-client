@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { css, cx } from '@emotion/css'
 
-import { getReadItem } from './reader.state'
+import { getReadItem, clearFailure } from './reader.state'
 
 import { Toolbar } from 'connectors/reader/toolbar'
 import { Header } from 'connectors/reader/header'
@@ -79,19 +79,14 @@ export const articleWrapperStyles = css`
 export default function Reader() {
   const dispatch = useDispatch()
   const router = useRouter()
-  const { slug: id } = router.query
+  const { slug } = router.query
 
-  const item = useSelector((state) => state.itemsDisplay[id])
-  const status = useSelector((state) => state.itemsSaved[id]?.status)
-
-  // Is deleted ?
-  useEffect(() => {
-    if (status === 'DELETED') {
-      const { getStarted } = router.query
-      const path = getStarted ? '/home' : '/saves'
-      router.replace(path)
-    }
-  }, [status, router, dispatch])
+  // Item Data
+  const itemId = useSelector((state) => state.idMap[slug])
+  const item = useSelector((state) => state.itemsDisplay[itemId])
+  const status = useSelector((state) => state.itemsSaved[itemId]?.status)
+  const sharedItem = useSelector((state) => state.sharedItem)
+  const hasFailed = useSelector((state) => state.reader.readFailure)
 
   // Display settings
   const lineHeight = useSelector((state) => state.readerSettings.lineHeight)
@@ -100,11 +95,23 @@ export default function Reader() {
   const fontFamily = useSelector((state) => state.readerSettings.fontFamily)
 
   useEffect(() => {
-    dispatch(getReadItem(id))
+    dispatch(getReadItem(slug))
     // dispatch(selectShortcutItem(id))
-  }, [dispatch, id])
+  }, [dispatch, slug])
 
-  if (!item)
+  if (sharedItem || hasFailed) {
+    dispatch(clearFailure())
+    router.replace('/home')
+  }
+
+  // Is deleted ?
+  if (status === 'DELETED') {
+    const { getStarted } = router.query
+    const path = getStarted ? '/home' : '/saves'
+    router.replace(path)
+  }
+
+  if (!item || status === 'DELETED')
     return (
       <LoaderCentered>
         <Loader isVisible />
@@ -133,17 +140,17 @@ export default function Reader() {
         <title>Pocket - {title}</title>
       </Head>
 
-      <Toolbar id={id} />
+      <Toolbar id={itemId} />
 
       <main className={articleWrapperStyles}>
-        <SidebarWrapper id={id} />
+        <SidebarWrapper id={itemId} />
         <article className={articleClasses} style={customStyles}>
-          <Header id={id} />
-          <ContentWrapper id={id} />
+          <Header id={itemId} />
+          <ContentWrapper id={itemId} />
         </article>
       </main>
 
-      <Recommendations id={id} />
+      <Recommendations id={itemId} />
       <Upsell />
 
       <ConfirmTagging />

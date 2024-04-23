@@ -50,6 +50,9 @@ import { readerSettingsReducers } from 'containers/read/reader-settings.state'
 import { readerSettingsSagas } from 'containers/read/reader-settings.state'
 
 //Items (From the graph)
+import { idMapReducers } from './containers/read/idMap.state'
+import { sharedItemReducers } from './containers/home/sharedItem/sharedItem.state'
+
 import { readerReducers } from 'containers/read/reader.state'
 import { readerSagas } from 'containers/read/reader.state'
 
@@ -121,6 +124,8 @@ import { mutationListShareReducers } from 'connectors/lists/mutation-share.state
 /* REDUCERS
  --------------------------------------------------------------- */
 const itemReducers = {
+  idMap: idMapReducers,
+  sharedItem: sharedItemReducers,
   itemsDisplay: itemsDisplayReducers, // This is canonical item data used to display an item from anywhere (an item is an item is an item)
   itemsSaved: itemsSavedReducers, // This represents the actions the user has taken on a given item (if any)
   itemsTransitions: itemsTransitionsReducers, // This represents items transitioning from unsaved to saved (saving -> saved -> unsaving)

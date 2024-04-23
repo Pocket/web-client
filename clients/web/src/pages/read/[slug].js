@@ -5,11 +5,8 @@ import { LOCALE_COMMON, LOCALE_READER } from 'common/constants'
 export async function getServerSideProps({ locale }) {
   return {
     props: {
-      authRequired: true,
-      ...(await serverSideTranslations(locale, [
-        ...LOCALE_COMMON,
-        ...LOCALE_READER
-      ]))
+      authRequired: false,
+      ...(await serverSideTranslations(locale, [...LOCALE_COMMON, ...LOCALE_READER]))
     }
   }
 }
