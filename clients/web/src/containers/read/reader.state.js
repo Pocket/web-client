@@ -82,7 +82,7 @@ function* readItemRequest({ slug }) {
     // If things don't go right
     if (response.error) throw new Error(response.error)
 
-    // Did we open a share link? If we did, let's populate
+    // Did we open a shared link? If we did, let's populate
     // the state and send them on to `home`
     if (response.share) {
       const derivedShare = deriveSharedItem(response.share)

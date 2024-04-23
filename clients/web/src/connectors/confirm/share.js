@@ -9,6 +9,7 @@ export const ConfirmShare = () => {
   const dispatch = useDispatch()
 
   const item = useSelector((state) => state.mutationShare.item)
+  const shareUrl = useSelector((state) => state.mutationShare.shareUrl)
   const quote = useSelector((state) => state.mutationShare.quote)
   const position = useSelector((state) => state.mutationShare.position) || 0
   const mastodonOpen = useSelector((state) => state.mutationShare.mastodonOpen)
@@ -49,6 +50,7 @@ export const ConfirmShare = () => {
         timeToRead={timeToRead}
         isSyndicated={isSyndicated}
         externalUrl={externalUrl}
+        shareUrl={shareUrl}
         thumbnail={thumbnail}
         quote={quote}
         showModal={!!itemId && !mastodonOpen}
@@ -60,7 +62,7 @@ export const ConfirmShare = () => {
         showModal={mastodonOpen}
         cancelShare={cancelShare}
         shareAction={confirmMastodon}
-        url={externalUrl}
+        url={shareUrl}
       />
     </>
   )

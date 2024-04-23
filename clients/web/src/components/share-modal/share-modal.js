@@ -21,7 +21,7 @@ export const ShareModal = ({
   excerpt,
   timeToRead,
   isSyndicated,
-  externalUrl,
+  shareUrl,
   thumbnail,
   quote,
   showModal,
@@ -53,7 +53,8 @@ export const ShareModal = ({
       </ModalBody>
       <ModalFooter>
         <ShareList
-          openUrl={externalUrl}
+          openUrl={shareUrl}
+          externalUrl={shareUrl}
           excerpt={excerpt}
           title={title}
           quote={quote}

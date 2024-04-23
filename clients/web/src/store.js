@@ -87,6 +87,7 @@ import { mutationBulkReducers } from 'connectors/items/mutations-bulk.state'
 import { mutationBulkSagas } from 'connectors/items/mutations-bulk.state'
 
 import { mutationShareReducers } from 'connectors/items/mutation-share.state'
+import { mutationShareSagas } from 'connectors/items/mutation-share.state'
 
 import { mutationReportReducers } from 'connectors/items/mutation-report.state'
 import { mutationReportSagas } from 'connectors/items/mutation-report.state'
@@ -249,6 +250,7 @@ function* rootSaga() {
     ...mutationTaggingSagas,
     ...mutationHighlightSagas,
     ...mutationReportSagas,
+    ...mutationShareSagas,
     ...mutationListCreateSagas,
     ...mutationListDeleteSagas,
     ...mutationListUpdateSagas,
