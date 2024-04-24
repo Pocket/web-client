@@ -40,6 +40,7 @@ export const HomeRecentSaves = () => {
             clamp={true}
             showExcerpt={showExcerpt}
             snowplowId="home.recent"
+            canBeRead={true}
           />
         ))}
       </div>

@@ -2,29 +2,33 @@ import { put, takeEvery } from 'redux-saga/effects'
 
 // Client API actions
 import { getSavedItemByItemId } from 'common/api/queries/get-saved-item-by-id'
-import { deriveReaderItem } from 'common/api/derivers/item'
+import { deriveReaderItem, deriveSharedItem } from 'common/api/derivers/item'
 
 import { READ_ITEM_REQUEST } from 'actions'
 import { READ_ITEM_SUCCESS } from 'actions'
 import { READ_ITEM_FAILURE } from 'actions'
-
+import { SHARED_ITEM_SUCCESS } from 'actions'
 import { READ_SET_HIGHLIGHTS } from 'actions'
+import { READER_CLEAR_FAILURE } from 'actions'
 
 import { TOGGLE_READER_SIDEBAR } from 'actions'
 import { READER_CLEAR_DELETION } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const getReadItem = (id) => ({ type: READ_ITEM_REQUEST, id })
+export const getReadItem = (slug) => ({ type: READ_ITEM_REQUEST, slug })
 export const setHighlightList = (highlightList) => ({ type: READ_SET_HIGHLIGHTS, highlightList })
 export const toggleSidebar = () => ({ type: TOGGLE_READER_SIDEBAR })
 export const clearDeletion = () => ({ type: READER_CLEAR_DELETION })
+export const clearFailure = () => ({ type: READER_CLEAR_FAILURE })
 
 /** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
   sideBarOpen: false,
   deleted: false,
+  readFailure: false,
+  idMap: {},
   highlightList: []
 }
 
@@ -35,12 +39,28 @@ export const readerReducers = (state = initialState, action) => {
       return { ...state, highlightList }
     }
 
+    case READ_ITEM_SUCCESS:
+    case READ_ITEM_REQUEST: {
+      const { idKey, slug } = action
+      return { ...state, idMap: { ...state.idMap, [slug]: idKey } }
+    }
+
     case TOGGLE_READER_SIDEBAR: {
       return { ...state, sideBarOpen: !state.sideBarOpen }
     }
+
     case READER_CLEAR_DELETION: {
       return { ...state, deleted: false }
     }
+
+    case READ_ITEM_FAILURE: {
+      return { ...state, readFailure: true }
+    }
+
+    case READER_CLEAR_FAILURE: {
+      return { ...state, readFailure: false }
+    }
+
     default:
       return state
   }
@@ -55,9 +75,24 @@ export const readerSagas = [
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
-function* readItemRequest({ id }) {
+function* readItemRequest({ slug }) {
   try {
-    const response = yield getSavedItemByItemId(id)
+    const response = yield getSavedItemByItemId(slug)
+
+    // If things don't go right
+    if (response.error) throw new Error(response.error)
+
+    // Did we open a share link? If we did, let's populate
+    // the state and send them on to `home`
+    if (response.share) {
+      const derivedShare = deriveSharedItem(response.share)
+      yield put({
+        type: SHARED_ITEM_SUCCESS,
+        shareItem: response.share,
+        itemsById: { [derivedShare.itemId]: derivedShare }
+      })
+      return
+    }
 
     const { item, savedData, relatedArticlesById } = response
     const derivedItem = deriveReaderItem(item, savedData)
@@ -65,9 +100,11 @@ function* readItemRequest({ id }) {
     const relatedArticleIds = Object.keys(relatedArticlesById)
     yield put({
       type: READ_ITEM_SUCCESS,
-      relatedItems: {[idKey]: relatedArticleIds},
+      relatedItems: { [idKey]: relatedArticleIds },
       itemsById: { [idKey]: derivedItem, ...relatedArticlesById },
-      nodes: { [idKey]: savedData }
+      nodes: { [idKey]: savedData },
+      idKey,
+      slug
     })
   } catch (error) {
     yield put({ type: READ_ITEM_FAILURE, error })

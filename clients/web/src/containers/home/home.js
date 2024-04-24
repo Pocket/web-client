@@ -5,6 +5,7 @@ import { HomeSetup } from './setup/setup'
 import { HomeContent } from './content'
 import { SuccessFXA } from 'components/snackbar/success-fxa'
 import { HomeGreeting } from './recent-saves/greeting'
+import { SharedItemInterstitial } from './sharedItem/sharedItem'
 import { Toasts } from 'connectors/toasts/toast-list'
 
 export const Home = ({ metaData }) => {
@@ -22,7 +23,7 @@ export const Home = ({ metaData }) => {
       <HomeGreeting />
       {isAuthenticated ? <HomeRecentSaves /> : null}
       <HomeContent />
-
+      <SharedItemInterstitial />
       <Toasts surface="home" />
     </Layout>
   )

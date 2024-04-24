@@ -97,6 +97,12 @@ export function deriveListItem(edge) {
   return deriveItem({ item, node: rest, cursor, utmId: 'pocket_saves' })
 }
 
+export function deriveSharedItem(share) {
+  const { preview, cursor = null } = share
+  const { item, ...rest } = preview
+  return deriveItem({ item, node: rest, cursor, utmId: 'pocket_shared' })
+}
+
 export function deriveCorpusItem(recommendation) {
   const item = recommendation.corpusItem
   const corpusRecommendationId = recommendation.corpusRecommendationId
@@ -360,7 +366,7 @@ export function readUrl({ item, node, itemEnrichment, status }) {
   if (!readable) return external
 
   // Otherwise we are gonna open it in reader view
-  const itemId = node?.id || item?.itemId
+  const itemId = item?.readerSlug || node?.id || item?.itemId
   return `/read/${itemId}`
 }
 
@@ -422,8 +428,9 @@ function isInternalItem({ item, node, itemEnrichment, status }) {
 
   if (!itemReadUrl) return false
 
-  // https://regexr.com/6qm61 <- test regex pattern
-  const pattern = /^\/read\/\d+/gim
+  // https://regexr.com/6qm61 <- old test regex pattern
+  // https://regexr.com/7vceb <- test regex pattern
+  const pattern = /^\/read\/(\d|\w)+/gim
   return !!itemReadUrl?.match(pattern)
 }
 

@@ -20,7 +20,9 @@ export function ItemCard({
   showExcerpt = true,
   useMarkdown,
   clamp,
-  snowplowId
+  snowplowId,
+  canBeRead,
+  onOpenItem
 }) {
   const dispatch = useDispatch()
 
@@ -33,7 +35,8 @@ export function ItemCard({
 
   const { readUrl, externalUrl, openExternal, syndicatedUrl, isCollection, authors, saveUrl } = item
 
-  const openUrl = openExternal ? externalUrl : syndicatedUrl || readUrl || externalUrl || saveUrl
+  const primaryUrl = canBeRead ? readUrl : syndicatedUrl
+  const openUrl = openExternal ? externalUrl : primaryUrl || readUrl || externalUrl || saveUrl
 
   const onImageFail = () => dispatch(setNoImage(id))
   const analyticsData = {
@@ -49,9 +52,13 @@ export function ItemCard({
   const onImpression = () => dispatch(sendSnowplowEvent(`${snowplowId}.impression`, analyticsData))
   const onItemInView = (inView) =>
     !impressionFired && inView && analyticsInitialized ? onImpression() : null
-  const onOpen = () => dispatch(sendSnowplowEvent(`${snowplowId}.open`, analyticsData))
+  const onOpen = () => {
+    if (onOpenItem) onOpenItem()
+    dispatch(sendSnowplowEvent(`${snowplowId}.open`, analyticsData))
+  }
 
   const onOpenOriginalUrl = () => {
+    if (onOpenItem) onOpenItem()
     const data = { ...analyticsData, destination: 'external' }
     dispatch(sendSnowplowEvent(`${snowplowId}.view-original`, data))
   }

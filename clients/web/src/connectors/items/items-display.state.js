@@ -1,5 +1,6 @@
 import { ITEMS_SUCCESS } from 'actions'
 import { READ_ITEM_SUCCESS } from 'actions'
+import { SHARED_ITEM_SUCCESS } from 'actions'
 import { ITEMS_SET_NO_IMAGE } from 'actions'
 import { ITEMS_UPDATE } from 'actions'
 import { HYDRATE } from 'actions'
@@ -14,6 +15,7 @@ export const hydrateItems = (itemsById) => ({ type: ITEMS_SUCCESS, itemsById })
 export const itemsDisplayReducers = (state = {}, action) => {
   switch (action.type) {
     case READ_ITEM_SUCCESS:
+    case SHARED_ITEM_SUCCESS:
     case ITEMS_SUCCESS: {
       const { itemsById = {} } = action
 
