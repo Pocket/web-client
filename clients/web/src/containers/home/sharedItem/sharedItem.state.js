@@ -13,7 +13,9 @@ export const sharedItemReducers = (state = initialState, action) => {
   switch (action.type) {
     case SHARED_ITEM_SUCCESS: {
       const { shareItem } = action
-      return shareItem
+      const context = shareItem?.context
+      const displayItemId = shareItem?.preview?.item?.itemId
+      return { displayItemId, context }
     }
 
     case SHARED_ITEM_DISMISS: {

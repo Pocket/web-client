@@ -33,8 +33,6 @@ const contextWrapper = css`
     border-color: var(--color-amber);
   }
 `
-const noteWrapper = css``
-const highlightWrapper = css``
 
 export const SharedItemInterstitial = () => {
   const { t } = useTranslation()
@@ -47,8 +45,8 @@ export const SharedItemInterstitial = () => {
 
   if (!sharedItem) return null
 
-  const id = sharedItem.preview.item.itemId
-  const { note, highlight } = sharedItem.context
+  const { displayItemId, context } = sharedItem
+  const { note, highlight } = context
   return (
     <Modal
       title={t('sharedItem:sharedItem', 'Shared Item')}
@@ -57,7 +55,7 @@ export const SharedItemInterstitial = () => {
       screenReaderLabel={t('sharedItem:sharedItem', 'Shared Item')}
       handleClose={closeModal}>
       <ModalBody>
-        <ItemCard id={id} />
+        <ItemCard id={displayItemId} onOpenItem={closeModal} />
         <div className={contextWrapper}>
           <SharedHighlight highlight={highlight} />
           <SharedNote note={note} />

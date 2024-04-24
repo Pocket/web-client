@@ -21,7 +21,8 @@ export function ItemCard({
   useMarkdown,
   clamp,
   snowplowId,
-  canBeRead
+  canBeRead,
+  onOpenItem
 }) {
   const dispatch = useDispatch()
 
@@ -51,9 +52,13 @@ export function ItemCard({
   const onImpression = () => dispatch(sendSnowplowEvent(`${snowplowId}.impression`, analyticsData))
   const onItemInView = (inView) =>
     !impressionFired && inView && analyticsInitialized ? onImpression() : null
-  const onOpen = () => dispatch(sendSnowplowEvent(`${snowplowId}.open`, analyticsData))
+  const onOpen = () => {
+    if (onOpenItem) onOpenItem()
+    dispatch(sendSnowplowEvent(`${snowplowId}.open`, analyticsData))
+  }
 
   const onOpenOriginalUrl = () => {
+    if (onOpenItem) onOpenItem()
     const data = { ...analyticsData, destination: 'external' }
     dispatch(sendSnowplowEvent(`${snowplowId}.view-original`, data))
   }
