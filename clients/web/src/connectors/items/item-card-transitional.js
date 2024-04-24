@@ -20,7 +20,8 @@ export function ItemCard({
   showExcerpt = true,
   useMarkdown,
   clamp,
-  snowplowId
+  snowplowId,
+  canBeRead
 }) {
   const dispatch = useDispatch()
 
@@ -33,7 +34,8 @@ export function ItemCard({
 
   const { readUrl, externalUrl, openExternal, syndicatedUrl, isCollection, authors, saveUrl } = item
 
-  const openUrl = openExternal ? externalUrl : syndicatedUrl || readUrl || externalUrl || saveUrl
+  const primaryUrl = canBeRead ? readUrl : syndicatedUrl
+  const openUrl = openExternal ? externalUrl : primaryUrl || readUrl || externalUrl || saveUrl
 
   const onImageFail = () => dispatch(setNoImage(id))
   const analyticsData = {
