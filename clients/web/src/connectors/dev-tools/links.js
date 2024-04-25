@@ -4,11 +4,6 @@ import Link from 'next/link'
 export const Links = ({ toggleDevMode }) => {
   const links = [
     {
-      title: 'FXA Learn More',
-      src: '/learn-more',
-      description: 'future blockade for non-fxa users'
-    },
-    {
       title: 'Privacy Policy',
       src: '/privacy',
       description: 'Switching from marketing control'
@@ -19,8 +14,13 @@ export const Links = ({ toggleDevMode }) => {
       description: 'Switching from marketing control'
     },
     {
-      title: 'Pocket and Firefox',
-      src: '/pocket-and-firefox',
+      title: 'About',
+      src: '/about',
+      description: 'Switching from marketing control'
+    },
+    {
+      title: 'Contact Info',
+      src: '/contact-info',
       description: 'Switching from marketing control'
     }
   ]

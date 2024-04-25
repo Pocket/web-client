@@ -1,18 +1,18 @@
 // Components
-import { PocketAndFirefox as Component } from '.'
+import { ContactInfo as Component } from '.'
 
 // Types
 import type { Meta, StoryObj } from '@storybook/react'
 
 // Storybook Meta
 const meta: Meta<typeof Component> = {
-  title: 'Marketing / Pocket And Firefox',
+  title: 'Marketing / Contact Info',
   component: Component
 }
 export default meta
 
 // Stories
-export const PocketAndFirefox: StoryObj<typeof Component> = {
+export const ContactInfo: StoryObj<typeof Component> = {
   render: () => {
     return <Component />
   },

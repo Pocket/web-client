@@ -378,6 +378,11 @@ export const GlobalFooter = (props) => {
                       {t('global-footer:about', 'About')}
                     </a>
                   </li>
+                  <li>
+                    <a href="https://getpocket.com/contact-info?src=footer_v2">
+                      {t('global-footer:contact-info', 'Contact Info')}
+                    </a>
+                  </li>
                 </ul>
               </nav>
             </div>
