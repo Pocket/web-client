@@ -1,0 +1,28 @@
+.base {
+  padding: 0 6rem 6rem;
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin-bottom: 1rem;
+    text-wrap: balance;
+    font-weight: 600;
+  }
+  h1 {
+    font-size: 3rem;
+    line-height: 1.125;
+    margin: 3rem 0 2.5rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+  p {
+    font-size: 1rem;
+    color: var(--color-textSecondary);
+  }
+}
