@@ -137,10 +137,7 @@ export function About() {
 
             <p>
               Download our images and press kit{' '}
-              <a id="press-page" href="https://blog.getpocket.com/press/">
-                here
-              </a>
-              .
+              <a href="https://blog-assets.getpocket.com/Pocket-Press-Assets-2019.zip">here</a>.
             </p>
           </Trans>
         </section>
