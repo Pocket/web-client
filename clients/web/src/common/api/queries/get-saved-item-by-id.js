@@ -55,8 +55,10 @@ const getSavedItemBySlugQuery = gql`
       fallbackPage {
         ... on ReaderInterstitial {
           itemCard {
-            item {
-              ...ItemDetails
+            ... on PocketMetadata {
+              item {
+                ...ItemDetails
+              }
             }
           }
         }
