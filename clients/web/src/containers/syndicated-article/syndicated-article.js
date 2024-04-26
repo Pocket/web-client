@@ -62,6 +62,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
     title,
     excerpt,
     publisher,
+    publisherUrl,
     authorNames,
     content,
     publishedAt,
@@ -104,7 +105,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   // This means we don't inadvertently clobber or steal publisher SEO
   const canonical = false
   const noIndex = publisher?.attributeCanonicalToPublisher
-
+  const syndicatedFrom = publisherUrl ? publisherUrl : false
   const ArticleLayout = isMobileWebView ? MobileLayout : Layout
 
   const saveAction = (savedUrl, value) => {
@@ -162,6 +163,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
       <ArticleLayout
         title={title}
         metaData={articleMetaData}
+        syndicatedFrom={syndicatedFrom}
         canonical={canonical}
         noIndex={noIndex}
         className={printLayout}>

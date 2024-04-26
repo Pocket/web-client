@@ -17,6 +17,7 @@ function mainLayout({
   children,
   title = 'Pocket',
   canonical,
+  syndicatedFrom,
   noIndex,
   noNav = false,
   selectedNavLink,
@@ -31,6 +32,7 @@ function mainLayout({
         title={title}
         noIndex={noIndex}
         canonical={canonical}
+        syndicatedFrom={syndicatedFrom}
         metaData={metaData}
         forceWebView={forceWebView}
       />

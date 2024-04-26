@@ -2,7 +2,14 @@ import Head from 'next/head'
 import { getImageCacheUrl } from 'common/utilities/urls/urls'
 import { FACEBOOK_APP_ID } from 'common/constants'
 
-export const PocketHead = ({ metaData = {}, title: pageTitle, canonical, noIndex, forceWebView }) => {
+export const PocketHead = ({
+  metaData = {},
+  title: pageTitle,
+  canonical,
+  syndicatedFrom,
+  noIndex,
+  forceWebView
+}) => {
   const { url = '', description = '', title = '', type = 'website', image } = metaData
 
   const twitterCardType = image ? 'summary_large_image' : 'summary'
@@ -25,6 +32,7 @@ export const PocketHead = ({ metaData = {}, title: pageTitle, canonical, noIndex
 
       {/*  Pocket Specific Tags */}
       <meta name="x-pocket-override-excerpt" content={description} />
+      {syndicatedFrom ? <meta name="pocket:syndicated-from" content={syndicatedFrom} /> : null}
 
       {/* Schema.org for Google */}
       <meta itemProp="name" content={title} />

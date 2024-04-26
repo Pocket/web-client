@@ -19,16 +19,25 @@ function mainLayout({
   metaData,
   children,
   title = 'Pocket',
-  canonical
+  canonical,
+  syndicatedFrom
 }: {
   metaData?: metaData
   children: ReactNode
   title?: string
   canonical?: string
+  syndicatedFrom?: string
 }) {
   return (
     <>
-      <PocketHead title={title} canonical={canonical} metaData={metaData} forceWebView={true} noIndex={false}/>
+      <PocketHead
+        title={title}
+        canonical={canonical}
+        syndicatedFrom={syndicatedFrom}
+        metaData={metaData}
+        forceWebView={true}
+        noIndex={false}
+      />
       <GlobalNav onlyLogout={true} />
       <div className={cx(fixedNavContainer)}>{children}</div>
     </>
