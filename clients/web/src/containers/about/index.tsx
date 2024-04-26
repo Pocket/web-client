@@ -6,6 +6,7 @@ import PocketList from 'static/images/about/pocket-list.png'
 import Focus from 'static/images/about/focused-reading.png'
 import SaveFrom from 'static/images/about/save-button-doodle.svg'
 import PrivateNook from 'static/images/about/reading-nook.png'
+import YourWay from 'static/images/about/pocket-your-way.png'
 
 import { Trans, useTranslation } from 'next-i18next'
 import { SaveIcon } from '@ui/icons/SaveIcon'
@@ -57,8 +58,9 @@ export function About() {
             <Trans t={t} i18nKey="marketing-about:save-from-anywhere">
               <h3>Save from anywhere on the web</h3>
               <p>
-                Once you’ve signed up, add the <SaveIcon /> button to your browser for the fastest
-                and easiest way to save articles, videos, and links to your personal library.
+                Once you’ve signed up, add the <SaveIcon /> button to your browser, install the app
+                on your mobile device, and start discovering content you love. With the click of a
+                button you can easily save articles, videos, and links to your personal library.
               </p>
             </Trans>
           </div>
@@ -95,6 +97,27 @@ export function About() {
           </div>
           <div className={`${style.media} ${style.focusedReading}`}>
             <img src={Focus.src} alt="" />
+          </div>
+        </section>
+
+        <section className="page-container">
+          <div className={style.media}>
+            <img src={YourWay.src} alt="" />
+          </div>
+          <div>
+            <Trans t={t} i18nKey="marketing-about:use-pocket-your-way">
+              <h3>Use Pocket your way</h3>
+              <p>
+                There are lots of ways you can use Pocket. Some people use it to save stories
+                throughout the day to read when they’re ready. Hunter-gatherer types use it to save
+                all the things they want to read, watch, listen to, or buy. Others use Pocket to
+                highlight key passages to help them grow, learn, and thrive.
+              </p>
+              <p>
+                And some folks love exploring Pocket’s recommendations to find inspiration,
+                challenge their views, and see the occasional cat (or dog) story.
+              </p>
+            </Trans>
           </div>
         </section>
 
