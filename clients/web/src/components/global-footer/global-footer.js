@@ -12,6 +12,7 @@ import { InstagramMonoIcon } from '@ui/icons/InstagramMonoIcon'
 import { Trans, useTranslation } from 'next-i18next'
 import { Languages } from 'connectors/languages/languages'
 import { PREMIUM_URL } from 'common/constants'
+import Link from 'next/link'
 
 const appStoreBadge =
   'https://assets.getpocket.com/web-ui/assets/apple-app-store-badge.2928664fe1fc6aca88583a6f606d60ba.svg'
@@ -346,14 +347,14 @@ export const GlobalFooter = (props) => {
               <nav aria-label="Products">
                 <ul>
                   <li>
-                    <a href="https://getpocket.com/explore?src=footer_v2">
+                    <Link href="explore?src=footer_v2">
                       {t('global-footer:must-read-articles', 'Must-read articles')}
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href={'https://getpocket.com/en/explore/pocket-hits-signup?src=footer_v2'}>
+                    <Link href={'/explore/pocket-hits-signup?src=footer_v2'}>
                       {t('global-footer:daily-newsletter', 'Daily newsletter')}
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <a href={`${PREMIUM_URL}&utm_campaign=global-bottom&src=footer_v2`}>
@@ -374,14 +375,12 @@ export const GlobalFooter = (props) => {
               <nav aria-label="Company">
                 <ul>
                   <li>
-                    <a href="https://getpocket.com/about?src=footer_v2">
-                      {t('global-footer:about', 'About')}
-                    </a>
+                    <Link href="/about?src=footer_v2">{t('global-footer:about', 'About')}</Link>
                   </li>
                   <li>
-                    <a href="https://getpocket.com/contact-info?src=footer_v2">
+                    <Link href="/contact-info?src=footer_v2">
                       {t('global-footer:contact-info', 'Contact Info')}
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </nav>
@@ -396,9 +395,9 @@ export const GlobalFooter = (props) => {
                     </a>
                   </li>
                   <li>
-                    <a href="https://getpocket.com/sponsor?src=footer_v2">
+                    <Link href="https://getpocket.com/sponsor?src=footer_v2">
                       {t('global-footer:advertise', 'Advertise')}
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </nav>
