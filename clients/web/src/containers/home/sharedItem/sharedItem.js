@@ -3,7 +3,7 @@ import { Modal, ModalBody } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 // import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { ItemCard } from 'connectors/items/item-card-transitional'
-import { dismissShare } from './sharedItem.state'
+import { dismissShare } from '../../share/sharedItem.state'
 import { css } from '@emotion/css'
 
 const contextWrapper = css`

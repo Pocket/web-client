@@ -51,7 +51,9 @@ import { readerSettingsSagas } from 'containers/read/reader-settings.state'
 
 //Items (From the graph)
 import { idMapReducers } from './containers/read/idMap.state'
-import { sharedItemReducers } from './containers/home/sharedItem/sharedItem.state'
+
+import { sharedItemReducers } from './containers/share/sharedItem.state'
+import { sharedItemSagas } from './containers/share/sharedItem.state'
 
 import { readerReducers } from 'containers/read/reader.state'
 import { readerSagas } from 'containers/read/reader.state'
@@ -220,6 +222,7 @@ export const rootReducer = combineReducers({
 function* rootSaga() {
   yield all([
     ...homeSetupSagas,
+    ...sharedItemSagas,
     ...appSagas,
     ...userSagas,
     ...settingsSagas,
