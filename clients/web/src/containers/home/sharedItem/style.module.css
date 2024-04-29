@@ -1,0 +1,32 @@
+.base {
+  padding: 0 2rem;
+  h4 {
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: var(--color-textSecondary);
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 1.1875rem;
+    font-style: italic;
+  }
+
+  div {
+    border-left-width: 6px;
+    border-left-style: solid;
+    padding: 1rem 0 0 1rem;
+  }
+}
+
+.note {
+  border-color: var(--color-dividerTertiary);
+}
+
+.highlights {
+  border-color: var(--color-amber);
+  mark {
+    background-color: var(--color-amberLight);
+  }
+}
