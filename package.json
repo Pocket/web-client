@@ -24,7 +24,7 @@
     "storybook:start": "pnpm --filter @config/storybook start-storybook",
     "gen": "turbo gen --config config/generators/config.ts",
     "locale:inject": "node ./common/localization/locale-inject.mjs",
-    "locale:parse": "cd common/localization/ && pnpm extract",
+    "locale:parse": "i18next",
     "schema": "rover graph fetch pocket-client-api@current >| schema.graphql",
     "format": "lint-staged",
     "prepare": "husky"
@@ -50,6 +50,7 @@
     "@semantic-release/git": "10.0.1",
     "@semantic-release/release-notes-generator": "13.0.0",
     "@turbo/gen": "1.13.2",
+    "i18next-parser": "^8.13.0",
     "husky": "9.0.11",
     "lint-staged": "15.2.2",
     "prettier": "^3.2.5",

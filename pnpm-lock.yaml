@@ -41,6 +41,9 @@ importers:
       husky:
         specifier: 9.0.11
         version: 9.0.11
+      i18next-parser:
+        specifier: ^8.13.0
+        version: 8.13.0
       lint-staged:
         specifier: 15.2.2
         version: 15.2.2
@@ -296,9 +299,6 @@ importers:
       fs-extra:
         specifier: ^11.2.0
         version: 11.2.0
-      i18next-parser:
-        specifier: ^8.13.0
-        version: 8.13.0
 
   common/mock-data: {}
 

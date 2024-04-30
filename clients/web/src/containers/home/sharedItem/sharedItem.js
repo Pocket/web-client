@@ -23,10 +23,10 @@ export const SharedItemInterstitial = () => {
   const showContext = false
   return (
     <Modal
-      title={t('sharedItem:sharedItem', 'Shared Item')}
+      title={t('shared-item:sharedItem', 'Shared Item')}
       appRootSelector={appRootSelector}
       isOpen={true}
-      screenReaderLabel={t('sharedItem:sharedItem', 'Shared Item')}
+      screenReaderLabel={t('shared-item:sharedItem', 'Shared Item')}
       handleClose={closeModal}>
       <ModalBody>
         <ItemCard id={displayItemId} onOpenItem={closeModal} />
