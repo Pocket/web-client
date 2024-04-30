@@ -457,31 +457,13 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
     <h4
       class="css-1wss8ru"
     >
-      nav:tags
-    </h4>
-    <button
-      class="css-cxlc41   action"
-      data-testid="side-nav-all-tags"
-    >
-      <svg
-        aria-hidden="true"
-        class="icon side-nav-icon"
-        fill="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
+      <a
+        data-testid="side-nav-all-tags"
+        href="/saves/tags"
       >
-        <path
-          clip-rule="evenodd"
-          d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 1.414.586L20 11.172a4 4 0 0 1 0 5.656L16.828 20a4 4 0 0 1-5.656 0l-8.586-8.586A2 2 0 0 1 2 10zm8 0 8.586 8.586a2 2 0 0 1 0 2.828l-3.172 3.172a2 2 0 0 1-2.828 0L4 10V4z"
-          fill-rule="evenodd"
-        />
-        <path
-          d="M9 7.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"
-        />
-      </svg>
-       
-      nav:all-tags
-    </button>
+        nav:tags
+      </a>
+    </h4>
     <button
       class="css-cxlc41  tag-class action"
       data-testid="side-nav-tags-home"

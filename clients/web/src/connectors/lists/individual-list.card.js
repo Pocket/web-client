@@ -77,11 +77,11 @@ export const IndividualListCard = ({ id, listId, position }) => {
 const listActionStyles = css`
   button {
     margin-left: 8px;
-    height: 30px;
   }
 
   .icon {
     margin-right: 8px;
+    height: 1rem;
   }
 `
 

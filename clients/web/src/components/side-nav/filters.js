@@ -3,7 +3,6 @@ import { useTranslation } from 'next-i18next'
 
 import { FavoriteIcon } from '@ui/icons/FavoriteIcon'
 import { HighlightIcon } from '@ui/icons/HighlightIcon'
-import { TagIcon } from '@ui/icons/TagIcon'
 import { ArticleIcon } from '@ui/icons/ArticleIcon'
 import { ArchiveIcon } from '@ui/icons/ArchiveIcon'
 import { VideoIcon } from '@ui/icons/VideoIcon'
@@ -91,12 +90,13 @@ export function FiltersSideNav({ subActive, pinned, clickEvent, handleCreateList
         </button>
       </Link>
 
-      <h4 className={sideNavHeader}>{t('nav:tags', 'Tags')}</h4>
-      <Link href="/saves/tags" legacyBehavior>
-        <button className={subActive('tag')} onClick={clickEvent} data-testid="side-nav-all-tags">
-          <TagIcon className="side-nav-icon" /> {t('nav:all-tags', 'All Tags')}
-        </button>
-      </Link>
+      <h4 className={sideNavHeader}>
+        <Link href="/saves/tags" legacyBehavior className={subActive('tags')}>
+          <a data-testid="side-nav-all-tags" onClick={clickEvent}>
+            {t('nav:tags', 'Tags')}
+          </a>
+        </Link>
+      </h4>
       {pinned.length
         ? pinned.map((tag) => (
             <Link href={`/saves/tags/${encodeURIComponent(tag)}`} key={tag} legacyBehavior>
