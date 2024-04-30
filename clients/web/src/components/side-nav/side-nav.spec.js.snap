@@ -9,7 +9,7 @@ exports[`SideNav renders the Account side nav 1`] = `
     role="navigation"
   >
     <a
-      class="css-1rd9wjg   action"
+      class="css-cxlc41   action"
       data-testid="side-nav-home"
       href="/home?src=sidebar"
     >
@@ -30,7 +30,7 @@ exports[`SideNav renders the Account side nav 1`] = `
       nav:home
     </a>
     <a
-      class="css-1rd9wjg   action"
+      class="css-cxlc41   action"
       data-testid="side-nav-saves"
       href="/saves?src=sidebar"
     >
@@ -68,7 +68,7 @@ exports[`SideNav renders the Account side nav 1`] = `
       nav:saves
     </a>
     <a
-      class="css-1rd9wjg   action"
+      class="css-cxlc41   action"
       data-testid="side-nav-discover"
       href="/explore?src=sidebar"
     >
@@ -94,7 +94,7 @@ exports[`SideNav renders the Account side nav 1`] = `
       nav:discover
     </a>
     <a
-      class="css-1rd9wjg   action"
+      class="css-cxlc41   action"
       data-testid="side-nav-collections"
       href="/collections?src=sidebar"
     >
@@ -134,7 +134,7 @@ exports[`SideNav renders the Account side nav 1`] = `
       nav:collections
     </a>
     <div
-      class="css-s9w2pk"
+      class="css-1wss8ru"
       data-testid="side-nav-account"
     />
   </nav>
@@ -173,7 +173,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
     role="navigation"
   >
     <a
-      class="css-1rd9wjg   action"
+      class="css-cxlc41   action"
       data-testid="side-nav-home"
       href="/home?src=sidebar"
     >
@@ -194,7 +194,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:home
     </a>
     <a
-      class="css-1rd9wjg   action"
+      class="css-cxlc41   action"
       data-testid="side-nav-saves"
       href="/saves?src=sidebar"
     >
@@ -232,7 +232,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:saves
     </a>
     <a
-      class="css-1rd9wjg   action"
+      class="css-cxlc41   action"
       data-testid="side-nav-discover"
       href="/explore?src=sidebar"
     >
@@ -258,7 +258,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:discover
     </a>
     <a
-      class="css-1rd9wjg   action"
+      class="css-cxlc41   action"
       data-testid="side-nav-collections"
       href="/collections?src=sidebar"
     >
@@ -297,22 +297,23 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
        
       nav:collections
     </a>
-    <div
-      class="css-1nwm6l7"
+    <h4
+      class="css-1wss8ru"
     >
-      <h4
-        class="css-s9w2pk"
+      <a
+        href="/lists"
       >
-        nav:lists
-      </h4>
+        nav:my-collections
+      </a>
       <button
-        class="css-rpqv52"
+        class="css-rpqv52 css-3rfia1 inline"
         data-testid="side-nav-create-list"
+        data-tooltip="nav:create-collection"
+        data-tooltip-delay="true"
       >
         <svg
           aria-hidden="true"
-          class="icon css-3rfia1 small"
-          data-tooltip="nav:create-list"
+          class="icon "
           fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -324,42 +325,14 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
           />
         </svg>
       </button>
-    </div>
-    <button
-      class="css-1rd9wjg   action"
-      data-testid="side-nav-all-lists"
-    >
-      <svg
-        aria-hidden="true"
-        class="icon side-nav-icon inactive"
-        fill="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M5 21q-.825 0-1.413-.587Q3 19.825 3 19V5q0-.825.587-1.413Q4.175 3 5 3h14q.825 0 1.413.587Q21 4.175 21 5v14q0 .825-.587 1.413Q19.825 21 19 21Zm0-2h14V5H5zm3-2q.425 0 .713-.288Q9 16.425 9 16t-.287-.713T8 15t-.713.287Q7 15.575 7 16t.287.712Q7.575 17 8 17m0-4q.425 0 .713-.288Q9 12.425 9 12t-.287-.713T8 11t-.713.287Q7 11.575 7 12t.287.712Q7.575 13 8 13m0-4q.425 0 .713-.288Q9 8.425 9 8t-.287-.713Q8.425 7 8 7t-.713.287Q7 7.575 7 8t.287.712Q7.575 9 8 9m4 8h4q.425 0 .712-.288Q17 16.425 17 16t-.288-.713Q16.425 15 16 15h-4q-.425 0-.712.287Q11 15.575 11 16t.288.712T12 17m0-4h4q.425 0 .712-.288Q17 12.425 17 12t-.288-.713Q16.425 11 16 11h-4q-.425 0-.712.287Q11 11.575 11 12t.288.712T12 13m0-4h4q.425 0 .712-.288Q17 8.425 17 8t-.288-.713Q16.425 7 16 7h-4q-.425 0-.712.287Q11 7.575 11 8t.288.712Q11.575 9 12 9M5 19V5z"
-        />
-      </svg>
-      <svg
-        aria-hidden="true"
-        class="icon side-nav-icon active"
-        fill="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M5 21q-.825 0-1.413-.587Q3 19.825 3 19V5q0-.825.587-1.413Q4.175 3 5 3h14q.825 0 1.413.587Q21 4.175 21 5v14q0 .825-.587 1.413Q19.825 21 19 21Zm3-4q.425 0 .713-.288Q9 16.425 9 16t-.287-.713T8 15t-.713.287Q7 15.575 7 16t.287.712Q7.575 17 8 17m0-4q.425 0 .713-.288Q9 12.425 9 12t-.287-.713T8 11t-.713.287Q7 11.575 7 12t.287.712Q7.575 13 8 13m0-4q.425 0 .713-.288Q9 8.425 9 8t-.287-.713Q8.425 7 8 7t-.713.287Q7 7.575 7 8t.287.712Q7.575 9 8 9m4 8h4q.425 0 .712-.288Q17 16.425 17 16t-.288-.713Q16.425 15 16 15h-4q-.425 0-.712.287Q11 15.575 11 16t.288.712T12 17m0-4h4q.425 0 .712-.288Q17 12.425 17 12t-.288-.713Q16.425 11 16 11h-4q-.425 0-.712.287Q11 11.575 11 12t.288.712T12 13m0-4h4q.425 0 .712-.288Q17 8.425 17 8t-.288-.713Q16.425 7 16 7h-4q-.425 0-.712.287Q11 7.575 11 8t.288.712Q11.575 9 12 9"
-        />
-      </svg>
-      nav:all-lists
-    </button>
+    </h4>
     <h4
-      class="css-s9w2pk"
+      class="css-1wss8ru"
     >
       nav:filters
     </h4>
     <button
-      class="css-1rd9wjg   action"
+      class="css-cxlc41   action"
       data-testid="side-nav-archive"
     >
       <svg
@@ -389,7 +362,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:archive
     </button>
     <button
-      class="css-1rd9wjg   action"
+      class="css-cxlc41   action"
       data-testid="side-nav-favorites"
     >
       <svg
@@ -409,7 +382,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:favorites
     </button>
     <button
-      class="css-1rd9wjg   action"
+      class="css-cxlc41   action"
       data-testid="side-nav-highlights"
     >
       <svg
@@ -429,7 +402,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:highlights
     </button>
     <button
-      class="css-1rd9wjg   action"
+      class="css-cxlc41   action"
       data-testid="side-nav-articles"
     >
       <svg
@@ -454,7 +427,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:articles
     </button>
     <button
-      class="css-1rd9wjg   action"
+      class="css-cxlc41   action"
       data-testid="side-nav-videos"
     >
       <svg
@@ -482,12 +455,12 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:videos
     </button>
     <h4
-      class="css-s9w2pk"
+      class="css-1wss8ru"
     >
       nav:tags
     </h4>
     <button
-      class="css-1rd9wjg   action"
+      class="css-cxlc41   action"
       data-testid="side-nav-all-tags"
     >
       <svg
@@ -510,13 +483,13 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:all-tags
     </button>
     <button
-      class="css-1rd9wjg  tag-class action"
+      class="css-cxlc41  tag-class action"
       data-testid="side-nav-tags-home"
     >
       home
     </button>
     <button
-      class="css-1rd9wjg  tag-class action"
+      class="css-cxlc41  tag-class action"
       data-testid="side-nav-tags-space"
     >
       space
