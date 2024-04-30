@@ -39,9 +39,9 @@ export const ShareListModal = ({
 
   return (
     <Modal
-      title={t('list:share-list', 'Share List')}
+      title={t('list:share-collection', 'Share Collection')}
       isOpen={showModal}
-      screenReaderLabel={t('list:share-list', 'Share List')}
+      screenReaderLabel={t('list:share-collection', 'Share Collection')}
       handleClose={cancelShare}>
       <ModalBody>
         <div className={cx(stackedGrid, stackedGridNoAside, reducedPaddingStyles)}>

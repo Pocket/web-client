@@ -8,11 +8,8 @@ import { ArticleIcon } from '@ui/icons/ArticleIcon'
 import { ArchiveIcon } from '@ui/icons/ArchiveIcon'
 import { VideoIcon } from '@ui/icons/VideoIcon'
 import { AddIcon } from '@ui/icons/AddIcon'
-import { ListViewAltIcon } from '@ui/icons/ListViewAltIcon'
-import { ListViewAltFilledIcon } from '@ui/icons/ListViewAltFilledIcon'
 
 import { sideNavHeader } from './side-nav'
-import { sideNavActionHeader } from './side-nav'
 import { bottomTooltip } from 'components/tooltip/tooltip'
 import { buttonReset } from 'components/buttons/button-reset'
 
@@ -23,28 +20,20 @@ export function FiltersSideNav({ subActive, pinned, clickEvent, handleCreateList
 
   return (
     <>
-      <div className={sideNavActionHeader}>
-        <h4 className={sideNavHeader}>{t('nav:lists', 'Lists')}</h4>
+      <h4 className={sideNavHeader}>
+        <Link href="/lists" legacyBehavior>
+          {t('nav:my-collections', 'My Collections')}
+        </Link>
         <button
-          className={buttonReset}
+          className={`${buttonReset} ${bottomTooltip} inline`}
           onClick={handleCreateList}
-          data-testid="side-nav-create-list">
-          <AddIcon
-            className={`${bottomTooltip} small`}
-            data-tooltip={t('nav:create-list', 'Create List')}
-          />
+          data-testid="side-nav-create-list"
+          data-tooltip-delay={true}
+          data-tooltip={t('nav:create-collection', 'Create Collection')}>
+          <AddIcon />
         </button>
-      </div>
-      <Link href="/lists" legacyBehavior>
-        <button
-          className={subActive('lists')}
-          onClick={clickEvent}
-          data-testid="side-nav-all-lists">
-          <ListViewAltIcon className="side-nav-icon inactive" />
-          <ListViewAltFilledIcon className="side-nav-icon active" />
-          {t('nav:all-lists', 'All Lists')}
-        </button>
-      </Link>
+      </h4>
+
       {listNames.length
         ? listNames.map((title) => (
             <Link href={`/lists/${recentLists[title]}`} key={recentLists[title]} legacyBehavior>

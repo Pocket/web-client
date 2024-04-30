@@ -192,12 +192,12 @@ export const ListsAllHeader = ({ sortOrder, handleCreateList, handleNewest, hand
   return (
     <header className={cx(savesHeaderStyle, listHeaderStyles)}>
       <h1 className="pageTitle" data-testid="page-title">
-        {t('list:all-lists', 'All Lists')}
+        {t('list:my-collections', 'My Collections')}
       </h1>
 
       <div className="create-sort">
         <button onClick={onCreateList} className="tiny">
-          <AddIcon className="small" /> {t('list:create-list', 'Create List')}
+          <AddIcon className="small" /> {t('list:create-user-collection', 'Create Collection')}
         </button>
         <ListSort sortOrder={sortOrder} handleNewest={handleNewest} handleOldest={handleOldest} />
       </div>

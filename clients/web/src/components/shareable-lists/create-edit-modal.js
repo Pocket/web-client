@@ -47,7 +47,7 @@ export const CreateEditShareableList = ({
       <ModalBody>
         <TextArea
           autoFocus={true}
-          labelText={t('list:list-name', 'List Name')}
+          labelText={t('list:collection-name', 'Collection Name')}
           name="list-name"
           value={listNameValue}
           onChange={onNameChange}

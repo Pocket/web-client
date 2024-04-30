@@ -57,7 +57,7 @@ export const AddToListModal = ({
       </ModalBody>
       <ModalFooter className={footerStyles}>
         <button onClick={createAction} className="text create">
-          <AddIcon /> {t('list:create-list', 'Create List')}
+          <AddIcon /> {t('list:create-list', 'Create Collection')}
         </button>
 
         <div>
@@ -66,7 +66,7 @@ export const AddToListModal = ({
           </button>
 
           <button onClick={confirmAction} autoFocus={true}>
-            {t('list:save-to-list', 'Save to List')}
+            {t('list:save-to-list', 'Save to Collection')}
           </button>
         </div>
       </ModalFooter>

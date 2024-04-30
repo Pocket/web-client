@@ -52,7 +52,7 @@ export const ConfirmAddToList = () => {
     dispatch(mutateListAddConfirm({ externalId, listTitle }))
   }
 
-  const addToList = t('list:add-to-list', 'Add to List')
+  const addToList = t('list:add-to-collection', 'Add to Collection')
   const selectOptions = titleToIdList ? Object.keys(titleToIdList) : []
 
   return showModal ? (

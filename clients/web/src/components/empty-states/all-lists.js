@@ -13,9 +13,9 @@ export const EmptyAllLists = ({ handleCreate }) => {
   return (
     <div className={emptyStyles}>
       <img src={TreasureSVG.src} alt="" aria-hidden="true" />
-      <p>{t('list:create-your-first-list', 'Create your first list.')}</p>
+      <p>{t('list:create-your-first-collection', 'Create your first collection.')}</p>
       <button className="outline" onClick={onCreateList}>
-        <AddIcon /> {t('list:create-list', 'Create list')}
+        <AddIcon /> {t('list:create-collection', 'Create Collection')}
       </button>
     </div>
   )

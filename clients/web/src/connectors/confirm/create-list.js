@@ -26,7 +26,7 @@ export const CreateListModal = () => {
   }
 
   const handleSubmit = (title, description) => {
-    const errorText = t('list:dupe-error', 'List name has already been used.')
+    const errorText = t('list:dupe-collection-error', 'Collection name has already been used.')
     if (existsInArray(titleList, title)) return setError(errorText)
 
     const identifier = ids ? 'shareable-list.create.bulk.submit' : 'shareable-list.create.submit'
@@ -37,14 +37,14 @@ export const CreateListModal = () => {
   }
 
   const createList = id
-    ? t('list:create-list-with-item', 'Create list with item')
-    : t('list:create-list', 'Create list')
+    ? t('list:create-collection-with-item', 'Create collection with item')
+    : t('list:create-collection', 'Create collection')
 
   return showModal ? (
     <CreateEditShareableList
       showModal={showModal}
       modalTitle={createList}
-      modalSubmit={t('list:create-list', 'Create List')}
+      modalSubmit={t('list:create-collection', 'Create Collection')}
       handleClose={handleClose}
       handleSubmit={handleSubmit}
       error={error}

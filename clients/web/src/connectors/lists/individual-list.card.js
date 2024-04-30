@@ -114,7 +114,7 @@ export const ListActions = ({ id, listId, analyticsData, position }) => {
         </button>
       ) : null}
       <button
-        aria-label={t('list:remove-item-from-list', 'Remove item from list')}
+        aria-label={t('list:remove-item-from-collection', 'Remove item from collection')}
         data-testid="remove-item"
         className="tiny outline"
         onClick={handleDeleteItem}>

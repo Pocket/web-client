@@ -71,20 +71,6 @@ export const sideNavWrapper = css`
   }
 `
 
-export const sideNavActionHeader = css`
-  display: flex;
-  justify-content: space-between;
-  margin: 25px 0 5px;
-
-  h4 {
-    margin-top: 0;
-  }
-
-  button {
-    padding: 0.5rem;
-  }
-`
-
 export const sideNavHeader = css`
   font-family: var(--fontSansSerif);
   font-size: var(--fontSize100);
@@ -93,6 +79,25 @@ export const sideNavHeader = css`
   padding: var(--spacing050);
   margin: 25px 0 5px;
   color: var(--color-textSecondary);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    padding: 0.25rem;
+    border-radius: 1000rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+      background-color: var(--color-actionPrimarySubdued);
+    }
+    svg {
+      height: 1em;
+      margin: 0;
+    }
+  }
 `
 
 export const sideNavItem = css`
@@ -124,7 +129,7 @@ export const sideNavItem = css`
     overflow: hidden;
     font-size: var(--fontSize085);
     text-align: left;
-    padding: var(--spacing025) var(--spacing050);
+    padding: 0 var(--spacing050);
     height: initial;
   }
 
