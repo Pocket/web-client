@@ -50,7 +50,7 @@ const SharedNote = ({ note }) => {
   ) : null
 }
 const SharedHighlight = ({ highlights }) => {
-  return highlights.length ? (
+  return highlights?.length ? (
     <div className={style.highlights}>
       <h4>Shared Highlights</h4>
       {highlights.map((highlight) => (

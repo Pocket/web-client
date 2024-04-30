@@ -9,10 +9,13 @@ import { SHARED_ITEM_FAILURE } from 'actions'
 import { SHARED_ITEM_SUCCESS } from 'actions'
 import { SHARED_ITEM_DISMISS } from 'actions'
 
+import { HYDRATE } from 'actions'
+
 /** ACTIONS
  --------------------------------------------------------------- */
 export const requestSharedItem = (slug) => ({ type: SHARED_ITEM_REQUEST, slug })
 export const dismissShare = () => ({ type: SHARED_ITEM_DISMISS })
+export const hydrateSharedItem = (shareItem) => ({ type: SHARED_ITEM_SUCCESS, ...shareItem }) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -22,14 +25,21 @@ export const sharedItemReducers = (state = initialState, action) => {
   switch (action.type) {
     case SHARED_ITEM_SUCCESS: {
       const { shareItem } = action
-      const context = shareItem?.context
+      const { context, shareUrl } = shareItem
       const displayItemId = shareItem?.preview?.item?.itemId
-      return { displayItemId, context }
+      return { displayItemId, shareUrl, context }
     }
 
     case SHARED_ITEM_FAILURE:
     case SHARED_ITEM_DISMISS: {
       return false
+    }
+
+    // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
+    // it represents the state used to build the page on the server.
+    case HYDRATE: {
+      const { sharedItem } = action.payload
+      return sharedItem
     }
 
     default:
@@ -45,13 +55,28 @@ export const sharedItemSagas = [takeEvery(SHARED_ITEM_REQUEST, sharedItemRequest
  --------------------------------------------------------------- */
 function* sharedItemRequest({ slug }) {
   try {
-    const response = yield getSharedItemByItemId(slug)
+    const data = yield getSharedItem(slug)
+    yield put({
+      type: SHARED_ITEM_SUCCESS,
+      ...data
+    })
+    return
+  } catch (error) {
+    yield put({ type: SHARED_ITEM_FAILURE, error })
+  }
+}
 
-    console.log(response)
+/**
+ * ASYNC CALLS
+ --------------------------------------------------------------- */
+export async function getSharedItem(slug) {
+  try {
+    const response = await getSharedItemByItemId(slug)
+
     // If things don't go right
     if (response.error) throw new Error(response.error)
 
-    // It things went slightly right
+    // Things went slightly right
     const { shareSlug, message } = response?.data || {}
 
     if (message) throw new Error(response.message)
@@ -60,17 +85,15 @@ function* sharedItemRequest({ slug }) {
     // the state and send them on to `home`
     if (shareSlug) {
       const derivedShare = deriveSharedItem(shareSlug)
-      yield put({
-        type: SHARED_ITEM_SUCCESS,
+      return {
         shareItem: shareSlug,
         itemsById: { [derivedShare.itemId]: derivedShare }
-      })
-      return
+      }
     }
 
     // Somehow all is wrong
-    yield put({ type: SHARED_ITEM_FAILURE, error: 'Nothing returned' })
+    return { error: 'No share found' }
   } catch (error) {
-    yield put({ type: SHARED_ITEM_FAILURE, error })
+    return { error }
   }
 }
