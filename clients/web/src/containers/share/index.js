@@ -21,7 +21,8 @@ export default function Share() {
   if (!sharedItem || !item) return
   const { shareUrl: url } = sharedItem
   const image = item?.thumbnail || false
-  const {title, excerpt } = item //prettier-ignore
+  const {title, excerpt, authors, timeToRead } = item //prettier-ignore
+  const authorString = authors.map((author) => author.name).join(',')
 
   return (
     <Head>
@@ -44,6 +45,20 @@ export default function Share() {
       <meta name="twitter:description" content={excerpt} />
       <meta name="twitter:site" content="@pocket" />
       {image ? <meta name="twitter:image" content={image} /> : null}
+
+      {/* Slack Unfurls */}
+      {authors.length ? (
+        <>
+          <meta name="twitter:label1" content="Written by" />
+          <meta name="twitter:data1" content={authorString} />
+        </>
+      ) : null}
+      {timeToRead ? (
+        <>
+          <meta name="twitter:label2" content="Reading time" />
+          <meta name="twitter:data2" content={`${timeToRead} minutes`} />
+        </>
+      ) : null}
 
       {/* Open Graph general (Facebook) */}
       <meta property="og:url" content={url} />
