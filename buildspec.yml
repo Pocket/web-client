@@ -60,11 +60,11 @@ phases:
     commands:
       - echo Build started on `date`
       ### If the branch is not main and its not dev, lets do a plan on prod.
-      - 'if [ "$CODEBUILD_WEBHOOK_HEAD_REF" != "$MAIN_BRANCH_REF" ] && [ "$CODEBUILD_WEBHOOK_HEAD_REF" != "$DEV_BRANCH_REF" ]; then /home/circleci/tfcmt plan --skip-no-changes --patch -- terraform plan -lock=false -refresh=false -no-color; fi'
+      - 'if [ "$CODEBUILD_WEBHOOK_HEAD_REF" != "$MAIN_BRANCH_REF" ] && [ "$CODEBUILD_WEBHOOK_HEAD_REF" != "$DEV_BRANCH_REF" ]; then terraform plan -lock=false -refresh=false -no-color; fi'
       #### If the branch is dev, lets do an apply on dev.
-      - 'if [ "$GIT_BRANCH" = "$DEV_BRANCH" ]; then /home/circleci/tfcmt apply -- terraform apply -auto-approve -no-color; fi'
+      - 'if [ "$GIT_BRANCH" = "$DEV_BRANCH" ]; then terraform apply -auto-approve -no-color; fi'
       #### If the branch is main lets apply.
-      - 'if [ "$GIT_BRANCH" = "$MAIN_BRANCH" ]; then /home/circleci/tfcmt apply -- terraform apply -auto-approve -no-color; fi'
+      - 'if [ "$GIT_BRANCH" = "$MAIN_BRANCH" ]; then terraform apply -auto-approve -no-color; fi'
   post_build:
     run-as: circleci
     commands:
