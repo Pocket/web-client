@@ -56,8 +56,8 @@ export const AddToListModal = ({
         </select>
       </ModalBody>
       <ModalFooter className={footerStyles}>
-        <button onClick={createAction} className="text create">
-          <AddIcon /> {t('list:create-list', 'Create Collection')}
+        <button onClick={createAction} className="outline create">
+          <AddIcon /> {t('list:create-collection', 'Create Collection')}
         </button>
 
         <div>
@@ -65,8 +65,8 @@ export const AddToListModal = ({
             {t('list:cancel', 'Cancel')}
           </button>
 
-          <button onClick={confirmAction} autoFocus={true}>
-            {t('list:save-to-list', 'Save to Collection')}
+          <button onClick={confirmAction} className="primary" autoFocus={true}>
+            {t('list:add', 'Add')}
           </button>
         </div>
       </ModalFooter>

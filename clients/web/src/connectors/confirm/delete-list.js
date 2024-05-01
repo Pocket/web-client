@@ -23,15 +23,15 @@ export const ConfirmListDelete = () => {
 
   return (
     <Modal
-      title={t('list:delete-list', 'Delete List')}
+      title={t('list:delete-collection', 'Delete Collection')}
       isOpen={showModal}
-      screenReaderLabel={t('list:delete-list', 'Delete List')}
+      screenReaderLabel={t('list:delete-collection', 'Delete Collection')}
       handleClose={cancelDelete}>
       <ModalBody>
         <p>
           {t(
-            'list:delete-list-confirmation',
-            'Are you sure you want to delete this list? This cannot be undone.'
+            'list:delete-collection-confirmation',
+            'Are you sure you want to delete this collection? This cannot be undone.'
           )}
         </p>
       </ModalBody>

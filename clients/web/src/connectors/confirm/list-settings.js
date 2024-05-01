@@ -51,7 +51,7 @@ export const ListSettingsModal = ({ id }) => {
   return showModal ? (
     <CreateEditShareableList
       showModal={showModal}
-      modalTitle={t('list:list-settings', 'List Settings')}
+      modalTitle={t('list:collection-settings', 'Collection Settings')}
       modalSubmit={t('list:save-changes', 'Save Changes')}
       listName={title}
       listDescription={description}

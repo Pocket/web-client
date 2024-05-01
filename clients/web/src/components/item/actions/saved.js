@@ -80,7 +80,7 @@ export function SavedActions({
       onClick: actionRefresh
     },
     lists: {
-      label: t('item-action:add-to-list', 'Add to List'),
+      label: t('item-action:add-to-collection', 'Add to Collection'),
       icon: <ListAddIcon />,
       onClick: actionAddToList
     },
