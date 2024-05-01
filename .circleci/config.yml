@@ -432,15 +432,15 @@ workflows:
           service_name: WebClient
 
       # Notify sentry of main deployment
-      - pocket/sentry_release_notification:
-          <<: *only_main
-          name: sentry-release-notification-prod
-          context: pocket
-          repository_name: Pocket/web-client
-          sentry_project_name: web-client
-          sentry_env: production
-          sentry_org: pocket
-          workspace-path: /tmp/workspace
-          requires:
-            - deploy_prod
+      # - pocket/sentry_release_notification:
+      #     <<: *only_main
+      #     name: sentry-release-notification-prod
+      #     context: pocket
+      #     repository_name: Pocket/web-client
+      #     sentry_project_name: web-client
+      #     sentry_env: production
+      #     sentry_org: pocket
+      #     workspace-path: /tmp/workspace
+      #     requires:
+      #       - deploy_prod
 
