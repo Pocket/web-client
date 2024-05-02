@@ -54,22 +54,6 @@ const buttonRail = css`
   height: 100%;
   transition: opacity 150ms ease-in-out;
   opacity: 0;
-
-  button {
-    background: var(--color-popoverCanvas);
-    color: var(--color-textSecondary);
-    font-size: var(--size150);
-    border-radius: 50%;
-    height: 32px;
-    width: 32px;
-    text-align: center;
-    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.15);
-    transform: translate(-24px, -24px);
-    &:hover {
-      color: var(--color-textPrimary);
-      background-color: var(--color-actionPrimarySubdued);
-    }
-  }
 `
 
 const verticallyCentered = css`
@@ -123,7 +107,7 @@ export const Sidebar = ({
                   ? t('nav:close-highlights-menu', 'Close Highlights Menu')
                   : t('nav:open-highlights-menu', 'Open Highlights Menu')
               }
-              className={buttonReset}
+              className="pagination"
               data-testid="reader-sidebar-toggle">
               {sideBarOpen ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </button>

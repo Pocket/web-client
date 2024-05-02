@@ -19,8 +19,8 @@ export const SharedItemInterstitial = () => {
   if (!sharedItem) return null
 
   const { displayItemId, context } = sharedItem
-  const { note, highlights } = context
-  const showContext = false
+  const { note, highlights } = context || {}
+  const showContext = note || highlights
   return (
     <Modal
       title={t('shared-item:sharedItem', 'Shared Item')}

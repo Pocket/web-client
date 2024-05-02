@@ -1,18 +1,23 @@
 import { css } from '@emotion/css'
 import { useTranslation } from 'next-i18next'
-
+import { useState } from 'react'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 
 import { Card } from 'components/item-card/card'
 import { ShareList } from './share-list'
+import { TextArea } from 'components/form-fields/text-area'
 
 const shareQuote = css`
-  margin: var(--spacing050) 0;
-  padding: 0 var(--spacing100);
-  border-left: 1px solid var(--color-dividerSecondary);
+  margin: 0.5rem 0;
+  padding: 0 1rem;
+  border-left: 3px solid var(--color-dividerSecondary);
   color: var(--color-textSecondary);
   font-style: italic;
-  font-size: var(--fontSize085);
+  font-size: 1rem;
+`
+const shareNote = css`
+  margin: 1.5rem 0 0;
+  padding: 0;
 `
 
 export const ShareModal = ({
@@ -21,15 +26,28 @@ export const ShareModal = ({
   excerpt,
   timeToRead,
   isSyndicated,
-  externalUrl,
+  shareUrl,
   thumbnail,
   quote,
   showModal,
   cancelShare,
   engagementEvent,
+  updateContext,
   handleMastodon
 }) => {
   const { t } = useTranslation()
+  const [note, updateNote] = useState('')
+
+  function handleInputChange(event) {
+    const inputVal = event.target.value
+    updateNote(inputVal)
+  }
+
+  function handleUpdateContext() {
+    updateContext(note)
+  }
+
+  function handleInputFocus(event) {}
 
   return (
     <Modal
@@ -49,14 +67,31 @@ export const ShareModal = ({
           itemType="display"
           cardShape="wide"
         />
+
         {quote ? <p className={shareQuote}>{quote}</p> : null}
+        <div className={shareNote}>
+          <TextArea
+            labelText={t('share:share-note', 'Note')}
+            name="share-input-note"
+            value={note}
+            showCharacterLimit={true}
+            characterLimit={500}
+            onChange={handleInputChange}
+            displayErrorInline={true}
+            onFocus={handleInputFocus}
+            data-testid="email-input"
+          />
+        </div>
       </ModalBody>
       <ModalFooter>
         <ShareList
-          openUrl={externalUrl}
+          openUrl={shareUrl}
+          externalUrl={shareUrl}
           excerpt={excerpt}
           title={title}
           quote={quote}
+          note={note}
+          updateContext={handleUpdateContext}
           engagementEvent={engagementEvent}
           cancelShare={cancelShare}
           handleMastodon={handleMastodon}
