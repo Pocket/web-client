@@ -1,5 +1,5 @@
 {
-  "add-to-list" : "Toevoegen aan Lijst",
+  "add-to-collection" : "Aan verzameling toevoegen",
   "archive" : "Archief",
   "delete" : "Verwijderen",
   "favorite" : "Favoriet",
@@ -17,6 +17,5 @@
   "show-similar" : "Toon vergelijkbare items",
   "show-similar-copy" : "Toon vergelijkbare items",
   "tag" : "Tag",
-  "unfavorite" : "Uit favorieten verwijderen",
-  "view-original" : "Origineel bekijken"
+  "unfavorite" : "Uit favorieten verwijderen"
 }
