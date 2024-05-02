@@ -1,5 +1,5 @@
 {
-  "add-to-list" : "Ajouter",
+  "add-to-collection" : "Ajouter à la collection",
   "archive" : "Archives",
   "delete" : "Supprimer",
   "favorite" : "Marquer",
@@ -17,6 +17,5 @@
   "show-similar" : "Afficher des éléments similaires",
   "show-similar-copy" : "Afficher des éléments similaires",
   "tag" : "Balise",
-  "unfavorite" : "Supprimer des favoris",
-  "view-original" : "Voir l'original"
+  "unfavorite" : "Supprimer des favoris"
 }
