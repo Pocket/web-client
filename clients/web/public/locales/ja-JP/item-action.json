@@ -1,5 +1,5 @@
 {
-  "add-to-list" : "リストに追加",
+  "add-to-collection" : "コレクションに追加",
   "archive" : "アーカイブ",
   "delete" : "削除",
   "favorite" : "お気に入り",
@@ -17,6 +17,5 @@
   "show-similar" : "類似コンテンツを表示",
   "show-similar-copy" : "類似アイテムを表示",
   "tag" : "タグ",
-  "unfavorite" : "お気に入りから外す",
-  "view-original" : "元のページを表示"
+  "unfavorite" : "お気に入りから外す"
 }
