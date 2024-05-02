@@ -1,3 +1,16 @@
+# [1.127.0](https://github.com/Pocket/web-client/compare/v1.126.1...v1.127.0) (2024-05-02)
+
+
+### Bug Fixes
+
+* **annotations:** update styles a bit ([09abaca](https://github.com/Pocket/web-client/commit/09abaca5f1ac9aca29cfba8eda098db01210b147))
+
+
+### Features
+
+* **share links:** adding share specific links ([7461bd3](https://github.com/Pocket/web-client/commit/7461bd373be08b39b5e0a943cbc673b5f7f4966e))
+* **share:** capture context ([100ff6c](https://github.com/Pocket/web-client/commit/100ff6c78c0e51637e8a85098a2e7efd6ab9195c))
+
 ## [1.126.1](https://github.com/Pocket/web-client/compare/v1.126.0...v1.126.1) (2024-05-01)
 
 
