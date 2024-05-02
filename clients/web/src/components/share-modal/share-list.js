@@ -28,6 +28,7 @@ export const ShareList = ({
   title,
   quote,
   engagementEvent,
+  updateContext,
   cancelShare,
   handleMastodon
 }) => {
@@ -36,17 +37,20 @@ export const ShareList = ({
 
   const onSocialShare = (service) => {
     engagementEvent(`share.${service}`)
+    updateContext()
     cancelShare()
   }
 
   const onShareMastodon = () => {
     engagementEvent('share.mastodon')
+    updateContext()
     handleMastodon()
   }
 
   const copyUrl = async () => {
     await copy(openUrl)
     engagementEvent('share.copy')
+    updateContext()
     dispatch({ type: COPY_ITEM_URL }) // sends Toast
     cancelShare()
   }

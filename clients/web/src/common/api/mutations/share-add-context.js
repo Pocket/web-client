@@ -15,15 +15,12 @@ const shareAddContextMutation = gql`
           note
         }
         slug
-        preview {
-          title
-        }
       }
     }
   }
 `
 
-export async function shareCreateLink(slug, context) {
+export async function shareAddContext(slug, context) {
   return requestGQL({
     query: shareAddContextMutation,
     operationName: 'shareAddContext',
