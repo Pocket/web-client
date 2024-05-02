@@ -1,5 +1,5 @@
 {
-  "add-to-list" : "新增到清單",
+  "add-to-collection" : "新增至收藏",
   "archive" : "封存",
   "delete" : "刪除",
   "favorite" : "我的最愛",
@@ -17,6 +17,5 @@
   "show-similar" : "顯示類似項目",
   "show-similar-copy" : "顯示類似項目",
   "tag" : "標籤",
-  "unfavorite" : "取消收藏",
-  "view-original" : "查看原始檔"
+  "unfavorite" : "取消收藏"
 }
