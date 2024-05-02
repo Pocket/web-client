@@ -1,5 +1,5 @@
 {
-  "add-to-list" : "목록에 추가",
+  "add-to-collection" : "컬렉션에 추가",
   "archive" : "보관소",
   "delete" : "삭제",
   "favorite" : "즐겨찾기",
@@ -17,6 +17,5 @@
   "show-similar" : "유사 항목 표시",
   "show-similar-copy" : "유사 항목 표시",
   "tag" : "태그",
-  "unfavorite" : "즐겨찾기 해제",
-  "view-original" : "원본 보기"
+  "unfavorite" : "즐겨찾기 해제"
 }
