@@ -7,8 +7,6 @@ import { IosShareIcon } from '@ui/icons/IosShareIcon'
 import { DeleteIcon } from '@ui/icons/DeleteIcon'
 import { PopupMenuGroup } from 'components/popup-menu/popup-menu'
 import { PopupMenuItem } from 'components/popup-menu/popup-menu'
-
-import { buttonReset } from 'components/buttons/button-reset'
 import { overlayBase } from 'components/overlay/overlay'
 
 const inlineMenuStyles = css`
@@ -21,11 +19,13 @@ const relativeWrapper = css`
   button.inline-button {
     background: var(--color-popoverCanvas);
     color: var(--color-textSecondary);
-    font-size: var(--size150);
-    border-radius: 50%;
+    border-radius: 1000em;
+    padding: 0;
     height: 32px;
     width: 32px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transform: translate(-24px, -24px);
     opacity: 0;
     transition: opacity 200ms ease-in-out 600ms;
@@ -45,8 +45,8 @@ const relativeWrapper = css`
       background-color: var(--color-actionPrimarySubdued);
     }
     .icon {
-      vertical-align: top;
-      margin-top: 3.5px;
+      margin-right: 0;
+      transform: translateY(0);
     }
   }
 `
@@ -134,12 +134,7 @@ export const AnnotationMenu = ({
           data-testid={`highlight-menu-${id}`}
           ref={selfRef}
           onClick={toggleMenu}
-          className={cx(
-            buttonReset,
-            'inline-button',
-            visible && 'visible',
-            floating && 'floating'
-          )}>
+          className={cx('inline-button', 'action', visible && 'visible', floating && 'floating')}>
           <OverflowMenuIcon />
         </button>
         {menuOpen ? (
