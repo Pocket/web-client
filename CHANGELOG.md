@@ -1,3 +1,10 @@
+## [1.127.1](https://github.com/Pocket/web-client/compare/v1.127.0...v1.127.1) (2024-05-07)
+
+
+### Bug Fixes
+
+* **share:** author meta ([2f8f8bc](https://github.com/Pocket/web-client/commit/2f8f8bc888a2016651d15596f76358e545ccb1bb))
+
 # [1.127.0](https://github.com/Pocket/web-client/compare/v1.126.1...v1.127.0) (2024-05-02)
 
 
