@@ -22,7 +22,7 @@ export default function Share() {
   const { shareUrl: url } = sharedItem
   const image = item?.thumbnail || false
   const {title, excerpt, authors, timeToRead } = item //prettier-ignore
-  const authorString = authors.map((author) => author.name).join(',')
+  const authorString = authors?.length ? authors.map((author) => author.name).join(',') : ''
 
   return (
     <Head>
