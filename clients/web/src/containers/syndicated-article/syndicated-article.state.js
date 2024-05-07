@@ -6,7 +6,8 @@ import {
   ARTICLE_SAVE_FAILURE,
   ARTICLE_UNSAVE_REQUEST,
   ARTICLE_UNSAVE_SUCCESS,
-  ARTICLE_UNSAVE_FAILURE
+  ARTICLE_UNSAVE_FAILURE,
+  ARTICLE_GET_PONG
 } from 'actions'
 import { getSyndicatedArticle } from 'common/api/queries/get-syndicated-article'
 import { saveItem } from 'common/api/_legacy/saveItem'
@@ -18,6 +19,7 @@ import { HYDRATE } from 'actions'
 export const hydrateArticle = (hydrated) => ({ type: ARTICLE_HYDRATE, hydrated }) //prettier-ignore
 export const saveArticleItem = (url) => ({ type: ARTICLE_SAVE_REQUEST, url })
 export const unSaveArticleItem = (id) => ({ type: ARTICLE_UNSAVE_REQUEST, id })
+export const callGetPong = () => ({ type: ARTICLE_GET_PONG })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -69,7 +71,8 @@ export const syndicatedArticleReducers = (state = initialState, action) => {
  --------------------------------------------------------------- */
 export const syndicatedArticleSagas = [
   takeEvery(ARTICLE_SAVE_REQUEST, articleSaveRequest),
-  takeEvery(ARTICLE_UNSAVE_REQUEST, articleUnSaveRequest)
+  takeEvery(ARTICLE_UNSAVE_REQUEST, articleUnSaveRequest),
+  takeEvery(ARTICLE_GET_PONG, articleGetPong)
 ]
 
 /** SAGA :: RESPONDERS
@@ -94,6 +97,14 @@ function* articleUnSaveRequest({ id }) {
   } catch (error) {
     yield put({ type: ARTICLE_UNSAVE_FAILURE, error })
   }
+}
+
+function* articleGetPong() {
+  yield fetch('/api/pong/get', {
+    method: 'post',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ pongs: ['rightRail', 'rightRail2'], keywords: [] })
+  })
 }
 
 /** ASYNC REQUESTS
