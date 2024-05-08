@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 ARG RELEASE_VERSION
 
 ## Add pnpm to all followup builder images
-RUN yarn global add pnpm
+RUN yarn global add pnpm@9.0.6
 
 ## Copy relative to the dockerfile into the workdir
 COPY . .
