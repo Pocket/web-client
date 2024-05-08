@@ -1,3 +1,10 @@
+# [1.128.0](https://github.com/Pocket/web-client/compare/v1.127.1...v1.128.0) (2024-05-08)
+
+
+### Features
+
+* **ads:** adding in a replica of the mdn ads proxy ([0a5d374](https://github.com/Pocket/web-client/commit/0a5d3741f06fe30bf8b61fcfd6992f1e21707131))
+
 ## [1.127.1](https://github.com/Pocket/web-client/compare/v1.127.0...v1.127.1) (2024-05-07)
 
 

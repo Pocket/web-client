@@ -312,3 +312,8 @@ export const breakpointMediumTablet = `@media (max-width: ${screenMediumTablet}p
 export const breakpointLargeTablet = `@media (max-width: ${screenLargeTablet}px)`
 export const breakpointSmallDesktop = `@media (max-width: ${screenSmallDesktop}px)`
 export const breakpointMediumDesktop = `@media (max-width: ${screenMediumDesktop}px)`
+
+// This key should be embedded into the mobile apps to verify the hmac signature of the urls 
+export const ADS_SIGNING_KEY = "xl`Z(GJ*fE5OxHv_wi.3H-H+Uu$LnMW#Vh+ciCcKJA8XpMs,8Q?peW'PxXn}d";
+// The key is the request parameter that clients can post to to get ads
+export const ADS_ZONE_MAPPING = { rightRail:"CW7DTKJU", rightRail2:"CW7DTKJY", test1: 'CW7DTKJ7', test2: 'CW7DTK7E'}
