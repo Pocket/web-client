@@ -1,3 +1,10 @@
+## [1.128.1](https://github.com/Pocket/web-client/compare/v1.128.0...v1.128.1) (2024-05-08)
+
+
+### Bug Fixes
+
+* **pnpm:** pinning pnpm to 9.0.6 ([7df3bd3](https://github.com/Pocket/web-client/commit/7df3bd302bec12e5088cc8b8f7c18161b6d68425))
+
 # [1.128.0](https://github.com/Pocket/web-client/compare/v1.127.1...v1.128.0) (2024-05-08)
 
 
