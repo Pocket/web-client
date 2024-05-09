@@ -19,7 +19,7 @@ import { LineHeightSettings } from './line-height'
 import { ColumnWidthSettings } from './column-width'
 import { ThemeSettings } from './theme'
 import { FONT_TYPES } from 'components/fonts/fonts'
-import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
+import { useInView } from 'react-intersection-observer'
 import { FONT_RANGE } from 'common/constants'
 import { LINE_HEIGHT_RANGE } from 'common/constants'
 import { COLUMN_WIDTH_RANGE } from 'common/constants'
@@ -171,9 +171,12 @@ export const DisplaySettings = ({
     setFocus(false)
   }
 
-  const handleVisible = () => {
-    onVisible('reader.display-settings')
-  }
+  // Fire a tracking event
+  const [viewRef] = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
+    onChange: (inView) => inView && onVisible('reader.display-settings')
+  })
 
   return (
     <div className={displayStyles} ref={menuRef}>
@@ -260,7 +263,7 @@ export const DisplaySettings = ({
                 />
               </>
             ) : (
-              <VisibilitySensor onVisible={handleVisible}>
+              <div ref={viewRef}>
                 <PopupMenuGroup>
                   <PopupMenuItem
                     id="reader.display-settings"
@@ -271,7 +274,7 @@ export const DisplaySettings = ({
                     <Trans i18nKey="settings:unlock-more-options">Unlock more options</Trans>
                   </PopupMenuItem>
                 </PopupMenuGroup>
-              </VisibilitySensor>
+              </div>
             )}
           </>
         )}

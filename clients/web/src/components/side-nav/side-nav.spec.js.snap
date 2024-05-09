@@ -2,7 +2,7 @@
 
 exports[`SideNav renders the Account side nav 1`] = `
 <div
-  class="css-c1dtfw side-nav"
+  class="css-vrtq8m side-nav"
   data-testid="side-nav"
 >
   <nav
@@ -166,7 +166,7 @@ exports[`SideNav renders the Account side nav 1`] = `
 
 exports[`SideNav renders the Saves side nav and shows tags 1`] = `
 <div
-  class="css-c1dtfw side-nav"
+  class="css-vrtq8m side-nav"
   data-testid="side-nav"
 >
   <nav

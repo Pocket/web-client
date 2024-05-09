@@ -3,7 +3,7 @@ import { css } from '@emotion/css'
 import { CrossIcon } from '@ui/icons/CrossIcon'
 import { breakpointSmallHandset, breakpointMediumTablet } from 'common/constants'
 import EmailSignupForm from 'components/email-signup-form/email-signup-form'
-import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
+import { useInView } from 'react-intersection-observer'
 import BorderSVG from 'static/images/pocket-hits-chyron/border.svg'
 import Green from 'static/images/pocket-hits-chyron/envelope-green.svg'
 import Red from 'static/images/pocket-hits-chyron/envelope-red.svg'
@@ -220,62 +220,63 @@ const PocketHitsIllustratedChyron = ({
     dismissChyron()
   }
 
-  function handleVisible() {
-    onVisible(FORM_ID)
-  }
+  // Fire a tracking event
+  const [viewRef] = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
+    onChange: (inView) => inView && onVisible(FORM_ID)
+  })
 
   return (
-    <VisibilitySensor onVisible={handleVisible}>
-      <aside className={ctaContainer}>
-        <div className={closeIcon} onClick={onDismiss}>
-          <CrossIcon />
-        </div>
-        <div className={ctaBox}>
-          <figure className={illustration} />
-          {isSuccessful ? (
-            <div className={promoBlurbWrapper}>
-              <h3 className={promoBlurb} data-testid="pocket-hits-chyron-success">
-                All set. You’ll get your first email from us tomorrow.&nbsp;Enjoy!
+    <aside className={ctaContainer} ref={viewRef}>
+      <div className={closeIcon} onClick={onDismiss}>
+        <CrossIcon />
+      </div>
+      <div className={ctaBox}>
+        <figure className={illustration} />
+        {isSuccessful ? (
+          <div className={promoBlurbWrapper}>
+            <h3 className={promoBlurb} data-testid="pocket-hits-chyron-success">
+              All set. You’ll get your first email from us tomorrow.&nbsp;Enjoy!
+            </h3>
+          </div>
+        ) : (
+          <div>
+            <section data-testid="pocket-hits-chyron">
+              <h3 className={promoBlurb}>
+                Get fascinating stories daily with <span>Pocket’s newsletter</span>.
               </h3>
-            </div>
-          ) : (
-            <div>
-              <section data-testid="pocket-hits-chyron">
-                <h3 className={promoBlurb}>
-                  Get fascinating stories daily with <span>Pocket’s newsletter</span>.
-                </h3>
-                <div id="pocket-hits-illustrated-chyron">
-                  <EmailSignupForm
-                    instanceId={FORM_ID}
-                    isProcessing={isProcessing}
-                    buttonLabelProcessing={'...'}
-                    onFocus={handleEmailInputFocus}
-                    onValidSubmit={onValidEmailSubmit}
-                    onValidationError={handleValidationError}
-                    errorMessage={signupError ? DEFAULT_ERROR : null}
-                    displayErrorInline
-                    buttonVariant="emphasized"
-                    hideCaptchaBadge
-                  />
-                </div>
-              </section>
-              <div className={captchaDisclaimer}>
-                This site is protected by reCAPTCHA.&nbsp;
-                <span>
-                  <a href="https://policies.google.com/privacy" rel="noopener">
-                    Privacy
-                  </a>
-                  &nbsp;·&nbsp;
-                  <a href="https://policies.google.com/terms" rel="noopener">
-                    Terms
-                  </a>
-                </span>
+              <div id="pocket-hits-illustrated-chyron">
+                <EmailSignupForm
+                  instanceId={FORM_ID}
+                  isProcessing={isProcessing}
+                  buttonLabelProcessing={'...'}
+                  onFocus={handleEmailInputFocus}
+                  onValidSubmit={onValidEmailSubmit}
+                  onValidationError={handleValidationError}
+                  errorMessage={signupError ? DEFAULT_ERROR : null}
+                  displayErrorInline
+                  buttonVariant="emphasized"
+                  hideCaptchaBadge
+                />
               </div>
+            </section>
+            <div className={captchaDisclaimer}>
+              This site is protected by reCAPTCHA.&nbsp;
+              <span>
+                <a href="https://policies.google.com/privacy" rel="noopener">
+                  Privacy
+                </a>
+                &nbsp;·&nbsp;
+                <a href="https://policies.google.com/terms" rel="noopener">
+                  Terms
+                </a>
+              </span>
             </div>
-          )}
-        </div>
-      </aside>
-    </VisibilitySensor>
+          </div>
+        )}
+      </div>
+    </aside>
   )
 }
 

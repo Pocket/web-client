@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/css'
 import { getPublishedDate } from 'common/utilities/date-time/date-time'
 import { breakpointLargeHandset } from 'common/constants'
-import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
+import { useInView } from 'react-intersection-observer'
 import { Trans } from 'next-i18next'
 
 const AttributionWrapper = css`
@@ -58,23 +58,27 @@ const AttributionWrapper = css`
 `
 
 function FollowPublisher({ leadIn, text, url, handleImpression, handleClick }) {
-  const onVisible = () => handleImpression(text)
+  // Fire a tracking event
+  const [viewRef] = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
+    onChange: (inView) => inView && handleImpression(text)
+  })
+
   const onClick = () => handleClick(text)
 
   return (
-    <VisibilitySensor onVisible={onVisible}>
-      <div className="publisher-follow" data-testid="follow-publisher">
-        <p>{leadIn}</p>
-        <a
-          className="button secondary"
-          onClick={onClick}
-          href={url}
-          /* eslint-disable-next-line */
-          rel="noopener">
-          {text}
-        </a>
-      </div>
-    </VisibilitySensor>
+    <div className="publisher-follow" data-testid="follow-publisher" ref={viewRef}>
+      <p>{leadIn}</p>
+      <a
+        className="button secondary"
+        onClick={onClick}
+        href={url}
+        /* eslint-disable-next-line */
+        rel="noopener">
+        {text}
+      </a>
+    </div>
   )
 }
 

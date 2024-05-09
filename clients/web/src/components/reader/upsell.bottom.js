@@ -24,7 +24,7 @@ import TypeLight from 'static/images/reader-upsells/Type-light.svg'
 import TypeSepia from 'static/images/reader-upsells/Type-sepia.svg'
 import { ArrowLink } from 'components/arrow-link/arrow-link'
 import { breakpointTinyTablet } from 'common/constants'
-import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
+import { useInView } from 'react-intersection-observer'
 import { PREMIUM_URL } from 'common/constants'
 
 const borderStyles = css`
@@ -503,19 +503,20 @@ function _determineItem() {
 export const BottomUpsell = ({ maxWidth, onVisible }) => {
   const [variant] = useState(_determineItem())
 
-  const handleVisible = () => {
-    onVisible('reader.bottom.premium')
-  }
+  // Fire a tracking event
+  const [viewRef] = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
+    onChange: (inView) => inView && onVisible('reader.bottom.premium')
+  })
 
   const Advertisement = AdsOptions[variant]
 
   return (
-    <VisibilitySensor onVisible={handleVisible}>
-      <aside className={borderStyles}>
-        <div className={upsellWrapper} style={{ maxWidth }}>
-          <Advertisement />
-        </div>
-      </aside>
-    </VisibilitySensor>
+    <aside className={borderStyles} ref={viewRef}>
+      <div className={upsellWrapper} style={{ maxWidth }}>
+        <Advertisement />
+      </div>
+    </aside>
   )
 }

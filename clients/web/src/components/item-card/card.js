@@ -8,7 +8,7 @@ import { ItemTags } from 'components/item-tags/item-tags'
 import { PartnerOverline } from 'components/content-partner/partner'
 import { cardStyles } from './card-base'
 import Link from 'next/link'
-import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
+import { useInView } from 'react-intersection-observer'
 import ReactMarkdown from 'react-markdown'
 import { NewViewIcon } from '@ui/icons/NewViewIcon'
 
@@ -97,11 +97,13 @@ export const Card = (props) => {
 
   const linkRef = useRef(null)
   const articleRef = useRef(null)
-  const viewRef = useRef(null)
 
-  // Fire when item is in view
-  const entry = useIntersectionObserver(viewRef, { freezeOnceVisible: true, threshold: 0.5 })
-  if (!!entry?.isIntersecting) onItemInView(true)
+  // Fire a tracking event
+  const [viewRef] = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
+    onChange: (inView) => inView && onItemInView(true)
+  })
 
   // Fire when item is selected by shortcut
   // This allows us to keep shortcuts in sync with tab selection and in view

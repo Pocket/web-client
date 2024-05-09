@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { css, cx } from '@emotion/css'
 import { BookmarkFilledIcon } from '@ui/icons/BookmarkFilledIcon'
-import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
 import { useHasChanged } from 'common/utilities/hooks/has-changed'
+import { useInView } from 'react-intersection-observer'
 
 const bookmarkStyles = css`
   @keyframes fadeIn {
@@ -39,11 +39,11 @@ export const BookmarkIcon = ({ newSaveCount = 0 }) => {
   const [hasChanged, setHasChanged] = useState(false)
   const saveCountChange = useHasChanged(newSaveCount.toString()) // 0 evals as false, needs to be string
 
-  const viewRef = useRef(null)
-
   // Fire when item is in view
-  const entry = useIntersectionObserver(viewRef, { threshold: 0.5 })
-  const inView = !!entry?.isIntersecting
+  const [viewRef, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.5
+  })
 
   useEffect(() => {
     if (saveCountChange) {

@@ -2,7 +2,7 @@ import React from 'react'
 import { css } from '@emotion/css'
 import { CrossIcon } from '@ui/icons/CrossIcon'
 import { SIGNUP_URL } from 'common/constants'
-import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
+import { useInView } from 'react-intersection-observer'
 import { breakpointSmallDesktop } from 'common/constants' // 1023
 import { breakpointLargeTablet } from 'common/constants' // 1023
 import { useTranslation, Trans } from 'next-i18next'
@@ -111,50 +111,52 @@ export function CallOutStartLibrary({
     completeChyron()
   }
 
-  return (
-    <VisibilitySensor onVisible={onVisible}>
-      <aside className={wrapper}>
-        <div>
-          <button onClick={handleCloseClick} className="close-button inline">
-            <CrossIcon />
-          </button>
+  // Fire a tracking event
+  const [viewRef] = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
+    onChange: (inView) => inView && onVisible()
+  })
 
-          <h6>
-            {t(
-              'discover:save-these-to-personal-library',
-              'Save these stories in a personal library'
-            )}
-          </h6>
-          <svg
-            className="zigzag"
-            xmlns="http://www.w3.org/2000/svg"
-            width="192"
-            height="13"
-            fill="none">
-            <defs />
-            <path
-              stroke="#221F1F"
-              strokeMiterlimit="10"
-              strokeWidth="2"
-              d="M0 1.306c13.72 0 13.72 9.91 27.42 9.91 13.7 0 13.7-9.91 27.42-9.91 13.72 0 13.72 9.91 27.42 9.91 13.72 0 13.72-9.91 27.44-9.91s13.72 9.91 27.42 9.91c13.72 0 13.72-9.91 27.44-9.91s13.72 9.91 27.44 9.91"
-            />
-          </svg>
-          <p>
-            <Trans i18nKey="discover:build-your-library">
-              Use the <span className="pocket-svg"></span> button to build your personal library of
-              articles right in Pocket. Read them when you’re free in a quiet, calm space.
-            </Trans>
-          </p>
-          <a
-            className="button primary start-button"
-            rel="noopener"
-            onClick={handleButtonClick}
-            href={`${SIGNUP_URL}?src=web-library-callout&utm_source=${global.location.href}&utm_medium=web`}>
-            {t('discover:start-your-library', 'Start your library')}
-          </a>
-        </div>
-      </aside>
-    </VisibilitySensor>
+  return (
+    <aside className={wrapper} ref={viewRef}>
+      <div>
+        <button onClick={handleCloseClick} className="close-button inline">
+          <CrossIcon />
+        </button>
+
+        <h6>
+          {t('discover:save-these-to-personal-library', 'Save these stories in a personal library')}
+        </h6>
+        <svg
+          className="zigzag"
+          xmlns="http://www.w3.org/2000/svg"
+          width="192"
+          height="13"
+          fill="none">
+          <defs />
+          <path
+            stroke="#221F1F"
+            strokeMiterlimit="10"
+            strokeWidth="2"
+            d="M0 1.306c13.72 0 13.72 9.91 27.42 9.91 13.7 0 13.7-9.91 27.42-9.91 13.72 0 13.72 9.91 27.42 9.91 13.72 0 13.72-9.91 27.44-9.91s13.72 9.91 27.42 9.91c13.72 0 13.72-9.91 27.44-9.91s13.72 9.91 27.44 9.91"
+          />
+        </svg>
+        <p>
+          <Trans i18nKey="discover:build-your-library">
+            Use the <span className="pocket-svg"></span> button to build your personal library of
+            articles right in Pocket. Read them when you’re free in a quiet, calm space.
+          </Trans>
+        </p>
+        <a
+          className="button primary start-button"
+          rel="noopener"
+          onClick={handleButtonClick}
+          href={`${SIGNUP_URL}?src=web-library-callout&utm_source=${global.location.href}&utm_medium=web`}>
+          {t('discover:start-your-library', 'Start your library')}
+        </a>
+      </div>
+    </aside>
   )
 }
 

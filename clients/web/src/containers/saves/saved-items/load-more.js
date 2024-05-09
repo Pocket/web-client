@@ -1,5 +1,5 @@
-import { useRef } from 'react'
-import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
+import { useInView } from 'react-intersection-observer'
+
 import { useSelector } from 'react-redux'
 import { Loader } from 'components/loader/loader'
 import { css } from '@emotion/css'
@@ -54,11 +54,8 @@ export function LoadMore({ loadMore }) {
 }
 
 function LoadMoreTrigger({ loadMore, shouldLoadMore }) {
-  const viewRef = useRef(null)
-
   // Fire when item is in view
-  const entry = useIntersectionObserver(viewRef, { threshold: 0.5 })
-  const inView = !!entry?.isIntersecting
+  const [viewRef, inView] = useInView({ threshold: 0.5 })
   if (inView && shouldLoadMore) loadMore()
 
   return <div ref={viewRef} className={loadMoreRefStyle} />

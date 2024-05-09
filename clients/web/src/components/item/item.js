@@ -8,8 +8,7 @@ import { NewViewIcon } from '@ui/icons/NewViewIcon'
 import { CardMedia } from 'components/item/item-media'
 import { ItemTags } from 'components/item/item-tags'
 import { itemStyles } from './item-styles'
-import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
-
+import { useInView } from 'react-intersection-observer'
 import { ListViewAltIcon } from '@ui/icons/ListViewAltIcon'
 import { ListStatusLink } from 'components/shareable-lists/list-status-link'
 import { ItemNote } from 'components/item/item-note'
@@ -98,7 +97,6 @@ export const Item = (props) => {
   const linkRel = openInNewTab ? 'noopener' : undefined
   const [tagsShown, setTagsShown] = useState(false)
 
-  const viewRef = useRef(null)
   const linkRef = useRef(null)
   const footerRef = useRef(null)
 
@@ -107,8 +105,11 @@ export const Item = (props) => {
   const tagCount = tags?.length
 
   // Fire a tracking event
-  const entry = useIntersectionObserver(viewRef, { freezeOnceVisible: true, threshold: 0.5 })
-  if (!!entry?.isIntersecting && onItemInView) onItemInView(true)
+  const [viewRef] = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
+    onChange: (inView) => inView && onItemInView(true)
+  })
 
   // Fire when item is selected by shortcut
   // This allows us to keep shortcuts in sync with tab selection and in view

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import { css, cx } from '@emotion/css'
 import EmailSignupForm from 'components/email-signup-form/email-signup-form'
-import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
+import { useInView } from 'react-intersection-observer'
 import { pocketHitsSignupRequested } from 'connectors/pocket-hits/pocket-hits.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { breakpointSmallDesktop } from 'common/constants' // 1279
@@ -223,83 +223,84 @@ const CallOutPocketHitsSignup = ({
     dispatch(pocketHitsSignupRequested(email, recaptchaResponseKey, utmCampaign, utmSource))
   }
 
-  function handleVisible() {
-    onVisible(FORM_ID)
-  }
+  // Fire a tracking event
+  const [viewRef] = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
+    onChange: (inView) => inView && onVisible(FORM_ID)
+  })
 
   const isEnglish = ['en', 'en-US'].includes(locale)
   const shouldHide = hide || !isEnglish
 
   return shouldHide ? null : (
-    <VisibilitySensor onVisible={handleVisible}>
-      <div className={`${wrapper} brandingMessage`} data-testid="pocket-hits-module">
-        <div className="brandBlock">
-          <aside>{t('call-out:fuel-your-mind', 'Get ready to fuel your mind.')}</aside>
-          <blockquote>
-            <span className={cx('copy', isSuccessful && 'isSuccessful')}>
-              <svg
-                className="zigzag"
-                xmlns="http://www.w3.org/2000/svg"
-                width="192"
-                height="13"
-                fill="none">
-                <defs />
-                <path
-                  strokeMiterlimit="10"
-                  strokeWidth="2"
-                  d="M0 1.306c13.72 0 13.72 9.91 27.42 9.91 13.7 0 13.7-9.91 27.42-9.91 13.72 0 13.72 9.91 27.42 9.91 13.72 0 13.72-9.91 27.44-9.91s13.72 9.91 27.42 9.91c13.72 0 13.72-9.91 27.44-9.91s13.72 9.91 27.44 9.91"
-                />
-              </svg>
-              {isSuccessful ? (
-                <>
-                  {t(
-                    'call-out:pocket-hits-success',
-                    'All set. You’ll get your first email from us tomorrow. Enjoy!'
-                  )}
-                </>
-              ) : (
-                <>
-                  {t(
-                    'call-out:pocket-hits-description',
-                    'Get a steady stream of Pocket stories that dig deep into a subject, offer a new perspective, or make you think.'
-                  )}
+    <div className={`${wrapper} brandingMessage`} data-testid="pocket-hits-module" ref={viewRef}>
+      <div className="brandBlock">
+        <aside>{t('call-out:fuel-your-mind', 'Get ready to fuel your mind.')}</aside>
+        <blockquote>
+          <span className={cx('copy', isSuccessful && 'isSuccessful')}>
+            <svg
+              className="zigzag"
+              xmlns="http://www.w3.org/2000/svg"
+              width="192"
+              height="13"
+              fill="none">
+              <defs />
+              <path
+                strokeMiterlimit="10"
+                strokeWidth="2"
+                d="M0 1.306c13.72 0 13.72 9.91 27.42 9.91 13.7 0 13.7-9.91 27.42-9.91 13.72 0 13.72 9.91 27.42 9.91 13.72 0 13.72-9.91 27.44-9.91s13.72 9.91 27.42 9.91c13.72 0 13.72-9.91 27.44-9.91s13.72 9.91 27.44 9.91"
+              />
+            </svg>
+            {isSuccessful ? (
+              <>
+                {t(
+                  'call-out:pocket-hits-success',
+                  'All set. You’ll get your first email from us tomorrow. Enjoy!'
+                )}
+              </>
+            ) : (
+              <>
+                {t(
+                  'call-out:pocket-hits-description',
+                  'Get a steady stream of Pocket stories that dig deep into a subject, offer a new perspective, or make you think.'
+                )}
 
-                  <div id="pocket-hits-call-out-signup">
-                    <EmailSignupForm
-                      instanceId={FORM_ID}
-                      isProcessing={isProcessing}
-                      buttonLabel={t('call-out:subscribe', 'Subscribe')}
-                      buttonLabelProcessing={'...'}
-                      inputLabel={t('call-out:email-address', 'Your email address')}
-                      onFocus={handleEmailInputFocus}
-                      onValidSubmit={handleEmailSubmit}
-                      onValidationError={handleValidationError}
-                      errorMessage={
-                        signupError ? t('call-out:error', 'Oops! Something went wrong.') : null
-                      }
-                      displayErrorInline
-                      hideCaptchaBadge
-                    />
-                  </div>
-                  <div className="captchaDisclaimer">
-                    {t('call-out:pocket-hits-description', 'This site is protected by reCAPTCHA.')}
-                    <span>
-                      <a href="https://policies.google.com/privacy" rel="noopener">
-                        {t('call-out:privacy', 'Privacy')}
-                      </a>
-                      &nbsp;·&nbsp;
-                      <a href="https://policies.google.com/terms" rel="noopener">
-                        {t('call-out:terms', 'Terms')}
-                      </a>
-                    </span>
-                  </div>
-                </>
-              )}
-            </span>
-          </blockquote>
-        </div>
+                <div id="pocket-hits-call-out-signup">
+                  <EmailSignupForm
+                    instanceId={FORM_ID}
+                    isProcessing={isProcessing}
+                    buttonLabel={t('call-out:subscribe', 'Subscribe')}
+                    buttonLabelProcessing={'...'}
+                    inputLabel={t('call-out:email-address', 'Your email address')}
+                    onFocus={handleEmailInputFocus}
+                    onValidSubmit={handleEmailSubmit}
+                    onValidationError={handleValidationError}
+                    errorMessage={
+                      signupError ? t('call-out:error', 'Oops! Something went wrong.') : null
+                    }
+                    displayErrorInline
+                    hideCaptchaBadge
+                  />
+                </div>
+                <div className="captchaDisclaimer">
+                  {t('call-out:pocket-hits-description', 'This site is protected by reCAPTCHA.')}
+                  <span>
+                    <a href="https://policies.google.com/privacy" rel="noopener">
+                      {t('call-out:privacy', 'Privacy')}
+                    </a>
+                    &nbsp;·&nbsp;
+                    <a href="https://policies.google.com/terms" rel="noopener">
+                      {t('call-out:terms', 'Terms')}
+                    </a>
+                  </span>
+                </div>
+              </>
+            )}
+          </span>
+        </blockquote>
       </div>
-    </VisibilitySensor>
+    </div>
   )
 }
 

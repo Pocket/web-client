@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/css'
-import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
+import { useInView } from 'react-intersection-observer'
 import { Trans } from 'next-i18next'
 
 const publisherStyles = css`
@@ -71,25 +71,26 @@ const RecommendedArticle = ({
   handleRecImpression,
   handleRecClick
 }) => {
+  // Fire a tracking event
+  const [viewRef] = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
+    onChange: (inView) => inView && handleRecImpression({ position, corpusRecommendationId, url })
+  })
+
   if (!rec) return null
   const { title, url } = rec
-
-  const handleVisible = () => {
-    handleRecImpression({ position, corpusRecommendationId, url })
-  }
 
   const handleClick = () => {
     handleRecClick({ position, corpusRecommendationId, url })
   }
 
   return (
-    <VisibilitySensor onVisible={handleVisible}>
-      <li className={recommendedArticleStyles} data-testid="publisher-recs-article">
-        <a onClick={handleClick} className="title" href={url} rel="noopener">
-          {title}
-        </a>
-      </li>
-    </VisibilitySensor>
+    <li className={recommendedArticleStyles} data-testid="publisher-recs-article" ref={viewRef}>
+      <a onClick={handleClick} className="title" href={url} rel="noopener">
+        {title}
+      </a>
+    </li>
   )
 }
 

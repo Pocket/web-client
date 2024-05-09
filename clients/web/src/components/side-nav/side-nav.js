@@ -1,16 +1,13 @@
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 import { css, cx } from '@emotion/css'
-import { useRef } from 'react'
 import { HomeIcon } from '@ui/icons/HomeIcon'
 import { SaveIcon } from '@ui/icons/SaveIcon'
 import { SaveFilledIcon } from '@ui/icons/SaveFilledIcon'
 import { ChevronUpIcon } from '@ui/icons/ChevronUpIcon'
 import { DiscoverIcon } from '@ui/icons/DiscoverIcon'
 import { CollectionsIcon } from '@ui/icons/CollectionsIcon'
-
-import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
-
+import { useInView } from 'react-intersection-observer'
 import { FiltersSideNav } from './filters'
 import { AccountSideNav } from './account'
 
@@ -42,18 +39,26 @@ export const sideNavWrapper = css`
       background-color: var(--color-popoverCanvas);
       color: var(--color-textSecondary);
       font-size: var(--size150);
-      border-radius: 50%;
-      height: 32px;
-      width: 32px;
+      border-radius: 1000rem;
+      height: 36px;
+      width: 36px;
       text-align: center;
       padding: 2px 0 0;
       pointer-events: none;
       box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
+      display: flex;
+      justify-content: center;
+      align-items: center;
       opacity: 0;
       transition:
         all 150ms ease-in-out,
         opacity 450ms ease-in-out;
 
+      .icon {
+        height: 1.25em;
+        margin: 0;
+        transform: none;
+      }
       &:hover {
         color: var(--color-textPrimary);
         background-color: var(--color-actionPrimarySubdued);
@@ -183,11 +188,9 @@ export function SideNav({
   recentLists
 }) {
   const { t } = useTranslation()
-  const viewRef = useRef(null)
 
   // Fire when item is in view
-  const entry = useIntersectionObserver(viewRef, { threshold: 0.5 })
-  const inView = !!entry?.isIntersecting
+  const [viewRef, inView] = useInView()
 
   const subActive = (active, isTag) => {
     const isActive = tag ? active === tag : active === subset

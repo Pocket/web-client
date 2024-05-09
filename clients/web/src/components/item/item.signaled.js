@@ -4,10 +4,9 @@ import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 import ReactMarkdown from 'react-markdown'
 import { SyndicatedIcon } from '@ui/icons/SyndicatedIcon'
-import { NewViewIcon } from '@ui/icons/NewViewIcon'
 import { CardMedia } from 'components/item/item-media'
 import { itemStyles } from './item-styles'
-import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
+import { useInView } from 'react-intersection-observer'
 import { OverflowMenuIcon } from '@ui/icons/OverflowMenuIcon'
 
 const allowsMarkdownElements = ['h1', 'h2', 'h3', 'p', 'a', 'strong', 'em', 'ul', 'ol', 'li']
@@ -81,13 +80,15 @@ export const ItemSignaled = (props) => {
     (bulkSelected || shortcutSelected) && 'selected'
   ) //prettier-ignore
 
-  const viewRef = useRef(null)
   const linkRef = useRef(null)
   const footerRef = useRef(null)
 
   // Fire a tracking event
-  const entry = useIntersectionObserver(viewRef, { freezeOnceVisible: true, threshold: 0.5 })
-  if (!!entry?.isIntersecting && onItemInView) onItemInView(true)
+  const [viewRef] = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
+    onChange: (inView) => inView && onItemInView(true)
+  })
 
   // Fire when item is selected by shortcut
   // This allows us to keep shortcuts in sync with tab selection and in view

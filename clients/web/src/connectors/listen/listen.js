@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getAudioFile } from 'connectors/listen/listen.state'
 import { Audio } from 'components/audio/audio'
-import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
+import { useInView } from 'react-intersection-observer'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const Listen = ({ itemId, path }) => {
@@ -15,21 +15,25 @@ export const Listen = ({ itemId, path }) => {
     if (isAuthenticated && itemId) dispatch(getAudioFile(itemId))
   }, [dispatch, isAuthenticated, itemId])
 
-  if (!file) return null
-
-  const { status, url } = file
+  const { status, url } = file || {}
   const available = status === 'available'
 
   const analyticsData = { url: path }
 
-  // Events
-  const handleVisible = () => {
-    import('common/utilities/braze/braze-lazy-load').then(({ logCustomEvent }) =>
-      logCustomEvent('listen.impression', analyticsData)
-    )
-    dispatch(sendSnowplowEvent('listen.impression', analyticsData))
-  }
+  const [viewRef] = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
+    onChange: (inView) => {
+      if (inView) {
+        import('common/utilities/braze/braze-lazy-load').then(({ logCustomEvent }) =>
+          logCustomEvent('listen.impression', analyticsData)
+        )
+        dispatch(sendSnowplowEvent('listen.impression', analyticsData))
+      }
+    }
+  })
 
+  // Events
   const playEvent = () => {
     import('common/utilities/braze/braze-lazy-load').then(({ logCustomEvent }) =>
       logCustomEvent('listen.play', analyticsData)
@@ -59,7 +63,7 @@ export const Listen = ({ itemId, path }) => {
   }
 
   return url && available ? (
-    <VisibilitySensor onVisible={handleVisible}>
+    <div ref={viewRef}>
       <Audio
         url={url}
         playEvent={playEvent}
@@ -67,6 +71,6 @@ export const Listen = ({ itemId, path }) => {
         rateChangeEvent={rateChangeEvent}
         endEvent={endEvent}
       />
-    </VisibilitySensor>
+    </div>
   ) : null
 }

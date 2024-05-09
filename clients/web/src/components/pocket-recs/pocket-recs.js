@@ -5,7 +5,7 @@ import { getImageCacheUrl } from 'common/utilities/urls/urls'
 import { breakpointTinyTablet } from 'common/constants'
 import { breakpointMediumTablet } from 'common/constants'
 import { breakpointLargeHandset } from 'common/constants'
-import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
+import { useInView } from 'react-intersection-observer'
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 
@@ -124,32 +124,33 @@ export const Recommendation = ({
   handleRecImpression,
   handleRecClick
 }) => {
+  // Fire a tracking event
+  const [viewRef] = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
+    onChange: (inView) => inView && handleRecImpression({ position, corpusRecommendationId, url })
+  })
+
   if (!rec) return null
   const { imageUrl, title, url, publisher, target } = rec
   const thumbnailUrl = getImageCacheUrl(imageUrl, { width: 270, height: 150 })
-
-  const handleVisible = () => {
-    handleRecImpression({ position, corpusRecommendationId, url })
-  }
 
   const handleClick = () => {
     handleRecClick({ position, corpusRecommendationId, url })
   }
 
   return (
-    <VisibilitySensor onVisible={handleVisible}>
-      <li className={recommendationStyles} data-testid="pocket-recs-article">
-        <Link href={url} className="thumbnail" onClick={handleClick}>
-          <img src={thumbnailUrl} alt={`Thumbnail image for article`} />
+    <li className={recommendationStyles} data-testid="pocket-recs-article" ref={viewRef}>
+      <Link href={url} className="thumbnail" onClick={handleClick}>
+        <img src={thumbnailUrl} alt={`Thumbnail image for article`} />
+      </Link>
+      <div className="details">
+        <Publisher name={publisher} logo={target?.publisher?.logoWideBlack} />
+        <Link href={url} onClick={handleClick}>
+          <h4 className="h5">{title}</h4>
         </Link>
-        <div className="details">
-          <Publisher name={publisher} logo={target?.publisher?.logoWideBlack} />
-          <Link href={url} onClick={handleClick}>
-            <h4 className="h5">{title}</h4>
-          </Link>
-        </div>
-      </li>
-    </VisibilitySensor>
+      </div>
+    </li>
   )
 }
 

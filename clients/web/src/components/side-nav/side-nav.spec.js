@@ -1,10 +1,7 @@
 import { render } from '@config/jest'
 import '@testing-library/jest-dom'
-import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
+import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils'
 import { SideNav } from './side-nav'
-
-jest.mock('common/utilities/intersection/intersection')
-const mockEntry = { isIntersecting: true }
 
 describe('SideNav', () => {
   const handleClick = () => {}
@@ -20,9 +17,9 @@ describe('SideNav', () => {
   }
 
   it('renders the Saves side nav and shows tags', () => {
-    useIntersectionObserver.mockReturnValue(mockEntry)
-
     const { queryByTestId, queryAllByTestId } = render(<SideNav type="saves" {...baseProps} />)
+
+    mockAllIsIntersecting(true)
 
     // Main section
     expect(queryByTestId('side-nav-home')).toBeInTheDocument()
@@ -47,6 +44,8 @@ describe('SideNav', () => {
 
   it('renders the Account side nav', () => {
     const { queryByTestId } = render(<SideNav type="account" />)
+
+    mockAllIsIntersecting(true)
 
     // Main section
     expect(queryByTestId('side-nav-home')).toBeInTheDocument()
