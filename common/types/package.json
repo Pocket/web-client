@@ -5,6 +5,11 @@
   "main": "index.js",
   "scripts": {},
   "keywords": [],
+  "dependencies": {
+    "@config/typescript-config": "workspace:*",
+    "next": "14.2.3",
+    "next-i18next": "15.3.0"
+  },
   "author": "",
   "license": "ISC"
 }

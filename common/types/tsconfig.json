@@ -1,0 +1,7 @@
+{
+  "extends": "@config/typescript-config/base.json",
+  "compilerOptions": {
+    "strict": true
+  },
+  "include": ["**/*.ts", "**/*.tsx", "index.d.ts"]
+}

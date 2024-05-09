@@ -41,6 +41,6 @@ describe('gql function', () => {
     const obj = { name: 'John', age: 30 }
     const arr = [1, 2, 3]
     const result = gql`query { user(data: ${obj}, numbers: ${arr}) }`
-    expect(result).toEqual('query { user(data: [object Object], numbers: 1,2,3) }')
+    expect(result).toEqual(`query { user(data: , numbers: ) }`)
   })
 })

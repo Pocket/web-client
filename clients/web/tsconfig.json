@@ -1,6 +1,7 @@
 {
   "extends": "@config/typescript-config/nextjs.json",
   "compilerOptions": {
+    "allowJs": true,
     "jsxImportSource": "@emotion/react",
     "baseUrl": "./",
     "paths": {
@@ -16,5 +17,5 @@
       "store": ["src/store.js"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.js", "**/*.ts", "**/*.tsx"]
 }

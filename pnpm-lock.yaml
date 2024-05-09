@@ -224,6 +224,9 @@ importers:
       '@common/localization':
         specifier: workspace:*
         version: link:../../common/localization
+      '@common/types':
+        specifier: workspace:*
+        version: link:../../common/types
       '@config/eslint-config':
         specifier: workspace:*
         version: link:../../config/eslint-config
@@ -254,6 +257,9 @@ importers:
       '@types/react':
         specifier: 18.3.1
         version: 18.3.1
+      '@types/react-beautiful-dnd':
+        specifier: 13.1.8
+        version: 13.1.8
       eslint:
         specifier: 8.57.0
         version: 8.57.0
@@ -348,7 +354,17 @@ importers:
         specifier: 5.4.5
         version: 5.4.5
 
-  common/types: {}
+  common/types:
+    dependencies:
+      '@config/typescript-config':
+        specifier: workspace:*
+        version: link:../../config/typescript-config
+      next:
+        specifier: 14.2.3
+        version: 14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next-i18next:
+        specifier: 15.3.0
+        version: 15.3.0(i18next@23.11.3)(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-i18next@14.1.1(i18next@23.11.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
 
   common/utilities:
     devDependencies:
@@ -3204,6 +3220,9 @@ packages:
 
   '@types/range-parser@1.2.7':
     resolution: {integrity: sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==}
+
+  '@types/react-beautiful-dnd@13.1.8':
+    resolution: {integrity: sha512-E3TyFsro9pQuK4r8S/OL6G99eq7p8v29sX0PM7oT8Z+PJfZvSQTx4zTQbUJ+QZXioAF0e7TGBEcA1XhYhCweyQ==}
 
   '@types/react-dom@18.3.0':
     resolution: {integrity: sha512-EhwApuTmMBmXuFOikhQLIBUn6uFg81SwLMOAUgodJF14SOBOCMdU04gDoYi0WOJJHD144TL32z4yDqCW3dnkQg==}
@@ -13906,6 +13925,10 @@ snapshots:
 
   '@types/range-parser@1.2.7': {}
 
+  '@types/react-beautiful-dnd@13.1.8':
+    dependencies:
+      '@types/react': 18.3.1
+
   '@types/react-dom@18.3.0':
     dependencies:
       '@types/react': 18.3.1
@@ -17474,7 +17497,7 @@ snapshots:
 
   i18next@23.11.3:
     dependencies:
-      '@babel/runtime': 7.24.4
+      '@babel/runtime': 7.24.5
 
   iconv-lite@0.4.24:
     dependencies:
@@ -18199,7 +18222,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 18.19.33
+      '@types/node': 20.12.11
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -19037,13 +19060,25 @@ snapshots:
 
   next-i18next@15.3.0(i18next@23.11.3)(next@14.2.3(@babel/core@7.24.4)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-i18next@14.1.1(i18next@23.11.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1):
     dependencies:
-      '@babel/runtime': 7.24.4
+      '@babel/runtime': 7.24.5
       '@types/hoist-non-react-statics': 3.3.5
       core-js: 3.36.1
       hoist-non-react-statics: 3.3.2
       i18next: 23.11.3
       i18next-fs-backend: 2.3.1
       next: 14.2.3(@babel/core@7.24.4)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+      react-i18next: 14.1.1(i18next@23.11.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+
+  next-i18next@15.3.0(i18next@23.11.3)(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-i18next@14.1.1(i18next@23.11.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1):
+    dependencies:
+      '@babel/runtime': 7.24.5
+      '@types/hoist-non-react-statics': 3.3.5
+      core-js: 3.36.1
+      hoist-non-react-statics: 3.3.2
+      i18next: 23.11.3
+      i18next-fs-backend: 2.3.1
+      next: 14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
       react-i18next: 14.1.1(i18next@23.11.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
@@ -19098,6 +19133,31 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       styled-jsx: 5.1.1(@babel/core@7.24.5)(babel-plugin-macros@3.1.0)(react@18.3.1)
+    optionalDependencies:
+      '@next/swc-darwin-arm64': 14.2.3
+      '@next/swc-darwin-x64': 14.2.3
+      '@next/swc-linux-arm64-gnu': 14.2.3
+      '@next/swc-linux-arm64-musl': 14.2.3
+      '@next/swc-linux-x64-gnu': 14.2.3
+      '@next/swc-linux-x64-musl': 14.2.3
+      '@next/swc-win32-arm64-msvc': 14.2.3
+      '@next/swc-win32-ia32-msvc': 14.2.3
+      '@next/swc-win32-x64-msvc': 14.2.3
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+
+  next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      '@next/env': 14.2.3
+      '@swc/helpers': 0.5.5
+      busboy: 1.6.0
+      caniuse-lite: 1.0.30001617
+      graceful-fs: 4.2.11
+      postcss: 8.4.31
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      styled-jsx: 5.1.1(react@18.3.1)
     optionalDependencies:
       '@next/swc-darwin-arm64': 14.2.3
       '@next/swc-darwin-x64': 14.2.3
@@ -21319,6 +21379,11 @@ snapshots:
     optionalDependencies:
       '@babel/core': 7.24.5
       babel-plugin-macros: 3.1.0
+
+  styled-jsx@5.1.1(react@18.3.1):
+    dependencies:
+      client-only: 0.0.1
+      react: 18.3.1
 
   stylehacks@6.1.1(postcss@8.4.38):
     dependencies:

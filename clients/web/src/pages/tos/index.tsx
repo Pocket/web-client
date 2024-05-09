@@ -5,54 +5,70 @@ import { readFileSync } from 'node:fs'
 import { marked } from 'marked'
 import customHeadingId from 'marked-custom-heading-id'
 
+import type { MarkedExtension } from 'marked'
+import type { LocalizedProps } from '@common/types'
+import type { GetStaticPropsContext, GetStaticProps } from 'next'
+
 // Override function
 const renderer = {
-  text(text) {
-    const hasDateTime = /\{\: datetime=/.test(text)
+  text(text: string) {
+    const hasDateTime = text.includes('{: datetime=')
     return hasDateTime ? '' : false
   }
 }
 
-export async function getStaticProps({ locale }) {
-  const localeMap = {
-    'de-DE': 'de',
-    'en-KE': 'en',
-    'es-LA': 'es-ES',
-    es: 'es-ES',
-    'fr-CA': 'fr',
-    'fr-FR': 'fr',
-    'it-IT': 'it',
-    'ja-JP': 'ja',
-    'ko-KR': 'ko',
-    'nl-NL': 'nl',
-    'pl-PL': 'pl',
-    pt: 'pt-BR',
-    'pt-PT': 'pt-BR',
-    'ru-RU': 'ru',
-    zh: 'zh-CN'
-  }
-  const legalLocale = localeMap[locale] || locale
-  let mdContent
+const localeMap: Record<string, string> = {
+  'de-DE': 'de',
+  'en-KE': 'en',
+  'es-LA': 'es-ES',
+  es: 'es-ES',
+  'fr-CA': 'fr',
+  'fr-FR': 'fr',
+  'it-IT': 'it',
+  'ja-JP': 'ja',
+  'ko-KR': 'ko',
+  'nl-NL': 'nl',
+  'pl-PL': 'pl',
+  pt: 'pt-BR',
+  'pt-PT': 'pt-BR',
+  'ru-RU': 'ru',
+  zh: 'zh-CN'
+}
+
+async function getMDContent(locale: string): Promise<string> {
+  let mdContent: string
 
   try {
-    mdContent = await readFileSync(`node_modules/legal-docs/${legalLocale}/pocket_tos.md`, 'utf8')
+    mdContent = readFileSync(`node_modules/legal-docs/${locale}/pocket_tos.md`, 'utf8')
   } catch {
-    mdContent = await readFileSync(`node_modules/legal-docs/en/pocket_tos.md`, 'utf8')
+    mdContent = readFileSync(`node_modules/legal-docs/en/pocket_tos.md`, 'utf8')
   }
 
   const mdContentModified = mdContent.replace(/\{:\s?\#(.+\S)\s?\}/gi, '{#$1}')
-  const content = await marked.use(customHeadingId()).use({ renderer }).parse(mdContentModified)
+  const content = await marked
+    .use(customHeadingId() as unknown as MarkedExtension)
+    .use({ renderer })
+    .parse(mdContentModified)
+
+  return content
+}
+
+export const getStaticProps: GetStaticProps<LocalizedProps> = async function getStaticProps(
+  ctx: GetStaticPropsContext
+) {
+  const locale = ctx.locale ?? 'en'
+  const localeToUse: string = localeMap[locale] ?? locale
+  const content: string = await getMDContent(localeToUse)
 
   return {
     props: {
       ...(await serverSideTranslations(locale, [...LOCALE_COMMON])),
-      authRequired: false,
-      locale,
       content
     }
   }
 }
-const TermsOfService = ({ content }) => {
+
+const TermsOfService = ({ content }): JSX.Element => {
   return (
     <Component>
       <div dangerouslySetInnerHTML={{ __html: content }}></div>

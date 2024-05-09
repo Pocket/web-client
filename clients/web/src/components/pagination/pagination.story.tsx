@@ -17,7 +17,19 @@ export default {
   }
 }
 
-const Template = ({ totalResults, totalLinksShown, perPageCount, page, pagePattern }) => {
+const Template = ({
+  totalResults,
+  totalLinksShown,
+  perPageCount,
+  page,
+  pagePattern
+}: {
+  pagePattern: string
+  totalResults: number
+  totalLinksShown: number
+  page: number
+  perPageCount: number
+}) => {
   const [currentPage, setCurrentPage] = useState(0)
   const totalPages = Math.ceil(totalResults / perPageCount)
 

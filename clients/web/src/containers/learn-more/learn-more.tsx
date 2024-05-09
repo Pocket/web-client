@@ -3,7 +3,6 @@ import { useTranslation, Trans } from 'next-i18next'
 import { css, cx } from '@emotion/css'
 import Layout from 'layouts/fxa'
 import { LogoMark } from 'components/logo/logo'
-import { PageContainer } from 'components/page-container/page-container'
 import { AccountDeleteModal } from 'containers/account/privacy/confirm-delete'
 import { AccountClearModal } from 'containers/account/privacy/confirm-clear'
 import { accountDelete } from 'containers/account/privacy/privacy.state'
@@ -137,7 +136,7 @@ export default function LearnMore() {
     <Layout title={`Pocket - ${t('learn-more:title', 'Learn more about Firefox migration')}`}>
       <main>
         <div className={cx('main', leanMoreStyles)}>
-          <PageContainer>
+          <div className="page-container">
             <LogoMark className="logo" />
             <h1>
               {enrolledRebranding ? (
@@ -181,9 +180,9 @@ export default function LearnMore() {
             <button className="large" onClick={handleUpgrade}>
               {t('learn-more:update-button', 'Update account')}
             </button>
-          </PageContainer>
+          </div>
         </div>
-        <PageContainer className={noUpgradeStyles}>
+        <div className={`page-contaienr ${noUpgradeStyles}`}>
           <h2>
             {t('learn-more:no-update-header', 'Don’t want to update?')}
             <br />
@@ -259,7 +258,7 @@ export default function LearnMore() {
               </button>
             </li>
           </ul>
-        </PageContainer>
+        </div>
       </main>
       <AccountDeleteModal isPremium={isPremium} />
       <AccountClearModal />

@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import GlobalNav from 'connectors/global-nav/global-nav'
 import { css, cx } from '@emotion/css'
 import { PocketHead } from 'containers/_layouts/_head'
@@ -7,7 +7,7 @@ const fixedNavContainer = css`
   padding-top: 65px;
 `
 
-type metaData = {
+interface MetaData {
   url?: string
   description?: string
   title?: string
@@ -22,7 +22,7 @@ function mainLayout({
   canonical,
   syndicatedFrom
 }: {
-  metaData?: metaData
+  metaData?: MetaData
   children: ReactNode
   title?: string
   canonical?: string

@@ -57,10 +57,10 @@ export const Pagination = ({
   const centerOfPagination = Math.ceil(totalShown / 2)
 
   // What links should we show?  If we are at page 18 of 20 ... we need to
-  // truncate The begining of the sequence
+  // truncate The beginning of the sequence
   const offsetStart = tooWide ? Math.max(currentPage - centerOfPagination, 0) : 0
 
-  // Do we have a clear runway to the end, so overlow is no longer neccesary?
+  // Do we have a clear runway to the end, so overflow is no longer necessary?
   const clearToTheEnd = totalPages - offsetStart <= totalShown
 
   // If we are clear to the end, we no longer want to adjust the starting position
@@ -94,7 +94,7 @@ export const Pagination = ({
     })
     .slice(startingPosition, endingPosition)
 
-  // This endlink may or may not be neccesary based on overflow we calculated
+  // This end link may or may not be necessary based on overflow we calculated
   const endLink = (
     <>
       <div className="more">
@@ -151,7 +151,15 @@ export const Pagination = ({
 }
 
 // This is the button for an individual link
-const PageLink = ({ pagePattern, pageNumber, currentPage }) => {
+const PageLink = ({
+  pagePattern,
+  pageNumber,
+  currentPage
+}: {
+  pagePattern: string
+  pageNumber: number
+  currentPage: number
+}) => {
   const buttonClass = pageNumber === currentPage ? 'active' : null
   const href = pageNumber === 1 ? pagePattern : `${pagePattern}/page/${pageNumber}`
   return (
