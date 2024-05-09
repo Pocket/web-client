@@ -1,5 +1,14 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalEnv": [
+    "NODE_ENV",
+    "TEST_SNOWPLOW",
+    "SHOW_DEV",
+    "RELEASE_VERSION",
+    "BRAZE_LOGS",
+    "BRAZE_PRIVATE_KEY",
+    "REVALIDATION_TOKEN"
+  ],
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],

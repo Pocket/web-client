@@ -4,6 +4,7 @@
     "jsxImportSource": "@emotion/react",
     "baseUrl": "./",
     "paths": {
+      "mocks/*": ["__mocks__/*"],
       "static/*": ["public/static/*"],
       "common/*": ["src/common/*"],
       "containers/*": ["src/containers/*"],
