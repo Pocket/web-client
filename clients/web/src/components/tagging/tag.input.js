@@ -146,7 +146,7 @@ export function TagInput(props) {
     <div className={inputWrapper}>
       <AutosizeInput
         data-testid="tagging-input"
-        autoFocus={true} //eslint-disable-line
+        autoFocus={true}  
         className={autoWrapper}
         inputRef={inputRef}
         inputClassName={inputStyle}

@@ -35,7 +35,6 @@ const ScrollPocketHitsChyron = ({
   handleEmailInputFocus = () => {},
   onVisible = () => {},
   handleEmailDismiss = () => {},
-  signupError = false,
   utmCampaign = '',
   utmSource = ''
 }) => {

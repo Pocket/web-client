@@ -185,7 +185,7 @@ const GlobalNavAdd = ({
     })
     if (!validUrl) return updateInputError(t('nav:please-enter-a-valid-url'))
 
-    const protocolRegEx = new RegExp('^https?://')
+    const protocolRegEx = /^https?:\/\//
     const prefix = !!protocolRegEx.test(addUrl) ? '' : 'https://'
     onSubmit(`${prefix}${addUrl}`)
 

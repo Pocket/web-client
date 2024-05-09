@@ -47,8 +47,6 @@ export const ShareModal = ({
     updateContext(note)
   }
 
-  function handleInputFocus(event) {}
-
   return (
     <Modal
       title={t('share:share-item', 'Share Item')}
@@ -78,7 +76,6 @@ export const ShareModal = ({
             characterLimit={500}
             onChange={handleInputChange}
             displayErrorInline={true}
-            onFocus={handleInputFocus}
             data-testid="email-input"
           />
         </div>

@@ -34,13 +34,12 @@ export const pillboxStyle = css`
 const TopicsPillbox = ({
   id,
   omitPromoted,
-  topicsMap = null,
+  topicsMap = {},
   headingText = 'Discover Articles By Topic',
   headingClassName = null,
   alignItems = 'left',
   onTopicClick = () => {}
 }) => {
-  topicsMap = topicsMap || {}
   const topicsKeys = Object.keys(topicsMap).filter((topic) =>
     omitPromoted ? !topicsMap[topic].is_promoted : true
   )

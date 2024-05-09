@@ -1,3 +1,5 @@
+/* eslint-disable -- legacy behavior -- needs update */
+
 /**
  * When you want to ensure a function only runs once, useful for init code
  * @param  {Function} function to ensure runs once

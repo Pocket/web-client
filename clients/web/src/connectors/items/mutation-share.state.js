@@ -81,7 +81,7 @@ function* updateShareContext({ slug, context: passedContext }) {
     if (response.error) throw new Error(response.error)
     const { shareUrl } = response
 
-    yield put({ type: SHARE_ADD_CONTEXT_SUCCESS, item, shareUrl })
+    yield put({ type: SHARE_ADD_CONTEXT_SUCCESS, shareUrl })
   } catch {
     yield put({ type: SHARE_ADD_CONTEXT_FAILURE })
   }

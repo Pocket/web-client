@@ -113,7 +113,9 @@ function homeDemotionPersist({ saveUrl }) {
     // to the DL team to impliment properly on the server side
     const today = new Date().setHours(0, 0, 0, 0)
     localStore.setItem('demotedRecsDate', today.toString())
-  } catch (err) {}
+  } catch (err) {
+    return
+  }
 }
 
 // NOTE: So so sorry for this function.  This is a hacky mc hack face function
@@ -151,4 +153,3 @@ export async function adjustSlates({ itemsById, slatesById, demoted }) {
 
   return { updatedItemsById, updatedSlatesById }
 }
-

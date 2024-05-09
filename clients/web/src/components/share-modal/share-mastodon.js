@@ -21,7 +21,7 @@ const customInstanceList = [
 
 function addhttp(url) {
   const hasProtocol = /^(?:f|ht)tps?\:\/\//.test(url)
-  return hasProtocol ? url : 'https://' + url
+  return hasProtocol ? url : `https://${url}`
 }
 
 export const ShareToMastodon = ({

@@ -97,8 +97,8 @@ export const appReducers = (state = initialState, action) => {
       return { ...state, colorMode }
     }
 
-    case APP_SET_MODE:
     // Revert global nav once bulk action is complete
+    case APP_SET_MODE:
     case MUTATION_BULK_BATCH_COMPLETE: {
       // MODES  [default, search, add, bulk]
       const { mode = 'default' } = action
@@ -239,12 +239,14 @@ export function setColorClass(colorMode) {
   const htmlTag = global.document && global.document.documentElement
   if (!colorMode || !htmlTag) return
 
-  if (colorMode === 'system') {
-    const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    colorMode = isSystemDark ? 'dark' : 'light'
-  }
+  const mode = colorMode === 'system' ? getSystemColorMode() : colorMode
 
-  htmlTag?.classList.toggle(`${COLOR_MODE_PREFIX}-light`, colorMode === 'light') //prettier-ignore
-  htmlTag?.classList.toggle(`${COLOR_MODE_PREFIX}-dark`, colorMode === 'dark') //prettier-ignore
-  htmlTag?.classList.toggle(`${COLOR_MODE_PREFIX}-sepia`, colorMode === 'sepia') //prettier-ignore
+  htmlTag?.classList.toggle(`${COLOR_MODE_PREFIX}-light`, mode === 'light') //prettier-ignore
+  htmlTag?.classList.toggle(`${COLOR_MODE_PREFIX}-dark`, mode === 'dark') //prettier-ignore
+  htmlTag?.classList.toggle(`${COLOR_MODE_PREFIX}-sepia`, mode === 'sepia') //prettier-ignore
+}
+
+function getSystemColorMode() {
+  const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  return isSystemDark ? 'dark' : 'light'
 }

@@ -208,7 +208,7 @@ export const Card = (props) => {
             {publisher ? (
               <>
                 {externalUrl ? (
-                  //eslint-disable-next-line
+                   
                   <a
                     className="publisher"
                     href={externalUrl}

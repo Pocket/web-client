@@ -51,7 +51,7 @@ export const ConfirmShare = ({ snowplowId }) => {
         externalUrl={url}
         thumbnail={itemImage}
         itemCount={itemCount}
-        showModal={true && !mastodonOpen}
+        showModal={!mastodonOpen}
         cancelShare={cancelShare}
         engagementEvent={engagementEvent}
         handleMastodon={handleMastodon}

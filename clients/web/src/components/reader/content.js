@@ -1,3 +1,4 @@
+/* eslint-disable -- Legacy behavior -- needs to be updated */
 //!! UPDATE HOOKS / REFACTOR TO TYPESCRIPT
 import { useEffect, useRef, useState } from 'react'
 import { cx } from '@emotion/css'

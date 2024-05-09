@@ -1,5 +1,6 @@
-const arrayOfItems = [1, 2, 3, 4, 5, 6]
 import { itemSelector, itemDeselector } from './mutations-bulk.state'
+
+const arrayOfItems = [1, 2, 3, 4, 5, 6]
 
 describe('Bulk Mutations - Select Items', () => {
   it('should select a single item', () => {

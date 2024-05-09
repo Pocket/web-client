@@ -63,7 +63,7 @@ const wrapper = css`
 
 export function CallOutCollection() {
   const { t } = useTranslation()
-  const title = t('collections:call-out-title', "Find what's worth reading") //eslint-disable-line quotes
+  const title = t('collections:call-out-title', "Find what's worth reading")  
   return (
     <aside className={wrapper}>
       <div>

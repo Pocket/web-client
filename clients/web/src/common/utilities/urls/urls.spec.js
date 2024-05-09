@@ -36,7 +36,7 @@ describe('getImageCacheUrl', () => {
   })
 
   it('escapes problematic characters in the original url.', () => {
-    const url = 'https://i.picsum.photos/id/1012/3973/2639.jpg?grayscale' //eslint-disable-line
+    const url = 'https://i.picsum.photos/id/1012/3973/2639.jpg?grayscale'  
     const redirect = getImageCacheUrl(url)
 
     expect(redirect).toBe(

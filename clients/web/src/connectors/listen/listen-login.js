@@ -56,7 +56,7 @@ export const ListenLogin = ({ itemId, path }) => {
 
   const signUpEvent = () => {
     import('common/utilities/braze/braze-lazy-load').then(({ logCustomEvent }) =>
-      logCustomEvent('listen.signup', analyticsData)
+      logCustomEvent('listen.signup')
     )
     dispatch(sendSnowplowEvent('listen.signup'))
   }

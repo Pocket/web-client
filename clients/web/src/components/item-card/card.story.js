@@ -204,7 +204,7 @@ export default {
   }
 }
 
-function sanitizeString(str) {
-  str = str.replace(/[^a-z0-9áéíóúñü \\.,_-]/gim, '')
+function sanitizeString(passedString) {
+  const str = passedString.replace(/[^a-z0-9áéíóúñü \\.,_-]/gim, '')
   return str.trim()
 }

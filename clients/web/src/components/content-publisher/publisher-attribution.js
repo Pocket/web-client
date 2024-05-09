@@ -74,7 +74,7 @@ function FollowPublisher({ leadIn, text, url, handleImpression, handleClick }) {
         className="button secondary"
         onClick={onClick}
         href={url}
-        /* eslint-disable-next-line */
+         
         rel="noopener">
         {text}
       </a>

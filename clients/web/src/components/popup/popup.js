@@ -1,3 +1,4 @@
+/* eslint-disable -- Legacy behavior -- needs to be updated */
 //!! UPDATE HOOKS / REFACTOR TO TYPESCRIPT
 import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'

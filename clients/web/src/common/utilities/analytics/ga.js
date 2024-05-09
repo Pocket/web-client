@@ -1,6 +1,5 @@
-/* global gtag */
 export const pageview = (url) => {
-  // This is the way google suggestes handling SPAs
+  // This is the way google suggests handling SPAs
   gtag('set', 'page_path', url)
   gtag('event', 'page_view')
 

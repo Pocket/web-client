@@ -1,3 +1,4 @@
+/* eslint-disable -- Third party code for the most part */
 import DiffMatchPatch from 'diff-match-patch'
 
 export function compileAnnotations(highlightList) {

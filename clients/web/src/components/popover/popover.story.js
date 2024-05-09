@@ -54,9 +54,6 @@ const PopoverAction = function ({ popoverOptions, copy }) {
   // Popover Effect
   const { popTrigger, popBody, shown } = usePopover(popoverOptions)
 
-  {
-    /*eslint-disable*/
-  }
   return (
     <a className={wrapperLink} href="https://www.merriam-webster.com/dictionary/oops">
       <div> {copy}</div>
