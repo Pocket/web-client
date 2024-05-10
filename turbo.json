@@ -1,6 +1,7 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalEnv": [
+    "ASSET_PREFIX",
     "NODE_ENV",
     "TEST_SNOWPLOW",
     "SHOW_DEV",
@@ -17,6 +18,7 @@
     "test": {},
     "test:update": {},
     "lint": {},
+    "checktypes": {},
     "dev": {
       "cache": false,
       "persistent": true

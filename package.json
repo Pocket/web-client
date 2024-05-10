@@ -27,6 +27,7 @@
     "locale:parse": "i18next",
     "schema": "rover graph fetch pocket-client-api@current >| schema.graphql",
     "format": "lint-staged",
+    "checktypes": "pnpm turbo checktypes",
     "prepare": "husky"
   },
   "repository": {
