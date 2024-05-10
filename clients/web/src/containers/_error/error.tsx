@@ -6,13 +6,25 @@ import { css } from '@emotion/css'
 
 // Components
 import { GlobalFooter } from 'components/global-footer/global-footer'
-import { PageContainer } from 'components/page-container/page-container'
 import GlobalNav from 'connectors/global-nav/global-nav'
 import QRMobileInstall from 'static/images/qr-mobile-install.png'
 
 // Constants
 import { breakpointSmallTablet } from 'common/constants'
 import { breakpointLargeHandset } from 'common/constants'
+
+type StatusCode = string | number
+const componentMapping: Record<StatusCode, React.FC> = {
+  404: NotFoundError,
+  moderatedList: ModeratedListError,
+  mobileNotification: MobileNotification,
+  impossible: ImpossibleError
+}
+
+const getErrorComponent = (statusCode: StatusCode | undefined): React.FC => {
+  if (!statusCode) return GeneralError
+  return componentMapping[statusCode] ?? GeneralError
+}
 
 /**
  * This is the visual side of the custon error that we pass on to NextJS to
@@ -21,15 +33,7 @@ import { breakpointLargeHandset } from 'common/constants'
  * on the web-client but are valid on mobile
  */
 export default function ErrorPage({ statusCode }: { statusCode?: number | string }) {
-  const specificCodes = {
-    404: NotFoundError,
-    moderatedList: ModeratedListError,
-    mobileNotification: MobileNotification,
-    userNotification: UserNotification,
-    impossible: ImpossibleError
-  }
-
-  const ErrorComponent = specificCodes[statusCode] ? specificCodes[statusCode] : GeneralError
+  const ErrorComponent = getErrorComponent(statusCode)
 
   return (
     <>
@@ -53,11 +57,11 @@ export default function ErrorPage({ statusCode }: { statusCode?: number | string
 
       <GlobalNav />
 
-      <PageContainer className={pageContainerStyle}>
+      <div className={` page-container ${pageContainerStyle}`}>
         <div className="container">
-          <ErrorComponent statusCode={statusCode} />
+          <ErrorComponent />
         </div>
-      </PageContainer>
+      </div>
 
       <GlobalFooter />
     </>
@@ -149,20 +153,6 @@ function GeneralError() {
       <a className="button primary large" href="https://help.getpocket.com/">
         {t('error:contact', 'Contact Support')}
       </a>
-    </div>
-  )
-}
-
-/**
- * Maintenance
- * -------------------------------------------------------------------------- */
-function UserNotification({ birth, accountCreationDate }) {
-  return (
-    <div className="content">
-      <h1>Welcome to the trailhead</h1>
-      <p data-testid="error-message">
-        Your account was created on {birth} ... or was it {accountCreationDate}
-      </p>
     </div>
   )
 }

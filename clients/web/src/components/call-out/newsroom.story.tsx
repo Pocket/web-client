@@ -23,10 +23,10 @@ const templateContainerStyle = css`
     position: unset;
   }
 `
-const Template = (args) => (
+const Template = () => (
   <div className={templateContainerStyle}>
     <div className="main">
-      <Component {...args} />
+      <Component />
     </div>
   </div>
 )

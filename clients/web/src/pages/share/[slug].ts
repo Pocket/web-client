@@ -4,9 +4,13 @@ import { LOCALE_COMMON } from 'common/constants'
 import { getSharedItem, hydrateSharedItem } from 'containers/share/sharedItem.state'
 import { wrapper } from 'store'
 
-export const getServerSideProps = wrapper.getServerSideProps(
+// Types
+import type { LocalizedProps } from '@common/types'
+import type { GetServerSideProps } from 'next'
+
+export const getServerSideProps: GetServerSideProps<LocalizedProps> = wrapper.getServerSideProps(
   (store) =>
-    async ({ locale, query }) => {
+    async ({ locale = 'en', query }) => {
       const { dispatch } = store
       const { slug } = query
 

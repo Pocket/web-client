@@ -5,5 +5,5 @@ export default {
   component: Component
 }
 
-const Template = (args) => <Component {...args} />
+const Template = () => <Component />
 export const BannerNewsroom = Template.bind({})
