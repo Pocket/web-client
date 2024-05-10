@@ -3,19 +3,11 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { LOCALE_COMMON } from 'common/constants'
 import { readFileSync } from 'node:fs'
 import { marked } from 'marked'
-import customHeadingId from 'marked-custom-heading-id'
+import { overrideDateTime, customHeadingId } from 'common/utilities/marked-formatters'
 
-import type { MarkedExtension } from 'marked'
+// Types
 import type { LocalizedProps } from '@common/types'
 import type { GetStaticPropsContext, GetStaticProps } from 'next'
-
-// Override function
-const renderer = {
-  text(text: string) {
-    const hasDateTime = text.includes('{: datetime=')
-    return hasDateTime ? '' : false
-  }
-}
 
 const localeMap: Record<string, string> = {
   'de-DE': 'de',
@@ -46,8 +38,8 @@ async function getMDContent(locale: string): Promise<string> {
 
   const mdContentModified = mdContent.replace(/\{:\s?\#(.+\S)\s?\}/gi, '{#$1}')
   const content = await marked
-    .use(customHeadingId() as unknown as MarkedExtension)
-    .use({ renderer })
+    .use(customHeadingId())
+    .use(overrideDateTime())
     .parse(mdContentModified)
 
   return content
@@ -68,7 +60,7 @@ export const getStaticProps: GetStaticProps<LocalizedProps> = async function get
   }
 }
 
-const PrivacyPolicy = ({ content }): JSX.Element => {
+const PrivacyPolicy = ({ content }: { content: string }): JSX.Element => {
   return (
     <Component>
       <div dangerouslySetInnerHTML={{ __html: content }}></div>
