@@ -8,20 +8,15 @@ import { Profile } from 'containers/account/profile/profile'
 import { Email } from 'containers/account/email/email'
 import { Braze } from 'containers/account/braze/braze'
 import { ConnectedServices } from 'containers/account/connections/connections'
-import { RSSFeeds } from 'containers/account/rss/rss'
 import { Privacy } from 'containers/account/privacy/privacy'
 import { useTranslation } from 'next-i18next'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-
 
 export const Account = () => {
   const dispatch = useDispatch()
 
   // Profile content
   const isLoggedIn = useSelector((state) => !!state.user.auth)
-
-  // Has the user migrated to FXA?
-  const { isFXA } = useSelector((state) => state.user)
 
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const { t } = useTranslation()
@@ -39,7 +34,6 @@ export const Account = () => {
         <Email />
         <Braze />
         <ConnectedServices />
-        {isFXA ? null : <RSSFeeds />}
         <Privacy />
       </main>
       <Toasts />

@@ -10,24 +10,13 @@ import { rssProtect } from './privacy.state'
 
 export const Privacy = () => {
   const dispatch = useDispatch()
-  const rssProtected = useSelector((state) => state?.userPrivacy?.rssProtected)
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const dispatchAccountClear = () => dispatch(accountClear())
   const dispatchAccountDelete = () => dispatch(accountDelete())
-  const dispatchRssProtect = () => dispatch(rssProtect(!rssProtected))
-
-  // Has the user migrated to FXA?
-  const { isFXA } = useSelector((state) => state.user)
 
   return (
     <>
-      <PrivacyComponent
-        isFxa={isFXA}
-        rssProtected={rssProtected}
-        rssProtect={dispatchRssProtect}
-        accountDelete={dispatchAccountDelete}
-        accountClear={dispatchAccountClear}
-      />
+      <PrivacyComponent accountDelete={dispatchAccountDelete} accountClear={dispatchAccountClear} />
       <AccountDeleteModal isPremium={isPremium} />
       <AccountClearModal />
     </>
