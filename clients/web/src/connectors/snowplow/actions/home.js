@@ -137,5 +137,55 @@ export const homeActions = {
     },
     expects: ['corpusRecommendationId', 'url'],
     description: 'Fired when a user clicks the thumbsdown button on an article'
+  },
+  'home.share-interstitial.save': {
+    eventType: 'engagement',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      engagementType: 'save',
+      uiType: 'button'
+    },
+    expects: ['url'],
+    description: 'Click “Save” on the shared card in the share interstitial'
+  },
+  'home.share-interstitial.unsave': {
+    eventType: 'engagement',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      engagementType: 'general',
+      uiType: 'button'
+    },
+    expects: ['url'],
+    description: 'Click “UnSave” on the shared card in the share interstitial'
+  },
+  'home.share-interstitial.impression': {
+    eventType: 'impression',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      component: 'ui',
+      uiType: 'card'
+    },
+    expects: ['url'],
+    description: 'Fired when the shared card in the share interstitial is seen'
+  },
+  'home.share-interstitial.view-original': {
+    eventType: 'contentOpen',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: ['url'],
+    description:
+      'Fired when a user clicks the publisher in the shared card in the share interstitial'
+  },
+  'home.share-interstitial.open': {
+    eventType: 'contentOpen',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      component: 'ui',
+      uiType: 'card'
+    },
+    expects: ['url'],
+    description: 'Fired when a user clicks on the shared card in the share interstitial'
   }
 }

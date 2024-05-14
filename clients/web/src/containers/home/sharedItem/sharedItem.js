@@ -3,16 +3,13 @@ import style from './style.module.css'
 import { useTranslation } from 'next-i18next'
 import { Modal, ModalBody } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
-// import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { ItemCard } from 'connectors/items/item-card-transitional'
+import { ItemCard } from 'connectors/items/item-card-shared'
 import { dismissShare } from '../../share/sharedItem.state'
 
 export const SharedItemInterstitial = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const sharedItem = useSelector((state) => state.sharedItem)
-  // const onLinkClick = () => dispatch(sendSnowplowEvent('home.recent.view-saves'))
-
   const closeModal = () => dispatch(dismissShare())
   const appRootSelector = '#__next'
 
@@ -29,7 +26,7 @@ export const SharedItemInterstitial = () => {
       screenReaderLabel={t('shared-item:sharedItem', 'Shared Item')}
       handleClose={closeModal}>
       <ModalBody>
-        <ItemCard id={displayItemId} onOpenItem={closeModal} />
+        <ItemCard id={displayItemId} onOpenItem={closeModal} snowplowId="home.share-interstitial" />
         {showContext ? (
           <div className={style.base}>
             <SharedHighlight highlights={highlights} />

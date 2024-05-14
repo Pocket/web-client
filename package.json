@@ -11,7 +11,7 @@
   "scripts": {
     "clean": "pnpm turbo clean",
     "dev": "pnpm turbo dev",
-    "dev:snowplow": "pnpm --filter @client/web dev:snowplow",
+    "dev:snowplow": "pnpm turbo dev:snowplow",
     "build": "pnpm --filter @client/web build",
     "start": "pnpm --filter @client/web start",
     "start:local": "pnpm --filter @client/web start:local",

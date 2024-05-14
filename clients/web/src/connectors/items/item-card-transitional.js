@@ -28,8 +28,6 @@ export function ItemCard({
 
   // Get data from state
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
-  const analyticsInitialized = useSelector((state) => state.analytics.initialized)
-
   const item = useSelector((state) => state.itemsDisplay[id])
   if (!item) return null
 
@@ -49,9 +47,12 @@ export function ItemCard({
    * ITEM TRACKING
    * ----------------------------------------------------------------
    */
-  const onImpression = () => dispatch(sendSnowplowEvent(`${snowplowId}.impression`, analyticsData))
-  const onItemInView = (inView) =>
-    !impressionFired && inView && analyticsInitialized ? onImpression() : null
+  const onItemInView = (inView) => {
+    if (!impressionFired && inView) {
+      dispatch(sendSnowplowEvent(`${snowplowId}.impression`, analyticsData))
+    }
+  }
+
   const onOpen = () => {
     if (onOpenItem) onOpenItem()
     dispatch(sendSnowplowEvent(`${snowplowId}.open`, analyticsData))

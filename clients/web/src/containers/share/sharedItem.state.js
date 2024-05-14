@@ -77,7 +77,7 @@ export async function getSharedItem(slug) {
     if (response.error) throw new Error(response.error)
 
     // Things went slightly right
-    const { shareSlug, message } = response?.data || {}
+    const { shareSlug, shareUrl, message } = response?.data || {}
 
     if (message) throw new Error(response.message)
 
@@ -87,6 +87,7 @@ export async function getSharedItem(slug) {
       const derivedShare = deriveSharedItem(shareSlug)
       return {
         shareItem: shareSlug,
+        shareUrl,
         itemsById: { [derivedShare.itemId]: derivedShare }
       }
     }

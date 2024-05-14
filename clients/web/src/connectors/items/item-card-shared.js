@@ -1,11 +1,11 @@
-import { ItemSignaled as Item } from 'components/item/item.signaled'
+import { Item } from 'components/item/item'
 import { useSelector, useDispatch } from 'react-redux'
 import { setNoImage } from 'connectors/items/items-display.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { SignaledActions } from 'components/item/actions/signaled'
+import { TransitionalActions } from 'components/item/actions/transitional'
+import { itemReportAction } from 'connectors/items/mutation-report.state'
 import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'
 import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
-import { completeDemotion, demoteHomeRec, promoteHomeRec } from 'containers/home/home.state'
 
 /**
  * Article Card
@@ -14,34 +14,32 @@ import { completeDemotion, demoteHomeRec, promoteHomeRec } from 'containers/home
  */
 export function ItemCard({
   id,
-  slateId,
-  position,
   className,
   cardShape,
   showExcerpt = true,
   useMarkdown,
   clamp,
-  snowplowId
+  snowplowId,
+  canBeRead,
+  onOpenItem
 }) {
   const dispatch = useDispatch()
+
   // Get data from state
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
-  const isDemoted = useSelector((state) => state.pageHome.demotedIds.includes(id))
-
   const item = useSelector((state) => state.itemsDisplay[id])
-  if (!item) return null
+  const sharedItem = useSelector((state) => state.sharedItem)
+  const analyticsUrl = sharedItem?.shareUrl || ''
 
-  const onCompleteDemotion = () => dispatch(completeDemotion(slateId, id))
+  if (!item || !sharedItem) return null
+
   const { readUrl, externalUrl, openExternal, syndicatedUrl, isCollection, authors, saveUrl } = item
 
-  const openUrl = openExternal ? externalUrl : syndicatedUrl || readUrl || externalUrl || saveUrl
+  const primaryUrl = canBeRead ? readUrl : syndicatedUrl
+  const openUrl = openExternal ? externalUrl : primaryUrl || readUrl || externalUrl || saveUrl
 
   const onImageFail = () => dispatch(setNoImage(id))
-  const analyticsData = {
-    position,
-    destination: !openExternal ? 'internal' : 'external',
-    ...item?.analyticsData
-  }
+  const analyticsData = { ...item?.analyticsData, url: analyticsUrl }
 
   /**
    * ITEM TRACKING
@@ -53,9 +51,13 @@ export function ItemCard({
     }
   }
 
-  const onOpen = () => dispatch(sendSnowplowEvent(`${snowplowId}.open`, analyticsData))
+  const onOpen = () => {
+    if (onOpenItem) onOpenItem()
+    dispatch(sendSnowplowEvent(`${snowplowId}.open`, analyticsData))
+  }
 
   const onOpenOriginalUrl = () => {
+    if (onOpenItem) onOpenItem()
     const data = { ...analyticsData, destination: 'external' }
     dispatch(sendSnowplowEvent(`${snowplowId}.view-original`, data))
   }
@@ -82,7 +84,6 @@ export function ItemCard({
       isInternalItem={isInternalItem}
       fromPartner={fromPartner}
       onImageFail={onImageFail}
-      position={position}
       className={className}
       cardShape={cardShape}
       showExcerpt={showExcerpt}
@@ -94,41 +95,28 @@ export function ItemCard({
       onItemInView={onItemInView}
       onOpenOriginalUrl={onOpenOriginalUrl}
       onOpen={onOpen}
-      Actions={ActionsSignaled}
+      Actions={ActionsTransitional}
       snowplowId={snowplowId}
-      // Signal
-      onCompleteDemotion={onCompleteDemotion}
-      isDemoted={isDemoted}
     />
   )
 }
 
-export function ActionsSignaled(props) {
-  const { id, position, snowplowId, slateId } = props
-
+export function ActionsTransitional(props) {
+  const { id, snowplowId } = props
   const dispatch = useDispatch()
 
   const isAuthenticated = useSelector((state) => state.user.auth)
   const item = useSelector((state) => state.itemsDisplay[id])
+  const sharedItem = useSelector((state) => state.sharedItem)
+  const analyticsUrl = sharedItem?.shareUrl || ''
 
   const saveItemId = useSelector((state) => state.itemsTransitions[id])
   const saveStatus = saveItemId ? 'saved' : 'unsaved'
 
-  const isPromoted = useSelector((state) => state.pageHome.promotedIds.includes(id))
+  if (!item || !sharedItem) return null
 
-  if (!item) return null
   const { saveUrl } = item
-  const analyticsData = { position, ...item?.analyticsData }
-
-  const onDemote = () => {
-    dispatch(sendSnowplowEvent('home.slate.thumbsdown', analyticsData))
-    dispatch(demoteHomeRec(slateId, id, saveUrl))
-  }
-
-  const onPromote = () => {
-    dispatch(sendSnowplowEvent('home.slate.thumbsup', analyticsData))
-    dispatch(promoteHomeRec(slateId, id, saveUrl))
-  }
+  const analyticsData = { ...item?.analyticsData, url: analyticsUrl }
 
   // Prep save action
   const onSave = () => {
@@ -143,16 +131,17 @@ export function ActionsSignaled(props) {
     dispatch(mutationDeleteTransitionalItem(saveItemId, id))
   }
 
+  // On Report
+  const onReport = () => dispatch(itemReportAction(id))
+
   return item ? (
-    <SignaledActions
+    <TransitionalActions
       id={id}
       isAuthenticated={isAuthenticated}
-      isPromoted={isPromoted}
       saveStatus={saveStatus}
       onSave={onSave}
       onUnSave={onUnSave}
-      onPromote={onPromote}
-      onDemote={onDemote}
+      onReport={onReport}
     />
   ) : null
 }
