@@ -35,7 +35,7 @@ export function ContactInfo() {
         <Trans t={t} i18nKey="marketing-contact-info:security">
         <h2>Security</h2>
         <p>If you believe you have discovered a security vulnerability in Pocket, please follow Mozilla’s bug reporting process documented on <a href="https://www.mozilla.org/en-US/about/governance/policies/security-group/bugs/">Mozilla’s Security page</a>.</p>
-        <p>For questions related to security, please contact us at <a href="mailto:security@getpocket.com">security@getpocket.com</a>.</p>
+        <p>For questions related to security, please contact us at <a href="mailto:security@mozilla.org">security@mozilla.org</a>.</p>
         </Trans>
 
         <Trans t={t} i18nKey="marketing-contact-info:follow-us">
