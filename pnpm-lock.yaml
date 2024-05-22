@@ -125,8 +125,8 @@ importers:
         specifier: 9.0.2
         version: 9.0.2
       legal-docs:
-        specifier: github:mozilla/legal-docs#1913c916a522934c1e159313806bee717e87f7f0
-        version: https://codeload.github.com/mozilla/legal-docs/tar.gz/1913c916a522934c1e159313806bee717e87f7f0
+        specifier: github:mozilla/legal-docs#7c2fffcbb56f16fa88eb7eed9d52650c5fcd95b1
+        version: https://codeload.github.com/mozilla/legal-docs/tar.gz/7c2fffcbb56f16fa88eb7eed9d52650c5fcd95b1
       marked:
         specifier: 12.0.2
         version: 12.0.2
@@ -6716,8 +6716,8 @@ packages:
     resolution: {integrity: sha512-DpMa59o5uGUWWjruMp71e6knmwKU3jRBBn1kjuLWN9EeIOxNeSAwvHf03WIl8g/ZMR2oSQC9ej3yeLBwdDc/pg==}
     engines: {node: '>=10.13.0'}
 
-  legal-docs@https://codeload.github.com/mozilla/legal-docs/tar.gz/1913c916a522934c1e159313806bee717e87f7f0:
-    resolution: {tarball: https://codeload.github.com/mozilla/legal-docs/tar.gz/1913c916a522934c1e159313806bee717e87f7f0}
+  legal-docs@https://codeload.github.com/mozilla/legal-docs/tar.gz/7c2fffcbb56f16fa88eb7eed9d52650c5fcd95b1:
+    resolution: {tarball: https://codeload.github.com/mozilla/legal-docs/tar.gz/7c2fffcbb56f16fa88eb7eed9d52650c5fcd95b1}
     version: 1.0.0
 
   leven@3.1.0:
@@ -18422,7 +18422,7 @@ snapshots:
 
   lead@4.0.0: {}
 
-  legal-docs@https://codeload.github.com/mozilla/legal-docs/tar.gz/1913c916a522934c1e159313806bee717e87f7f0: {}
+  legal-docs@https://codeload.github.com/mozilla/legal-docs/tar.gz/7c2fffcbb56f16fa88eb7eed9d52650c5fcd95b1: {}
 
   leven@3.1.0: {}
 

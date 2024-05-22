@@ -77,7 +77,7 @@
     "he": "1.2.0",
     "intersection-observer": "0.12.2",
     "jsonwebtoken": "9.0.2",
-    "legal-docs": "github:mozilla/legal-docs#1913c916a522934c1e159313806bee717e87f7f0",
+    "legal-docs": "github:mozilla/legal-docs#7c2fffcbb56f16fa88eb7eed9d52650c5fcd95b1",
     "marked": "12.0.2",
     "marked-custom-heading-id": "2.0.7",
     "match-sorter": "6.3.4",
