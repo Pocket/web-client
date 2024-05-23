@@ -77,6 +77,7 @@ async function getMDContent(locale: string, isEU: boolean): Promise<string> {
 
 export const getServerSideProps: GetServerSideProps<LocalizedProps> =
   async function getServerSideProps(ctx: GetServerSidePropsContext) {
+    console.log(ctx.req.headers)
     const country = ctx.req.headers['cloudfront-viewer-country'] ?? 'US'
     const isEU = EUCodes.includes(country as string)
     const locale = ctx.locale ?? 'en'
