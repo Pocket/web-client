@@ -77,7 +77,7 @@ async function getMDContent(locale: string, isEU: boolean): Promise<string> {
 
 export const getServerSideProps: GetServerSideProps<LocalizedProps> =
   async function getServerSideProps(ctx: GetServerSidePropsContext) {
-    const country = ctx.req.headers['CloudFront-Viewer-Country-Region'] ?? 'US'
+    const country = ctx.req.headers['cloudfront-viewer-country'] ?? 'US'
     const isEU = EUCodes.includes(country as string)
     const locale = ctx.locale ?? 'en'
     const localeToUse: string = localeMap[locale] ?? locale
@@ -86,14 +86,15 @@ export const getServerSideProps: GetServerSideProps<LocalizedProps> =
     return {
       props: {
         ...(await serverSideTranslations(locale, [...LOCALE_COMMON])),
-        content
+        content,
+        country
       }
     }
   }
 
-const PrivacyPolicy = ({ content }: { content: string }): JSX.Element => {
+const PrivacyPolicy = ({ content, country }: { content: string; country: string }): JSX.Element => {
   return (
-    <Component>
+    <Component country={country}>
       <div dangerouslySetInnerHTML={{ __html: content }}></div>
     </Component>
   )
