@@ -95,7 +95,7 @@ export function Toast({
     [HIGHLIGHT_DELETE_SUCCESS]: t('toast:highlight-deleted', '{{count}} highlight removed', { count }), //prettier-ignore
 
     // Lists
-    [LIST_CREATE_SUCCESS]: t('toast:list-created', 'List created with {{ count }} item', { count }), //prettier-ignore
+    [LIST_CREATE_SUCCESS]: t('toast:list-created', 'List created with {{count}} item', { count }), //prettier-ignore
     [LIST_CREATE_FAILURE]: t('toast:error-creating-list', 'Error creating list'),
     [LIST_UPDATE_SUCCESS]: t('toast:list-updated', 'List updated'),
     [LIST_UPDATE_FAILURE]: t('toast:error-updating-list', 'Error updating list'),
