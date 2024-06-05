@@ -117,6 +117,16 @@ export async function getSavedItemByItemId(itemId) {
     .catch((error) => console.error(error))
 }
 
+export async function getItemByReaderSlug(slug) {
+  return requestGQL({
+    query: getSavedItemBySlugQuery,
+    operationName: 'GetReaderItemBySlug',
+    variables: { id: slug }
+  })
+    .then(handleSlugResponse)
+    .catch((error) => console.error(error))
+}
+
 function handleResponse(response) {
   const data = response?.data
   if (!data) throw new Error(response?.errors)
@@ -146,6 +156,31 @@ function handleResponse(response) {
 
   // Otherwise, we are just gonna populate the share item which will trigger
   // a redirect to home with a share interstitial
+  return handleShareResponse(itemCard.item)
+}
+
+/**
+ * handleSlugResponse
+ * ---
+ * This is required for ssr since we want to always assume there is no users (since we don't auth
+ * on the server ... yet)
+ */
+function handleSlugResponse(response) {
+  const data = response?.data
+
+  if (!data) throw new Error(response?.errors)
+
+  // We will assume there will not be save data at this point (this will change when we
+  // start server side auth)
+  const { fallbackPage } = data?.readerSlug
+
+  // Looks like this item isn't saved.  Let's get share data and process it
+  const { itemCard, message } = fallbackPage
+
+  // Magically, the user has found a slug that doesn't work
+  if (message) return { error: message }
+
+  // We are just gonna populate the share item
   return handleShareResponse(itemCard.item)
 }
 
