@@ -23,7 +23,7 @@ export const getServerSideProps: GetServerSideProps<LocalizedProps> = wrapper.ge
       if (slug === 'null') return { props: defaultProps }
 
       const { shareItem, itemsById } = await getReaderItemMeta(slug)
-      const hasItems = Object.values(itemsById).length
+      const hasItems = itemsById ? Object.values(itemsById).length : false
 
       if (hasItems) {
         const idKey = shareItem?.preview?.item?.itemId

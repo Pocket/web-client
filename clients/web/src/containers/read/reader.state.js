@@ -114,13 +114,20 @@ function* readItemRequest({ slug }) {
 /** ASYNC REQUESTS
  --------------------------------------------------------------- */
 export async function getReaderItemMeta(slug) {
-  const response = await getItemByReaderSlug(slug)
-  // If things don't go right
-  if (response.error) throw new Error(response.error)
+  try {
+    const response = await getItemByReaderSlug(slug)
 
-  const derivedShare = deriveSharedItem(response.share)
-  return {
-    shareItem: response.share,
-    itemsById: { [derivedShare.itemId]: derivedShare }
+    // If things don't go right
+    if (!response || response?.error) throw new Error(response.error)
+
+    const derivedShare = deriveSharedItem(response.share)
+    return {
+      shareItem: response.share,
+      itemsById: { [derivedShare.itemId]: derivedShare }
+    }
+  } catch (err) {
+    return {
+      error: 'Bad Response'
+    }
   }
 }

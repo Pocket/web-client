@@ -36,7 +36,7 @@ export function ItemCard({
   const { readUrl, externalUrl, openExternal, syndicatedUrl, isCollection, authors, saveUrl } = item
 
   const primaryUrl = canBeRead ? readUrl : syndicatedUrl
-  const openUrl = openExternal ? externalUrl : primaryUrl || readUrl || externalUrl || saveUrl
+  const openUrl = openExternal ? externalUrl : primaryUrl || externalUrl || saveUrl
 
   const onImageFail = () => dispatch(setNoImage(id))
   const analyticsData = { ...item?.analyticsData, url: analyticsUrl }
