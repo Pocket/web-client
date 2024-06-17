@@ -37,8 +37,8 @@
     "@config/typescript-config": "workspace:*",
     "@graphql-eslint/eslint-plugin": "3.20.1",
     "@next/eslint-plugin-next": "14.2.4",
-    "@testing-library/jest-dom": "6.4.5",
-    "@testing-library/react": "15.0.7",
+    "@testing-library/jest-dom": "6.4.6",
+    "@testing-library/react": "16.0.0",
     "@testing-library/user-event": "14.5.2",
     "@types/node": "20.14.2",
     "@types/react": "18.3.3",
@@ -52,7 +52,7 @@
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-nested": "^6.0.1",
     "postcss-preset-env": "^9.5.14",
-    "prettier": "3.2.5",
+    "prettier": "3.3.2",
     "typescript": "5.4.5"
   },
   "dependencies": {
@@ -65,7 +65,7 @@
     "@popperjs/core": "2.11.8",
     "@sentry/integrations": "7.114.0",
     "@sentry/nextjs": "7.114.0",
-    "@storybook/react": "8.0.10",
+    "@storybook/react": "8.1.9",
     "@types/jest": "^29.5.12",
     "@ui/icons": "workspace:*",
     "@ui/styles": "workspace:*",
