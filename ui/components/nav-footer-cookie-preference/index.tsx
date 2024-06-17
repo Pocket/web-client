@@ -1,3 +1,5 @@
+'use client'
+
 import { t } from '@common/localization'
 
 declare global {

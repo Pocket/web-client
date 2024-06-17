@@ -1,0 +1,32 @@
+{
+  "name": "pocket",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "home": "PORT=443 next dev --experimental-https --experimental-https-key ./certificates/local.client.pocket.com-key.pem --experimental-https-cert ./certificates/local.client.pocket.com.pem",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@ui/components": "workspace:*",
+    "@ui/styles": "workspace:*",
+    "@common/constants": "workspace:*",
+    "react": "^18",
+    "react-dom": "^18",
+    "next": "14.2.3"
+  },
+  "devDependencies": {
+    "@config/eslint-config": "workspace:*",
+    "@config/jest": "workspace:*",
+    "typescript": "^5",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.3",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-nested": "^6.0.1",
+    "postcss-preset-env": "^9.5.11"
+  }
+}
