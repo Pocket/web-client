@@ -128,11 +128,8 @@ importers:
         specifier: github:mozilla/legal-docs#7c2fffcbb56f16fa88eb7eed9d52650c5fcd95b1
         version: https://codeload.github.com/mozilla/legal-docs/tar.gz/7c2fffcbb56f16fa88eb7eed9d52650c5fcd95b1
       marked:
-        specifier: 12.0.2
-        version: 12.0.2
-      marked-custom-heading-id:
-        specifier: 2.0.7
-        version: 2.0.7(marked@12.0.2)
+        specifier: 13.0.0
+        version: 13.0.0
       match-sorter:
         specifier: 6.3.4
         version: 6.3.4
@@ -7314,11 +7311,6 @@ packages:
     peerDependencies:
       react: '>= 0.14.0'
 
-  marked-custom-heading-id@2.0.7:
-    resolution: {integrity: sha512-/UcmA6ZaGRVcTAhhXpXZ8ZaSCN39U/511lWa0po3GY3cTHx8J/CgeUWnBriF+IXkMa67w6UXBhrwR1iEdUEwag==}
-    peerDependencies:
-      marked: '>=1 <13'
-
   marked-terminal@7.1.0:
     resolution: {integrity: sha512-+pvwa14KZL74MVXjYdPR3nSInhGhNvPce/3mqLVZT2oUvt654sL1XImFuLZ1pkA866IYZ3ikDTOFUIC7XzpZZg==}
     engines: {node: '>=16.0.0'}
@@ -7327,6 +7319,11 @@ packages:
 
   marked@12.0.2:
     resolution: {integrity: sha512-qXUm7e/YKFoqFPYPa3Ukg9xlI5cyAtGmyEIzMfW//m6kXwCy2Ps9DYf5ioijFKQ8qyuscrHoY04iJGctu2Kg0Q==}
+    engines: {node: '>= 18'}
+    hasBin: true
+
+  marked@13.0.0:
+    resolution: {integrity: sha512-VTeDCd9txf4KLLljUZ0nljE/Incb9SrWuueE44QVuU0pkOdh4sfCeW1Z6lPcxyDRSVY6rm8db/0OPaN75RNUmw==}
     engines: {node: '>= 18'}
     hasBin: true
 
@@ -19481,10 +19478,6 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  marked-custom-heading-id@2.0.7(marked@12.0.2):
-    dependencies:
-      marked: 12.0.2
-
   marked-terminal@7.1.0(marked@12.0.2):
     dependencies:
       ansi-escapes: 7.0.0
@@ -19496,6 +19489,8 @@ snapshots:
       supports-hyperlinks: 3.0.0
 
   marked@12.0.2: {}
+
+  marked@13.0.0: {}
 
   match-sorter@6.3.4:
     dependencies:
