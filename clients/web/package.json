@@ -65,7 +65,7 @@
     "@popperjs/core": "2.11.8",
     "@sentry/integrations": "7.114.0",
     "@sentry/nextjs": "7.114.0",
-    "@storybook/react": "8.1.9",
+    "@storybook/react": "8.1.10",
     "@types/jest": "^29.5.12",
     "@ui/icons": "workspace:*",
     "@ui/styles": "workspace:*",

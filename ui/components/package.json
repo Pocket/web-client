@@ -35,7 +35,7 @@
     "@common/state": "workspace:*",
     "@common/types": "workspace:*",
     "@common/utilities": "workspace:*",
-    "@storybook/react": "8.1.9",
+    "@storybook/react": "8.1.10",
     "@ui/icons": "workspace:*",
     "@ui/styles": "workspace:*",
     "next": "14.2.4"
