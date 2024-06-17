@@ -28,7 +28,7 @@ a:not([href]):not([tabindex]):focus{outline:0}
 code,kbd,pre,samp{font-family:SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-size:1em}
 pre{margin-bottom:1rem;margin-top:0;overflow:auto}
 figure{margin:0 0 1rem}
-img{border-style:none}
+img{border-style:none;pointer-events:none}
 img,svg{vertical-align:middle}
 svg{overflow:hidden}
 table{border-collapse:collapse}
