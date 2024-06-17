@@ -1,5 +1,4 @@
 import { gql } from 'common/utilities/gql/gql'
-import * as Sentry from '@sentry/nextjs'
 import { requestGQL } from 'common/utilities/request/request'
 import { processIndividualList } from 'common/api/derivers/shared-lists'
 
@@ -68,7 +67,7 @@ function handleResponse(response) {
 
     return processedData
   } catch (error) {
-    Sentry.captureMessage(error)
+    console.warn(error)
   }
 }
 

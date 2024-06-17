@@ -1,5 +1,4 @@
 import { put, call, select, takeEvery } from 'redux-saga/effects'
-import * as Sentry from '@sentry/nextjs'
 import { itemFiltersFromGraph } from 'common/api/queries/get-saved-items.filters'
 import { arraysAreEqual } from 'common/utilities/object-array/object-array'
 
@@ -196,7 +195,7 @@ export const pageSavedInfoReducers = (state = initialState, action) => {
 export const pageSavedIdsSagas = [
   takeEvery(MUTATION_SUCCESS, reconcileMutation),
   takeEvery(MUTATION_DELETE_SUCCESS, reconcileDeleteMutation),
-  takeEvery([ ITEMS_UPSERT_SUCCESS, ITEMS_SAVED_UPDATE_SUCCESS ], reconcileUpsert),
+  takeEvery([ITEMS_UPSERT_SUCCESS, ITEMS_SAVED_UPDATE_SUCCESS], reconcileUpsert),
   takeEvery(LOAD_MORE_ITEMS, loadMoreItems),
   takeEvery(LOAD_PREVIOUS_ITEMS, loadPreviousItems),
   takeEvery(ITEMS_SAVED_PAGE_SET_SORT_ORDER_REQUEST, adjustSortOrder),
@@ -306,9 +305,8 @@ function* requestItems(action) {
 
 function* loadMoreItems() {
   try {
-    const { searchTerm, sortOrder, endCursor, actionType, tagNames } = yield select(
-      getSavedPageInfo
-    )
+    const { searchTerm, sortOrder, endCursor, actionType, tagNames } =
+      yield select(getSavedPageInfo)
     const type = yield call(itemRequestType, searchTerm, tagNames)
 
     yield put({
@@ -329,9 +327,7 @@ function* loadMoreItems() {
 
 function* loadPreviousItems() {
   try {
-    const { searchTerm, sortOrder, actionType, tagNames } = yield select(
-      getSavedPageInfo
-    )
+    const { searchTerm, sortOrder, actionType, tagNames } = yield select(getSavedPageInfo)
     const type = yield call(itemRequestType, searchTerm, tagNames)
     // We only want to fetch an update if the user is on Saves
     if (type !== ITEMS_SAVED_REQUEST) return
@@ -350,19 +346,17 @@ function* loadPreviousItems() {
       }
     })
   } catch (err) {
-    Sentry.withScope((scope) => {
-      scope.setFingerprint('LoadPreviousItems Error')
-      Sentry.captureMessage(err)
-    })
+    const isDevBuild = process.env.SHOW_DEV === 'included'
+    if (isDevBuild) console.warn('LoadPreviousItems Error', err)
   }
 }
 
-function* adjustSortOrder(action){
-  const {sortOrder} = action
+function* adjustSortOrder(action) {
+  const { sortOrder } = action
   const currentSortOrder = yield select(getSortOrder)
 
   // Don't change sort order if it's already in the same space
-  if(currentSortOrder === sortOrder) return
+  if (currentSortOrder === sortOrder) return
 
   yield put({ type: ITEMS_SAVED_PAGE_SET_SORT_ORDER, sortOrder })
 

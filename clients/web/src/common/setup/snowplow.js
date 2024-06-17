@@ -25,8 +25,6 @@ import { ClientHintsPlugin } from '@snowplow/browser-plugin-client-hints'
 import { PrivacySandboxPlugin } from '@snowplow/browser-plugin-privacy-sandbox'
 import { TimezonePlugin } from '@snowplow/browser-plugin-timezone'
 
-import * as Sentry from '@sentry/nextjs'
-
 export function initializeSnowplow(user_id, sess_guid, cookied, finalizeInit) {
   try {
     // configure snowplow
@@ -69,10 +67,6 @@ export function initializeSnowplow(user_id, sess_guid, cookied, finalizeInit) {
 
     finalizeInit()
   } catch (err) {
-    Sentry.withScope((scope) => {
-      scope.setTag('snowplow')
-      scope.setFingerprint('Snowplow Error')
-      Sentry.captureMessage(err)
-    })
+    console.warn(err)
   }
 }

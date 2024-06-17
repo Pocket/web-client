@@ -1,6 +1,5 @@
 import { gql } from 'common/utilities/gql/gql'
 import { requestGQL } from 'common/utilities/request/request'
-import * as Sentry from '@sentry/nextjs'
 
 const getUnleashAssignmentsQuery = gql`
   query GetUnleashAssignments(
@@ -56,9 +55,7 @@ export async function getUnleashAssignments(sessionId, userId, birth, appName, l
   })
     .then((response) => response?.data?.unleashAssignments)
     .catch((error) => {
-      Sentry.withScope((scope) => {
-        scope.setFingerprint('Unleash')
-        Sentry.captureMessage(error)
-      })
+      const isDevBuild = process.env.SHOW_DEV === 'included'
+      if (isDevBuild) console.error('Unleash', error)
     })
 }

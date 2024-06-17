@@ -1,5 +1,4 @@
 /* global googletag, gptadslots */
-import * as Sentry from '@sentry/nextjs'
 import { useState, useEffect, useCallback } from 'react'
 import { useTranslation } from 'next-i18next'
 import { css, cx } from '@emotion/css'
@@ -74,6 +73,8 @@ export const AdSlot = (props) => {
   )
 }
 
+const isDevBuild = process.env.SHOW_DEV === 'included'
+
 // Define Ad Slot with Google API
 const defineAdSlot = (params) => {
   const { id, type, adUnitPath, positionAlias, refreshRate } = params
@@ -99,12 +100,7 @@ const defineAdSlot = (params) => {
     // Add pubAds service
     gptadslots[id].addService(googletag.pubads())
   } catch (err) {
-    Sentry.withScope((scope) => {
-      scope.setTag('third party', 'google ads')
-      scope.setExtra('ad error type', 'define ad slot')
-      scope.setFingerprint('Ad Error')
-      Sentry.captureMessage(err)
-    })
+    if (isDevBuild) console.warn('third party', 'google ads', 'define ad slot', err)
   }
 }
 
@@ -115,12 +111,7 @@ const createSizeMapping = (sizes) => {
     sizes.forEach(({ browserSize, adSizes }) => mapping.addSize(browserSize, adSizes))
     return mapping.build()
   } catch (err) {
-    Sentry.withScope((scope) => {
-      scope.setTag('third party', 'google ads')
-      scope.setExtra('ad error type', 'size mapping')
-      scope.setFingerprint('Ad Error')
-      Sentry.captureMessage(err)
-    })
+    if (isDevBuild) console.warn('third party', 'google ads', 'size mapping', err)
   }
 }
 
@@ -136,11 +127,6 @@ const loadAd = (slotId) => {
       global.googletag.pubads().refresh([global.gptadslots[slotId]])
     }
   } catch (err) {
-    Sentry.withScope((scope) => {
-      scope.setTag('third party', 'google ads')
-      scope.setExtra('ad error type', 'load ad')
-      scope.setFingerprint('Ad Error')
-      Sentry.captureMessage(err)
-    })
+    if (isDevBuild) console.warn('third party', 'google ads', 'load ad', err)
   }
 }

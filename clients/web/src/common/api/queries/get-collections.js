@@ -2,7 +2,6 @@ import { gql } from 'common/utilities/gql/gql'
 import { requestGQL } from 'common/utilities/request/request'
 import { deriveCollection } from 'common/api/derivers/item'
 import { arrayToObject } from 'common/utilities/object-array/object-array'
-import * as Sentry from '@sentry/nextjs'
 
 const getCollectionsQuery = gql`
   query GetCollections($filters: CollectionsFiltersInput, $perPage: Int, $page: Int) {
@@ -102,7 +101,7 @@ function handleSlugsResponse(response) {
 
     return { slugs }
   } catch (error) {
-    Sentry.captureMessage(error)
+    console.warn(error)
   }
 }
 

@@ -5,7 +5,6 @@
  */
 import React from 'react'
 import Error from 'next/error'
-import * as Sentry from '@sentry/nextjs'
 import ErrorPage from 'containers/_error/error'
 
 const ClientError = ({ statusCode, hasGetInitialPropsRun, err }) => {
@@ -14,7 +13,6 @@ const ClientError = ({ statusCode, hasGetInitialPropsRun, err }) => {
     // https://github.com/zeit/next.js/issues/8592. As a workaround, we pass
     // err via _app.js so it can be captured
     console.info({ err })
-    Sentry.captureException(err)
   }
 
   return <ErrorPage statusCode={statusCode} />
@@ -40,8 +38,6 @@ ClientError.getInitialProps = async ({ res, err, asPath }) => {
     }
 
     if (err) {
-      Sentry.captureException(err)
-
       return errorInitialProps
     }
   } else {
@@ -55,16 +51,13 @@ ClientError.getInitialProps = async ({ res, err, asPath }) => {
     //    Boundary. Read more about what types of exceptions are caught by Error
     //    Boundaries: https://reactjs.org/docs/error-boundaries.html
     if (err) {
-      Sentry.captureException(err)
-
       return errorInitialProps
     }
   }
 
   // If this point is reached, getInitialProps was called without any
   // information about what the error might be. This is unexpected and may
-  // indicate a bug introduced in Next.js, so record it in Sentry
-  Sentry.captureException(new Error(`_error.js getInitialProps missing data at path: ${asPath}`))
+  // indicate a bug introduced in Next.js
 
   return errorInitialProps
 }

@@ -1,5 +1,4 @@
 import { requestGQL } from 'common/utilities/request/request'
-import * as Sentry from '@sentry/nextjs'
 import { gql } from 'common/utilities/gql/gql'
 
 const getRecentShareableListsQuery = gql`
@@ -48,7 +47,7 @@ function handleResponse(response) {
     if (errors) throw new GetRecentShareableListsError(errors)
     return shareableLists
   } catch (error) {
-    Sentry.captureMessage(error)
+    console.warn(error)
   }
 }
 

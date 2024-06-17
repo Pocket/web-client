@@ -1,4 +1,3 @@
-import * as Sentry from '@sentry/nextjs'
 import { put, takeEvery, select } from 'redux-saga/effects'
 import { getUnleashAssignments } from 'common/api/queries/get-unleash-assignments'
 import { arrayToObject } from 'common/utilities/object-array/object-array'
@@ -103,9 +102,6 @@ export async function fetchUnleashData(userId, sessionId, birth, locale, userMod
     // Adjust those responses based on any override payloads we have sent down
     const adjustedAssignments = await checkOverrides(filteredAssignments)
 
-    // Add assignments to setnry tag
-    assignSentryTags(adjustedAssignments)
-
     // Format the data to add to state
     const unleashData = arrayToObject(adjustedAssignments, 'name')
 
@@ -188,11 +184,4 @@ export function checkOverrides(assignments) {
   })
 
   return adjustedAssignments
-}
-
-export function assignSentryTags(assignments) {
-  assignments.forEach((assignment) => {
-    const { active, name } = assignment
-    if (active) Sentry.setTag(name, true)
-  })
 }

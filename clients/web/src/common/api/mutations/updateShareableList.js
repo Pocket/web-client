@@ -1,5 +1,4 @@
 import { gql } from 'common/utilities/gql/gql'
-import * as Sentry from '@sentry/nextjs'
 import { requestGQL } from 'common/utilities/request/request'
 
 const updateShareableListQuery = gql`
@@ -45,7 +44,7 @@ function handleResponse(response) {
 
     return updateShareableList
   } catch (error) {
-    Sentry.captureMessage(error)
+    console.warn(error)
   }
 }
 

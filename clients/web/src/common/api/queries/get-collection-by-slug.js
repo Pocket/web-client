@@ -3,7 +3,6 @@ import { requestGQL } from 'common/utilities/request/request'
 import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 import { deriveCollection, deriveStory } from 'common/api/derivers/item'
 import { arrayToObject } from 'common/utilities/object-array/object-array'
-import * as Sentry from '@sentry/nextjs'
 
 const getCollectionBySlugQuery = gql`
   query GetCollectionBySlug($getCollectionBySlugSlug: String!) {
@@ -86,10 +85,7 @@ function handleResponse(response, slug) {
 
     return { itemsById: { ...derivedCollectionBySlug, ...storiesById }, storyIdsBySlug }
   } catch (error) {
-    Sentry.withScope((scope) => {
-      scope.setTag('slug', slug)
-      Sentry.captureMessage(error)
-    })
+    console.error(error)
   }
 }
 

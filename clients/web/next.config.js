@@ -1,14 +1,6 @@
 /** @type {import('next').NextConfig} */
 
 const { i18n } = require('./next-i18next.config.js')
-const { withSentryConfig } = require('@sentry/nextjs')
-
-// For all available options, see:
-// https://github.com/getsentry/sentry-webpack-plugin#options.
-const SentryWebpackPluginOptions = {
-  silent: true // Suppresses all logs
-}
-
 const nextOptions = {
   transpilePackages: ['@ui/icons', '@ui/components', '@common/i18n'],
   i18n,
@@ -22,10 +14,6 @@ const nextOptions = {
     emotion: true
   },
   assetPrefix: process.env.ASSET_PREFIX,
-  sentry: {
-    disableServerWebpackPlugin: true,
-    disableClientWebpackPlugin: true
-  },
   async rewrites() {
     return [
       { source: '/explore', destination: '/discover' },
@@ -72,4 +60,4 @@ const nextOptions = {
   }
 }
 
-module.exports = withSentryConfig(nextOptions, SentryWebpackPluginOptions)
+module.exports = nextOptions

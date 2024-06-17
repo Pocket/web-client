@@ -1,5 +1,4 @@
 import queryString from 'query-string'
-import * as Sentry from '@sentry/nextjs'
 
 export default function Waypoint() {
   /**
@@ -46,11 +45,6 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
     // Something went wrong while trying to sort the user out
     // so we are just gonna route them to `/saves` to avoid poor
     // user experience(seeing waypoint)
-    Sentry.withScope((scope) => {
-      scope.setTag('waypoint', 'fail over')
-      scope.setFingerprint('Waypoint Error')
-      Sentry.captureMessage(err)
-    })
     return {
       redirect: {
         permanent: false,

@@ -3,7 +3,6 @@ import { gql } from 'common/utilities/gql/gql'
 import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 import { itemFiltersFromGraph } from './get-saved-items.filters'
 import { actionToCamelCase } from 'common/utilities/strings/strings'
-import * as Sentry from '@sentry/nextjs'
 
 import { LOGIN_URL } from 'common/constants'
 
@@ -72,10 +71,7 @@ function handleResponse(response) {
   // In grahpQL there could be response errors, but the response could still
   // be semi-valid.  So we will just capture and move on
   if (response?.errors) {
-    Sentry.withScope((scope) => {
-      scope.setFingerprint('SavedItemRequestErrors')
-      Sentry.captureMessage(response?.errors)
-    })
+    console.warn('SavedItemRequestErrors', response)
   }
 
   if (!responseData) throw new ItemRequestResponseMissingError(response?.errors)

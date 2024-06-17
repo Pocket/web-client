@@ -1,6 +1,5 @@
 import { take, takeEvery, takeLatest, call, put, select } from 'redux-saga/effects'
 import { analyticsActions } from 'connectors/snowplow/actions'
-import * as Sentry from '@sentry/nextjs'
 
 import { createContentOpenEvent } from 'connectors/snowplow/events'
 import { createEngagementEvent } from 'connectors/snowplow/events'
@@ -206,10 +205,6 @@ export function validateSnowplowExpectations({ identifier, expects, data }) {
     return true
   } catch (err) {
     if (isDevBuild) return console.warn(identifier, data, err.message)
-    Sentry.withScope((scope) => {
-      scope.setContext('data', { identifier, ...data })
-      Sentry.captureMessage(err)
-    })
     return false
   }
 }

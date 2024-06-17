@@ -55,7 +55,7 @@ const ViewportProvider = ({ children }) => {
 
 const useViewport = () => {
   const { width, height } = useContext(viewportContext) // if we're in-browser and width/height is undefined, likely means that the provider
-  // was not added to outer scope.
+  // was not added to outer scope
 
   if (typeof window !== 'undefined' && (width === undefined || height === undefined)) {
     console.warn(

@@ -1,6 +1,5 @@
 import type { NextApiResponse } from 'next'
 import { gql } from 'common/utilities/gql/gql'
-import * as Sentry from '@sentry/nextjs'
 
 export default function handler(res: NextApiResponse): Promise<void> | undefined {
   const getUserQuery = gql`
@@ -39,9 +38,6 @@ export default function handler(res: NextApiResponse): Promise<void> | undefined
         res.status(200).json(response)
       })
   } catch (err) {
-    Sentry.withScope((scope) => {
-      scope.setTransactionName('USER API ERROR')
-      Sentry.captureMessage(err as string)
-    })
+    console.warn('USER API ERROR')
   }
 }
