@@ -10,7 +10,7 @@
   "packageManager": "pnpm@9.4.0",
   "scripts": {
     "clean": "pnpm turbo clean",
-    "home": "pnpm turbo home",
+    "pocket": "pnpm turbo pocket",
     "dev": "pnpm turbo dev",
     "dev:snowplow": "pnpm turbo dev:snowplow",
     "build": "pnpm --filter @client/web build",

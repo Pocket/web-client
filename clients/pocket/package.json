@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "home": "PORT=443 next dev --experimental-https --experimental-https-key ./certificates/local.client.pocket.com-key.pem --experimental-https-cert ./certificates/local.client.pocket.com.pem",
+    "pocket": "echo 'https://local.client.pocket.com/\n\n' && PORT=443 next dev --experimental-https --experimental-https-key ./certificates/local.client.pocket.com-key.pem --experimental-https-cert ./certificates/local.client.pocket.com.pem",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

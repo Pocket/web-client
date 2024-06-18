@@ -12,20 +12,14 @@
   ],
   "tasks": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        ".next/**",
-        "!.next/cache/**",
-        "dist/**"
-      ]
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
     "test": {},
     "test:update": {},
     "lint": {},
     "checktypes": {},
-    "home": {
+    "pocket": {
       "cache": false,
       "persistent": true
     },
@@ -41,9 +35,7 @@
       "cache": false
     },
     "storybook": {
-      "dependsOn": [
-        "^build"
-      ],
+      "dependsOn": ["^build"],
       "cache": false,
       "persistent": true
     }
