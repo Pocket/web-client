@@ -5,32 +5,32 @@
  */
 
 /* BROWSER RESETS --------------------------------------------- */
-@import url('./browser-resets.pcss');
+@import url('./browser-resets.css');
 
 /* STYLE VARIABLES  --------------------------------------------- */
-@import url('./global-variables.pcss');
-@import url('./future-variables.pcss');
+@import url('./global-variables.css');
+@import url('./future-variables.css');
 
 /* CONTAINER STYLES --------------------------------------------- */
-@import url('./containers.pcss');
+@import url('./containers.css');
 
 /* TYPOGRAPHY --------------------------------------------- */
-@import url('./typography.pcss');
+@import url('./typography.css');
 
 /* BASIC ELEMENTS --------------------------------------------- */
-@import url('./form-elements.pcss');
+@import url('./form-elements.css');
 
 /* BUTTONS --------------------------------------------- */
-@import url('./buttons.pcss');
+@import url('./buttons.css');
 
 /* APP FONTS --------------------------------------------- */
-@import url('./fonts.pcss');
+@import url('./fonts.css');
 
 /* READER FONTS --------------------------------------------- */
-@import url('./fonts-reader.pcss');
+@import url('./fonts-reader.css');
 
 /* TOOLTIPS STYLES --------------------------------------------- */
-@import url('./tooltips.pcss');
+@import url('./tooltips.css');
 
 /* BRAZE STYLES --------------------------------------------- */
-@import url('./braze.pcss');
+@import url('./braze.css');

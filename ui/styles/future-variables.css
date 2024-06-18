@@ -1,0 +1,67 @@
+/* STYLE VARIABLES  --------------------------------------------- */
+:root{
+  // Surfaces
+  --theme-dark-surface-100: #121212;
+  --theme-dark-surface-200: #282828;
+  --theme-dark-surface-300: #3f3f3f;
+
+  // Shadows
+  --theme-dark-shadow-100: 0 0 15px rgba(0, 0, 0, 0.4);
+  --theme-dark-shadow-200: 0 0 15px rgba(0, 0, 0, 0.4);
+  --theme-dark-shadow-300: 0 0 15px rgba(0, 0, 0, 0.4);
+
+  // Typography
+  --theme-dark-text-100: #fff;
+  --theme-dark-text-200: #a1a1a1;
+  --theme-dark-text-300: #ccc;
+
+  // Accents
+  --theme-dark-accent-100: #00a69c;
+  --theme-dark-accent-200: #121212;
+  --theme-dark-accent-300: #121212;
+
+  // Brand
+  --theme-dark-brand-100: #121212;
+  --theme-dark-brand-200: #121212;
+  --theme-dark-brand-300: #121212;
+
+}
+.colormode-light {
+  --card-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: 0 0 18px rgba(0, 0, 0, 0.25);
+
+  --nav-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --nav-border: #404040;
+}
+.colormode-sepia {
+  --card-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: 0 0 18px rgba(0, 0, 0, 0.25);
+
+  --nav-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --nav-border: #404040;
+}
+.colormode-dark {
+
+
+  --card-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  --card-shadow-hover: 0 0 18px rgba(0, 0, 0, 0.6);
+
+  --nav-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --nav-border: #404040;
+}
+
+.colormode-system {
+  --nav-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --nav-border: #404040;
+  @media (prefers-color-scheme: dark) {
+    --color-surface-100: #121212;
+    --color-surface-200: #282828;
+    --color-surface-300: #3f3f3f;
+    --color-surface-400: #575757;
+    --color-surface-500: #717171;
+    --color-surface-600: #8b8b8b;
+
+    --nav-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    --nav-border: #000;
+  }
+}
