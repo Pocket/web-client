@@ -119,23 +119,25 @@ export function NavFooter() {
         </section>
         <section className={style.appLinks}>
           <h6>{t('global-footer:get-the-app', 'Get the app')}</h6>
-          <a
-            href="https://apps.apple.com/us/app/pocket-save-read-grow/id309601447"
-            rel="noopener"
-            title={t('global-footer:app-store', 'Download On the Apple App Store')}>
-            <svg height="40" width="119.664">
-              <use href="#appstore" />
-            </svg>
-          </a>
-          <a
-            className="google-play-badge"
-            href="https://play.google.com/store/apps/details?id=com.ideashower.readitlater.pro"
-            rel="noopener"
-            title={t('global-footer:google-play', 'Get It On Google Play')}>
-            <svg height="40.37" width="135.12">
-              <use href="#googleplay" />
-            </svg>
-          </a>
+          <div>
+            <a
+              href="https://apps.apple.com/us/app/pocket-save-read-grow/id309601447"
+              rel="noopener"
+              title={t('global-footer:app-store', 'Download On the Apple App Store')}>
+              <svg height="40" width="119.664">
+                <use href="#appstore" />
+              </svg>
+            </a>
+            <a
+              className="google-play-badge"
+              href="https://play.google.com/store/apps/details?id=com.ideashower.readitlater.pro"
+              rel="noopener"
+              title={t('global-footer:google-play', 'Get It On Google Play')}>
+              <svg height="40.37" width="135.12">
+                <use href="#googleplay" />
+              </svg>
+            </a>
+          </div>
         </section>
         <div className={style.subContent}>
           <section>
