@@ -1,9 +1,10 @@
 .base {
   background-color: var(--color-canvas);
-  /* border-bottom: 1px solid var(--color-dividerTertiary); */
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--nav-border);
+  box-shadow: var(--nav-shadow);
   align-items: center;
   position: sticky;
+  margin-bottom: 3rem;
   top: 0;
   width: 100%;
 }

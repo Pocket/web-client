@@ -1,7 +1,17 @@
 export default function Home() {
   return (
-    <>
-      <h1>Pocket</h1>
-    </>
+    <div className="page-container">
+      <h1>Some content header</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Et iusto dolores quidem, beatae
+        voluptatum neque officia accusantium commodi expedita cum modi illo, culpa sit id laborum
+        unde cumque! Dignissimos, nihil!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati sunt magni, sit
+        necessitatibus ad fuga fugiat odit doloremque? Nemo debitis nihil fuga tenetur quo voluptas
+        deleniti libero sunt perferendis natus?
+      </p>
+    </div>
   )
 }

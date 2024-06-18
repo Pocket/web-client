@@ -11,7 +11,7 @@ import { t } from '@common/localization'
 export function NavTopSearch() {
   const searchPlaceholder = t('nav:search', 'Search')
   return (
-    <div className={style.base} data-testid="nav-top-search">
+    <div className={`${style.base} new`} data-testid="nav-top-search">
       <input id="search" name="search" placeholder={searchPlaceholder} type="search" />
     </div>
   )
