@@ -1,11 +1,11 @@
+'use client'
+
 import style from './style.module.css'
-import { cookies } from 'next/headers'
+import { useUserSettings } from '@common/state/user-settings'
 
 import { SystemModeIcon } from '@ui/icons/SystemModeIcon'
 import { DarkModeIcon } from '@ui/icons/DarkModeIcon'
 import { LightModeIcon } from '@ui/icons/LightModeIcon'
-import { CACHE_KEY_COLOR_MODE } from '@common/constants'
-import { createThemeCookie } from './actions'
 
 /**
  * NavFooterTheme
@@ -13,25 +13,31 @@ import { createThemeCookie } from './actions'
  * Just a small theme switcher to live in the footer (not a permanent solution)
  */
 export function NavFooterTheme() {
-  const cookieStore = cookies()
-  const storedColorPreference = cookieStore.get(CACHE_KEY_COLOR_MODE)
-  const theme = storedColorPreference?.value ?? 'system'
+  // Get user setting
+  const colorMode = useUserSettings((state) => state.colorMode)
+  const updateColorMode = useUserSettings((state) => state.updateColorMode)
 
-  const systemClass = theme === 'system' ? 'active' : ''
-  const lightClass = theme === 'light' ? 'active' : ''
-  const darkClass = theme === 'dark' ? 'active' : ''
+  // Functions for setting modes
+  const setSystemMode = () => updateColorMode('system')
+  const setDarkMode = () => updateColorMode('dark')
+  const setLightMode = () => updateColorMode('light')
+
+  // Get active class
+  const systemClass = colorMode === 'system' ? 'active' : ''
+  const lightClass = colorMode === 'light' ? 'active' : ''
+  const darkClass = colorMode === 'dark' ? 'active' : ''
 
   return (
     <div className={style.base} data-testid="nav-footer-theme">
-      <form action={createThemeCookie}>
+      <form>
         <div className="button-group iconic">
-          <button className={systemClass} type="submit" name="theme" value="system">
+          <button className={systemClass} type="button" onClick={setSystemMode}>
             <SystemModeIcon />
           </button>
-          <button className={darkClass} type="submit" name="theme" value="dark">
+          <button className={darkClass} type="button" onClick={setDarkMode}>
             <DarkModeIcon />
           </button>
-          <button className={lightClass} type="submit" name="theme" value="light">
+          <button className={lightClass} type="button" onClick={setLightMode}>
             <LightModeIcon />
           </button>
         </div>

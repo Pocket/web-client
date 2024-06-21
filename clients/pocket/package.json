@@ -12,6 +12,7 @@
     "@ui/components": "workspace:*",
     "@ui/styles": "workspace:*",
     "@common/constants": "workspace:*",
+    "@common/state": "workspace:*",
     "react": "^18",
     "react-dom": "^18",
     "next": "14.2.3"

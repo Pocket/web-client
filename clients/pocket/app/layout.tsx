@@ -6,6 +6,9 @@ import { NavTop } from '@ui/components/nav-top'
 import { COLOR_MODE_PREFIX, CACHE_KEY_COLOR_MODE } from '@common/constants'
 import { cookies } from 'next/headers'
 
+import { HydrateUserSettings } from '@common/state/user-settings/hydrate'
+import type { UserSettingsState } from '@common/state/user-settings'
+
 export const metadata: Metadata = {
   title: 'Pocket Future',
   description: 'Building the future of the web'
@@ -16,7 +19,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  // Gather some stored user settings
   const colorMode = getColorMode()
+
+  // Set up state for hydration
+  const userSettingsState: UserSettingsState = { colorMode }
+
   return (
     <html lang="en" className={`${COLOR_MODE_PREFIX}-${colorMode}`}>
       <body>
@@ -24,6 +32,7 @@ export default function RootLayout({
         <main>{children}</main>
         <NavFooter />
       </body>
+      <HydrateUserSettings state={userSettingsState} />
     </html>
   )
 }
