@@ -26,7 +26,18 @@ export function ItemMedia({ imageUrl, id = '1' }: { imageUrl?: string; id: strin
  * @param id
  */
 function getColorFromId(id: string) {
-  const colorArray = ['coral', 'teal', 'apricot', 'mint', 'apricot', 'mint', 'coral', 'teal']
+  const colorArray = [
+    'coral',
+    'teal',
+    'apricot',
+    'mint',
+    'lapis',
+    'iris',
+    'apricot',
+    'mint',
+    'coral',
+    'teal'
+  ]
   const idInt = parseInt(id, 10) // Item Id may not be an int
   const colorIndex = idInt % colorArray.length
   return colorArray[colorIndex || 0]

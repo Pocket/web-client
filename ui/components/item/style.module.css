@@ -5,7 +5,7 @@
   & > div {
     font-size: clamp(1rem, 0.913rem + 0.4348cqi, 1.25rem);
     border-radius: 10px;
-    box-shadow: var(--card-shadow);
+    box-shadow: var(--shadow-card);
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -15,7 +15,7 @@
   footer cite {
     font-size: clamp(0.875rem, 0.788rem + 0.4348cqi, 1.125rem);
     font-style: normal;
-    color: var(--color-textSecondary);
+    color: var(--color-text-lighter);
     display: block;
     margin-bottom: 0.25em;
     white-space: nowrap;
@@ -56,7 +56,7 @@
   figure {
     margin-bottom: 0;
     max-width: 100%;
-    background-color: var(--color-emptyCanvas);
+    background-color: var(--color-surface-lifted);
     border-radius: 10px 10px 0 0;
     img,
     & > div {

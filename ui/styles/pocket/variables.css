@@ -67,6 +67,11 @@
 
   --color-coralDark: #901424;
   --color-coral: #ef4056;
+  --color-teal: #009990;
+  --color-mint: #00cb77;
+  --color-apricot: #f67d6d;
+  --color-lapis: #3668ff;
+  --color-iris: #c4a5f7;
 
   /* Brand */
   --color-brand-pocket: var(--color-coral);
@@ -92,6 +97,7 @@
   --color-border: var(--color-grey25);
 
   /* Shadows */
+  --shadow-card: 0px 2px 25px -3px rgba(0, 0, 0, 0.1), 0px 7px 7px -5px rgba(0, 0, 0, 0.1);
   --shadow-color: 0deg 0% 67%;
   --shadow-low: 0.3px 0.5px 0.9px hsl(var(--shadow-color) / 0),
     0.4px 0.8px 1.3px hsl(var(--shadow-color) / 0.11),
@@ -183,6 +189,7 @@
     --color-border: var(--color-black100);
 
     /* Shadows */
+    --shadow-card: 0px 2px 25px -3px rgba(0, 0, 0, 0.5), 0px 7px 7px -5px rgba(0, 0, 0, 0.7);
     --shadow-color: 0deg 0% 3%;
     --shadow-low: 0.3px 0.5px 0.9px hsl(var(--shadow-color) / 0),
       0.4px 0.8px 1.3px hsl(var(--shadow-color) / 0.11),
@@ -278,6 +285,7 @@
   --color-border: var(--color-black100);
 
   /* Shadows */
+  --shadow-card: 0px 2px 25px -3px rgba(0, 0, 0, 0.5), 0px 7px 7px -5px rgba(0, 0, 0, 0.7);
   --shadow-color: 0deg 0% 3%;
   --shadow-low: 0.3px 0.5px 0.9px hsl(var(--shadow-color) / 0),
     0.4px 0.8px 1.3px hsl(var(--shadow-color) / 0.11),

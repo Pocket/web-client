@@ -4,8 +4,8 @@ import { cookies } from 'next/headers'
 import { SystemModeIcon } from '@ui/icons/SystemModeIcon'
 import { DarkModeIcon } from '@ui/icons/DarkModeIcon'
 import { LightModeIcon } from '@ui/icons/LightModeIcon'
-import { createThemeCookie } from './server-action'
 import { CACHE_KEY_COLOR_MODE } from '@common/constants'
+import { createThemeCookie } from './actions'
 
 /**
  * NavFooterTheme
