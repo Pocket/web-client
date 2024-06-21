@@ -12,10 +12,10 @@
     "eslint-plugin-i18next": "^6.0.3",
     "eslint-plugin-jest": "^28.6.0",
     "eslint-plugin-jsdoc": "^48.2.12",
-    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-jsx-a11y": "^6.9.0",
     "eslint-plugin-only-warn": "^1.1.0",
     "eslint-plugin-perfectionist": "^2.11.0",
     "eslint-plugin-unicorn": "^54.0.0",
-    "typescript": "^5.4.5"
+    "typescript": "^5.5.2"
   }
 }

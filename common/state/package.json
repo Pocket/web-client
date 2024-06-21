@@ -18,9 +18,9 @@
     "@config/eslint-config": "workspace:*",
     "@config/jest": "workspace:*",
     "@config/typescript-config": "workspace:*",
-    "@types/node": "20.14.2",
+    "@types/node": "20.14.7",
     "msw": "^2.3.1",
     "ts-node": "^10.9.2",
-    "typescript": "5.4.5"
+    "typescript": "5.5.2"
   }
 }
