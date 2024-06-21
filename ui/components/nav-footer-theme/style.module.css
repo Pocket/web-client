@@ -1,0 +1,9 @@
+/** Remove this file if we don't have styles for the component **/
+.base {
+  white-space: nowrap;
+  display: flex;
+  justify-content: flex-end;
+  @media (max-width: 690px) {
+    margin-top: 1rem;
+  }
+}

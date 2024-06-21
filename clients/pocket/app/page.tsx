@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <div className="page-container">
-      <h1>Some content header</h1>
+      <h2>Some content header</h2>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Et iusto dolores quidem, beatae
         voluptatum neque officia accusantium commodi expedita cum modi illo, culpa sit id laborum

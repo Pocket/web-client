@@ -6,31 +6,21 @@
 
 /* BROWSER RESETS --------------------------------------------- */
 @import url('./browser-resets.css');
-
 /* STYLE VARIABLES  --------------------------------------------- */
 @import url('./global-variables.css');
-@import url('./future-variables.css');
-
 /* CONTAINER STYLES --------------------------------------------- */
 @import url('./containers.css');
-
 /* TYPOGRAPHY --------------------------------------------- */
 @import url('./typography.css');
-
 /* BASIC ELEMENTS --------------------------------------------- */
 @import url('./form-elements.css');
-
 /* BUTTONS --------------------------------------------- */
 @import url('./buttons.css');
-
 /* APP FONTS --------------------------------------------- */
 @import url('./fonts.css');
-
 /* READER FONTS --------------------------------------------- */
 @import url('./fonts-reader.css');
-
 /* TOOLTIPS STYLES --------------------------------------------- */
 @import url('./tooltips.css');
-
 /* BRAZE STYLES --------------------------------------------- */
 @import url('./braze.css');

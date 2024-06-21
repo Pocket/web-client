@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "postcss index.css -o global.css",
-    "pocket": "postcss index.css -o global.css --watch",
-    "dev": "postcss index.css -o global.css --watch"
+    "build": "postcss legacy/index.css -o legacy/global.css && postcss pocket/index.css -o pocket/global.css",
+    "pocket": "postcss pocket/index.css -o pocket/global.css --watch",
+    "dev": "postcss legacy/index.css -o legacy/global.css --watch",
+    "storybook": "postcss pocket/index.css -o pocket/global.css --watch"
   },
   "keywords": [],
   "author": "",

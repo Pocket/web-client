@@ -1,0 +1,80 @@
+/* STYLE VARIABLES  --------------------------------------------- */
+:root {
+  /* Surfaces */
+  --theme-dark-surface-base: #1a1a1a;
+  --theme-dark-surface-lift: #282828;
+  --theme-dark-surface-raise: #3f3f3f;
+
+  --theme-light-surface-base: #f5f5f5;
+  --theme-light-surface-lift: #fafafa;
+  --theme-light-surface-raise: #fff;
+
+  /* Shadows */
+  --theme-dark-shadow-color: 0deg 0% 3%;
+  --theme-light-shadow-color: 0deg 0% 67%;
+
+  --shadow-low: 0.3px 0.5px 0.9px hsl(var(--shadow-color) / 0),
+    0.4px 0.8px 1.3px hsl(var(--shadow-color) / 0.11),
+    0.8px 1.5px 2.6px hsl(var(--shadow-color) / 0.22);
+  --shadow-medium: 0.3px 0.5px 0.9px hsl(var(--shadow-color) / 0),
+    1px 1.9px 3.2px hsl(var(--shadow-color) / 0.09),
+    1.9px 3.7px 6.2px hsl(var(--shadow-color) / 0.18),
+    3.8px 7.5px 12.6px hsl(var(--shadow-color) / 0.26);
+  --shadow-high: 0.3px 0.5px 0.9px hsl(var(--shadow-color) / 0),
+    1.6px 3.2px 5.4px hsl(var(--shadow-color) / 0.05),
+    2.7px 5.5px 9.2px hsl(var(--shadow-color) / 0.11),
+    4.1px 8.2px 13.8px hsl(var(--shadow-color) / 0.16),
+    5.9px 11.8px 19.8px hsl(var(--shadow-color) / 0.21),
+    8.6px 17.2px 28.8px hsl(var(--shadow-color) / 0.27),
+    12.5px 25px 41.9px hsl(var(--shadow-color) / 0.32);
+
+  /* Typography */
+  --theme-dark-text-darker: #a6a6a6;
+  --theme-dark-text-base: #cfcfcf;
+  --theme-dark-text-lighter: #ededed;
+
+  /* Accents */
+  --theme-dark-accent-darker: #00a69c;
+  --theme-dark-accent-base: #00bdb0;
+  --theme-dark-accent-lighter: #00e6d6;
+
+  /* Brand */
+  --theme-dark-brand: #ef4056;
+}
+.colormode-light {
+  --card-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: 0 0 18px rgba(0, 0, 0, 0.25);
+
+  --nav-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --nav-border: #404040;
+}
+.colormode-sepia {
+  --card-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: 0 0 18px rgba(0, 0, 0, 0.25);
+
+  --nav-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --nav-border: #404040;
+}
+.colormode-dark {
+  --card-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  --card-shadow-hover: 0 0 18px rgba(0, 0, 0, 0.6);
+
+  --nav-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --nav-border: #404040;
+}
+
+.colormode-system {
+  --nav-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --nav-border: #404040;
+  @media (prefers-color-scheme: dark) {
+    --color-surface-100: #121212;
+    --color-surface-200: #282828;
+    --color-surface-300: #3f3f3f;
+    --color-surface-400: #575757;
+    --color-surface-500: #717171;
+    --color-surface-600: #8b8b8b;
+
+    --nav-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    --nav-border: #000;
+  }
+}

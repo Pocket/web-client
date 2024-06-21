@@ -1,13 +1,10 @@
-import '@ui/styles/global.css' // This is our base styles
+import '@ui/styles/pocket/global.css' // This is our base styles
 
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import { NavFooter } from '@ui/components/nav-footer'
 import { NavTop } from '@ui/components/nav-top'
 import { COLOR_MODE_PREFIX, CACHE_KEY_COLOR_MODE } from '@common/constants'
 import { cookies } from 'next/headers'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Pocket Future',
@@ -20,10 +17,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   const colorMode = getColorMode()
-  console.log(colorMode)
   return (
     <html lang="en" className={`${COLOR_MODE_PREFIX}-${colorMode}`}>
-      <body className={inter.className}>
+      <body>
         <NavTop />
         <main>{children}</main>
         <NavFooter />
