@@ -8,6 +8,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@common/constants": "workspace:*",
     "@common/utilities": "workspace:*",
     "@types/react": "18.3.3",
     "react": "18.3.1",

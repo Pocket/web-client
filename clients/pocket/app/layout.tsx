@@ -7,6 +7,7 @@ import { COLOR_MODE_PREFIX, CACHE_KEY_COLOR_MODE } from '@common/constants'
 import { cookies } from 'next/headers'
 
 import { HydrateUserSettings } from '@common/state/user-settings/hydrate'
+import { useUserSettings } from '@common/state/user-settings'
 import type { UserSettingsState } from '@common/state/user-settings'
 
 export const metadata: Metadata = {
@@ -20,13 +21,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   // Gather some stored user settings
-  const colorMode = getColorMode()
+  const storedColorMode = getColorMode()
 
   // Set up state for hydration
-  const userSettingsState: UserSettingsState = { colorMode }
+  const userSettingsState: UserSettingsState = { colorMode: storedColorMode }
 
   return (
-    <html lang="en" className={`${COLOR_MODE_PREFIX}-${colorMode}`}>
+    <html lang="en" className={`${COLOR_MODE_PREFIX}-${storedColorMode}`}>
       <body>
         <NavTop />
         <main>{children}</main>
