@@ -8,7 +8,6 @@ import { HydrateItemDisplay } from '@common/state/item-display/hydrate'
 
 // Mock Data
 import itemsById from '@common/mock-data/in-state/itemsById.json'
-import savedItemsById from '@common/mock-data/in-state/itemsRaw.json'
 
 // Types
 import type { Meta, StoryFn, StoryObj } from '@storybook/react'

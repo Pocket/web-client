@@ -40,7 +40,7 @@ export function NavFooterTheme() {
   const darkClass = colorMode === 'dark' ? 'active' : ''
 
   useEffect(() => {
-    bodyRef.current = document.querySelector('html')
+    bodyRef.current = document.querySelector('body')
   }, [])
 
   return (

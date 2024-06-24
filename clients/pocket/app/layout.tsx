@@ -7,7 +7,6 @@ import { COLOR_MODE_PREFIX, CACHE_KEY_COLOR_MODE } from '@common/constants'
 import { cookies } from 'next/headers'
 
 import { HydrateUserSettings } from '@common/state/user-settings/hydrate'
-import { useUserSettings } from '@common/state/user-settings'
 import type { UserSettingsState } from '@common/state/user-settings'
 
 export const metadata: Metadata = {
