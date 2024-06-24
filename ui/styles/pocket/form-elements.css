@@ -310,6 +310,11 @@ select {
   background-size: 11px auto;
   padding-right: 1.725rem;
 
+  .colormode-system & {
+    @media (prefers-color-scheme: dark) {
+      background-image: var(--selectDownArrowDark);
+    }
+  }
   .colormode-dark & {
     background-image: var(--selectDownArrowDark);
   }
@@ -320,5 +325,11 @@ option {
 
   .colormode-dark & {
     color: var(--color-surface-base);
+  }
+
+  .colormode-system & {
+    @media (prefers-color-scheme: dark) {
+      color: var(--color-surface-base);
+    }
   }
 }

@@ -169,10 +169,10 @@
 
   --color-button-group-text: var(--color-text-base);
   --color-button-group-border: var(--color-grey80);
-  --color-button-group-background: var(--color-grey85);
-  --color-button-group-background-hover: var(--color-grey80);
-  --color-button-group-border-hover: var(--color-grey40);
-  --color-button-group-background-active: var(--color-white97);
+  --color-button-group-background: var(--color-white100);
+  --color-button-group-background-hover: var(--color-white95);
+  --color-button-group-border-hover: var(--color-grey80);
+  --color-button-group-background-active: var(--color-white95);
 }
 
 .colormode-system {
@@ -260,13 +260,13 @@
     --color-pagination-background-hover: #4d4d4d65;
 
     --color-button-group-text: var(--color-white100);
-    --color-button-group-border: var(--color-grey25);
-    --color-button-group-background: var(--color-grey20);
-    --color-button-group-background-hover: var(--color-grey35);
+    --color-button-group-border: var(--color-grey40);
+    --color-button-group-background: var(--color-grey10);
+    --color-button-group-background-hover: var(--color-grey20);
     --color-button-group-border-hover: var(--color-grey40);
 
     --color-button-group-text-active: var(--color-white100);
-    --color-button-group-background-active: var(--color-grey35);
+    --color-button-group-background-active: var(--color-grey20);
     --color-button-group-border-active: var(--color-teal65);
   }
 }
@@ -356,12 +356,12 @@
   --color-pagination-background-hover: #4d4d4d65;
 
   --color-button-group-text: var(--color-white100);
-  --color-button-group-border: var(--color-grey25);
-  --color-button-group-background: var(--color-grey20);
-  --color-button-group-background-hover: var(--color-grey35);
+  --color-button-group-border: var(--color-grey40);
+  --color-button-group-background: var(--color-grey10);
+  --color-button-group-background-hover: var(--color-grey20);
   --color-button-group-border-hover: var(--color-grey40);
 
   --color-button-group-text-active: var(--color-white100);
-  --color-button-group-background-active: var(--color-grey35);
+  --color-button-group-background-active: var(--color-grey20);
   --color-button-group-border-active: var(--color-teal65);
 }
