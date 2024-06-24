@@ -216,6 +216,10 @@ jobs:
       repo_name:
         description: 'The ecr repo name'
         type: string
+      flavor:
+        description: 'The docker build args'
+        type: enum
+        enum: ["web", "pocket"]
       push:
         # This allows us to test that the image can be built without
         # without pushing broken code to production 
@@ -247,7 +251,7 @@ jobs:
                 aws-access-key-id: << parameters.environment >>_AWS_ACCESS_KEY
                 aws-secret-access-key: << parameters.environment >>_AWS_SECRET_ACCESS_KEY
                 tag: << parameters.tag >>
-                extra-build-args: --build-arg RELEASE_VERSION=${RELEASE_VERSION}
+                extra-build-args: --build-arg RELEASE_VERSION=${RELEASE_VERSION} --build-arg START_COMMAND="start:<< parameters.flavor >>"
       - unless:
           condition: <<parameters.push>>
           steps:
@@ -256,7 +260,7 @@ jobs:
                 repo: << parameters.repo_name >>
                 tag: << parameters.tag >>
                 path: /tmp/workspace/app_prod
-                extra-build-args: --build-arg RELEASE_VERSION=${RELEASE_VERSION}
+                extra-build-args: --build-arg RELEASE_VERSION=${RELEASE_VERSION} --build-arg START_COMMAND="start:<< parameters.flavor >>"
 
   # ——————————————————————————————————————————————————————————————
   # !! NEW ALB
@@ -344,7 +348,7 @@ workflows:
       - docker_build:
           <<: *not_dev_main
           context: pocket
-          name: build_docker
+          name: build_docker_web
           environment: 'Dev'
           tag: latest,$CIRCLE_SHA1
           # dev-app is based on how its created in shared infrastructure
@@ -352,6 +356,23 @@ workflows:
           repo_name: webclient-dev-app 
           ecr_url: 410318598490.dkr.ecr.us-east-1.amazonaws.com
           push: false
+          flavor: web
+          requires:
+            - build_app_dev # Make sure build is not funky and change this to that
+
+       # Pocket
+      - docker_build:
+          <<: *not_dev_main
+          context: pocket
+          name: build_docker_pocket
+          environment: 'Dev'
+          tag: latest,$CIRCLE_SHA1
+          # dev-app is based on how its created in shared infrastructure
+          # https://github.com/Pocket/shared-infrastructure
+          repo_name: webclient-dev-pocket-app
+          ecr_url: 410318598490.dkr.ecr.us-east-1.amazonaws.com
+          push: false
+          flavor: pocket
           requires:
             - build_app_dev # Make sure build is not funky and change this to that
 
@@ -359,16 +380,45 @@ workflows:
       - docker_build:
           <<: *only_dev
           context: pocket
-          name: build_docker_dev
+          name: build_docker_dev_web
           environment: 'Dev'
           tag: latest,$CIRCLE_SHA1
           repo_name: webclient-dev-app
           ecr_url: 410318598490.dkr.ecr.us-east-1.amazonaws.com
           push: true
+          flavor: web
           requires:
             - build_app_dev
-      
+
+      # Build & Deploy the Dev Pocket Docker Image
+      - docker_build:
+          <<: *only_dev
+          context: pocket
+          name: build_docker_dev_pocket
+          environment: 'Dev'
+          tag: latest,$CIRCLE_SHA1
+          repo_name: webclient-dev-pocket-app
+          ecr_url: 410318598490.dkr.ecr.us-east-1.amazonaws.com
+          push: true
+          flavor: pocket
+          requires:
+            - build_app_dev
+
       # Dev
+      - pocket/execute_codepipeline:
+          <<: *only_dev
+          context: pocket
+          name: deploy_dev_web
+          environment: Dev
+          aws-access-key-id: Dev_AWS_ACCESS_KEY
+          aws-secret-access-key: Dev_AWS_SECRET_ACCESS_KEY
+          aws-region: Dev_AWS_DEFAULT_REGION
+          codepipeline-name: WebClient-Dev-Web-CodePipeline
+          codebuild-project-name: WebClient-Dev-Web
+          codebuild-project-branch: dev
+          requires:
+            - build_docker_dev_web
+
       - pocket/execute_codepipeline:
           <<: *only_dev
           context: pocket
@@ -377,22 +427,36 @@ workflows:
           aws-access-key-id: Dev_AWS_ACCESS_KEY
           aws-secret-access-key: Dev_AWS_SECRET_ACCESS_KEY
           aws-region: Dev_AWS_DEFAULT_REGION
-          codepipeline-name: WebClient-Dev-CodePipeline
-          codebuild-project-name: WebClient-Dev
+          codepipeline-name: WebClient-Dev-Pocket-CodePipeline
+          codebuild-project-name: WebClient-Dev-Pocket
           codebuild-project-branch: dev
           requires:
-            - build_docker_dev
+            - build_docker_dev_pocket
 
       # Build & Deploy the Prod Docker Image
       - docker_build:
           <<: *only_main
           context: pocket
-          name: build_docker_prod
+          name: build_docker_prod_web
           environment: 'Prod'
           tag: latest,$CIRCLE_SHA1
           repo_name: webclient-prod-app
           ecr_url: 996905175585.dkr.ecr.us-east-1.amazonaws.com
           push: true
+          flavor: web
+          requires:
+            - build_app_production
+
+      - docker_build:
+          <<: *only_main
+          context: pocket
+          name: build_docker_prod_pocket
+          environment: 'Prod'
+          tag: latest,$CIRCLE_SHA1
+          repo_name: webclient-prod-pocket-app
+          ecr_url: 996905175585.dkr.ecr.us-east-1.amazonaws.com
+          push: true
+          flavor: pocket
           requires:
             - build_app_production
 
@@ -400,16 +464,31 @@ workflows:
       - pocket/execute_codepipeline:
           <<: *only_main
           context: pocket
-          name: deploy_prod
+          name: deploy_prod_web
           environment: Prod
           aws-access-key-id: Prod_AWS_ACCESS_KEY
           aws-secret-access-key: Prod_AWS_SECRET_ACCESS_KEY
           aws-region: Prod_AWS_DEFAULT_REGION
-          codepipeline-name: WebClient-Prod-CodePipeline
-          codebuild-project-name: WebClient-Prod
+          codepipeline-name: WebClient-Prod-Web-CodePipeline
+          codebuild-project-name: WebClient-Prod-Web
           codebuild-project-branch: main
           requires:
-            - build_docker_prod
+            - build_docker_prod_web
+            - push_production_assets
+
+      - pocket/execute_codepipeline:
+          <<: *only_main
+          context: pocket
+          name: deploy_prod_pocket
+          environment: Prod
+          aws-access-key-id: Prod_AWS_ACCESS_KEY
+          aws-secret-access-key: Prod_AWS_SECRET_ACCESS_KEY
+          aws-region: Prod_AWS_DEFAULT_REGION
+          codepipeline-name: WebClient-Prod-Pocket-CodePipeline
+          codebuild-project-name: WebClient-Prod-Pocket
+          codebuild-project-branch: main
+          requires:
+            - build_docker_prod_pocket
             - push_production_assets
 
       - pocket/setup_deploy_params:
