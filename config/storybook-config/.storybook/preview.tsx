@@ -1,4 +1,4 @@
-import '@ui/styles/index.css' // This is our base styles
+import '@ui/styles/pocket/global.css' // This is our base styles
 import i18n from './i18n' // This just needs to be present
 import { I18nextProvider } from 'react-i18next'
 
@@ -95,11 +95,11 @@ const preview: Preview = {
     theme: {
       name: 'Theme',
       description: 'Global theme for components',
-      defaultValue: 'light',
+      defaultValue: 'system',
       toolbar: {
         icon: 'photo',
         // array of plain string values or MenuItem shape
-        items: ['light', 'dark', 'sepia'],
+        items: ['system', 'light', 'dark', 'sepia'],
         // Property that specifies if the name of the item will be displayed
         showName: true,
         // Change title based on selected value
@@ -109,6 +109,7 @@ const preview: Preview = {
   },
   decorators: [
     (Story, context) => {
+      document.body.classList.remove('colormode-system')
       document.body.classList.remove('colormode-light')
       document.body.classList.remove('colormode-dark')
       document.body.classList.remove('colormode-sepia')
@@ -116,7 +117,9 @@ const preview: Preview = {
 
       return (
         <I18nextProvider i18n={i18n}>
-          <Story {...context} />
+          <div style={{ marginBottom: '30vh' }}>
+            <Story {...context} />
+          </div>
         </I18nextProvider>
       )
     }

@@ -154,7 +154,7 @@ export function CallOutBuildHome({ topBorder }) {
           id="explore-signup-hero" // needed for snowplow identifier
           className="button brand"
           rel="noopener"
-          href={`${SIGNUP_URL}?src=web-add-callout&utm_source=${global.location.href}&utm_medium=web`}>
+          href={`${SIGNUP_URL}?src=web-add-callout&utm_source=${global?.location?.href ?? 'home'}&utm_medium=web`}>
           {t('call-out:sign-up', 'Sign Up')}
         </a>
       </aside>

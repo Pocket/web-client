@@ -16,14 +16,14 @@ export function NavTopAccountAuth() {
       <a
         className="button new small outline"
         data-testid="nav-top-account-signup-link"
-        href={`${SIGNUP_URL}?src=web-nav&utm_source=${global.location.href}`}
+        href={`${SIGNUP_URL}?src=web-nav`}
         id="global-nav-signup-link">
         <span className="label">{t('nav:sign-up', 'Sign up')}</span>
       </a>
       <a
         className="button new small primary"
         data-testid="nav-top-account-login-link"
-        href={`${LOGIN_URL}?src=web-nav&utm_source=${global.location.href}`}
+        href={`${LOGIN_URL}?src=web-nav`}
         id="global-nav-login-link">
         {t('nav:log-in', 'Log in')}
       </a>

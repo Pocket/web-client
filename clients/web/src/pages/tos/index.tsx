@@ -37,10 +37,7 @@ async function getMDContent(locale: string): Promise<string> {
   }
 
   const mdContentModified = mdContent.replace(/\{:\s?\#(.+\S)\s?\}/gi, '{#$1}')
-  const content = await marked
-    .use(customHeadingId())
-    .use(overrideDateTime())
-    .parse(mdContentModified)
+  const content = await marked.use(customHeadingId, overrideDateTime).parse(mdContentModified)
 
   return content
 }

@@ -17,7 +17,7 @@
   "devDependencies": {
     "@config/typescript-config": "workspace:*",
     "@types/fs-extra": "11.0.4",
-    "@types/react": "18.3.1",
+    "@types/react": "18.3.3",
     "fs-extra": "11.2.0",
     "svgo": "3.3.2",
     "ts-node": "^10.9.2"

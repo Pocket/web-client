@@ -9,7 +9,7 @@ exports[`renders NavTopAccountAuth with defaults 1`] = `
     <a
       class="button new small outline"
       data-testid="nav-top-account-signup-link"
-      href="https://getpocket.com/signup?src=web-nav&utm_source=http://localhost/"
+      href="https://getpocket.com/signup?src=web-nav"
       id="global-nav-signup-link"
     >
       <span
@@ -21,7 +21,7 @@ exports[`renders NavTopAccountAuth with defaults 1`] = `
     <a
       class="button new small primary"
       data-testid="nav-top-account-login-link"
-      href="https://getpocket.com/login?src=web-nav&utm_source=http://localhost/"
+      href="https://getpocket.com/login?src=web-nav"
       id="global-nav-login-link"
     >
       Log in

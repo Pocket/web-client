@@ -7,9 +7,10 @@
     "node": ">=20.0.0",
     "pnpm": ">=9"
   },
-  "packageManager": "pnpm@9.0.6",
+  "packageManager": "pnpm@9.4.0",
   "scripts": {
     "clean": "pnpm turbo clean",
+    "pocket": "pnpm turbo pocket",
     "dev": "pnpm turbo dev",
     "dev:snowplow": "pnpm turbo dev:snowplow",
     "build": "pnpm --filter @client/web build",
@@ -46,17 +47,17 @@
     "@config/eslint-config": "workspace:*",
     "@config/typescript-config": "workspace:*",
     "@semantic-release/changelog": "6.0.3",
-    "@semantic-release/commit-analyzer": "12.0.0",
+    "@semantic-release/commit-analyzer": "13.0.0",
     "@semantic-release/exec": "6.0.3",
     "@semantic-release/git": "10.0.1",
-    "@semantic-release/release-notes-generator": "13.0.0",
-    "@turbo/gen": "1.13.3",
+    "@semantic-release/release-notes-generator": "14.0.0",
+    "@turbo/gen": "2.0.4",
     "husky": "9.0.11",
-    "i18next-parser": "^8.13.0",
-    "lint-staged": "15.2.2",
-    "prettier": "^3.2.5",
-    "turbo": "1.13.3",
-    "typescript": "5.4.5"
+    "i18next-parser": "^9.0.0",
+    "lint-staged": "15.2.7",
+    "prettier": "^3.3.2",
+    "turbo": "2.0.4",
+    "typescript": "5.5.2"
   },
   "commitlint": {
     "extends": [

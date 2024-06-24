@@ -4,19 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "postcss index.pcss -o global.css",
-    "build": "postcss index.pcss -o global.css"
+    "build": "postcss legacy/index.css -o legacy/global.css && postcss pocket/index.css -o pocket/global.css",
+    "pocket": "postcss pocket/index.css -o pocket/global.css --watch",
+    "dev": "postcss legacy/index.css -o legacy/global.css --watch",
+    "storybook": "postcss pocket/index.css -o pocket/global.css --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cssnano": "6.1.2",
+    "cssnano": "7.0.3",
     "postcss": "8.4.38",
     "postcss-cli": "11.0.0",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "16.1.0",
     "postcss-nested": "6.0.1",
-    "postcss-preset-env": "^9.5.11"
+    "postcss-preset-env": "^9.5.14"
   }
 }

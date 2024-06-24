@@ -1,0 +1,335 @@
+input[type='text'],
+input[type='date'],
+input[type='email'],
+input[type='password'],
+input[type='search'],
+input[type='month'],
+input[type='number'],
+input[type='time'],
+input[type='url'],
+input[type='week'],
+input[type='datetime-local'],
+input[type='color'],
+input[type='tel'],
+textarea,
+select {
+  display: block;
+  border: 1px solid var(--color-border-input);
+  border-radius: var(--radius-input);
+  color: var(--color-text-base);
+  outline: none;
+  line-height: 160%;
+  padding: 0.375em 1.25em;
+  width: 100%;
+  background: none;
+  -webkit-appearance: none;
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &:hover:enabled:not(:focus-visible) {
+    border: 1px solid var(--color-border-input-hover);
+  }
+
+  &:focus-visible {
+    border-color: transparent;
+    outline: 2px solid var(--color-border-input-focus);
+  }
+}
+legend {
+  margin-bottom: 1rem;
+}
+
+label {
+  cursor: pointer;
+  margin: 0;
+  padding: 0 0.5em;
+  display: inline-flex;
+  & > input[type='radio'],
+  & > input[type='checkbox'] {
+    cursor: pointer;
+    margin: 0 0.725em 0 0;
+  }
+}
+fieldset > div {
+  position: relative;
+  margin-bottom: 1rem;
+  --label-position: translate(1em, 0.5em);
+  --label-position-active: translate(1em, -0.75em);
+  label {
+    color: var(--color-text-lighter);
+    border-radius: var(--radius-input);
+  }
+
+  label:has(
+      + :is(
+          input[type='text'],
+          input[type='email'],
+          input[type='password'],
+          input[type='search'],
+          input[type='number'],
+          input[type='url'],
+          input[type='tel']
+        )
+    ) {
+    transition: all 80ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: var(--label-position);
+  }
+
+  label:has(+ :is(input[type='search'])) {
+    transform: translate(1.75em, 0.5em);
+  }
+
+  label:has(
+      + :is(
+          input[type='date'],
+          input[type='month'],
+          input[type='time'],
+          input[type='datetime-local'],
+
+        )
+    ) {
+    color: var(--color-text-base);
+    background-color: var(--color-surface-base);
+  }
+  &:focus-within {
+    label:has(
+        + :is(
+            input[type='text'],
+            input[type='search'],
+            input[type='email'],
+            input[type='password'],
+            input[type='number'],
+            input[type='url'],
+            input[type='tel']
+          )
+      ) {
+      color: var(--color-text-base);
+      background-color: var(--color-surface-base);
+      transform: var(--label-position-active);
+    }
+    label:has(+ :is(input[type='search'])) {
+      transform: translate(1.75em, -0.75em);
+    }
+  }
+}
+
+textarea {
+  border-radius: var(--radius-textarea) var(--radius-textarea) 0 var(--radius-textarea);
+}
+
+/* clears the 'X' from Chrome */
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
+  display: none;
+  -webkit-appearance: none;
+}
+input[type='search'] {
+  padding-left: 2.5rem;
+  background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGZpbGw9JyNhYWFhYWEnIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTYuNjE3NyAxOC4wMzE5QzE1LjA3OCAxOS4yNjM1IDEzLjEyNSAyMCAxMSAyMEM2LjAyOTQ0IDIwIDIgMTUuOTcwNiAyIDExQzIgNi4wMjk0NCA2LjAyOTQ0IDIgMTEgMkMxNS45NzA2IDIgMjAgNi4wMjk0NCAyMCAxMUMyMCAxMy4xMjUgMTkuMjYzNSAxNS4wNzggMTguMDMxOSAxNi42MTc3TDIxLjcwNzEgMjAuMjkyOUMyMi4wOTc2IDIwLjY4MzQgMjIuMDk3NiAyMS4zMTY2IDIxLjcwNzEgMjEuNzA3MUMyMS4zMTY2IDIyLjA5NzYgMjAuNjgzNCAyMi4wOTc2IDIwLjI5MjkgMjEuNzA3MUwxNi42MTc3IDE4LjAzMTlaTTE4IDExQzE4IDE0Ljg2NiAxNC44NjYgMTggMTEgMThDNy4xMzQwMSAxOCA0IDE0Ljg2NiA0IDExQzQgNy4xMzQwMSA3LjEzNDAxIDQgMTEgNEMxNC44NjYgNCAxOCA3LjEzNDAxIDE4IDExWiIgLz4KPC9zdmc+');
+  background-repeat: no-repeat;
+  background-position: 8px center;
+  background-size: 24px;
+}
+
+/* dotted line on select elements in FF */
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 var(--color-text-base);
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+  height: 1.5em;
+  width: 1.5em;
+  margin: 0.5em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 1px solid var(--color-border-input);
+  border-radius: 0.25em;
+  outline: none;
+  transition:
+    border 50ms cubic-bezier(0.4, 0, 0.2, 1),
+    background 50ms cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--color-surface-base);
+  vertical-align: middle;
+
+  &:active,
+  &:focus-visible {
+    border-color: var(--color-border-input-hover);
+  }
+
+  &:hover:enabled:not(:checked) {
+    border-color: var(--color-border-input-hover);
+  }
+
+  &:checked {
+    border-color: var(--color-border-input);
+    background-color: var(--color-accent-base);
+  }
+}
+
+input[type='radio'] {
+  border-radius: 1000rem;
+  &:checked {
+    box-shadow: inset 0 0 0 3px var(--color-surface-base);
+  }
+}
+
+input[type='checkbox'] {
+  &:before {
+    content: var(--checkboxCheckMarkLight);
+    transform: scale(0);
+    opacity: 0;
+    line-height: normal;
+    display: block;
+    text-align: center;
+    transition:
+      opacity 100ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform 100ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &:checked {
+    &:before {
+      transform: scale(1.25);
+      opacity: 1;
+    }
+  }
+
+  &:disabled,
+  &:disabled:checked {
+    opacity: 0.5;
+    pointer-events: none;
+
+    & + label {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+}
+
+input.toggle[type='checkbox'] {
+  cursor: pointer;
+  height: 36px;
+  width: 64px;
+  margin: 0.25 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  border-radius: 18px;
+  outline: none;
+  transition: background 50ms cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--color-toggle-base);
+  vertical-align: middle;
+  color: var(--color-accent-base);
+  & + label {
+    width: auto;
+  }
+
+  &:hover,
+  &:active {
+    &:before {
+      outline: 2px solid var(--color-toggle-knob-hover);
+      content: var(--crossIconHover);
+    }
+  }
+
+  &:before {
+    margin: 2px;
+    width: 32px;
+    height: 32px;
+    background-color: var(--color-surface-base);
+    border-radius: 18px;
+    content: var(--crossIconColor);
+    transform: translateX(0);
+    line-height: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+  }
+
+  &:checked {
+    color: var(--color-accent-base);
+    border: none;
+    background: var(--color-toggle-base-active);
+
+    &:before {
+      transform: translateX(28px);
+      opacity: 1;
+      content: var(--checkboxCheckMarkColor);
+    }
+
+    &:hover,
+    &:active {
+      border: none;
+      background: var(--color-toggle-base-active);
+      &:before {
+        content: var(--checkboxCheckMarkHover);
+        outline: 2px solid var(--color-toggle-knob-hover-active);
+      }
+    }
+  }
+
+  &:focus {
+    box-shadow:
+      0px 0 0 2px var(--color-surface-base),
+      0px 0 0 4px var(--color-formFieldFocusLabel);
+  }
+
+  &:disabled,
+  &:disabled:checked {
+    opacity: 0.5;
+    pointer-events: none;
+
+    & + label {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: var(--selectDownArrowLight);
+  background-repeat: no-repeat;
+  background-position: right 0.7rem top 50%;
+  background-size: 11px auto;
+  padding-right: 1.725rem;
+
+  .colormode-system & {
+    @media (prefers-color-scheme: dark) {
+      background-image: var(--selectDownArrowDark);
+    }
+  }
+  .colormode-dark & {
+    background-image: var(--selectDownArrowDark);
+  }
+}
+
+option {
+  color: var(--color-text-base);
+
+  .colormode-dark & {
+    color: var(--color-surface-base);
+  }
+
+  .colormode-system & {
+    @media (prefers-color-scheme: dark) {
+      color: var(--color-surface-base);
+    }
+  }
+}

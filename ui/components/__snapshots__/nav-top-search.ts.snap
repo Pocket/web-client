@@ -3,7 +3,7 @@
 exports[`renders NavTopSearch with defaults 1`] = `
 <div>
   <div
-    class="base"
+    class="base new"
     data-testid="nav-top-search"
   >
     <input

@@ -1,3 +1,5 @@
+'use client'
+
 // Components
 import { LANGUAGE_BY_LOCALE } from '@common/localization'
 

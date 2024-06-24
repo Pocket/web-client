@@ -1,7 +1,7 @@
 import { put, takeEvery } from 'redux-saga/effects'
 
 // Client API actions
-import { getSavedItemByItemId } from 'common/api/queries/get-saved-item-by-id'
+import { getSavedItemByItemId, getItemByReaderSlug } from 'common/api/queries/get-saved-item-by-id' //prettier-ignore
 import { deriveReaderItem, deriveSharedItem } from 'common/api/derivers/item'
 
 import { READ_ITEM_REQUEST } from 'actions'
@@ -113,3 +113,21 @@ function* readItemRequest({ slug }) {
 
 /** ASYNC REQUESTS
  --------------------------------------------------------------- */
+export async function getReaderItemMeta(slug) {
+  try {
+    const response = await getItemByReaderSlug(slug)
+
+    // If things don't go right
+    if (!response || response?.error) throw new Error(response.error)
+
+    const derivedShare = deriveSharedItem(response.share)
+    return {
+      shareItem: response.share,
+      itemsById: { [derivedShare.itemId]: derivedShare }
+    }
+  } catch (err) {
+    return {
+      error: 'Bad Response'
+    }
+  }
+}

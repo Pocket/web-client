@@ -1,13 +1,15 @@
-/** Remove this file if we don't have styles for the component **/
 .base {
+  background-color: var(--color-surface-base);
+  border-top: 1px solid var(--color-divider);
+  margin-top: 4rem;
   a,
   button {
     padding: 0;
     display: inline-block;
-    color: var(--color-textSecondary);
+    color: var(--color-text-primary);
     text-decoration: none;
     &:hover {
-      color: var(--color-textLinkHover);
+      color: var(--color-accent-base);
       text-decoration: underline;
     }
   }
@@ -49,19 +51,22 @@
 .subContent {
   grid-column: 1/-1;
   padding-top: 1.5rem;
-  border-top: 1px solid var(--color-dividerTertiary);
+  border-top: 1px solid var(--color-divider);
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: top;
   margin-top: 2.5rem;
+  section:last-of-type {
+    align-items: right;
+  }
 
   @media (max-width: 690px) {
     flex-direction: column;
     justify-content: flex-start;
     flex-direction: column-reverse;
     align-items: stretch;
-    .languageSelector {
-      margin-bottom: 1.5rem;
+    section:last-of-type div {
+      align-items: right;
     }
   }
 }
@@ -79,7 +84,7 @@
 }
 
 .socialTitle {
-  color: var(--color-textSecondary);
+  color: var(--color-text-lighter);
 }
 .social {
   white-space: nowrap;
@@ -92,7 +97,7 @@
     }
 
     &:hover {
-      color: var(--color-textPrimary);
+      color: var(--color-text-base);
     }
   }
 }

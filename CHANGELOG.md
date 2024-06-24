@@ -1,3 +1,62 @@
+# [1.131.0](https://github.com/Pocket/web-client/compare/v1.130.4...v1.131.0) (2024-06-24)
+
+
+### Bug Fixes
+
+* **colors:** update some dark mode colors ([fa5162c](https://github.com/Pocket/web-client/commit/fa5162c18d1fe754a73cea7b61f788538e27ab93))
+* **footer theme:** wire up to state and mutation ([715c161](https://github.com/Pocket/web-client/commit/715c161f9e7c8bf2a501eb76fed5e087c284e2f7))
+* **user settings:** use zustand for theme ([8c31b02](https://github.com/Pocket/web-client/commit/8c31b02f1f276d24db9123cd8a4ac9304e1a0307))
+
+
+### Features
+
+* **baseline:** top / content layout ([b2a5fab](https://github.com/Pocket/web-client/commit/b2a5fab699e66923bebeaf96dc0720dec53d6484))
+* **footer:** add app wrapper and border ([0b625d0](https://github.com/Pocket/web-client/commit/0b625d0cf0c97b205fc1cf4b02ab75ae19814cd9))
+* **pocket:** initial commit ([540f818](https://github.com/Pocket/web-client/commit/540f818014d556235736d886fe56ea17f286c8d7))
+* **turbo:** compile css in time ([42443ae](https://github.com/Pocket/web-client/commit/42443ae896bf8c7b079b008dd9adaeda7947b077))
+
+## [1.130.4](https://github.com/Pocket/web-client/compare/v1.130.3...v1.130.4) (2024-06-17)
+
+
+### Bug Fixes
+
+* **docker:** update pnpm ([067b47d](https://github.com/Pocket/web-client/commit/067b47de2729570af00f2fcc1478139ca4e4192d))
+
+## [1.130.3](https://github.com/Pocket/web-client/compare/v1.130.2...v1.130.3) (2024-06-17)
+
+
+### Bug Fixes
+
+* **image:** reduce pointer events ([95a816b](https://github.com/Pocket/web-client/commit/95a816b0c0f731092aaa506cd478aa082c3244a1))
+
+## [1.130.2](https://github.com/Pocket/web-client/compare/v1.130.1...v1.130.2) (2024-06-06)
+
+
+### Bug Fixes
+
+* **reader:** update share links behavior ([7dbb143](https://github.com/Pocket/web-client/commit/7dbb143353132d38eaffaaabf78a282b1e952c5c))
+
+## [1.130.1](https://github.com/Pocket/web-client/compare/v1.130.0...v1.130.1) (2024-06-05)
+
+
+### Bug Fixes
+
+* **reader:** populate meta data ([d3fd4c7](https://github.com/Pocket/web-client/commit/d3fd4c7ebb9f8b7a70657b5b629b113576a3d508))
+
+# [1.130.0](https://github.com/Pocket/web-client/compare/v1.129.3...v1.130.0) (2024-06-04)
+
+
+### Features
+
+* **home:** add signup cta ([eb46fc8](https://github.com/Pocket/web-client/commit/eb46fc8ad57edd724f767308bc1ab6d4eb21189a))
+
+## [1.129.3](https://github.com/Pocket/web-client/compare/v1.129.2...v1.129.3) (2024-05-24)
+
+
+### Bug Fixes
+
+* **localization:** extra spacing in placeholder ([ce3f23d](https://github.com/Pocket/web-client/commit/ce3f23d3ac0a9e52713fd12478000e5dfb01b871))
+
 ## [1.129.2](https://github.com/Pocket/web-client/compare/v1.129.1...v1.129.2) (2024-05-23)
 
 

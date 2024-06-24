@@ -100,7 +100,7 @@ export function deriveListItem(edge) {
 export function deriveSharedItem(share) {
   const { preview, cursor = null } = share
   const { item, ...rest } = preview
-  return deriveItem({ item, node: rest, cursor, utmId: 'pocket_shared' })
+  return deriveItem({ item, node: { ...rest, status: 'shared' }, cursor, utmId: 'pocket_shared' })
 }
 
 export function deriveCorpusItem(recommendation) {

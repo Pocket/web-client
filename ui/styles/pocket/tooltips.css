@@ -1,0 +1,171 @@
+:root {
+  @keyframes tooltipFadeawayHorizontal {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    9%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes tooltipFadeawayBottom {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, 0.2em) scale(0.8);
+    }
+    9%,
+    100% {
+      opacity: 1;
+      transform: translate(-50%, 0) scale(1);
+    }
+  }
+
+  @keyframes tooltipFadeawayTop {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -0.2em) scale(0.8);
+    }
+    9%,
+    100% {
+      opacity: 1;
+      transform: translate(-50%, 0) scale(1);
+    }
+  }
+}
+
+a,
+button {
+  &[data-tooltip] {
+    position: relative;
+    /* tooltip arrow AND body */
+    &:before,
+    &:after {
+      line-height: 1;
+      user-select: none;
+      pointer-events: none;
+      position: absolute;
+      opacity: 0;
+    }
+
+    /* tooltip arrow */
+    &:before {
+      content: '';
+      z-index: var(--zIndexTooltip);
+      border: 4px solid transparent;
+    }
+
+    /* tooltip body */
+    &:after {
+      content: attr(data-tooltip); /* get text value from markup */
+      font-size: 0.85rem;
+      z-index: var(--zIndexTooltip);
+      text-align: center;
+      width: 0;
+
+      /* Constrain edge case sizes */
+      min-width: 3rem;
+      max-width: 20rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      line-height: 143%;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+
+      background-color: var(--color-tooltipCanvas);
+      color: var(--color-tooltipText);
+    }
+
+    &:hover:after {
+      width: unset;
+    }
+
+    /* Shared animation styles for both tooltip arrow and body on hover */
+    &:hover:before,
+    &:hover:after {
+      animation-duration: calc(
+        var(--dialogsDurationEnterMS) + 1500ms + var(--dialogsDurationExitMS)
+      );
+      animation-timing-function: var(--easingAccelerate);
+      animation-direction: normal;
+      animation-fill-mode: forwards;
+    }
+
+    /* Safari focus/active styles are super buggy
+   * and show focus outline around pseudo elements.
+   * Hide tooltip if button has focus/active */
+    &:active:before,
+    &:active:after,
+    &:focus:before,
+    &:focus:after {
+      display: none;
+    }
+
+    /* Re-show tooltip if hovering over focused element */
+    &:focus:hover:before,
+    &:focus:hover:after {
+      display: inline-block;
+    }
+  }
+
+  &[data-tooltip-position='bottom'] {
+    &:before,
+    &:after {
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+
+    /* tooltip arrow */
+    &:before {
+      top: calc(100% + 0.5rem);
+      border-top-width: 0;
+      border-bottom-color: var(--color-tooltipCanvas);
+    }
+
+    /* tooltip body */
+    &:after {
+      top: calc(100% + 3px + 0.5rem);
+    }
+
+    &:hover:before,
+    &:hover:after {
+      transform-origin: top;
+      animation-name: tooltipFadeawayBottom;
+    }
+  }
+
+  &[data-tooltip-position='top'] {
+    &:before,
+    &:after {
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+
+    /* tooltip arrow */
+    &:before {
+      bottom: calc(100% + 0.5rem);
+      border-bottom-width: 0;
+      border-top-color: var(--color-tooltipCanvas);
+    }
+
+    /* tooltip body */
+    &:after {
+      bottom: calc(100% + 3px + 0.5rem);
+    }
+
+    &:hover:before,
+    &:hover:after {
+      transform-origin: bottom;
+      animation-name: tooltipFadeawayTop;
+    }
+  }
+
+  &[data-tooltip-delay]:hover:before,
+  &[data-tooltip-delay]:hover:after {
+    animation-delay: 1s;
+  }
+}

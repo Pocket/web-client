@@ -4,6 +4,7 @@ import { HomeRecentSaves } from 'containers/home/recent-saves/recent-saves'
 import { HomeSetup } from './setup/setup'
 import { HomeContent } from './content'
 import { SuccessFXA } from 'components/snackbar/success-fxa'
+import { HomeSignUpCTA } from './sign-up-cta'
 import { HomeGreeting } from './recent-saves/greeting'
 import { SharedItemInterstitial } from './sharedItem/sharedItem'
 import { Toasts } from 'connectors/toasts/toast-list'
@@ -18,10 +19,15 @@ export const Home = ({ metaData }) => {
 
   return (
     <Layout metaData={metaData} isFullWidthLayout={true} noContainer={true}>
-      {isAuthenticated ? <SuccessFXA type="home" /> : null}
-      {isAuthenticated ? <HomeSetup /> : null}
-      <HomeGreeting />
-      {isAuthenticated ? <HomeRecentSaves /> : null}
+      {isAuthenticated ? (
+        <>
+          <SuccessFXA type="home" />
+          <HomeSetup />
+          <HomeGreeting />
+        </>
+      ) : null}
+
+      {isAuthenticated ? <HomeRecentSaves /> : <HomeSignUpCTA />}
       <HomeContent />
       <SharedItemInterstitial />
       <Toasts surface="home" />

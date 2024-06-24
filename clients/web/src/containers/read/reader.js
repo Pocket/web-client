@@ -84,6 +84,7 @@ export default function Reader() {
   // Item Data
   const itemId = useSelector((state) => state.idMap[slug])
   const item = useSelector((state) => state.itemsDisplay[itemId])
+  const savedData = useSelector((state) => state.itemsSaved[itemId])
   const status = useSelector((state) => state.itemsSaved[itemId]?.status)
   const sharedItem = useSelector((state) => state.sharedItem)
   const hasFailed = useSelector((state) => state.reader.readFailure)
@@ -111,14 +112,17 @@ export default function Reader() {
     router.replace(path)
   }
 
-  if (!item || status === 'DELETED')
+  if (!item)
     return (
       <LoaderCentered>
         <Loader isVisible />
       </LoaderCentered>
     )
 
-  const { title, hasVideo } = item
+  const { shareUrl: url } = sharedItem
+  const image = item?.thumbnail || false
+  const {title, hasVideo, excerpt, authors, timeToRead } = item //prettier-ignore
+  const authorString = authors?.length ? authors.map((author) => author.name).join(',') : ''
 
   const customStyles = {
     maxWidth: `${COLUMN_WIDTH_RANGE[columnWidth]}px`,
@@ -137,21 +141,70 @@ export default function Reader() {
   return (
     <>
       <Head>
-        <title>Pocket - {title}</title>
+        {/*  Title may have commas so we stringify it */}
+        <title>{`Pocket - ${title}`}</title>
+
+        {/*  Primary Meta Tags */}
+        <meta name="description" content={excerpt} />
+
+        {/*  Pocket Specific Tags */}
+        <meta name="x-pocket-override-excerpt" content={excerpt} />
+
+        {/* Schema.org for Google */}
+        <meta itemProp="name" content={title} />
+        <meta itemProp="description" content={excerpt} />
+        {image ? <meta itemProp="image" content={image} /> : null}
+
+        {/*  Twitter */}
+        <meta name="twitter:url" content={url} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={excerpt} />
+        <meta name="twitter:site" content="@pocket" />
+        {image ? <meta name="twitter:image" content={image} /> : null}
+
+        {/* Slack Unfurls */}
+        {authors.length ? (
+          <>
+            <meta name="twitter:label1" content="Written by" />
+            <meta name="twitter:data1" content={authorString} />
+          </>
+        ) : null}
+        {timeToRead ? (
+          <>
+            <meta name="twitter:label2" content="Reading time" />
+            <meta name="twitter:data2" content={`${timeToRead} minutes`} />
+          </>
+        ) : null}
+
+        {/* Open Graph general (Facebook) */}
+        <meta property="og:url" content={url} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={excerpt} />
+        <meta property="og:site_name" content="Pocket" />
+        {image ? <meta property="og:image" content={image} /> : null}
       </Head>
 
-      <Toolbar id={itemId} />
+      {/**
+       *  We don't want to render much else until we have saveData.
+       * This wasn't a possibility in the past but because we can now get some basic
+       * item data on the server, we need this check
+       **/}
+      {savedData ? (
+        <>
+          <Toolbar id={itemId} />
 
-      <main className={articleWrapperStyles}>
-        <SidebarWrapper id={itemId} />
-        <article className={articleClasses} style={customStyles}>
-          <Header id={itemId} />
-          <ContentWrapper id={itemId} />
-        </article>
-      </main>
+          <main className={articleWrapperStyles}>
+            <SidebarWrapper id={itemId} />
+            <article className={articleClasses} style={customStyles}>
+              <Header id={itemId} />
+              <ContentWrapper id={itemId} />
+            </article>
+          </main>
 
-      <Recommendations id={itemId} />
-      <Upsell />
+          <Recommendations id={itemId} />
+          <Upsell />
+        </>
+      ) : null}
 
       <ConfirmTagging />
       <ConfirmShare />
