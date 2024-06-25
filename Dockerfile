@@ -4,6 +4,8 @@ WORKDIR /usr/src/app
 
 ARG RELEASE_VERSION
 
+ARG START_COMMAND
+
 ## Add pnpm to all followup builder images
 RUN yarn global add pnpm@9.4.0
 
@@ -19,4 +21,4 @@ EXPOSE ${PORT}
 
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 
-CMD ["pnpm", "start"]
+CMD ["pnpm", "${START_COMMAND}""]

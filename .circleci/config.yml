@@ -664,12 +664,36 @@ workflows:
           requires:
             - build_app_dev # Make sure build is not funky and change this to that
 
+      - build_image:
+          <<: *not_dev_main
+          context: pocket
+          name: pocket-client_build_docker
+          aws-access-key-id: Dev_AWS_ACCESS_KEY
+          aws-secret-access-key: Dev_AWS_SECRET_ACCESS_KEY
+          aws-region: Dev_AWS_DEFAULT_REGION
+          repo-name: pocketclient-dev-app
+          ecr-url: 410318598490.dkr.ecr.us-east-1.amazonaws.com
+          push: false
+          extra-build-args: --build-arg START_COMMAND='start:pocket'
+          requires:
+            - build_app_dev # Make sure build is not funky and change this to that
+
       - infrastructure:
           <<: *not_dev_main
           context: pocket
           name: web-client_infrastructure_plan_prod
           scope: web-client-cdk
           stack-output-path: infrastructure/web/cdktf.out/stacks/web-client
+          resource-class: pocket/default-prod
+          dev: false
+          apply: false
+
+      - infrastructure:
+          <<: *not_dev_main
+          context: pocket
+          name: pocket-client_infrastructure_plan_prod
+          scope: pocket-client-cdk
+          stack-output-path: infrastructure/pocket/cdktf.out/stacks/pocket-client
           resource-class: pocket/default-prod
           dev: false
           apply: false
@@ -684,6 +708,16 @@ workflows:
           name: web-client_infrastructure_apply_dev
           scope: web-client-cdk
           stack-output-path: infrastructure/web/cdktf.out/stacks/web-client
+          resource-class: pocket/default-dev
+          dev: true
+          apply: true
+
+      - infrastructure:
+          <<: *only_dev
+          context: pocket
+          name: pocket-client_infrastructure_apply_dev
+          scope: pocket-client-cdk
+          stack-output-path: infrastructure/pocket/cdktf.out/stacks/pocket-client
           resource-class: pocket/default-dev
           dev: true
           apply: true
@@ -703,6 +737,29 @@ workflows:
           requires:
             - build_app_dev # Make sure build is not funky and change this to that
             - web-client_infrastructure_apply_dev
+
+      - build_image:
+          <<: *only_dev
+          context: pocket
+          name: pocket-client_build_docker_dev
+          aws-access-key-id: Dev_AWS_ACCESS_KEY
+          aws-secret-access-key: Dev_AWS_SECRET_ACCESS_KEY
+          aws-region: Dev_AWS_DEFAULT_REGION
+          repo-name: pocketclient-dev-app
+          ecr-url: 410318598490.dkr.ecr.us-east-1.amazonaws.com
+          push: true
+          extra-build-args: --build-arg START_COMMAND='start:pocket'
+          requires:
+            - build_app_dev # Make sure build is not funky and change this to that
+            - pocket-client_infrastructure_apply_dev
+
+      - code_deploy_ecs:
+          <<: *only_dev
+          context: pocket
+          name: pocket_client_code_deploy_ecs_dev
+          resource-class: pocket/default-dev
+          requires:
+            - pocket-client_build_docker_dev
 
       - code_deploy_ecs:
           <<: *only_dev
@@ -736,6 +793,16 @@ workflows:
           apply: true
           dev: false
 
+      - infrastructure:
+          <<: *only_main
+          context: pocket
+          name: pocket-client_infrastructure_apply_prod
+          scope: pocket-client-cdk
+          stack-output-path: infrastructure/pocket/cdktf.out/stacks/pocket-client
+          resource-class: pocket/default-prod
+          apply: true
+          dev: false
+
       # Build & Deploy the Prod Docker Image
       - build_image:
           <<: *only_main
@@ -752,6 +819,21 @@ workflows:
             - web-client_infrastructure_apply_prod
             - build_app_production
 
+      - build_image:
+          <<: *only_main
+          context: pocket
+          name: pocket-client_build_docker_prod
+          aws-access-key-id: Prod_AWS_ACCESS_KEY
+          aws-secret-access-key: Prod_AWS_SECRET_ACCESS_KEY
+          aws-region: Prod_AWS_DEFAULT_REGION
+          repo-name: pocketclient-prod-app
+          ecr-url: 996905175585.dkr.ecr.us-east-1.amazonaws.com
+          push: true
+          extra-build-args: --build-arg START_COMMAND='start:pocket'
+          requires:
+            - pocket-client_infrastructure_apply_prod
+            - build_app_production
+
       - code_deploy_ecs:
           <<: *only_main
           context: pocket
@@ -759,6 +841,15 @@ workflows:
           resource-class: pocket/default-prod
           requires:
             - web-client_build_docker_prod
+            - push_production_assets
+
+      - code_deploy_ecs:
+          <<: *only_main
+          context: pocket
+          name: pocket-client_code_deploy_ecs_prod
+          resource-class: pocket/default-prod
+          requires:
+            - pocket-client_build_docker_prod
             - push_production_assets
 
       # Notify sentry of main deployment
