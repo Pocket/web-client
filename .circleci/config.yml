@@ -675,7 +675,7 @@ workflows:
           name: web-client_infrastructure_apply_dev
           scope: web-client-cdk
           stack-output-path: infrastructure/web/cdktf.out/stacks/web-client
-          resource-class: pocket/default-prod
+          resource-class: pocket/default-dev
           dev: true
           apply: true
 

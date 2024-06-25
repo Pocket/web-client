@@ -1,5 +1,4 @@
-.aws
-.circleci
+infrastructure
 .storybook
 .eslintrc
 npm-debug.log
