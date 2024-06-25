@@ -13,7 +13,7 @@ export function inGrid(Story: StoryFn, gridCount: GridCount) {
   return (
     <main className="page-container">
       <div data-columns={gridCount}>
-        <div className={style.grid}>
+        <div className="grid">
           <Story />
         </div>
       </div>

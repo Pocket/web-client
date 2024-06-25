@@ -26,8 +26,8 @@ export default function RootLayout({
   const userSettingsState: UserSettingsState = { colorMode: storedColorMode }
 
   return (
-    <html lang="en" className={`${COLOR_MODE_PREFIX}-${storedColorMode}`}>
-      <body>
+    <html lang="en">
+      <body className={`${COLOR_MODE_PREFIX}-${storedColorMode}`}>
         <NavTop />
         <main>{children}</main>
         <NavFooter />

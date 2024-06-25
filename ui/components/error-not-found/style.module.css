@@ -1,0 +1,25 @@
+/** Remove this file if we don't have styles for the component **/
+.base {
+  h2 {
+    margin-top: 4rem;
+  }
+  & > p {
+    font-weight: 300;
+  }
+}
+
+.container {
+  padding: 2rem 0 4rem;
+}
+
+.copy {
+  p {
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 0;
+  }
+}
+
+.animation {
+  max-width: 300px;
+}

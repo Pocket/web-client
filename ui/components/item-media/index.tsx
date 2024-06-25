@@ -8,7 +8,7 @@ import { ColorPlanes } from './color-planes'
  * Media Block that will load an image, handle failure, display a fall back
  * and do your dishes ... one of these statements is not true.  The game is afoot!
  */
-export function ItemMedia({ imageUrl, id = '1' }: { imageUrl?: string; id: string }) {
+export function ItemMedia({ imageUrl, id = '1' }: { imageUrl?: string | null; id: string }) {
   const colorToUse = getColorFromId(id)
   const { width, height } = { width: 640, height: 360 }
   return (
