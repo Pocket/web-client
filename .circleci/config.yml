@@ -252,17 +252,10 @@ jobs:
   # Push built deployment to the s3 bucket for client side caching
   # ——————————————————————————————————————————————————————————————
   push_production_assets:
-    docker:
-      - image: circleci/python # for aws cli without fluff
+    machine: true
+    shell: /bin/bash --login -eo pipefail
+    resource_class: pocket/default-prod
     steps:
-      - run:
-          name: Setup environment variables
-          command: |
-            echo 'export AWS_ACCESS_KEY_ID="${OLD_AWS_ACCESS_KEY_ID}"' >> $BASH_ENV
-            echo 'export AWS_SECRET_ACCESS_KEY="${OLD_AWS_SECRET_ACCESS_KEY}"' >> $BASH_ENV
-      - aws-cli/install
-      - assume-role/assume-role:
-          account-id: $ACCOUNT_ID_PROD
       - attach_workspace:
           at: .
       - run:
