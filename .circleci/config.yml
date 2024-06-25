@@ -660,7 +660,7 @@ workflows:
           repo-name: webclient-dev-app
           ecr-url: 410318598490.dkr.ecr.us-east-1.amazonaws.com
           push: false
-          extra-build-args: --build-arg START_COMMAND='start:web'
+          extra-build-args: --build-arg START_COMMAND=start-web
           requires:
             - build_app_dev # Make sure build is not funky and change this to that
 
@@ -674,7 +674,7 @@ workflows:
           repo-name: pocketclient-dev-app
           ecr-url: 410318598490.dkr.ecr.us-east-1.amazonaws.com
           push: false
-          extra-build-args: --build-arg START_COMMAND='start:pocket'
+          extra-build-args: --build-arg START_COMMAND=start-pocket
           requires:
             - build_app_dev # Make sure build is not funky and change this to that
 
@@ -733,7 +733,7 @@ workflows:
           repo-name: webclient-dev-app
           ecr-url: 410318598490.dkr.ecr.us-east-1.amazonaws.com
           push: true
-          extra-build-args: --build-arg START_COMMAND='start:web'
+          extra-build-args: --build-arg START_COMMAND=start-web
           requires:
             - build_app_dev # Make sure build is not funky and change this to that
             - web-client_infrastructure_apply_dev
@@ -748,7 +748,7 @@ workflows:
           repo-name: pocketclient-dev-app
           ecr-url: 410318598490.dkr.ecr.us-east-1.amazonaws.com
           push: true
-          extra-build-args: --build-arg START_COMMAND='start:pocket'
+          extra-build-args: --build-arg START_COMMAND=start-pocket
           requires:
             - build_app_dev # Make sure build is not funky and change this to that
             - pocket-client_infrastructure_apply_dev
@@ -814,7 +814,7 @@ workflows:
           repo-name: webclient-prod-app
           ecr-url: 996905175585.dkr.ecr.us-east-1.amazonaws.com
           push: true
-          extra-build-args: --build-arg START_COMMAND='start:web'
+          extra-build-args: --build-arg START_COMMAND=start-web
           requires:
             - web-client_infrastructure_apply_prod
             - build_app_production
@@ -829,7 +829,7 @@ workflows:
           repo-name: pocketclient-prod-app
           ecr-url: 996905175585.dkr.ecr.us-east-1.amazonaws.com
           push: true
-          extra-build-args: --build-arg START_COMMAND='start:pocket'
+          extra-build-args: --build-arg START_COMMAND=start-pocket
           requires:
             - pocket-client_infrastructure_apply_prod
             - build_app_production
