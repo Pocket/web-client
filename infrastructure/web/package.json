@@ -25,7 +25,8 @@
     "@pocket-tools/terraform-modules": "5.12.5",
     "cdktf": "0.20.7",
     "cdktf-cli": "0.20.7",
-    "constructs": "10.3.0"
+    "constructs": "10.3.0",
+    "tslib": "2.6.3"
   },
   "devDependencies": {
     "@pocket-tools/tsconfig": "2.0.2",

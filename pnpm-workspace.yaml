@@ -5,3 +5,4 @@ packages:
   - 'config/*'
   - 'common/*'
   - 'ui/*'
+  - 'infrastructure/*'

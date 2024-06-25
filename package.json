@@ -29,7 +29,8 @@
     "schema": "rover graph fetch pocket-client-api@current >| schema.graphql",
     "format": "lint-staged",
     "checktypes": "pnpm turbo checktypes",
-    "prepare": "husky"
+    "prepare": "husky",
+    "synth": "pnpm turbo synth"
   },
   "repository": {
     "type": "git",

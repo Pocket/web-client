@@ -112,7 +112,7 @@ ui/icons/dist/
 node_modules/
 cdktf.out/
 .gen/
-.aws/dist/
+infrastructure/**/dist/
 
 # Certificates 
 localhost.web-client.getpocket.com-key.pem

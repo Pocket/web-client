@@ -43,7 +43,7 @@ commands:
   # ——————————————————————————————————————————————————————————————
   install_infrastructure_pnpm:
     parameters:
-      path:
+      scope:
         description: The pnpm scope to build for
         type: string
     steps:
@@ -54,8 +54,7 @@ commands:
             nvm use
             npm install -g pnpm@9.4.0
             pnpm config set store-dir .pnpm-store
-            cd << paramaters.path >>
-            pnpm install --frozen-lockfile
+            pnpm install --filter=<< parameters.scope >>... --frozen-lockfile
   
   # ——————————————————————————————————————————————————————————————
   # Infra: Setup a Github Bot to post comments
@@ -402,10 +401,9 @@ jobs:
   infrastructure:
       description: Build and optionally deploy the infratructure
       parameters:
-        path:
-          description: The pnpm path to build for
+        scope:
+          description: The pnpm scope to build for
           type: string
-          default: ''
         stack-output-path:
           description: The pnpm output path
           type: string
@@ -435,7 +433,7 @@ jobs:
               fi
         - setup_github_bot
         - install_infrastructure_pnpm:
-            path: << parameters.path >>
+            scope: << parameters.scope >>
         - when:
             condition: <<parameters.dev>>
             steps:
@@ -444,8 +442,7 @@ jobs:
                   command: |
                     nvm use
                     export NODE_ENV=development
-                    cd << parameters.path >>
-                    pnpm run synth
+                    pnpm run synth --filter=<< parameters.scope >>...
         - unless:
             condition: <<parameters.dev>>
             steps:
@@ -454,8 +451,7 @@ jobs:
                   command: |
                     nvm use
                     export NODE_ENV=production
-                    cd << parameters.path >>
-                    pnpm run synth
+                    pnpm run synth --filter=<< parameters.scope >>...
         - run:
             name: Setup terraform
             command: |
@@ -469,7 +465,7 @@ jobs:
                   name: Terraform apply
                   # Re-add this when tfcmt supports ignoring no change applies
                   # https://github.com/suzuki-shunsuke/tfcmt/issues/1184
-                  #  /home/circleci/tfcmt --var target:<< parameters.scope >><<#parameters.dev>>-dev<</parameters.dev>> apply -- terraform apply -auto-approve -lock-timeout=10m
+                  #  /home/circleci/tfcmt --var target:<< parameters.path >><<#parameters.dev>>-dev<</parameters.dev>> apply -- terraform apply -auto-approve -lock-timeout=10m
                   command: |
                     cd << parameters.stack-output-path >>
                     terraform apply -auto-approve -lock-timeout=10m
@@ -663,7 +659,7 @@ workflows:
           <<: *not_dev_main
           context: pocket
           name: web-client_infrastructure_plan_prod
-          path: infrastructure/web
+          scope: web-client-cdk
           stack-output-path: infrastructure/web/cdktf.out/stacks/web-client
           resource-class: pocket/default-prod
           dev: false
@@ -677,11 +673,11 @@ workflows:
           <<: *only_dev
           context: pocket
           name: web-client_infrastructure_apply_dev
-          path: infrastructure/web
+          scope: web-client-cdk
           stack-output-path: infrastructure/web/cdktf.out/stacks/web-client
           resource-class: pocket/default-prod
-          dev: false
-          apply: false
+          dev: true
+          apply: true
 
       # Build & Deploy the Dev Docker Image
       - build_image:
@@ -725,7 +721,7 @@ workflows:
           <<: *only_main
           context: pocket
           name: web-client_infrastructure_apply_prod
-          path: infrastructure/web
+          scope: web-client-cdk
           stack-output-path: infrastructure/web/cdktf.out/stacks/web-client
           resource-class: pocket/default-prod
           apply: true
@@ -754,6 +750,7 @@ workflows:
           resource-class: pocket/default-prod
           requires:
             - web-client_build_docker_prod
+            - push_production_assets
 
       # Notify sentry of main deployment
       - sentry_release_notification:
