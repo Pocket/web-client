@@ -56,6 +56,14 @@ commands:
             pnpm config set store-dir .pnpm-store
             pnpm install --filter=<< parameters.scope >>... --frozen-lockfile
   
+  install_codebuild_secrets:
+    steps:
+      - run: 
+          name: Setup our secrets from AWS Secret Manager
+          command: |
+            echo 'export SECRET_VALUE="$(aws secretsmanager get-secret-value --secret-id CodeBuild/Default --query SecretString --output text)"' >> "$BASH_ENV"
+            echo 'export PAGERDUTY_TOKEN="$(echo $SECRET_VALUE | jq -r '.mozilla_pagerduty_token')"' >> "$BASH_ENV"
+
   # ——————————————————————————————————————————————————————————————
   # Infra: Setup a Github Bot to post comments
   # ——————————————————————————————————————————————————————————————
@@ -432,6 +440,7 @@ jobs:
                   chmod a+x /home/circleci/tfcmt
               fi
         - setup_github_bot
+        - install_codebuild_secrets
         - install_infrastructure_pnpm:
             scope: << parameters.scope >>
         - when:
