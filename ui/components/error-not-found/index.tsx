@@ -1,7 +1,9 @@
-import style from './style.module.css'
 import itemStyle from '../item/style.module.css'
-import { ItemMedia } from '../item-media'
+import style from './style.module.css'
+
 import Link from 'next/link'
+
+import { ItemMedia } from '../item-media'
 
 /**
  * ErrorNotFound
@@ -11,11 +13,13 @@ import Link from 'next/link'
  */
 export function ErrorNotFound() {
   return (
-    <div className={style.base} data-testid="error-four" data-columns="4">
-      <h2>Oops! This page does not exist.</h2>
-      <p>
-        You can always discover interesting things on <Link href="/">Home</Link>
-      </p>
+    <div className={style.base} data-columns="4" data-testid="error-four">
+      <div className={style.copy}>
+        <h2>Oops! This page does not exist.</h2>
+        <p>
+          You can always discover interesting things on <Link href="/">Home</Link>
+        </p>
+      </div>
       <div className={`${style.container} grid`}>
         <article className={itemStyle.base}>
           <div>

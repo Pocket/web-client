@@ -1,11 +1,6 @@
 /** Remove this file if we don't have styles for the component **/
 .base {
-  h2 {
-    margin-top: 4rem;
-  }
-  & > p {
-    font-weight: 300;
-  }
+  margin-top: 4rem;
 }
 
 .container {
@@ -13,6 +8,9 @@
 }
 
 .copy {
+  h2 {
+    text-align: center;
+  }
   p {
     font-weight: 300;
     text-align: center;

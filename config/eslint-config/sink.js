@@ -12,7 +12,6 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
     'plugin:perfectionist/recommended-natural',
     'plugin:jsdoc/recommended-typescript-error',
     'plugin:i18next/recommended'
