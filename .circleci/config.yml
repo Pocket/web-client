@@ -2,13 +2,20 @@ version: 2.1
 
 # Orbs: Pre-configured bundled functionality
 orbs:
-  aws-cli: circleci/aws-cli@1.2.1
-  aws-ecr-old: circleci/aws-ecr@6.1.0
-  aws-ecr: circleci/aws-ecr@6.10.0
-  assume-role: airswap/assume-role@0.2.0
+  aws-cli: circleci/aws-cli@4.1.3
+  aws-ecr: circleci/aws-ecr@7.3.0
+  aws-code-deploy: circleci/aws-code-deploy@3.0.0
+  aws-ecs: circleci/aws-ecs@4.0.0
   slack: circleci/slack@3.4.0
-  aws-ecs: circleci/aws-ecs@2.0.0
-  pocket: pocket/circleci-orbs@1.2.8
+
+
+resource_class_enmum: &resource_class_enmum
+  resource-class:
+    description: The self hosted runnner to run on
+    type: enum
+    enum: 
+      - pocket/default-dev
+      - pocket/default-prod
 
 # Commands: Setting up some tasks to avoid a lot of boilerplate
 commands:
@@ -30,7 +37,81 @@ commands:
       - run:
           name: Install dependencies
           command: pnpm install
+  
+  # ——————————————————————————————————————————————————————————————
+  # Infra: Install PNPM on our infrastructure stack
+  # ——————————————————————————————————————————————————————————————
+  install_infrastructure_pnpm:
+    parameters:
+      path:
+        description: The pnpm scope to build for
+        type: string
+    steps:
+      - run:
+          name: Install and setup node
+          command: |
+            nvm install
+            nvm use
+            npm install -g pnpm@9.4.0
+            pnpm config set store-dir .pnpm-store
+            cd << paramaters.path >>
+            pnpm install --frozen-lockfile
+  
+  # ——————————————————————————————————————————————————————————————
+  # Infra: Setup a Github Bot to post comments
+  # ——————————————————————————————————————————————————————————————
+  setup_github_bot:
+    steps:
+      - run:
+          name: Get Github Bot Token
+          command: |
+            app_id=$GITHUB_APP_ID
+            pem="$(echo "$GITHUB_APP_PRIVATE_KEY" | base64 -d)"
+            installation_id=$GITHUB_INSTALLATION_APP_ID
 
+            now=$(date +%s)
+            iat=$((${now} - 60)) # Issues 60 seconds in the past
+            exp=$((${now} + 600)) # Expires 15 minutes in the future
+
+            b64enc() { openssl base64 | tr -d '=' | tr '/+' '_-' | tr -d '\n'; }
+
+            header_json='{
+                "typ":"JWT",
+                "alg":"RS256"
+            }'
+            # Header encode
+            header=$( echo -n "${header_json}" | b64enc )
+
+            payload_json='{
+                "iat":'"${iat}"',
+                "exp":'"${exp}"',
+                "iss":'"${app_id}"'
+            }'
+            # Payload encode
+            payload=$( echo -n "${payload_json}" | b64enc )
+
+            # Signature
+            header_payload="${header}"."${payload}"
+            signature=$( 
+                openssl dgst -sha256 -sign <(echo -n "${pem}") \
+                <(echo -n "${header_payload}") | b64enc 
+            )
+
+            # Create JWT
+            JWT="${header_payload}"."${signature}"
+
+            # Make a POST request to GitHub API to get the installation token
+            response=$(curl -s -X POST \
+              -H "Accept: application/vnd.github.v3+json" \
+              -H "Authorization: Bearer $JWT" \
+              -d "{}" \
+              "https://api.github.com/app/installations/$installation_id/access_tokens")
+
+            # Extract the token from the response
+            token=$(echo "$response" | jq -r '.token')
+            echo "export GITHUB_TOKEN=$token" >> $BASH_ENV
+            echo "export GH_TOKEN=$token" >> $BASH_ENV
+            echo "export GITHUB_ACCESS_TOKEN=$token" >> $BASH_ENV
 
 # Jobs: Setting up tasks for CI to execute
 jobs:
@@ -197,72 +278,305 @@ jobs:
             app_prod/clients/web/.next s3://readitlater-deploy/web-client/_next
 
   # ——————————————————————————————————————————————————————————————
-  # !! NEW ALB
   # Build the app along with the docker image to use for this version
   # Will push the docker image to ECR (Elastic Container Repository)
   # ECS will access this image to build a container to run the app
   # ——————————————————————————————————————————————————————————————
-  docker_build:
+  build_image:
+    description: Build and/or push docker image to ECR.
+
     parameters:
-      tag:
-        description: 'The docker tag name'
+      aws-access-key-id:
+        description: 'AWS access key id environment variable'
         type: string
-      environment:
-        description: 'The environment name'
+      aws-region:
+        description: 'AWS region value'
         type: string
-      ecr_url:
+      aws-secret-access-key:
+        description: 'AWS secret access key environment variable'
+        type: string
+      ecr-url:
         description: 'The ecr url'
         type: string
-      repo_name:
-        description: 'The ecr repo name'
+      extra-build-args:
+        description: 'Extra flags to pass to docker build. For examples, see https://docs.docker.com/engine/reference/commandline/build'
         type: string
+        default: ''
       push:
-        # This allows us to test that the image can be built without
-        # without pushing broken code to production 
         description: 'Whether or not to push the code'
         type: boolean
         default: false
-    docker:
-      - image: pocket/ops-cli:v0.0.5
+      repo-name:
+        description: 'The ecr repo name'
+        type: string
+      tag:
+        description: 'The docker tag name'
+        type: string
+        default: latest,$CIRCLE_SHA1
+      app_path:
+        description: 'The path needed for building the Docker image'
+        type: string
+        default: '.'
+      layer_caching:
+        description: 'Whether to use docker layer caching'
+        type: boolean
+        default: true
+      <<: *repo_for_enum
+    executor: aws-cli/default
+
     steps:
       - attach_workspace:
           at: /tmp/workspace
-      - run:
-          name: Setup common environment variables
-          command: |
-            echo 'export AWS_ECR_ACCOUNT_URL="<< parameters.ecr_url >>"' >> $BASH_ENV
-            echo 'export AWS_REGION=${<< parameters.environment >>_AWS_DEFAULT_REGION}' >> $BASH_ENV
-            echo 'export RELEASE_VERSION="$(cat /tmp/workspace/.version)"' >> $BASH_ENV
       - run: 
           name: "What version is being built?"
           command: echo ${RELEASE_VERSION}
+      - aws-cli/setup:
+          aws_access_key_id: << parameters.aws-access-key-id >>
+          aws_secret_access_key: << parameters.aws-secret-access-key >>
+          region: << parameters.aws-region >>
+      - run:
+          name: Setup common environment variables
+          command: |
+            { \
+              echo 'export AWS_ECR_ACCOUNT_URL="<< parameters.ecr-url >>"'; \
+              echo 'export REPO_NAME="<< parameters.repo-name >>"'; \
+              echo 'export RELEASE_VERSION="$(cat /tmp/workspace/.version)"'; \
+            } >> "$BASH_ENV"
       - when:
           condition: <<parameters.push>>
           steps:
             - aws-ecr/build-and-push-image:
                 checkout: false
-                repo: << parameters.repo_name >>
-                setup-remote-docker: true
+                repo: << parameters.repo-name >>
                 path: /tmp/workspace/app_prod
-                aws-access-key-id: << parameters.environment >>_AWS_ACCESS_KEY
-                aws-secret-access-key: << parameters.environment >>_AWS_SECRET_ACCESS_KEY
+                setup-remote-docker: true
+                remote-docker-layer-caching: << parameters.layer_caching >>
+                aws-access-key-id: << parameters.aws-access-key-id >>
+                aws-secret-access-key: << parameters.aws-secret-access-key >>
                 tag: << parameters.tag >>
-                extra-build-args: --build-arg RELEASE_VERSION=${RELEASE_VERSION}
+                remote-docker-version: default
+                extra-build-args: --build-arg RELEASE_VERSION=${RELEASE_VERSION} << parameters.extra-build-args >>
       - unless:
           condition: <<parameters.push>>
           steps:
-            - setup_remote_docker
+            - setup_remote_docker:
+                version: default
+                docker-layer-caching: << parameters.layer_caching >>
             - aws-ecr/build-image:
-                repo: << parameters.repo_name >>
+                repo: << parameters.repo-name >>
                 tag: << parameters.tag >>
                 path: /tmp/workspace/app_prod
-                extra-build-args: --build-arg RELEASE_VERSION=${RELEASE_VERSION}
+                extra-build-args: --build-arg RELEASE_VERSION=${RELEASE_VERSION} << parameters.extra-build-args >>
 
-  # ——————————————————————————————————————————————————————————————
-  # !! NEW ALB
-  # That's it. Crazy.
-  # ——————————————————————————————————————————————————————————————
+  sentry_release_notification:
+    description: Create new release in Sentry
+    resource_class: small
+    parameters:
+      sentry_project_name:
+        type: string
+        description: the Sentry project name
+      sentry_env:
+        type: string
+        default: Prod
+        description: Which environment the release is going to
+      sentry_org:
+        type: string
+        description: The sentry org
+      <<: *repo_for_enum
+    docker:
+      - image: getsentry/sentry-cli@sha256:67e30136fc6c4b38c7b93df802d03507f5afbcf6307ddfbaa4ebf98a640c6d02
+        auth:
+          username: $DOCKER_LOGIN
+          password: $DOCKER_PASSWORD
+    steps:
+      - exit-early-if-irrelevant:
+          for: << parameters.for >>
+      - run:
+          name: Setup Environment variables
+          command: |
+            echo "export SENTRY_AUTH_TOKEN="$SENTRY_BEARER"" >> "$BASH_ENV"
+            echo "export SENTRY_ORG=<< parameters.sentry_org >>" >> "$BASH_ENV"
+            echo "export SENTRY_PROJECT=<< parameters.sentry_project_name >>" >> "$BASH_ENV"
+      - run:
+          name: Sentry Release Notification
+          command: |
+            source "$BASH_ENV"
+            sentry-cli releases new "$CIRCLE_SHA1"
+            sentry-cli releases set-commits "$CIRCLE_SHA1" --commit "Pocket/web-client@$CIRCLE_SHA1"
+            sentry-cli releases finalize "$CIRCLE_SHA1"
+      - run:
+          name: Sentry Deploy Notification
+          command: |
+            source "$BASH_ENV"
+            sentry-cli releases deploys "$CIRCLE_SHA1" new -e "<< parameters.sentry_env >>"
 
+  infrastructure:
+      description: Build and optionally deploy the infratructure
+      parameters:
+        path:
+          description: The pnpm path to build for
+          type: string
+          default: ''
+        stack-output-path:
+          description: The pnpm output path
+          type: string
+        apply:
+          description: If you should apply
+          type: boolean
+          default: false
+        dev:
+          description: Whether or not its a dev build
+          type: boolean
+          default: false
+        <<: [*resource_class_enmum]
+      # Our self hosted runners dont support docker images, cause its not deployed in kubernetes, so we have some special steps
+      machine: true
+      shell: /bin/bash --login -eo pipefail
+      resource_class: << parameters.resource-class >>
+      steps:
+        - checkout
+        - run:
+            name: Install tfcmt
+            command: |
+              if ! command -v tfcmt &> /dev/null; then
+                  echo "tfcmt does not exist, installing"
+                  curl -L https://github.com/suzuki-shunsuke/tfcmt/releases/download/v4.9.1/tfcmt_linux_amd64.tar.gz | tar xvzf - tfcmt
+                  mv tfcmt /home/circleci/tfcmt
+                  chmod a+x /home/circleci/tfcmt
+              fi
+        - setup_github_bot
+        - install_infrastructure_pnpm:
+            path: << parameters.path >>
+        - when:
+            condition: <<parameters.dev>>
+            steps:
+              - run:
+                  name: Build Dev Infra
+                  command: |
+                    nvm use
+                    export NODE_ENV=development
+                    cd << parameters.path >>
+                    pnpm run synth
+        - unless:
+            condition: <<parameters.dev>>
+            steps:
+              - run:
+                  name: Build Prod Infra
+                  command: |
+                    nvm use
+                    export NODE_ENV=production
+                    cd << parameters.path >>
+                    pnpm run synth
+        - run:
+            name: Setup terraform
+            command: |
+              cd << parameters.stack-output-path >>
+              tfenv use
+              terraform init
+        - when:
+            condition: <<parameters.apply>>
+            steps:
+              - run:
+                  name: Terraform apply
+                  # Re-add this when tfcmt supports ignoring no change applies
+                  # https://github.com/suzuki-shunsuke/tfcmt/issues/1184
+                  #  /home/circleci/tfcmt --var target:<< parameters.scope >><<#parameters.dev>>-dev<</parameters.dev>> apply -- terraform apply -auto-approve -lock-timeout=10m
+                  command: |
+                    cd << parameters.stack-output-path >>
+                    terraform apply -auto-approve -lock-timeout=10m
+                    mkdir -p /tmp/workspace
+                    echo "$(terraform output -json)" > /tmp/workspace/tf_output.json
+              # Persist TF_OUTPUT using workspace
+              - persist_to_workspace:
+                  root: /tmp/workspace
+                  paths:
+                    - tf_output.json
+        - unless:
+            condition: <<parameters.apply>>
+            steps:
+              - run:
+                  name: Terraform plan
+                  command: |
+                    cd << parameters.stack-output-path >>
+                    tfcmt --var target:<< parameters.scope >><<#parameters.dev>>-dev<</parameters.dev>> plan --skip-no-changes --patch -- terraform plan -lock-timeout=10m
+
+  code_deploy_ecs:
+      parameters:
+        <<: [*resource_class_enmum]
+      # Our self hosted runners dont support docker images, cause its not deployed in kubernetes, so we have some special steps
+      machine: true
+      shell: /bin/bash --login -eo pipefail
+      resource_class: << parameters.resource-class >>
+      steps:
+        # Restore TF_OUTPUT from workspace
+        - attach_workspace:
+            at: /tmp/workspace
+        - run:
+            # Pulls out the terraform params needed for CodeDeploy and then re-saves them to be used in the CodeDeploy ORB
+            name: CodeDeploy Load Env
+            command: |
+              TF_OUTPUT=$(cat /tmp/workspace/tf_output.json)
+              ECS_TASK_ARN=$(echo "$TF_OUTPUT" | jq -r '.["ecs-task-arn"].value')
+              ECS_TASK_CONTAINER_NAME=$(echo "$TF_OUTPUT" | jq -r '.["ecs-task-containerName"].value')
+              ECS_TASK_CONTAINER_PORT=$(echo "$TF_OUTPUT" | jq -r '.["ecs-task-containerPort"].value')
+              ECS_TASK_FAMILY=$(echo "$TF_OUTPUT" | jq -r '.["ecs-task-family"].value')
+              ECS_CODEDEPLOY_GROUP=$(echo "$TF_OUTPUT" | jq -r '.["ecs-codedeploy-group"].value')
+              ECS_CODEDEPLOY_APP=$(echo "$TF_OUTPUT" | jq -r '.["ecs-codedeploy-app"].value')
+
+              echo "export ECS_TASK_ARN=$ECS_TASK_ARN" >> $BASH_ENV
+              echo "export ECS_TASK_CONTAINER_NAME=$ECS_TASK_CONTAINER_NAME" >> $BASH_ENV
+              echo "export ECS_TASK_CONTAINER_PORT=$ECS_TASK_CONTAINER_PORT" >> $BASH_ENV
+              echo "export ECS_TASK_FAMILY=$ECS_TASK_FAMILY" >> $BASH_ENV
+              echo "export ECS_CODEDEPLOY_GROUP=$ECS_CODEDEPLOY_GROUP" >> $BASH_ENV
+              echo "export ECS_CODEDEPLOY_APP=$ECS_CODEDEPLOY_APP" >> $BASH_ENV
+
+        ## All the following steps are copied from https://github.com/CircleCI-Public/aws-ecs-orb/blob/master/src/commands/update_service.yml but we manually run them so we can pass env variables that we otherwise couldn't since it relies on parameter steps.
+        ## See open issue to clean up when we can. https://github.com/CircleCI-Public/aws-ecs-orb/issues/211
+        ## Once the above issue is fixed we can remove the included script and these commands and replace it with the below.
+        # - aws-ecs/update_service:
+        #     name: Deploy ECS Service
+        #     codedeploy_application_name: ${ECS_CODEDEPLOY_APP}
+        #     codedeploy_deployment_group_name: ${ECS_CODEDEPLOY_GROUP}
+        #     codedeploy_load_balanced_container_name: ${ECS_TASK_CONTAINER_NAME}
+        #     codedeploy_load_balanced_container_port: ${ECS_TASK_CONTAINER_PORT}
+        #     family: ${ECS_TASK_FAMILY}
+        #     container_image_name_updates: tag=${CIRCLE_SHA1}, container=${ECS_TASK_CONTAINER_NAME}
+        #     deployment_controller: CODE_DEPLOY
+        #     verify_revision_is_deployed: true
+
+        - aws-cli/install
+        ## Set the AWS CLI to use the Ecs Container credentials since this is in a hosted runner on AWS.
+        - run:
+            name: Setup AWS Auth
+            command: |
+              aws configure set profile.default.credential_source EcsContainer
+
+        ## This will use the last revision in AWS to create a new task definition with the container image pointed to the sha of this commit
+        ## If the task def was changed in terraform, that will be the latest revision that this will then over
+        - aws-ecs/update_task_definition:
+            family: ${ECS_TASK_FAMILY}
+            container_image_name_updates: container=${ECS_TASK_CONTAINER_NAME},tag=${CIRCLE_SHA1}
+        ## We need to checkout the code, because that contains our copied script from the aws-ecs orb repo.
+        - checkout
+        - run:
+            name: Update ECS Blue/Green service with registered task definition.
+            command: |
+              .circleci/scripts/update_bluegreen_service_via_task_def.sh
+            no_output_timeout: 10m
+            environment:
+              DEPLOYMENT_CONTROLLER: CODE_DEPLOY
+              ORB_STR_CD_APP_NAME: ${ECS_CODEDEPLOY_APP}
+              ORB_STR_CD_DEPLOY_GROUP_NAME: ${ECS_CODEDEPLOY_GROUP}
+              ORB_STR_CD_LOAD_BALANCED_CONTAINER_NAME: ${ECS_TASK_CONTAINER_NAME}
+              ORB_INT_CD_LOAD_BALANCED_CONTAINER_PORT: ${ECS_TASK_CONTAINER_PORT}
+              # Dont wait for a successful deploy, we will get alerts in slack for those.
+              ORB_BOOL_VERIFY_REV_DEPLOY: false
+              ORB_STR_PROFILE_NAME: default
+              ORB_BOOL_ENABLE_CIRCUIT_BREAKER: false
+              ORB_STR_CD_CAPACITY_PROVIDER_NAME: 
+              ORB_STR_CD_CAPACITY_PROVIDER_WEIGHT: 
+              ORB_STR_CD_CAPACITY_PROVIDER_BASE: 
+              ORB_STR_CD_DEPLOYMENT_CONFIG_NAME:
 
 # Workflow switches
 not_main: &not_main
@@ -308,6 +622,10 @@ workflows:
   version: 2
   all:
     jobs:
+      #——————————————————————————————————————————————————————————————
+      # Every PR Jobs
+      #——————————————————————————————————————————————————————————————
+
       # lint all the files
       - lint:
           <<: *not_main
@@ -338,109 +656,126 @@ workflows:
           requires:
             - build_app_production
 
-       # Try building the ECS docker image on each branch
-       # !! This pushes to a dev account
-       # !! Change this to not_main instead of getting rid of it
-      - docker_build:
+      - build_image:
           <<: *not_dev_main
           context: pocket
-          name: build_docker
-          environment: 'Dev'
-          tag: latest,$CIRCLE_SHA1
-          # dev-app is based on how its created in shared infrastructure
-          # https://github.com/Pocket/shared-infrastructure
-          repo_name: webclient-dev-app 
-          ecr_url: 410318598490.dkr.ecr.us-east-1.amazonaws.com
-          push: false
-          requires:
-            - build_app_dev # Make sure build is not funky and change this to that
-
-      # Build & Deploy the Dev Docker Image
-      - docker_build:
-          <<: *only_dev
-          context: pocket
-          name: build_docker_dev
-          environment: 'Dev'
-          tag: latest,$CIRCLE_SHA1
-          repo_name: webclient-dev-app
-          ecr_url: 410318598490.dkr.ecr.us-east-1.amazonaws.com
-          push: true
-          requires:
-            - build_app_dev
-      
-      # Dev
-      - pocket/execute_codepipeline:
-          <<: *only_dev
-          context: pocket
-          name: deploy_dev
-          environment: Dev
+          name: web-client_build_docker
           aws-access-key-id: Dev_AWS_ACCESS_KEY
           aws-secret-access-key: Dev_AWS_SECRET_ACCESS_KEY
           aws-region: Dev_AWS_DEFAULT_REGION
-          codepipeline-name: WebClient-Dev-CodePipeline
-          codebuild-project-name: WebClient-Dev
-          codebuild-project-branch: dev
+          repo-name: webclient-dev-app
+          ecr-url: 410318598490.dkr.ecr.us-east-1.amazonaws.com
+          push: false
+          extra-build-args: --build-arg START_COMMAND='start:web'
           requires:
-            - build_docker_dev
+            - build_app_dev # Make sure build is not funky and change this to that
+
+      - infrastructure:
+          <<: *not_dev_main
+          context: pocket
+          name: web-client_infrastructure_plan_prod
+          path: .aws-web-client
+          stack-output-path: .aws-web-client/cdktf.out/stacks/web-client
+          resource-class: pocket/default-prod
+          dev: false
+          apply: false
+
+      #——————————————————————————————————————————————————————————————
+      # Dev Branch Deployment (Dev Environment)
+      #——————————————————————————————————————————————————————————————
+
+      - infrastructure:
+          <<: *only_dev
+          context: pocket
+          name: web-client_infrastructure_apply_dev
+          path: .aws-web-client
+          stack-output-path: .aws-web-client/cdktf.out/stacks/web-client
+          resource-class: pocket/default-prod
+          dev: false
+          apply: false
+
+      # Build & Deploy the Dev Docker Image
+      - build_image:
+          <<: *only_dev
+          context: pocket
+          name: web-client_build_docker_dev
+          aws-access-key-id: Dev_AWS_ACCESS_KEY
+          aws-secret-access-key: Dev_AWS_SECRET_ACCESS_KEY
+          aws-region: Dev_AWS_DEFAULT_REGION
+          repo-name: webclient-dev-app
+          ecr-url: 410318598490.dkr.ecr.us-east-1.amazonaws.com
+          push: true
+          extra-build-args: --build-arg START_COMMAND='start:web'
+          requires:
+            - build_app_dev # Make sure build is not funky and change this to that
+            - web-client_infrastructure_apply_dev
+
+      - code_deploy_ecs:
+          <<: *only_dev
+          context: pocket
+          name: web_client_code_deploy_ecs_dev
+          resource-class: pocket/default-dev
+          requires:
+            - web-client_build_docker_dev
+
+      # Notify sentry of dev deployment
+      - sentry_release_notification:
+          <<: *only_dev
+          name: web-client_sentry-release-notification-dev
+          context: pocket
+          sentry_project_name: web-client
+          sentry_env: development
+          sentry_org: pocket
+          requires:
+            - web_client_code_deploy_ecs_dev
+
+      #——————————————————————————————————————————————————————————————
+      # Main Branch Deployment (Production Environment)
+      #——————————————————————————————————————————————————————————————
+      - infrastructure:
+          <<: *only_main
+          context: pocket
+          name: web-client_infrastructure_apply_prod
+          path: .aws-web-client
+          stack-output-path: .aws-web-client/cdktf.out/stacks/web-client
+          resource-class: pocket/default-prod
+          apply: true
+          dev: false
 
       # Build & Deploy the Prod Docker Image
-      - docker_build:
+      - build_image:
           <<: *only_main
           context: pocket
-          name: build_docker_prod
-          environment: 'Prod'
-          tag: latest,$CIRCLE_SHA1
-          repo_name: webclient-prod-app
-          ecr_url: 996905175585.dkr.ecr.us-east-1.amazonaws.com
-          push: true
-          requires:
-            - build_app_production
-
-      # Prod
-      - pocket/execute_codepipeline:
-          <<: *only_main
-          context: pocket
-          name: deploy_prod
-          environment: Prod
+          name: web-client_build_docker_prod
           aws-access-key-id: Prod_AWS_ACCESS_KEY
           aws-secret-access-key: Prod_AWS_SECRET_ACCESS_KEY
           aws-region: Prod_AWS_DEFAULT_REGION
-          codepipeline-name: WebClient-Prod-CodePipeline
-          codebuild-project-name: WebClient-Prod
-          codebuild-project-branch: main
+          repo-name: webclient-prod-app
+          ecr-url: 996905175585.dkr.ecr.us-east-1.amazonaws.com
+          push: true
+          extra-build-args: --build-arg START_COMMAND='start:web'
           requires:
-            - build_docker_prod
-            - push_production_assets
+            - web-client_infrastructure_apply_prod
+            - build_app_production
 
-      - pocket/setup_deploy_params:
+      - code_deploy_ecs:
           <<: *only_main
-          name: setup-deploy-params-prod
-          aws_access_key_id: Prod_AWS_ACCESS_KEY
-          aws_secret_access_key: Prod_AWS_SECRET_ACCESS_KEY
           context: pocket
-          env: Prod
-          service_name: WebClient
-
-      # !! This pushes to a dev account
-      - pocket/setup_deploy_params:
-          <<: *only_dev
-          name: setup-deploy-params-dev
-          aws_access_key_id: Dev_AWS_ACCESS_KEY
-          aws_secret_access_key: Dev_AWS_SECRET_ACCESS_KEY
-          context: pocket
-          env: Dev
-          service_name: WebClient
+          name: web-client_code_deploy_ecs_prod
+          resource-class: pocket/default-prod
+          requires:
+            - web-client_build_docker_prod
 
       # Notify sentry of main deployment
-      # - pocket/sentry_release_notification:
-      #     <<: *only_main
-      #     name: sentry-release-notification-prod
-      #     context: pocket
-      #     repository_name: Pocket/web-client
-      #     sentry_project_name: web-client
-      #     sentry_env: production
-      #     sentry_org: pocket
-      #     workspace-path: /tmp/workspace
-      #     requires:
-      #       - deploy_prod
+      - sentry_release_notification:
+          <<: *only_main
+          name: web-client_sentry-release-notification-prod
+          context: pocket
+          sentry_project_name: web-client
+          sentry_env: production
+          sentry_org: pocket
+          requires:
+            - web-client_code_deploy_ecs_prod
+
+
 
