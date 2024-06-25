@@ -625,9 +625,6 @@ importers:
         specifier: 2.6.3
         version: 2.6.3
     devDependencies:
-      '@pocket-tools/tsconfig':
-        specifier: 2.0.2
-        version: 2.0.2
       '@types/node':
         specifier: 20.14.8
         version: 20.14.8
@@ -665,9 +662,6 @@ importers:
         specifier: 2.6.3
         version: 2.6.3
     devDependencies:
-      '@pocket-tools/tsconfig':
-        specifier: 2.0.2
-        version: 2.0.2
       '@types/node':
         specifier: 20.14.8
         version: 20.14.8
@@ -2926,10 +2920,6 @@ packages:
 
   '@pocket-tools/terraform-modules@5.12.5':
     resolution: {integrity: sha512-C+9yaTm0YyUybNRPj+4BKV7XFOIhnC8MqRAEBgsU8csoQIl7LSke0qPCoxbmhtvdBrNzarWDmMR5cZ9wXQ+x2g==}
-
-  '@pocket-tools/tsconfig@2.0.2':
-    resolution: {integrity: sha512-BpkJEYqpWf/8bWIBHTJGpuchYLwwTSAoajE/Y/vMVh5NASuauqvAwtVlyK9vbB1inI2d5/cjnPGeYww0C9C51g==}
-    engines: {node: '>=20'}
 
   '@popperjs/core@2.11.8':
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
@@ -8711,10 +8701,6 @@ packages:
   pac-resolver@7.0.1:
     resolution: {integrity: sha512-5NPgf87AT2STgwa2ntRMr45jTKrYBGkVU36yT0ig/n/GMAa3oPqhZfIQ2kMEimReg0+t9kZViDVZ83qfVUlckg==}
     engines: {node: '>= 14'}
-
-  package-up@5.0.0:
-    resolution: {integrity: sha512-MQEgDUvXCa3sGvqHg3pzHO8e9gqTCMPVrWUko3vPQGntwegmFo52mZb2abIVTjFnUcW0BcPz0D93jV5Cas1DWA==}
-    engines: {node: '>=18'}
 
   pako@0.2.9:
     resolution: {integrity: sha512-NUcwaKxUxWrZLpDG+z/xZaCgQITkA/Dv4V/T6bw7VON6l1Xz/VnrBqrYjZQ12TamKHzITTfOEIYUj48y2KXImA==}
@@ -14500,11 +14486,6 @@ snapshots:
       - react
       - supports-color
       - utf-8-validate
-
-  '@pocket-tools/tsconfig@2.0.2':
-    dependencies:
-      package-up: 5.0.0
-      typescript: 5.5.2
 
   '@popperjs/core@2.11.8': {}
 
@@ -22720,10 +22701,6 @@ snapshots:
     dependencies:
       degenerator: 5.0.1
       netmask: 2.0.2
-
-  package-up@5.0.0:
-    dependencies:
-      find-up-simple: 1.0.0
 
   pako@0.2.9: {}
 
