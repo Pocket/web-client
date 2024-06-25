@@ -321,7 +321,6 @@ jobs:
         description: 'Whether to use docker layer caching'
         type: boolean
         default: true
-      <<: *repo_for_enum
     executor: aws-cli/default
 
     steps:
@@ -382,15 +381,12 @@ jobs:
       sentry_org:
         type: string
         description: The sentry org
-      <<: *repo_for_enum
     docker:
       - image: getsentry/sentry-cli@sha256:67e30136fc6c4b38c7b93df802d03507f5afbcf6307ddfbaa4ebf98a640c6d02
         auth:
           username: $DOCKER_LOGIN
           password: $DOCKER_PASSWORD
     steps:
-      - exit-early-if-irrelevant:
-          for: << parameters.for >>
       - run:
           name: Setup Environment variables
           command: |
@@ -674,8 +670,8 @@ workflows:
           <<: *not_dev_main
           context: pocket
           name: web-client_infrastructure_plan_prod
-          path: .aws-web-client
-          stack-output-path: .aws-web-client/cdktf.out/stacks/web-client
+          path: infrastructure/web
+          stack-output-path: infrastructure/web/cdktf.out/stacks/web-client
           resource-class: pocket/default-prod
           dev: false
           apply: false
@@ -688,8 +684,8 @@ workflows:
           <<: *only_dev
           context: pocket
           name: web-client_infrastructure_apply_dev
-          path: .aws-web-client
-          stack-output-path: .aws-web-client/cdktf.out/stacks/web-client
+          path: infrastructure/web
+          stack-output-path: infrastructure/web/cdktf.out/stacks/web-client
           resource-class: pocket/default-prod
           dev: false
           apply: false
@@ -736,8 +732,8 @@ workflows:
           <<: *only_main
           context: pocket
           name: web-client_infrastructure_apply_prod
-          path: .aws-web-client
-          stack-output-path: .aws-web-client/cdktf.out/stacks/web-client
+          path: infrastructure/web
+          stack-output-path: infrastructure/web/cdktf.out/stacks/web-client
           resource-class: pocket/default-prod
           apply: true
           dev: false

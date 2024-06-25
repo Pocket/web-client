@@ -1,34 +1,31 @@
-import { Construct } from 'constructs'
-
 import { config } from './config'
-
+import { Construct } from 'constructs'
 import { App, S3Backend, TerraformStack } from 'cdktf'
 
-import { ArchiveProvider } from '@cdktf/provider-archive/lib/provider'
-import { AwsProvider } from '@cdktf/provider-aws/lib/provider'
-import { DataAwsRegion } from '@cdktf/provider-aws/lib/data-aws-region'
-import { DataAwsCallerIdentity } from '@cdktf/provider-aws/lib/data-aws-caller-identity'
-import { DataAwsSnsTopic } from '@cdktf/provider-aws/lib/data-aws-sns-topic'
-import { DataAwsKmsAlias } from '@cdktf/provider-aws/lib/data-aws-kms-alias'
-import { LocalProvider } from '@cdktf/provider-local/lib/provider'
-import { NullProvider } from '@cdktf/provider-null/lib/provider'
-import { PagerdutyProvider } from '@cdktf/provider-pagerduty/lib/provider'
 import {
-  PocketALBApplication,
-  PocketECSCodePipeline,
-  PocketVPC
-} from '@pocket-tools/terraform-modules'
+  provider as awsProvider,
+  dataAwsRegion,
+  dataAwsCallerIdentity,
+  dataAwsKmsAlias,
+  dataAwsSnsTopic
+} from '@cdktf/provider-aws'
+import { provider as nullProvider } from '@cdktf/provider-null'
+import { provider as localProvider } from '@cdktf/provider-local'
+import { provider as archiveProvider } from '@cdktf/provider-archive'
+import { PocketALBApplication } from '@pocket-tools/terraform-modules'
 import * as fs from 'fs'
 
 class WebClient extends TerraformStack {
   constructor(scope: Construct, name: string) {
     super(scope, name)
 
-    new AwsProvider(this, 'aws', { region: 'us-east-1' })
-    new PagerdutyProvider(this, 'pagerduty_provider', { token: undefined })
-    new NullProvider(this, 'null-provider')
-    new LocalProvider(this, 'local-provider')
-    new ArchiveProvider(this, 'archive-provider')
+    new awsProvider.AwsProvider(this, 'aws', {
+      region: 'us-east-1',
+      defaultTags: [{ tags: config.tags }]
+    })
+    new nullProvider.NullProvider(this, 'null-provider')
+    new localProvider.LocalProvider(this, 'local-provider')
+    new archiveProvider.ArchiveProvider(this, 'archive-provider')
     new S3Backend(this, {
       bucket: `mozilla-pocket-team-${config.environment.toLowerCase()}-terraform-state`,
       dynamodbTable: `mozilla-pocket-team-${config.environment.toLowerCase()}-terraform-state`,
@@ -36,19 +33,15 @@ class WebClient extends TerraformStack {
       region: 'us-east-1'
     })
 
-    const pocketVPC = new PocketVPC(this, 'pocket-vpc')
-    const region = new DataAwsRegion(this, 'region')
-    const caller = new DataAwsCallerIdentity(this, 'caller')
+    const region = new dataAwsRegion.DataAwsRegion(this, 'region')
+    const caller = new dataAwsCallerIdentity.DataAwsCallerIdentity(this, 'caller')
 
-    const pocketApp = this.createPocketAlbApplication({
+    this.createPocketAlbApplication({
       secretsManagerKmsAlias: this.getSecretsManagerKmsAlias(),
       snsTopic: this.getCodeDeploySnsTopic(),
       region,
-      caller,
-      vpc: pocketVPC
+      caller
     })
-
-    this.createApplicationCodePipeline(pocketApp)
   }
 
   /**
@@ -56,7 +49,7 @@ class WebClient extends TerraformStack {
    * @private
    */
   private getCodeDeploySnsTopic() {
-    return new DataAwsSnsTopic(this, 'frontend_notifications', {
+    return new dataAwsSnsTopic.DataAwsSnsTopic(this, 'frontend_notifications', {
       name: `Frontend-${config.environment}-ChatBot`
     })
   }
@@ -66,35 +59,18 @@ class WebClient extends TerraformStack {
    * @private
    */
   private getSecretsManagerKmsAlias() {
-    return new DataAwsKmsAlias(this, 'kms_alias', {
+    return new dataAwsKmsAlias.DataAwsKmsAlias(this, 'kms_alias', {
       name: 'alias/aws/secretsmanager'
     })
   }
 
-  /**
-   * Create CodePipeline to build and deploy terraform and ecs
-   * @param app
-   * @private
-   */
-  private createApplicationCodePipeline(app: PocketALBApplication) {
-    new PocketECSCodePipeline(this, 'code-pipeline', {
-      prefix: config.prefix,
-      source: {
-        codeStarConnectionArn: config.codePipeline.githubConnectionArn,
-        repository: config.codePipeline.repository,
-        branchName: config.codePipeline.branch
-      }
-    })
-  }
-
   private createPocketAlbApplication(dependencies: {
-    region: DataAwsRegion
-    caller: DataAwsCallerIdentity
-    secretsManagerKmsAlias: DataAwsKmsAlias
-    snsTopic: DataAwsSnsTopic
-    vpc: PocketVPC
+    region: dataAwsRegion.DataAwsRegion
+    caller: dataAwsCallerIdentity.DataAwsCallerIdentity
+    secretsManagerKmsAlias: dataAwsKmsAlias.DataAwsKmsAlias
+    snsTopic: dataAwsSnsTopic.DataAwsSnsTopic
   }): PocketALBApplication {
-    const { region, caller, secretsManagerKmsAlias, snsTopic, vpc } = dependencies
+    const { region, caller, secretsManagerKmsAlias, snsTopic } = dependencies
 
     return new PocketALBApplication(this, 'application', {
       prefix: config.prefix,
@@ -164,11 +140,13 @@ class WebClient extends TerraformStack {
       ],
       codeDeploy: {
         useCodeDeploy: true,
-        useCodePipeline: true,
+        useCodePipeline: false,
+        useTerraformBasedCodeDeploy: false,
+        generateAppSpec: false,
         notifications: {
           notifyOnFailed: true,
           notifyOnStarted: false,
-          notifyOnSucceeded: true
+          notifyOnSucceeded: false
         },
         snsNotificationTopicArn: snsTopic.arn
       },
