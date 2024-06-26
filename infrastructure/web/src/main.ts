@@ -197,7 +197,7 @@ class WebClient extends TerraformStack {
       },
 
       autoscalingConfig: {
-        targetMinCapacity: 5,
+        targetMinCapacity: config.isDev ? 1 : 5,
         targetMaxCapacity: 30
       },
       alarms: {

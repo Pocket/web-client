@@ -1,11 +1,11 @@
 {
-  "name": "pocket",
+  "name": "@client/pocket",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "pocket": "echo 'https://local.client.pocket.com/\n\n' && PORT=443 next dev --experimental-https --experimental-https-key ./certificates/local.client.pocket.com-key.pem --experimental-https-cert ./certificates/local.client.pocket.com.pem",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 80",
     "lint": "next lint"
   },
   "dependencies": {

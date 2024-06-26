@@ -2,64 +2,41 @@
   "name": "@pocket/front-end",
   "version": "1.0.0",
   "description": "Pocket Front End",
-  "main": "index.js",
-  "engines": {
-    "node": ">=20.0.0",
-    "pnpm": ">=9"
-  },
-  "packageManager": "pnpm@9.4.0",
-  "scripts": {
-    "clean": "pnpm turbo clean",
-    "pocket": "pnpm turbo pocket",
-    "dev": "pnpm turbo dev",
-    "dev:snowplow": "pnpm turbo dev:snowplow",
-    "build": "pnpm --filter @client/web build",
-    "start-web": "pnpm --filter @client/web start",
-    "start-pocket": "pnpm --filter @client/pocket start",
-    "start:local": "pnpm --filter @client/web start:local",
-    "lint": "pnpm turbo lint",
-    "test": "pnpm turbo test",
-    "test:ci": "pnpm --filter @client/web test:ci",
-    "test:update": "pnpm turbo test:update",
-    "storybook": "pnpm turbo storybook",
-    "storybook:build": "pnpm --filter @config/storybook build-storybook",
-    "storybook:start": "pnpm --filter @config/storybook start-storybook",
-    "gen": "turbo gen --config config/generators/config.ts",
-    "locale:inject": "node ./common/localization/locale-inject.mjs",
-    "locale:parse": "i18next",
-    "schema": "rover graph fetch pocket-client-api@current >| schema.graphql",
-    "format": "lint-staged",
-    "checktypes": "pnpm turbo checktypes",
-    "prepare": "husky",
-    "synth": "pnpm turbo synth"
+  "homepage": "https://github.com/Pocket/web-client#readme",
+  "bugs": {
+    "url": "https://github.com/Pocket/web-client/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Pocket/web-client.git"
   },
-  "author": "",
   "license": "ISC",
-  "homepage": "https://github.com/Pocket/web-client#readme",
-  "bugs": {
-    "url": "https://github.com/Pocket/web-client/issues"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^19.3.0",
-    "@commitlint/config-conventional": "^19.2.2",
-    "@config/eslint-config": "workspace:*",
-    "@config/typescript-config": "workspace:*",
-    "@semantic-release/changelog": "6.0.3",
-    "@semantic-release/commit-analyzer": "13.0.0",
-    "@semantic-release/exec": "6.0.3",
-    "@semantic-release/git": "10.0.1",
-    "@semantic-release/release-notes-generator": "14.0.0",
-    "@turbo/gen": "2.0.4",
-    "husky": "9.0.11",
-    "i18next-parser": "^9.0.0",
-    "lint-staged": "15.2.7",
-    "prettier": "^3.3.2",
-    "turbo": "2.0.4",
-    "typescript": "5.5.2"
+  "author": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "pnpm --filter @client/* build",
+    "checktypes": "pnpm turbo checktypes",
+    "clean": "pnpm turbo clean",
+    "dev": "pnpm turbo dev",
+    "dev:snowplow": "pnpm turbo dev:snowplow",
+    "format": "lint-staged",
+    "gen": "turbo gen --config config/generators/config.ts",
+    "lint": "pnpm turbo lint",
+    "locale:inject": "node ./common/localization/locale-inject.mjs",
+    "locale:parse": "i18next",
+    "pocket": "pnpm turbo pocket",
+    "prepare": "husky",
+    "schema": "rover graph fetch pocket-client-api@current >| schema.graphql",
+    "start:local": "pnpm --filter @client/web start:local",
+    "start:pocket": "pnpm --filter @client/pocket start",
+    "start:web": "pnpm --filter @client/web start",
+    "storybook": "pnpm turbo storybook",
+    "storybook:build": "pnpm --filter @config/storybook build-storybook",
+    "storybook:start": "pnpm --filter @config/storybook start-storybook",
+    "synth": "pnpm turbo synth",
+    "test": "pnpm turbo test",
+    "test:ci": "pnpm --filter @client/web test:ci",
+    "test:update": "pnpm turbo test:update"
   },
   "commitlint": {
     "extends": [
@@ -82,5 +59,28 @@
         }
       ]
     ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@config/eslint-config": "workspace:*",
+    "@config/typescript-config": "workspace:*",
+    "@semantic-release/changelog": "6.0.3",
+    "@semantic-release/commit-analyzer": "13.0.0",
+    "@semantic-release/exec": "6.0.3",
+    "@semantic-release/git": "10.0.1",
+    "@semantic-release/release-notes-generator": "14.0.0",
+    "@turbo/gen": "2.0.4",
+    "husky": "9.0.11",
+    "i18next-parser": "^9.0.0",
+    "lint-staged": "15.2.7",
+    "prettier": "^3.3.2",
+    "turbo": "2.0.4",
+    "typescript": "5.5.2"
+  },
+  "packageManager": "pnpm@9.4.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9"
   }
 }

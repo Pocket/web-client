@@ -4,7 +4,8 @@ WORKDIR /usr/src/app
 
 ARG RELEASE_VERSION
 
-ARG START_COMMAND
+ARG SCOPE
+ENV SCOPE=${SCOPE}
 
 ## Add pnpm to all followup builder images
 RUN yarn global add pnpm@9.4.0
@@ -20,5 +21,14 @@ ENV RELEASE_VERSION=${RELEASE_VERSION}
 EXPOSE ${PORT}
 
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
-ENV START_COMMAND=${START_COMMAND}
-CMD ["pnpm", "${START_COMMAND}"]
+
+# Use a shell script to conditionally set the CMD
+RUN echo '#!/bin/sh' > /set_cmd.sh \
+    && echo 'if [ "$SCOPE" = "web" ]; then' >> /set_cmd.sh \
+    && echo '  exec pnpm start:web' >> /set_cmd.sh \
+    && echo 'elif [ "$SCOPE" = "pocket" ]; then' >> /set_cmd.sh \
+    && echo '  exec pnpm start:pocket' >> /set_cmd.sh \
+    && echo 'fi' >> /set_cmd.sh \
+    && chmod +x /set_cmd.sh
+
+CMD ["/set_cmd.sh"]

@@ -112,15 +112,15 @@ class PocketClient extends TerraformStack {
             // TODO: add these as their own key
             {
               name: 'SENTRY_DSN',
-              valueFrom: `arn:aws:ssm:${region.name}:${caller.accountId}:parameter/Web/${config.environment}/SENTRY_DSN`
+              valueFrom: `arn:aws:ssm:${region.name}:${caller.accountId}:parameter/WebClient/${config.environment}/SENTRY_DSN`
             },
             {
               name: 'BRAZE_PRIVATE_KEY',
-              valueFrom: `arn:aws:ssm:${region.name}:${caller.accountId}:parameter/Web/${config.environment}/BRAZE_PRIVATE_KEY`
+              valueFrom: `arn:aws:ssm:${region.name}:${caller.accountId}:parameter/WebClient/${config.environment}/BRAZE_PRIVATE_KEY`
             },
             {
               name: 'REVALIDATION_TOKEN',
-              valueFrom: `arn:aws:ssm:${region.name}:${caller.accountId}:parameter/Web/${config.environment}/REVALIDATION_TOKEN`
+              valueFrom: `arn:aws:ssm:${region.name}:${caller.accountId}:parameter/WebClient/${config.environment}/REVALIDATION_TOKEN`
             }
           ],
           logMultilinePattern: '^\\S.+'
@@ -154,7 +154,7 @@ class PocketClient extends TerraformStack {
       exposedContainer: {
         name: 'app',
         port: 80,
-        healthCheckPath: '/web-client-health'
+        healthCheckPath: '/'
       },
       ecsIamConfig: {
         prefix: config.prefix,
@@ -175,7 +175,9 @@ class PocketClient extends TerraformStack {
             actions: ['ssm:GetParameter*'],
             resources: [
               `arn:aws:ssm:${region.name}:${caller.accountId}:parameter/${config.name}/${config.environment}`,
-              `arn:aws:ssm:${region.name}:${caller.accountId}:parameter/${config.name}/${config.environment}/*`
+              `arn:aws:ssm:${region.name}:${caller.accountId}:parameter/${config.name}/${config.environment}/*`,
+              `arn:aws:ssm:${region.name}:${caller.accountId}:parameter/WebClient/${config.environment}`,
+              `arn:aws:ssm:${region.name}:${caller.accountId}:parameter/WebClient/${config.environment}/*`
             ],
             effect: 'Allow'
           }
@@ -198,7 +200,7 @@ class PocketClient extends TerraformStack {
       },
 
       autoscalingConfig: {
-        targetMinCapacity: 5,
+        targetMinCapacity: config.isDev ? 1 : 5,
         targetMaxCapacity: 30
       },
       alarms: {
