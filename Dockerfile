@@ -20,5 +20,5 @@ ENV RELEASE_VERSION=${RELEASE_VERSION}
 EXPOSE ${PORT}
 
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
-
-CMD ["pnpm", ${START_COMMAND}]
+ENV START_COMMAND=${START_COMMAND}
+CMD ["pnpm", "${START_COMMAND}"]
