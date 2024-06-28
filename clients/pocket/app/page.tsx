@@ -1,17 +1,27 @@
-export default function Home() {
+import { getHomeSlates, type HomeQueryResponse } from './(server)/api/get-home-feed'
+import type { CorpusSlate } from '@common/types/pocket'
+
+export default async function Home() {
+  const response = await getHomeSlates('en')
+  if ('responseError' in response) return null
+
+  const { itemsById, slatesById, slateArray } = response as HomeQueryResponse
+
   return (
     <div className="page-container">
-      <h2>Some content header</h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Et iusto dolores quidem, beatae
-        voluptatum neque officia accusantium commodi expedita cum modi illo, culpa sit id laborum
-        unde cumque! Dignissimos, nihil!
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati sunt magni, sit
-        necessitatibus ad fuga fugiat odit doloremque? Nemo debitis nihil fuga tenetur quo voluptas
-        deleniti libero sunt perferendis natus?
-      </p>
+      {slateArray.map((slateId: string) => {
+        const slate: CorpusSlate = slatesById[slateId]
+        const slateIds = slate.recommendations as unknown as string[]
+        return (
+          <section key={slateId}>
+            <h3>{slate.headline}</h3>
+            {slate.subheadline ?? <h4>{slate.subheadline}</h4>}
+            {slateIds.map((itemId: string) => {
+              return <article key={itemId}>{itemsById[itemId].title}</article>
+            })}
+          </section>
+        )
+      })}
     </div>
   )
 }

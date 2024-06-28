@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "@config/eslint-config": "workspace:*",
+    "@common/types": "workspace:*",
     "@config/jest": "workspace:*",
     "@types/node": "^20.14.7",
     "@types/react": "^18",

@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "author": "",
   "devDependencies": {
+    "@common/types": "workspace:*",
     "@config/typescript-config": "workspace:*",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.14.7",
