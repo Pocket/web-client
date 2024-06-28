@@ -1,15 +1,8 @@
 {
   "name": "@common/utilities",
-  "version": "0.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "jest",
-    "clean": "rm -rf .turbo && rm -rf node_modules"
-  },
-  "keywords": [],
+  "version": "0.0.0",
   "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@config/typescript-config": "workspace:*",
     "@types/jest": "^29.5.12",
@@ -17,5 +10,12 @@
     "ts-jest": "^29.1.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.2"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf .turbo && rm -rf node_modules",
+    "test": "jest"
   }
 }

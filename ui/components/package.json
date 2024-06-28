@@ -1,16 +1,19 @@
 {
   "name": "@ui/components",
-  "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "jest",
-    "test:update": "jest --u",
-    "clean": "rm -rf .turbo && rm -rf node_modules"
-  },
-  "keywords": [],
+  "version": "1.0.0",
   "author": "",
-  "license": "ISC",
+  "dependencies": {
+    "@common/constants": "workspace:*",
+    "@common/localization": "workspace:*",
+    "@common/state": "workspace:*",
+    "@common/types": "workspace:*",
+    "@common/utilities": "workspace:*",
+    "@storybook/react": "8.1.10",
+    "@ui/icons": "workspace:*",
+    "@ui/styles": "workspace:*",
+    "next": "14.2.4"
+  },
   "devDependencies": {
     "@common/mock-data": "workspace:*",
     "@config/eslint-config": "workspace:*",
@@ -29,15 +32,12 @@
     "postcss-nested": "^6.0.1",
     "postcss-preset-env": "^9.5.14"
   },
-  "dependencies": {
-    "@common/constants": "workspace:*",
-    "@common/localization": "workspace:*",
-    "@common/state": "workspace:*",
-    "@common/types": "workspace:*",
-    "@common/utilities": "workspace:*",
-    "@storybook/react": "8.1.10",
-    "@ui/icons": "workspace:*",
-    "@ui/styles": "workspace:*",
-    "next": "14.2.4"
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf .turbo && rm -rf node_modules",
+    "test": "jest",
+    "test:update": "jest --u"
   }
 }

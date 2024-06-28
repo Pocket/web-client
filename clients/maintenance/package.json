@@ -1,12 +1,12 @@
 {
   "name": "@client/maintenance",
-  "version": "1.0.0",
   "description": "",
+  "version": "1.0.0",
+  "author": "",
+  "keywords": [],
+  "license": "ISC",
   "main": "index.js",
   "scripts": {
     "minify": "pnpm dlx html-minifier --input-dir ./ --output-dir ./dist --file-ext html --remove-comments --collapse-whitespace --minify-js true --minify-css true"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  }
 }

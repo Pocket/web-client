@@ -1,14 +1,13 @@
 {
   "name": "@common/constants",
-  "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {},
-  "keywords": [],
+  "version": "1.0.0",
   "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@config/typescript-config": "workspace:*",
     "typescript": "5.5.2"
-  }
+  },
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js"
 }

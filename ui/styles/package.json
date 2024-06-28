@@ -1,17 +1,8 @@
 {
   "name": "@ui/styles",
-  "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "build": "postcss legacy/index.css -o legacy/global.css && postcss pocket/index.css -o pocket/global.css",
-    "pocket": "postcss pocket/index.css -o pocket/global.css --watch",
-    "dev": "postcss legacy/index.css -o legacy/global.css --watch",
-    "storybook": "postcss pocket/index.css -o pocket/global.css --watch"
-  },
-  "keywords": [],
+  "version": "1.0.0",
   "author": "",
-  "license": "ISC",
   "devDependencies": {
     "cssnano": "7.0.3",
     "postcss": "8.4.38",
@@ -20,5 +11,14 @@
     "postcss-import": "16.1.0",
     "postcss-nested": "6.0.1",
     "postcss-preset-env": "^9.5.14"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "build": "postcss legacy/index.css -o legacy/global.css && postcss pocket/index.css -o pocket/global.css",
+    "dev": "postcss legacy/index.css -o legacy/global.css --watch",
+    "pocket": "postcss pocket/index.css -o pocket/global.css --watch",
+    "storybook": "postcss pocket/index.css -o pocket/global.css --watch"
   }
 }

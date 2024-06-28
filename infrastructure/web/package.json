@@ -1,21 +1,6 @@
 {
   "name": "web-client-cdk",
   "version": "1.0.0",
-  "main": "dist/src/main.js",
-  "types": "src/main.ts",
-  "license": "MPL-2.0",
-  "private": true,
-  "scripts": {
-    "setup": "brew install tfenv && tfenv install 1.8.3 && tfenv use 1.8.3",
-    "build:dev": "npm run build && NODE_ENV=development npm run synth",
-    "build": "rm -rf dist && tsc",
-    "synth": "cdktf synth",
-    "compile": "tsc --pretty",
-    "watch": "tsc -w"
-  },
-  "engines": {
-    "node": "=20.10.0"
-  },
   "dependencies": {
     "@cdktf/provider-archive": "10.0.1",
     "@cdktf/provider-aws": "19.21.0",
@@ -30,5 +15,20 @@
   },
   "devDependencies": {
     "@types/node": "20.14.8"
-  }
+  },
+  "engines": {
+    "node": "=20.10.0"
+  },
+  "license": "MPL-2.0",
+  "main": "dist/src/main.js",
+  "private": true,
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "build:dev": "npm run build && NODE_ENV=development npm run synth",
+    "compile": "tsc --pretty",
+    "setup": "brew install tfenv && tfenv install 1.8.3 && tfenv use 1.8.3",
+    "synth": "cdktf synth",
+    "watch": "tsc -w"
+  },
+  "types": "src/main.ts"
 }

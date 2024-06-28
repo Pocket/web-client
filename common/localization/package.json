@@ -1,15 +1,15 @@
 {
   "name": "@common/localization",
-  "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "clean": "rm -rf .turbo && rm -rf node_modules"
-  },
+  "version": "1.0.0",
   "author": "",
-  "license": "ISC",
   "dependencies": {
     "cli-progress": "^3.12.0",
     "fs-extra": "^11.2.0"
+  },
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf .turbo && rm -rf node_modules"
   }
 }

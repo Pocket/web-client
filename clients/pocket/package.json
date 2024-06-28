@@ -1,13 +1,6 @@
 {
   "name": "@client/pocket",
   "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "pocket": "echo 'https://local.client.pocket.com/\n\n' && PORT=443 next dev --experimental-https --experimental-https-key ./certificates/local.client.pocket.com-key.pem --experimental-https-cert ./certificates/local.client.pocket.com.pem",
-    "build": "next build",
-    "start": "next start -p 80",
-    "lint": "next lint"
-  },
   "dependencies": {
     "@common/constants": "workspace:*",
     "@common/state": "workspace:*",
@@ -29,5 +22,16 @@
     "postcss-nested": "^6.0.1",
     "postcss-preset-env": "^9.5.11",
     "typescript": "^5.5.2"
+  },
+  "engines": {
+    "node": "=20.10.0",
+    "pnpm": ">=9"
+  },
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "lint": "next lint",
+    "pocket": "echo 'https://local.client.pocket.com/\n\n' && PORT=443 next dev --experimental-https --experimental-https-key ./certificates/local.client.pocket.com-key.pem --experimental-https-cert ./certificates/local.client.pocket.com.pem",
+    "start": "next start -p 80"
   }
 }
