@@ -4,6 +4,7 @@
   "dependencies": {
     "@common/constants": "workspace:*",
     "@common/state": "workspace:*",
+    "@common/utilities": "workspace:*",
     "@sentry/nextjs": "^8",
     "@ui/components": "workspace:*",
     "@ui/styles": "workspace:*",
