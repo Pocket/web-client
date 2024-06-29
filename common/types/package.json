@@ -10,5 +10,18 @@
   },
   "keywords": [],
   "license": "ISC",
-  "main": "index.js"
+  "main": "index.js",
+  "devDependencies": {
+    "@apollo/rover": "0.22.0",
+    "@graphql-codegen/cli": "5.0.2",
+    "@graphql-codegen/typescript": "4.0.8",
+    "@graphql-codegen/typescript-resolvers": "4.2.0",
+    "graphql": "16.9.0"
+  },
+  "scripts": {
+    "schema:help": "rover config --help",
+    "schema:auth": "rover config auth",
+    "schema": "rover graph fetch pocket-client-api@current >| schema.graphql",
+    "generateTypes": "gql-gen --config codegen.yml"
+  }
 }

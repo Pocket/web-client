@@ -4,5 +4,6 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": true
-  }
+  },
+  "ignorePatterns": ["pocket/index.d.ts"]
 }
