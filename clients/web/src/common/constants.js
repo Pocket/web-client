@@ -65,7 +65,7 @@ export const SNOWPLOW_CONFIG = {
   eventMethod: 'beacon',
   respectDoNotTrack: false, // temporary to determine impact
   stateStorageStrategy: 'cookieAndLocalStorage',
-  contexts: { webPage: true, performanceTiming: true },
+  contexts: { webPage: true, performanceTiming: true, session: true, browser: true },
   postPath: SNOWPLOW_POST_PATH
 }
 export const SNOWPLOW_ANONYMOUS_CONFIG = {
@@ -73,6 +73,8 @@ export const SNOWPLOW_ANONYMOUS_CONFIG = {
   eventMethod: 'post', // over-rides eventMethod: post
   stateStorageStrategy: 'none', // over-rides stateStorageStrategy: cookieAndLocalStorage
   anonymousTracking: { withServerAnonymisation: true },
+  // no session context on anonymous config
+  contexts: { webPage: true, performanceTiming: true, session: false, browser: true },
 }
 
 // Mastodon 

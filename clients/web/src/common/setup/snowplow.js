@@ -28,8 +28,14 @@ export function initializeSnowplow(user_id, sess_guid, cookied, finalizeInit) {
     if (!snowplow) throw new SnowplowInjectionError()
 
     // configure snowplow
-    const snowplowConfig = (cookied) ? SNOWPLOW_CONFIG : SNOWPLOW_ANONYMOUS_CONFIG
+    const snowplowConfig = cookied ? SNOWPLOW_CONFIG : SNOWPLOW_ANONYMOUS_CONFIG
     snowplow('newTracker', 'sp', SNOWPLOW_COLLECTOR, snowplowConfig)
+
+    // add User entity to Snowplow global context
+    const userEntity = createUserEntity(user_id, sess_guid)
+    const globalContexts = [userEntity, apiUserEntity]
+    snowplow('setUserId', user_id)
+    snowplow('addGlobalContexts', globalContexts)
 
     // enable activity monitoring (heartbeat)
     snowplow('enableActivityTracking', {
@@ -42,11 +48,6 @@ export function initializeSnowplow(user_id, sess_guid, cookied, finalizeInit) {
 
     // automatic form elements tracking
     snowplow('enableFormTracking')
-
-    // add User entity to Snowplow global context
-    const userEntity = createUserEntity(user_id, sess_guid)
-    const globalContexts = [userEntity, apiUserEntity]
-    snowplow('addGlobalContexts', globalContexts)
 
     // no analytics cookies allowed, make sure user data is clean
     if (!cookied) snowplow('clearUserData')
