@@ -5,3 +5,6 @@ fonts.js
 
 // Ignore circleCI confgig
 .circleci/config.yml
+
+// Ignore generated type files
+**/pocket/index.d.ts

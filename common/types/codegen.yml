@@ -5,4 +5,3 @@ generates:
   ./pocket/index.d.ts:
     plugins:
       - 'typescript'
-      - 'typescript-resolvers'

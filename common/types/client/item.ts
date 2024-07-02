@@ -1,4 +1,4 @@
-export type Item = {
+export interface Item {
   authors?: ItemAuthor[]
   excerpt: string
   id: string
@@ -10,11 +10,11 @@ export type Item = {
   url: string
 }
 
-export type ItemAuthor = {
+export interface ItemAuthor {
   name?: string | null
 }
 
-export type ItemImage = {
+export interface ItemImage {
   url?: string | null
   width?: number
   height?: number

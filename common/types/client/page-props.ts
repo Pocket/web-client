@@ -8,3 +8,7 @@ export interface LocalizedProps {
     userConfig: UserConfig | null
   }
 }
+
+export interface ResponseError {
+  responseError?: string
+}
