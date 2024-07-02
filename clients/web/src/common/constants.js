@@ -39,7 +39,6 @@ export const BRAZE_SDK_ENDPOINT = 'sdk.iad-05.braze.com' // SDK endpoint for Poc
 // SNOWPLOW
 export const API_USER_ID = 89624 // Pocket backend identifier for an API user used in Snowplow analytic events
 export const SNOWPLOW_SCHEMA_VENDOR = 'com.pocket'
-export const SNOWPLOW_SCRIPT = 'https://assets.getpocket.com/web-utilities/public/static/te-3.1.2.js'
 export const SNOWPLOW_POST_PATH = process.env.TEST_SNOWPLOW === 'included'
   ? '/com.snowplowanalytics.snowplow/tp2'
   : '/t/e'

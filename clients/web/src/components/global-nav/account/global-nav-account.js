@@ -17,6 +17,7 @@ import { ThemeSettings } from 'components/display-settings/theme'
 import { ListSettings } from 'components/display-settings/list-modes'
 import { useInView } from 'react-intersection-observer'
 import { FloatingNotification } from './notification'
+import { clearUserData } from '@snowplow/browser-tracker'
 
 const accountLinkStyle = css`
   display: inline-block;
@@ -216,7 +217,7 @@ const GlobalNavAccount = ({
     // Fire for all users when Braze launches
     if (brazeInitialized)
       import('common/utilities/braze/braze-lazy-load').then(({ destroy }) => destroy())
-    if (analyticsInitialized) snowplow('clearUserData')
+    if (analyticsInitialized) clearUserData()
   }
   const updateFocus = (e) => {
     if (e.charCode === KEYS.SPACE || e.charCode === KEYS.ENTER) setFocus(true)

@@ -28,6 +28,7 @@ import { VARIANTS_SAVE } from 'actions'
 import { FEATURES_HYDRATE } from 'actions'
 
 import { BATCH_SIZE } from 'common/constants'
+import { trackSelfDescribingEvent } from '@snowplow/browser-tracker'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -286,7 +287,7 @@ export function* fireSnowplowEvent({ identifier, data }) {
  */
 const sendCustomSnowplowEvent = (event, context = []) => {
   try {
-    global.snowplow('trackSelfDescribingEvent', { event, context })
+    trackSelfDescribingEvent({ event, context })
   } catch {
     console.warn('CustomEvent: snowplow library is not available')
   }
@@ -294,7 +295,7 @@ const sendCustomSnowplowEvent = (event, context = []) => {
 
 const snowplowTrackPageView = () => {
   try {
-    global.snowplow('trackPageView')
+    trackPageView()
   } catch {
     console.warn('PageView: snowplow library is not available')
   }
