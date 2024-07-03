@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders Error with defaults 1`] = `
+<div>
+  <div
+    class="base page-container"
+    data-testid="error"
+  >
+    <h2>
+      Oh no
+    </h2>
+    <p>
+      Something has gone wrong
+    </p>
+  </div>
+</div>
+`;

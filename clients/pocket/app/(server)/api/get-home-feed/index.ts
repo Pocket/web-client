@@ -2,7 +2,7 @@ import { gql, pocketRequest } from '@common/utilities/pocket-request'
 import { getErrorMessage } from '@common/utilities/error-handler'
 
 // Types
-import type { CorpusSlate, CorpusRecommendation, SlateLineup } from '@common/types/pocket'
+import type { CorpusSlate, CorpusRecommendation, CorpusSlateLineup } from '@common/types/pocket'
 import type { Item } from '@common/types'
 
 export type HomeQueryResponse = {
@@ -32,7 +32,9 @@ const getHomeQuery = gql`
         recommendations(count: 12) {
           id
           corpusItem {
-            imageUrl
+            image {
+              url
+            }
             url
             title
             excerpt
@@ -60,12 +62,12 @@ const getHomeQuery = gql`
  */
 export async function getHomeSlates(locale: string): Promise<HomeQueryResponse | ResponseError> {
   try {
-    const response = await pocketRequest({
+    const response = await pocketRequest<{ homeSlateLineup: CorpusSlateLineup }>({
       query: getHomeQuery,
       variables: { locale }
     })
 
-    const slates = response?.data?.homeSlateLineup?.slates
+    const slates = response?.homeSlateLineup?.slates
     if (!slates) throw new HomeRequestError('No slates were returned')
 
     const itemsById = slates

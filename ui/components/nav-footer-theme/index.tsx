@@ -1,12 +1,14 @@
 'use client'
 
 import style from './style.module.css'
+
 import { COLOR_MODE_PREFIX } from '@common/constants'
-import { useUserSettings } from '@common/state/user-settings'
-import { useEffect, useRef } from 'react'
-import { SystemModeIcon } from '@ui/icons/SystemModeIcon'
 import { DarkModeIcon } from '@ui/icons/DarkModeIcon'
 import { LightModeIcon } from '@ui/icons/LightModeIcon'
+import { SystemModeIcon } from '@ui/icons/SystemModeIcon'
+import { useEffect, useRef } from 'react'
+
+import { useUserSettings } from '@common/state/user-settings'
 
 /**
  * NavFooterTheme

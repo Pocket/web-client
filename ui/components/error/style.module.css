@@ -1,4 +1,8 @@
 /** Remove this file if we don't have styles for the component **/
-.base{
-
+.base {
+  padding: 8rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

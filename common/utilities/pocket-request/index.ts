@@ -34,6 +34,9 @@ export async function pocketRequest<T extends GraphQlData>(data: GraphQlRequest)
   // Cast the response to the correct type
   const graphQlRes: GraphQlResponse<T> = await response.json()
 
+  // We need some better error handling
+  if (graphQlRes.errors) console.log(graphQlRes.errors)
+
   return graphQlRes.data
 }
 

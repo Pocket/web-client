@@ -1,5 +1,5 @@
 import style from './style.module.css'
-import { withScope, captureException } from '@sentry/nextjs'
+
 import { useEffect } from 'react'
 
 /**
@@ -21,15 +21,15 @@ export function Placard() {
       const randomClientError = global.window ? window.crypto.randomUUID() : null
       if (randomClientError) throw new PlacardError(randomClientError)
     } catch (err) {
-      withScope(function (scope) {
-        scope.setFingerprint(['Generic ThirdParty Ad Failure'])
-        captureException(err)
-      })
+      // withScope(function (scope) {
+      //   scope.setFingerprint(['Generic ThirdParty Ad Failure'])
+      //   captureException(err)
+      // })
     }
   }
   return (
     <div className={style.base} data-testid="placard">
-      ERROR MACHINE ON POINT!
+      {`ERROR MACHINE ON POINT!`}
     </div>
   )
 }

@@ -1,7 +1,5 @@
-/** Remove this file if we don't have styles for the component **/
 .base {
   container-type: inline-size;
-
   & > div {
     font-size: clamp(1rem, 0.913rem + 0.4348cqi, 1.25rem);
     border-radius: 10px;
@@ -35,7 +33,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     text-wrap: pretty;
-    font-size: clamp(1rem, 0.7337rem + 1.9565cqi, 2rem);
+    font-size: clamp(1rem, 0.7337rem + 1.9565cqi, 3rem);
     font-weight: 500;
     line-height: 1.22;
     margin-bottom: 0.625em;

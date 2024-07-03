@@ -4,40 +4,33 @@ import { type GridCount, inGrid } from '../_decorators/inGrid'
 // Components
 import { Item as Component } from '.'
 
-import { HydrateItemDisplay } from '@common/state/item-display/hydrate'
-
 // Mock Data
-import itemsById from '@common/mock-data/in-state/itemsById.json'
+import itemData from '@common/mock-data/in-state/itemsById.json'
 
 // Types
-import type { Meta, StoryFn, StoryObj } from '@storybook/react'
-
-const state = { itemsById }
-const withState = (Story: StoryFn) => {
-  return (
-    <>
-      <HydrateItemDisplay state={state} />
-      <Story />
-    </>
-  )
-}
+import { Item } from '@common/types'
+import type { Meta, StoryObj } from '@storybook/react'
 
 // Storybook Meta
 const meta: Meta<typeof Component> = {
   title: 'Item',
-  component: Component,
-  decorators: [withState]
+  component: Component
 }
 export default meta
 
 // Stories
-type ComponentPropsAndCustomArgs = React.ComponentProps<typeof Component> & {
+type ComponentPropsAndCustomArgs = {
   gridCount: GridCount
-}
+  id: string
+} & React.ComponentProps<typeof Component>
+
+const itemsById: Record<string, Item> = itemData
 
 export const Complete: StoryObj<ComponentPropsAndCustomArgs> = {
   render: (args) => {
-    return <Component id={args.id.toString()} />
+    const itemId = args.id ?? 0
+    const item = itemsById[itemId]
+    return <Component item={item as Item} />
   },
   decorators: [(Story, { args }) => inGrid(Story, args.gridCount)],
   argTypes: {
@@ -47,8 +40,12 @@ export const Complete: StoryObj<ComponentPropsAndCustomArgs> = {
     },
     id: {
       options: Object.keys(itemsById),
-      control: { type: 'select' },
-      mapping: {}
+      control: { type: 'select' }
+    },
+    item: {
+      table: {
+        disable: true
+      }
     }
   },
   args: {
@@ -62,7 +59,7 @@ export const InLayout: StoryObj<ComponentPropsAndCustomArgs> = {
     return (
       <>
         {Object.keys(itemsById).map((id) => (
-          <Component key={id} id={id} />
+          <Component key={id} item={itemsById[id] as Item} />
         ))}
       </>
     )
@@ -77,6 +74,11 @@ export const InLayout: StoryObj<ComponentPropsAndCustomArgs> = {
     gridCount: {
       options: [1, 2, 3, 4, 5, 'lockup'],
       control: { type: 'inline-radio' }
+    },
+    item: {
+      table: {
+        disable: true
+      }
     }
   },
   args: {

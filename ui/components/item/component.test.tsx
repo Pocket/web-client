@@ -25,7 +25,7 @@ describe('renders Item', () => {
     useItemDisplay.setState({ itemsById }, true)
 
     const itemToRender = Object.values(itemsById)[0] as Item
-    const rendered = render(<Component id={itemToRender.id} />)
+    const rendered = render(<Component item={itemToRender} />)
     const renderedComponent = screen.getByTestId('item')
     expect(renderedComponent).toBeInTheDocument()
     expect(rendered.container).toMatchSnapshot()

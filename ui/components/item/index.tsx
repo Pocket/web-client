@@ -3,9 +3,6 @@ import style from './style.module.css'
 import { ItemActions } from '../item-actions'
 import { ItemMedia } from '../item-media'
 
-// State
-import { useItemDisplay } from '@common/state/item-display'
-
 // Types
 import type { Item } from '@common/types'
 
@@ -13,9 +10,9 @@ import type { Item } from '@common/types'
  * Item
  * ---
  * A self contained representation of a piece of content from around the web
+ * Change for lint check
  */
-export function Item({ id }: { id: string }) {
-  const item = useItemDisplay((state) => state.itemsById[id]) as Item
+export function Item({ item }: { item: Item }) {
   if (!item) return null
 
   const { id: itemId, title, excerpt, image, publisher } = item
@@ -24,7 +21,7 @@ export function Item({ id }: { id: string }) {
     <article className={style.base} data-testid="item">
       <div>
         <figure>
-          <ItemMedia id={itemId} imageUrl={image.url} />
+          <ItemMedia id={itemId} imageUrl={image?.url} />
         </figure>
         <div className={style.contentContainer}>
           <div className="copy">

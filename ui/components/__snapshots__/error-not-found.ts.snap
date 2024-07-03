@@ -1,0 +1,314 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders ErrorFour with defaults 1`] = `
+<div>
+  <div
+    class="base"
+    data-columns="4"
+    data-testid="error-four"
+  >
+    <div
+      class="copy"
+    >
+      <h2>
+        Oops! This page does not exist.
+      </h2>
+      <p>
+        You can always discover interesting things on 
+        <a
+          href="/"
+        >
+          Home
+        </a>
+      </p>
+    </div>
+    <div
+      class="container grid"
+    >
+      <article
+        class="base"
+      >
+        <div>
+          <figure>
+            <div
+              class="base"
+              data-color="teal"
+              data-testid="item-media"
+            >
+              <svg
+                viewBox="0 0 1280 720"
+              >
+                <rect
+                  height="200%"
+                  style="opacity: 0.3;"
+                  width="200%"
+                  x="-50%"
+                  y="-50%"
+                />
+                <polyline
+                  points="-640, 64 1920,663 640,0 415,360"
+                  style="opacity: 0.2;"
+                />
+                <polyline
+                  points="-640, 576 640,994 1280,510 1920,4 640,360 415,360"
+                  style="opacity: 0.2;"
+                />
+                <polyline
+                  points="-640, 256 640,470 1280,100 1920,663 640,720 415,360"
+                  style="opacity: 0.2;"
+                />
+                <polyline
+                  points="-640, 400 1920,1062 640,1080 415,360"
+                  style="opacity: 0.2;"
+                />
+                <polyline
+                  points="-640, 289 480,328 960,326 1440,877 1920,4 640,1440 415,360"
+                  style="opacity: 0.2;"
+                />
+              </svg>
+            </div>
+          </figure>
+          <div
+            class="contentContainer"
+          >
+            <div
+              class="copy"
+            >
+              <cite>
+                Oops
+              </cite>
+              <h3>
+                404: Page Not Found
+              </h3>
+              <p>
+                This is probably not the page you were looking for.
+              </p>
+            </div>
+            <footer>
+              <cite>
+                Pocket
+              </cite>
+            </footer>
+          </div>
+        </div>
+      </article>
+      <article
+        class="base"
+      >
+        <div>
+          <figure>
+            <div
+              class="base"
+              data-color="apricot"
+              data-testid="item-media"
+            >
+              <svg
+                viewBox="0 0 1280 720"
+              >
+                <rect
+                  height="200%"
+                  style="opacity: 0.3;"
+                  width="200%"
+                  x="-50%"
+                  y="-50%"
+                />
+                <polyline
+                  points="-640, 361 640,751 1280,21 1920,8 640,0 66,360"
+                  style="opacity: 0.2;"
+                />
+                <polyline
+                  points="-640, 289 480,523 960,1058 1440,532 1920,918 640,360 66,360"
+                  style="opacity: 0.2;"
+                />
+                <polyline
+                  points="-640, 81 960,889 1920,961 640,720 66,360"
+                  style="opacity: 0.2;"
+                />
+                <polyline
+                  points="-640, 81 640,52 1280,230 1920,560 640,1080 66,360"
+                  style="opacity: 0.2;"
+                />
+                <polyline
+                  points="-640, 144 1920,4 640,1440 66,360"
+                  style="opacity: 0.2;"
+                />
+              </svg>
+            </div>
+          </figure>
+          <div
+            class="contentContainer"
+          >
+            <div
+              class="copy"
+            >
+              <cite>
+                How did I get here
+              </cite>
+              <h3>
+                What to do when you can’t find your way
+              </h3>
+              <p>
+                Sometime things just can’t be found.
+              </p>
+            </div>
+            <footer>
+              <cite>
+                Pocket
+              </cite>
+            </footer>
+          </div>
+        </div>
+      </article>
+      <article
+        class="base"
+      >
+        <div>
+          <figure>
+            <div
+              class="base"
+              data-color="mint"
+              data-testid="item-media"
+            >
+              <svg
+                viewBox="0 0 1280 720"
+              >
+                <rect
+                  height="200%"
+                  style="opacity: 0.3;"
+                  width="200%"
+                  x="-50%"
+                  y="-50%"
+                />
+                <polyline
+                  points="-640, 729 480,4 960,124 1440,143 1920,1006 640,0 93,360"
+                  style="opacity: 0.2;"
+                />
+                <polyline
+                  points="-640, 900 960,4 1920,656 640,360 93,360"
+                  style="opacity: 0.2;"
+                />
+                <polyline
+                  points="-640, 841 640,1029 1280,748 1920,235 640,720 93,360"
+                  style="opacity: 0.2;"
+                />
+                <polyline
+                  points="-640, 9 960,4 1920,491 640,1080 93,360"
+                  style="opacity: 0.2;"
+                />
+                <polyline
+                  points="-640, 361 960,247 1920,513 640,1440 93,360"
+                  style="opacity: 0.2;"
+                />
+              </svg>
+            </div>
+          </figure>
+          <div
+            class="contentContainer"
+          >
+            <div
+              class="copy"
+            >
+              <cite>
+                Lost Pages Monthly
+              </cite>
+              <h3>
+                404 ways to tell you are lost.
+              </h3>
+              <p>
+                Is this a sign of the times, or is it a typo?
+              </p>
+            </div>
+            <footer>
+              <cite>
+                Pocket
+              </cite>
+            </footer>
+          </div>
+        </div>
+      </article>
+      <article
+        class="base"
+        data-testid="item"
+      >
+        <div>
+          <figure>
+            <div
+              class="base"
+              data-color="lapis"
+              data-testid="item-media"
+            >
+              <svg
+                viewBox="0 0 1280 720"
+              >
+                <rect
+                  height="200%"
+                  style="opacity: 0.3;"
+                  width="200%"
+                  x="-50%"
+                  y="-50%"
+                />
+                <polyline
+                  points="-640, 9 1920,4 640,0 404,360"
+                  style="opacity: 0.2;"
+                />
+                <polyline
+                  points="-640, 361 1920,246 640,360 404,360"
+                  style="opacity: 0.2;"
+                />
+                <polyline
+                  points="-640, 841 1920,4 640,720 404,360"
+                  style="opacity: 0.2;"
+                />
+                <polyline
+                  points="-640, 484 480,5 960,462 1440,864 1920,364 640,1080 404,360"
+                  style="opacity: 0.2;"
+                />
+                <polyline
+                  points="-640, 289 480,365 960,4 1440,428 1920,537 640,1440 404,360"
+                  style="opacity: 0.2;"
+                />
+              </svg>
+            </div>
+          </figure>
+          <div
+            class="contentContainer"
+          >
+            <div
+              class="copy"
+            >
+              <cite>
+                Finding Things
+              </cite>
+              <h3>
+                Nope. Not today
+              </h3>
+              <p>
+                Finding things used to be easy. What happened?
+              </p>
+            </div>
+            <footer>
+              <cite>
+                Pocket
+              </cite>
+            </footer>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div
+      class="copy"
+    >
+      <p>
+        If you think this is an error, please
+         
+        <a
+          href="https://help.getpocket.com/?src=page_404"
+        >
+          contact support
+        </a>
+        .
+      </p>
+    </div>
+  </div>
+</div>
+`;

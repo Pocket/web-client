@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders Placard with defaults 1`] = `
+<div>
+  <div
+    class="base"
+    data-testid="placard"
+  >
+    ERROR MACHINE ON POINT!
+  </div>
+</div>
+`;
