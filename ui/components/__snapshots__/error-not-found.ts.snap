@@ -39,30 +39,28 @@ exports[`renders ErrorFour with defaults 1`] = `
                 viewBox="0 0 1280 720"
               >
                 <rect
-                  height="200%"
+                  height="720"
                   style="opacity: 0.3;"
-                  width="200%"
-                  x="-50%"
-                  y="-50%"
+                  width="1280"
                 />
-                <polyline
-                  points="-640, 64 1920,663 640,0 415,360"
+                <polygon
+                  points="0,525 480,584 960,443 1440,839  1920,4 640,360 0,360"
                   style="opacity: 0.2;"
                 />
-                <polyline
-                  points="-640, 576 640,994 1280,510 1920,4 640,360 415,360"
+                <polygon
+                  points="0,673 640,482 1280,71 1920,6 640,360 0,360"
                   style="opacity: 0.2;"
                 />
-                <polyline
-                  points="-640, 256 640,470 1280,100 1920,663 640,720 415,360"
+                <polygon
+                  points="0,29 640,309 1280,4 1920,248 640,360 0,360"
                   style="opacity: 0.2;"
                 />
-                <polyline
-                  points="-640, 400 1920,1062 640,1080 415,360"
+                <polygon
+                  points="0,256 1920,7 640,360 0,360"
                   style="opacity: 0.2;"
                 />
-                <polyline
-                  points="-640, 289 480,328 960,326 1440,877 1920,4 640,1440 415,360"
+                <polygon
+                  points="0,153 1920,4 640,360 0,360"
                   style="opacity: 0.2;"
                 />
               </svg>
@@ -106,30 +104,28 @@ exports[`renders ErrorFour with defaults 1`] = `
                 viewBox="0 0 1280 720"
               >
                 <rect
-                  height="200%"
+                  height="720"
                   style="opacity: 0.3;"
-                  width="200%"
-                  x="-50%"
-                  y="-50%"
+                  width="1280"
                 />
-                <polyline
-                  points="-640, 361 640,751 1280,21 1920,8 640,0 66,360"
+                <polygon
+                  points="0,525 480,584 960,443 1440,839  1920,4 640,360 0,360"
                   style="opacity: 0.2;"
                 />
-                <polyline
-                  points="-640, 289 480,523 960,1058 1440,532 1920,918 640,360 66,360"
+                <polygon
+                  points="0,673 640,482 1280,71 1920,6 640,360 0,360"
                   style="opacity: 0.2;"
                 />
-                <polyline
-                  points="-640, 81 960,889 1920,961 640,720 66,360"
+                <polygon
+                  points="0,29 640,309 1280,4 1920,248 640,360 0,360"
                   style="opacity: 0.2;"
                 />
-                <polyline
-                  points="-640, 81 640,52 1280,230 1920,560 640,1080 66,360"
+                <polygon
+                  points="0,256 1920,7 640,360 0,360"
                   style="opacity: 0.2;"
                 />
-                <polyline
-                  points="-640, 144 1920,4 640,1440 66,360"
+                <polygon
+                  points="0,153 1920,4 640,360 0,360"
                   style="opacity: 0.2;"
                 />
               </svg>
@@ -173,30 +169,28 @@ exports[`renders ErrorFour with defaults 1`] = `
                 viewBox="0 0 1280 720"
               >
                 <rect
-                  height="200%"
+                  height="720"
                   style="opacity: 0.3;"
-                  width="200%"
-                  x="-50%"
-                  y="-50%"
+                  width="1280"
                 />
-                <polyline
-                  points="-640, 729 480,4 960,124 1440,143 1920,1006 640,0 93,360"
+                <polygon
+                  points="0,525 480,584 960,443 1440,839  1920,4 640,360 0,360"
                   style="opacity: 0.2;"
                 />
-                <polyline
-                  points="-640, 900 960,4 1920,656 640,360 93,360"
+                <polygon
+                  points="0,673 640,482 1280,71 1920,6 640,360 0,360"
                   style="opacity: 0.2;"
                 />
-                <polyline
-                  points="-640, 841 640,1029 1280,748 1920,235 640,720 93,360"
+                <polygon
+                  points="0,29 640,309 1280,4 1920,248 640,360 0,360"
                   style="opacity: 0.2;"
                 />
-                <polyline
-                  points="-640, 9 960,4 1920,491 640,1080 93,360"
+                <polygon
+                  points="0,256 1920,7 640,360 0,360"
                   style="opacity: 0.2;"
                 />
-                <polyline
-                  points="-640, 361 960,247 1920,513 640,1440 93,360"
+                <polygon
+                  points="0,153 1920,4 640,360 0,360"
                   style="opacity: 0.2;"
                 />
               </svg>
@@ -241,30 +235,28 @@ exports[`renders ErrorFour with defaults 1`] = `
                 viewBox="0 0 1280 720"
               >
                 <rect
-                  height="200%"
+                  height="720"
                   style="opacity: 0.3;"
-                  width="200%"
-                  x="-50%"
-                  y="-50%"
+                  width="1280"
                 />
-                <polyline
-                  points="-640, 9 1920,4 640,0 404,360"
+                <polygon
+                  points="0,525 480,584 960,443 1440,839  1920,4 640,360 0,360"
                   style="opacity: 0.2;"
                 />
-                <polyline
-                  points="-640, 361 1920,246 640,360 404,360"
+                <polygon
+                  points="0,673 640,482 1280,71 1920,6 640,360 0,360"
                   style="opacity: 0.2;"
                 />
-                <polyline
-                  points="-640, 841 1920,4 640,720 404,360"
+                <polygon
+                  points="0,29 640,309 1280,4 1920,248 640,360 0,360"
                   style="opacity: 0.2;"
                 />
-                <polyline
-                  points="-640, 484 480,5 960,462 1440,864 1920,364 640,1080 404,360"
+                <polygon
+                  points="0,256 1920,7 640,360 0,360"
                   style="opacity: 0.2;"
                 />
-                <polyline
-                  points="-640, 289 480,365 960,4 1440,428 1920,537 640,1440 404,360"
+                <polygon
+                  points="0,153 1920,4 640,360 0,360"
                   style="opacity: 0.2;"
                 />
               </svg>
