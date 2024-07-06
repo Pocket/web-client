@@ -4,6 +4,9 @@ import { Item } from '@ui/components/item'
 import { getHomeSlates, type HomeQueryResponse } from './(server)/api/get-home-feed'
 import type { CorpusSlate } from '@common/types/pocket'
 
+// Revalidate this request once every minute
+export const revalidate = 60
+
 export default async function Home() {
   const response = await getHomeSlates('en')
 
