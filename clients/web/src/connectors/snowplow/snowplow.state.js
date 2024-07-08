@@ -28,7 +28,10 @@ import { VARIANTS_SAVE } from 'actions'
 import { FEATURES_HYDRATE } from 'actions'
 
 import { BATCH_SIZE } from 'common/constants'
-import { trackSelfDescribingEvent } from '@snowplow/browser-tracker'
+import {
+  trackSelfDescribingEvent,
+  trackPageView as snowplowSDKTrackPageView
+} from '@snowplow/browser-tracker'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -295,7 +298,7 @@ const sendCustomSnowplowEvent = (event, context = []) => {
 
 const snowplowTrackPageView = () => {
   try {
-    trackPageView()
+    snowplowSDKTrackPageView()
   } catch {
     console.warn('PageView: snowplow library is not available')
   }
