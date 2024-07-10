@@ -2,4 +2,7 @@
 .base {
   display: flex;
   justify-content: flex-end;
+  button {
+    color: var(--color-text-darker);
+  }
 }

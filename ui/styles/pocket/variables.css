@@ -160,6 +160,9 @@
   --color-button-brand-text-hover: var(--color-white100);
   --color-button-brand-hover: var(--color-brand-darker);
 
+  --color-menu-hover-text: var(--color-black100);
+  --color-menu-background-hover: var(--color-teal100);
+
   --color-pagination-text: var(--color-teal65);
   --color-pagination-text-hover: var(--color-teal65);
   --color-pagination-text-active: var(--color-teal65);
@@ -207,7 +210,7 @@
       12.5px 25px 41.9px hsl(var(--shadow-color) / 0.32);
 
     /* Typography */
-    --color-text-darker: var(--color-white97);
+    --color-text-darker: var(--color-grey85);
     --color-text-base: var(--color-white95);
     --color-text-lighter: var(--color-white100);
 
@@ -259,6 +262,9 @@
     --color-pagination-background-active: #4d4d4d65;
     --color-pagination-background-hover: #4d4d4d65;
 
+    --color-menu-hover-text: var(--color-white100);
+    --color-menu-background-hover: var(--color-teal65);
+
     --color-button-group-text: var(--color-white100);
     --color-button-group-border: var(--color-grey40);
     --color-button-group-background: var(--color-grey10);
@@ -303,7 +309,7 @@
     12.5px 25px 41.9px hsl(var(--shadow-color) / 0.32);
 
   /* Typography */
-  --color-text-darker: var(--color-white97);
+  --color-text-darker: var(--color-grey85);
   --color-text-base: var(--color-white95);
   --color-text-lighter: var(--color-white100);
 
@@ -354,6 +360,9 @@
   --color-pagination-border-hover: var(--color-teal65);
   --color-pagination-background-active: #4d4d4d65;
   --color-pagination-background-hover: #4d4d4d65;
+
+  --color-menu-hover-text: var(--color-white100);
+  --color-menu-background-hover: var(--color-teal65);
 
   --color-button-group-text: var(--color-white100);
   --color-button-group-border: var(--color-grey40);

@@ -71,6 +71,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    margin-top: 0.5rem;
   }
 
   /* Berry tiny card: no image, no excerpt, no actions, no mercy */
@@ -96,7 +97,7 @@
       font-size: 0.75rem;
     }
     h3 {
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 3;
       font-size: 0.875rem;
     }
     p {
