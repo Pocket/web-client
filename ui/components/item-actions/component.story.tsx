@@ -1,6 +1,6 @@
 // Decorators
 import { inCard } from '../_decorators/inCard'
-import { inGrid } from '../_decorators/inGrid'
+import { inCenter } from '../_decorators/inCenter'
 
 // Components
 import { ItemActions as Component } from '.'
@@ -12,7 +12,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 const meta: Meta<typeof Component> = {
   title: 'Item / Actions',
   component: Component,
-  decorators: [(Story) => inGrid(Story, 2)]
+  decorators: [inCenter]
 }
 export default meta
 
@@ -21,15 +21,23 @@ export const Actions: StoryObj<typeof Component> = {
   decorators: [inCard],
   render: () => {
     return (
-      <div
+      <article
         style={{
-          minHeight: '300px',
-          display: 'flex',
-          justifyContent: 'flex-end',
-          padding: '0.5rem'
+          maxWidth: '300px',
+          minHeight: '150px',
+          boxShadow: 'var(--shadow-high)',
+          padding: '1rem',
+          borderRadius: '8px',
+          position: 'relative'
         }}>
-        <Component />
-      </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <footer>
+          <Component id="abc123" />
+        </footer>
+      </article>
     )
   },
   args: {}

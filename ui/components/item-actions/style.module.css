@@ -1,8 +1,39 @@
 /** Remove this file if we don't have styles for the component **/
 .base {
+  justify-content: space-between;
   display: flex;
-  justify-content: flex-end;
+  column-gap: 0.5rem;
+}
+
+.secondary {
+  position: absolute;
+  top: 0.5em;
+  right: 1em;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  visibility: hidden;
+}
+
+.secondary {
   button {
-    color: var(--color-text-darker);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    font-size: 0.75rem;
+    background: var(--color-surface-base);
+    border: 1px solid var(--color-menu-border);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
   }
+}
+button.bookmarked {
+  color: var(--color-brand);
+}
+
+article:focus-within .secondary,
+article:hover .secondary {
+  visibility: visible;
 }

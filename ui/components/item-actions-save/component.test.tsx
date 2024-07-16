@@ -3,12 +3,12 @@ import { render, screen } from '@config/jest'
 import '@testing-library/jest-dom'
 
 // Components
-import { ItemActionsMenu as Component } from '.'
+import { ItemActionsSave as Component } from '.'
 
-describe('renders ItemActionsMenu', () => {
+describe('renders ItemActionsSave', () => {
   it('with defaults', () => {
     const rendered = render(<Component />)
-    const renderedComponent = screen.getByTestId('item-actions-menu')
+    const renderedComponent = screen.getByTestId('item-actions-save')
     expect(renderedComponent).toBeInTheDocument()
     expect(rendered.container).toMatchSnapshot()
   })

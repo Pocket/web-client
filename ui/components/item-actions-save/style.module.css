@@ -1,0 +1,40 @@
+/** Remove this file if we don't have styles for the component **/
+.base {
+  background: var(--color-surface-base);
+  border-radius: 10px;
+  box-shadow: var(--shadow-high);
+  min-width: 100px;
+  z-index: var(--z-index-menu);
+
+  button {
+    font-size: 0.85rem;
+    &:last-of-type,
+    &:first-of-type {
+      border-radius: 0;
+    }
+  }
+
+  footer {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.header {
+  padding: 0.5rem 0;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+}
+
+.typeahead {
+  padding: 0.5rem;
+  input {
+    border: 1px solid var(--color-typeahead-input-border);
+    background: var(--color-typeahead-input-background);
+    &:focus-visible {
+      border-color: var(--color-typeahead-input-border-focus);
+      outline: none;
+    }
+  }
+}

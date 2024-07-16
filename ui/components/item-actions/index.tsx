@@ -1,24 +1,14 @@
+'use client'
+
 import style from './style.module.css'
 
-// Libraries
-import { t } from '@common/localization'
-import {
-  FloatingPortal,
-  autoPlacement,
-  autoUpdate,
-  offset,
-  useClick,
-  useDismiss,
-  useFloating,
-  useFocus,
-  useInteractions
-} from '@floating-ui/react'
-import { IosShareIcon, SaveIcon } from '@ui/icons'
-import { OverflowMenuIcon } from '@ui/icons/OverflowMenuIcon'
-import { useState } from 'react'
+import { BookmarkFilledIcon, BookmarkIcon, IosShareIcon, SimilarIcon } from '@ui/icons'
 
 // Components
-import { ItemActionsMenu } from '../item-actions-menu'
+import { ItemActionsOverflow } from '../item-actions-overflow'
+import { ItemActionsSave } from '../item-actions-save'
+
+import { useItemStatus } from '@common/state/item-status'
 
 /**
  * ItemActions
@@ -26,56 +16,30 @@ import { ItemActionsMenu } from '../item-actions-menu'
  * Actions that can be taken on an item. Should be ubiquitous if we are leaning into
  * a better organization.
  */
-export function ItemActions() {
-  const [isOpen, setIsOpen] = useState(false)
+export function ItemActions({ id }: { id: string }) {
+  const isSaved = useItemStatus((state) => state.isSaved(id))
+  const addSave = useItemStatus((state) => state.addSave)
+  const removeSave = useItemStatus((state) => state.removeSave)
 
-  const { refs, context, floatingStyles } = useFloating({
-    open: isOpen,
-    onOpenChange: setIsOpen,
-    middleware: [
-      offset({
-        mainAxis: 0,
-        crossAxis: 0
-      }),
-      autoPlacement({
-        allowedPlacements: ['top-end']
-      })
-    ],
-    whileElementsMounted: autoUpdate
-  })
-
-  const click = useClick(context)
-  const dismiss = useDismiss(context)
-  const focus = useFocus(context)
-
-  const { getReferenceProps, getFloatingProps } = useInteractions([click, dismiss, focus])
-
-  const handleClick = () => {
-    setIsOpen(false)
-  }
+  const handleSaveClick = () => (isSaved ? removeSave(id) : addSave(id))
 
   return (
     <div className={style.base} data-testid="item-actions">
-      <button className="action" type="button">
-        <IosShareIcon />
-      </button>
-      <button className="action" type="button">
-        <SaveIcon />
-        {t('item-actions:save', 'Save')}
-      </button>
+      <div className={style.secondary}>
+        <button className="action tiny" type="button">
+          <IosShareIcon />
+        </button>
+        <button
+          className={`action tiny  ${isSaved ? style.bookmarked : ''}`}
+          type="button"
+          onClick={handleSaveClick}>
+          <BookmarkIcon />
+        </button>
+      </div>
 
-      {isOpen ? (
-        <FloatingPortal>
-          <div
-            ref={refs.setFloating}
-            data-testid="menu-dropdown"
-            style={floatingStyles}
-            onClick={handleClick}
-            {...getFloatingProps()}>
-            <ItemActionsMenu />
-          </div>
-        </FloatingPortal>
-      ) : null}
+      <ItemActionsOverflow id={id} />
+
+      <ItemActionsSave id={id} />
     </div>
   )
 }
