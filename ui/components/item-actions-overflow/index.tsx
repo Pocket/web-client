@@ -16,19 +16,14 @@ import {
   useFocus,
   useInteractions
 } from '@floating-ui/react'
-import { AndroidOverflowMenuIcon, IosShareIcon } from '@ui/icons'
-import { ChevronDownIcon } from '@ui/icons/ChevronDownIcon'
 import { CrossCircledIcon } from '@ui/icons/CrossCircledIcon'
 import { DiscoverIcon } from '@ui/icons/DiscoverIcon'
+import { IosShareIcon } from '@ui/icons/IosShareIcon'
 import { ListAddIcon } from '@ui/icons/ListAddIcon'
 import { ListenIcon } from '@ui/icons/ListenIcon'
 import { OverflowMenuIcon } from '@ui/icons/OverflowMenuIcon'
-import { PermanentCopyIcon } from '@ui/icons/PermanentCopyIcon'
 import { ReportIcon } from '@ui/icons/ReportIcon'
 import { SimilarIcon } from '@ui/icons/SimilarIcon'
-import { TagIcon } from '@ui/icons/TagIcon'
-import { ThumbsDownIcon } from '@ui/icons/ThumbsDownIcon'
-import { ThumbsUpIcon } from '@ui/icons/ThumbsUpIcon'
 import { useState } from 'react'
 
 import { useItemStatus } from '@common/state/item-status'
@@ -40,8 +35,6 @@ import { useItemStatus } from '@common/state/item-status'
 export function ItemActionsOverflow({ id }: { id: string }) {
   // Connect shared state actions
   const isSaved = useItemStatus((state) => state.isSaved(id))
-  const addSave = useItemStatus((state) => state.addSave)
-  const removeSave = useItemStatus((state) => state.removeSave)
 
   // Local state
   const [isOpen, setIsOpen] = useState(false)

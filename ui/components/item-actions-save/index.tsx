@@ -16,26 +16,10 @@ import {
   useFocus,
   useInteractions
 } from '@floating-ui/react'
-import {
-  AddIcon,
-  BookmarkIcon,
-  LikeIcon,
-  PinIcon,
-  ReadingIcon,
-  SaveFilledIcon,
-  SaveIcon
-} from '@ui/icons'
-import { ChevronDownIcon } from '@ui/icons/ChevronDownIcon'
-import { CrossCircledIcon } from '@ui/icons/CrossCircledIcon'
-import { DiscoverIcon } from '@ui/icons/DiscoverIcon'
-import { ListAddIcon } from '@ui/icons/ListAddIcon'
-import { ListenIcon } from '@ui/icons/ListenIcon'
-import { PermanentCopyIcon } from '@ui/icons/PermanentCopyIcon'
-import { ReportIcon } from '@ui/icons/ReportIcon'
-import { SimilarIcon } from '@ui/icons/SimilarIcon'
-import { TagIcon } from '@ui/icons/TagIcon'
-import { ThumbsDownIcon } from '@ui/icons/ThumbsDownIcon'
-import { ThumbsUpIcon } from '@ui/icons/ThumbsUpIcon'
+import { AddIcon } from '@ui/icons/AddIcon'
+import { ReadingIcon } from '@ui/icons/ReadingIcon'
+import { SaveFilledIcon } from '@ui/icons/SaveFilledIcon'
+import { SaveIcon } from '@ui/icons/SaveIcon'
 import { useState } from 'react'
 
 import { useItemStatus } from '@common/state/item-status'

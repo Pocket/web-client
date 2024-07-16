@@ -2,7 +2,8 @@
 
 import style from './style.module.css'
 
-import { BookmarkFilledIcon, BookmarkIcon, IosShareIcon, SimilarIcon } from '@ui/icons'
+import { BookmarkIcon } from '@ui/icons/BookmarkIcon'
+import { IosShareIcon } from '@ui/icons/IosShareIcon'
 
 // Components
 import { ItemActionsOverflow } from '../item-actions-overflow'

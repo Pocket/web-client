@@ -1,6 +1,6 @@
 import style from './style.module.css'
 
-import * as AllIcons from '@ui/icons'
+import * as AllIcons from '@ui/icons/all'
 
 // Types
 import type { Meta, StoryObj } from '@storybook/react'
@@ -27,7 +27,7 @@ export const Icons: StoryObj<typeof IconDisplayComponent> = {
  * Display all the icons with the ability to change font sizes
  */
 function IconDisplayComponent({ fontSize }: { fontSize?: number }) {
-  const iconList = Object.keys(AllIcons).sort()
+  const iconList: string[] = Object.keys(AllIcons).sort()
   return (
     <div className={style.iconContainer} style={{ fontSize: `${fontSize}px` }}>
       <div className={style.iconGrid}>

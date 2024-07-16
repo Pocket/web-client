@@ -52,11 +52,13 @@ function camelcase(str: string) {
 
 function writeIndex(imports: ImportData[]) {
   const importStatements = imports.map(buildImport).join('\n')
+  fs.writeFile(`${OUTPUT_DIR}/index.ts`, `export type IconType = React.ReactElement`)
   fs.writeFile(
-    `${OUTPUT_DIR}/index.ts`,
-    `export type IconType = React.ReactElement
-
-  ${importStatements}`
+    `${OUTPUT_DIR}/all.ts`,
+    `
+    export type IconType = React.ReactElement
+    
+    ${importStatements}`
   )
 }
 
