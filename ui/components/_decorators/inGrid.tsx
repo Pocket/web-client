@@ -1,5 +1,3 @@
-import style from './style.module.css'
-
 // Types
 import type { StoryFn } from '@storybook/react'
 

@@ -1,11 +1,12 @@
 import style from './style.module.css'
 
-import { SaveIcon } from '@ui/icons/SaveIcon'
-import { ThumbsDownIcon } from '@ui/icons/ThumbsDownIcon'
-import { ThumbsUpIcon } from '@ui/icons/ThumbsUpIcon'
-import { SystemModeIcon } from '@ui/icons/SystemModeIcon'
+import { ChevronDownIcon } from '@ui/icons/ChevronDownIcon'
 import { DarkModeIcon } from '@ui/icons/DarkModeIcon'
 import { LightModeIcon } from '@ui/icons/LightModeIcon'
+import { SaveIcon } from '@ui/icons/SaveIcon'
+import { SystemModeIcon } from '@ui/icons/SystemModeIcon'
+import { ThumbsDownIcon } from '@ui/icons/ThumbsDownIcon'
+import { ThumbsUpIcon } from '@ui/icons/ThumbsUpIcon'
 
 // Types
 import type { Meta, StoryObj } from '@storybook/react'
@@ -114,7 +115,7 @@ const ButtonComponent = ({
       </div>
       <div className={`${style.buttonContainer} ${style.buttonListMixed}`}>
         <h4>Button Group</h4>
-        <div className="button-group iconic">
+        <div className="button-group">
           <button type="button">
             <SystemModeIcon />
           </button>
@@ -123,6 +124,15 @@ const ButtonComponent = ({
           </button>
           <button type="button">
             <LightModeIcon />
+          </button>
+        </div>
+        <br />
+        <div className="button-group">
+          <button type="button">
+            <ChevronDownIcon />
+          </button>
+          <button className="active" type="button">
+            Save
           </button>
         </div>
       </div>
