@@ -1,5 +1,4 @@
 // Libraries
-import config from '@config/env'
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 
@@ -15,7 +14,7 @@ export type {{pascalCase stateType}}{{pascalCase stateName}} = {
   is{{pascalCase stateName }}: (id: string) => boolean // Helper to know if {{stateType }} is {{stateName }}
 } & {{pascalCase stateType}}{{pascalCase stateName}}State
 
-const MASTODON_API_URL = config.mastodon.client.url
+const API_URL = 'some url yet to be defined'
 
 /**
  * use{{pascalCase stateType}}{{pascalCase stateName}}
@@ -41,7 +40,7 @@ export const use{{pascalCase stateType}}{{pascalCase stateName}} = create<{{pasc
         })
 
         // Send a signal to the server
-        const response = await fetch(`${MASTODON_API_URL}/{{ stateType }}-{{ stateName }}`, {
+        const response = await fetch(`${API_URL}/{{ stateType }}-{{ stateName }}`, {
           method: 'PUT',
           body: JSON.stringify({ id})
         })
@@ -73,7 +72,7 @@ export const use{{pascalCase stateType}}{{pascalCase stateName}} = create<{{pasc
         })
 
         // Send a signal to the server to follow this user
-        const response = await fetch(`${MASTODON_API_URL}/{{ stateType }}-{{ stateName }}`, {
+        const response = await fetch(`${API_URL}/{{ stateType }}-{{ stateName }}`, {
           method: 'DELETE',
           body: JSON.stringify({ id})
         })
