@@ -160,8 +160,17 @@
   --color-button-brand-text-hover: var(--color-white100);
   --color-button-brand-hover: var(--color-brand-darker);
 
+  --color-button-save-text-hover: var(--color-white100);
+  --color-button-save-background-hover: var(--color-brand);
+  --color-button-save-border-hover: var(--color-brand);
+
   --color-menu-hover-text: var(--color-black100);
   --color-menu-background-hover: var(--color-teal100);
+  --color-menu-border: var(--color-grey85);
+
+  --color-typeahead-input-border: var(--color-grey65);
+  --color-typeahead-input-background: #4d4d4d15;
+  --color-typeahead-input-border-focus: #4d4d4d15;
 
   --color-pagination-text: var(--color-teal65);
   --color-pagination-text-hover: var(--color-teal65);
@@ -264,6 +273,9 @@
 
     --color-menu-hover-text: var(--color-white100);
     --color-menu-background-hover: var(--color-teal65);
+    --color-menu-border: var(--color-black95);
+
+    --color-typeahead-input-border: var(--color-black95);
 
     --color-button-group-text: var(--color-white100);
     --color-button-group-border: var(--color-grey40);
@@ -363,6 +375,7 @@
 
   --color-menu-hover-text: var(--color-white100);
   --color-menu-background-hover: var(--color-teal65);
+  --color-menu-border: var(--color-black95);
 
   --color-button-group-text: var(--color-white100);
   --color-button-group-border: var(--color-grey40);

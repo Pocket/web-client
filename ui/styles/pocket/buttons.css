@@ -73,7 +73,7 @@ input[type='reset'] {
 
   &.action {
     color: var(--color-text-lighter);
-    padding: 0.25rem 0.5rem;
+    padding: 0.25rem;
     &:hover {
       color: var(--color-accent-base);
     }
@@ -91,6 +91,7 @@ input[type='reset'] {
   }
 
   &.secondary,
+  &.save,
   &.outline {
     color: var(--color-button-secondary-text);
     border: 1px solid var(--color-button-secondary-border);
@@ -107,6 +108,22 @@ input[type='reset'] {
       background-color: var(--color-button-secondary-background-hover);
       border-color: var(--color-button-secondary-border-hover);
     }
+  }
+
+  &.save,
+  &.saved {
+    border-color: transparent;
+    &:active,
+    &:hover {
+      color: var(--color-button-save-text-hover);
+      background-color: var(--color-button-save-background-hover);
+      border-color: transparent;
+    }
+  }
+  &.saved,
+  &.saving {
+    background-color: var(--color-button-save-background-hover);
+    color: var(--color-button-save-text-hover);
   }
 
   &.brand {
@@ -146,6 +163,7 @@ input[type='reset'] {
 
     &:focus {
       outline: none;
+      background-color: var(--color-menu-background-hover);
     }
 
     &:first-of-type {
@@ -226,16 +244,38 @@ input[type='reset'] {
 .icon {
   height: 1.5em;
   transform: translateY(-4%);
-  margin-right: 0.25rem;
+  &:has(+ span) {
+    margin-right: 0.25rem;
+  }
+}
+
+.save-group {
+  color: var(--color-button-secondary-text);
+  border: 1px solid var(--color-button-secondary-border);
+  border-radius: 1000em;
+  background-color: var(--color-surface-base);
+  padding: 0 0.5rem;
+
+  &:hover {
+    color: var(--color-button-outline-text-hover);
+    border-color: var(--color-button-outline-border-hover);
+  }
 }
 
 .button-group {
   button {
-    color: var(--color-button-group-text);
-    border: 1px solid var(--color-button-group-border);
-    background-color: var(--color-button-group-background);
     border-radius: 0;
     border-width: 1px 1px 1px 0;
+    margin-left: 0;
+    box-sizing: content-box;
+
+    &.tiny {
+      .icon {
+        height: 1rem;
+        margin-right: 0;
+        transform: translate(3px, -2px) scale(125%);
+      }
+    }
 
     &:first-of-type {
       border-left-width: 1px;
@@ -246,17 +286,12 @@ input[type='reset'] {
       border-radius: 0 1000em 1000em 0;
     }
 
-    &.active {
-      background-color: var(--color-button-group-background-active);
+    &:only-of-type {
+      border-radius: 1000em;
+      border-left-width: 1px;
+      .icon {
+        transform: translate(-1px, -2px) scale(125%);
+      }
     }
-
-    &:hover:not(.active) {
-      background-color: var(--color-button-group-background-hover);
-      border-color: var(--color-button-group-border-hover);
-    }
-  }
-  &.iconic button {
-    font-size: 0.85rem;
-    padding: 0.375rem 0.75rem;
   }
 }

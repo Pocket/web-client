@@ -10,6 +10,7 @@
 @import url('./variables.css');
 /* LAYOUT STYLES --------------------------------------------- */
 @import url('./layout.css');
+@import url('./dividers.css');
 /* TYPOGRAPHY --------------------------------------------- */
 @import url('./typography.css');
 /* BASIC ELEMENTS --------------------------------------------- */
