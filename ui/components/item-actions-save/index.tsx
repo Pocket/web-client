@@ -25,6 +25,7 @@ import { matchSorter } from 'match-sorter'
 import { useState } from 'react'
 
 import { useItemStatus } from '@common/state/item-status'
+
 /**
  * ItemActionsMenuOverflow
  * ---
@@ -67,7 +68,7 @@ export function ItemActionsSave({ id }: { id: string }) {
       {isSaved ? (
         <button
           className="saved tiny"
-          data-testid="item-actions-saved"
+          data-testid="trigger-saved"
           type="button"
           onClick={handleSavedClick}>
           <SaveFilledIcon /> <span>{t('item-action:saved', 'Saved')}</span>
@@ -75,7 +76,7 @@ export function ItemActionsSave({ id }: { id: string }) {
       ) : (
         <button
           className={`save tiny ${isOpen ? 'saving' : ''}`}
-          data-testid="item-actions-save"
+          data-testid="trigger-save"
           type="button"
           {...getReferenceProps()}
           ref={refs.setReference}>
@@ -85,11 +86,7 @@ export function ItemActionsSave({ id }: { id: string }) {
       {isOpen ? (
         <FloatingPortal>
           <FloatingFocusManager context={context} visuallyHiddenDismiss={true}>
-            <div
-              ref={refs.setFloating}
-              data-testid="menu-dropdown"
-              style={floatingStyles}
-              {...getFloatingProps()}>
+            <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}>
               <SaveMenu handleOverflowClick={handleOverflowClick} id={id} />
             </div>
           </FloatingFocusManager>
@@ -118,10 +115,14 @@ function SaveMenu({ id, handleOverflowClick }: { id: string; handleOverflowClick
   }
 
   return (
-    <div className={style.base} data-testid="item-actions-save-menu">
+    <div className={style.base} data-testid="save-menu">
       <div className={style.header}>{t('item-action:save-to', 'Save to:')}</div>
       <hr />
-      <button className="menu" type="button" onClick={handleAddSaveClick}>
+      <button
+        className="menu"
+        data-testid="save-menu-action-default"
+        type="button"
+        onClick={handleAddSaveClick}>
         <ReadingIcon /> <span>{t('item-action:reading-list', 'default reading list')}</span>
       </button>
       <hr />
@@ -168,7 +169,11 @@ function SaveCollection({
   }
 
   return (
-    <button className="menu" type="button" onClick={handleAddSaveClick}>
+    <button
+      className="menu"
+      data-testid="save-menu-action-category"
+      type="button"
+      onClick={handleAddSaveClick}>
       {collection}
     </button>
   )

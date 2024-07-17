@@ -69,6 +69,7 @@ export function ItemActionsOverflow({ id }: { id: string }) {
         className="action tiny"
         {...getReferenceProps()}
         ref={refs.setReference}
+        data-testid="trigger-overflow"
         type="button">
         <OverflowMenuIcon />
       </button>
@@ -78,7 +79,6 @@ export function ItemActionsOverflow({ id }: { id: string }) {
           <FloatingFocusManager context={context} initialFocus={5} visuallyHiddenDismiss={true}>
             <div
               ref={refs.setFloating}
-              data-testid="menu-dropdown"
               style={floatingStyles}
               onClick={handleClick}
               {...getFloatingProps()}>
@@ -99,7 +99,7 @@ function OverflowMenu({ id, isSaved }: { id: string; isSaved: boolean }) {
   const handleUnSaveClick = () => removeSave(id)
 
   return (
-    <div className={style.base} data-testid="item-actions-menu">
+    <div className={style.base} data-testid="overflow-menu">
       {isSaved ? (
         <button className="menu" type="button" onClick={handleUnSaveClick}>
           <CrossCircledIcon /> <span>{t('item-action:un-save', 'Un-Save Item')}</span>
