@@ -16,10 +16,12 @@ import {
   useFocus,
   useInteractions
 } from '@floating-ui/react'
+// Icons
 import { AddIcon } from '@ui/icons/AddIcon'
 import { ReadingIcon } from '@ui/icons/ReadingIcon'
 import { SaveFilledIcon } from '@ui/icons/SaveFilledIcon'
 import { SaveIcon } from '@ui/icons/SaveIcon'
+import { matchSorter } from 'match-sorter'
 import { useState } from 'react'
 
 import { useItemStatus } from '@common/state/item-status'
@@ -101,35 +103,47 @@ export function ItemActionsSave({ id }: { id: string }) {
  *
  */
 function SaveMenu({ id, handleOverflowClick }: { id: string; handleOverflowClick: () => void }) {
+  const [categoryList, setCategoryList] = useState<string[]>(categories)
   const addSave = useItemStatus((state) => state.addSave)
   const handleAddSaveClick = () => {
     addSave(id)
     handleOverflowClick()
   }
 
-  const lastSavedCollections = ['camping', 'nature', 'outdoors']
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const sortedList = matchSorter(categories, e.target.value, {
+      threshold: matchSorter.rankings.CONTAINS
+    })
+    setCategoryList(sortedList)
+  }
+
   return (
     <div className={style.base} data-testid="item-actions-save-menu">
       <div className={style.header}>{t('item-action:save-to', 'Save to:')}</div>
       <hr />
       <button className="menu" type="button" onClick={handleAddSaveClick}>
-        <ReadingIcon /> <span>{t('item-action:reading-list', 'reading list')}</span>
+        <ReadingIcon /> <span>{t('item-action:reading-list', 'default reading list')}</span>
       </button>
       <hr />
-      <button className="menu" type="button">
-        <AddIcon /> {t('item-action:new-collection', 'new collection')}
-      </button>
-      <hr />
-      {lastSavedCollections.map((collection) => (
-        <SaveCollection
-          key={collection}
-          collection={collection}
-          handleOverflowClick={handleOverflowClick}
-          id={id}
-        />
-      ))}
+
+      <div className={style.categories}>
+        {categoryList.length ? (
+          categoryList.map((collection) => (
+            <SaveCollection
+              key={collection}
+              collection={collection}
+              handleOverflowClick={handleOverflowClick}
+              id={id}
+            />
+          ))
+        ) : (
+          <button className="menu" type="button">
+            <AddIcon /> {t('item-action:new-collection', 'new collection')}
+          </button>
+        )}
+      </div>
       <div className={style.typeahead}>
-        <input type="text" />
+        <input type="text" onChange={handleInputChange} />
       </div>
     </div>
   )
@@ -159,3 +173,106 @@ function SaveCollection({
     </button>
   )
 }
+
+const categories = [
+  'Adventure',
+  'Animation',
+  'Architecture',
+  'Art',
+  'Artificial Intelligence',
+  'Astronomy',
+  'Augmented Reality',
+  'Automotive',
+  'Baking',
+  'Beauty',
+  'Biology',
+  'Blockchain',
+  'Books',
+  'Business',
+  'Career',
+  'Chemistry',
+  'Coding',
+  'Comics',
+  'Cooking',
+  'Crafts',
+  'Cryptocurrency',
+  'Culture',
+  'Customer Service',
+  'Data Science',
+  'Digital Art',
+  'DIY',
+  'E-commerce',
+  'Economy',
+  'Education',
+  'Engineering',
+  'Entertainment',
+  'Environment',
+  'Event Planning',
+  'Fashion',
+  'Finance',
+  'Fitness',
+  'Food',
+  'Gaming',
+  'Gardening',
+  'Geography',
+  'Graphic Design',
+  'Health',
+  'History',
+  'Home Improvement',
+  'Human Resources',
+  'Interior Design',
+  'Investing',
+  'Language Learning',
+  'Law',
+  'Leadership',
+  'Lifestyle',
+  'Machine Learning',
+  'Marketing',
+  'Mathematics',
+  'Mental Health',
+  'Mindfulness',
+  'Movies',
+  'Music',
+  'Nature',
+  'Nutrition',
+  'Parenting',
+  'Personal Finance',
+  'Pets',
+  'Philosophy',
+  'Photo Editing',
+  'Photography',
+  'Physics',
+  'Podcasting',
+  'Poetry',
+  'Politics',
+  'Productivity',
+  'Project Management',
+  'Public Speaking',
+  'Real Estate',
+  'Recipes',
+  'Relationships',
+  'Religion',
+  'Robotics',
+  'Science Fiction',
+  'Science',
+  'Sculpture',
+  'Self-Improvement',
+  'Social Media',
+  'Spirituality',
+  'Sports',
+  'Startups',
+  'Statistics',
+  'Street Photography',
+  'Sustainability',
+  'Technology',
+  'Traditional Art',
+  'Travel Photography',
+  'Travel Tips',
+  'Travel',
+  'Video Production',
+  'Virtual Reality',
+  'Web Development',
+  'Wedding Photography',
+  'Wildlife Photography',
+  'Writing'
+]

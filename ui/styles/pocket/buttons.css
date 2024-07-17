@@ -161,7 +161,7 @@ input[type='reset'] {
       border-color: transparent;
     }
 
-    &:focus {
+    &:focus-visible {
       outline: none;
       background-color: var(--color-menu-background-hover);
     }

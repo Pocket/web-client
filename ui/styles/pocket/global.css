@@ -386,7 +386,7 @@ a.button.menu,button.menu,input[type=button].menu,input[type=reset].menu,input[t
 
 a.button.menu:hover,button.menu:hover,input[type=button].menu:hover,input[type=reset].menu:hover,input[type=submit].menu:hover{background-color:var(--color-menu-background-hover);border-color:transparent;color:var(--color-menu-hover-text)}
 
-a.button.menu:focus,button.menu:focus,input[type=button].menu:focus,input[type=reset].menu:focus,input[type=submit].menu:focus{background-color:var(--color-menu-background-hover);outline:none}
+a.button.menu:focus-visible,button.menu:focus-visible,input[type=button].menu:focus-visible,input[type=reset].menu:focus-visible,input[type=submit].menu:focus-visible{background-color:var(--color-menu-background-hover);outline:none}
 
 a.button.menu:first-of-type,button.menu:first-of-type,input[type=button].menu:first-of-type,input[type=reset].menu:first-of-type,input[type=submit].menu:first-of-type{border-radius:10px 10px 0 0}
 

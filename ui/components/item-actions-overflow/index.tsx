@@ -75,7 +75,7 @@ export function ItemActionsOverflow({ id }: { id: string }) {
 
       {isOpen ? (
         <FloatingPortal>
-          <FloatingFocusManager context={context} visuallyHiddenDismiss={true}>
+          <FloatingFocusManager context={context} initialFocus={5} visuallyHiddenDismiss={true}>
             <div
               ref={refs.setFloating}
               data-testid="menu-dropdown"

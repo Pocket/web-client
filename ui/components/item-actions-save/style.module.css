@@ -38,3 +38,9 @@
     }
   }
 }
+
+.categories {
+  max-height: 6.5625rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
