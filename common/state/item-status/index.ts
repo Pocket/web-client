@@ -40,6 +40,9 @@ export const useItemStatus = create<ItemStatus>()(
 
     /** State Action — addSave */
     addSave: async (id: string): Promise<void> => {
+      // !! This will just fail silently ... do better than this when we wire it up
+      if (!id) return
+
       try {
         // Adding Ids to SavedItemIds array optimistically
         set((state) => {
@@ -78,6 +81,9 @@ export const useItemStatus = create<ItemStatus>()(
 
     /** State Action — removeStatus */
     removeSave: async (id: string): Promise<void> => {
+      // !! This will just fail silently ... do better than this when we wire it up
+      if (!id) return
+
       try {
         // Removing id from savedItemIds array optimistically
         set((state) => {

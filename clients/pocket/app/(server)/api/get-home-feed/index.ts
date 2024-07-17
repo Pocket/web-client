@@ -100,6 +100,7 @@ function getItemsFromSlate({ recommendations }: { recommendations: CorpusRecomme
         ...corpusItem,
         externalUrl: corpusItem.url,
         saveUrl: corpusItem.url,
+        id: corpusRecommendationId,
         itemId: corpusRecommendationId,
         topic,
         corpusRecommendationId,
