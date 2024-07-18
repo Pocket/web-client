@@ -75,7 +75,7 @@ export function ItemActionsSave({ id }: { id: string }) {
         </button>
       ) : (
         <button
-          className={`save tiny ${isOpen ? 'saving' : ''}`}
+          className={`save tiny ${isOpen ? 'saving active' : ''}`}
           data-testid="trigger-save"
           type="button"
           {...getReferenceProps()}
@@ -143,6 +143,7 @@ function SaveMenu({ id, handleOverflowClick }: { id: string; handleOverflowClick
           </button>
         )}
       </div>
+      <hr />
       <div className={style.typeahead}>
         <input type="text" onChange={handleInputChange} />
       </div>

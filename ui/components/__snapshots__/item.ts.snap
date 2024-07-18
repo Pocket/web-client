@@ -94,7 +94,7 @@ exports[`renders Item with expected data 1`] = `
               </button>
             </div>
             <button
-              class="action tiny"
+              class="action tiny "
               data-testid="trigger-overflow"
               type="button"
             >

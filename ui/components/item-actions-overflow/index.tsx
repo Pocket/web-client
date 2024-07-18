@@ -66,7 +66,7 @@ export function ItemActionsOverflow({ id }: { id: string }) {
   return (
     <>
       <button
-        className="action tiny"
+        className={`action tiny ${isOpen ? 'active' : ''}`}
         {...getReferenceProps()}
         ref={refs.setReference}
         data-testid="trigger-overflow"

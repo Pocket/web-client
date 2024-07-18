@@ -37,3 +37,7 @@ article:focus-within .secondary,
 article:hover .secondary {
   visibility: visible;
 }
+
+.base:has([class~='active']) .secondary {
+  visibility: visible;
+}

@@ -159,7 +159,7 @@ exports[`renders ItemActionsMenu when opened 1`] = `
 exports[`renders ItemActionsMenu with defaults 1`] = `
 <div>
   <button
-    class="action tiny"
+    class="action tiny "
     data-testid="trigger-overflow"
     type="button"
   >
