@@ -125,7 +125,6 @@ function OverflowMenu({ id, isSaved }: { id: string; isSaved: boolean }) {
       <button className="menu" type="button">
         <ListAddIcon /> <span>{t('item-action:add-to-collection', 'Add to Collection')}</span>
       </button>
-
       <hr />
       <button className="menu" type="button">
         <IosShareIcon /> <span>{t('item-action:share', 'Share')}</span>

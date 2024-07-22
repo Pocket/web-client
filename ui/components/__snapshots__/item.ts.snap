@@ -75,7 +75,7 @@ exports[`renders Item with expected data 1`] = `
                 </svg>
               </button>
               <button
-                class="action tiny  "
+                class="action tiny "
                 type="button"
               >
                 <svg
@@ -86,9 +86,7 @@ exports[`renders Item with expected data 1`] = `
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    clip-rule="evenodd"
-                    d="M18.765 22.848a2 2 0 0 1-2.18-.434L12 17.828l-4.586 4.586A2 2 0 0 1 4 21V6a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v15a2 2 0 0 1-1.235 1.848M12 15l6 6V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v15z"
-                    fill-rule="evenodd"
+                    d="M16.58 4C19.27 4 21 5.84 21 8.7c0 3.36-3.03 6.72-9 11.95-5.97-5.24-9-8.59-9-11.95C3 5.67 4.57 4 7.42 4c1.17 0 2.16.51 3.05 1.57l.763.918a1 1 0 0 0 1.536.002l.761-.91C14.42 4.51 15.42 4 16.58 4m0-2c-1.78 0-3.32.78-4.58 2.29C10.74 2.78 9.2 2 7.42 2 3.59 2 1 4.44 1 8.7c0 4.2 3.5 8.18 10.42 14.09A.9.9 0 0 0 12 23c.21 0 .41-.07.58-.22C19.5 16.88 23 12.9 23 8.7 23 4.55 20.18 2 16.58 2"
                   />
                 </svg>
               </button>
@@ -110,34 +108,36 @@ exports[`renders Item with expected data 1`] = `
                 />
               </svg>
             </button>
-            <button
-              class="save tiny "
-              data-testid="trigger-save"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="icon "
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
+            <div>
+              <button
+                class="save tiny "
+                data-testid="trigger-save"
+                type="button"
               >
-                <path
-                  clip-rule="evenodd"
-                  d="M2 5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2H2m2 0H2v6c0 5.523 4.477 10 10 10s10-4.477 10-10V5h-2v6a8 8 0 1 1-16 0z"
-                  fill-rule="evenodd"
-                />
-                <path
-                  clip-rule="evenodd"
-                  d="M7.293 9.293a1 1 0 0 1 1.414 0L12 12.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414"
-                  fill-rule="evenodd"
-                />
-              </svg>
-               
-              <span>
-                Save
-              </span>
-            </button>
+                <svg
+                  aria-hidden="true"
+                  class="icon "
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    clip-rule="evenodd"
+                    d="M2 5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2H2m2 0H2v6c0 5.523 4.477 10 10 10s10-4.477 10-10V5h-2v6a8 8 0 1 1-16 0z"
+                    fill-rule="evenodd"
+                  />
+                  <path
+                    clip-rule="evenodd"
+                    d="M7.293 9.293a1 1 0 0 1 1.414 0L12 12.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414"
+                    fill-rule="evenodd"
+                  />
+                </svg>
+                 
+                <span>
+                  Save
+                </span>
+              </button>
+            </div>
           </div>
         </footer>
       </div>

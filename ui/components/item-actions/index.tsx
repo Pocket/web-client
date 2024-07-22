@@ -2,8 +2,8 @@
 
 import style from './style.module.css'
 
-import { BookmarkIcon } from '@ui/icons/BookmarkIcon'
 import { IosShareIcon } from '@ui/icons/IosShareIcon'
+import { LikeIcon } from '@ui/icons/LikeIcon'
 
 // Components
 import { ItemActionsOverflow } from '../item-actions-overflow'
@@ -18,23 +18,14 @@ import { useItemStatus } from '@common/state/item-status'
  * a better organization.
  */
 export function ItemActions({ id }: { id: string }) {
-  const isSaved = useItemStatus((state) => state.isSaved(id))
-  const addSave = useItemStatus((state) => state.addSave)
-  const removeSave = useItemStatus((state) => state.removeSave)
-
-  const handleSaveClick = () => (isSaved ? removeSave(id) : addSave(id))
-
   return (
     <div className={style.base} data-testid="item-actions">
       <div className={style.secondary}>
         <button className="action tiny" type="button">
           <IosShareIcon />
         </button>
-        <button
-          className={`action tiny  ${isSaved ? style.bookmarked : ''}`}
-          type="button"
-          onClick={handleSaveClick}>
-          <BookmarkIcon />
+        <button className={`action tiny `} type="button">
+          <LikeIcon />
         </button>
       </div>
 

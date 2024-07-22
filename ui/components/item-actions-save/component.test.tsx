@@ -28,11 +28,6 @@ describe('renders ItemActionsSave', () => {
     const menu = screen.getByTestId('save-menu')
     expect(menu).toBeInTheDocument()
 
-    const defaultSaveButton = screen.getByTestId('save-menu-action-default')
-
-    // Click the button
-    await act(() => user.click(defaultSaveButton))
-
     // Let's make sure the buttons have reset
     const savedTrigger = screen.queryByTestId('trigger-saved')
     const modifiedSaveButton = screen.queryByTestId('trigger-save')

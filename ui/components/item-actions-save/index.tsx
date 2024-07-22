@@ -18,7 +18,6 @@ import {
 } from '@floating-ui/react'
 // Icons
 import { AddIcon } from '@ui/icons/AddIcon'
-import { ReadingIcon } from '@ui/icons/ReadingIcon'
 import { SaveFilledIcon } from '@ui/icons/SaveFilledIcon'
 import { SaveIcon } from '@ui/icons/SaveIcon'
 import { matchSorter } from 'match-sorter'
@@ -35,6 +34,11 @@ export function ItemActionsSave({ id }: { id: string }) {
   // Connect shared state actions
   const isSaved = useItemStatus((state) => state.isSaved(id))
   const removeSave = useItemStatus((state) => state.removeSave)
+  const addSave = useItemStatus((state) => state.addSave)
+
+  const handleOverflowClick = () => setIsOpen(false)
+  const handleRemoveSaveClick = () => removeSave(id)
+  const handleSaveClick = () => addSave(id)
 
   // Local state
   const [isOpen, setIsOpen] = useState(false)
@@ -60,29 +64,30 @@ export function ItemActionsSave({ id }: { id: string }) {
 
   const { getReferenceProps, getFloatingProps } = useInteractions([click, dismiss, focus])
 
-  const handleOverflowClick = () => setIsOpen(false)
-  const handleSavedClick = () => removeSave(id)
-
   return (
     <>
-      {isSaved ? (
-        <button
-          className="saved tiny"
-          data-testid="trigger-saved"
-          type="button"
-          onClick={handleSavedClick}>
-          <SaveFilledIcon /> <span>{t('item-action:saved', 'Saved')}</span>
-        </button>
-      ) : (
-        <button
-          className={`save tiny ${isOpen ? 'saving active' : ''}`}
-          data-testid="trigger-save"
-          type="button"
-          {...getReferenceProps()}
-          ref={refs.setReference}>
-          <SaveIcon /> <span>{t('item-action:save', 'Save')}</span>
-        </button>
-      )}
+      <div ref={refs.setReference}>
+        {isSaved ? (
+          <button
+            className={`saved tiny ${isOpen ? 'active' : ''}`}
+            data-testid="trigger-saved"
+            type="button"
+            onClick={handleRemoveSaveClick}>
+            <SaveFilledIcon /> <span>{t('item-action:saved', 'Saved')}</span>
+          </button>
+        ) : (
+          <button
+            className={`save tiny ${isOpen ? 'active' : ''}`}
+            data-testid="trigger-save"
+            type="button"
+            {...getReferenceProps({ onClick: handleSaveClick })}>
+            <SaveIcon />{' '}
+            <span>
+              {isOpen ? t('item-action:saving', 'Saving') : t('item-action:save', 'Save')}
+            </span>
+          </button>
+        )}
+      </div>
       {isOpen ? (
         <FloatingPortal>
           <FloatingFocusManager context={context} visuallyHiddenDismiss={true}>
@@ -101,11 +106,6 @@ export function ItemActionsSave({ id }: { id: string }) {
  */
 function SaveMenu({ id, handleOverflowClick }: { id: string; handleOverflowClick: () => void }) {
   const [categoryList, setCategoryList] = useState<string[]>(categories)
-  const addSave = useItemStatus((state) => state.addSave)
-  const handleAddSaveClick = () => {
-    addSave(id)
-    handleOverflowClick()
-  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const sortedList = matchSorter(categories, e.target.value, {
@@ -116,17 +116,24 @@ function SaveMenu({ id, handleOverflowClick }: { id: string; handleOverflowClick
 
   return (
     <div className={style.base} data-testid="save-menu">
-      <div className={style.header}>{t('item-action:save-to', 'Save to:')}</div>
-      <hr />
-      <button
-        className="menu"
-        data-testid="save-menu-action-default"
-        type="button"
-        onClick={handleAddSaveClick}>
-        <ReadingIcon /> <span>{t('item-action:reading-list', 'default reading list')}</span>
-      </button>
-      <hr />
+      <div className={style.header}>
+        {t('item-action:save-to-collection', 'Save to collection:')}
+      </div>
+      {recent.length ? (
+        <>
+          <hr />
+          {recent.map((recent) => (
+            <SaveCollection
+              key={recent}
+              collection={recent}
+              handleOverflowClick={handleOverflowClick}
+              id={id}
+            />
+          ))}
+        </>
+      ) : null}
 
+      <hr />
       <div className={style.categories}>
         {categoryList.length ? (
           categoryList.map((collection) => (
@@ -179,6 +186,8 @@ function SaveCollection({
     </button>
   )
 }
+
+const recent = ['redwood', 'nature']
 
 const categories = [
   'Adventure',
