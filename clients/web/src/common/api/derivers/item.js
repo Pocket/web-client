@@ -97,6 +97,12 @@ export function deriveListItem(edge) {
   return deriveItem({ item, node: rest, cursor, utmId: 'pocket_saves' })
 }
 
+export function deriveSearchItem(edge) {
+  const { node = {}, cursor = null } = edge
+  const { preview, searchHighlights } = node
+  return deriveItem({ item: { ...preview, searchHighlights }, cursor, utmId: 'pocket_search' })
+}
+
 export function deriveSharedItem(share) {
   const { preview, cursor = null } = share
   const { item, ...rest } = preview
@@ -247,7 +253,8 @@ function title({ item, itemEnrichment }) {
  * @returns {string:url} The most appropriate image to show as a thumbnail
  */
 function thumbnail({ item, itemEnrichment }) {
-  const passedImage = itemEnrichment?.thumbnail || item?.thumbnail || item?.topImageUrl || false
+  const passedImage =
+    itemEnrichment?.thumbnail || item?.thumbnail || item?.topImageUrl || item?.image?.url || false
   if (passedImage) return passedImage
 
   const firstImage = item?.images?.[Object.keys(item?.images)[0]]?.src
@@ -270,6 +277,7 @@ function publisher({ item, itemEnrichment, passedPublisher }) {
     passedPublisher ||            // Collections - hardcoded as 'Pocket'
     itemEnrichment?.publisher ||  // Home - curatedInfo: provided by curation || Collection - publisher: provided by curation
     item?.domainMetadata?.name || // Metadata from a domain, originally populated from ClearBit. Takes precedence
+    item?.domain?.name ||         // Domain specifically from graph return of preview 
     item?.domain ||               // Domain, such as 'getpocket.com' of the {.resolved_url}
     derivedDomain ||              // Regex - givenUrl: The url as provided by the user when saving. Only http or https schemes allowed || resolvedUrl: If the givenUrl redirects (once or many times), this is the final url. Otherwise, same as givenUrl
     null

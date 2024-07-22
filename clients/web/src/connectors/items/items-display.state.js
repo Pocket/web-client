@@ -3,6 +3,7 @@ import { READ_ITEM_SUCCESS } from 'actions'
 import { SHARED_ITEM_SUCCESS } from 'actions'
 import { ITEMS_SET_NO_IMAGE } from 'actions'
 import { ITEMS_UPDATE } from 'actions'
+import { CORPUS_SEARCH_SUCCESS } from 'actions'
 import { HYDRATE } from 'actions'
 
 /** ACTIONS
@@ -16,11 +17,12 @@ export const itemsDisplayReducers = (state = {}, action) => {
   switch (action.type) {
     case READ_ITEM_SUCCESS:
     case SHARED_ITEM_SUCCESS:
+    case CORPUS_SEARCH_SUCCESS:
     case ITEMS_SUCCESS: {
       const { itemsById = {} } = action
 
       // Instead of a wholesale shallow merge (which overwrites existing values)
-      // We are gonna do a messy deep merge.  This is all neccesary because we
+      // We are gonna do a messy deep merge.  This is all necessary because we
       // don't have great data consistency in our endpoints
       const passedItemIds = Object.keys(itemsById)
       const preExistingItemIds = passedItemIds.filter((value) => Object.keys(state).includes(value))

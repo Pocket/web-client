@@ -2,12 +2,10 @@ import style from './style.module.css'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { CallOutBuildHome } from 'components/call-out/call-out-build-home'
 
-import type { FC } from 'react'
-
-export const HomeSignUpCTA: FC = () => {
+export const HomeSignUpCTA = ({ topBorder = false }: { topBorder: boolean }) => {
   return (
     <SectionWrapper className={style.base}>
-      <CallOutBuildHome topBorder={false} />
+      <CallOutBuildHome topBorder={topBorder} />
     </SectionWrapper>
   )
 }

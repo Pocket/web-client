@@ -10,7 +10,7 @@ const homeGreeting = css`
   font-weight: 600;
   font-size: 1rem;
   line-height: 1.2;
-  padding-top: 2.5rem;  // can't use padding, will override SectionWrapper's css
+  padding-top: 2.5rem; // can't use padding, will override SectionWrapper's css
   padding-bottom: 1rem;
 `
 

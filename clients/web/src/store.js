@@ -124,6 +124,10 @@ import { mutationListUpdateSagas } from 'connectors/lists/mutation-update.state'
 
 import { mutationListShareReducers } from 'connectors/lists/mutation-share.state'
 
+import { pageSearchIdsReducers } from 'containers/search/search.state'
+import { pageSearchInfoReducers } from 'containers/search/search.state'
+import { pageSearchSagas } from 'containers/search/search.state'
+
 /* REDUCERS
  --------------------------------------------------------------- */
 const itemReducers = {
@@ -132,7 +136,7 @@ const itemReducers = {
   itemsDisplay: itemsDisplayReducers, // This is canonical item data used to display an item from anywhere (an item is an item is an item)
   itemsSaved: itemsSavedReducers, // This represents the actions the user has taken on a given item (if any)
   itemsTransitions: itemsTransitionsReducers, // This represents items transitioning from unsaved to saved (saving -> saved -> unsaving)
-  itemsRelated: itemsRelatedReducers, // This is an explict call for related items ... these will shift over requests
+  itemsRelated: itemsRelatedReducers, // This is an explicit call for related items ... these will shift over requests
   listsDisplay: listsDisplayReducers,
   listen: listenReducers
 }
@@ -166,7 +170,9 @@ const pageReducers = {
   pageCollectionInfo: [], // In future this will handle pagination
   pageCollectionStories: pageCollectionStoriesReducers,
   pageStoriesInfo: [],
-  pageListsInfo: pageListsInfoReducers
+  pageListsInfo: pageListsInfoReducers,
+  pageSearchInfo: pageSearchInfoReducers,
+  pageSearchIds: pageSearchIdsReducers
 }
 
 const discoverReducers = {
@@ -255,7 +261,8 @@ function* rootSaga() {
     ...mutationListDeleteSagas,
     ...mutationListUpdateSagas,
     ...mutationListAddSagas,
-    ...listenSagas
+    ...listenSagas,
+    ...pageSearchSagas
   ])
 }
 
