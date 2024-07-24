@@ -1,5 +1,4 @@
 import style from './style.module.css'
-import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { useTranslation } from 'next-i18next'
 import { useRef, useState } from 'react'
 import { useRouter } from 'next/router'
@@ -10,16 +9,18 @@ export function SearchCorpus() {
   const router = useRouter()
   const { t } = useTranslation()
 
-  /* DO NOT PUSH WITHOUT SANITIZATION */
+  // We will get sanitization on storage, and we don't execute this query client side. The body
+  // Get's JSON stringified in the request
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       router.push(`/search?q=${searchQuery}`)
     }
   }
 
-  const handleSearchSubmit = () => {
-    router.push(`/search?q=${searchQuery}`)
-  }
+  // For when we add a button
+  // const handleSearchSubmit = () => {
+  //   router.push(`/search?q=${searchQuery}`)
+  // }
 
   return (
     <div className={style.base} data-testid="home-section-search">
