@@ -10,6 +10,7 @@ import { READ_ITEM_FAILURE } from 'actions'
 import { SHARED_ITEM_SUCCESS } from 'actions'
 import { READ_SET_HIGHLIGHTS } from 'actions'
 import { READER_CLEAR_FAILURE } from 'actions'
+import { READ_ITEM_RESOLVED } from 'actions'
 
 import { TOGGLE_READER_SIDEBAR } from 'actions'
 import { READER_CLEAR_DELETION } from 'actions'
@@ -29,7 +30,8 @@ const initialState = {
   deleted: false,
   readFailure: false,
   idMap: {},
-  highlightList: []
+  highlightList: [],
+  hasResolved: false
 }
 
 export const readerReducers = (state = initialState, action) => {
@@ -37,6 +39,10 @@ export const readerReducers = (state = initialState, action) => {
     case READ_SET_HIGHLIGHTS: {
       const { highlightList } = action
       return { ...state, highlightList }
+    }
+
+    case READ_ITEM_RESOLVED: {
+      return { ...state, hasResolved: true }
     }
 
     case READ_ITEM_SUCCESS:
@@ -54,7 +60,7 @@ export const readerReducers = (state = initialState, action) => {
     }
 
     case READ_ITEM_FAILURE: {
-      return { ...state, readFailure: true }
+      return { ...state, readFailure: true, hasResolved: true }
     }
 
     case READER_CLEAR_FAILURE: {
@@ -91,6 +97,7 @@ function* readItemRequest({ slug }) {
         shareItem: response.share,
         itemsById: { [derivedShare.itemId]: derivedShare }
       })
+      yield put({ type: READ_ITEM_RESOLVED })
       return
     }
 
@@ -106,6 +113,7 @@ function* readItemRequest({ slug }) {
       idKey,
       slug
     })
+    yield put({ type: READ_ITEM_RESOLVED })
   } catch (error) {
     yield put({ type: READ_ITEM_FAILURE, error })
   }

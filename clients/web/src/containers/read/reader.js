@@ -88,6 +88,7 @@ export default function Reader() {
   const status = useSelector((state) => state.itemsSaved[itemId]?.status)
   const sharedItem = useSelector((state) => state.sharedItem)
   const hasFailed = useSelector((state) => state.reader.readFailure)
+  const hasResolved = useSelector((state) => state.reader.hasResolved)
 
   // Display settings
   const lineHeight = useSelector((state) => state.readerSettings.lineHeight)
@@ -206,7 +207,7 @@ export default function Reader() {
         </>
       ) : null}
 
-      <ConfirmTagging />
+      {hasResolved && !sharedItem ? <ConfirmTagging /> : null}
       <ConfirmShare />
       <Toasts />
     </>
