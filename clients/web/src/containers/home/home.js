@@ -50,10 +50,11 @@ export const Home = ({ metaData }) => {
           ) : null}
 
           {isAuthenticated ? <HomeRecentSaves /> : null}
+
+          <SharedItemInterstitial />
         </>
       )}
       <HomeContent />
-      <SharedItemInterstitial />
       <Toasts surface="home" />
     </Layout>
   )
