@@ -1,17 +1,16 @@
 import Layout from 'layouts/main'
 import { ItemCard } from 'connectors/items/item-card-transitional'
 import { Toasts } from 'connectors/toasts/toast-list'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { standardGrid } from 'components/item/items-layout'
 import { SearchCorpus } from '../../connectors/search-corpus'
 
-export const Search = () => {
-  const dispatch = useDispatch()
+export const Search = ({ query }) => {
   const pageSearchIds = useSelector((state) => state.pageSearchIds) //prettier-ignore
 
   return (
     <Layout>
-      <SearchCorpus />
+      <SearchCorpus query={query} />
       <br />
       <div className={standardGrid}>
         {pageSearchIds.map((itemId) => {

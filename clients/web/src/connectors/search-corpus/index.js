@@ -3,8 +3,8 @@ import { useTranslation } from 'next-i18next'
 import { useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 
-export function SearchCorpus() {
-  const [searchQuery, setSearchQuery] = useState('')
+export function SearchCorpus({ query = '' }) {
+  const [searchQuery, setSearchQuery] = useState(query)
   const searchRef = useRef(null)
   const router = useRouter()
   const { t } = useTranslation()

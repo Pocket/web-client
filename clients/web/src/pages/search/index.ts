@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps<LocalizedProps> = wrapper.ge
       dispatch(hydrateSearchResults(data))
 
       // Revalidate means this can be regenerated once every X seconds
-      return { props: defaultProps }
+      return { props: { ...defaultProps, query: q } }
     }
 )
 
