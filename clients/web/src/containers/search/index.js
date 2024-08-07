@@ -1,24 +1,23 @@
 import Layout from 'layouts/main'
-import { ItemCard } from 'connectors/items/item-card-transitional'
+import { ListOfSearchResults } from './list-of-items'
 import { Toasts } from 'connectors/toasts/toast-list'
-import { useSelector } from 'react-redux'
-import { standardGrid } from 'components/item/items-layout'
-import { SearchCorpus } from '../../connectors/search-corpus'
+import { SearchCorpus } from 'connectors/search-corpus'
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { requestSearch } from './search.state'
 
-export const Search = ({ query }) => {
-  const pageSearchIds = useSelector((state) => state.pageSearchIds) //prettier-ignore
+export const Search = ({ query, locale }) => {
+  const dispatch = useDispatch()
+  const loading = useSelector((state) => state.pageSearchInfo.loading)
+
+  useEffect(() => {
+    dispatch(requestSearch(query, locale.toUpperCase()))
+  }, [query, locale, dispatch])
 
   return (
     <Layout>
       <SearchCorpus query={query} />
-      <br />
-      <div className={standardGrid}>
-        {pageSearchIds.map((itemId) => {
-          if (typeof itemId !== 'string') return null
-          const positionOfItem = pageSearchIds.indexOf(itemId)
-          return <ItemCard key={itemId} id={itemId} position={positionOfItem} snowplowId="search" />
-        })}
-      </div>
+      <ListOfSearchResults />
       <Toasts />
     </Layout>
   )

@@ -116,8 +116,8 @@ export const Pagination = ({
   // the position we are at in the sequence.
   const disableBack = currentPage === 1
   const disableForward = currentPage === totalPages
-  const backLink = currentPage === 2 ? pagePattern : `${pagePattern}/page/${currentPage - 1}`
-  const forwardLink = disableForward ? '#' : `${pagePattern}/page/${currentPage + 1}`
+  const backLink = currentPage === 2 ? pagePattern : `${pagePattern}${currentPage - 1}`
+  const forwardLink = disableForward ? '#' : `${pagePattern}${currentPage + 1}`
 
   return showPagination ? (
     <>
@@ -161,7 +161,7 @@ const PageLink = ({
   currentPage: number
 }) => {
   const buttonClass = pageNumber === currentPage ? 'active' : null
-  const href = pageNumber === 1 ? pagePattern : `${pagePattern}/page/${pageNumber}`
+  const href = pageNumber === 1 ? pagePattern : `${pagePattern}${pageNumber}`
   return (
     <Link href={href}>
       <button className={cx('pagination', buttonClass)}>{pageNumber}</button>

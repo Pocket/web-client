@@ -3,8 +3,12 @@ import { requestGQL } from 'common/utilities/request/request'
 import { deriveSearchItem } from 'common/api/derivers/item'
 
 const getSearchQuery = gql`
-  query CorpusSearchQuery($search: CorpusSearchQueryString!, $filter: CorpusSearchFilters!) {
-    searchCorpus(search: $search, filter: $filter) {
+  query CorpusSearchQuery(
+    $search: CorpusSearchQueryString!
+    $filter: CorpusSearchFilters!
+    $pagination: PaginationInput
+  ) {
+    searchCorpus(search: $search, filter: $filter, pagination: $pagination) {
       pageInfo {
         hasNextPage
         endCursor
@@ -63,10 +67,10 @@ const getSearchQuery = gql`
 /**
  * getSearchCorpus is for ... wait for it ... searching the corpus of content provided content team
  */
-export async function getCorpusSearch({ search, filter }) {
+export async function getCorpusSearch({ search, filter, pagination }) {
   return requestGQL({
     query: getSearchQuery,
-    variables: { search, filter }
+    variables: { search, filter, pagination: { ...pagination, first: 30 } }
   })
     .then(handleResponse)
     .catch((error) => {
