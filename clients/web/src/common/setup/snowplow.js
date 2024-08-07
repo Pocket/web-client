@@ -15,10 +15,10 @@ import {
   LinkClickTrackingPlugin,
   enableLinkClickTracking
 } from '@snowplow/browser-plugin-link-click-tracking'
-import {
-  ButtonClickTrackingPlugin,
-  enableButtonClickTracking
-} from '@snowplow/browser-plugin-button-click-tracking'
+// import {
+//   ButtonClickTrackingPlugin,
+//   enableButtonClickTracking
+// } from '@snowplow/browser-plugin-button-click-tracking'
 import { FormTrackingPlugin, enableFormTracking } from '@snowplow/browser-plugin-form-tracking'
 import { PerformanceNavigationTimingPlugin } from '@snowplow/browser-plugin-performance-navigation-timing'
 import { ClientHintsPlugin } from '@snowplow/browser-plugin-client-hints'
@@ -35,7 +35,7 @@ export function initializeSnowplow(user_id, sess_guid, cookied, finalizeInit) {
       ...snowplowConfig,
       plugins: [
         LinkClickTrackingPlugin(),
-        ButtonClickTrackingPlugin(),
+        // ButtonClickTrackingPlugin(),
         FormTrackingPlugin(),
         PerformanceNavigationTimingPlugin(),
         ClientHintsPlugin(),
@@ -59,7 +59,7 @@ export function initializeSnowplow(user_id, sess_guid, cookied, finalizeInit) {
     enableLinkClickTracking()
 
     // automatic button tracking
-    enableButtonClickTracking()
+    // enableButtonClickTracking()
 
     // automatic form elements tracking
     enableFormTracking()
