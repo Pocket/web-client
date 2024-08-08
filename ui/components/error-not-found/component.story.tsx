@@ -6,13 +6,13 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 // Storybook Meta
 const meta: Meta<typeof Component> = {
-  title: 'Error / Four',
+  title: 'Error / Not Found',
   component: Component
 }
 export default meta
 
 // Stories
-export const Four: StoryObj<typeof Component> = {
+export const NotFound: StoryObj<typeof Component> = {
   render: () => {
     return <Component />
   },

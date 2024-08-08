@@ -2,41 +2,29 @@
 import { ItemShortLayout as Component } from '.'
 import { ItemShort } from '../item-short'
 
-// State
-import { HydrateItemDisplay } from '@common/state/item-display/hydrate'
-
 // Mock Data
-import itemsById from '@common/mock-data/in-state/shortsById.json'
+import itemData from '@common/mock-data/in-state/shortsById.json'
 
+import type { Item } from '@common/types'
 // Types
-import type { Meta, StoryFn, StoryObj } from '@storybook/react'
-
-// Setting up required state
-const state = { itemsById }
-const withState = (Story: StoryFn) => {
-  return (
-    <>
-      <HydrateItemDisplay state={state} />
-      <Story />
-    </>
-  )
-}
+import type { Meta, StoryObj } from '@storybook/react'
 
 // Storybook Meta
 const meta: Meta<typeof Component> = {
   title: 'Item - Short / Layout',
-  component: Component,
-  decorators: [withState]
+  component: Component
 }
 export default meta
 
 // Stories
+const itemsById: Record<string, Item> = itemData
+
 export const Layout: StoryObj<typeof Component> = {
   render: (args) => {
     return (
       <Component {...args}>
         {Object.keys(itemsById).map((id) => (
-          <ItemShort key={id} id={id} />
+          <ItemShort key={id} item={itemsById[id] as Item} />
         ))}
       </Component>
     )
