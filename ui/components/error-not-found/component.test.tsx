@@ -6,7 +6,7 @@ import { render, screen } from '@testing-library/react'
 import { ErrorNotFound as Component } from '.'
 
 //prettier-ignore
-jest.mock('../item-media/color-planes', () => ({
+jest.mock('../item-article-media/color-planes', () => ({
   ColorPlanes: jest.fn(() => (
     <svg viewBox="0 0 1280 720">
       <rect height="720" style={{ opacity: '0.3' }} width="1280"></rect>

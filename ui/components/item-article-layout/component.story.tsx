@@ -1,47 +1,50 @@
 // Components
-import { ItemArticleLayout as Component } from '.'
-import { ItemArticle } from '../item-article'
-
-// State
-import { HydrateItemDisplay } from '@common/state/item-display/hydrate'
+import { ItemArticle as Component } from '../item-article'
+import { ItemArticleLayout, type LayoutType } from '../item-article-layout'
 
 // Mock Data
-import itemsById from '@common/mock-data/in-state/itemsById.json'
+import itemData from '@common/mock-data/in-state/itemsById.json'
 
 // Types
-import type { Meta, StoryFn, StoryObj } from '@storybook/react'
-
-// Setting up required state
-const state = { itemsById }
-const withState = (Story: StoryFn) => {
-  return (
-    <>
-      <HydrateItemDisplay state={state} />
-      <Story />
-    </>
-  )
-}
+import { Item } from '@common/types'
+import type { Meta, StoryObj } from '@storybook/react'
 
 // Storybook Meta
 const meta: Meta<typeof Component> = {
   title: 'Item - Article / Layout',
-  component: Component,
-  decorators: [withState]
+  component: Component
 }
 export default meta
 
 // Stories
-export const Layout: StoryObj<typeof Component> = {
+type ComponentPropsAndCustomArgs = {
+  gridCount: LayoutType
+} & React.ComponentProps<typeof Component>
+
+const itemsById: Record<string, Item> = itemData
+
+export const Layout: StoryObj<ComponentPropsAndCustomArgs> = {
   render: (args) => {
     return (
-      <Component {...args}>
+      <ItemArticleLayout layoutType={args.gridCount}>
         {Object.keys(itemsById).map((id) => (
-          <ItemArticle key={id} id={id} />
+          <Component key={id} item={itemsById[id] as Item} />
         ))}
-      </Component>
+      </ItemArticleLayout>
     )
   },
+  argTypes: {
+    gridCount: {
+      options: [1, 2, 3, 4, 5, 'lockup'],
+      control: { type: 'inline-radio' }
+    },
+    item: {
+      table: {
+        disable: true
+      }
+    }
+  },
   args: {
-    layoutType: 'lockup'
+    gridCount: 3
   }
 }

@@ -3,7 +3,7 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 
 // Components
-import { ItemArticleImage as Component } from '.'
+import { ItemArticleMedia as Component } from '.'
 
 //prettier-ignore
 jest.mock('./color-planes', () => ({
@@ -24,10 +24,10 @@ beforeEach(() => {
   jest.clearAllMocks()
 })
 
-describe('renders ItemArticleImage', () => {
+describe('renders ItemMedia', () => {
   it('with no image', () => {
     const rendered = render(<Component id="1" />)
-    const renderedComponent = screen.getByTestId('item-article-image')
+    const renderedComponent = screen.getByTestId('item-media')
     expect(renderedComponent).toBeInTheDocument()
     expect(rendered.container).toMatchSnapshot()
   })
@@ -36,7 +36,7 @@ describe('renders ItemArticleImage', () => {
     const imageUrl =
       'https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-collectionapi-prod-images%2Ff9ec4814-8d77-4bfe-a759-0e6cba7453ab.jpeg'
     const rendered = render(<Component id="1" imageUrl={imageUrl} />)
-    const renderedComponent = screen.getByTestId('item-article-image')
+    const renderedComponent = screen.getByTestId('item-media')
     expect(renderedComponent).toBeInTheDocument()
     expect(rendered.container).toMatchSnapshot()
   })

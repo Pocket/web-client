@@ -1,60 +1,56 @@
-// Decorators
-import { type LayoutType, inArticleLayout } from '../_decorators/inArticleLayout'
-
 // Components
 import { ItemArticle as Component } from '.'
-
-// State
-import { HydrateItemDisplay } from '@common/state/item-display/hydrate'
+// Types
+import { ItemArticleLayout, type LayoutType } from '../item-article-layout'
 
 // Mock Data
-import itemsById from '@common/mock-data/in-state/itemsById.json'
+import itemData from '@common/mock-data/in-state/itemsById.json'
 
-// Types
-import type { Meta, StoryFn, StoryObj } from '@storybook/react'
-
-// Setting up required state
-const state = { itemsById }
-const withState = (Story: StoryFn) => {
-  return (
-    <>
-      <HydrateItemDisplay state={state} />
-      <Story />
-    </>
-  )
-}
+import { Item } from '@common/types'
+import type { Meta, StoryObj } from '@storybook/react'
 
 // Storybook Meta
 const meta: Meta<typeof Component> = {
   title: 'Item - Article / Complete',
-  component: Component,
-  decorators: [withState]
+  component: Component
 }
 export default meta
 
 // Stories
 type ComponentPropsAndCustomArgs = {
-  layoutType: LayoutType
+  gridCount: LayoutType
+  id: string
 } & React.ComponentProps<typeof Component>
 
+const itemsById: Record<string, Item> = itemData
+
 export const Complete: StoryObj<ComponentPropsAndCustomArgs> = {
-  decorators: [(Story, { args }) => inArticleLayout(Story, args.layoutType)],
   render: (args) => {
-    return <Component id={args.id.toString()} />
+    const itemId = args.id ?? 0
+    const item = itemsById[itemId]
+    return (
+      <ItemArticleLayout layoutType={args.gridCount}>
+        <Component item={item as Item} />
+      </ItemArticleLayout>
+    )
   },
   argTypes: {
-    layoutType: {
+    gridCount: {
       options: [1, 2, 3, 4, 5],
       control: { type: 'inline-radio' }
     },
     id: {
       options: Object.keys(itemsById),
-      control: { type: 'select' },
-      mapping: {}
+      control: { type: 'select' }
+    },
+    item: {
+      table: {
+        disable: true
+      }
     }
   },
   args: {
-    layoutType: 3,
+    gridCount: 3,
     id: Object.keys(itemsById)[0]
   }
 }

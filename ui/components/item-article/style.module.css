@@ -1,11 +1,9 @@
-/** Remove this file if we don't have styles for the component **/
 .base {
   container-type: inline-size;
-
   & > div {
     font-size: clamp(1rem, 0.913rem + 0.4348cqi, 1.25rem);
     border-radius: 10px;
-    box-shadow: var(--card-shadow);
+    box-shadow: var(--shadow-card);
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -15,7 +13,7 @@
   footer cite {
     font-size: clamp(0.875rem, 0.788rem + 0.4348cqi, 1.125rem);
     font-style: normal;
-    color: var(--color-textSecondary);
+    color: var(--color-text-lighter);
     display: block;
     margin-bottom: 0.25em;
     white-space: nowrap;
@@ -35,12 +33,25 @@
     overflow: hidden;
     text-overflow: ellipsis;
     text-wrap: pretty;
-    font-size: clamp(1rem, 0.7337rem + 1.9565cqi, 2rem);
+    font-size: clamp(1rem, 0.7337rem + 1.9565cqi, 3rem);
     font-weight: 500;
     line-height: 1.22;
     margin-bottom: 0.625em;
   }
 
+  a {
+    text-decoration: none;
+    color: var(--color-text-base);
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:focus,
+    &:focus-visible {
+      outline: none;
+      text-decoration: underline;
+    }
+  }
   p {
     font-size: clamp(1rem, 0.913rem + 0.4348cqi, 1.25rem);
     font-size: 1rem;
@@ -56,7 +67,7 @@
   figure {
     margin-bottom: 0;
     max-width: 100%;
-    background-color: var(--color-emptyCanvas);
+    background-color: var(--color-surface-lifted);
     border-radius: 10px 10px 0 0;
     img,
     & > div {
@@ -72,7 +83,9 @@
   footer {
     display: flex;
     justify-content: flex-end;
+    column-gap: 1rem;
     align-items: center;
+    margin-top: 0.5rem;
   }
 
   /* Berry tiny card: no image, no excerpt, no actions, no mercy */
@@ -98,7 +111,7 @@
       font-size: 0.75rem;
     }
     h3 {
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 3;
       font-size: 0.875rem;
     }
     p {
@@ -109,6 +122,9 @@
 
   /* Wide card that shifts layout to side by side: image | copy */
   @container (min-width: 600px) {
+    .copy {
+      padding-right: 2.5rem;
+    }
     & > div {
       display: grid;
       grid-template-columns: auto minmax(0px, 1fr);

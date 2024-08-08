@@ -1,40 +1,39 @@
 import style from './style.module.css'
 
 import { ItemActions } from '../item-actions'
-import { ItemArticleImage } from '../item-article-image'
-
-// State
-import { useItemDisplay } from '@common/state/item-display'
+import { ItemArticleMedia } from '../item-article-media'
 
 // Types
 import type { Item } from '@common/types'
 
 /**
- * Item
+ * ItemArticle
  * ---
- * A self contained representation of a piece of content from around the web
+ * A self contained representation of a piece of written content from around the web
  */
-export function ItemArticle({ id }: { id: string }) {
-  const item = useItemDisplay((state) => state.itemsById[id]) as Item
+export function ItemArticle({ item }: { item: Item }) {
   if (!item) return null
 
-  const { id: itemId, title, excerpt, image, publisher } = item
-
+  const { id: itemId, title, excerpt, image, publisher, topic, url } = item
   return (
     <article className={style.base} data-testid="item">
       <div>
         <figure>
-          <ItemArticleImage id={itemId} imageUrl={image.url} />
+          <ItemArticleMedia id={itemId} imageUrl={image?.url} />
         </figure>
         <div className={style.contentContainer}>
-          <div className="copy">
+          <div className={style.copy}>
             <cite>{publisher}</cite>
-            <h3>{title}</h3>
+            <h3>
+              <a href={url} target="_blank">
+                {title}
+              </a>
+            </h3>
             <p>{excerpt}</p>
           </div>
           <footer>
             <cite>{publisher}</cite>
-            <ItemActions />
+            <ItemActions id={itemId} />
           </footer>
         </div>
       </div>

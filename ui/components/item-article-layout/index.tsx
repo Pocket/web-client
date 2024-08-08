@@ -5,7 +5,7 @@ import { PropsWithChildren } from 'react'
 export type LayoutType = 1 | 2 | 3 | 4 | 5 | 'lockup'
 
 /**
- * ItemLayouts
+ * ItemArticleLayout
  * ---
  * Item Layouts are just a clean way to define grids, strata and whatnot
  */

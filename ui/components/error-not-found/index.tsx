@@ -1,9 +1,9 @@
-import itemStyle from '../item/style.module.css'
+import itemStyle from '../item-article/style.module.css'
 import style from './style.module.css'
 
 import Link from 'next/link'
 
-import { ItemMedia } from '../item-media'
+import { ItemArticleMedia } from '../item-article-media'
 
 /**
  * ErrorNotFound
@@ -24,7 +24,7 @@ export function ErrorNotFound() {
         <article className={itemStyle.base}>
           <div>
             <figure>
-              <ItemMedia id="1" />
+              <ItemArticleMedia id="1" />
             </figure>
             <div className={itemStyle.contentContainer}>
               <div className="copy">
@@ -41,7 +41,7 @@ export function ErrorNotFound() {
         <article className={itemStyle.base}>
           <div>
             <figure>
-              <ItemMedia id="2" />
+              <ItemArticleMedia id="2" />
             </figure>
             <div className={itemStyle.contentContainer}>
               <div className="copy">
@@ -58,7 +58,7 @@ export function ErrorNotFound() {
         <article className={itemStyle.base}>
           <div>
             <figure>
-              <ItemMedia id="3" />
+              <ItemArticleMedia id="3" />
             </figure>
             <div className={itemStyle.contentContainer}>
               <div className="copy">
@@ -75,7 +75,7 @@ export function ErrorNotFound() {
         <article className={itemStyle.base} data-testid="item">
           <div>
             <figure>
-              <ItemMedia id="4" />
+              <ItemArticleMedia id="4" />
             </figure>
             <div className={itemStyle.contentContainer}>
               <div className="copy">

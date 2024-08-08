@@ -1,18 +1,18 @@
 // Decorators
-import { inArticleLayout } from '../_decorators/inArticleLayout'
 import { inCard } from '../_decorators/inCard'
+import { inGrid } from '../_decorators/inGrid'
 
 // Components
-import { ItemArticleImage as Component } from '.'
+import { ItemArticleMedia as Component } from '.'
 
 // Types
 import type { Meta, StoryObj } from '@storybook/react'
 
 // Storybook Meta
 const meta: Meta<typeof Component> = {
-  title: 'Item - Article /  Image',
+  title: 'Item - Article / Media',
   component: Component,
-  decorators: [(Story) => inArticleLayout(Story, 2)]
+  decorators: [(Story) => inGrid(Story, 2)]
 }
 export default meta
 
@@ -30,7 +30,7 @@ const images = {
   broken: 'https://www.baltimoresun.com/resizer/S386uMJ7GqScn6h_15U_J5YOYgI=/1200x0/top/cloudfront-us-east-1.images.arcpublishing.com/tronc/GQFD7ILH6FHHBEIT4LF3XDARJA.JPG'
 }
 
-export const Image: StoryObj<ComponentPropsAndCustomArgs> = {
+export const Media: StoryObj<ComponentPropsAndCustomArgs> = {
   render: (args) => {
     return (
       <figure>

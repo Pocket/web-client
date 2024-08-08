@@ -1,6 +1,7 @@
 import style from './style.module.css'
 
-import { ChevronLeftIcon, ChevronRightIcon } from '@ui/icons'
+import { ChevronLeftIcon } from '@ui/icons/ChevronLeftIcon'
+import { ChevronRightIcon } from '@ui/icons/ChevronRightIcon'
 import { Children, useEffect, useRef, useState } from 'react'
 
 import { useRefDimensions } from '../use-dimensions'
