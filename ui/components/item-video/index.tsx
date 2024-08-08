@@ -6,9 +6,6 @@ import ReactPlayer from 'react-player'
 // Components
 import { Expand } from './expand'
 
-// State
-import { useItemDisplay } from '@common/state/item-display'
-
 // Types
 import type { Item } from '@common/types'
 
@@ -17,8 +14,7 @@ import type { Item } from '@common/types'
  * ---
  * This is standard video in 16:9 ratio youtube/vimeo/dailymotion and the like
  */
-export function ItemVideo({ id }: { id: string }) {
-  const item = useItemDisplay((state) => state.itemsById[id]) as Item
+export function ItemVideo({ item }: { item: Item }) {
   const videoUrl = item?.url || false
   const { title, image } = item
 

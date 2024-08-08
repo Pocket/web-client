@@ -14,7 +14,7 @@ import itemsById from '@common/mock-data/in-state/videosById.json'
 // Types
 import { Item } from '@common/types'
 
-describe('renders ItemSound', () => {
+describe('renders ItemVideo', () => {
   const initialStoreState = useItemDisplay.getState()
   beforeEach(() => {
     useItemDisplay.setState(initialStoreState, true)
@@ -24,8 +24,8 @@ describe('renders ItemSound', () => {
     useItemDisplay.setState({ itemsById }, true)
 
     const itemToRender = Object.values(itemsById)[0] as Item
-    const rendered = render(<Component id={itemToRender.id} />)
-    const renderedComponent = screen.getByTestId('item-short')
+    const rendered = render(<Component item={itemToRender} />)
+    const renderedComponent = screen.getByTestId('item-video')
     expect(renderedComponent).toBeInTheDocument()
     expect(rendered.container).toMatchSnapshot()
   })
