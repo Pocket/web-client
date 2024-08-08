@@ -1,4 +1,4 @@
-import style from '../item/style.module.css'
+import style from '../item-article/style.module.css'
 
 import type { StoryFn } from '@storybook/react'
 

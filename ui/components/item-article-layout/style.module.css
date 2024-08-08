@@ -1,0 +1,92 @@
+/** Remove this file if we don't have styles for the component **/
+.base {
+  display: grid;
+  column-gap: 1rem;
+  row-gap: 1.5rem;
+  &[data-layout='1'] {
+    grid-template-columns: repeat(4, 1fr);
+    @media (max-width: 1040px) {
+      grid-template-columns: 1fr;
+    }
+    & > article,
+    & > div {
+      grid-column: span 3;
+    }
+  }
+  &[data-layout='2'] {
+    grid-template-columns: repeat(2, 1fr);
+    @media (max-width: 675px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  &[data-layout='3'] {
+    grid-template-columns: repeat(3, 1fr);
+    @media (max-width: 805px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 675px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  &[data-layout='4'] {
+    grid-template-columns: repeat(4, 1fr);
+    @media (max-width: 1035px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 805px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 675px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  &[data-layout='5'] {
+    grid-template-columns: repeat(5, 1fr);
+    @media (max-width: 1035px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    @media (max-width: 805px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  &[data-layout='lockup'] {
+    grid-template-columns: repeat(4, 1fr);
+    & > article,
+    & > div {
+      &:first-of-type {
+        grid-column: span 2;
+        grid-row: span 2;
+      }
+      &:nth-child(n + 6) {
+        grid-column: span 3;
+      }
+    }
+    @media (max-width: 1040px) {
+      grid-template-columns: repeat(4, 1fr);
+      & > article,
+      & > div {
+        &:first-of-type,
+        &:nth-child(n + 2) {
+          grid-column: span 2;
+          grid-row: span 1;
+        }
+        &:nth-child(n + 3) {
+          grid-column: span 4;
+        }
+      }
+    }
+    @media (max-width: 730px) {
+      & > article,
+      & > div {
+        &:first-of-type,
+        &:nth-child(n + 2) {
+          grid-column: span 4;
+          grid-row: span 1;
+        }
+        &:nth-child(n + 3) {
+          grid-column: span 4;
+        }
+      }
+    }
+  }
+}
