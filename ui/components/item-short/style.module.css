@@ -1,0 +1,17 @@
+/** Remove this file if we don't have styles for the component **/
+.base {
+  figure {
+    aspect-ratio: 9/16;
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    iframe,
+    div {
+      border: none;
+      width: 100%;
+      height: 100%;
+      background-position: 50% 50%;
+      background-size: cover;
+    }
+  }
+}

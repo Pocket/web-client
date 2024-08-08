@@ -1,0 +1,41 @@
+.outer {
+  display: block;
+  margin: 0 auto;
+  max-width: calc(100% + 4rem);
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  &:after,
+  &:before {
+    pointer-events: none;
+    content: '';
+    display: block;
+    position: absolute;
+    width: 2rem;
+    height: 100%;
+    bottom: 0;
+    top: 0;
+    z-index: var(--zIndexRaised);
+  }
+  &:after {
+    right: 0;
+    background: linear-gradient(90deg, transparent 25%, var(--color-canvas));
+  }
+  &:before {
+    left: 0;
+    background: linear-gradient(90deg, var(--color-canvas), transparent 25%);
+  }
+}
+
+.inner {
+  display: grid;
+  column-gap: 1rem;
+  row-gap: 1.5rem;
+  width: 100%;
+  grid-template-columns: repeat(4, 1fr);
+  transition: 350ms ease-in-out;
+  &[data-total-cards='5'] {
+    grid-template-columns: repeat(8, 1fr);
+    width: 200%;
+  }
+}
