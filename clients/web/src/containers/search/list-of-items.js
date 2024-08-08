@@ -105,7 +105,7 @@ export const ListOfSearchResults = () => {
                   height={height}
                   verticalPadding={verticalPadding}
                   horizontalPadding={horizontalPadding}
-                  snowplowId="search"
+                  snowplowId="search.corpus"
                 />
               )
             })

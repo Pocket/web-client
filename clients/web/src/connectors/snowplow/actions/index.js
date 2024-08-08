@@ -16,6 +16,7 @@ import { topicActions } from './topic'
 import { marketingActions } from './marketing'
 import { shareableListActions } from './shareable-lists'
 import { learnMoreActions } from './learn-more'
+import { searchActions } from './search'
 
 export const analyticsActions = {
   ...accountActions,
@@ -35,5 +36,6 @@ export const analyticsActions = {
   ...topicActions,
   ...marketingActions,
   ...shareableListActions,
-  ...learnMoreActions
+  ...learnMoreActions,
+  ...searchActions
 }
