@@ -3,7 +3,7 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 
 // Components
-import { ItemShortLayout as Component } from '.'
+import { ItemSoundLayout as Component } from '.'
 
 describe('renders ItemLayouts', () => {
   it('with defaults', () => {

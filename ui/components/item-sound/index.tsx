@@ -2,9 +2,6 @@ import style from './style.module.css'
 
 import ReactPlayer from 'react-player'
 
-// State
-import { useItemDisplay } from '@common/state/item-display'
-
 // Types
 import type { Item } from '@common/types'
 
@@ -13,8 +10,7 @@ import type { Item } from '@common/types'
  * ---
  * This is vertical short video format such as tiktok, reels, or youtube shorts
  */
-export function ItemSound({ id }: { id: string }) {
-  const item = useItemDisplay((state) => state.itemsById[id]) as Item
+export function ItemSound({ item }: { item: Item }) {
   const soundUrl = item?.url || false
 
   return soundUrl ? (
