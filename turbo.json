@@ -34,6 +34,9 @@
     "clean": {
       "cache": false
     },
+    "scraper": {
+      "persistent": true
+    },
     "storybook": {
       "dependsOn": ["^build"],
       "cache": false,

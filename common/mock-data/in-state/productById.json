@@ -1,0 +1,82 @@
+[
+  {
+    "ogTitle": "The Truth About Monsters: Kelly, Aryn, Kelly, Joel: 9798990264502: Amazon.com: Books",
+    "ogImage": [
+      {
+        "url": "https://m.media-amazon.com/images/G/01/gno/sprites/nav-sprite-global-1x-reorg-privacy._CB587940754_.png",
+        "type": "png"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/G/01/marketing/prime/new_prime_logo_RGB_blue._CB426090081_.png",
+        "type": "png"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/G/01/amazonbookclub/ABC_logo_primary_beta._CB408510813_.svg",
+        "type": "svg"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/G/01/amazonbookclub/ABC_logo_primary_beta._CB408510813_.svg",
+        "type": "svg"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/G/01/amazonbookclub/joinClubsImage._CB409113671_.svg",
+        "type": "svg"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/G/01/amazonbookclub/chooseBooksImage._CB409113671_.svg",
+        "type": "svg"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/G/01/amazonbookclub/scheduleWithEaseImage._CB409113670_.svg",
+        "type": "svg"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/G/01/kindle/app/kindle-app-logo._CB668847749_.png",
+        "type": "png",
+        "width": 92
+      },
+      {
+        "url": "https://m.media-amazon.com/images/G/01/kindle/app/QR-store-link-kindle-app._CB626291935_.png",
+        "type": "png",
+        "width": 92
+      },
+      { "url": "https://m.media-amazon.com/images/I/41qGyAl-VTL._SX342_SY445_.jpg", "type": "jpg" }
+    ],
+    "ogLocale": "en-us",
+    "ogUrl": "https://www.amazon.com/Truth-About-Monsters-Aryn-Kelly/dp/B0CY46GYMT",
+    "charset": "utf-8",
+    "requestUrl": "https://www.amazon.com/dp/B0CY46GYMT",
+    "success": true,
+    "id": "b7e01aa015191737533d3126a55dd9f00f8e21313dc4af01f110ace3628688d8"
+  },
+  {
+    "ogTitle": "Amazon.com | Crocs Unisex-Child Kids' Echo Clog | Clogs & Mules",
+    "ogImage": [
+      {
+        "url": "https://m.media-amazon.com/images/G/01/gno/sprites/nav-sprite-global-1x-reorg-privacy._CB587940754_.png",
+        "type": "png"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/G/01/nav2/images/gui/amazon-fashion-store-new._CB485923950_.png",
+        "type": "png"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/G/01/AMAZON_FASHION/2021/PRIME_WARDROBE/REBRAND/en_US/TBYB_Right_Nav._CB639761007_.jpg",
+        "type": "jpg"
+      },
+      { "url": "https://m.media-amazon.com/images/I/41yOQYRofUL._AC_US40_.jpg", "type": "jpg" },
+      { "url": "https://m.media-amazon.com/images/I/51F5Is2C5QL._AC_US40_.jpg", "type": "jpg" },
+      { "url": "https://m.media-amazon.com/images/I/51uGxg+y+9L._AC_US40_.jpg", "type": "jpg" },
+      { "url": "https://m.media-amazon.com/images/I/51Uws7O18aL._AC_US40_.jpg", "type": "jpg" },
+      { "url": "https://m.media-amazon.com/images/I/51-r7opYWKL._AC_US40_.jpg", "type": "jpg" },
+      { "url": "https://m.media-amazon.com/images/I/510eJmAJ15L._AC_US40_.jpg", "type": "jpg" },
+      { "url": "https://m.media-amazon.com/images/I/41fx9eqfvaL._AC_US40_.jpg", "type": "jpg" }
+    ],
+    "ogLocale": "en-us",
+    "ogUrl": "https://www.amazon.com/Crocs-Unisex-Child-Kids-Echo-Clog/dp/B0C8YXYLWF",
+    "charset": "utf-8",
+    "requestUrl": "https://www.amazon.com/Crocs-Clogs-Black-Unisex-Little/dp/B0BVF5TRBT",
+    "success": true,
+    "id": "618b7fd81809d7145e89385c2d2b226137b5aa85d2619242c2a9e46262be109f"
+  }
+]

@@ -67,6 +67,7 @@
     "locale:parse": "i18next",
     "pocket": "pnpm turbo pocket",
     "prepare": "husky",
+    "scraper": "pnpm turbo scraper",
     "schema": "rover graph fetch pocket-client-api@current >| schema.graphql",
     "start:local": "pnpm --filter @client/web start:local",
     "start:pocket": "pnpm --filter @client/pocket start",
