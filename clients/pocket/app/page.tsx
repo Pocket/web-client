@@ -1,5 +1,5 @@
 import { Error } from '@ui/components/error'
-import { Item } from '@ui/components/item'
+import { ItemArticle } from '@ui/components/item-article'
 
 import { getHomeSlates, type HomeQueryResponse } from './(server)/api/get-home-feed'
 import type { CorpusSlate } from '@common/types/pocket'
@@ -31,7 +31,7 @@ export default async function Home() {
             <div className="outer">
               <div className="grid" data-total={layoutTotal}>
                 {slateIds.map((itemId: string) => (
-                  <Item key={itemId} item={itemsById[itemId]} />
+                  <ItemArticle key={itemId} item={itemsById[itemId]} />
                 ))}
               </div>
             </div>
