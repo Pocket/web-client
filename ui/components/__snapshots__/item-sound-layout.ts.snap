@@ -4,7 +4,7 @@ exports[`renders ItemLayouts with defaults 1`] = `
 <div>
   <div
     class="base"
-    data-testid="item-video-layout"
+    data-testid="item-short-layout"
     data-total-cards="0"
   >
     <div

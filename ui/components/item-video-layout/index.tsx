@@ -52,7 +52,7 @@ export function ItemVideoLayout({ children }: PropsWithChildren) {
     <div
       ref={containerRef}
       className={style.base}
-      data-testid="item-short-layout"
+      data-testid="item-video-layout"
       data-total-cards={itemCount}>
       <div className={`${style.controls} ${hideSlide && style.noSlide}`}>
         <button

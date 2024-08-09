@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders ItemLayouts with defaults 1`] = `
+<div>
+  <div
+    class="base"
+    data-layout="lockup"
+    data-testid="item-layout"
+  />
+</div>
+`;
