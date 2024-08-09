@@ -39,6 +39,7 @@ body {
 [data-columns='4'],
 [data-columns='5'],
 [data-columns='lockup'],
+[data-columns='carousel'],
 [data-columns='magazine'] {
   padding-top: 3rem;
   .grid {
