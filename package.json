@@ -68,7 +68,7 @@
     "pocket": "pnpm turbo pocket",
     "prepare": "husky",
     "scraper": "pnpm turbo scraper",
-    "schema": "rover graph fetch pocket-client-api@current >| schema.graphql",
+    "schema": "pnpm turbo schema",
     "start:local": "pnpm --filter @client/web start:local",
     "start:pocket": "pnpm --filter @client/pocket start",
     "start:web": "pnpm --filter @client/web start",

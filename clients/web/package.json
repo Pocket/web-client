@@ -64,7 +64,6 @@
     "validator": "13.12.0"
   },
   "devDependencies": {
-    "@apollo/rover": "0.23.0",
     "@common/localization": "workspace:*",
     "@common/types": "workspace:*",
     "@config/eslint-config": "workspace:*",
@@ -109,7 +108,6 @@
     "lint": "next lint",
     "locale:inject": "node ./common/localization/locale-inject.mjs",
     "locale:parse": "cd common/localization/ && pnpm extract",
-    "schema": "rover graph fetch pocket-client-api@current >| schema.graphql",
     "start": "next start -p 80",
     "start:local": "AS_PRODUCTION=true node ./server.local.js",
     "test": "jest --reporters='default'",

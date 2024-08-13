@@ -35,6 +35,9 @@
     "clean": {
       "cache": false
     },
+    "schema": {
+      "cache": false
+    },
     "scraper": {
       "persistent": true
     },

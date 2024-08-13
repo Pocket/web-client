@@ -120,6 +120,7 @@ localhost.web-client.getpocket.com.pem
 
 # Typescript
 next-env.d.ts
+schema.graphql
 
 # turbo
 .turbo
