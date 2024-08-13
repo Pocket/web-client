@@ -24,7 +24,7 @@
     "i18next-parser": "^9.0.2",
     "lint-staged": "15.2.9",
     "prettier": "^3.3.3",
-    "syncpack": "12.3.3",
+    "syncpack": "12.4.0",
     "turbo": "2.0.12",
     "typescript": "5.5.4"
   },
@@ -67,8 +67,8 @@
     "locale:parse": "i18next",
     "pocket": "pnpm turbo pocket",
     "prepare": "husky",
-    "scraper": "pnpm turbo scraper",
     "schema": "pnpm turbo schema",
+    "scraper": "pnpm turbo scraper",
     "start:local": "pnpm --filter @client/web start:local",
     "start:pocket": "pnpm --filter @client/pocket start",
     "start:web": "pnpm --filter @client/web start",

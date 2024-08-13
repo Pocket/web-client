@@ -3,9 +3,6 @@
   "description": "",
   "version": "1.0.0",
   "author": "",
-  "keywords": [],
-  "license": "ISC",
-  "main": "index.js",
   "devDependencies": {
     "@apollo/rover": "0.25.0",
     "@config/typescript-config": "workspace:*",
@@ -16,11 +13,14 @@
     "next": "14.2.5",
     "next-i18next": "15.3.0"
   },
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
   "scripts": {
+    "generateTypes": "gql-gen --config codegen.yml",
     "schema": "rover graph fetch pocket-client-api@current >| schema.graphql && gql-gen --config codegen.yml",
-    "schema:help": "rover config --help",
     "schema:auth": "rover config auth",
     "schema:generate": "rover graph fetch pocket-client-api@current >| schema.graphql",
-    "generateTypes": "gql-gen --config codegen.yml"
+    "schema:help": "rover config --help"
   }
 }

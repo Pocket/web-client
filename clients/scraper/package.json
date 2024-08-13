@@ -1,14 +1,8 @@
 {
   "name": "@client/scraper",
-  "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "scraper": "nodemon index.ts"
-  },
-  "keywords": [],
+  "version": "1.0.0",
   "author": "",
-  "license": "ISC",
   "dependencies": {
     "@common/types": "workspace:*",
     "@common/utilities": "workspace:*",
@@ -20,5 +14,11 @@
     "open-graph-scraper": "6.5.1",
     "ts-node": "^10.9.2",
     "typescript": "5.5.4"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "scraper": "nodemon index.ts"
   }
 }
