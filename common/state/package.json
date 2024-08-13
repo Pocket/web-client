@@ -7,7 +7,7 @@
     "@common/constants": "workspace:*",
     "@common/utilities": "workspace:*",
     "react": "18.3.1",
-    "zustand": "4.5.2"
+    "zustand": "4.5.4"
   },
   "devDependencies": {
     "@common/types": "workspace:*",
