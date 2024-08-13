@@ -10,6 +10,7 @@
     "BRAZE_PRIVATE_KEY",
     "REVALIDATION_TOKEN"
   ],
+  "ui": "tui",
   "tasks": {
     "build": {
       "dependsOn": ["^build"],

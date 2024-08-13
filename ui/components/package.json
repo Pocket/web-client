@@ -10,11 +10,11 @@
     "@common/types": "workspace:*",
     "@common/utilities": "workspace:*",
     "@floating-ui/react": "0.26.19",
-    "@storybook/react": "8.1.10",
+    "@storybook/react": "8.2.9",
     "@ui/icons": "workspace:*",
     "@ui/styles": "workspace:*",
     "match-sorter": "6.3.4",
-    "next": "14.2.4",
+    "next": "14.2.5",
     "react-player": "2.16.0"
   },
   "devDependencies": {
