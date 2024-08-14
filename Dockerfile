@@ -8,7 +8,7 @@ ARG SCOPE
 ENV SCOPE=${SCOPE}
 
 ## Add pnpm to all followup builder images
-RUN yarn global add pnpm@9.4.0
+RUN yarn global add pnpm@9.7.1
 
 ## Copy relative to the dockerfile into the workdir
 COPY . .

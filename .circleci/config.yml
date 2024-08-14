@@ -31,7 +31,7 @@ commands:
           name: Install pnpm package manager
           command: |
             corepack enable
-            corepack prepare pnpm@9.4.0 --activate
+            corepack prepare pnpm@9.7.1 --activate
             pnpm config set store-dir .pnpm-store
       # Install javascript dependencies
       - run:
@@ -52,7 +52,7 @@ commands:
           command: |
             nvm install
             nvm use
-            npm install -g pnpm@9.4.0
+            npm install -g pnpm@9.7.1
             pnpm config set store-dir .pnpm-store
             pnpm install --filter=<< parameters.scope >>... --frozen-lockfile
   
