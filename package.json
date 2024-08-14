@@ -19,13 +19,13 @@
     "@semantic-release/exec": "6.0.3",
     "@semantic-release/git": "10.0.1",
     "@semantic-release/release-notes-generator": "14.0.1",
-    "@turbo/gen": "2.0.12",
+    "@turbo/gen": "2.0.13",
     "husky": "9.1.4",
     "i18next-parser": "^9.0.2",
     "lint-staged": "15.2.9",
     "prettier": "^3.3.3",
     "syncpack": "12.4.0",
-    "turbo": "2.0.12",
+    "turbo": "2.0.13",
     "typescript": "5.5.4"
   },
   "engines": {
