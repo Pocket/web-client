@@ -34,12 +34,12 @@ jobs:
         uses: pocket/pocket-monorepo/.github/workflows/reuse-infrastructure.yml@github-actions
         with:
             scope: pocket-client-cdk
-            stack-output-path: infrastructure/pocket-client-cdk/cdktf.out/stacks/pocket-client-cdk
+            stack-output-path: infrastructure/pocket/cdktf.out/stacks/pocket-client
         secrets: inherit
 
     web-client-infrastructure:
         uses: pocket/pocket-monorepo/.github/workflows/reuse-infrastructure.yml@github-actions
         with:
             scope: web-client-cdk
-            stack-output-path: infrastructure/web-client-cdk/cdktf.out/stacks/web-client-cdk
+            stack-output-path: infrastructure/web/cdktf.out/stacks/web-client
         secrets: inherit
