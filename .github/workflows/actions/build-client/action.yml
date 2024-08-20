@@ -1,0 +1,39 @@
+name: 'Re-usable Docker Build Flow'
+description: 'Used to setup and build a docker image for web client'
+
+inputs:
+  prefix:
+    description: The assets prefix
+    type: string
+    default: ""
+  showdev:
+    description: Including dev tools
+    type: string
+    default: ""
+
+runs:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with: 
+        fetch-depth: 0 # clone the whole repo so we get the tags for version release checking.
+    - name: Install PNPM & Node
+      uses: pocket/pocket-monorepo/.github/actions/install-pnpm-and-node@github-actions
+    - name: Generate release, if needed
+      run: HUSKY=0 pnpm dlx semantic-release
+    - name: Check for new release
+      id: release-name
+      run: |
+        if [ -f ".version" ]; then
+            echo "We have a semantic release"
+        else
+            echo 'No semantically releasable changes.'
+            echo `git describe --abbrev=0 --tags` > .version
+        fi
+        release=$(cat .version)
+        echo "RELEASE_VERSION=$release" >> $GITHUB_OUTPUT
+    - name: Set version
+      run: |
+        mkdir -p config
+        echo "module.exports = '${{github.sha}}';" > ./config/version.js
+    - name: Build
+      run: RELEASE_VERSION=${{steps.release-name.outputs.RELEASE_VERSION}} ASSET_PREFIX=${{inputs.prefix}} SHOW_DEV=${{inputs.showdev}} NODE_ENV=production pnpm run build

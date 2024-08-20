@@ -1,0 +1,34 @@
+name: Pull Request
+on:
+    push:
+      branches:
+        - main
+        - dev
+
+# TODO: change the github-actions branch to main once merged.
+jobs:
+
+    pocket-client-infrastructure:
+        uses: pocket/pocket-monorepo/.github/workflows/reuse-infrastructure.yml@github-actions
+        with:
+            scope: pocket-client-cdk
+            stack-output-path: infrastructure/pocket-client-cdk/cdktf.out/stacks/pocket-client-cdk
+        secrets: inherit
+
+    web-client-infrastructure:
+        uses: pocket/pocket-monorepo/.github/workflows/reuse-infrastructure.yml@github-actions
+        with:
+            scope: web-client-cdk
+            stack-output-path: infrastructure/web-client-cdk/cdktf.out/stacks/web-client-cdk
+        secrets: inherit
+
+    # we are building on branch to make sure there are no build errors
+    build:
+      needs: 
+        - pocket-client-infrastructure
+        - web-client-infrastructure
+      uses: ./.github/workflows/build-app.yml
+      secrets: inherit
+      with:
+        pocket-client-terraform-output: ${{needs.pocket-client-infrastructure.outputs.terraform-output}}
+        web-client-terraform-output: ${{needs.web-client-infrastructure.outputs.terraform-output}}

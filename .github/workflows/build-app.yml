@@ -1,0 +1,166 @@
+name: Build App
+on:
+  workflow_call:
+    inputs:
+      web-client-terraform-output:
+        description: 'The terraform output which is used to get the ECS_Service and Task Defintion arns for codedeploy for web client'
+        required: false
+        type: string
+      pocket-client-terraform-output:
+        description: 'The terraform output which is used to get the ECS_Service and Task Defintion arns for codedeploy for pocket client'
+        required: false
+        type: string
+
+
+permissions:
+  contents: read  # This is required for actions/checkout
+  id-token: write  # Access the Github JWT for AWS access
+  deployments: write
+
+jobs:
+    pull-request:
+      if: github.event_name == 'pull_request'
+      runs-on: ubuntu-latest
+      steps:
+        - name: Build App
+          uses: ./.github/actions/build-app
+        - name: Build Web Client
+          uses: pocket/pocket-monorepo/.github/actions/containerize@github-actions
+          with:
+            docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/webclient-dev-app"
+            app-path: ''
+            app-port: 80
+            context: '.'
+            dockerhub-username: ${{secrets.DOCKERHUB_USERNAME}}
+            dockerhub-token: ${{secrets.DOCKERHUB_TOKEN}}
+            scope: 'web'
+            sentry-project: ''
+            sentry-token: ${{secrets.SENTRY_BEARER}}
+        - name: Build Pocket Client
+          uses: pocket/pocket-monorepo/.github/actions/containerize@github-actions
+          with:
+            docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/pocketclient-dev-app"
+            app-path: ''
+            app-port: 80
+            context: '.'
+            dockerhub-username: ${{secrets.DOCKERHUB_USERNAME}}
+            dockerhub-token: ${{secrets.DOCKERHUB_TOKEN}}
+            scope: 'pocket'
+            sentry-project: ''
+            sentry-token: ${{secrets.SENTRY_BEARER}}
+    development:
+      if: github.ref == 'refs/heads/dev'
+      runs-on: ubuntu-latest
+      steps:
+        - name: Build App
+          uses: ./.github/actions/build-app
+        # Get the AWS credentials
+        - name: AWS Credentials
+          uses: aws-actions/configure-aws-credentials@v4
+          with:
+            aws-region: us-east-1
+            # TODO: Change this to the right roles when setup
+            role-to-assume: arn:aws:iam::410318598490:role/GithubTesting-Daniel
+        - name: Build Web Client
+          id: web-docker-build
+          uses: pocket/pocket-monorepo/.github/actions/containerize@github-actions
+          with:
+            docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/webclient-prod-app"
+            push: true
+            app-path: ''
+            app-port: 80
+            context: '.'
+            dockerhub-username: ${{secrets.DOCKERHUB_USERNAME}}
+            dockerhub-token: ${{secrets.DOCKERHUB_TOKEN}}
+            scope: 'web'
+            sentry-project: ''
+            sentry-token: ${{secrets.SENTRY_BEARER}}
+        - name: Code Deploy Web Docker Image
+          uses:  pocket/pocket-monorepo/.github/actions/ecs-codedeploy@github-actions
+          if: fromJSON(inputs.web-client-terraform-output).ecs-task-containerName.value != ''
+          with:
+            docker-image-name: ${{steps.web-docker-build.outputs.docker-image-name}}
+            terraform-output: ${{ inputs.web-client-terraform-output }}
+            name: 'web'        
+
+        - name: Build Pocket Client
+          id: pocket-docker-build
+          uses: pocket/pocket-monorepo/.github/actions/containerize@github-actions
+          with:
+            docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/pocketclient-prod-app"
+            push: true
+            app-path: ''
+            app-port: 80
+            context: '.'
+            dockerhub-username: ${{secrets.DOCKERHUB_USERNAME}}
+            dockerhub-token: ${{secrets.DOCKERHUB_TOKEN}}
+            scope: 'pocket'
+            sentry-project: ''
+            sentry-token: ${{secrets.SENTRY_BEARER}}
+        - name: Code Deploy Pocket Docker Image
+          uses:  pocket/pocket-monorepo/.github/actions/ecs-codedeploy@github-actions
+          if: fromJSON(inputs.pocket-client-terraform-output).ecs-task-containerName.value != ''
+          with:
+            docker-image-name: ${{steps.pocket-docker-build.outputs.docker-image-name}}
+            terraform-output: ${{ inputs.pocket-client-terraform-output }}
+            name: 'pocket'
+  
+    production:
+      if: github.ref == 'refs/heads/main'
+      runs-on: ubuntu-latest
+      steps:
+        - name: Build App
+          uses: ./.github/actions/build-app
+          with:
+            prefix: "https://assets.getpocket.com/web-client"
+            showdev: ""
+        # Get the AWS credentials
+        - name: AWS Credentials
+          uses: aws-actions/configure-aws-credentials@v4
+          with:
+            aws-region: us-east-1
+            # TODO: Change this to the right roles when setup
+            role-to-assume: arn:aws:iam::410318598490:role/GithubTesting-Daniel
+        - name: Build Web Client
+          id: web-docker-build
+          uses: pocket/pocket-monorepo/.github/actions/containerize@github-actions
+          with:
+            docker-repo-name: "996905175585.dkr.ecr.us-east-1.amazonaws.com/webclient-prod-app"
+            push: true
+            app-path: ''
+            app-port: 80
+            context: '.'
+            dockerhub-username: ${{secrets.DOCKERHUB_USERNAME}}
+            dockerhub-token: ${{secrets.DOCKERHUB_TOKEN}}
+            scope: 'web'
+            sentry-project: ''
+            sentry-token: ${{secrets.SENTRY_BEARER}}
+        - name: Code Deploy Web Docker Image
+          uses:  pocket/pocket-monorepo/.github/actions/ecs-codedeploy@github-actions
+          if: fromJSON(inputs.web-client-terraform-output).ecs-task-containerName.value != ''
+          with:
+            docker-image-name: ${{steps.web-docker-build.outputs.docker-image-name}}
+            terraform-output: ${{ inputs.web-client-terraform-output }}
+            name: 'web'        
+
+        - name: Build Pocket Client
+          id: pocket-docker-build
+          uses: pocket/pocket-monorepo/.github/actions/containerize@github-actions
+          with:
+            docker-repo-name: "996905175585.dkr.ecr.us-east-1.amazonaws.com/pocketclient-prod-app"
+            push: true
+            app-path: ''
+            app-port: 80
+            context: '.'
+            dockerhub-username: ${{secrets.DOCKERHUB_USERNAME}}
+            dockerhub-token: ${{secrets.DOCKERHUB_TOKEN}}
+            scope: 'pocket'
+            sentry-project: ''
+            sentry-token: ${{secrets.SENTRY_BEARER}}
+        - name: Code Deploy Pocket Docker Image
+          uses:  pocket/pocket-monorepo/.github/actions/ecs-codedeploy@github-actions
+          if: fromJSON(inputs.pocket-client-terraform-output).ecs-task-containerName.value != ''
+          with:
+            docker-image-name: ${{steps.pocket-docker-build.outputs.docker-image-name}}
+            terraform-output: ${{ inputs.pocket-client-terraform-output }}
+            name: 'pocket'

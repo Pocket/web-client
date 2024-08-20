@@ -14,7 +14,8 @@ jobs:
               uses: pocket/pocket-monorepo/.github/actions/install-pnpm-and-node@github-actions
             - name: Eslint
               run: pnpm lint
-    # # unit test all the files~
+    
+    # unit test all the files
     unit-tests:
         runs-on: ubuntu-latest
         steps:
@@ -24,13 +25,21 @@ jobs:
               uses: pocket/pocket-monorepo/.github/actions/install-pnpm-and-node@github-actions
             - name: Test
               run: pnpm test:ci
-    # # we are building on branch to make sure there are no build errors
-    # build:
-    
-    # web-build:
+    # we are building on branch to make sure there are no build errors
+    build:
+        uses: ./.github/workflows/build-app.yml
+        secrets: inherit
 
-    # pocket-build:
+    pocket-infrastructure:
+        uses: pocket/pocket-monorepo/.github/workflows/reuse-infrastructure.yml@github-actions
+        with:
+            scope: pocket-client-cdk
+            stack-output-path: infrastructure/pocket-client-cdk/cdktf.out/stacks/pocket-client-cdk
+        secrets: inherit
 
-    # pocket-infrastructure:
-
-    # web-infrastructure:
+    web-client-infrastructure:
+        uses: pocket/pocket-monorepo/.github/workflows/reuse-infrastructure.yml@github-actions
+        with:
+            scope: web-client-cdk
+            stack-output-path: infrastructure/web-client-cdk/cdktf.out/stacks/web-client-cdk
+        secrets: inherit
