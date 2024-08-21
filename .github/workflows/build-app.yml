@@ -13,7 +13,8 @@ on:
 
 
 permissions:
-  contents: read  # This is required for actions/checkout
+  contents: write  # This is required for actions/checkout and write to be able to write releases
+  pull-requests: write # to be able to comment on released pull requests
   id-token: write  # Access the Github JWT for AWS access
   deployments: write
 
@@ -28,6 +29,8 @@ jobs:
             fetch-depth: 0 # allows us to git parse tags for release
         - name: Build App
           uses: ./.github/actions/build-client
+          with:
+            github-token: ${{ secrets.GITHUB_TOKEN }}
         - name: Build Web Client
           uses: pocket/pocket-monorepo/.github/actions/containerize@main
           with:
@@ -62,6 +65,8 @@ jobs:
             fetch-depth: 0 # allows us to git parse tags for release
         - name: Build App
           uses: ./.github/actions/build-client
+          with:
+            github-token: ${{ secrets.GITHUB_TOKEN }}
         # Get the AWS credentials
         - name: AWS Credentials
           uses: aws-actions/configure-aws-credentials@v4
@@ -125,6 +130,7 @@ jobs:
           with:
             prefix: "https://assets.getpocket.com/web-client"
             showdev: ""
+            github-token: ${{ secrets.GITHUB_TOKEN }}
         # Get the AWS credentials
         - name: AWS Credentials
           uses: aws-actions/configure-aws-credentials@v4

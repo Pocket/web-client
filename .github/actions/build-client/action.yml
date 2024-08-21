@@ -8,6 +8,9 @@ inputs:
   showdev:
     description: Including dev tools
     default: ""
+  github-token:
+    description: Github token
+    required: true
 
 runs:
   using: 'composite'
@@ -17,6 +20,8 @@ runs:
     - name: Generate release, if needed
       shell: bash
       run: HUSKY=0 pnpm dlx semantic-release
+      env: 
+        GITHUB_TOKEN: ${{ inputs.github-token }}
     - name: Check for new release
       shell: bash
       id: release-name
