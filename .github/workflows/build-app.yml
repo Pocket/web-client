@@ -72,7 +72,7 @@ jobs:
           id: web-docker-build
           uses: pocket/pocket-monorepo/.github/actions/containerize@main
           with:
-            docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/webclient-prod-app"
+            docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/webclient-dev-app"
             push: true
             app-path: ''
             app-port: 80
@@ -94,7 +94,7 @@ jobs:
           id: pocket-docker-build
           uses: pocket/pocket-monorepo/.github/actions/containerize@main
           with:
-            docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/pocketclient-prod-app"
+            docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/pocketclient-dev-app"
             push: true
             app-path: ''
             app-port: 80
@@ -145,14 +145,6 @@ jobs:
             scope: 'web'
             sentry-project: ''
             sentry-token: ${{secrets.SENTRY_BEARER}}
-        - name: Code Deploy Web Docker Image
-          uses:  pocket/pocket-monorepo/.github/actions/ecs-codedeploy@main
-          if: fromJSON(inputs.web-client-terraform-output).ecs-task-containerName.value != ''
-          with:
-            docker-image-name: ${{steps.web-docker-build.outputs.docker-image-name}}
-            terraform-output: ${{ inputs.web-client-terraform-output }}
-            name: 'web'        
-
         - name: Build Pocket Client
           id: pocket-docker-build
           uses: pocket/pocket-monorepo/.github/actions/containerize@main
@@ -167,6 +159,24 @@ jobs:
             scope: 'pocket'
             sentry-project: ''
             sentry-token: ${{secrets.SENTRY_BEARER}}
+        - name: Push Production Assets
+          shell: bash
+          run: |
+              aws s3 cp \
+              --recursive \
+              --acl public-read \
+              --metadata-directive REPLACE \
+              --cache-control max-age=31536000 \
+              --include "*" \
+              --exclude "BUILD_ID" \
+                clients/web/.next s3://readitlater-deploy/web-client/_next
+        - name: Code Deploy Web Docker Image
+          uses:  pocket/pocket-monorepo/.github/actions/ecs-codedeploy@main
+          if: fromJSON(inputs.web-client-terraform-output).ecs-task-containerName.value != ''
+          with:
+            docker-image-name: ${{steps.web-docker-build.outputs.docker-image-name}}
+            terraform-output: ${{ inputs.web-client-terraform-output }}
+            name: 'web'        
         - name: Code Deploy Pocket Docker Image
           uses:  pocket/pocket-monorepo/.github/actions/ecs-codedeploy@main
           if: fromJSON(inputs.pocket-client-terraform-output).ecs-task-containerName.value != ''
