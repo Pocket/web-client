@@ -5,18 +5,17 @@ on:
         - main
         - dev
 
-# TODO: change the github-actions branch to main once merged.
 jobs:
 
     pocket-client-infrastructure:
-        uses: pocket/pocket-monorepo/.github/workflows/reuse-infrastructure.yml@github-actions
+        uses: pocket/pocket-monorepo/.github/workflows/reuse-infrastructure.yml@main
         with:
             scope: pocket-client-cdk
             stack-output-path: infrastructure/pocket-client-cdk/cdktf.out/stacks/pocket-client-cdk
         secrets: inherit
 
     web-client-infrastructure:
-        uses: pocket/pocket-monorepo/.github/workflows/reuse-infrastructure.yml@github-actions
+        uses: pocket/pocket-monorepo/.github/workflows/reuse-infrastructure.yml@main
         with:
             scope: web-client-cdk
             stack-output-path: infrastructure/web-client-cdk/cdktf.out/stacks/web-client-cdk

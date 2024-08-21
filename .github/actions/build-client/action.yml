@@ -13,7 +13,7 @@ runs:
   using: 'composite'
   steps:
     - name: Install PNPM & Node
-      uses: pocket/pocket-monorepo/.github/actions/install-pnpm-and-node@github-actions
+      uses: pocket/pocket-monorepo/.github/actions/install-pnpm-and-node@main
     - name: Generate release, if needed
       shell: bash
       run: HUSKY=0 pnpm dlx semantic-release

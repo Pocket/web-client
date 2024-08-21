@@ -29,7 +29,7 @@ jobs:
         - name: Build App
           uses: ./.github/actions/build-client
         - name: Build Web Client
-          uses: pocket/pocket-monorepo/.github/actions/containerize@github-actions
+          uses: pocket/pocket-monorepo/.github/actions/containerize@main
           with:
             docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/webclient-dev-app"
             app-path: ''
@@ -41,7 +41,7 @@ jobs:
             sentry-project: ''
             sentry-token: ${{secrets.SENTRY_BEARER}}
         - name: Build Pocket Client
-          uses: pocket/pocket-monorepo/.github/actions/containerize@github-actions
+          uses: pocket/pocket-monorepo/.github/actions/containerize@main
           with:
             docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/pocketclient-dev-app"
             app-path: ''
@@ -70,7 +70,7 @@ jobs:
             role-to-assume: arn:aws:iam::410318598490:role/PocketGHARole
         - name: Build Web Client
           id: web-docker-build
-          uses: pocket/pocket-monorepo/.github/actions/containerize@github-actions
+          uses: pocket/pocket-monorepo/.github/actions/containerize@main
           with:
             docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/webclient-prod-app"
             push: true
@@ -83,7 +83,7 @@ jobs:
             sentry-project: ''
             sentry-token: ${{secrets.SENTRY_BEARER}}
         - name: Code Deploy Web Docker Image
-          uses:  pocket/pocket-monorepo/.github/actions/ecs-codedeploy@github-actions
+          uses:  pocket/pocket-monorepo/.github/actions/ecs-codedeploy@main
           if: fromJSON(inputs.web-client-terraform-output).ecs-task-containerName.value != ''
           with:
             docker-image-name: ${{steps.web-docker-build.outputs.docker-image-name}}
@@ -92,7 +92,7 @@ jobs:
 
         - name: Build Pocket Client
           id: pocket-docker-build
-          uses: pocket/pocket-monorepo/.github/actions/containerize@github-actions
+          uses: pocket/pocket-monorepo/.github/actions/containerize@main
           with:
             docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/pocketclient-prod-app"
             push: true
@@ -105,7 +105,7 @@ jobs:
             sentry-project: ''
             sentry-token: ${{secrets.SENTRY_BEARER}}
         - name: Code Deploy Pocket Docker Image
-          uses:  pocket/pocket-monorepo/.github/actions/ecs-codedeploy@github-actions
+          uses:  pocket/pocket-monorepo/.github/actions/ecs-codedeploy@main
           if: fromJSON(inputs.pocket-client-terraform-output).ecs-task-containerName.value != ''
           with:
             docker-image-name: ${{steps.pocket-docker-build.outputs.docker-image-name}}
@@ -133,7 +133,7 @@ jobs:
             role-to-assume: arn:aws:iam::996905175585:role/PocketGHARole
         - name: Build Web Client
           id: web-docker-build
-          uses: pocket/pocket-monorepo/.github/actions/containerize@github-actions
+          uses: pocket/pocket-monorepo/.github/actions/containerize@main
           with:
             docker-repo-name: "996905175585.dkr.ecr.us-east-1.amazonaws.com/webclient-prod-app"
             push: true
@@ -146,7 +146,7 @@ jobs:
             sentry-project: ''
             sentry-token: ${{secrets.SENTRY_BEARER}}
         - name: Code Deploy Web Docker Image
-          uses:  pocket/pocket-monorepo/.github/actions/ecs-codedeploy@github-actions
+          uses:  pocket/pocket-monorepo/.github/actions/ecs-codedeploy@main
           if: fromJSON(inputs.web-client-terraform-output).ecs-task-containerName.value != ''
           with:
             docker-image-name: ${{steps.web-docker-build.outputs.docker-image-name}}
@@ -155,7 +155,7 @@ jobs:
 
         - name: Build Pocket Client
           id: pocket-docker-build
-          uses: pocket/pocket-monorepo/.github/actions/containerize@github-actions
+          uses: pocket/pocket-monorepo/.github/actions/containerize@main
           with:
             docker-repo-name: "996905175585.dkr.ecr.us-east-1.amazonaws.com/pocketclient-prod-app"
             push: true
@@ -168,7 +168,7 @@ jobs:
             sentry-project: ''
             sentry-token: ${{secrets.SENTRY_BEARER}}
         - name: Code Deploy Pocket Docker Image
-          uses:  pocket/pocket-monorepo/.github/actions/ecs-codedeploy@github-actions
+          uses:  pocket/pocket-monorepo/.github/actions/ecs-codedeploy@main
           if: fromJSON(inputs.pocket-client-terraform-output).ecs-task-containerName.value != ''
           with:
             docker-image-name: ${{steps.pocket-docker-build.outputs.docker-image-name}}
