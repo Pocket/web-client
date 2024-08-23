@@ -8,6 +8,7 @@
     "@sentry/nextjs": "^8.25.0",
     "@ui/components": "workspace:*",
     "@ui/styles": "workspace:*",
+    "jose": "5.7.0",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18"

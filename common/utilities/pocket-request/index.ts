@@ -2,7 +2,10 @@ import { GraphQlData, GraphQlRequest, GraphQlResponse } from '@common/types'
 
 export const gql = String.raw
 
-export async function pocketRequest<T extends GraphQlData>(data: GraphQlRequest): Promise<T> {
+export async function pocketRequest<T extends GraphQlData>(
+  data: GraphQlRequest,
+  token?: string
+): Promise<T> {
   // Grab current release of the client
   const RELEASE_VERSION = process.env.RELEASE_VERSION || 'v0.0.0'
 
@@ -13,7 +16,8 @@ export async function pocketRequest<T extends GraphQlData>(data: GraphQlRequest)
   const headers = {
     'apollographql-client-name': 'web-client',
     'apollographql-client-version': RELEASE_VERSION,
-    'Content-Type': 'application/graphql-response+json'
+    'Content-Type': 'application/graphql-response+json',
+    ...(token && { Authorization: `Bearer ${token}` })
   }
 
   // Stringify the query

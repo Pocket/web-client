@@ -5,7 +5,6 @@ import { NavFooter } from '@ui/components/nav-footer'
 import { NavTop } from '@ui/components/nav-top'
 import { COLOR_MODE_PREFIX, CACHE_KEY_COLOR_MODE } from '@common/constants'
 import { cookies } from 'next/headers'
-
 import { HydrateUserSettings } from '@common/state/user-settings/hydrate'
 import type { UserSettingsState } from '@common/state/user-settings'
 

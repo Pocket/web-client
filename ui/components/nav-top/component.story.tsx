@@ -16,10 +16,7 @@ export default meta
 
 // Stories
 export const Complete: StoryObj<typeof Component> = {
-  render: (args) => {
-    return <Component {...args} />
-  },
-  args: {
-    isLoggedIn: false
+  render: () => {
+    return <Component />
   }
 }
