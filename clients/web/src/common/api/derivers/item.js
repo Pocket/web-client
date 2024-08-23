@@ -199,7 +199,7 @@ export function deriveItemData({
   return {
     ...item,
     authors: itemEnrichment?.authors || item?.authors || false,
-    title: title({ item, itemEnrichment }),
+    title: title({ item, itemEnrichment, node }),
     thumbnail: thumbnail({ item, itemEnrichment }),
     excerpt: excerpt({ item, itemEnrichment }),
     publisher: publisher({ item, itemEnrichment, passedPublisher }),
@@ -229,12 +229,13 @@ export function deriveItemData({
  * @param {object} curatedInfo Additional information provided by the curation team
  * @returns {string} The most appropriate title to show
  */
-function title({ item, itemEnrichment }) {
+function title({ item, itemEnrichment, node }) {
   // This is for matching images/files
   const urlToUse = item?.collectionUrl || item?.givenUrl || item?.resolvedUrl
   const file = urlToUse?.substring(urlToUse.lastIndexOf('/') + 1)
   const fileName = file ? file.replace(/\.[^/.]+$/, '') : false
   return (
+    node?.title ||
     itemEnrichment?.title ||
     item?.collection?.title ||
     item?.title ||

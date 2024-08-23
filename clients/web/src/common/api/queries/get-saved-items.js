@@ -26,6 +26,7 @@ const getSavedItemsQuery = gql`
             favoritedAt
             isArchived
             archivedAt
+            title
             tags {
               id
               name
