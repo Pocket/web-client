@@ -38,19 +38,8 @@ class PocketClient extends TerraformStack {
 
     this.createPocketAlbApplication({
       secretsManagerKmsAlias: this.getSecretsManagerKmsAlias(),
-      snsTopic: this.getCodeDeploySnsTopic(),
       region,
       caller
-    })
-  }
-
-  /**
-   * Get the sns topic for code deploy
-   * @private
-   */
-  private getCodeDeploySnsTopic() {
-    return new dataAwsSnsTopic.DataAwsSnsTopic(this, 'frontend_notifications', {
-      name: `Frontend-${config.environment}-ChatBot`
     })
   }
 
@@ -68,9 +57,8 @@ class PocketClient extends TerraformStack {
     region: dataAwsRegion.DataAwsRegion
     caller: dataAwsCallerIdentity.DataAwsCallerIdentity
     secretsManagerKmsAlias: dataAwsKmsAlias.DataAwsKmsAlias
-    snsTopic: dataAwsSnsTopic.DataAwsSnsTopic
   }): PocketALBApplication {
-    const { region, caller, secretsManagerKmsAlias, snsTopic } = dependencies
+    const { region, caller, secretsManagerKmsAlias } = dependencies
 
     return new PocketALBApplication(this, 'application', {
       prefix: config.prefix,
@@ -148,8 +136,7 @@ class PocketClient extends TerraformStack {
           notifyOnFailed: true,
           notifyOnStarted: false,
           notifyOnSucceeded: false
-        },
-        snsNotificationTopicArn: snsTopic.arn
+        }
       },
       exposedContainer: {
         name: 'app',
