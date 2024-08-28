@@ -72,33 +72,7 @@ exports[`renders LayoutMain with defaults 1`] = `
         <div
           class="loggedOut"
           data-testid="nav-top-account"
-        >
-          <div
-            class="base"
-            data-testid="nav-top-account-auth"
-          >
-            <a
-              class="button new small outline"
-              data-testid="nav-top-account-signup-link"
-              href="https://getpocket.com/signup?src=web-nav"
-              id="global-nav-signup-link"
-            >
-              <span
-                class="label"
-              >
-                Sign up
-              </span>
-            </a>
-            <a
-              class="button new small primary"
-              data-testid="nav-top-account-login-link"
-              href="https://getpocket.com/login?src=web-nav"
-              id="global-nav-login-link"
-            >
-              Log in
-            </a>
-          </div>
-        </div>
+        />
       </div>
     </header>
     <main
@@ -367,102 +341,101 @@ exports[`renders LayoutMain with defaults 1`] = `
               class="base"
               data-testid="nav-footer-theme"
             >
-              <form>
-                <div
-                  class="button-group iconic"
+              <div
+                class="base"
+                data-testid="setting-theme"
+              >
+                <button
+                  class="active "
+                  type="button"
                 >
-                  <button
-                    class="active"
-                    type="button"
+                  <svg
+                    aria-hidden="true"
+                    class="icon "
+                    viewBox="0 0 256 256"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    <svg
-                      aria-hidden="true"
-                      class="icon "
-                      viewBox="0 0 256 256"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M0 0h256v256H0z"
-                        fill="none"
-                      />
-                      <path
-                        d="M40 176V72a16 16 0 0 1 16-16h144a16 16 0 0 1 16 16v104M24 176h208v16a16 16 0 0 1-16 16H40a16 16 0 0 1-16-16zM144 88h-32"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="16"
-                      />
-                    </svg>
-                  </button>
-                  <button
-                    class=""
-                    type="button"
+                    <path
+                      d="M0 0h256v256H0z"
+                      fill="none"
+                    />
+                    <path
+                      d="M40 176V72a16 16 0 0 1 16-16h144a16 16 0 0 1 16 16v104M24 176h208v16a16 16 0 0 1-16 16H40a16 16 0 0 1-16-16zM144 88h-32"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="16"
+                    />
+                  </svg>
+                </button>
+                <button
+                  class=" "
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="icon "
+                    viewBox="0 0 256 256"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    <svg
-                      aria-hidden="true"
-                      class="icon "
-                      viewBox="0 0 256 256"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M0 0h256v256H0z"
-                        fill="none"
-                      />
-                      <path
-                        d="M208 120V72M232 96h-48M160 32v32M176 48h-32M210.69 158.18A96.8 96.8 0 0 1 192 160 96.08 96.08 0 0 1 97.82 45.31a88 88 0 1 0 112.87 112.87"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="16"
-                      />
-                    </svg>
-                  </button>
-                  <button
-                    class=""
-                    type="button"
+                    <path
+                      d="M0 0h256v256H0z"
+                      fill="none"
+                    />
+                    <path
+                      d="M208 120V72M232 96h-48M160 32v32M176 48h-32M210.69 158.18A96.8 96.8 0 0 1 192 160 96.08 96.08 0 0 1 97.82 45.31a88 88 0 1 0 112.87 112.87"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="16"
+                    />
+                  </svg>
+                </button>
+                <button
+                  class=" "
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="icon "
+                    viewBox="0 0 256 256"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    <svg
-                      aria-hidden="true"
-                      class="icon "
-                      viewBox="0 0 256 256"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M0 0h256v256H0z"
-                        fill="none"
-                      />
-                      <path
-                        d="M128 40v-8"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="16"
-                      />
-                      <circle
-                        cx="128"
-                        cy="128"
-                        fill="none"
-                        r="56"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="16"
-                      />
-                      <path
-                        d="m64 64-8-8M64 192l-8 8M192 64l8-8M192 192l8 8M40 128h-8M128 216v8M216 128h8"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="16"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </form>
+                    <path
+                      d="M0 0h256v256H0z"
+                      fill="none"
+                    />
+                    <path
+                      d="M128 40v-8"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="16"
+                    />
+                    <circle
+                      cx="128"
+                      cy="128"
+                      fill="none"
+                      r="56"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="16"
+                    />
+                    <path
+                      d="m64 64-8-8M64 192l-8 8M192 64l8-8M192 192l8 8M40 128h-8M128 216v8M216 128h8"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="16"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
           </section>
           <section>

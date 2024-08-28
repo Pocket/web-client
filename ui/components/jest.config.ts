@@ -9,9 +9,9 @@ const config: Config = {
   testEnvironmentOptions: {
     customExportConditions: ['']
   },
+  testEnvironment: '@config/jest/setup/jsdom-extended.js',
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/coverage'],
   setupFilesAfterEnv: ['@config/jest/mocks/matchmedia.js'],
-  testEnvironment: 'jsdom',
   snapshotResolver: '@config/jest/setup/jest.snapshot-resolver.ui.ts',
   reporters: ['default', 'jest-junit']
 }

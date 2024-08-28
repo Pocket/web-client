@@ -12,7 +12,6 @@ exports[`renders NavTopAccountProfile with defaults 1`] = `
     >
       <img
         alt=""
-        src="https://i.pravatar.cc/300?img=38"
       />
     </button>
   </div>

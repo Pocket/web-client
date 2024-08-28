@@ -5,32 +5,6 @@ exports[`renders NavTopAccount with defaults 1`] = `
   <div
     class="loggedOut"
     data-testid="nav-top-account"
-  >
-    <div
-      class="base"
-      data-testid="nav-top-account-auth"
-    >
-      <a
-        class="button new small outline"
-        data-testid="nav-top-account-signup-link"
-        href="https://getpocket.com/signup?src=web-nav"
-        id="global-nav-signup-link"
-      >
-        <span
-          class="label"
-        >
-          Sign up
-        </span>
-      </a>
-      <a
-        class="button new small primary"
-        data-testid="nav-top-account-login-link"
-        href="https://getpocket.com/login?src=web-nav"
-        id="global-nav-login-link"
-      >
-        Log in
-      </a>
-    </div>
-  </div>
+  />
 </div>
 `;
