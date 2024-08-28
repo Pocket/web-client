@@ -1,6 +1,4 @@
 export const CONSUMER_KEY = '94110-6d5ff7a89d72c869766af0e0' // web-client
-export const LOGIN_HANDLER = 'https://local.client.pocket.com/waypoint'
-export const LOGIN_URL = `https://getpocket.com/ff_signin?direct_route=${LOGIN_HANDLER}&consumer_key=${CONSUMER_KEY}`
 export const SIGNUP_URL = 'https://getpocket.com/signup'
 export const PREMIUM_URL = 'https://getpocket.com/premium'
 

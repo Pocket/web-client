@@ -1,7 +1,7 @@
 import style from './style.module.css'
 
 // Constants
-import { LOGIN_URL, SIGNUP_URL } from '@common/constants'
+import { SIGNUP_URL } from '@common/constants'
 // Libraries
 import { t } from '@common/localization'
 
@@ -11,6 +11,7 @@ import { t } from '@common/localization'
  * When the user is not logged in we give the option to sign in or sign up
  */
 export function NavTopAccountAuth() {
+  const LOGIN_URL = process.env.NEXT_PUBLIC_LOGIN_URL
   return (
     <div className={style.base} data-testid="nav-top-account-auth">
       <a
