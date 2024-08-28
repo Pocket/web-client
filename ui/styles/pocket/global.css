@@ -388,10 +388,6 @@ a.button.menu:hover,button.menu:hover,input[type=button].menu:hover,input[type=r
 
 a.button.menu:focus-visible,button.menu:focus-visible,input[type=button].menu:focus-visible,input[type=reset].menu:focus-visible,input[type=submit].menu:focus-visible{background-color:var(--color-menu-background-hover);outline:none}
 
-a.button.menu:first-of-type,button.menu:first-of-type,input[type=button].menu:first-of-type,input[type=reset].menu:first-of-type,input[type=submit].menu:first-of-type{border-radius:10px 10px 0 0}
-
-a.button.menu:last-of-type,button.menu:last-of-type,input[type=button].menu:last-of-type,input[type=reset].menu:last-of-type,input[type=submit].menu:last-of-type{border-radius:0 0 10px 10px}
-
 a.button.pagination,button.pagination,input[type=button].pagination,input[type=reset].pagination,input[type=submit].pagination{align-content:center;align-items:center;background-color:transparent;border:1px solid transparent;border-radius:50%;color:var(--color-pagination-text);display:block;font-size:.875rem;height:40px;line-height:0;margin-right:.25rem;padding:0;width:40px}
 
 a.button.pagination:hover,button.pagination:hover,input[type=button].pagination:hover,input[type=reset].pagination:hover,input[type=submit].pagination:hover{background-color:var(--color-pagination-background-hover);border-color:var(--color-pagination-border-hover);color:var(--color-pagination-text-hover)}
@@ -528,4 +524,4 @@ a[data-tooltip-delay]:hover:after,a[data-tooltip-delay]:hover:before,button[data
 
 /* ZINDEX STYLES --------------------------------------------- */
 
-:root{--z-index-surface:1;--z-index-nav:calc(var(--z-index-surface) + 1);--z-index-mobile-nav:calc(var(--z-index-nav) + 1);--z-index-top-nav:calc(var(--z-index-mobile-nav) + 1);--z-index-nav-section:calc(var(--z-index-top-nav) + 1);--z-index-snackbar:calc(var(--z-index-nav-section) + 1);--z-index-scrim:calc(var(--z-index-snackbar) + 1);--z-index-menu:calc(var(--z-index-scrim) + 1)}
+:root{--z-index-surface:1;--z-index-nav:2;--z-index-mobile-nav:3;--z-index-top-nav:4;--z-index-nav-section:5;--z-index-snackbar:6;--z-index-scrim:7;--z-index-menu:8}

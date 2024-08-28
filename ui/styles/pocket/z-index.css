@@ -1,11 +1,11 @@
 :root {
   --z-index-surface: 1;
-  --z-index-nav: calc(var(--z-index-surface) + 1);
-  --z-index-mobile-nav: calc(var(--z-index-nav) + 1);
-  --z-index-top-nav: calc(var(--z-index-mobile-nav) + 1);
-  --z-index-nav-section: calc(var(--z-index-top-nav) + 1);
+  --z-index-nav: 2;
+  --z-index-mobile-nav: 3;
+  --z-index-top-nav: 4;
+  --z-index-nav-section: 5;
 
-  --z-index-snackbar: calc(var(--z-index-nav-section) + 1);
-  --z-index-scrim: calc(var(--z-index-snackbar) + 1);
-  --z-index-menu: calc(var(--z-index-scrim) + 1);
+  --z-index-snackbar: 6;
+  --z-index-scrim: 7;
+  --z-index-menu: 8;
 }

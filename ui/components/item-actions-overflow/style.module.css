@@ -8,6 +8,13 @@
   z-index: var(--z-index-menu);
   button {
     font-size: 0.85rem;
+    &:first-of-type {
+      border-radius: 10px 10px 0 0;
+    }
+
+    &:last-of-type {
+      border-radius: 0 0 10px 10px;
+    }
   }
 }
 

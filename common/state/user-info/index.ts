@@ -15,6 +15,7 @@ export type UserInfoState = {
 export type UserInfo = {
   actions: {
     getUserData: () => UserInfoState
+    removeUserData: () => void
     setUserData: (data: UserInfoState) => void
   }
 } & UserInfoState
@@ -27,8 +28,8 @@ export type UserInfo = {
  */
 export const useUserInfo = create<UserInfo>()(
   devtools((set) => ({
-    pending: true,
     /** State Values */
+    pending: true,
     actions: {
       getUserData: async () => {
         // Let's optimistically set the user based on the stored token if it exists
@@ -40,6 +41,7 @@ export const useUserInfo = create<UserInfo>()(
         const retrievedUser = await getUser()
         if (retrievedUser) set({ ...retrievedUser, pending: false })
       },
+      removeUserData: () => {},
       setUserData: (data) => set({ ...data, pending: false })
     }
   }))

@@ -165,14 +165,6 @@ input[type='reset'] {
       outline: none;
       background-color: var(--color-menu-background-hover);
     }
-
-    &:first-of-type {
-      border-radius: 10px 10px 0 0;
-    }
-
-    &:last-of-type {
-      border-radius: 0 0 10px 10px;
-    }
   }
 
   &.pagination {

@@ -47,19 +47,17 @@ export function NavFooterTheme() {
 
   return (
     <div className={style.base} data-testid="nav-footer-theme">
-      <form>
-        <div className="button-group iconic">
-          <button className={systemClass} type="button" onClick={setSystemMode}>
-            <SystemModeIcon />
-          </button>
-          <button className={darkClass} type="button" onClick={setDarkMode}>
-            <DarkModeIcon />
-          </button>
-          <button className={lightClass} type="button" onClick={setLightMode}>
-            <LightModeIcon />
-          </button>
-        </div>
-      </form>
+      <div className="button-group iconic">
+        <button className={systemClass} type="button" onClick={setSystemMode}>
+          <SystemModeIcon />
+        </button>
+        <button className={darkClass} type="button" onClick={setDarkMode}>
+          <DarkModeIcon />
+        </button>
+        <button className={lightClass} type="button" onClick={setLightMode}>
+          <LightModeIcon />
+        </button>
+      </div>
     </div>
   )
 }
