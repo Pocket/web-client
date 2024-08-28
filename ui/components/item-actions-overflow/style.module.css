@@ -1,6 +1,6 @@
 /** Remove this file if we don't have styles for the component **/
 .base {
-  background: var(--color-surface-base);
+  background: var(--color-surface-menu);
   border-radius: 10px;
   border: 1px solid var(--color-menu-border);
   box-shadow: var(--shadow-medium);

@@ -25,6 +25,7 @@
   --color-black90: hsl(0, 0%, 10%);
 
   --color-grey10: #1a1a1a;
+  --color-grey15: #212121;
   --color-grey20: #333;
   --color-grey25: #404040;
   --color-grey30: #4d4d4d;
@@ -86,6 +87,7 @@
   /* Surfaces */
   --color-surface-lower: var(--color-grey85);
   --color-surface-base: var(--color-white100);
+  --color-surface-menu: var(--color-white97);
   --color-surface-lift: var(--color-white97);
   --color-surface-raise: var(--color-white95);
 
@@ -192,6 +194,7 @@
     /* Surfaces */
     --color-surface-lower: var(--color-grey85);
     --color-surface-base: var(--color-grey10);
+    --color-surface-menu: var(--color-grey15);
     --color-surface-lift: var(--color-grey20);
     --color-surface-raise: var(--color-grey25);
 
@@ -294,6 +297,7 @@
   /* Surfaces */
   --color-surface-lower: var(--color-grey85);
   --color-surface-base: var(--color-grey10);
+  --color-surface-menu: var(--color-grey15);
   --color-surface-lift: var(--color-grey20);
   --color-surface-raise: var(--color-grey25);
 
