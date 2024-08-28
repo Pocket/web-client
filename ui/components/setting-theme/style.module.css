@@ -1,0 +1,6 @@
+/** Remove this file if we don't have styles for the component **/
+.base {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 1rem;
+}

@@ -15,11 +15,15 @@ import {
   useFocus,
   useInteractions
 } from '@floating-ui/react'
+import { AddCircledIcon } from '@ui/icons/AddCircledIcon'
 import { CollectionsIcon } from '@ui/icons/CollectionsIcon'
+import { HomeIcon } from '@ui/icons/HomeIcon'
 import { LockIcon } from '@ui/icons/LockIcon'
 import { SaveIcon } from '@ui/icons/SaveIcon'
 import { SettingsIcon } from '@ui/icons/SettingsIcon'
 import { useState } from 'react'
+
+import { SettingTheme } from '../setting-theme'
 
 import { useUserInfo } from '@common/state/user-info'
 
@@ -50,14 +54,16 @@ export function NavTopAccountProfile() {
   })
 
   const click = useClick(context)
-  const dismiss = useDismiss(context)
+  const dismiss = useDismiss(context, {
+    ancestorScroll: true
+  })
   const focus = useFocus(context)
 
   const { getReferenceProps, getFloatingProps } = useInteractions([click, dismiss, focus])
 
-  const handleClick = () => {
-    setIsOpen(false)
-  }
+  // const handleClick = () => {
+  //   setIsOpen(false)
+  // }
   return (
     <>
       <div className={style.base} data-testid="nav-top-account-profile">
@@ -76,7 +82,6 @@ export function NavTopAccountProfile() {
             <div
               ref={refs.setFloating}
               style={{ ...floatingStyles, zIndex: 'var(--z-index-menu)' }}
-              onClick={handleClick}
               {...getFloatingProps()}>
               <ProfilePanel />
             </div>
@@ -107,15 +112,25 @@ function ProfilePanel() {
       </div>
       <hr />
       <button className={`menu ${style.menuTop}`} type="button">
+        <HomeIcon /> {t('profile:home', 'Home')}
+      </button>
+      <button className="menu" type="button">
         <SaveIcon /> {t('profile:saves', 'Saves')}
       </button>
       <button className="menu" type="button">
         <CollectionsIcon /> {t('profile:collections', 'Collections')}
       </button>
-      <hr />
+      <button className="menu" type="button">
+        <AddCircledIcon /> {t('profile:add', 'Add')}
+      </button>
       <button className="menu" type="button">
         <SettingsIcon /> {t('profile:settings', 'Settings')}
       </button>
+      <hr />
+      <div className={style.themeSelect}>
+        <SettingTheme buttonClass={style.themeButton} />
+      </div>
+
       <hr />
       <button className="menu" type="button" onClick={logout}>
         <LockIcon /> {t('profile:log-out', 'Log Out')}

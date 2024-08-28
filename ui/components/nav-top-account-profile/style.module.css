@@ -22,7 +22,7 @@
   min-width: 200px;
   z-index: var(--z-index-menu);
   button {
-    font-size: 1rem;
+    font-size: 0.9375rem;
     &:last-of-type {
       border-radius: 0 0 10px 10px;
     }
@@ -30,10 +30,28 @@
       margin-right: 0.5rem;
     }
   }
+
+  .themeButton {
+    padding: 0.5rem;
+    border-radius: 0;
+    &[class~='active'] {
+      border-bottom: 2px solid var(--color-accent-base);
+    }
+    svg {
+      margin: 0;
+    }
+    &:last-of-type {
+      border-radius: 0;
+    }
+  }
+}
+
+.themeSelect {
+  padding: 0.5rem 1rem;
 }
 
 .details {
-  padding: 1rem 1.5rem;
+  padding: 1.5rem;
 }
 
 .name {
