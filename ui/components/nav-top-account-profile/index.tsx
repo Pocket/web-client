@@ -95,7 +95,7 @@ function ProfilePanel() {
   const firstName = useUserInfo((state) => state.firstName)
   const lastName = useUserInfo((state) => state.lastName)
   const email = useUserInfo((state) => state.email)
-  const logout = useUserInfo((state) => state.actions.removeUserData)
+  const logout = useUserInfo((state) => state.removeUserData)
 
   return (
     <div className={style.panel}>

@@ -21,7 +21,7 @@ export function NavTopAccount() {
   const isLoggedIn = useUserInfo((state) => state.id)
 
   // Actions
-  const getUserData = useUserInfo((state) => state.actions.getUserData)
+  const getUserData = useUserInfo((state) => state.getUserData)
 
   // Style variables
   const accountClass = isLoggedIn ? style.loggedIn : style.loggedOut
