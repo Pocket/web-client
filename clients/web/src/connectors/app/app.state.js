@@ -100,7 +100,7 @@ export const appReducers = (state = initialState, action) => {
     // Revert global nav once bulk action is complete
     case APP_SET_MODE:
     case MUTATION_BULK_BATCH_COMPLETE: {
-      // MODES  [default, search, add, bulk]
+      // MODES  [default, search, discovery, add, bulk]
       const { mode = 'default' } = action
       return { ...state, mode }
     }

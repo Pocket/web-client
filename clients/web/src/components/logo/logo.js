@@ -37,16 +37,20 @@ const logoLabelStyle = css`
 `
 const Logo = ({ className }) => {
   return (
-    <div className={cx(logoStyle, className)}>
-      <span className={logoLabelStyle}>Pocket</span>
+    <div className={cx(logoStyle, className)} suppressHydrationWarning>
+      <span className={logoLabelStyle} suppressHydrationWarning>
+        Pocket
+      </span>
     </div>
   )
 }
 
 const LogoMark = ({ className }) => {
   return (
-    <div className={cx(logoMarkStyle, className)}>
-      <span className={logoLabelStyle}>Pocket</span>
+    <div className={cx(logoMarkStyle, className)} suppressHydrationWarning>
+      <span className={logoLabelStyle} suppressHydrationWarning>
+        Pocket
+      </span>
     </div>
   )
 }

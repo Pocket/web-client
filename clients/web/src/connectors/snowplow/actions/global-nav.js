@@ -9,6 +9,16 @@ export const globalNavActions = {
     expects: ['url'],
     description: 'A user clicks `Add` after entering a URL in the global nav'
   },
+  'global-nav.search-discovery.submit': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['value'],
+    description:
+      'A user clicks `Search` while in the discovery search bar after entering a search term in the global nav'
+  },
   'global-nav.search.submit': {
     eventType: 'engagement',
     entityTypes: ['ui'],

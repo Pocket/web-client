@@ -7,11 +7,9 @@ import { HomeSetup } from './setup/setup'
 import { HomeContent } from './content'
 import { SuccessFXA } from 'components/snackbar/success-fxa'
 import { HomeSignUpCTA } from './sign-up-cta'
-import { SearchCorpus } from '../../connectors/search-corpus'
 import { HomeGreeting } from './recent-saves/greeting'
 import { SharedItemInterstitial } from './sharedItem/sharedItem'
 import { Toasts } from 'connectors/toasts/toast-list'
-import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 export const Home = ({ metaData }) => {
@@ -31,12 +29,6 @@ export const Home = ({ metaData }) => {
       isFullWidthLayout={true}
       noContainer={true}
       className={style.spacer}>
-      {showSearch ? (
-        <SectionWrapper className={`${style.search}`}>
-          <SearchCorpus />
-        </SectionWrapper>
-      ) : null}
-
       {!shouldRender ? null : (
         <>
           {isAuthenticated ? null : <HomeSignUpCTA topBorder={showSearch} />}

@@ -189,7 +189,7 @@ export const Menu = ({
   isUserPremium,
   handleClick
 }) => (
-  <ul className={listStyle}>
+  <ul className={listStyle} suppressHydrationWarning>
     {links.map((link) => {
       const isSelected = link.name === selectedLink
       const key = `global-nav-mobile-menu-${link?.name}`
@@ -283,7 +283,8 @@ const GlobalNavMobileMenu = ({
         onClick={handleOpen}
         aria-label={t('nav:open-the-pocket-mobile-menu', 'Open the Pocket mobile menu')}
         data-tooltip={t('nav:open', 'Open')}
-        className={cx(iconStyle, toggleClass, bottomTooltip, 'inline')}>
+        className={cx(iconStyle, toggleClass, bottomTooltip, 'inline')}
+        suppressHydrationWarning>
         <MenuIcon />
       </button>
       <Drawer

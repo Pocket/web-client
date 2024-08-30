@@ -9,6 +9,7 @@ import { setListModeDetail } from 'connectors/app/app.state'
 import { setColorMode } from 'connectors/app/app.state'
 
 import GlobalNavComponent from 'components/global-nav/global-nav'
+import GlobalNavSearchDiscovery from './global-nav-search-discovery'
 import GlobalNavSearch from './global-nav-search'
 import GlobalNavAdd from './global-nav-add'
 import GlobalNavBulkMutations from './global-nav-bulk-mutations'
@@ -196,12 +197,19 @@ const GlobalNav = (props) => {
           icon: <EditIcon />
         }
       ]
-    : []
+    : [
+        {
+          name: 'discovery',
+          label: t('nav:search', 'Search'),
+          icon: <SearchIcon />
+        }
+      ]
 
   const onLinkClick = (label) => dispatch(sendSnowplowEvent('global-nav', { label }))
 
   const toolClick = (name) => {
     dispatch(sendSnowplowEvent(`global-nav.${name}`))
+    if (name === 'discovery') dispatch(appSetMode('discovery'))
     if (name === 'search') dispatch(appSetMode('search'))
     if (name === 'add-item') dispatch(appSetMode('add'))
     if (name === 'bulk-edit') dispatch(appSetMode('bulk'))
@@ -210,6 +218,7 @@ const GlobalNav = (props) => {
   const resetNav = () => dispatch(appSetMode('default'))
 
   const navChildren = {
+    discovery: GlobalNavSearchDiscovery,
     search: GlobalNavSearch,
     add: GlobalNavAdd,
     bulk: GlobalNavBulkMutations
@@ -228,6 +237,7 @@ const GlobalNav = (props) => {
 
   return (
     <GlobalNavComponent
+      suppressHydrationWarning
       pocketLogoOutboundUrl={pocketLogoOutboundUrl}
       appRootSelector="#__next"
       links={links}
