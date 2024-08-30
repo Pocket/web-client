@@ -8,7 +8,7 @@ import { deleteSession } from './session'
 // Types
 import type { UserDisplayData } from '@common/types'
 
-type UserInfoState = {
+export type UserInfoState = {
   pending?: boolean
   responseError?: string
 } & UserDisplayData

@@ -22,6 +22,9 @@ const config: StorybookConfig = {
   },
   core: {
     disableTelemetry: true
+  },
+  features: {
+    experimentalRSC: true
   }
   // webpackFinal: async (config: any): Promise<any> => {
   //   const alias = {

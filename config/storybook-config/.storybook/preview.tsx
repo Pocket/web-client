@@ -81,6 +81,9 @@ const customViewports = {
 
 const preview: Preview = {
   parameters: {
+    nextjs: {
+      appDirectory: true
+    },
     viewport: {
       viewports: customViewports
     },
@@ -91,6 +94,7 @@ const preview: Preview = {
       }
     }
   },
+
   globalTypes: {
     theme: {
       name: 'Theme',
