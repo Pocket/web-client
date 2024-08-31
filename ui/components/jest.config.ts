@@ -11,6 +11,7 @@ const config: Config = {
   },
   testEnvironment: '@config/jest/setup/jsdom-extended.js',
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/coverage'],
+  setupFiles: ['@config/jest/setup/load-env.js'],
   setupFilesAfterEnv: ['@config/jest/mocks/matchmedia.js'],
   snapshotResolver: '@config/jest/setup/jest.snapshot-resolver.ui.ts',
   reporters: ['default', 'jest-junit']

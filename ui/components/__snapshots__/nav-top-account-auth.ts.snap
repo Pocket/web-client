@@ -21,7 +21,7 @@ exports[`renders NavTopAccountAuth with defaults 1`] = `
     <a
       class="button new small primary"
       data-testid="nav-top-account-login-link"
-      href="undefined?src=web-nav"
+      href="https://getpocket.com/ff_signin?direct_route=https://pocket-client.pocket.com/waypoint&consumer_key=94110-6d5ff7a89d72c869766af0e0?src=web-nav"
       id="global-nav-login-link"
     >
       Log in
