@@ -1,21 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ItemVideo with defaults 1`] = `
-<div>
-  <div
-    class="base"
-    data-testid="item-video"
+<div
+  class="base"
+  data-testid="item-video"
+>
+  <button
+    type="button"
   >
-    <button
-      type="button"
+    Expand
+  </button>
+  <figure>
+    <div
+      style="width: 100%; height: 100%;"
     >
-      Expand
-    </button>
-    <figure>
       <div
         style="width: 100%; height: 100%;"
-      />
-    </figure>
-  </div>
+      >
+        <div />
+      </div>
+    </div>
+  </figure>
 </div>
 `;

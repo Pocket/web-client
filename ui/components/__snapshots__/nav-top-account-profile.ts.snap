@@ -1,19 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders NavTopAccountProfile with defaults 1`] = `
-<div>
-  <div
-    class="base"
-    data-testid="nav-top-account-profile"
+<div
+  class="base"
+  data-testid="nav-top-account-profile"
+>
+  <button
+    class="avatar text"
+    type="button"
   >
-    <button
-      class="avatar text"
-      type="button"
-    >
-      <img
-        alt=""
-      />
-    </button>
-  </div>
+    <img
+      alt=""
+    />
+  </button>
 </div>
 `;

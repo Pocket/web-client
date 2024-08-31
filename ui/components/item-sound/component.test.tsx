@@ -1,6 +1,6 @@
 // Test Utilities
 import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
+import { act, render, screen } from '@testing-library/react'
 
 // Components
 import { ItemSound as Component } from '.'
@@ -12,11 +12,14 @@ import itemsById from '@common/mock-data/in-state/soundById.json'
 import { Item } from '@common/types'
 
 describe('renders ItemSound', () => {
-  it('with defaults', () => {
+  it('with defaults', async () => {
     const itemToRender = Object.values(itemsById)[0] as Item
-    const rendered = render(<Component item={itemToRender} />)
+
+    await act(() => {
+      render(<Component item={itemToRender} />)
+    })
     const renderedComponent = screen.getByTestId('item-short')
     expect(renderedComponent).toBeInTheDocument()
-    expect(rendered.container).toMatchSnapshot()
+    expect(renderedComponent).toMatchSnapshot()
   })
 })

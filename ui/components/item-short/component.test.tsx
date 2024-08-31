@@ -1,6 +1,6 @@
 // Test Utilities
 import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
+import { act, render, screen } from '@testing-library/react'
 
 // Components
 import { ItemShort as Component } from '.'
@@ -12,14 +12,15 @@ import itemsById from '@common/mock-data/in-state/shortsById.json'
 import { Item } from '@common/types'
 
 describe('renders ItemShort', () => {
-  let rendered
-
-  it('with defaults', () => {
+  it('with defaults', async () => {
     const itemToRender = Object.values(itemsById)[0] as Item
 
-    rendered = render(<Component item={itemToRender} />)
+    await act(() => {
+      render(<Component item={itemToRender} />)
+    })
+
     const renderedComponent = screen.getByTestId('item-short')
     expect(renderedComponent).toBeInTheDocument()
-    expect(rendered.container).toMatchSnapshot()
+    expect(renderedComponent).toMatchSnapshot()
   })
 })
