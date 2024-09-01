@@ -188,6 +188,10 @@ export const itemStyles = css`
     margin: var(--title-margin);
     line-height: var(--title-line-height);
 
+    .text {
+      word-break: break-word;
+    }
+
     &.withTopDetails {
       margin-top: 0;
     }

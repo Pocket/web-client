@@ -5,6 +5,9 @@ import { Loader } from 'components/loader/loader'
 import { savesHeaderStyle } from './saves-header'
 
 const searchStyles = css`
+  .query {
+    text-transform: capitalize;
+  }
   ${breakpointLargeTablet} {
     flex-wrap: wrap;
 
@@ -23,14 +26,16 @@ export const SearchDiscoveryPageHeader = ({ total, loading, query }) => {
   return query ? (
     <header className={cx(savesHeaderStyle, searchStyles)}>
       <h1 className="pageTitle" data-testid="page-title">
-        <em data-testid="search-query">“{query}”</em> —{' '}
+        <em data-testid="search-query" className="query">
+          “{query}” —
+        </em>{' '}
         {loading ? (
           <span>
             {t('search:searching', 'Searching')} <Loader />{' '}
           </span>
         ) : (
           <span>
-            {total || 0} {t('search:search-results', 'Search Results')}
+            {total || 0} {t('search:results', 'results')}
           </span>
         )}
       </h1>

@@ -5,6 +5,7 @@ import { SearchDiscoveryPageHeader } from 'components/headers/search-discovery-h
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { requestSearch } from './search.state'
+import { Breadcrumb } from './breadcrumb'
 
 export const Search = ({ query, locale }) => {
   const dispatch = useDispatch()
@@ -17,6 +18,7 @@ export const Search = ({ query, locale }) => {
 
   return (
     <Layout>
+      <Breadcrumb withSaves={false} />
       <SearchDiscoveryPageHeader query={query} total={total} loading={loading} />
       <ListOfSearchResults />
       <Toasts />
