@@ -24,11 +24,21 @@ export function SettingTheme({ buttonClass = '' }: { buttonClass?: string }) {
   const updateColorMode = useUserSettings((state) => state.updateColorMode)
 
   // We want to set the mode on state AND update the body class in a non reactive way
-  const setColorMode = (mode: string) => {
-    updateColorMode(mode)
+  const setColorMode = (colorMode: string) => {
+    updateColorMode(colorMode)
 
-    // If we have a proper ref yet, swap out the class
-    if (bodyRef.current) bodyRef.current.className = `${COLOR_MODE_PREFIX}-${mode}`
+    // Set up which classes will need to be removed before adding in the current
+    // mode.  We don't want to clobber pre-existing classes
+    const validColorModes = ['system', 'dark', 'light']
+    const classesToRemove = validColorModes
+      .filter((color) => color !== colorMode)
+      .map((color) => `${COLOR_MODE_PREFIX}-${color}`)
+
+    // If we have a proper ref yet, swap out the classes
+    if (bodyRef.current) {
+      bodyRef.current.classList.remove(...classesToRemove)
+      bodyRef.current.classList.add(`${COLOR_MODE_PREFIX}-${colorMode}`)
+    }
   }
 
   // Functions for setting modes

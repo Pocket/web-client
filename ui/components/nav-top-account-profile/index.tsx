@@ -47,7 +47,7 @@ export function NavTopAccountProfile() {
         crossAxis: 0
       }),
       autoPlacement({
-        allowedPlacements: ['bottom-end']
+        allowedPlacements: ['bottom-end', 'bottom-start']
       })
     ],
     whileElementsMounted: autoUpdate
@@ -61,9 +61,6 @@ export function NavTopAccountProfile() {
 
   const { getReferenceProps, getFloatingProps } = useInteractions([click, dismiss, focus])
 
-  // const handleClick = () => {
-  //   setIsOpen(false)
-  // }
   return (
     <>
       <div className={style.base} data-testid="nav-top-account-profile">
@@ -78,7 +75,7 @@ export function NavTopAccountProfile() {
 
       {isOpen ? (
         <FloatingPortal>
-          <FloatingFocusManager context={context} initialFocus={5} visuallyHiddenDismiss={true}>
+          <FloatingFocusManager context={context} modal={false} visuallyHiddenDismiss={true}>
             <div
               ref={refs.setFloating}
               style={{ ...floatingStyles, zIndex: 'var(--z-index-menu)' }}
