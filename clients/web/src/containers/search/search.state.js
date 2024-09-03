@@ -25,6 +25,10 @@ export const hydrateSearchResults = (response) => ({ type: HYDRATE_CORPUS_SEARCH
  --------------------------------------------------------------- */
 export const pageSearchIdsReducers = (state = [], action) => {
   switch (action.type) {
+    case CORPUS_SEARCH_REQUEST: {
+      return []
+    }
+
     case CORPUS_SEARCH_SUCCESS: {
       const { itemIds } = action
       const updatedItemIds = new Set([...state, ...itemIds])
@@ -47,6 +51,10 @@ export const pageSearchIdsReducers = (state = [], action) => {
  --------------------------------------------------------------- */
 export const pageSearchInfoReducers = (state = { loading: true, startCursor: false }, action) => {
   switch (action.type) {
+    case CORPUS_SEARCH_REQUEST: {
+      return { loading: true, startCursor: false }
+    }
+
     case CORPUS_SEARCH_PAGE_INFO_SUCCESS: {
       const { pageInfo } = action
       return { ...state, ...pageInfo, error: false, loading: false }
