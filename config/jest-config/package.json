@@ -5,7 +5,7 @@
   "author": "",
   "dependencies": {
     "@config/typescript-config": "workspace:*",
-    "@emotion/react": "11.13.0",
+    "@emotion/react": "11.11.4",
     "@testing-library/react": "^16.0.0",
     "@types/jest": "^29.5.12",
     "@types/node": "^22.2.0",
