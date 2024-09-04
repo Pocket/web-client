@@ -15,19 +15,21 @@ const itemsListStyle = css`
   margin-top: 2rem;
 `
 
+const cardHeight = 400
+
 export const LIST_DIMENSIONS = {
   grid: {
-    screenLargeDesktop: [0.3, 455, 3],
-    screenMediumDesktop: [0.3, 455, 3],
-    screenSmallDesktop: [0.3, 455, 3],
-    screenLargeTablet: [0.3, 455, 3],
-    screenMediumTablet: [0.3, 455, 3],
-    screenSmallTablet: [0.3, 455, 3],
-    screenTinyTablet: [0.3, 455, 3],
-    screenLargeHandset: ['100%', 455, 1],
-    screenMediumHandset: ['100%', 455, 1],
-    screenSmallHandset: ['100%', 455, 1],
-    screenTinyHandset: ['100%', 455, 1]
+    screenLargeDesktop: [0.3, cardHeight, 3],
+    screenMediumDesktop: [0.3, cardHeight, 3],
+    screenSmallDesktop: [0.3, cardHeight, 3],
+    screenLargeTablet: [0.3, cardHeight, 3],
+    screenMediumTablet: [0.3, cardHeight, 3],
+    screenSmallTablet: [0.3, cardHeight, 3],
+    screenTinyTablet: [0.3, cardHeight, 3],
+    screenLargeHandset: ['100%', cardHeight, 1],
+    screenMediumHandset: ['100%', cardHeight, 1],
+    screenSmallHandset: ['100%', cardHeight, 1],
+    screenTinyHandset: ['100%', cardHeight, 1]
   }
 }
 
@@ -100,6 +102,7 @@ export const ListOfSearchResults = () => {
                   id={itemId}
                   position={positionOfItem}
                   type={type}
+                  clamp={true}
                   columnCount={columnCount}
                   width={width}
                   height={height}
