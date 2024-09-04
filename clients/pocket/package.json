@@ -34,9 +34,9 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf .next",
     "lint": "next lint",
     "pocket": "echo \u001b[1m\u001b[36m'🌐 — https://local.client.pocket.com/\n\n'\u001b[0m && PORT=443 next dev --experimental-https --experimental-https-key ./certificates/local.client.pocket.com-key.pem --experimental-https-cert ./certificates/local.client.pocket.com.pem",
-    "start": "next start -p 80",
-    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf .next"
+    "start": "next start -p 80"
   }
 }
