@@ -127,10 +127,13 @@ export function deriveRecommendation(
   analyticsData,
   utmId = 'pocket_discover'
 ) {
-  const { item, recommendationId, curatedInfo: itemEnrichment } = recommendationsFromSlate
+  const { item, recommendationId } = recommendationsFromSlate
   return deriveItem({
-    item,
-    itemEnrichment,
+    item: { ...item, ...item.corpusItem },
+    itemEnrichment: {
+      url: item.corpusItem ? item.corpusItem.url : item.url,
+      publisher: item.corpusItem?.publisher ?? undefined
+    },
     analyticsData: { ...analyticsData, recommendationId },
     utmId
   })

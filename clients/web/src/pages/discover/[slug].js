@@ -45,7 +45,6 @@ export const getStaticProps = wrapper.getStaticProps((store) => async ({ params,
   // ?? Set at 5 minutes now to avoid crawlers crushing our servers
   const response = await fetchTopicData(topic)
   if (!response) return { props: { ...defaultProps, statusCode: 500 }, revalidate: 300 }
-
   const { itemIds, itemsById } = response
 
   // Hydrate the items array

@@ -12,13 +12,22 @@ const getSlateQuery = gql`
       recommendations {
         item {
           ...ItemDetails
+          ... on Item {
+            corpusItem {
+              imageUrl
+              thumbnail: imageUrl
+              url
+              title
+              excerpt
+              language
+              publisher
+              authors {
+                name
+              }
+            }
+          }
         }
         id
-        curatedInfo {
-          title
-          excerpt
-          imageSrc
-        }
       }
     }
   }
