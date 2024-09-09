@@ -162,6 +162,7 @@ const GlobalNavSearch = ({
   onFocus = () => {},
   onBlur = () => {},
   value = '',
+  discovery = false,
   placeholder = 'nav:search-for-topics-and-interests', // default localized key
   mobilePlaceholder = 'nav:search-for-topics', // default localized key
   onSubmit,
@@ -283,7 +284,7 @@ const GlobalNavSearch = ({
           data-testid="search-input"
           enterKeyHint="search"
         />
-        <RecentSearches searchTerms={recentSearches} isFocused={isFocused} />
+        <RecentSearches searchTerms={recentSearches} isFocused={isFocused} discovery={discovery} />
         {inputError ? (
           <div className="error-message">
             <div>

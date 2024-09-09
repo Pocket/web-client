@@ -51,7 +51,7 @@ const recentSearchStyle = css`
   }
 `
 
-export function RecentSearches({ searchTerms = [], isFocused }) {
+export function RecentSearches({ searchTerms = [], isFocused, discovery }) {
   const { t } = useTranslation()
   const [isHovered, setIsHovered] = useState(false)
 
@@ -64,6 +64,7 @@ export function RecentSearches({ searchTerms = [], isFocused }) {
 
   const showModule = (isFocused || isHovered) && searchTerms.length
 
+  const link = discovery ? '/search?q=' : '/saves/search?query='
   return showModule ? (
     <div
       className={recentSearchStyle}
@@ -73,7 +74,7 @@ export function RecentSearches({ searchTerms = [], isFocused }) {
 
       {searchTerms.map((search) => (
         <div key={search}>
-          <Link href={`/search?q=${encodeURIComponent(search)}`} tabIndex={0}>
+          <Link href={`${link}${encodeURIComponent(search)}`} tabIndex={0}>
             {search}
           </Link>
         </div>

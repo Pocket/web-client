@@ -26,6 +26,7 @@ function GlobalNavSearchDiscoveryConnected({ onClose }) {
     <GlobalNavSearch
       onClose={onClose}
       onSubmit={onSubmit}
+      discovery={true}
       recentSearches={recentSearches}
       isPremium={isPremium}
     />
