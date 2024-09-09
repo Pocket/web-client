@@ -1,35 +1,44 @@
+// !! NOTE: Used search specific saved item state here
+
 import { put, select, takeEvery } from 'redux-saga/effects'
 
 // Client API actions
-import { getCorpusSearch } from 'common/api/queries/get-corpus-search'
+import { itemFiltersFromGraph } from 'common/api/queries/get-saved-items.filters'
 
-import { CORPUS_SEARCH_REQUEST } from 'actions'
-import { CORPUS_SEARCH_FAILURE } from 'actions'
-import { CORPUS_SEARCH_SUCCESS } from 'actions'
-import { CORPUS_SEARCH_DISMISS } from 'actions'
-import { CORPUS_SEARCH_LOAD_MORE } from 'actions'
-import { CORPUS_SEARCH_LOAD_PREVIOUS } from 'actions'
-import { CORPUS_SEARCH_PAGE_INFO_SUCCESS } from 'actions'
-import { HYDRATE_CORPUS_SEARCH } from 'actions'
+import { SEARCH_SAVED_ITEMS } from 'actions'
+import { SEARCH_SAVED_ITEMS_UNREAD } from 'actions'
+import { SEARCH_SAVED_ITEMS_ARCHIVED } from 'actions'
+import { SEARCH_SAVED_ITEMS_FAVORITES } from 'actions'
 
+import { SEARCH_SAVES_REQUEST } from 'actions'
+import { SEARCH_SAVES_FAILURE } from 'actions'
+import { SEARCH_SAVES_SUCCESS } from 'actions'
+
+import { SEARCH_SAVES_LOAD_MORE } from 'actions'
+import { SEARCH_SAVES_LOAD_PREVIOUS } from 'actions'
+import { SEARCH_SAVES_PAGE_INFO_SUCCESS } from 'actions'
+import { SEARCH_SAVES_HYDRATE } from 'actions'
+
+// Special Hydrate
 import { HYDRATE } from 'actions'
+import { getSavedItems } from 'common/api/queries/get-saved-items'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const requestSearch = (query, language, cursor) => ({ type: CORPUS_SEARCH_REQUEST, query, language, cursor }) //prettier-ignore
-export const loadMoreSearchItems = () => ({ type: CORPUS_SEARCH_LOAD_MORE })
-export const loadPreviousSearchItems = () => ({ type: CORPUS_SEARCH_LOAD_PREVIOUS })
-export const hydrateSearchResults = (response) => ({ type: HYDRATE_CORPUS_SEARCH, response })
+export const requestSavesSearch = (query, language, cursor, filter) => ({ type: SEARCH_SAVES_REQUEST, query, language, cursor, filter }) //prettier-ignore
+export const loadMoreSavesSearch = () => ({ type: SEARCH_SAVES_LOAD_MORE })
+export const loadPreviousSavesSearch = () => ({ type: SEARCH_SAVES_LOAD_PREVIOUS })
+export const hydrateSavesSearch = (response) => ({ type: SEARCH_SAVES_HYDRATE, response })
 
 /** REDUCERS
  --------------------------------------------------------------- */
-export const pageSearchIdsReducers = (state = [], action) => {
+export const pageSearchSavesIdsReducers = (state = [], action) => {
   switch (action.type) {
-    case CORPUS_SEARCH_REQUEST: {
+    case SEARCH_SAVES_REQUEST: {
       return []
     }
 
-    case CORPUS_SEARCH_SUCCESS: {
+    case SEARCH_SAVES_SUCCESS: {
       const { itemIds } = action
       const updatedItemIds = new Set([...state, ...itemIds])
       return Array.from(updatedItemIds)
@@ -49,18 +58,21 @@ export const pageSearchIdsReducers = (state = [], action) => {
 
 /** PAGINATION REDUCERS
  --------------------------------------------------------------- */
-export const pageSearchInfoReducers = (state = { loading: true, startCursor: false }, action) => {
+export const pageSearchSavesInfoReducers = (
+  state = { loading: true, startCursor: false },
+  action
+) => {
   switch (action.type) {
-    case CORPUS_SEARCH_REQUEST: {
+    case SEARCH_SAVES_REQUEST: {
       return { loading: true, startCursor: false }
     }
 
-    case CORPUS_SEARCH_PAGE_INFO_SUCCESS: {
+    case SEARCH_SAVES_PAGE_INFO_SUCCESS: {
       const { pageInfo } = action
       return { ...state, ...pageInfo, error: false, loading: false }
     }
 
-    case CORPUS_SEARCH_LOAD_MORE: {
+    case SEARCH_SAVES_LOAD_MORE: {
       return { ...state, startCursor: state.endCursor, loading: true }
     }
 
@@ -78,10 +90,10 @@ export const pageSearchInfoReducers = (state = { loading: true, startCursor: fal
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
-export const pageSearchSagas = [
-  takeEvery(CORPUS_SEARCH_REQUEST, searchRequest),
-  takeEvery(CORPUS_SEARCH_LOAD_MORE, searchLoadMore),
-  takeEvery(HYDRATE_CORPUS_SEARCH, hydrateSearch)
+export const pageSearchSavesSagas = [
+  takeEvery(SEARCH_SAVES_REQUEST, searchRequest),
+  takeEvery(SEARCH_SAVES_LOAD_MORE, searchLoadMore),
+  takeEvery(SEARCH_SAVES_HYDRATE, hydrateSearch)
 ]
 
 /** SAGA :: SELECTORS
@@ -96,17 +108,17 @@ function* searchLoadMore() {
     const response = yield getSearchResults(query, language, cursor)
     yield hydrateSearch({ response, query, language })
   } catch (error) {
-    yield put({ type: CORPUS_SEARCH_FAILURE, error })
+    yield put({ type: SEARCH_SAVES_FAILURE, error })
   }
 }
 
-function* searchRequest({ query, language, cursor }) {
+function* searchRequest({ query, language, cursor, filter }) {
   try {
-    const response = yield getSearchResults(query, language, cursor)
+    const response = yield getSearchResults(query, language, cursor, filter)
 
     yield hydrateSearch({ response, query, language })
   } catch (error) {
-    yield put({ type: CORPUS_SEARCH_FAILURE, error })
+    yield put({ type: SEARCH_SAVES_FAILURE, error })
   }
 }
 
@@ -114,22 +126,22 @@ function* hydrateSearch({ response, query, language }) {
   try {
     const { itemsById, itemIds, pageInfo } = response
     const endOfList = pageInfo?.endCursor === null
-    yield put({ type: CORPUS_SEARCH_SUCCESS, itemIds, itemsById })
+    yield put({ type: SEARCH_SAVES_SUCCESS, itemIds, itemsById })
     yield put({
-      type: CORPUS_SEARCH_PAGE_INFO_SUCCESS,
+      type: SEARCH_SAVES_PAGE_INFO_SUCCESS,
       pageInfo: { ...pageInfo, query, language, endOfList }
     })
     return
   } catch (error) {
-    yield put({ type: CORPUS_SEARCH_FAILURE, error })
+    yield put({ type: SEARCH_SAVES_FAILURE, error })
   }
 }
 /**
  * ASYNC CALLS
  --------------------------------------------------------------- */
-export async function getSearchResults(query, language, cursor) {
+export async function getSearchResults(query, language, cursor, filter) {
   try {
-    const response = await getCorpusSearch({
+    const response = await getSavedItems({
       search: { query },
       filter: { language },
       ...(cursor && { pagination: { after: cursor } })

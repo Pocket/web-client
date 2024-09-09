@@ -124,9 +124,13 @@ import { mutationListUpdateSagas } from 'connectors/lists/mutation-update.state'
 
 import { mutationListShareReducers } from 'connectors/lists/mutation-share.state'
 
-import { pageSearchIdsReducers } from 'containers/search/search.state'
-import { pageSearchInfoReducers } from 'containers/search/search.state'
-import { pageSearchSagas } from 'containers/search/search.state'
+import { pageSearchCorpusIdsReducers } from 'containers/search/corpus/search.corpus.state'
+import { pageSearchCorpusInfoReducers } from 'containers/search/corpus/search.corpus.state'
+import { pageSearchCorpusSagas } from 'containers/search/corpus/search.corpus.state'
+
+import { pageSearchSavesIdsReducers } from 'containers/search/saves/search.saves.state'
+import { pageSearchSavesInfoReducers } from 'containers/search/saves/search.saves.state'
+import { pageSearchSavesSagas } from 'containers/search/saves/search.saves.state'
 
 /* REDUCERS
  --------------------------------------------------------------- */
@@ -171,8 +175,10 @@ const pageReducers = {
   pageCollectionStories: pageCollectionStoriesReducers,
   pageStoriesInfo: [],
   pageListsInfo: pageListsInfoReducers,
-  pageSearchInfo: pageSearchInfoReducers,
-  pageSearchIds: pageSearchIdsReducers
+  pageSearchCorpusInfo: pageSearchCorpusInfoReducers,
+  pageSearchCorpusIds: pageSearchCorpusIdsReducers,
+  pageSearchSavesIds: pageSearchSavesIdsReducers,
+  pageSearchSavesInfo: pageSearchSavesInfoReducers
 }
 
 const discoverReducers = {
@@ -262,7 +268,8 @@ function* rootSaga() {
     ...mutationListUpdateSagas,
     ...mutationListAddSagas,
     ...listenSagas,
-    ...pageSearchSagas
+    ...pageSearchCorpusSagas,
+    ...pageSearchSavesSagas
   ])
 }
 

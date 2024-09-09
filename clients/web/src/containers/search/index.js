@@ -1,26 +1,21 @@
 import Layout from 'layouts/main'
-import { ListOfSearchResults } from './list-of-items'
 import { Toasts } from 'connectors/toasts/toast-list'
-import { SearchDiscoveryPageHeader } from 'components/headers/search-discovery-header'
-import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { requestSearch } from './search.state'
-import { Breadcrumb } from './breadcrumb'
+import { SearchCorpus } from './corpus/index.js'
+import { SearchSaves } from './saves/index.js'
 
-export const Search = ({ query, locale }) => {
-  const dispatch = useDispatch()
-  const total = useSelector((state) => state.pageSearchInfo.totalCount)
-  const loading = useSelector((state) => state.pageSearchInfo.loading)
+import { useSelector } from 'react-redux'
 
-  useEffect(() => {
-    dispatch(requestSearch(query, locale.toUpperCase()))
-  }, [query, locale, dispatch])
-
+export const Search = ({ query, locale, searchType }) => {
+  const appMode = useSelector((state) => state.app.mode)
+  const searchTypeFromAppMode = appMode === 'discovery' ? 'all' : 'saves'
+  const pageToShow = searchType ? searchType : searchTypeFromAppMode
   return (
     <Layout>
-      <Breadcrumb withSaves={false} />
-      <SearchDiscoveryPageHeader query={query} total={total} loading={loading} />
-      <ListOfSearchResults />
+      {pageToShow === 'all' ? (
+        <SearchCorpus query={query} locale={locale} />
+      ) : (
+        <SearchSaves query={query} locale={locale} />
+      )}
       <Toasts />
     </Layout>
   )

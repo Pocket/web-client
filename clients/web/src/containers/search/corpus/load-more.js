@@ -29,24 +29,20 @@ const loadMoreRefStyle = css`
 `
 
 export function LoadMore({ loadMore }) {
-  const loading = useSelector((state) => state.pageSearchInfo.loading)
-  const error = useSelector((state) => state.pageSearchInfo.error)
-  const startCursor = useSelector((state) => state.pageSearchInfo.startCursor)
-  const endOfList = useSelector((state) => state.pageSearchInfo.endOfList)
+  const loading = useSelector((state) => state.pageSearchCorpusInfo.loading)
+  const error = useSelector((state) => state.pageSearchCorpusInfo.error)
+  const startCursor = useSelector((state) => state.pageSearchCorpusInfo.startCursor)
+  const endOfList = useSelector((state) => state.pageSearchCorpusInfo.endOfList)
 
   const shouldLoadMore = !loading && !endOfList
 
   const loadMoreMessage = startCursor ? 'Loading more items' : ''
 
-  return loading || error ? (
+  if (error) return null
+
+  return loading ? (
     <div key="load-more" className={loadMoreStyle}>
-      {error ? (
-        <>Something went wrong while searching</>
-      ) : (
-        <>
-          {loadMoreMessage} <Loader />
-        </>
-      )}
+      {loadMoreMessage} <Loader />
     </div>
   ) : (
     <LoadMoreTrigger loadMore={loadMore} shouldLoadMore={shouldLoadMore} />

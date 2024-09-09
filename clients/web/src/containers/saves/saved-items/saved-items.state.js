@@ -95,6 +95,7 @@ export const savedItemsSetSortBy = (sortBy) => ({ type: ITEMS_SAVED_PAGE_SET_SOR
 
 export const loadMoreListItems = () => ({ type: LOAD_MORE_ITEMS })
 export const loadPreviousListItems = () => ({ type: LOAD_PREVIOUS_ITEMS })
+export const clearSearchItems = () => ({ type: ITEMS_CLEAR_CURRENT })
 
 /** LIST SAVED REDUCERS
  --------------------------------------------------------------- */
@@ -152,7 +153,7 @@ export const pageSavedInfoReducers = (state = initialState, action) => {
     case ITEMS_SAVED_SEARCH_REQUEST:
     case ITEMS_SAVED_REQUEST: {
       const { sortOrder = 'DESC', tagNames, searchTerm, actionType } = action
-      return { ...state, error: false, loading: true, sortOrder, actionType, tagNames, searchTerm }
+      return { error: false, loading: true, sortOrder, actionType, tagNames, searchTerm }
     }
 
     case ITEMS_SAVED_PAGE_SET_FILTERS: {

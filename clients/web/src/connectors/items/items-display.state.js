@@ -3,7 +3,7 @@ import { READ_ITEM_SUCCESS } from 'actions'
 import { SHARED_ITEM_SUCCESS } from 'actions'
 import { ITEMS_SET_NO_IMAGE } from 'actions'
 import { ITEMS_UPDATE } from 'actions'
-import { CORPUS_SEARCH_SUCCESS } from 'actions'
+import { SEARCH_CORPUS_SUCCESS } from 'actions'
 import { HYDRATE } from 'actions'
 
 /** ACTIONS
@@ -17,7 +17,7 @@ export const itemsDisplayReducers = (state = {}, action) => {
   switch (action.type) {
     case READ_ITEM_SUCCESS:
     case SHARED_ITEM_SUCCESS:
-    case CORPUS_SEARCH_SUCCESS:
+    case SEARCH_CORPUS_SUCCESS:
     case ITEMS_SUCCESS: {
       const { itemsById = {} } = action
 

@@ -1,12 +1,12 @@
 import { useEffect, useCallback, useState } from 'react'
 import { LoadMore } from './load-more'
-import { ItemCard } from 'connectors/items/item-card-search'
+import { ItemCard } from 'connectors/items/item-card-saved'
 import { useSelector, useDispatch } from 'react-redux'
-import { loadMoreSearchItems } from './search.state'
-import { loadPreviousSearchItems } from './search.state'
 import { getScrollTop } from 'common/utilities/scroll/scroll'
 import { useViewport } from 'components/viewport-provider/viewport-provider'
 import { EmptyFilters } from 'components/empty-states/filters'
+import { loadMoreListItems } from '../../saves/saved-items/saved-items.state'
+import { loadPreviousListItems } from '../../saves/saved-items/saved-items.state'
 
 import { css } from '@emotion/css'
 
@@ -33,13 +33,13 @@ export const LIST_DIMENSIONS = {
   }
 }
 
-export const ListOfSearchResults = () => {
+export const ListOfSavedItems = () => {
   const dispatch = useDispatch()
   const viewport = useViewport()
 
-  const pageSearchIds = useSelector((state) => state.pageSearchIds)
+  const pageSearchIds = useSelector((state) => state.pageSavedIds)
   const type = 'grid'
-  const loading = useSelector((state) => state.pageSearchInfo.loading)
+  const loading = useSelector((state) => state.pageSavedInfo.loading)
 
   const [startingIndex, setStartingIndex] = useState(0)
 
@@ -52,8 +52,8 @@ export const ListOfSearchResults = () => {
   const verticalPadding = 25
   const horizontalPadding = 25
 
-  const blockRows = pageSearchIds.length / columnCount
-  const totalHeight = blockRows * height + blockRows * verticalPadding + verticalPadding + 100 // 100 = size of the search bar for now
+  const blockRows = Math.ceil(pageSearchIds.length / columnCount)
+  const totalHeight = blockRows * height + blockRows * verticalPadding
 
   /** FUNCTIONS
  --------------------------------------------------------------- */
@@ -66,7 +66,7 @@ export const ListOfSearchResults = () => {
   }, [columnCount, height, startingIndex, verticalPadding])
 
   const checkVisibility = useCallback(() => {
-    if (document.visibilityState === 'visible') dispatch(loadPreviousSearchItems())
+    if (document.visibilityState === 'visible') dispatch(loadPreviousListItems())
   }, [dispatch])
 
   /** EFFECTS
@@ -87,12 +87,12 @@ export const ListOfSearchResults = () => {
     }
   }, [checkRange, checkVisibility])
 
-  const loadMore = () => dispatch(loadMoreSearchItems())
+  const loadMore = () => dispatch(loadMoreListItems())
   const itemsToShow = pageSearchIds.slice(startingIndex, startingIndex + itemsOnScreen + 1)
 
   return (
     <>
-      <div className={itemsListStyle} data-testid={`list-of-items-view-${type}`}>
+      <div className={itemsListStyle}>
         {itemsToShow
           ? itemsToShow.map((itemId) => {
               const positionOfItem = pageSearchIds.indexOf(itemId)
@@ -108,7 +108,7 @@ export const ListOfSearchResults = () => {
                   height={height}
                   verticalPadding={verticalPadding}
                   horizontalPadding={horizontalPadding}
-                  snowplowId="search.corpus"
+                  snowplowId="search.saves"
                 />
               )
             })

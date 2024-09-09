@@ -73,7 +73,7 @@ export function RecentSearches({ searchTerms = [], isFocused }) {
 
       {searchTerms.map((search) => (
         <div key={search}>
-          <Link href={`/saves/search?query=${encodeURIComponent(search)}`} tabIndex={0}>
+          <Link href={`/search?q=${encodeURIComponent(search)}`} tabIndex={0}>
             {search}
           </Link>
         </div>

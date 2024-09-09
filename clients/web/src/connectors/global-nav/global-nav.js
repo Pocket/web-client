@@ -182,11 +182,6 @@ const GlobalNav = (props) => {
   const tools = showNav
     ? [
         {
-          name: 'search',
-          label: t('nav:search', 'Search'),
-          icon: <SearchIcon />
-        },
-        {
           name: 'add-item',
           label: t('nav:save', 'Save a URL'),
           icon: <LinkCopyIcon />
@@ -195,6 +190,11 @@ const GlobalNav = (props) => {
           name: 'bulk-edit',
           label: t('nav:bulk-edit', 'Bulk Edit'),
           icon: <EditIcon />
+        },
+        {
+          name: 'search',
+          label: t('nav:search', 'Search'),
+          icon: <SearchIcon />
         }
       ]
     : [
