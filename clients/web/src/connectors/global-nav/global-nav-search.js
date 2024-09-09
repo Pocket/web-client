@@ -15,7 +15,7 @@ function GlobalNavSearchConnected({ onClose }) {
   const onSubmit = (searchTerm) => {
     dispatch(sendSnowplowEvent('global-nav.search.submit', { value: searchTerm }))
     dispatch(saveRecentSearch(searchTerm))
-    router.push(`/search/?q=${encodeURIComponent(searchTerm)}&st=saves`)
+    router.push(`/saves/search/?query=${encodeURIComponent(searchTerm)}`)
   }
 
   useEffect(() => {

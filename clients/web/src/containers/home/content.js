@@ -117,7 +117,7 @@ function SlideSlate({ slateId }) {
   const { headline, subheadline, moreLink, recommendations } = slate
 
   const viewport = useViewport()
-  const itemsOnScreen = getItemsOnSceen(viewport.width)
+  const itemsOnScreen = getItemsOnScreen(viewport.width)
   const recCount = recommendations.length
   const recsToShow = recommendations.slice(0, recCount)
   const hideSlide = recCount <= itemsOnScreen
@@ -242,7 +242,7 @@ function SlateEmpty() {
   )
 }
 
-function getItemsOnSceen(width) {
+function getItemsOnScreen(width) {
   if (width <= 599) return 1
   if (width <= 719) return 2
   if (width <= 1023) return 3

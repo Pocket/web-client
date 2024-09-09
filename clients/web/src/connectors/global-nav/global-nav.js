@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
@@ -33,6 +33,7 @@ import { BASE_URL } from 'common/constants'
 import { LOGIN_URL } from 'common/constants'
 import { getTopLevelPath } from 'common/utilities/urls/urls'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { BRAZE_SEARCH } from 'common/utilities/braze/feature-flags'
 
 import { Banner } from './global-nav-banner'
 
@@ -78,6 +79,21 @@ const GlobalNav = (props) => {
 
   const listMode = useSelector((state) => state?.app?.listMode)
   const colorMode = useSelector((state) => state?.app?.colorMode)
+
+  // We are gonna use Braze for feature flags here
+  const [listenEnrolled, setListenEnrolled] = useState(false)
+  const brazeInitialized = useSelector((state) => state?.braze?.initialized)
+
+  useEffect(() => {
+    if (!brazeInitialized) return () => {}
+    import('common/utilities/braze/braze-lazy-load').then(
+      ({ logFeatureFlagImpression, getFeatureFlag }) => {
+        const flag = getFeatureFlag(BRAZE_SEARCH)
+        if (flag?.enabled) setListenEnrolled(true)
+        logFeatureFlagImpression(BRAZE_SEARCH)
+      }
+    )
+  }, [brazeInitialized])
 
   // Has the user migrated to FXA?
   const { isFXA } = useSelector((state) => state.user)
@@ -191,18 +207,32 @@ const GlobalNav = (props) => {
           label: t('nav:bulk-edit', 'Bulk Edit'),
           icon: <EditIcon />
         },
-        {
-          name: 'search',
-          label: t('nav:search', 'Search'),
-          icon: <SearchIcon />
-        }
+        ...(listenEnrolled
+          ? [
+              {
+                name: 'discovery',
+                label: t('nav:search', 'Search'),
+                icon: <SearchIcon />
+              }
+            ]
+          : [
+              {
+                name: 'search',
+                label: t('nav:search', 'Search'),
+                icon: <SearchIcon />
+              }
+            ])
       ]
     : [
-        {
-          name: 'discovery',
-          label: t('nav:search', 'Search'),
-          icon: <SearchIcon />
-        }
+        ...(listenEnrolled
+          ? [
+              {
+                name: 'discovery',
+                label: t('nav:search', 'Search'),
+                icon: <SearchIcon />
+              }
+            ]
+          : [])
       ]
 
   const onLinkClick = (label) => dispatch(sendSnowplowEvent('global-nav', { label }))
