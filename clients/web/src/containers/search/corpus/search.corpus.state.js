@@ -36,8 +36,8 @@ export const pageSearchCorpusIdsReducers = (state = [], action) => {
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
     case HYDRATE: {
-      const { pageSearchIds } = action.payload
-      return pageSearchIds
+      const { pageSearchCorpusIds } = action.payload
+      return pageSearchCorpusIds
     }
 
     default:
@@ -72,8 +72,8 @@ export const pageSearchCorpusInfoReducers = (
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
     case HYDRATE: {
-      const { pageSearchInfo } = action.payload
-      return pageSearchInfo
+      const { pageSearchCorpusInfo } = action.payload
+      return pageSearchCorpusInfo
     }
 
     default:
