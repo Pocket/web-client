@@ -128,10 +128,6 @@ import { pageSearchCorpusIdsReducers } from 'containers/search/corpus/search.cor
 import { pageSearchCorpusInfoReducers } from 'containers/search/corpus/search.corpus.state'
 import { pageSearchCorpusSagas } from 'containers/search/corpus/search.corpus.state'
 
-import { pageSearchSavesIdsReducers } from 'containers/search/saves/search.saves.state'
-import { pageSearchSavesInfoReducers } from 'containers/search/saves/search.saves.state'
-import { pageSearchSavesSagas } from 'containers/search/saves/search.saves.state'
-
 /* REDUCERS
  --------------------------------------------------------------- */
 const itemReducers = {
@@ -176,9 +172,7 @@ const pageReducers = {
   pageStoriesInfo: [],
   pageListsInfo: pageListsInfoReducers,
   pageSearchCorpusInfo: pageSearchCorpusInfoReducers,
-  pageSearchCorpusIds: pageSearchCorpusIdsReducers,
-  pageSearchSavesIds: pageSearchSavesIdsReducers,
-  pageSearchSavesInfo: pageSearchSavesInfoReducers
+  pageSearchCorpusIds: pageSearchCorpusIdsReducers
 }
 
 const discoverReducers = {
@@ -268,8 +262,7 @@ function* rootSaga() {
     ...mutationListUpdateSagas,
     ...mutationListAddSagas,
     ...listenSagas,
-    ...pageSearchCorpusSagas,
-    ...pageSearchSavesSagas
+    ...pageSearchCorpusSagas
   ])
 }
 

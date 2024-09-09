@@ -5,11 +5,6 @@ import { useEffect } from 'react'
 import { filterSelector } from 'containers/saves/saved-items/saved-items.js'
 import { clearSearchItems } from 'containers/saves/saved-items/saved-items.state.js'
 
-// import { requestSavesSearch } from './search.saves.state.js'
-// import { searchItemsUnread } from 'containers/saves/saved-items/saved-items.state'
-// import { searchItemsArchived } from 'containers/saves/saved-items/saved-items.state'
-// import { searchItemsFavorites } from 'containers/saves/saved-items/saved-items.state'
-
 export const SearchSaves = ({ query, locale }) => {
   const dispatch = useDispatch()
   const total = useSelector((state) => state.pageSavedInfo.totalCount)

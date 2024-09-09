@@ -8,7 +8,6 @@ import { SEARCH_CORPUS_FAILURE } from 'actions'
 import { SEARCH_CORPUS_SUCCESS } from 'actions'
 import { SEARCH_CORPUS_PAGE_INFO_SUCCESS } from 'actions'
 import { SEARCH_CORPUS_LOAD_MORE } from 'actions'
-import { SEARCH_CORPUS_LOAD_PREVIOUS } from 'actions'
 import { SEARCH_CORPUS_HYDRATE } from 'actions'
 
 import { HYDRATE } from 'actions'
@@ -17,7 +16,7 @@ import { HYDRATE } from 'actions'
  --------------------------------------------------------------- */
 export const requestCorpusSearch = (query, language, cursor) => ({ type: SEARCH_CORPUS_REQUEST, query, language, cursor }) //prettier-ignore
 export const loadMoreSearchItems = () => ({ type: SEARCH_CORPUS_LOAD_MORE })
-export const loadPreviousSearchItems = () => ({ type: SEARCH_CORPUS_LOAD_PREVIOUS })
+export const loadPreviousSearchItems = () => ({ type: SEARCH_CORPUS_LOAD_MORE })
 export const hydrateSearchResults = (response) => ({ type: SEARCH_CORPUS_HYDRATE, response })
 
 /** REDUCERS
