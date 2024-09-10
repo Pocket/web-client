@@ -5,7 +5,11 @@ import { breakpointLargeHandset } from 'common/constants'
 import { useTranslation } from 'next-i18next'
 import { Loader } from 'components/loader/loader'
 import Link from 'next/link'
+import { savedItemsSetSortOrder } from 'containers/saves/saved-items/saved-items.state'
+import { savedItemsSetSortBy } from 'containers/saves/saved-items/saved-items.state'
 import { SearchFilterMenu } from 'components/list-filter-menu/search-filter-menu'
+import { ListSort } from 'components/list-sort/list-sort'
+import { useDispatch } from 'react-redux'
 
 const searchStyles = css`
   margin-bottom: 1.5rem;
@@ -50,7 +54,8 @@ const searchStyles = css`
     }
   }
   .sourceBar {
-    display: block;
+    display: flex;
+    justify-content: space-between;
     a {
       text-decoration: none;
       display: inline-block;
@@ -68,8 +73,22 @@ const searchStyles = css`
   }
 `
 
-export const SearchPageHeader = ({ total, loading, query, searchType, filter }) => {
+export const SearchPageHeader = ({
+  total,
+  loading,
+  query,
+  searchType,
+  filter,
+  sortOrder,
+  isPremium
+}) => {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
+
+  const handleNewest = () => dispatch(savedItemsSetSortOrder('DESC'))
+  const handleOldest = () => dispatch(savedItemsSetSortOrder('ASC'))
+  const handleRelevance = () => dispatch(savedItemsSetSortBy('RELEVANCE'))
+
   return query ? (
     <header className={searchStyles}>
       <h1 className="pageTitle" data-testid="page-title">
@@ -87,16 +106,29 @@ export const SearchPageHeader = ({ total, loading, query, searchType, filter }) 
         )}
       </h1>
       <div className="sourceBar">
-        <Link className={searchType === 'all' ? 'active' : ''} href={`/search?q=${query}&st=all`}>
-          All of Pocket
-        </Link>{' '}
-        <Link
-          className={searchType === 'saves' ? 'active' : ''}
-          href={`/search?q=${query}&st=saves`}>
-          Only My Saves
-        </Link>
+        <div>
+          <Link className={searchType === 'all' ? 'active' : ''} href={`/search?q=${query}&st=all`}>
+            All of Pocket
+          </Link>{' '}
+          <Link
+            className={searchType === 'saves' ? 'active' : ''}
+            href={`/search?q=${query}&st=saves`}>
+            Only My Saves
+          </Link>
+          {searchType === 'saves' ? (
+            <SearchFilterMenu subset="search" query={query} filter={filter} sortOrder={sortOrder} />
+          ) : null}
+        </div>
         {searchType === 'saves' ? (
-          <SearchFilterMenu subset="search" query={query} filter={filter} />
+          <ListSort
+            query={query}
+            filter={filter}
+            showRelevance={isPremium}
+            sortOrder={sortOrder}
+            handleNewest={handleNewest}
+            handleOldest={handleOldest}
+            handleRelevance={handleRelevance}
+          />
         ) : null}
       </div>
     </header>

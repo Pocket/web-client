@@ -29,7 +29,6 @@ export const getServerSideProps: GetServerSideProps<LocalizedProps> = async ({
   // Light validation
   const searchType = typeof st === 'string' && validSearchTypes.includes(st) ? st : false
   const filter = typeof ft === 'string' && validFilters.includes(ft) ? ft : false
-
   return { props: { ...defaultProps, query: q, searchType, filter } }
 }
 
