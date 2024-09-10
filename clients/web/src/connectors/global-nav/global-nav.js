@@ -81,7 +81,7 @@ const GlobalNav = (props) => {
   const colorMode = useSelector((state) => state?.app?.colorMode)
 
   // We are gonna use Braze for feature flags here
-  const [listenEnrolled, setListenEnrolled] = useState(false)
+  const [searchEnrolled, setSearchEnrolled] = useState(false)
   const brazeInitialized = useSelector((state) => state?.braze?.initialized)
 
   useEffect(() => {
@@ -89,7 +89,7 @@ const GlobalNav = (props) => {
     import('common/utilities/braze/braze-lazy-load').then(
       ({ logFeatureFlagImpression, getFeatureFlag }) => {
         const flag = getFeatureFlag(BRAZE_SEARCH)
-        if (flag?.enabled) setListenEnrolled(true)
+        if (flag?.enabled) setSearchEnrolled(true)
         logFeatureFlagImpression(BRAZE_SEARCH)
       }
     )
@@ -207,7 +207,7 @@ const GlobalNav = (props) => {
           label: t('nav:bulk-edit', 'Bulk Edit'),
           icon: <EditIcon />
         },
-        ...(listenEnrolled
+        ...(searchEnrolled
           ? [
               {
                 name: 'discovery',
@@ -224,7 +224,7 @@ const GlobalNav = (props) => {
             ])
       ]
     : [
-        ...(listenEnrolled
+        ...(searchEnrolled
           ? [
               {
                 name: 'discovery',
