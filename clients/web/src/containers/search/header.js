@@ -5,6 +5,7 @@ import { breakpointLargeHandset } from 'common/constants'
 import { useTranslation } from 'next-i18next'
 import { Loader } from 'components/loader/loader'
 import Link from 'next/link'
+import { SearchFilterMenu } from 'components/list-filter-menu/search-filter-menu'
 
 const searchStyles = css`
   margin-bottom: 1.5rem;
@@ -67,7 +68,7 @@ const searchStyles = css`
   }
 `
 
-export const SearchPageHeader = ({ total, loading, query, searchType }) => {
+export const SearchPageHeader = ({ total, loading, query, searchType, filter }) => {
   const { t } = useTranslation()
   return query ? (
     <header className={searchStyles}>
@@ -94,6 +95,9 @@ export const SearchPageHeader = ({ total, loading, query, searchType }) => {
           href={`/search?q=${query}&st=saves`}>
           Only My Saves
         </Link>
+        {searchType === 'saves' ? (
+          <SearchFilterMenu subset="search" query={query} filter={filter} />
+        ) : null}
       </div>
     </header>
   ) : null
