@@ -3,41 +3,19 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { LOCALE_COMMON } from 'common/constants'
 import { readFileSync } from 'node:fs'
 import { marked } from 'marked'
-import { overrideDateTime, customHeadingId } from 'common/utilities/marked-formatters'
 
 // Types
 import type { LocalizedProps } from '@common/types'
 import type { GetStaticPropsContext, GetStaticProps } from 'next'
+import { join } from 'node:path'
 
-const localeMap: Record<string, string> = {
-  'de-DE': 'de',
-  'en-KE': 'en',
-  'es-LA': 'es-ES',
-  es: 'es-ES',
-  'fr-CA': 'fr',
-  'fr-FR': 'fr',
-  'it-IT': 'it',
-  'ja-JP': 'ja',
-  'ko-KR': 'ko',
-  'nl-NL': 'nl',
-  'pl-PL': 'pl',
-  pt: 'pt-BR',
-  'pt-PT': 'pt-BR',
-  'ru-RU': 'ru',
-  zh: 'zh-CN'
-}
-
-async function getMDContent(locale: string): Promise<string> {
-  let mdContent: string
-
-  try {
-    mdContent = readFileSync(`node_modules/legal-docs/${locale}/pocket_tos.md`, 'utf8')
-  } catch {
-    mdContent = readFileSync(`node_modules/legal-docs/en/pocket_tos.md`, 'utf8')
-  }
-
+async function getMDContent(): Promise<string> {
+  const mdContent = readFileSync(join(process.cwd(), 'public/static/docs/ios-oss.md'), 'utf8')
   const mdContentModified = mdContent.replace(/\{:\s?\#(.+\S)\s?\}/gi, '{#$1}')
-  const content = await marked.use(customHeadingId, overrideDateTime).parse(mdContentModified)
+  const content = marked.parse(
+    // eslint-disable-next-line no-misleading-character-class
+    mdContentModified.replace(/^[\u200B\u200C\u200D\u200E\u200F\uFEFF]/, '')
+  )
 
   return content
 }
@@ -46,8 +24,7 @@ export const getStaticProps: GetStaticProps<LocalizedProps> = async function get
   ctx: GetStaticPropsContext
 ) {
   const locale = ctx.locale ?? 'en'
-  const localeToUse: string = localeMap[locale] ?? locale
-  const content: string = await getMDContent(localeToUse)
+  const content: string = await getMDContent()
 
   return {
     props: {
