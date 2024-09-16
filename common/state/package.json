@@ -6,10 +6,10 @@
   "dependencies": {
     "@common/constants": "workspace:*",
     "@common/utilities": "workspace:*",
-    "jose": "5.7.0",
-    "next": "14.2.5",
+    "jose": "5.9.2",
+    "next": "14.2.11",
     "react": "18.3.1",
-    "zustand": "4.5.4"
+    "zustand": "5.0.0-rc.2"
   },
   "devDependencies": {
     "@common/types": "workspace:*",
@@ -20,7 +20,7 @@
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
     "@types/eslint": "^9.6.0",
-    "@types/jest": "^29.5.12",
+    "@types/jest": "^29.5.13",
     "@types/node": "^22.5.5",
     "@types/react": "18.3.6",
     "@types/react-dom": "^18.3.0",
