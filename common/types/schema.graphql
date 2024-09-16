@@ -176,6 +176,9 @@ type Collection {
   marked as beta because it's not ready yet for large client request.
   """
   shortUrl: Url
+
+  """The preview of the collection"""
+  preview: PocketMetadata!
 }
 
 type CollectionAuthor {
@@ -331,6 +334,9 @@ type CorpusItem {
 
   """Time to read in minutes. Is nullable."""
   timeToRead: Int
+
+  """The preview of the search result"""
+  preview: PocketMetadata!
 }
 
 """An author associated with a CorpusItem."""
@@ -477,7 +483,12 @@ type CorpusSearchHighlights {
 
 """A node in a CorpusSearchConnection result"""
 type CorpusSearchNode {
-  """The preview of the search result"""
+  """Attaches the item so we can use the preview field"""
+  item: Item
+
+  """
+  The preview of the search result, the @requires fields must be kept in sync with the preview field in the Item entity
+  """
   preview: PocketMetadata!
 
   """Search highlights"""
@@ -499,6 +510,8 @@ input CorpusSearchQueryString {
 
 """
 Sort scheme for Corpus Search. Defaults to showing most relevant results first.
+Only relevant for indices which use keyword search.
+**Semantic search will ignore any inputs and use default only.**
 """
 input CorpusSearchSort {
   sortBy: CorpusSearchSortBy!
@@ -901,6 +914,11 @@ type Item {
   collection: Collection
 
   """
+  If the item is in corpus allow the item to reference it.  Exposing curated info for consistent UX
+  """
+  corpusItem: CorpusItem
+
+  """
   The Item entity is owned by the Parser service.
   We only extend it in this service to make this service's schema valid.
   The key for this entity is the 'itemId'
@@ -1064,8 +1082,13 @@ type Item {
   """
   marticle: [MarticleComponent!]
 
-  """The client preview/display logic for this url"""
+  """
+  The client preview/display logic for this url. The requires for each object should be kept in sync with the sub objects requires field.
+  """
   preview: PocketMetadata
+
+  """If the item has a syndicated counterpart the syndication information"""
+  syndicatedArticle: SyndicatedArticle
 
   """Recommend similar articles to show in the bottom of an article."""
   relatedAfterArticle(
@@ -1078,9 +1101,6 @@ type Item {
     """Maximum number of recommendations to return, defaults to 10"""
     count: Int = 10
   ): [CorpusRecommendation!]!
-
-  """If the item has a syndicated counterpart the syndication information"""
-  syndicatedArticle: SyndicatedArticle
 
   """Keyword highlights from search"""
   highlights: ItemHighlights
@@ -1726,6 +1746,9 @@ enum PocketMetadataSource {
   POCKET_PARSER
   OPENGRAPH
   OEMBED
+  CURATED_CORPUS
+  COLLECTION
+  SYNDICATION
 }
 
 """
@@ -1838,14 +1861,14 @@ enum PremiumStatus {
 
 """The publisher that the curation team set for the syndicated article"""
 type Publisher {
+  """Square logo to use for the publisher"""
+  logo: String
+
   """Name of the publisher of the article"""
   name: String
 
   """Url of the publisher"""
   url: Url
-
-  """Square logo to use for the publisher"""
-  logo: String
 
   """Wide logo to use for the publisher"""
   logoWide: String
@@ -2052,7 +2075,12 @@ type Query {
   """Get a user entity for an authenticated client"""
   user: User
 
-  """Search Pocket's corpus of recommendations and collections."""
+  """
+  Search Pocket's corpus of recommendations and collections.
+  Note that sort will have no effect unless using keyword
+  semantic search will always be returned in relevance order
+  (most relevant first).
+  """
   searchCorpus(search: CorpusSearchQueryString!, filter: CorpusSearchFilters!, sort: CorpusSearchSort, pagination: PaginationInput): CorpusSearchConnection
 }
 
@@ -2068,7 +2096,7 @@ Card preview data for Items resolved from reader view
 
 Should be used to create a view if Reader Mode cannot
 be rendered (e.g. the link is visited by an anonymous
-Pocket user, or a Pocket User that does not have the 
+Pocket user, or a Pocket User that does not have the
 underlying Item in their Saves). Due to legal obligations
 we can only display Reader Mode for SavedItems.
 """
@@ -3101,9 +3129,30 @@ type SyndicatedArticle {
   """Slug that pocket uses for this article in the url"""
   slug: String
 
+  """Title of syndicated article"""
+  title: String!
+
+  """Array of author names in string format"""
+  authorNames: [String]!
+
+  """AWSDateTime — Format: YYYY-MM-DDThh:mm:ss.sssZ"""
+  publishedAt: String!
+
+  """Primary image to use in surfacing this content"""
+  mainImage: String
+
+  """Excerpt """
+  excerpt: String
+  publisherUrl: String!
+
+  """The manually set publisher information for this article"""
+  publisher: Publisher
+
+  """The preview of the syndicated article"""
+  preview: PocketMetadata!
+
   """The item id of this Syndicated Article"""
   itemId: ID
-  publisherUrl: String!
 
   """The item id of the article we cloned"""
   originalItemId: ID!
@@ -3133,26 +3182,8 @@ type SyndicatedArticle {
   """Should ads be shown on this article or not"""
   showAds: Boolean!
 
-  """The manually set publisher information for this article"""
-  publisher: Publisher
-
-  """Array of author names in string format"""
-  authorNames: [String]!
-
   """When does the contract for syndication expire"""
   expiresAt: String
-
-  """Title of syndicated article"""
-  title: String!
-
-  """Excerpt """
-  excerpt: String
-
-  """AWSDateTime — Format: YYYY-MM-DDThh:mm:ss.sssZ"""
-  publishedAt: String!
-
-  """Primary image to use in surfacing this content"""
-  mainImage: String
 
   """The language of the article"""
   localeLanguage: String
@@ -3280,7 +3311,7 @@ Represents a topic for /explore
 Deprecated for SlateLineups
 """
 type Topic {
-  """The id of the topic"""
+  """The legacy UUID id of the topic"""
   id: ID!
 
   """The name of the topic to show to the user"""

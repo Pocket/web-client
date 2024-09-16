@@ -194,6 +194,8 @@ export type Collection = {
    */
   language: CollectionLanguage;
   partnership?: Maybe<CollectionPartnership>;
+  /** The preview of the collection */
+  preview: PocketMetadata;
   publishedAt?: Maybe<Scalars['DateString']['output']>;
   /**
    * Provides short url for the given_url in the format: https://pocket.co/<identifier>.
@@ -314,6 +316,8 @@ export type CorpusItem = {
   imageUrl: Scalars['Url']['output'];
   /** What language this item is in. This is a two-letter code, for example, 'EN' for English. */
   language: CorpusLanguage;
+  /** The preview of the search result */
+  preview: PocketMetadata;
   /** The name of the online publication that published this story. */
   publisher: Scalars['String']['output'];
   /** The user's saved item, from the Corpus Item, if the corpus item was saved to the user's saves */
@@ -462,7 +466,9 @@ export type CorpusSearchHighlights = {
 /** A node in a CorpusSearchConnection result */
 export type CorpusSearchNode = {
   __typename?: 'CorpusSearchNode';
-  /** The preview of the search result */
+  /** Attaches the item so we can use the preview field */
+  item?: Maybe<Item>;
+  /** The preview of the search result, the @requires fields must be kept in sync with the preview field in the Item entity */
   preview: PocketMetadata;
   /** Search highlights */
   searchHighlights?: Maybe<CorpusSearchHighlights>;
@@ -480,7 +486,11 @@ export type CorpusSearchQueryString = {
   query: Scalars['String']['input'];
 };
 
-/** Sort scheme for Corpus Search. Defaults to showing most relevant results first. */
+/**
+ * Sort scheme for Corpus Search. Defaults to showing most relevant results first.
+ * Only relevant for indices which use keyword search.
+ * **Semantic search will ignore any inputs and use default only.**
+ */
 export type CorpusSearchSort = {
   sortBy: CorpusSearchSortBy;
   sortOrder?: InputMaybe<SearchItemsSortOrder>;
@@ -839,6 +849,8 @@ export type Item = {
    * @deprecated Clients should not use this
    */
   contentLength?: Maybe<Scalars['Int']['output']>;
+  /** If the item is in corpus allow the item to reference it.  Exposing curated info for consistent UX */
+  corpusItem?: Maybe<CorpusItem>;
   /** The date the article was published */
   datePublished?: Maybe<Scalars['DateString']['output']>;
   /** The date the parser resolved this item */
@@ -915,7 +927,7 @@ export type Item = {
    * @deprecated Use a domain as the identifier instead
    */
   originDomainId?: Maybe<Scalars['String']['output']>;
-  /** The client preview/display logic for this url */
+  /** The client preview/display logic for this url. The requires for each object should be kept in sync with the sub objects requires field. */
   preview?: Maybe<PocketMetadata>;
   /** A server generated unique reader slug for this item based on itemId */
   readerSlug: Scalars['String']['output'];
@@ -1972,9 +1984,12 @@ export type PocketMetadata = {
 };
 
 export enum PocketMetadataSource {
+  Collection = 'COLLECTION',
+  CuratedCorpus = 'CURATED_CORPUS',
   Oembed = 'OEMBED',
   Opengraph = 'OPENGRAPH',
-  PocketParser = 'POCKET_PARSER'
+  PocketParser = 'POCKET_PARSER',
+  Syndication = 'SYNDICATION'
 }
 
 /**
@@ -2176,7 +2191,12 @@ export type Query = {
   /** List all topics that the user can express a preference for. */
   recommendationPreferenceTopics: Array<Topic>;
   scheduledSurface: ScheduledSurface;
-  /** Search Pocket's corpus of recommendations and collections. */
+  /**
+   * Search Pocket's corpus of recommendations and collections.
+   * Note that sort will have no effect unless using keyword
+   * semantic search will always be returned in relevance order
+   * (most relevant first).
+   */
   searchCorpus?: Maybe<CorpusSearchConnection>;
   /**
    * Resolve data for a Shared link, or return a Not Found
@@ -3316,6 +3336,8 @@ export type SyndicatedArticle = {
   mainImage?: Maybe<Scalars['String']['output']>;
   /** The item id of the article we cloned */
   originalItemId: Scalars['ID']['output'];
+  /** The preview of the syndicated article */
+  preview: PocketMetadata;
   /** AWSDateTime — Format: YYYY-MM-DDThh:mm:ss.sssZ */
   publishedAt: Scalars['String']['output'];
   /** The manually set publisher information for this article */
@@ -3449,7 +3471,7 @@ export type Topic = {
   displayName: Scalars['String']['output'];
   /** If returned a note to show to the user about the topic */
   displayNote?: Maybe<Scalars['String']['output']>;
-  /** The id of the topic */
+  /** The legacy UUID id of the topic */
   id: Scalars['ID']['output'];
   /** Whether or not clients should show this topic ot users */
   isDisplayed: Scalars['Boolean']['output'];
