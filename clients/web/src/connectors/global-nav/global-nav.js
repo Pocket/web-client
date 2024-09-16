@@ -9,7 +9,6 @@ import { setListModeDetail } from 'connectors/app/app.state'
 import { setColorMode } from 'connectors/app/app.state'
 
 import GlobalNavComponent from 'components/global-nav/global-nav'
-import GlobalNavSearchDiscovery from './global-nav-search-discovery'
 import GlobalNavSearch from './global-nav-search'
 import GlobalNavAdd from './global-nav-add'
 import GlobalNavBulkMutations from './global-nav-bulk-mutations'
@@ -194,8 +193,8 @@ const GlobalNav = (props) => {
   /**
    * Tools are what we use on Saves
    */
-  const showNav = topLevelPath === 'saves' && isLoggedIn
-  const tools = showNav
+  const fromSaves = topLevelPath === 'saves' && isLoggedIn
+  const tools = fromSaves
     ? [
         {
           name: 'add-item',
@@ -207,27 +206,17 @@ const GlobalNav = (props) => {
           label: t('nav:bulk-edit', 'Bulk Edit'),
           icon: <EditIcon />
         },
-        ...(searchEnrolled
-          ? [
-              {
-                name: 'discovery',
-                label: t('nav:search', 'Search'),
-                icon: <SearchIcon />
-              }
-            ]
-          : [
-              {
-                name: 'search',
-                label: t('nav:search', 'Search'),
-                icon: <SearchIcon />
-              }
-            ])
+        {
+          name: 'search',
+          label: t('nav:search', 'Search'),
+          icon: <SearchIcon />
+        }
       ]
     : [
         ...(searchEnrolled
           ? [
               {
-                name: 'discovery',
+                name: 'search',
                 label: t('nav:search', 'Search'),
                 icon: <SearchIcon />
               }
@@ -239,7 +228,6 @@ const GlobalNav = (props) => {
 
   const toolClick = (name) => {
     dispatch(sendSnowplowEvent(`global-nav.${name}`))
-    if (name === 'discovery') dispatch(appSetMode('discovery'))
     if (name === 'search') dispatch(appSetMode('search'))
     if (name === 'add-item') dispatch(appSetMode('add'))
     if (name === 'bulk-edit') dispatch(appSetMode('bulk'))
@@ -248,7 +236,6 @@ const GlobalNav = (props) => {
   const resetNav = () => dispatch(appSetMode('default'))
 
   const navChildren = {
-    discovery: GlobalNavSearchDiscovery,
     search: GlobalNavSearch,
     add: GlobalNavAdd,
     bulk: GlobalNavBulkMutations
@@ -299,7 +286,9 @@ const GlobalNav = (props) => {
       bannerCampaign={bannerCampaign}
       Banner={CurrentBanner}
       flagsReady={flagsReady}>
-      {NavTakeover ? <NavTakeover onClose={resetNav} /> : null}
+      {NavTakeover ? (
+        <NavTakeover onClose={resetNav} searchEnrolled={searchEnrolled} fromSaves={fromSaves} />
+      ) : null}
     </GlobalNavComponent>
   )
 }
