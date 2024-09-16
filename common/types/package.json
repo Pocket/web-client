@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "author": "",
   "devDependencies": {
-    "@apollo/rover": "0.25.0",
+    "@apollo/rover": "0.26.2",
     "@config/typescript-config": "workspace:*",
     "@graphql-codegen/cli": "5.0.2",
     "@graphql-codegen/typescript": "4.0.9",
