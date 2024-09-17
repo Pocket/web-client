@@ -12,7 +12,7 @@ function GlobalNavSearchConnected({ onClose, searchEnrolled, fromSaves }) {
   const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false) //prettier-ignore
   const recentSearches = useSelector((state) => state?.userSearch?.recent ) //prettier-ignore
 
-  const baseQuery = searchEnrolled ? 'search/?q' : 'saves/search/?query'
+  const baseQuery = searchEnrolled ? '/search?q' : '/saves/search/?query'
   const saveType = fromSaves ? '&st=saves' : '&st=all'
 
   const onSubmit = (searchTerm) => {
