@@ -1,8 +1,9 @@
 // Override function
+const dateTimeRegex = /\{: datetime=/i
 export const overrideDateTime = {
   renderer: {
-    text(text) {
-      const hasDateTime = text.includes('{: datetime=')
+    text({ text }) {
+      const hasDateTime = dateTimeRegex.exec(text)
       return hasDateTime ? '' : false
     }
   }
@@ -13,13 +14,10 @@ const headingIdRegex = /(?: +|^)\{#([a-z][\w-]*)\}(?: +|$)/i
 
 export const customHeadingId = {
   renderer: {
-    heading(text, level) {
+    heading({ text, depth }) {
       const hasId = headingIdRegex.exec(text)
-      if (!hasId) {
-        // fallback to original heading renderer
-        return false
-      }
-      return `<h${level} id="${hasId[1]}">${text.replace(headingIdRegex, '')}</h${level}>\n`
+      if (!hasId) return false
+      return `<h${depth} id="${hasId[1]}">${text.replace(headingIdRegex, '')}</h${depth}>\n`
     }
   }
 }
