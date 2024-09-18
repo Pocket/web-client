@@ -1,6 +1,6 @@
 import { gql } from 'common/utilities/gql/gql'
 import { requestGQL } from 'common/utilities/request/request'
-import { deriveSearchItem } from 'common/api/derivers/item'
+import { deriveCorpusPreview } from 'common/api/derivers/preview'
 import { FRAGMENT_ITEM_PREVIEW } from 'common/api/fragments/fragment.preview'
 
 const getSearchQuery = gql`
@@ -67,8 +67,7 @@ function getItemsByIdFromEdges(edges) {
   return edges.reduce((previous, current) => {
     if (!current?.node?.item?.preview?.id) return previous
 
-    const item = deriveSearchItem(current)
-    const searchHighlights = current?.node?.searchHighlights
+    const { item, searchHighlights } = deriveCorpusPreview(current)
     return {
       ...previous,
       [item.id]: {
