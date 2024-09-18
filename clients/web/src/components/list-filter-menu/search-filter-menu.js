@@ -61,7 +61,7 @@ const filterStyle = css`
   }
 `
 
-export function SearchFilterMenu({ subset, filter, tag, query }) {
+export function SearchFilterMenu({ subset, filter, total, query }) {
   const { t } = useTranslation()
 
   const filterActive = (filterLink) => {
@@ -96,7 +96,7 @@ export function SearchFilterMenu({ subset, filter, tag, query }) {
         ref={popTrigger}
         data-testid="filter-trigger"
         className={cx(buttonReset, 'filter-trigger')}>
-        {activeTitle}
+        {activeTitle} {total ? ` — ${total} items` : null}
         <ChevronDownIcon style={{ marginTop: 0, paddingLeft: '3px' }} />
       </button>
       {shown ? (

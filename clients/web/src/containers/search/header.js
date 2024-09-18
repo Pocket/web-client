@@ -92,18 +92,15 @@ export const SearchPageHeader = ({
   return query ? (
     <header className={searchStyles}>
       <h1 className="pageTitle" data-testid="page-title">
-        <em data-testid="search-query" className="query">
-          “{query}” —
-        </em>{' '}
         {loading ? (
-          <span>
-            {t('search:searching', 'Searching')} <Loader />{' '}
-          </span>
+          <span>{t('search:searching', 'Searching')}</span>
         ) : (
-          <span>
-            {total || 0} {t('search:search-results', 'search results')}
-          </span>
+          <span>{t('search:search-results', 'search results')}</span>
         )}
+        <em data-testid="search-query" className="query">
+          {' '}
+          — “{query}”
+        </em>
       </h1>
       <div className="sourceBar">
         <div>
@@ -116,7 +113,13 @@ export const SearchPageHeader = ({
             Only My Saves
           </Link>
           {searchType === 'saves' ? (
-            <SearchFilterMenu subset="search" query={query} filter={filter} sortOrder={sortOrder} />
+            <SearchFilterMenu
+              subset="search"
+              query={query}
+              filter={filter}
+              sortOrder={sortOrder}
+              total={total}
+            />
           ) : null}
         </div>
         {searchType === 'saves' ? (
