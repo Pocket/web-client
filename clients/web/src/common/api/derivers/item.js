@@ -99,7 +99,8 @@ export function deriveListItem(edge) {
 
 export function deriveSearchItem(edge) {
   const { node = {}, cursor = null } = edge
-  const { preview, searchHighlights } = node
+  const { item, searchHighlights } = node
+  const preview = item?.preview
   return deriveItem({ item: { ...preview, searchHighlights }, cursor, utmId: 'pocket_search' })
 }
 

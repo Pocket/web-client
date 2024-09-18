@@ -1,6 +1,7 @@
 import { gql } from 'common/utilities/gql/gql'
 import { requestGQL } from 'common/utilities/request/request'
 import { deriveSearchItem } from 'common/api/derivers/item'
+import { FRAGMENT_ITEM_PREVIEW } from 'common/api/fragments/fragment.preview'
 
 const getSearchQuery = gql`
   query CorpusSearchQuery(
@@ -14,54 +15,25 @@ const getSearchQuery = gql`
         endCursor
       }
       edges {
+        cursor
         node {
-          preview {
-            ... on ItemSummary {
-              id
-              image {
-                url
-              }
-              excerpt
-              title
-              authors {
-                name
-              }
-              domain {
-                name
-              }
-              datePublished
-              url
-            }
-            ... on OEmbed {
-              id
-              image {
-                url
-              }
-              excerpt
-              title
-              authors {
-                name
-              }
-              domain {
-                name
-              }
-              datePublished
-              url
-              htmlEmbed
-              type
-            }
-          }
           searchHighlights {
             excerpt
+            fullText
             publisher
             title
           }
+          item {
+            preview {
+              ...ItemPreview
+            }
+          }
         }
-        cursor
       }
       totalCount
     }
   }
+  ${FRAGMENT_ITEM_PREVIEW}
 `
 
 /**
@@ -93,7 +65,7 @@ function handleResponse(response) {
 
 function getItemsByIdFromEdges(edges) {
   return edges.reduce((previous, current) => {
-    if (!current?.node?.preview?.id) return previous
+    if (!current?.node?.item?.preview?.id) return previous
 
     const item = deriveSearchItem(current)
     const searchHighlights = current?.node?.searchHighlights
