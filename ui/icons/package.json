@@ -22,7 +22,6 @@
     "linkDirectory": true
   },
   "scripts": {
-    "build": "ts-node build.ts",
-    "postinstall": "ts-node build.ts"
+    "build": "ts-node build.ts"
   }
 }

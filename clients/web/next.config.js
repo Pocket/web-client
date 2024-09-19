@@ -2,6 +2,7 @@
 
 const { i18n } = require('./next-i18next.config.js')
 const nextOptions = {
+  output: 'standalone',
   transpilePackages: ['@ui/icons', '@ui/components', '@common/i18n'],
   i18n,
   env: {

@@ -2,7 +2,8 @@ import { withSentryConfig } from '@sentry/nextjs'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['@ui/styles']
+  transpilePackages: ['@ui/styles'],
+  output: 'standalone',
 }
 
 export default withSentryConfig(nextConfig, {

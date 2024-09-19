@@ -27,32 +27,32 @@ jobs:
           uses: actions/checkout@v4 
           with:
             fetch-depth: 0 # allows us to git parse tags for release
-        - name: Build App
-          uses: ./.github/actions/build-client
-          with:
-            github-token: ${{ secrets.GITHUB_TOKEN }}
+        # - name: Build App
+        #   uses: ./.github/actions/build-client
+        #   with:
+        #     github-token: ${{ secrets.GITHUB_TOKEN }}
         - name: Build Web Client
           uses: pocket/pocket-monorepo/.github/actions/containerize@main
           with:
             docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/webclient-dev-app"
-            app-path: ''
+            app-path: 'web'
             app-port: 80
             context: '.'
             dockerhub-username: ${{secrets.DOCKERHUB_USERNAME}}
             dockerhub-token: ${{secrets.DOCKERHUB_TOKEN}}
-            scope: 'web'
+            scope: '@client/web'
             sentry-project: ''
             sentry-token: ${{secrets.SENTRY_BEARER}}
         - name: Build Pocket Client
           uses: pocket/pocket-monorepo/.github/actions/containerize@main
           with:
             docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/pocketclient-dev-app"
-            app-path: ''
+            app-path: 'pocket'
             app-port: 80
             context: '.'
             dockerhub-username: ${{secrets.DOCKERHUB_USERNAME}}
             dockerhub-token: ${{secrets.DOCKERHUB_TOKEN}}
-            scope: 'pocket'
+            scope: '@client/pocket'
             sentry-project: ''
             sentry-token: ${{secrets.SENTRY_BEARER}}
     development:
@@ -79,7 +79,7 @@ jobs:
           with:
             docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/webclient-dev-app"
             push: true
-            app-path: ''
+            app-path: 'web'
             app-port: 80
             context: '.'
             dockerhub-username: ${{secrets.DOCKERHUB_USERNAME}}
@@ -101,7 +101,7 @@ jobs:
           with:
             docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/pocketclient-dev-app"
             push: true
-            app-path: ''
+            app-path: 'pocket'
             app-port: 80
             context: '.'
             dockerhub-username: ${{secrets.DOCKERHUB_USERNAME}}
