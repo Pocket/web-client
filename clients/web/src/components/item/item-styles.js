@@ -560,4 +560,49 @@ export const itemStyles = css`
       }
     }
   }
+
+  &.display {
+    --media-radius: 1rem;
+    grid-column: span 8;
+    box-shadow: none;
+    width: 100%;
+    .media-block {
+      margin: 0.5rem;
+      width: 200px;
+      grid-row: span 2;
+    }
+    .footer {
+      display: none;
+    }
+    grid-template-rows: auto var(--footer-height);
+    grid-template-columns: auto minmax(0, 1fr);
+    --title-lines: 2;
+    --excerpt-lines: 2;
+    --footer-column-template: minmax(0, 1fr) auto;
+    --title-margin: 1rem 0 0.5rem 0;
+    --excerpt-margin: 0.5rem 0;
+    .card-tags {
+      display: none;
+    }
+
+    ${breakpointSmallTablet} {
+      grid-template-rows: auto minmax(0, 1fr);
+      --footer-column-template: minmax(0, 1fr) auto;
+      .media-block {
+        margin: 0.5rem;
+        width: 170px;
+        grid-row: span 1;
+      }
+      .footer {
+        grid-column: span 2;
+      }
+    }
+    ${breakpointMediumHandset} {
+      .media-block {
+        margin: 0.5rem;
+        width: 120px;
+        grid-row: span 1;
+      }
+    }
+  }
 `
