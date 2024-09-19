@@ -104,11 +104,16 @@ export const Item = (props) => {
   const hideTags = () => setTagsShown(false)
   const tagCount = tags?.length
 
+  // For display only items we don't need it to be linked
+  const LinkWrapper = openUrl
+    ? Link
+    : ({ className, children }) => <span className={className}>{children}</span>
+
   // Fire a tracking event
   const [viewRef] = useInView({
     triggerOnce: true,
     threshold: 0.5,
-    onChange: (inView) => inView && onItemInView(true)
+    onChange: (inView) => onItemInView && inView && onItemInView(true)
   })
 
   // Fire when item is selected by shortcut
@@ -151,7 +156,7 @@ export const Item = (props) => {
         />
       </span>
       <div className="item-links">
-        <Link
+        <LinkWrapper
           href={openUrl}
           onClick={onOpen}
           className="content-block"
@@ -169,7 +174,7 @@ export const Item = (props) => {
             </h2>
             <Excerpt useMarkdown={useMarkdown} excerpt={excerpt} />
           </div>
-        </Link>
+        </LinkWrapper>
         {listStatusInfo ? (
           <ListStatusLink
             listStatusInfo={listStatusInfo}
