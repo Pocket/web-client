@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next'
 import { useState } from 'react'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 
-import { Card } from 'components/item-card/card'
+import { Item } from 'components/item/item'
 import { ShareList } from './share-list'
 import { TextArea } from 'components/form-fields/text-area'
 
@@ -54,7 +54,7 @@ export const ShareModal = ({
       screenReaderLabel={t('share:share-item', 'Share Item')}
       handleClose={cancelShare}>
       <ModalBody>
-        <Card
+        <Item
           showExcerpt={false}
           itemImage={thumbnail}
           title={title}
@@ -62,10 +62,9 @@ export const ShareModal = ({
           excerpt={excerpt}
           timeToRead={timeToRead}
           isSyndicated={isSyndicated}
-          itemType="display"
-          cardShape="wide"
+          type="display"
+          clamp={true}
         />
-
         {quote ? <p className={shareQuote}>{quote}</p> : null}
         <div className={shareNote}>
           <TextArea
