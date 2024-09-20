@@ -56,7 +56,7 @@ export default function Collections({ locale, noIndex, totalResults, perPage, cu
         {showPagination ? (
           <div className="pagination-container">
             <Pagination
-              pagePattern="/collections/page/"
+              pagePattern="/collections"
               totalResults={totalResults}
               currentPage={currentPage}
               perPageCount={perPage}
@@ -105,7 +105,7 @@ export default function Collections({ locale, noIndex, totalResults, perPage, cu
         {showPagination ? (
           <div className="pagination-container">
             <Pagination
-              pagePattern="/collections/page/"
+              pagePattern="/collections"
               totalResults={totalResults}
               currentPage={currentPage}
               perPageCount={perPage}
