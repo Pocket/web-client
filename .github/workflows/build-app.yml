@@ -44,62 +44,54 @@ jobs:
       steps:
         - name: Checkout
           uses: actions/checkout@v4 
-          with:
-            fetch-depth: 0 # allows us to git parse tags for release
-        - name: Set version
-          shell: bash
-          run: |
-            mkdir -p config
-            echo "export RELEASE_VERSION=${{inputs.release-version}}" > ./config/build-envs
-            echo "export SHOW_DEV=''" > ./config/build-envs
-            echo "export ASSETS_PREFIX=''" > ./config/build-envs
         - name: Build Client
-          uses: pocket/pocket-monorepo/.github/actions/containerize@main
+          uses: './.github/actions/containerize'
           with:
-            docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/${{inputs.docker-repo-name}}-dev-app"
-            app-path: ${{inputs.app-path}}
-            app-port: 80
-            context: '.'
-            dockerhub-username: ${{secrets.DOCKERHUB_USERNAME}}
-            dockerhub-token: ${{secrets.DOCKERHUB_TOKEN}}
-            scope: ${{inputs.scope}}
-            sentry-project: ''
-            sentry-token: ${{secrets.SENTRY_BEARER}}
+              docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/${{inputs.docker-repo-name}}-dev-app"
+              app-path: ${{inputs.app-path}}
+              app-port: 3000
+              context: '.'
+              dockerhub-username: ${{secrets.DOCKERHUB_USERNAME}}
+              dockerhub-token: ${{secrets.DOCKERHUB_TOKEN}}
+              scope: ${{inputs.scope}}
+              sentry-project: ''
+              sentry-token: ${{secrets.SENTRY_BEARER}}
+              assets-prefix: https://pocket-assets-dev.s3-website-us-east-1.amazonaws.com/${{inputs.assets-prefix}}
+              release-version: ${{inputs.release-version}}
     development:
       if: github.ref == 'refs/heads/dev'
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
           uses: actions/checkout@v4 
-          with:
-            fetch-depth: 0 # allows us to git parse tags for release
-        - name: Set version
-          shell: bash
-          run: |
-            mkdir -p config
-            echo "export RELEASE_VERSION=${{inputs.release-version}}" > ./config/build-envs
-            echo "export SHOW_DEV=''" > ./config/build-envs
-            echo "export ASSETS_PREFIX=''" > ./config/build-envs
         # Get the AWS credentials
         - name: AWS Credentials
+          id: aws-creds
           uses: aws-actions/configure-aws-credentials@v4
           with:
             aws-region: us-east-1
             role-to-assume: arn:aws:iam::410318598490:role/PocketGHARole
-        - name: Build Web Client
+        - name: Build Client
           id: docker-build
-          uses: pocket/pocket-monorepo/.github/actions/containerize@main
+          uses: './.github/actions/containerize'
           with:
             docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/${{inputs.docker-repo-name}}-dev-app"
             push: true
             app-path: ${{inputs.app-path}}
-            app-port: 80
+            app-port: 3000
             context: '.'
             dockerhub-username: ${{secrets.DOCKERHUB_USERNAME}}
             dockerhub-token: ${{secrets.DOCKERHUB_TOKEN}}
             scope: ${{inputs.scope}}
             sentry-project: ''
             sentry-token: ${{secrets.SENTRY_BEARER}}
+            assets-prefix: https://pocket-assets-dev.s3-website-us-east-1.amazonaws.com/${{inputs.assets-prefix}}
+            release-version: ${{inputs.release-version}}
+            s3-bucket: pocket-assets-dev
+            s3-path: ${{inputs.asset-path-name}}
+            aws-access-key-id: ${{ steps.aws-creds.outputs.aws-access-key-id }}
+            aws-secret-key: ${{ steps.aws-creds.outputs.aws-secret-access-key }}
+            aws-session-token: ${{ steps.aws-creds.outputs.aws-session-token}}
         - name: Code Deploy Docker Image
           uses:  pocket/pocket-monorepo/.github/actions/ecs-codedeploy@main
           if: fromJSON(inputs.terraform-output).ecs-task-containerName.value != ''
@@ -114,46 +106,34 @@ jobs:
       steps:
         - name: Checkout
           uses: actions/checkout@v4 
-          with:
-            fetch-depth: 0 # allows us to git parse tags for release
         - name: AWS Credentials
+          id: aws-creds
           uses: aws-actions/configure-aws-credentials@v4
           with:
             aws-region: us-east-1
             role-to-assume: arn:aws:iam::996905175585:role/PocketGHARole
-        - name: Set version
-          shell: bash
-          run: |
-            mkdir -p config
-            echo "export RELEASE_VERSION=${{inputs.release-version}}" > ./config/build-envs
-            echo "export SHOW_DEV=''" > ./config/build-envs
-            echo "export ASSETS_PREFIX='${{inputs.assets-prefix}}'" > ./config/build-envs
         - name: Build Client
           id: docker-build
-          uses: pocket/pocket-monorepo/.github/actions/containerize@main
+          uses: './.github/actions/containerize'
           with:
             docker-repo-name: "996905175585.dkr.ecr.us-east-1.amazonaws.com/${{inputs.docker-repo-name}}-prod-app"
             push: true
             app-path: ${{ inputs.app-path }}
-            app-port: 80
+            app-port: 3000
             context: '.'
             dockerhub-username: ${{secrets.DOCKERHUB_USERNAME}}
             dockerhub-token: ${{secrets.DOCKERHUB_TOKEN}}
             scope: ${{ inputs.scope }}
             sentry-project: ''
             sentry-token: ${{secrets.SENTRY_BEARER}}
-        - name: Push Production Assets
-          shell: bash
-          run: |
-              aws s3 cp \
-              --recursive \
-              --acl public-read \
-              --metadata-directive REPLACE \
-              --cache-control max-age=31536000 \
-              --include "*" \
-              --exclude "BUILD_ID" \
-                clients/${{ inputs.app-path}}/.next s3://readitlater-deploy/${{inputs.asset-path-name}}/_next
-        - name: Code Deploy Web Docker Image
+            assets-prefix: https://assets.getpocket.com/${{inputs.assets-prefix}}
+            release-version: ${{inputs.release-version}}
+            s3-bucket: readitlater-deploy
+            s3-path: ${{inputs.asset-path-name}}
+            aws-access-key-id: ${{ steps.aws-creds.outputs.aws-access-key-id }}
+            aws-secret-key: ${{ steps.aws-creds.outputs.aws-secret-access-key }}
+            aws-session-token: ${{ steps.aws-creds.outputs.aws-session-token}}
+        - name: Code Deploy Docker Image
           uses:  pocket/pocket-monorepo/.github/actions/ecs-codedeploy@main
           if: fromJSON(inputs.terraform-output).ecs-task-containerName.value != ''
           with:

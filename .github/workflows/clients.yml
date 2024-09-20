@@ -22,6 +22,8 @@ jobs:
       steps:
         - name: Checkout
           uses: actions/checkout@v4
+          with:
+            fetch-depth: 0 # allows us to git parse tags for release
         - name: Install PNPM & Node
           uses: pocket/pocket-monorepo/.github/actions/install-pnpm-and-node@main
         - name: Generate release, if needed
@@ -38,7 +40,7 @@ jobs:
                 echo "We have a semantic release"
             else
                 echo 'No semantically releasable changes.'
-                echo `git describe --abbrev=0 --tags` > .version
+                git describe --abbrev=0 --tags > .version
             fi
             release=$(cat .version)
             echo "RELEASE_VERSION=$release" >> $GITHUB_OUTPUT
@@ -59,10 +61,10 @@ jobs:
         terraform-output: ${{needs.web-client-infrastructure.outputs.terraform-output}}
         app-path: 'web'
         scope: '@client/web'
-        docker-repo-name: 'web'
+        docker-repo-name: 'webclient'
         asset-path-name: 'web'
         release-version: ${{needs.semantic-release.outputs.release-version}}
-        assets-prefix: 'https://assets.getpocket.com/web-client'
+        assets-prefix: 'web-client'
       secrets: inherit
     
     pocket-client-infrastructure:
@@ -83,10 +85,10 @@ jobs:
         terraform-output: ${{needs.pocket-client-infrastructure.outputs.terraform-output}}
         app-path: 'pocket'
         scope: '@client/pocket'
-        docker-repo-name: 'pocket'
+        docker-repo-name: 'pocketclient'
         asset-path-name: 'pocket'
         release-version: ${{needs.semantic-release.outputs.release-version}}
-        assets-prefix: 'https://assets.getpocket.com/pocket'
+        assets-prefix: 'pocket'
       secrets: inherit
 
   
