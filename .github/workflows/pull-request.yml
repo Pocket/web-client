@@ -24,21 +24,3 @@ jobs:
               uses: pocket/pocket-monorepo/.github/actions/install-pnpm-and-node@main
             - name: Test
               run: pnpm test:ci
-    # we are building on branch to make sure there are no build errors
-    build:
-        uses: ./.github/workflows/build-app.yml
-        secrets: inherit
-
-    pocket-infrastructure:
-        uses: pocket/pocket-monorepo/.github/workflows/reuse-infrastructure.yml@main
-        with:
-            scope: pocket-client-cdk
-            stack-output-path: infrastructure/pocket/cdktf.out/stacks/pocket-client
-        secrets: inherit
-
-    web-client-infrastructure:
-        uses: pocket/pocket-monorepo/.github/workflows/reuse-infrastructure.yml@main
-        with:
-            scope: web-client-cdk
-            stack-output-path: infrastructure/web/cdktf.out/stacks/web-client
-        secrets: inherit

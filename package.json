@@ -80,7 +80,7 @@
     "sync:list": "syncpack list",
     "synth": "pnpm turbo synth",
     "test": "pnpm turbo test",
-    "test:ci": "pnpm --filter @client/web test:ci",
+    "test:ci": "pnpm turbo test:ci",
     "test:update": "pnpm turbo test:update"
   },
   "syncpack": {

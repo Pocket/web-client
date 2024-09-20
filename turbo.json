@@ -17,6 +17,7 @@
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
     "test": {},
+    "test:ci": {},
     "test:update": {},
     "lint": {},
     "checktypes": {},

@@ -1,0 +1,92 @@
+name: Build Clients
+on:
+    push:
+      branches:
+        - main
+        - dev
+    pull_request:
+
+
+permissions:
+  contents: write  # This is required for actions/checkout and write to be able to write releases
+  pull-requests: write # to be able to comment on released pull requests
+  id-token: write  # Access the Github JWT for AWS access
+  deployments: write
+
+jobs:
+
+    semantic-release:
+      runs-on: ubuntu-latest
+      outputs:
+          release-version: ${{ steps.release-name.outputs.RELEASE_VERSION }}
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+        - name: Install PNPM & Node
+          uses: pocket/pocket-monorepo/.github/actions/install-pnpm-and-node@main
+        - name: Generate release, if needed
+          shell: bash
+          run: HUSKY=0 pnpm dlx semantic-release
+          env: 
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        - name: Check for new release
+          shell: bash
+          id: release-name
+          
+          run: |
+            if [ -f ".version" ]; then
+                echo "We have a semantic release"
+            else
+                echo 'No semantically releasable changes.'
+                echo `git describe --abbrev=0 --tags` > .version
+            fi
+            release=$(cat .version)
+            echo "RELEASE_VERSION=$release" >> $GITHUB_OUTPUT
+  
+    web-client-infrastructure:
+      uses: pocket/pocket-monorepo/.github/workflows/reuse-infrastructure.yml@main
+      with:
+          scope: web-client-cdk
+          stack-output-path: infrastructure/web/cdktf.out/stacks/web-client
+      secrets: inherit
+
+    web:
+      uses: ./.github/workflows/build-app.yml
+      needs: 
+        - web-client-infrastructure
+        - semantic-release
+      with:
+        terraform-output: ${{needs.web-client-infrastructure.outputs.terraform-output}}
+        app-path: 'web'
+        scope: '@client/web'
+        docker-repo-name: 'web'
+        asset-path-name: 'web'
+        release-version: ${{needs.semantic-release.outputs.release-version}}
+        assets-prefix: 'https://assets.getpocket.com/web-client'
+      secrets: inherit
+    
+    pocket-client-infrastructure:
+        uses: pocket/pocket-monorepo/.github/workflows/reuse-infrastructure.yml@main
+        with:
+            scope: pocket-client-cdk
+            stack-output-path: infrastructure/pocket/cdktf.out/stacks/pocket-client
+        secrets: inherit
+
+ 
+    # we are building on branch to make sure there are no build errors
+    pocket:
+      uses: ./.github/workflows/build-app.yml
+      needs: 
+        - pocket-client-infrastructure
+        - semantic-release
+      with:
+        terraform-output: ${{needs.pocket-client-infrastructure.outputs.terraform-output}}
+        app-path: 'pocket'
+        scope: '@client/pocket'
+        docker-repo-name: 'pocket'
+        asset-path-name: 'pocket'
+        release-version: ${{needs.semantic-release.outputs.release-version}}
+        assets-prefix: 'https://assets.getpocket.com/pocket'
+      secrets: inherit
+
+  

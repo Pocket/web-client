@@ -2,15 +2,34 @@ name: Build App
 on:
   workflow_call:
     inputs:
-      web-client-terraform-output:
+      terraform-output:
         description: 'The terraform output which is used to get the ECS_Service and Task Defintion arns for codedeploy for web client'
         required: false
         type: string
-      pocket-client-terraform-output:
-        description: 'The terraform output which is used to get the ECS_Service and Task Defintion arns for codedeploy for pocket client'
-        required: false
+      app-path:
+        description: 'The path where the client is outputed by turbo repo build'
+        required: true
         type: string
-
+      scope:
+        description: 'The scope of the client to build'
+        required: true
+        type: string
+      docker-repo-name:
+        description: 'The docker repo name to push the image to'
+        required: true
+        type: string
+      asset-path-name:
+        description: 'The asset path name to push static content to'
+        required: true
+        type: string
+      release-version:
+        description: 'The release version to use for the build'
+        required: true
+        type: string
+      assets-prefix:
+        description: 'The asset prefix to use for the build'
+        required: true
+        type: string
 
 permissions:
   contents: write  # This is required for actions/checkout and write to be able to write releases
@@ -27,32 +46,23 @@ jobs:
           uses: actions/checkout@v4 
           with:
             fetch-depth: 0 # allows us to git parse tags for release
-        # - name: Build App
-        #   uses: ./.github/actions/build-client
-        #   with:
-        #     github-token: ${{ secrets.GITHUB_TOKEN }}
-        - name: Build Web Client
+        - name: Set version
+          shell: bash
+          run: |
+            mkdir -p config
+            echo "export RELEASE_VERSION=${{inputs.release-version}}" > ./config/build-envs
+            echo "export SHOW_DEV=''" > ./config/build-envs
+            echo "export ASSETS_PREFIX=''" > ./config/build-envs
+        - name: Build Client
           uses: pocket/pocket-monorepo/.github/actions/containerize@main
           with:
-            docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/webclient-dev-app"
-            app-path: 'web'
+            docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/${{inputs.docker-repo-name}}-dev-app"
+            app-path: ${{inputs.app-path}}
             app-port: 80
             context: '.'
             dockerhub-username: ${{secrets.DOCKERHUB_USERNAME}}
             dockerhub-token: ${{secrets.DOCKERHUB_TOKEN}}
-            scope: '@client/web'
-            sentry-project: ''
-            sentry-token: ${{secrets.SENTRY_BEARER}}
-        - name: Build Pocket Client
-          uses: pocket/pocket-monorepo/.github/actions/containerize@main
-          with:
-            docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/pocketclient-dev-app"
-            app-path: 'pocket'
-            app-port: 80
-            context: '.'
-            dockerhub-username: ${{secrets.DOCKERHUB_USERNAME}}
-            dockerhub-token: ${{secrets.DOCKERHUB_TOKEN}}
-            scope: '@client/pocket'
+            scope: ${{inputs.scope}}
             sentry-project: ''
             sentry-token: ${{secrets.SENTRY_BEARER}}
     development:
@@ -63,10 +73,13 @@ jobs:
           uses: actions/checkout@v4 
           with:
             fetch-depth: 0 # allows us to git parse tags for release
-        - name: Build App
-          uses: ./.github/actions/build-client
-          with:
-            github-token: ${{ secrets.GITHUB_TOKEN }}
+        - name: Set version
+          shell: bash
+          run: |
+            mkdir -p config
+            echo "export RELEASE_VERSION=${{inputs.release-version}}" > ./config/build-envs
+            echo "export SHOW_DEV=''" > ./config/build-envs
+            echo "export ASSETS_PREFIX=''" > ./config/build-envs
         # Get the AWS credentials
         - name: AWS Credentials
           uses: aws-actions/configure-aws-credentials@v4
@@ -74,48 +87,26 @@ jobs:
             aws-region: us-east-1
             role-to-assume: arn:aws:iam::410318598490:role/PocketGHARole
         - name: Build Web Client
-          id: web-docker-build
+          id: docker-build
           uses: pocket/pocket-monorepo/.github/actions/containerize@main
           with:
-            docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/webclient-dev-app"
+            docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/${{inputs.docker-repo-name}}-dev-app"
             push: true
-            app-path: 'web'
+            app-path: ${{inputs.app-path}}
             app-port: 80
             context: '.'
             dockerhub-username: ${{secrets.DOCKERHUB_USERNAME}}
             dockerhub-token: ${{secrets.DOCKERHUB_TOKEN}}
-            scope: 'web'
+            scope: ${{inputs.scope}}
             sentry-project: ''
             sentry-token: ${{secrets.SENTRY_BEARER}}
-        - name: Code Deploy Web Docker Image
+        - name: Code Deploy Docker Image
           uses:  pocket/pocket-monorepo/.github/actions/ecs-codedeploy@main
-          if: fromJSON(inputs.web-client-terraform-output).ecs-task-containerName.value != ''
+          if: fromJSON(inputs.terraform-output).ecs-task-containerName.value != ''
           with:
-            docker-image-name: ${{steps.web-docker-build.outputs.docker-image-name}}
-            terraform-output: ${{ inputs.web-client-terraform-output }}
-            name: 'web'        
-
-        - name: Build Pocket Client
-          id: pocket-docker-build
-          uses: pocket/pocket-monorepo/.github/actions/containerize@main
-          with:
-            docker-repo-name: "410318598490.dkr.ecr.us-east-1.amazonaws.com/pocketclient-dev-app"
-            push: true
-            app-path: 'pocket'
-            app-port: 80
-            context: '.'
-            dockerhub-username: ${{secrets.DOCKERHUB_USERNAME}}
-            dockerhub-token: ${{secrets.DOCKERHUB_TOKEN}}
-            scope: 'pocket'
-            sentry-project: ''
-            sentry-token: ${{secrets.SENTRY_BEARER}}
-        - name: Code Deploy Pocket Docker Image
-          uses:  pocket/pocket-monorepo/.github/actions/ecs-codedeploy@main
-          if: fromJSON(inputs.pocket-client-terraform-output).ecs-task-containerName.value != ''
-          with:
-            docker-image-name: ${{steps.pocket-docker-build.outputs.docker-image-name}}
-            terraform-output: ${{ inputs.pocket-client-terraform-output }}
-            name: 'pocket'
+            docker-image-name: ${{steps.docker-build.outputs.docker-image-name}}
+            terraform-output: ${{ inputs.terraform-output }}
+            name: ${{inputs.scope}}        
   
     production:
       if: github.ref == 'refs/heads/main'
@@ -125,44 +116,30 @@ jobs:
           uses: actions/checkout@v4 
           with:
             fetch-depth: 0 # allows us to git parse tags for release
-        - name: Build App
-          uses: ./.github/actions/build-client
-          with:
-            prefix: "https://assets.getpocket.com/web-client"
-            showdev: ""
-            github-token: ${{ secrets.GITHUB_TOKEN }}
-        # Get the AWS credentials
         - name: AWS Credentials
           uses: aws-actions/configure-aws-credentials@v4
           with:
             aws-region: us-east-1
             role-to-assume: arn:aws:iam::996905175585:role/PocketGHARole
-        - name: Build Web Client
-          id: web-docker-build
+        - name: Set version
+          shell: bash
+          run: |
+            mkdir -p config
+            echo "export RELEASE_VERSION=${{inputs.release-version}}" > ./config/build-envs
+            echo "export SHOW_DEV=''" > ./config/build-envs
+            echo "export ASSETS_PREFIX='${{inputs.assets-prefix}}'" > ./config/build-envs
+        - name: Build Client
+          id: docker-build
           uses: pocket/pocket-monorepo/.github/actions/containerize@main
           with:
-            docker-repo-name: "996905175585.dkr.ecr.us-east-1.amazonaws.com/webclient-prod-app"
+            docker-repo-name: "996905175585.dkr.ecr.us-east-1.amazonaws.com/${{inputs.docker-repo-name}}-prod-app"
             push: true
-            app-path: ''
+            app-path: ${{ inputs.app-path }}
             app-port: 80
             context: '.'
             dockerhub-username: ${{secrets.DOCKERHUB_USERNAME}}
             dockerhub-token: ${{secrets.DOCKERHUB_TOKEN}}
-            scope: 'web'
-            sentry-project: ''
-            sentry-token: ${{secrets.SENTRY_BEARER}}
-        - name: Build Pocket Client
-          id: pocket-docker-build
-          uses: pocket/pocket-monorepo/.github/actions/containerize@main
-          with:
-            docker-repo-name: "996905175585.dkr.ecr.us-east-1.amazonaws.com/pocketclient-prod-app"
-            push: true
-            app-path: ''
-            app-port: 80
-            context: '.'
-            dockerhub-username: ${{secrets.DOCKERHUB_USERNAME}}
-            dockerhub-token: ${{secrets.DOCKERHUB_TOKEN}}
-            scope: 'pocket'
+            scope: ${{ inputs.scope }}
             sentry-project: ''
             sentry-token: ${{secrets.SENTRY_BEARER}}
         - name: Push Production Assets
@@ -175,18 +152,11 @@ jobs:
               --cache-control max-age=31536000 \
               --include "*" \
               --exclude "BUILD_ID" \
-                clients/web/.next s3://readitlater-deploy/web-client/_next
+                clients/${{ inputs.app-path}}/.next s3://readitlater-deploy/${{inputs.asset-path-name}}/_next
         - name: Code Deploy Web Docker Image
           uses:  pocket/pocket-monorepo/.github/actions/ecs-codedeploy@main
-          if: fromJSON(inputs.web-client-terraform-output).ecs-task-containerName.value != ''
+          if: fromJSON(inputs.terraform-output).ecs-task-containerName.value != ''
           with:
-            docker-image-name: ${{steps.web-docker-build.outputs.docker-image-name}}
-            terraform-output: ${{ inputs.web-client-terraform-output }}
-            name: 'web'        
-        - name: Code Deploy Pocket Docker Image
-          uses:  pocket/pocket-monorepo/.github/actions/ecs-codedeploy@main
-          if: fromJSON(inputs.pocket-client-terraform-output).ecs-task-containerName.value != ''
-          with:
-            docker-image-name: ${{steps.pocket-docker-build.outputs.docker-image-name}}
-            terraform-output: ${{ inputs.pocket-client-terraform-output }}
-            name: 'pocket'
+            docker-image-name: ${{steps.docker-build.outputs.docker-image-name}}
+            terraform-output: ${{ inputs.terraform-output }}
+            name: ${{ inputs.scope }}
