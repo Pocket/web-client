@@ -111,7 +111,8 @@ export const Pagination = ({
   const shownLinks = showOverflow ? [...links, ...endLink] : links
 
   // We want to know if we should be activating the forward/backward based on
-  // the position we are at in the sequence.
+  // the position we are at in the sequence. If we are at the second page we will return
+  // them to the base location (without /page)
   const disableBack = currentPage === 1
   const disableForward = currentPage === totalPages
   const backLink = currentPage === 2 ? pagePattern : `${pagePattern}/page/${currentPage - 1}`
