@@ -62,7 +62,6 @@ jobs:
         app-path: 'web'
         scope: '@client/web'
         docker-repo-name: 'webclient'
-        asset-path-name: 'web'
         release-version: ${{needs.semantic-release.outputs.release-version}}
         assets-prefix: 'web-client'
       secrets: inherit
@@ -86,7 +85,6 @@ jobs:
         app-path: 'pocket'
         scope: '@client/pocket'
         docker-repo-name: 'pocketclient'
-        asset-path-name: 'pocket'
         release-version: ${{needs.semantic-release.outputs.release-version}}
         assets-prefix: 'pocket'
       secrets: inherit

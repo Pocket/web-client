@@ -18,10 +18,6 @@ on:
         description: 'The docker repo name to push the image to'
         required: true
         type: string
-      asset-path-name:
-        description: 'The asset path name to push static content to'
-        required: true
-        type: string
       release-version:
         description: 'The release version to use for the build'
         required: true
@@ -56,7 +52,7 @@ jobs:
               scope: ${{inputs.scope}}
               sentry-project: ''
               sentry-token: ${{secrets.SENTRY_BEARER}}
-              assets-prefix: https://pocket-assets-dev.s3-website-us-east-1.amazonaws.com/${{inputs.assets-prefix}}
+              assets-prefix: https://pocket-assets-dev.s3.amazonaws.com/${{inputs.assets-prefix}}
               release-version: ${{inputs.release-version}}
     development:
       if: github.ref == 'refs/heads/dev'
@@ -85,10 +81,10 @@ jobs:
             scope: ${{inputs.scope}}
             sentry-project: ''
             sentry-token: ${{secrets.SENTRY_BEARER}}
-            assets-prefix: https://pocket-assets-dev.s3-website-us-east-1.amazonaws.com/${{inputs.assets-prefix}}
+            assets-prefix: https://pocket-assets-dev.s3.amazonaws.com/${{inputs.assets-prefix}}
             release-version: ${{inputs.release-version}}
             s3-bucket: pocket-assets-dev
-            s3-path: ${{inputs.asset-path-name}}
+            s3-path: ${{inputs.assets-prefix}}
             aws-access-key-id: ${{ steps.aws-creds.outputs.aws-access-key-id }}
             aws-secret-key: ${{ steps.aws-creds.outputs.aws-secret-access-key }}
             aws-session-token: ${{ steps.aws-creds.outputs.aws-session-token}}
@@ -129,7 +125,7 @@ jobs:
             assets-prefix: https://assets.getpocket.com/${{inputs.assets-prefix}}
             release-version: ${{inputs.release-version}}
             s3-bucket: readitlater-deploy
-            s3-path: ${{inputs.asset-path-name}}
+            s3-path: ${{inputs.assets-prefix}}
             aws-access-key-id: ${{ steps.aws-creds.outputs.aws-access-key-id }}
             aws-secret-key: ${{ steps.aws-creds.outputs.aws-secret-access-key }}
             aws-session-token: ${{ steps.aws-creds.outputs.aws-session-token}}

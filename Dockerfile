@@ -6,6 +6,7 @@ ARG APP_PATH
 ARG RELEASE_VERSION
 ARG S3_BUCKET
 ARG S3_PATH
+ARG ASSET_PREFIX
 
 ## Add curl for health checks
 RUN apk add --no-cache curl
@@ -31,6 +32,7 @@ ARG APP_PATH
 ARG RELEASE_VERSION
 ARG S3_BUCKET
 ARG S3_PATH
+ARG ASSET_PREFIX
 
 RUN apk add --no-cache curl
 RUN apk update
