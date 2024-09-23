@@ -4,6 +4,7 @@ import { withSentryConfig } from '@sentry/nextjs'
 const nextConfig = {
   transpilePackages: ['@ui/styles'],
   output: 'standalone',
+  assetPrefix: process.env.ASSET_PREFIX
 }
 
 export default withSentryConfig(nextConfig, {

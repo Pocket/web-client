@@ -140,13 +140,13 @@ USER nodejs
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nodejs:nodejs /app/clients/${APP_PATH}/.next/standalone ./
+COPY --from=builder --chown=nodejs:nodejs /app/clients/${APP_PATH}/.next/standalone /app
 
 # These are only if we aren't uploading to S3
 # COPY --from=builder --chown=nodejs:nodejs /app/clients/${APP_PATH}/.next/static ./_next/static
 
 # We could serve this from the Assets CDN but it requires more updates https://nextjs.org/docs/pages/api-reference/next-config-js/assetPrefix
-COPY --from=builder --chown=nodejs:nodejs /app/clients/${APP_PATH}/public ./app/clients/${APP_PATH}/public
+COPY --from=builder --chown=nodejs:nodejs /app/clients/${APP_PATH}/public /app/clients/${APP_PATH}/public
 
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
