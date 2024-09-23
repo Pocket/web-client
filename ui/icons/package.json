@@ -22,6 +22,7 @@
     "linkDirectory": true
   },
   "scripts": {
-    "build": "ts-node build.ts"
+    "build": "ts-node build.ts",
+    "clean": "rm -rf dist node_modules .turbo"
   }
 }
