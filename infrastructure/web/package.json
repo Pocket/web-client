@@ -7,14 +7,15 @@
     "@cdktf/provider-local": "10.1.0",
     "@cdktf/provider-null": "10.0.0",
     "@cdktf/provider-pagerduty": "13.11.4",
-    "@pocket-tools/terraform-modules": "5.12.10",
+    "@pocket-tools/terraform-modules": "5.14.1",
     "cdktf": "0.20.8",
     "cdktf-cli": "0.20.8",
     "constructs": "10.3.0",
     "tslib": "2.6.3"
   },
   "devDependencies": {
-    "@types/node": "22.5.5"
+    "@types/node": "22.5.5",
+    "@config/eslint-config": "workspace:*"
   },
   "engines": {
     "node": "=20.16.0"

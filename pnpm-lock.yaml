@@ -739,6 +739,9 @@ importers:
         specifier: 2.6.3
         version: 2.6.3
     devDependencies:
+      '@config/eslint-config':
+        specifier: workspace:*
+        version: link:../../config/eslint-config
       '@types/node':
         specifier: 22.5.5
         version: 22.5.5
@@ -776,6 +779,9 @@ importers:
         specifier: 2.6.3
         version: 2.6.3
     devDependencies:
+      '@config/eslint-config':
+        specifier: workspace:*
+        version: link:../../config/eslint-config
       '@types/node':
         specifier: 22.5.5
         version: 22.5.5

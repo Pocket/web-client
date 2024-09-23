@@ -165,7 +165,7 @@ class PocketClient extends TerraformStack {
       },
 
       autoscalingConfig: {
-        targetMinCapacity: config.isDev ? 1 : 5,
+        targetMinCapacity: config.isDev ? 1 : 1,
         targetMaxCapacity: 30
       },
       alarms: {

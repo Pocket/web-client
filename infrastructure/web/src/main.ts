@@ -6,8 +6,7 @@ import {
   provider as awsProvider,
   dataAwsRegion,
   dataAwsCallerIdentity,
-  dataAwsKmsAlias,
-  dataAwsSnsTopic
+  dataAwsKmsAlias
 } from '@cdktf/provider-aws'
 import { provider as nullProvider } from '@cdktf/provider-null'
 import { provider as localProvider } from '@cdktf/provider-local'
@@ -163,7 +162,7 @@ class WebClient extends TerraformStack {
       },
 
       autoscalingConfig: {
-        targetMinCapacity: config.isDev ? 1 : 5,
+        targetMinCapacity: config.isDev ? 1 : 2,
         targetMaxCapacity: 30
       },
       alarms: {
