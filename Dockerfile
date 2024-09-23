@@ -146,7 +146,7 @@ COPY --from=builder --chown=nodejs:nodejs /app/clients/${APP_PATH}/.next/standal
 # COPY --from=builder --chown=nodejs:nodejs /app/clients/${APP_PATH}/.next/static ./_next/static
 
 # We could serve this from the Assets CDN but it requires more updates https://nextjs.org/docs/pages/api-reference/next-config-js/assetPrefix
-COPY --from=builder --chown=nodejs:nodejs /app/clients/${APP_PATH}/public ./public
+COPY --from=builder --chown=nodejs:nodejs /app/clients/${APP_PATH}/public ./app/clients/${APP_PATH}/public
 
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
