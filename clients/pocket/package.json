@@ -9,7 +9,7 @@
     "@ui/components": "workspace:*",
     "@ui/styles": "workspace:*",
     "jose": "5.9.2",
-    "next": "14.2.11",
+    "next": "14.2.13",
     "react": "^18",
     "react-dom": "^18"
   },
@@ -18,7 +18,7 @@
     "@config/eslint-config": "workspace:*",
     "@config/jest": "workspace:*",
     "@types/node": "^22.5.5",
-    "@types/react": "^18.3.6",
+    "@types/react": "^18.3.8",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",

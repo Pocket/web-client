@@ -95,29 +95,28 @@ export const Pagination = ({
     .slice(startingPosition, endingPosition)
 
   // This end link may or may not be necessary based on overflow we calculated
-  const endLink = (
-    <>
-      <div className="more">
-        <OverflowMenuIcon className="" />
-      </div>
-      <PageLink
-        pagePattern={pagePattern}
-        key={`pagination-${totalPages}`}
-        pageNumber={totalPages}
-        currentPage={currentPage}
-      />
-    </>
-  )
+  const endLink = [
+    <div key="pagination-overflow" className="more">
+      <OverflowMenuIcon className="" />
+    </div>,
+    <PageLink
+      key="pagination-end-link"
+      pagePattern={pagePattern}
+      pageNumber={totalPages}
+      currentPage={currentPage}
+    />
+  ]
 
   // Build our link array here (with possible overflow)
-  const shownLinks = showOverflow ? [...links, endLink] : links
+  const shownLinks = showOverflow ? [...links, ...endLink] : links
 
   // We want to know if we should be activating the forward/backward based on
-  // the position we are at in the sequence.
+  // the position we are at in the sequence. If we are at the second page we will return
+  // them to the base location (without /page)
   const disableBack = currentPage === 1
   const disableForward = currentPage === totalPages
-  const backLink = currentPage === 2 ? pagePattern : `${pagePattern}${currentPage - 1}`
-  const forwardLink = disableForward ? '#' : `${pagePattern}${currentPage + 1}`
+  const backLink = currentPage === 2 ? pagePattern : `${pagePattern}/page/${currentPage - 1}`
+  const forwardLink = disableForward ? '#' : `${pagePattern}/page/${currentPage + 1}`
 
   return showPagination ? (
     <>
@@ -127,7 +126,7 @@ export const Pagination = ({
             <ChevronLeftIcon className="" />
           </button>
         ) : (
-          <Link href={backLink}>
+          <Link key={'pagination-backward'} href={backLink}>
             <button className="pagination">
               <ChevronLeftIcon className="" />
             </button>
@@ -139,7 +138,7 @@ export const Pagination = ({
             <ChevronRightIcon className="" />
           </button>
         ) : (
-          <Link href={forwardLink}>
+          <Link key={'pagination-forward'} href={forwardLink}>
             <button className="pagination">
               <ChevronRightIcon className="" />
             </button>
@@ -161,7 +160,7 @@ const PageLink = ({
   currentPage: number
 }) => {
   const buttonClass = pageNumber === currentPage ? 'active' : null
-  const href = pageNumber === 1 ? pagePattern : `${pagePattern}${pageNumber}`
+  const href = pageNumber === 1 ? pagePattern : `${pagePattern}/page/${pageNumber}`
   return (
     <Link href={href}>
       <button className={cx('pagination', buttonClass)}>{pageNumber}</button>
