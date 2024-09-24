@@ -14,8 +14,8 @@
     "tslib": "2.6.3"
   },
   "devDependencies": {
-    "@types/node": "22.5.5",
-    "@config/eslint-config": "workspace:*"
+    "@config/eslint-config": "workspace:*",
+    "@types/node": "22.5.5"
   },
   "engines": {
     "node": "=20.16.0"
