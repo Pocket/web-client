@@ -36,6 +36,9 @@ import { Toasts } from 'connectors/toasts/toast-list'
 import { ListenLogin as Listen } from 'connectors/listen/listen-login'
 import { ShareToMastodon } from 'components/share-modal/share-mastodon'
 
+import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'
+import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
+
 // Possible query params passed via url
 const validParams = {
   mobile_web_view: false, // hide unneeded elements when rendered by native apps
@@ -52,7 +55,6 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
 
   const topics = useSelector((state) => state.topicList?.topicsByName)
   const articleData = useSelector((state) => state.syndicatedArticle.articleData)
-  const saveStatus = useSelector((state) => state.syndicatedArticle.saveStatus)
 
   const [isMastodonOpen, setIsMastodonOpen] = useState(false)
 
@@ -72,6 +74,9 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
     iabSubCategory,
     showAds
   } = articleData || {}
+
+  const saveItemId = useSelector((state) => state.itemsTransitions[slug])
+  const saveStatus = saveItemId ? 'saved' : 'unsaved'
 
   // modify rendered elements when query params are passed in
   const { mobile_web_view, premium_user } = queryParams
@@ -112,14 +117,18 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   const syndicatedFrom = publisherUrl ? publisherUrl : false
   const ArticleLayout = isMobileWebView ? MobileLayout : Layout
 
-  const saveAction = (savedUrl, value) => {
-    if (saveStatus === 'saved') dispatch(unSaveArticleItem(itemId))
-    if (saveStatus !== 'saved') {
-      const analyticsData = { url: savedUrl, value }
-      dispatch(sendSnowplowEvent('syndicated.article.save', analyticsData))
-      dispatch(saveArticleItem(savedUrl))
-    }
+  // Prep save action
+  const onSave = (url, value) => {
+    dispatch(sendSnowplowEvent('syndicated.article.save', { url, value }))
+    dispatch(mutationUpsertTransitionalItem(url, slug))
   }
+
+  const onUnSave = (url, value) => {
+    dispatch(sendSnowplowEvent('syndicated.article.unsave', { url, value }))
+    dispatch(mutationDeleteTransitionalItem(saveItemId, slug))
+  }
+
+  const saveAction = saveItemId ? onUnSave : onSave
 
   const shareAction = (platform) => {
     const analyticsData = { url }
