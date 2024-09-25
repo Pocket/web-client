@@ -30,7 +30,6 @@ on:
 permissions:
   contents: write  # This is required for actions/checkout and write to be able to write releases
   pull-requests: write # to be able to comment on released pull requests
-  issues: write # to be able to add completion to issues (which we don't use, but is still required)
   id-token: write  # Access the Github JWT for AWS access
   deployments: write
 
