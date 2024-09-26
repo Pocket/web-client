@@ -348,6 +348,9 @@ importers:
       '@common/types':
         specifier: workspace:*
         version: link:../../common/types
+      '@config/document-config':
+        specifier: workspace:*
+        version: link:../../config/document-config
       '@config/eslint-config':
         specifier: workspace:*
         version: link:../../config/eslint-config

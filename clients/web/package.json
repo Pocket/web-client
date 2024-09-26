@@ -66,6 +66,7 @@
     "@common/localization": "workspace:*",
     "@common/types": "workspace:*",
     "@config/eslint-config": "workspace:*",
+    "@config/document-config": "workspace:*",
     "@config/jest": "workspace:^",
     "@config/typescript-config": "workspace:*",
     "@graphql-eslint/eslint-plugin": "3.20.1",
