@@ -107,6 +107,9 @@ ui/styles/global-variables.pcss
 # We don't want to commit built icons files
 ui/icons/dist/
 
+# We don't want to commit built document files either
+clients/web/public/static/docs/legal
+
 # TS Terraform build 
 .terraform/
 node_modules/

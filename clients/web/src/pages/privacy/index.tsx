@@ -4,6 +4,7 @@ import { LOCALE_COMMON } from 'common/constants'
 import { readFileSync } from 'node:fs'
 import { marked } from 'marked'
 import { overrideDateTime, customHeadingId } from 'common/utilities/marked-formatters'
+import { join } from 'node:path'
 
 // Types
 import type { LocalizedProps } from '@common/types'
@@ -61,9 +62,9 @@ async function getMDContent(locale: string, isEU: boolean): Promise<string> {
   let mdContent: string
   const docToUse = isEU ? 'pocket_privacy_policy_eu.md' : 'pocket_privacy_policy.md'
   try {
-    mdContent = readFileSync(`node_modules/legal-docs/${locale}/${docToUse}`, 'utf8')
+    mdContent = readFileSync(join(process.cwd(), `public/static/docs/legal/${locale}/${docToUse}`), 'utf8') //prettier-ignore
   } catch {
-    mdContent = readFileSync(`node_modules/legal-docs/en/${docToUse}`, 'utf8')
+    mdContent = readFileSync(join(process.cwd(), `public/static/docs/legal/en/${docToUse}`), 'utf8')
   }
 
   const mdContentModified = mdContent.replace(/\{:\s?\#(.+\S)\s?\}/gi, '{#$1}')

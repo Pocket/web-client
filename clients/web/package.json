@@ -32,7 +32,6 @@
     "he": "1.2.0",
     "intersection-observer": "0.12.2",
     "jsonwebtoken": "9.0.2",
-    "legal-docs": "github:mozilla/legal-docs#74eccbd6e11b762ca706f31734ab6c5192273de4",
     "marked": "14.1.2",
     "match-sorter": "6.3.4",
     "mousetrap": "1.6.5",
