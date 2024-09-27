@@ -17,16 +17,19 @@ const videoWrapper = css`
   }
 `
 
-const getVideoType = (type) => {
+const getVideo = ({ type, vid, src }) => {
   switch (type) {
     case '1':
     case 'YOUTUBE': {
-      return 'https://www.youtube-nocookie.com/embed/'
+      return `https://www.youtube-nocookie.com/embed/${vid}?autoplay=0&dnt=1`
     }
     case '2':
     case '3':
     case 'VIMEO': {
-      return 'https://player.vimeo.com/video/'
+      return `https://player.vimeo.com/video/${vid}?autoplay=0&dnt=1`
+    }
+    case 'HTML5': {
+      return src
     }
     default: {
       break
@@ -35,20 +38,17 @@ const getVideoType = (type) => {
 }
 
 export const Video = ({ videoData }) => {
-  const id = videoData.vid
-  const type = videoData.type
-  const videoType = getVideoType(type)
-  const src = `${videoType}${id}?autoplay=0&dnt=1`
+  const videoSrc = getVideo(videoData)
 
-  return (
+  return videoSrc ? (
     <div className={videoWrapper}>
       <iframe
         className="player"
         title="pocket-video-frame"
-        src={src}
+        src={videoSrc}
         frameBorder="0"
         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; modestbranding; picture-in-picture"
         allowFullScreen></iframe>
     </div>
-  )
+  ) : null
 }
