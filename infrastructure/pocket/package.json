@@ -2,20 +2,20 @@
   "name": "pocket-client-cdk",
   "version": "1.0.0",
   "dependencies": {
-    "@cdktf/provider-archive": "10.1.0",
-    "@cdktf/provider-aws": "19.31.1",
-    "@cdktf/provider-local": "10.1.0",
-    "@cdktf/provider-null": "10.0.0",
-    "@cdktf/provider-pagerduty": "13.11.4",
-    "@pocket-tools/terraform-modules": "5.14.1",
-    "cdktf": "0.20.8",
-    "cdktf-cli": "0.20.8",
+    "@cdktf/provider-archive": "10.2.0",
+    "@cdktf/provider-aws": "19.35.0",
+    "@cdktf/provider-local": "10.1.1",
+    "@cdktf/provider-null": "10.0.1",
+    "@cdktf/provider-pagerduty": "13.11.6",
+    "@pocket-tools/terraform-modules": "5.14.5",
+    "cdktf": "0.20.9",
+    "cdktf-cli": "0.20.9",
     "constructs": "10.3.0",
-    "tslib": "2.6.3"
+    "tslib": "2.7.0"
   },
   "devDependencies": {
     "@config/eslint-config": "workspace:*",
-    "@types/node": "22.5.5"
+    "@types/node": "22.7.4"
   },
   "engines": {
     "node": "=20.16.0"
