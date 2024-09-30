@@ -21,6 +21,6 @@ describe('ItemCard', () => {
 
   it('renders a story', () => {
     const { getByTestId } = render(<StoryCard id={derivedStory.itemId} position={3} />, { initialState }) //prettier-ignore
-    expect(getByTestId('article-card-', { exact: false })).toMatchSnapshot()
+    expect(getByTestId('article-card', { exact: false })).toMatchSnapshot()
   })
 })

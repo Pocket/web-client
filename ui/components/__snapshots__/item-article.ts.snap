@@ -41,9 +41,6 @@ exports[`renders Item with expected data 1`] = `
           </p>
         </div>
         <footer>
-          <cite>
-            Slate
-          </cite>
           <div
             class="base"
             data-testid="item-actions"

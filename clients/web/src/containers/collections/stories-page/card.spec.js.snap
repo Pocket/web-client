@@ -2,24 +2,20 @@
 
 exports[`ItemCard renders a story 1`] = `
 <article
-  class="css-17xj56a grid noExcerpt"
-  data-testid="article-card-1731163180"
+  class="css-1si58nt wide"
+  data-testid="article-card"
 >
-  <div
-    class="selectedBack"
-  />
-  <div
-    class="cardWrap"
+  <span
+    class="media-block"
   >
     <div
-      class="css-1v4yrya media"
+      class="css-dwpxoa media"
     >
       <a
         data-testid="image-link"
         href="https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html?utm_source=pocket_collection_story"
-        rel="noopener"
+        rel="noopner"
         tabindex="-1"
-        target="_blank"
       >
         <img
           alt=""
@@ -29,51 +25,70 @@ exports[`ItemCard renders a story 1`] = `
         />
       </a>
     </div>
-    <div
-      class="content"
+  </span>
+  <div
+    class="item-links"
+  >
+    <a
+      class="content-block"
+      data-testid="content-block"
+      href="https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html?utm_source=pocket_collection_story"
+      rel="noopener"
+      target="_blank"
     >
-      <h2
-        class="title open-external"
+      <div
+        class="content"
       >
-        <a
-          data-testid="title-link"
-          href="https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html?utm_source=pocket_collection_story"
-          rel="noopener"
-          tabindex="0"
-          target="_blank"
+        <h2
+          class="title open-external"
         >
-          Inside VW’s Campaign of Trickery
-        </a>
-        <svg
-          aria-hidden="true"
-          class="icon mobile-view-original"
-          data-testid="view-original-icon"
-          fill="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            clip-rule="evenodd"
-            d="M6 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3a1 1 0 1 1 2 0v3a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4h3a1 1 0 0 1 0 2z"
-            fill-rule="evenodd"
-          />
-          <path
-            clip-rule="evenodd"
-            d="M13 3a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v7a1 1 0 1 1-2 0V5.414l-7.293 7.293a1 1 0 0 1-1.414-1.414L18.586 4H14a1 1 0 0 1-1-1"
-            fill-rule="evenodd"
-          />
-        </svg>
-      </h2>
-      <cite
-        class="details"
-      >
-        <div
-          class="authors"
-        >
-          <span>
-            Jack Ewing
+          <span
+            class="text"
+          >
+            Inside VW’s Campaign of Trickery
           </span>
+          <svg
+            aria-hidden="true"
+            class="icon mobile-view-original"
+            data-testid="view-original-icon"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clip-rule="evenodd"
+              d="M6 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3a1 1 0 1 1 2 0v3a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4h3a1 1 0 0 1 0 2z"
+              fill-rule="evenodd"
+            />
+            <path
+              clip-rule="evenodd"
+              d="M13 3a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v7a1 1 0 1 1-2 0V5.414l-7.293 7.293a1 1 0 0 1-1.414-1.414L18.586 4H14a1 1 0 0 1-1-1"
+              fill-rule="evenodd"
+            />
+          </svg>
+        </h2>
+        <div
+          class="excerpt"
+        >
+          **SS**: “One of the guests in our Volkswagen episode was *New York Times* reporter Jack Ewing. Jack knows everything about VW, and it’s always wonderful to have the most authoritative voices on our show. He described for us what it’s like to visit VW’s headquarters in Germany, and talked about the company’s complicated history there. He also covered the VW emissions scandal from its beginning; you can read an excerpt of his book in this *NYT* article.”
         </div>
+      </div>
+    </a>
+  </div>
+  <footer
+    class="footer"
+  >
+    <cite
+      class="details"
+    >
+      <div
+        class="authors"
+      >
+        <span>
+          Jack Ewing
+        </span>
+      </div>
+      <div>
         <a
           class="publisher"
           data-testid="publisher-link"
@@ -83,43 +98,46 @@ exports[`ItemCard renders a story 1`] = `
         >
           New York Times
         </a>
-      </cite>
-    </div>
-  </div>
-  <footer
-    class="footer"
-  >
+      </div>
+      <div
+        class="context"
+      />
+    </cite>
     <div
-      class="css-dz1tot actions"
+      class="footer-actions"
     >
-      <button
-        class="unsaved card-actions forceWidth css-1sh3voc"
-        data-testid="article-save-btn-1731163180"
+      <div
+        class="css-dz1tot actions"
       >
-        <svg
-          aria-hidden="true"
-          class="icon "
-          fill="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
+        <button
+          class="unsaved card-actions forceWidth css-1sh3voc"
+          data-testid="article-save-btn-1731163180"
         >
-          <path
-            clip-rule="evenodd"
-            d="M2 5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2H2m2 0H2v6c0 5.523 4.477 10 10 10s10-4.477 10-10V5h-2v6a8 8 0 1 1-16 0z"
-            fill-rule="evenodd"
-          />
-          <path
-            clip-rule="evenodd"
-            d="M7.293 9.293a1 1 0 0 1 1.414 0L12 12.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414"
-            fill-rule="evenodd"
-          />
-        </svg>
-        <div
-          class="actionCopy"
-        >
-          item-action:save-unsaved
-        </div>
-      </button>
+          <svg
+            aria-hidden="true"
+            class="icon "
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clip-rule="evenodd"
+              d="M2 5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2H2m2 0H2v6c0 5.523 4.477 10 10 10s10-4.477 10-10V5h-2v6a8 8 0 1 1-16 0z"
+              fill-rule="evenodd"
+            />
+            <path
+              clip-rule="evenodd"
+              d="M7.293 9.293a1 1 0 0 1 1.414 0L12 12.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414"
+              fill-rule="evenodd"
+            />
+          </svg>
+          <div
+            class="actionCopy"
+          >
+            item-action:save-unsaved
+          </div>
+        </button>
+      </div>
     </div>
   </footer>
 </article>
