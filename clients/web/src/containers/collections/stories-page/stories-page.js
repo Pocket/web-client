@@ -32,25 +32,8 @@ import { ItemCard } from './card'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import ErrorPage from 'pages/_error'
 
-import { css } from '@emotion/css'
-import { breakpointMediumHandset } from 'common/constants' // 479
-
 import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'
 import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
-
-const itemStyles = css`
-  ${breakpointMediumHandset} {
-    &.wide .excerpt {
-      display: block;
-    }
-
-    &.wide .media,
-    &.wide .content,
-    &.wide footer.footer .actions {
-      grid-column: span 12;
-    }
-  }
-`
 
 const newsroomUrls = [
   'https://getpocket.com/collections/the-american-journalism-project',
@@ -230,9 +213,7 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
                       id={id}
                       key={id}
                       position={index}
-                      cardShape="wide"
                       showExcerpt={true}
-                      className={itemStyles}
                       partnerType={partnership?.type}
                     />
                   ))

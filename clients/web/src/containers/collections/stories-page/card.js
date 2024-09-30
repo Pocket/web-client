@@ -1,4 +1,4 @@
-import { Card } from 'components/item-card/card'
+import { Item } from 'components/item/item'
 import { useSelector, useDispatch } from 'react-redux'
 import { ActionsCollection } from './card-actions'
 import { setNoImage } from 'connectors/items/items-display.state'
@@ -45,7 +45,7 @@ export function ItemCard({ id, cardShape, className, showExcerpt = false, positi
   const {tags, title, publisher, excerpt, isSyndicated, isInternalItem, fromPartner, authors } = item //prettier-ignore
 
   return (
-    <Card
+    <Item
       itemId={itemId}
       externalUrl={externalUrl}
       tags={tags}
@@ -58,10 +58,10 @@ export function ItemCard({ id, cardShape, className, showExcerpt = false, positi
       isInternalItem={isInternalItem}
       fromPartner={fromPartner}
       authors={authors}
+      authorContext={true}
       onImageFail={onImageFail}
       position={position}
-      className={className}
-      cardShape={cardShape}
+      className="wide"
       showExcerpt={showExcerpt}
       openUrl={openUrl}
       useMarkdown={true}
@@ -69,7 +69,7 @@ export function ItemCard({ id, cardShape, className, showExcerpt = false, positi
       // Tracking
       onItemInView={onItemInView}
       onOpen={onOpen}
-      ActionMenu={ActionsCollection}
+      Actions={ActionsCollection}
     />
   )
 }

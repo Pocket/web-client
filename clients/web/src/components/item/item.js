@@ -45,6 +45,7 @@ export const Item = (props) => {
     tags,
     type,
     listStatusInfo,
+    authorContext,
 
     // Data
     bulkEdit,
@@ -185,6 +186,14 @@ export const Item = (props) => {
       </div>
       <footer className="footer">
         <cite className="details">
+          {authorContext ? (
+            <div className="authors">
+              {authors.map((author) => (
+                <span key={author.name}>{author.name}</span>
+              ))}
+            </div>
+          ) : null}
+
           {isCollection ? (
             <div>
               {authors.map((author) => (
