@@ -32,7 +32,6 @@ export function ItemArticle({ item }: { item: Item }) {
             <p>{excerpt}</p>
           </div>
           <footer>
-            <cite>{publisher}</cite>
             <ItemActions id={itemId} />
           </footer>
         </div>
