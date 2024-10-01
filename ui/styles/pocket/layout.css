@@ -30,7 +30,7 @@ body {
 .grid {
   display: grid;
   column-gap: 1.25rem;
-  row-gap: 1.25rem;
+  row-gap: 1.75rem;
 }
 
 [data-columns='1'],
