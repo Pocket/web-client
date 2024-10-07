@@ -10,16 +10,10 @@ import { HomeSignUpCTA } from './sign-up-cta'
 import { HomeGreeting } from './recent-saves/greeting'
 import { SharedItemInterstitial } from './sharedItem/sharedItem'
 import { Toasts } from 'connectors/toasts/toast-list'
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 export const Home = ({ metaData }) => {
   const userStatus = useSelector((state) => state.user.user_status)
   const isAuthenticated = useSelector((state) => state.user.auth)
-  const featureState = useSelector((state) => state.features) || {}
-
-  const featureSearch = featureFlagActive({ flag: 'corpus.search', featureState })
-  const flagsReady = featureState.flagsReady
-  const showSearch = featureSearch && flagsReady
 
   const shouldRender = userStatus !== 'pending'
 
@@ -31,7 +25,7 @@ export const Home = ({ metaData }) => {
       className={style.spacer}>
       {!shouldRender ? null : (
         <>
-          {isAuthenticated ? null : <HomeSignUpCTA topBorder={showSearch} />}
+          {isAuthenticated ? null : <HomeSignUpCTA />}
 
           {isAuthenticated ? (
             <>
