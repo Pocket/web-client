@@ -125,7 +125,9 @@ type CachedImage {
 
 """Set of parameters that will be used to change an image"""
 input CachedImageInput {
-  """Id of the image in the returned result set"""
+  """
+  ID that will be added to the generated response object so you can find it. NOTE: Can be any string that you like, it will be added to the response so you can use it when consuming it
+  """
   id: ID!
 
   """
@@ -322,6 +324,11 @@ type CorpusItem {
   target: CorpusTarget
 
   """
+  Experimental data point that could imply either an expiry date or an urgency to be shown.
+  """
+  isTimeSensitive: Boolean!
+
+  """
   The user's saved item, from the Corpus Item, if the corpus item was saved to the user's saves
   """
   savedItem: SavedItem
@@ -485,11 +492,6 @@ type CorpusSearchHighlights {
 type CorpusSearchNode {
   """Attaches the item so we can use the preview field"""
   item: Item
-
-  """
-  The preview of the search result, the @requires fields must be kept in sync with the preview field in the Item entity
-  """
-  preview: PocketMetadata!
 
   """Search highlights"""
   searchHighlights: CorpusSearchHighlights
@@ -710,7 +712,9 @@ type CurationCategory {
   slug: String!
 }
 
-"""A date in the YYYY-MM-DD format."""
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
 scalar Date
 
 """
@@ -914,6 +918,11 @@ type Item {
   collection: Collection
 
   """
+  If the givenUrl redirects (once or many times), this is the final url. Otherwise, same as givenUrl
+  """
+  resolvedUrl: Url
+
+  """
   If the item is in corpus allow the item to reference it.  Exposing curated info for consistent UX
   """
   corpusItem: CorpusItem
@@ -992,11 +1001,6 @@ type Item {
 
   """The item id of the resolved_url"""
   resolvedId: String
-
-  """
-  If the givenUrl redirects (once or many times), this is the final url. Otherwise, same as givenUrl
-  """
-  resolvedUrl: Url
 
   """The title as determined by the parser."""
   title: String
@@ -2259,7 +2263,7 @@ type SavedItem implements RemoteEntity {
   """Annotations associated to this SavedItem"""
   annotations: SavedItemAnnotations
 
-  """The url the user saved to their list"""
+  """key field to identify the SavedItem entity in the ListApi service"""
   url: String!
 
   """
@@ -3129,6 +3133,11 @@ type SyndicatedArticle {
   """Slug that pocket uses for this article in the url"""
   slug: String
 
+  """
+  The canonical publisher URL. Automatically set at time of creation but can be changed by editor.
+  """
+  publisherUrl: String!
+
   """Title of syndicated article"""
   title: String!
 
@@ -3143,13 +3152,18 @@ type SyndicatedArticle {
 
   """Excerpt """
   excerpt: String
-  publisherUrl: String!
 
   """The manually set publisher information for this article"""
   publisher: Publisher
 
   """The preview of the syndicated article"""
   preview: PocketMetadata!
+
+  """
+  The Item entity representing the original content this was
+  syndicated from.
+  """
+  originalItem: Item!
 
   """The item id of this Syndicated Article"""
   itemId: ID
