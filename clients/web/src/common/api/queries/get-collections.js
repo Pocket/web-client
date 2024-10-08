@@ -1,18 +1,19 @@
 import { gql } from 'common/utilities/gql/gql'
 import { requestGQL } from 'common/utilities/request/request'
-import { deriveCollection } from 'common/api/derivers/item'
+import { deriveCollectionItem } from 'common/api/derivers/preview'
 import { arrayToObject } from 'common/utilities/object-array/object-array'
+import { FRAGMENT_ITEM_PREVIEW } from 'common/api/fragments/fragment.preview'
 
 const getCollectionsQuery = gql`
   query GetCollections($filters: CollectionsFiltersInput, $perPage: Int, $page: Int) {
     getCollections(filters: $filters, perPage: $perPage, page: $page) {
       collections {
+        preview {
+          ...ItemPreview
+        }
         slug
         itemId: slug
-        title
-        excerpt
         intro
-        imageUrl
         thumbnail: imageUrl
         authors {
           name
@@ -31,6 +32,7 @@ const getCollectionsQuery = gql`
       }
     }
   }
+  ${FRAGMENT_ITEM_PREVIEW}
 `
 
 export function getCollections(language = 'en', labels, page = 1) {
@@ -56,7 +58,7 @@ function handleResponse(response) {
 
   if (!collections) throw new CollectionsRequestError()
 
-  const items = collections.map((collection) => deriveCollection(collection))
+  const items = collections.map((collection) => deriveCollectionItem(collection))
   const itemsBySlug = arrayToObject(items, 'slug')
   const itemSlugs = Object.keys(itemsBySlug)
 
