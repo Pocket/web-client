@@ -3,7 +3,8 @@
 import style from './style.module.css'
 
 // Libraries
-import { t } from '@common/localization'
+import { useTranslation } from '@common/localization'
+
 import {
   FloatingFocusManager,
   FloatingPortal,
@@ -31,6 +32,8 @@ import { useItemStatus } from '@common/state/item-status'
  * The menu to allow secondary actions that a user may wish to take on an item
  */
 export function ItemActionsSave({ id }: { id: string }) {
+  const { t } = useTranslation()
+
   // Connect shared state actions
   const isSaved = useItemStatus((state) => state.isSaved(id))
   const removeSave = useItemStatus((state) => state.removeSave)
@@ -105,6 +108,8 @@ export function ItemActionsSave({ id }: { id: string }) {
  *
  */
 function SaveMenu({ id, handleOverflowClick }: { id: string; handleOverflowClick: () => void }) {
+  const { t } = useTranslation()
+
   const [categoryList, setCategoryList] = useState<string[]>(categories)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

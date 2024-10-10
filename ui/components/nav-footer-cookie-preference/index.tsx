@@ -1,14 +1,6 @@
 'use client'
 
-import { t } from '@common/localization'
-
-declare global {
-  interface Window {
-    OneTrust: {
-      ToggleInfoDisplay: () => void
-    }
-  }
-}
+import { useTranslation } from '@common/localization'
 
 /**
  * NavFooterCookiePreference
@@ -16,6 +8,7 @@ declare global {
  * Trigger cookie preference dashboard
  */
 export function NavFooterCookiePreference() {
+  const { t } = useTranslation()
   const oneTrustClickHandler = () => window.OneTrust?.ToggleInfoDisplay()
   return (
     <button

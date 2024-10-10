@@ -2,7 +2,7 @@
 import style from './style.module.css'
 
 // Libraries
-import { Trans, t } from '@common/localization'
+import { useTranslation } from '@common/localization'
 import { FacebookMonoIcon } from '@ui/icons/FacebookMonoIcon'
 import { InstagramMonoIcon } from '@ui/icons/InstagramMonoIcon'
 import { TwitterMonoIcon } from '@ui/icons/TwitterMonoIcon'
@@ -19,8 +19,10 @@ import { NavFooterTheme } from '../nav-footer-theme'
  * Global nav footer that contains links to various properties as well as legal info and
  * language selectors
  */
-export function NavFooter() {
+export async function NavFooter({ locale }: { locale: string }) {
   const PREMIUM_URL = 'https://getpocket.com/premium?utm_source=web-app-premium-cta'
+
+  const { t, Trans } = await useTranslation(locale, ['global-footer'])
 
   return (
     <footer className={style.base} data-testid="nav-footer">

@@ -2,7 +2,7 @@ import { withSentryConfig } from '@sentry/nextjs'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['@ui/styles'],
+  transpilePackages: ['@ui/styles', '@common/localization'],
   output: 'standalone',
   assetPrefix: process.env.ASSET_PREFIX
 }

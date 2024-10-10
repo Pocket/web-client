@@ -20,6 +20,16 @@ export const LANGUAGE_BY_LOCALE: { [key: string]: string } = {
 /**
  *
  */
+export function useTranslation(lang?: string, namespaces?: string[]) {
+  return {
+    t,
+    Trans
+  }
+}
+
+/**
+ *
+ */
 export function t(key: string, text: string) {
   return text
 }

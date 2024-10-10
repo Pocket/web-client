@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "dependencies": {
     "@common/constants": "workspace:*",
+    "@common/localization": "workspace:*",
     "@common/state": "workspace:*",
     "@common/utilities": "workspace:*",
     "@sentry/nextjs": "^8.32.0",
@@ -10,6 +11,7 @@
     "@ui/styles": "workspace:*",
     "jose": "5.9.3",
     "next": "14.2.13",
+    "next-i18n-router": "5.5.1",
     "react": "^18",
     "react-dom": "^18"
   },

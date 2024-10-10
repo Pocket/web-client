@@ -1,6 +1,8 @@
+'use client'
+
 import style from './style.module.css'
 
-import { t } from '@common/localization'
+import { useTranslation } from '@common/localization'
 
 /**
  * NavTopSearch
@@ -9,6 +11,8 @@ import { t } from '@common/localization'
  * search for now
  */
 export function NavTopSearch() {
+  const { t } = useTranslation()
+
   const searchPlaceholder = t('nav:search', 'Search')
   return (
     <div className={`${style.base} new`} data-testid="nav-top-search">

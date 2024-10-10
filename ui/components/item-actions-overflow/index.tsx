@@ -3,7 +3,7 @@
 import style from './style.module.css'
 
 // Libraries
-import { t } from '@common/localization'
+import { useTranslation } from '@common/localization'
 import {
   FloatingFocusManager,
   FloatingPortal,
@@ -95,6 +95,8 @@ export function ItemActionsOverflow({ id }: { id: string }) {
  *
  */
 function OverflowMenu({ id, isSaved }: { id: string; isSaved: boolean }) {
+  const { t } = useTranslation()
+
   const removeSave = useItemStatus((state) => state.removeSave)
   const handleUnSaveClick = () => removeSave(id)
 

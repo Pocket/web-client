@@ -2,7 +2,7 @@
 import style from './style.module.css'
 
 // Libraries
-import { t } from '@common/localization'
+import { useTranslation } from '@common/localization'
 import {
   FloatingFocusManager,
   FloatingPortal,
@@ -93,6 +93,8 @@ export function NavTopAccountProfile() {
  *
  */
 function ProfilePanel() {
+  const { t } = useTranslation()
+
   // Connect state info
   const firstName = useUserInfo((state) => state.firstName)
   const lastName = useUserInfo((state) => state.lastName)

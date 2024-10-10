@@ -20,8 +20,8 @@ export function NavTop() {
     <header className={style.base} data-testid="nav-top">
       <div className={`${style.container} page-container`}>
         <NavTopBrand />
-        <NavTopSearch />
         <Suspense>
+          <NavTopSearch />
           <NavTopAccount />
         </Suspense>
       </div>
