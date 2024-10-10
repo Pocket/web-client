@@ -456,6 +456,9 @@ importers:
       fs-extra:
         specifier: ^11.2.0
         version: 11.2.0
+      next-i18n-router:
+        specifier: 5.5.1
+        version: 5.5.1
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@22.7.4)(typescript@5.6.2)

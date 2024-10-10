@@ -1,5 +1,6 @@
 import { gql, pocketRequest } from '@common/utilities/pocket-request'
 import { getErrorMessage } from '@common/utilities/error-handler'
+import { SUPPORTED_LOCALES } from '@common/localization'
 
 // Types
 import type { CorpusSlate, CorpusRecommendation, CorpusSlateLineup } from '@common/types/pocket'
@@ -62,9 +63,10 @@ const getHomeQuery = gql`
  */
 export async function getHomeSlates(locale: string): Promise<HomeQueryResponse | ResponseError> {
   try {
+    const localeToUse = SUPPORTED_LOCALES.includes(locale) ? locale : 'en'
     const response = await pocketRequest<{ homeSlateLineup: CorpusSlateLineup }>({
       query: getHomeQuery,
-      variables: { locale }
+      variables: { locale: localeToUse }
     })
 
     const slates = response?.homeSlateLineup?.slates

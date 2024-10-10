@@ -14,9 +14,11 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({
-  children
+  children,
+  params: { locale }
 }: Readonly<{
   children: React.ReactNode
+  params: { locale: string }
 }>) {
   // Gather some stored user settings
   const storedColorMode = getColorMode()
@@ -29,7 +31,7 @@ export default function RootLayout({
       <body className={`${COLOR_MODE_PREFIX}-${storedColorMode}`}>
         <NavTop />
         <main>{children}</main>
-        <NavFooter />
+        <NavFooter locale={locale} />
       </body>
       <HydrateUserSettings state={userSettingsState} />
     </html>

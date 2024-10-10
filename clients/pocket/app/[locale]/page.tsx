@@ -1,14 +1,14 @@
 import { Error } from '@ui/components/error'
 import { ItemArticle } from '@ui/components/item-article'
 
-import { getHomeSlates, type HomeQueryResponse } from './(server)/api/get-home-feed'
+import { getHomeSlates, type HomeQueryResponse } from '@api/get-home-feed'
 import type { CorpusSlate } from '@common/types/pocket'
 
 // Revalidate this request once every minute
 export const revalidate = 60
 
-export default async function Home() {
-  const response = await getHomeSlates('en')
+export default async function Home({ params: { locale } }: { params: { locale: string } }) {
+  const response = await getHomeSlates(locale)
 
   const errorTitle = 'Well that’s not right... '
   if ('responseError' in response)

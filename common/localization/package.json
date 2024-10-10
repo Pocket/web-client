@@ -11,6 +11,7 @@
     "@types/eslint": "^9.6.0",
     "@types/node": "^22.7.4",
     "@types/react": "18.3.10",
+    "next-i18n-router": "5.5.1",
     "ts-node": "^10.9.2",
     "typescript": "5.6.2"
   },
