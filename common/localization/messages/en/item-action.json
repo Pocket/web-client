@@ -1,0 +1,21 @@
+{
+  "add-to-collection": "Add to Collection",
+  "archive": "Archive",
+  "delete": "Delete",
+  "favorite": "Favorite",
+  "no-auth-save": "<0>Log in</0> or <3>Sign up</3> to save this article.",
+  "permanent-copy": "Permanent Copy",
+  "re-add": "Re-add to Saves",
+  "read-now": "Read Now",
+  "refresh": "Refresh",
+  "save-article-bottom": "How was it? Save stories you love and never lose them.",
+  "save-article-top": "Read when you’ve got time to spare.",
+  "save-saved": "Saved",
+  "save-saving": "Save",
+  "save-unsaved": "Save",
+  "share": "Share",
+  "show-similar": "Show Similar Items",
+  "show-similar-copy": "Show Similar",
+  "tag": "Tag",
+  "unfavorite": "Un-Favorite"
+}

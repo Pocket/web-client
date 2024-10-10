@@ -1,0 +1,17 @@
+{
+  "signup-next-step": "다음 단계: 받은 편지함 확인",
+  "signup-next-step-confirm": "구독을 확인하는 데 필요한 이메일을 보냈습니다. 이메일의 버튼을 클릭하면 준비가 끝납니다.",
+  "signup-confirm-subscription": "Pocket 뉴스레터 구독 확인",
+  "signup-one-click-away": "한 번의 클릭으로 흥미로운 읽을거리에 연결됩니다.",
+  "signup-confirm-email": "이메일 주소 확인",
+  "signup-email-preferences": "Pocket에 등록하셨으므로 본 이메일이 발송되는 것입니다. 이메일 기본 설정을 업데이트하려면 <1>여기</1>를 클릭하십시오.",
+  "signup-thanks": "구독해 주셔서 감사합니다!",
+  "signup-check-inbox": "평일날 언제든 받은 편지함에 수신된 웹 상의 스토리 권장 사항을 확인해 보세요.",
+  "signup-article-recommend": "Pocket이 추천하는 가장 인기있는 영어 아티클 몇 가지를 확인해 보십시오.",
+  "signup-confirmation-link-expired": "이 링크는 만료되었습니다.",
+  "signup-return-to-subscribe": "여전히 흥미로운 읽을거리를 안내하는 Pocket의 평일 뉴스레터에 구독하실 수 있습니다. 뉴스레터 등록 페이지로 돌아가려면 <1>여기</1>를 클릭하십시오.",
+  "discover-must-read": "필독 아티클 살펴보기",
+  "unsubscribe": "탈퇴",
+  "privacy-policy": "개인정보 보호정책",
+  "help": "도움말"
+}

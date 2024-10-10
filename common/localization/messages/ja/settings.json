@@ -1,0 +1,22 @@
+{
+  "decrease-column-width" : "列の幅を狭くする",
+  "decrease-line-height" : "行の高さを減らす",
+  "decrease-text-size" : "テキストサイズを小さくする",
+  "display-items-as-a-grid" : "アイテムをグリッドで表示する",
+  "display-items-as-a-list" : "アイテムをリストとして表示する",
+  "display-items-in-detail" : "アイテムの詳細を表示",
+  "display-settings" : "表示設定",
+  "font-options" : "フォントのオプション",
+  "increase-column-width" : "列の幅を広くする",
+  "increase-line-height" : "行の高さを増やす",
+  "increase-text-size" : "テキストサイズを大きくする",
+  "open-display-settings" : "表示設定を開く",
+  "sort-newest" : "最新から",
+  "sort-oldest" : "最古から",
+  "sort-options" : "並べ替えオプション",
+  "sort-relevance" : "関連性",
+  "theme-dark" : "ダーク",
+  "theme-light" : "ライト",
+  "theme-sepia" : "セピア",
+  "unlock-more-options" : "その他のオプションを解除する"
+}

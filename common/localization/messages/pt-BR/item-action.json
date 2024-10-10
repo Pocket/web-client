@@ -1,0 +1,21 @@
+{
+  "add-to-collection" : "Adicionar à coleção",
+  "archive" : "Arquivar",
+  "delete" : "Excluir",
+  "favorite" : "Favorito",
+  "no-auth-save" : "<0>Faça login</0> ou <3>cadastre-se</3> para salvar este artigo.",
+  "permanent-copy" : "Cópia permanente",
+  "re-add" : "Adicionar novamente aos Salvos",
+  "read-now" : "Leia agora",
+  "refresh" : "Atualizar",
+  "save-article-bottom" : "O que achou? Salve suas matérias favoritas para nunca perdê-las.",
+  "save-article-top" : "Leia em seu tempo livre.",
+  "save-saved" : "Salvo",
+  "save-saving" : "Salvar",
+  "save-unsaved" : "Salvar",
+  "share" : "Compartilhe",
+  "show-similar" : "Mostrar itens semelhantes",
+  "show-similar-copy" : "Mostrar semelhantes",
+  "tag" : "Tag",
+  "unfavorite" : "Desfavoritar"
+}

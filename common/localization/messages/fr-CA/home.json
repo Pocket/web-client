@@ -1,0 +1,12 @@
+{
+  "good-afternoon" : "Bon après-midi!",
+  "good-afternoon-name" : "Bon après-midi, {{firstName}}!",
+  "good-evening" : "Bonsoir!",
+  "good-evening-name" : "Bonsoir, {{firstName}}!",
+  "good-morning" : "Bonjour!",
+  "good-morning-name" : "Bonjour, {{firstName}}!",
+  "recent-saves-link-text" : "Accéder aux sauvegardes",
+  "recent-saves-title" : "Sauvegardes récentes",
+  "tooltip-demote" : "Pas pour moi",
+  "tooltip-promote" : "J'aime ça"
+}

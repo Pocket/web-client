@@ -1,0 +1,12 @@
+{
+  "good-afternoon" : "こんにちは！",
+  "good-afternoon-name" : "{{firstName}} さん、こんにちは！",
+  "good-evening" : "こんばんは！",
+  "good-evening-name" : "{{firstName}} さん、こんばんは！",
+  "good-morning" : "おはようございます！",
+  "good-morning-name" : "{{firstName}} さん、おはようございます！",
+  "recent-saves-link-text" : "保存アイテムに移動",
+  "recent-saves-title" : "最近保存したアイテム",
+  "tooltip-demote" : "自分には合わない",
+  "tooltip-promote" : "気に入っている"
+}

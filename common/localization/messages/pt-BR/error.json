@@ -1,0 +1,11 @@
+{
+  "404-detail" : "",
+  "404-message" : "Parece que a página que você está tentando acessar está não existe mais. Entre em contato com nossa equipe de suporte se achar que se trata de um erro.",
+  "404-title" : "Ops! Algo deu errado...",
+  "contact" : "Fale com o suporte",
+  "message" : "Ocorreu um erro. Tente atualizar sua página para corrigir o problema. Se o problema persistir, entre em contato com a nossa equipe de suporte.",
+  "moderated-list-message" : "Esta Lista não está disponível porque pode ter violado as políticas de conteúdo compartilhado do Pocket.",
+  "notification-message" : "O link que você clicou leva para as configurações de notificação do seu celular, podendo ser acessadas somente em um dispositivo móvel. Leia o QR code para instalar o Pocket no seu telefone.",
+  "notification-title" : "Humm, parece que algo deu errado",
+  "title" : "Ops! Algo deu errado..."
+}

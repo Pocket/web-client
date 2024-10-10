@@ -1,0 +1,21 @@
+{
+  "add-to-list" : "Dodaj do listy",
+  "archive" : "Archiwizuj",
+  "delete" : "Usuń",
+  "favorite" : "Dodaj do Ulubionych",
+  "no-auth-save" : "<0> Zaloguj się</0> lub <3>Zarejestruj się</3>, aby zapisać ten artykuł.",
+  "permanent-copy" : "Trwała kopia",
+  "re-add" : "Dodaj ponownie do zapisanych",
+  "read-now" : "Czytaj teraz",
+  "save-article-bottom" : "Spodobało Ci się? Zapisuj ulubione historie, aby nie przepadły.",
+  "save-article-top" : "Przeczytaj, gdy będziesz mieć chwilę wolnego.",
+  "save-saved" : "Zapisano",
+  "save-saving" : "Zapisz",
+  "save-unsaved" : "Zapisz",
+  "share" : "Udostępnij",
+  "show-similar" : "Pokaż podobne elementy",
+  "show-similar-copy" : "Pokaż podobne",
+  "tag" : "Tag",
+  "unfavorite" : "Usuń z Ulubionych",
+  "view-original" : "Wyświetl oryginał"
+}

@@ -1,0 +1,17 @@
+{
+  "added-date" : "Ajouté le {{date}}",
+  "added-many-days-ago" : "Ajouté il y a {{date}} jours",
+  "added-one-day-ago" : "Ajouté il y a {{date}} jour",
+  "added-today" : "Ajouté aujourd'hui",
+  "close" : "Fermer",
+  "highlight" : "Highlight",
+  "highlight-limit" : "Limite de mise en surbrillance",
+  "highlight-limit-copy" : "Vous êtes limité(e) à 3 surbrillances par article. La mise en surbrillance est illimitée pour les membres Pocket Premium.",
+  "just-now" : "à l'instant",
+  "my-highlights" : "Éléments en surbrillance",
+  "open-highlights-menu" : "Ouvrir le menu Surbrillance",
+  "share" : "Partager",
+  "upgrade-now" : "Changer de version",
+  "when-you-select-text" : "Le texte que vous sélectionnez pendant votre lecture apparaîtra ici.",
+  "you-havent-highlighted" : "Vous n'avez encore rien mis en surbrillance"
+}

@@ -1,0 +1,21 @@
+{
+  "add-to-collection" : "新增至收藏",
+  "archive" : "封存",
+  "delete" : "刪除",
+  "favorite" : "我的最愛",
+  "no-auth-save" : "<0>登入</0>或<3>註冊</3>即可儲存這篇文章。",
+  "permanent-copy" : "永久副本",
+  "re-add" : "重新新增至儲存項目",
+  "read-now" : "立即閱讀",
+  "refresh" : "重新整理",
+  "save-article-bottom" : "喜歡嗎？儲存喜愛的篇章，永不遺失。",
+  "save-article-top" : "閒暇時閱讀。",
+  "save-saved" : "已儲存",
+  "save-saving" : "儲存",
+  "save-unsaved" : "儲存",
+  "share" : "分享",
+  "show-similar" : "顯示類似項目",
+  "show-similar-copy" : "顯示類似項目",
+  "tag" : "標籤",
+  "unfavorite" : "取消收藏"
+}

@@ -1,0 +1,10 @@
+{
+  "item-count_one" : "Элементов: {{count}}",
+  "item-count_other" : "Элементов: {{count}}",
+  "list" : "Список",
+  "story-count_one" : "{{count}} история",
+  "story-count_other" : "{{count}} историй",
+  "tag-count_one" : "{{count}} тег",
+  "tag-count_other" : "{{count}} тега(-ов)",
+  "time-to-read" : "{{timeToRead}} мин."
+}

@@ -1,0 +1,11 @@
+{
+  "a-friend-shared" : "친구가 Pocket에서 무언가를 공유했습니다. 공유 항목을 보려면 이메일을 확인하십시오.",
+  "activity" : "활동",
+  "confirmation" : "확인이 전송되었습니다! 이메일을 확인하십시오.",
+  "dismiss" : "해제",
+  "inbox-is-empty" : "받은 편지함이 비어 있음",
+  "messages" : "메시지",
+  "oops" : "저런! 문제가 생겼습니다. 나중에 다시 시도하십시오.",
+  "resend-confirmation" : "확인 다시 보내기",
+  "when-someone-shares" : "누군가가 친구에게 보내기를 사용해서 공유한 항목이 여기에 나타납니다."
+}

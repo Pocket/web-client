@@ -1,0 +1,10 @@
+{
+  "item-count_one" : "{{count}} 个项目",
+  "item-count_other" : "{{count}} 项",
+  "list" : "列表",
+  "story-count_one" : "{{count}} 个故事",
+  "story-count_other" : "{{count}} 个故事",
+  "tag-count_one" : "{{count}} 个标记",
+  "tag-count_other" : "{{count}} 个标记",
+  "time-to-read" : "{{timeToRead}} 分钟"
+}

@@ -1,0 +1,12 @@
+{
+  "good-afternoon" : "Добрый день!",
+  "good-afternoon-name" : "Добрый день, {{firstName}}!",
+  "good-evening" : "Добрый вечер!",
+  "good-evening-name" : "Добрый вечер, {{firstName}}!",
+  "good-morning" : "Доброе утро!",
+  "good-morning-name" : "Доброе утро, {{firstName}}!",
+  "recent-saves-link-text" : "Перейти к Сохраненному",
+  "recent-saves-title" : "Недавно сохраненное",
+  "tooltip-demote" : "Не подходит",
+  "tooltip-promote" : "Мне это подходит"
+}

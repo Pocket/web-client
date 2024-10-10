@@ -1,0 +1,21 @@
+{
+  "add-to-list" : "Toevoegen aan Lijst",
+  "archive" : "Archief",
+  "delete" : "Verwijderen",
+  "favorite" : "Favoriet",
+  "no-auth-save" : "<0>Log in</0> of <3>meld je aan</3> om dit artikel op te slaan.",
+  "permanent-copy" : "Permanente kopie",
+  "re-add" : "Opnieuw toevoegen aan Opgeslagen items",
+  "read-now" : "Nu lezen",
+  "save-article-bottom" : "Wat vond je ervan? Sla je favoriete verhalen op zodat je ze altijd kunt terugvinden.",
+  "save-article-top" : "Lees wanneer je tijd over hebt.",
+  "save-saved" : "Opgeslagen",
+  "save-saving" : "Opslaan",
+  "save-unsaved" : "Opslaan",
+  "share" : "Delen",
+  "show-similar" : "Toon vergelijkbare items",
+  "show-similar-copy" : "Toon vergelijkbare items",
+  "tag" : "Tag",
+  "unfavorite" : "Uit favorieten verwijderen",
+  "view-original" : "Origineel bekijken"
+}

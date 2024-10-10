@@ -1,0 +1,11 @@
+{
+  "404-detail" : "",
+  "404-message" : "Al parecer, la página que estás buscando no se encuentra. Comunícate con nuestro equipo de soporte si crees que se trata de un error.",
+  "404-title" : "¡Vaya! Algo salió mal...",
+  "contact" : "Contactar a Soporte",
+  "message" : "Ocurrió un error. Prueba actualizar la página y, si el problema continúa, comunícate con el equipo de Soporte.",
+  "moderated-list-message" : "La lista no está disponible porque puede haber violado las políticas de contenido compartido de Pocket.",
+  "notification-message" : "El enlace en el que hiciste clic te dirige a la configuración de notificaciones de tu teléfono, a la que solo se puede acceder desde un dispositivo móvil. Escanea el código QR para instalar Pocket en tu teléfono.",
+  "notification-title" : "Parece que algo salió mal",
+  "title" : "¡Vaya! Algo salió mal..."
+}

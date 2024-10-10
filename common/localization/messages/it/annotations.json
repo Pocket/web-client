@@ -1,0 +1,17 @@
+{
+  "added-date" : "Aggiunto il {{date}}",
+  "added-many-days-ago" : "Aggiunto {{date}} giorni fa",
+  "added-one-day-ago" : "Aggiunto {{date}} giorno fa",
+  "added-today" : "Aggiunto oggi",
+  "close" : "Chiudi",
+  "highlight" : "In evidenza",
+  "highlight-limit" : "Limite di evidenziazione",
+  "highlight-limit-copy" : "Le tue evidenziazioni sono limitate a 3 per articolo. I membri Pocket Premium hanno diritto a evidenziazioni illimitate.",
+  "just-now" : "proprio adesso",
+  "my-highlights" : "Le mie evidenziazioni",
+  "open-highlights-menu" : "Apri menu Evidenziazioni",
+  "share" : "Condividi",
+  "upgrade-now" : "Aggiorna adesso",
+  "when-you-select-text" : "Quando selezioni il testo durante la lettura, verrà visualizzato qui.",
+  "you-havent-highlighted" : "Non hai ancora evidenziato nulla"
+}

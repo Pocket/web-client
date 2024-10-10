@@ -1,0 +1,17 @@
+{
+  "added-date" : "Ajouté le {{date}}",
+  "added-many-days-ago" : "Ajouté il y a {{date}} jours",
+  "added-one-day-ago" : "Ajouté {{date}} il y a jour",
+  "added-today" : "Ajouté aujourd'hui",
+  "close" : "Fermer",
+  "highlight" : "Highlight",
+  "highlight-limit" : "Limite de surlignement",
+  "highlight-limit-copy" : "Vous êtes limité à 3 passages surlignés par article. Les membres Pocket Premium peuvent surligner à volonté.",
+  "just-now" : "À l'instant",
+  "my-highlights" : "Mes passages surlignés",
+  "open-highlights-menu" : "Ouvrir le menu Surligner",
+  "share" : "Partager",
+  "upgrade-now" : "Mettre à jour maintenant",
+  "when-you-select-text" : "Lorsque vous sélectionnez du texte pendant que vous lisez, il apparaît ici.",
+  "you-havent-highlighted" : "Vous n'avez encore rien surligné"
+}

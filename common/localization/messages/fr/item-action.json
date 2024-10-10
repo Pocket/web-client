@@ -1,0 +1,21 @@
+{
+  "add-to-list" : "Ajouter",
+  "archive" : "Archives",
+  "delete" : "Supprimer",
+  "favorite" : "Favori",
+  "no-auth-save" : "<0>Connectez-vous</0> ou <3>inscrivez-vous</3> pour sauvegarder cet article.",
+  "permanent-copy" : "Copie permanente",
+  "re-add" : "Ajouter à nouveau aux sauvegardes",
+  "read-now" : "Lire maintenant",
+  "save-article-bottom" : "Comment était-ce ? Sauvegardez les histoires que vous aimez sans jamais les perdre.",
+  "save-article-top" : "Lisez quand vous avez du temps devant vous.",
+  "save-saved" : "Sauvegarde effectuée",
+  "save-saving" : "Sauvegarder",
+  "save-unsaved" : "Sauvegarder",
+  "share" : "Partager",
+  "show-similar" : "Afficher des éléments similaires",
+  "show-similar-copy" : "Afficher des éléments similaires",
+  "tag" : "Label",
+  "unfavorite" : "Retirer des favoris",
+  "view-original" : "Afficher l'original"
+}

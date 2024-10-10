@@ -1,0 +1,23 @@
+{
+  "decrease-column-width" : "Reducir ancho de columna",
+  "decrease-line-height" : "Disminuir altura de línea",
+  "decrease-text-size" : "Disminuir el tamaño del texto",
+  "display-items-as-a-grid" : "Mostrar enlaces en cuadrícula",
+  "display-items-as-a-list" : "Mostrar artículos como una lista",
+  "display-items-in-detail" : "Mostrar enlaces en detalle",
+  "display-settings" : "Opciones de visualización",
+  "font-options" : "Opciones de letra",
+  "increase-column-width" : "Aumentar ancho de columna",
+  "increase-line-height" : "Aumentar altura de línea",
+  "increase-text-size" : "Aumentar el tamaño del texto",
+  "open-display-settings" : "Abrir opciones de visualización",
+  "sort-newest" : "Más reciente primero",
+  "sort-oldest" : "Más antiguo primero",
+  "sort-options" : "Opciones de orden",
+  "sort-relevance" : "Por relevancia",
+  "theme-dark" : "Oscuro",
+  "theme-light" : "Claro",
+  "theme-sepia" : "Sepia",
+  "theme-system" : "Sistema",
+  "unlock-more-options" : "Abrir más opciones"
+}

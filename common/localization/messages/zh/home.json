@@ -1,0 +1,12 @@
+{
+  "good-afternoon" : "下午好！",
+  "good-afternoon-name" : "下午好，{{firstName}}！",
+  "good-evening" : "晚上好！",
+  "good-evening-name" : "晚上好，{{firstName}}！",
+  "good-morning" : "早上好！",
+  "good-morning-name" : "早上好，{{firstName}}！",
+  "recent-saves-link-text" : "前往“保存内容”",
+  "recent-saves-title" : "最近保存",
+  "tooltip-demote" : "不适合我",
+  "tooltip-promote" : "我喜欢这个"
+}

@@ -1,0 +1,17 @@
+{
+  "signup-next-step": "次のステップ：受信トレイをご確認ください",
+  "signup-next-step-confirm": "ニュースレター配信へのご登録を確認するため、メールを送信しました。メール内のボタンをクリックすれば準備完了です。",
+  "signup-confirm-subscription": "Pocket のニュースレター配信をご確認ください",
+  "signup-one-click-away": "あと 1 クリックで面白い記事にたどり着きます。",
+  "signup-confirm-email": "メールアドレスを認証する",
+  "signup-email-preferences": "このメールは、Pocket に登録された方に送信されています。メールの配信設定を更新するには<1>こちら<1>をクリックしてください。",
+  "signup-thanks": "ご登録ありがとうございます！",
+  "signup-check-inbox": "インターネットで発見したおすすめのコンテンツが毎日（週末を除く）受信トレイに届きます。",
+  "signup-article-recommend": "お待ちいただく間、最も人気の高い英語の記事をご覧ください。",
+  "signup-confirmation-link-expired": "このリンクの有効期限が切れています",
+  "signup-return-to-subscribe": "Pocket が平日にお届けする面白いコンテンツを購読できます。<1>ここ</1>をクリックしてニュースレターの登録ページにお戻りください。",
+  "discover-must-read": "必読の記事を発見",
+  "unsubscribe": "定期購読を解除",
+  "privacy-policy": "プライバシーポリシー",
+  "help": "ヘルプ"
+}
