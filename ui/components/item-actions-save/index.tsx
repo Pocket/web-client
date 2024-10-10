@@ -4,7 +4,6 @@ import style from './style.module.css'
 
 // Libraries
 import { useTranslation } from '@common/localization'
-
 import {
   FloatingFocusManager,
   FloatingPortal,
@@ -66,7 +65,6 @@ export function ItemActionsSave({ id }: { id: string }) {
   const focus = useFocus(context)
 
   const { getReferenceProps, getFloatingProps } = useInteractions([click, dismiss, focus])
-
   return (
     <>
       <div ref={refs.setReference}>
@@ -76,7 +74,8 @@ export function ItemActionsSave({ id }: { id: string }) {
             data-testid="trigger-saved"
             type="button"
             onClick={handleRemoveSaveClick}>
-            <SaveFilledIcon /> <span>{t('item-action:saved', 'Saved')}</span>
+            <SaveFilledIcon />{' '}
+            <span suppressHydrationWarning={true}>{t('item-action:save-saved', 'Saved')}</span>
           </button>
         ) : (
           <button
@@ -85,8 +84,10 @@ export function ItemActionsSave({ id }: { id: string }) {
             type="button"
             {...getReferenceProps({ onClick: handleSaveClick })}>
             <SaveIcon />{' '}
-            <span>
-              {isOpen ? t('item-action:saving', 'Saving') : t('item-action:save', 'Save')}
+            <span suppressHydrationWarning={true}>
+              {isOpen
+                ? t('item-action:save-saving', 'Saving')
+                : t('item-action:save-unsaved', 'Save')}
             </span>
           </button>
         )}

@@ -1,6 +1,15 @@
 'use client'
 
 import { useTranslation } from '@common/localization'
+import { useEffect, useRef } from 'react'
+
+declare global {
+  interface Window {
+    OneTrust: {
+      ToggleInfoDisplay: () => null
+    }
+  }
+}
 
 /**
  * NavFooterCookiePreference
@@ -9,14 +18,20 @@ import { useTranslation } from '@common/localization'
  */
 export function NavFooterCookiePreference() {
   const { t } = useTranslation()
-  const oneTrustClickHandler = () => window.OneTrust?.ToggleInfoDisplay()
+  const oneTrustClickHandler = useRef(() => {})
+
+  useEffect(() => {
+    oneTrustClickHandler.current = () => window.OneTrust?.ToggleInfoDisplay()
+  }, [])
+
   return (
     <button
       className="text"
       data-testid="nav-footer-cookie-preference"
       id="ot-sdk-btn"
+      suppressHydrationWarning={true}
       type="button"
-      onClick={oneTrustClickHandler}>
+      onClick={oneTrustClickHandler.current}>
       {t('global-footer:cookie-preferences', 'Cookie preferences')}
     </button>
   )

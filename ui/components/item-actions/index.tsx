@@ -9,8 +9,6 @@ import { LikeIcon } from '@ui/icons/LikeIcon'
 import { ItemActionsOverflow } from '../item-actions-overflow'
 import { ItemActionsSave } from '../item-actions-save'
 
-import { useItemStatus } from '@common/state/item-status'
-
 /**
  * ItemActions
  * ---

@@ -1,12 +1,15 @@
+'use server'
+
 // Styles
 import style from './style.module.css'
 
 // Libraries
-import { useTranslation } from '@common/localization'
+import { Trans, useTranslation } from '@common/localization'
 import { FacebookMonoIcon } from '@ui/icons/FacebookMonoIcon'
 import { InstagramMonoIcon } from '@ui/icons/InstagramMonoIcon'
 import { TwitterMonoIcon } from '@ui/icons/TwitterMonoIcon'
 import Link from 'next/link'
+import { Suspense } from 'react'
 
 // Components
 import { NavFooterCookiePreference } from '../nav-footer-cookie-preference'
@@ -22,7 +25,7 @@ import { NavFooterTheme } from '../nav-footer-theme'
 export async function NavFooter({ locale }: { locale: string }) {
   const PREMIUM_URL = 'https://getpocket.com/premium?utm_source=web-app-premium-cta'
 
-  const { t, Trans } = await useTranslation(locale, ['global-footer'])
+  const { t } = await useTranslation(locale, 'global-footer')
 
   return (
     <footer className={style.base} data-testid="nav-footer">
@@ -73,7 +76,9 @@ export async function NavFooter({ locale }: { locale: string }) {
                 </Link>
               </li>
               <li>
-                <NavFooterCookiePreference />
+                <Suspense>
+                  <NavFooterCookiePreference />
+                </Suspense>
               </li>
             </ul>
           </nav>
