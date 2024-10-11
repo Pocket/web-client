@@ -25,7 +25,7 @@ import { NavFooterTheme } from '../nav-footer-theme'
 export async function NavFooter({ locale }: { locale: string }) {
   const PREMIUM_URL = 'https://getpocket.com/premium?utm_source=web-app-premium-cta'
 
-  const { t } = await useTranslation(locale, 'global-footer')
+  const { t } = await useTranslation(locale)
 
   return (
     <footer className={style.base} data-testid="nav-footer">
