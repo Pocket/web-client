@@ -25,7 +25,7 @@ import { NavFooterTheme } from '../nav-footer-theme'
 export async function NavFooter({ locale }: { locale: string }) {
   const PREMIUM_URL = 'https://getpocket.com/premium?utm_source=web-app-premium-cta'
 
-  const { t } = await useTranslation(locale)
+  const { t, i18n } = await useTranslation(['global-footer'], { lng: locale })
 
   return (
     <footer className={style.base} data-testid="nav-footer">
@@ -154,7 +154,7 @@ export async function NavFooter({ locale }: { locale: string }) {
         <div className={style.subContent}>
           <section>
             <div className={style.partOf}>
-              <Trans i18nKey="global-footer:pocket-is-part-of">
+              <Trans i18n={i18n} i18nKey="global-footer:pocket-is-part-of" t={t}>
                 Pocket is part of the{' '}
                 <a href="https://www.mozilla.org/about/" rel="noopener">
                   Mozilla

@@ -10,6 +10,9 @@ import { useEffect, useRef } from 'react'
  * ---
  * Really this should be a universal bar with a dropdown ... but we will call it
  * search for now
+ *
+ * !!NOTE: We should make this a static painted door that only brings interactivity once a user
+ * !!interacts.  That way we get consistent static paints
  */
 export function NavTopSearch() {
   const { t } = useTranslation()

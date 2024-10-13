@@ -6,10 +6,18 @@ import { initReactI18next } from 'react-i18next/initReactI18next'
 
 import { getOptions } from './utilities'
 
+export { Trans } from 'react-i18next/TransWithoutContext'
+
 /**
  *
  */
-export async function useTranslation(locale: string, namespaces: string[]) {
+export async function useTranslation(
+  namespaces: string[],
+  options?: {
+    lng: string | undefined
+  }
+) {
+  const locale = options?.lng
   const i18nInstance = createInstance()
 
   i18nInstance.use(initReactI18next)
@@ -33,18 +41,4 @@ export async function useTranslation(locale: string, namespaces: string[]) {
     resources: i18nInstance.services.resourceStore.data,
     t: i18nInstance.t
   }
-}
-
-/**
- *
- */
-export function t(key: string, text: string) {
-  return text
-}
-
-/**
- *
- */
-export function Trans({ children }: React.PropsWithChildren<{ i18nKey?: string }>) {
-  return children
 }
