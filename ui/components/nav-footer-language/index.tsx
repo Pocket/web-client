@@ -1,7 +1,7 @@
 'use client'
 
 // Components
-import { LANGUAGE_BY_LOCALE } from '@common/localization'
+import { LANGUAGE_BY_LOCALE } from '@common/constants'
 
 // Types
 import type { ChangeEvent } from 'react'

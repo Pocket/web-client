@@ -7,3 +7,22 @@ export const CACHE_KEY_COLOR_MODE = 'pocket-color-mode'
 export const CACHE_KEY_LIST_MODE = 'pocket-list-mode'
 export const CACHE_KEY_SORT_OPTIONS = 'pocket-sort-options'
 export const CACHE_KEY_HOME_STORED_TOPICS = 'pocket-home-stored-topics'
+
+export const LANGUAGE_BY_LOCALE: { [key: string]: string } = {
+  'zh-TW': 'Chinese (Taiwan)',
+  zh: 'Chinese',
+  nl: 'Dutch',
+  en: 'English',
+  fr: 'French',
+  'fr-CA': 'French (Canada)',
+  de: 'German',
+  it: 'Italian',
+  ja: 'Japanese',
+  ko: 'Korean',
+  pl: 'Polish',
+  pt: 'Portuguese',
+  'pt-BR': 'Portuguese (Brazil)',
+  ru: 'Russian',
+  es: 'Spanish (Spain)',
+  'es-LA': 'Spanish (Latin America)'
+}
