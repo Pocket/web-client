@@ -1,6 +1,6 @@
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
-import { LANGUAGE_BY_LOCALE } from '@common/localization'
+import { LANGUAGE_BY_LOCALE } from '@common/constants'
 
 export function Languages() {
   const translation = useTranslation()

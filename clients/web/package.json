@@ -3,6 +3,7 @@
   "description": "Pocket front end web client",
   "version": "1.0.0",
   "dependencies": {
+    "@common/constants": "workspace:*",
     "@braze/web-sdk": "5.4.0",
     "@emotion/cache": "11.13.1",
     "@emotion/css": "11.13.0",
