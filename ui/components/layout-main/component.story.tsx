@@ -1,10 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
+import style from './style.module.css'
 
-// Components
-import { LayoutMain as Component } from '.'
+import { NavFooter } from '../nav-footer'
+import { NavTop } from '../nav-top'
 
 // Types
 import type { Meta, StoryObj } from '@storybook/react'
+import type { PropsWithChildren } from 'react'
 
 // Storybook Meta
 const meta: Meta<typeof Component> = {
@@ -17,6 +19,19 @@ const meta: Meta<typeof Component> = {
 export default meta
 
 // Stories
+/**
+ *
+ */
+function Component({ children }: PropsWithChildren) {
+  return (
+    <div className="new" data-testid="layout-main">
+      <NavTop />
+      <main className={`${style.base} page-container`}>{children}</main>
+      <NavFooter locale="en" />
+    </div>
+  )
+}
+
 export const Main: StoryObj<typeof Component> = {
   render: () => {
     return (
