@@ -24,7 +24,7 @@ export default function GlobalError({ error }: { error: Error & { digest?: strin
         <main>
           <NextError statusCode={0} />
         </main>
-        <NavFooter />
+        <NavFooter locale="en" />
       </body>
     </html>
   )
