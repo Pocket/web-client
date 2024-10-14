@@ -3,15 +3,17 @@ import '@testing-library/jest-dom'
 import { act, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
+import { localeWrapper as wrapper } from '@config/jest/wrapper'
+
 // Components
 import { ItemActionsOverflow as Component } from '.'
 
 describe('renders ItemActionsMenu', () => {
   it('with defaults', () => {
-    const rendered = render(<Component id="abc123" />)
+    render(<Component id="abc123" />, { wrapper })
     const renderedComponent = screen.getByTestId('trigger-overflow')
     expect(renderedComponent).toBeInTheDocument()
-    expect(rendered.container).toMatchSnapshot()
+    expect(renderedComponent).toMatchSnapshot()
   })
 
   it('when opened', async () => {

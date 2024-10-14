@@ -9,7 +9,7 @@ exports[`renders NavTopSearch with defaults 1`] = `
     <input
       id="search"
       name="search"
-      placeholder="Search"
+      placeholder=""
       type="search"
     />
   </div>

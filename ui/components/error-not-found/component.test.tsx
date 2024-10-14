@@ -2,6 +2,8 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 
+import { localeWrapper as wrapper } from '@config/jest/wrapper'
+
 // Components
 import { ErrorNotFound as Component } from '.'
 
@@ -26,7 +28,7 @@ beforeEach(() => {
 
 describe('renders ErrorFour', () => {
   it('with defaults', () => {
-    const rendered = render(<Component />)
+    const rendered = render(<Component locale="en" />, { wrapper })
     const renderedComponent = screen.getByTestId('error-four')
     expect(renderedComponent).toBeInTheDocument()
     expect(rendered.container).toMatchSnapshot()

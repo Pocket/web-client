@@ -3,12 +3,14 @@ import '@testing-library/jest-dom'
 import { act, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
+import { localeWrapper as wrapper } from '@config/jest/wrapper'
+
 // Components
 import { ItemActionsSave as Component } from '.'
 
 describe('renders ItemActionsSave', () => {
   it('with defaults', () => {
-    const rendered = render(<Component id="abc123" />)
+    const rendered = render(<Component id="abc123" />, { wrapper })
     const renderedComponent = screen.getByTestId('trigger-save')
     expect(renderedComponent).toBeInTheDocument()
     expect(rendered.container).toMatchSnapshot()
@@ -18,7 +20,7 @@ describe('renders ItemActionsSave', () => {
     // Setup user for events
     const user = userEvent.setup()
 
-    render(<Component id="abc123" />)
+    render(<Component id="abc123" />, { wrapper })
     const saveTrigger = screen.getByTestId('trigger-save')
     expect(saveTrigger).toBeInTheDocument()
 
