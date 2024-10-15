@@ -26,7 +26,26 @@ export const globalNavActions = {
       uiType: 'button'
     },
     expects: ['value'],
-    description: 'A user clicks `Search` after entering a search term in the global nav'
+    description: 'A user clicks `Search` after entering a search term in the global nav [LEGACY]'
+  },
+  'global-nav.search.save.submit': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['value'],
+    description: 'A user clicks `Search` after entering a search term in the global nav from saves'
+  },
+  'global-nav.search.global.submit': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['value'],
+    description:
+      'A user clicks `Search` after entering a search term in the global nav from NOT saves'
   },
   'global-nav.upgrade-link': {
     eventType: 'impression',

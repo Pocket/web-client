@@ -14,9 +14,11 @@ function GlobalNavSearchConnected({ onClose, searchEnrolled, fromSaves }) {
 
   const baseQuery = searchEnrolled ? '/search?q' : '/saves/search/?query'
   const saveType = fromSaves ? '&st=saves' : '&st=all'
+  const enrolledId = fromSaves ? 'global-nav.search.global.submit' : 'global-nav.search.save.submit'
+  const snowplowId = searchEnrolled ? enrolledId : 'global-nav.search.submit'
 
   const onSubmit = (searchTerm) => {
-    dispatch(sendSnowplowEvent('global-nav.search.submit', { value: searchTerm }))
+    dispatch(sendSnowplowEvent(snowplowId, { value: searchTerm }))
     dispatch(saveRecentSearch(searchTerm))
     router.push(`${baseQuery}=${encodeURIComponent(searchTerm)}${saveType}`)
   }
