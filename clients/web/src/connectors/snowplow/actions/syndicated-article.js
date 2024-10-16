@@ -136,5 +136,22 @@ export const syndicatedArticleActions = {
     },
     expects: ['corpusRecommendationId', 'url', 'position'],
     description: 'Fired when a user clicks a rec in the sidebar of a syndicated article'
+  },
+  'syndicated.signup.impression': {
+    eventType: 'impression',
+    entityTypes: ['ui'],
+    eventData: {
+      component: 'ui',
+      uiType: 'button'
+    },
+    description: 'Signup section in the right side for logged-out users is seen'
+  },
+  'syndicated.signup.click': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    description: 'Signup section in the right side for logged-out users is clicked through'
   }
 }

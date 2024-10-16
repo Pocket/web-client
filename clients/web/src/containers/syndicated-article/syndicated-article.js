@@ -38,6 +38,7 @@ import { ShareToMastodon } from 'components/share-modal/share-mastodon'
 
 import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'
 import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
+import { CallOutSyndicated } from 'components/call-out/call-out-syndicated'
 
 // Possible query params passed via url
 const validParams = {
@@ -83,6 +84,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   const isMobileWebView = mobile_web_view === 'true'
   const isPremiumUser = premium_user === 'true' || isPremium === '1'
   const allowAds = userStatus === 'pending' || isPremiumUser ? false : showAds
+  const showCTA = userStatus !== 'valid'
 
   // Initialize Ads on the page
   // Turned off for now, but leaving for future BSA work
@@ -153,6 +155,14 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
 
   const publisherClick = (label) => {
     dispatch(sendSnowplowEvent('syndicated.attribution.click', { label }))
+  }
+
+  const onCTAVisible = () => {
+    dispatch(sendSnowplowEvent('syndicated.signup.impression'))
+  }
+
+  const onCTASignup = () => {
+    dispatch(sendSnowplowEvent('syndicated.signup.click'))
   }
 
   const showAuthors = authorNames?.length > 0
@@ -228,6 +238,9 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
 
             {/* Right aside content such as ads and recs */}
             <aside className="right-aside">
+              {showCTA ? (
+                <CallOutSyndicated onVisible={onCTAVisible} handleSignup={onCTASignup} />
+              ) : null}
               <AdRailTop allowAds={allowAds} targeting={targeting} />
               <PublisherRecs
                 itemId={originalItemId}
