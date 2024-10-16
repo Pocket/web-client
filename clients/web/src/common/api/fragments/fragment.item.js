@@ -4,6 +4,7 @@ export const FRAGMENT_ITEM = gql`
   fragment ItemDetails on Item {
     isArticle
     title
+    shareId: id
     itemId
     readerSlug
     resolvedId

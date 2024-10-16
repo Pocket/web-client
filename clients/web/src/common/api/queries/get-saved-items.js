@@ -1,6 +1,7 @@
 import { requestGQL } from 'common/utilities/request/request'
 import { gql } from 'common/utilities/gql/gql'
 import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
+import { FRAGMENT_ITEM_PREVIEW } from '../fragments/fragment.preview'
 import { itemFiltersFromGraph } from './get-saved-items.filters'
 import { actionToCamelCase } from 'common/utilities/strings/strings'
 
@@ -20,7 +21,6 @@ const getSavedItemsQuery = gql`
             url
             _createdAt
             _updatedAt
-            id
             status
             isFavorite
             favoritedAt
@@ -48,7 +48,65 @@ const getSavedItemsQuery = gql`
   }
   ${FRAGMENT_ITEM}
 `
-export async function getSavedItems({ actionType, sortOrder = 'DESC', tagNames, pagination }) {
+
+const getSavedItemsPreviewMetadataQuery = gql`
+  query GetSavedItems(
+    $filter: SavedItemsFilter
+    $sort: SavedItemsSort
+    $pagination: PaginationInput
+  ) {
+    user {
+      savedItems(filter: $filter, sort: $sort, pagination: $pagination) {
+        edges {
+          cursor
+          node {
+            _createdAt
+            _updatedAt
+            status
+            isFavorite
+            favoritedAt
+            isArchived
+            archivedAt
+            tags {
+              id
+              name
+            }
+            item {
+              ... on Item {
+                isArticle
+                hasImage
+                hasVideo
+                timeToRead
+                shareId: id
+                itemId
+                preview {
+                  ...ItemPreview
+                }
+              }
+            }
+          }
+        }
+        pageInfo {
+          hasNextPage
+          hasPreviousPage
+          startCursor
+          endCursor
+        }
+        totalCount
+      }
+    }
+  }
+  ${FRAGMENT_ITEM_PREVIEW}
+`
+
+export async function getSavedItems({
+  actionType,
+  sortOrder = 'DESC',
+  tagNames,
+  pagination,
+  usePreviewMetaData
+}) {
+  const query = usePreviewMetaData ? getSavedItemsPreviewMetadataQuery : getSavedItemsQuery
   const requestDetails = itemFiltersFromGraph[actionType]
   if (!requestDetails) throw new MalformedItemRequestError()
 
@@ -56,7 +114,7 @@ export async function getSavedItems({ actionType, sortOrder = 'DESC', tagNames, 
   const variables = { filter: { ...filter, tagNames }, sort: { ...sort, sortOrder }, pagination }
   const operationName = actionToCamelCase(actionType)
 
-  return requestGQL({ query: getSavedItemsQuery, operationName, variables })
+  return requestGQL({ query, operationName, variables })
     .then(handleResponse)
     .catch((error) => console.error(error))
 }
