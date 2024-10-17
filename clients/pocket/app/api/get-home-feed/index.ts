@@ -1,6 +1,7 @@
 import { gql, pocketRequest } from '@common/utilities/pocket-request'
 import { getErrorMessage } from '@common/utilities/error-handler'
 import { SUPPORTED_LOCALES } from '@common/localization'
+import { FRAGMENT_ITEM_PREVIEW } from '../_fragments/preview'
 
 // Types
 import type { CorpusSlate, CorpusRecommendation, CorpusSlateLineup } from '@common/types/pocket'
@@ -33,16 +34,8 @@ const getHomeQuery = gql`
         recommendations(count: 12) {
           id
           corpusItem {
-            image {
-              url
-            }
-            url
-            title
-            excerpt
-            language
-            publisher
-            authors {
-              name
+            preview {
+              ...ItemPreview
             }
           }
           reason {
@@ -53,6 +46,8 @@ const getHomeQuery = gql`
       }
     }
   }
+
+  ${FRAGMENT_ITEM_PREVIEW}
 `
 
 /**
@@ -93,21 +88,22 @@ export async function getHomeSlates(locale: string): Promise<HomeQueryResponse |
 function getItemsFromSlate({ recommendations }: { recommendations: CorpusRecommendation[] }) {
   return recommendations.reduce((previous, current) => {
     const corpusItem = current?.corpusItem
+    const preview = current?.corpusItem?.preview
     const topic = current?.reason?.name
     const corpusRecommendationId = current?.id
     if (!corpusItem) return previous
     return {
       ...previous,
       [corpusRecommendationId]: {
-        ...corpusItem,
-        externalUrl: corpusItem.url,
-        saveUrl: corpusItem.url,
+        ...preview,
+        externalUrl: preview.url,
+        saveUrl: preview.url,
         id: corpusRecommendationId,
         itemId: corpusRecommendationId,
         topic,
         corpusRecommendationId,
         analyticsData: {
-          url: corpusItem.url,
+          url: preview.url,
           corpusRecommendationId
         }
       }
