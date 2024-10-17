@@ -6,11 +6,11 @@
   "devDependencies": {
     "@apollo/rover": "0.26.2",
     "@config/typescript-config": "workspace:*",
-    "@graphql-codegen/cli": "5.0.2",
-    "@graphql-codegen/typescript": "4.0.9",
-    "@graphql-codegen/typescript-resolvers": "4.2.1",
+    "@graphql-codegen/cli": "5.0.3",
+    "@graphql-codegen/typescript": "4.1.0",
+    "@graphql-codegen/typescript-resolvers": "4.3.0",
     "graphql": "16.9.0",
-    "next": "14.2.13",
+    "next": "14.2.15",
     "next-i18next": "15.3.1"
   },
   "keywords": [],

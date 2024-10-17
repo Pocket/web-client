@@ -6,28 +6,28 @@
   "dependencies": {
     "@common/constants": "workspace:*",
     "@common/utilities": "workspace:*",
-    "jose": "5.9.3",
-    "next": "14.2.13",
+    "jose": "5.9.4",
+    "next": "14.2.15",
     "react": "18.3.1",
-    "zustand": "5.0.0-rc.2"
+    "zustand": "5.0.0"
   },
   "devDependencies": {
     "@common/types": "workspace:*",
     "@config/eslint-config": "workspace:*",
     "@config/jest": "workspace:*",
     "@config/typescript-config": "workspace:*",
-    "@testing-library/jest-dom": "^6.5.0",
+    "@testing-library/jest-dom": "^6.6.2",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
     "@types/eslint": "^9.6.0",
     "@types/jest": "^29.5.13",
-    "@types/node": "^22.7.4",
-    "@types/react": "18.3.10",
-    "@types/react-dom": "^18.3.0",
+    "@types/node": "^22.7.6",
+    "@types/react": "18.3.11",
+    "@types/react-dom": "^18.3.1",
     "jest": "29.7.0",
-    "msw": "^2.4.9",
+    "msw": "^2.4.11",
     "ts-node": "^10.9.2",
-    "typescript": "5.6.2"
+    "typescript": "5.6.3"
   },
   "keywords": [],
   "license": "ISC",

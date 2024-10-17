@@ -7,13 +7,13 @@
     "@common/types": "workspace:*",
     "@common/utilities": "workspace:*",
     "@types/express": "5.0.0",
-    "@types/node": "22.7.4",
+    "@types/node": "22.7.6",
     "dotenv": "16.4.5",
-    "express": "4.21.0",
+    "express": "4.21.1",
     "nodemon": "3.1.7",
     "open-graph-scraper": "6.8.2",
     "ts-node": "^10.9.2",
-    "typescript": "5.6.2"
+    "typescript": "5.6.3"
   },
   "keywords": [],
   "license": "ISC",
