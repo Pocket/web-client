@@ -260,14 +260,11 @@ function title({ item, itemEnrichment, node }) {
  */
 function thumbnail({ item, itemEnrichment }) {
   const previewImage = item?.preview?.image?.cachedImages[0]?.url
+  if (previewImage) return previewImage
+
   const passedImage =
-    previewImage ||
-    itemEnrichment?.thumbnail ||
-    item?.thumbnail ||
-    item?.topImageUrl ||
-    item?.image?.url ||
-    false
-  if (passedImage) return passedImage
+    itemEnrichment?.thumbnail || item?.thumbnail || item?.topImageUrl || item?.image?.url || false
+  if (passedImage) return getImageCacheUrl(passedImage, { width: 600 })
 
   const firstImage = item?.images?.[Object.keys(item?.images)[0]]?.src
   if (firstImage) return getImageCacheUrl(firstImage, { width: 600 })

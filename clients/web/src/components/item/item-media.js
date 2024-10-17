@@ -1,7 +1,6 @@
 import { css } from '@emotion/css'
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
-import { getImageCacheUrl } from 'common/utilities/urls/urls'
 import { ListViewAltIcon } from '@ui/icons/ListViewAltIcon'
 
 const cardMediaStyles = css`
@@ -70,7 +69,7 @@ const cardMediaStyles = css`
  * to the layout.
  */
 export const CardMedia = function ({
-  image_src,
+  itemImage,
   title,
   id,
   onImageFail = () => {},
@@ -104,7 +103,7 @@ export const CardMedia = function ({
    *   0%	   = 00
    */
 
-  const hasImage = !!image_src
+  const hasImage = !!itemImage
   const letter = getFirstLetter(title)
   const color = getColorFromId(id)
   const mediaFallbackDetails = {
@@ -121,8 +120,8 @@ export const CardMedia = function ({
         style={mediaFallbackDetails}
         onError={onImageFail}
         alt=""
-        src={getImageCacheUrl(image_src, { width: 640, height: 360 })}
-        srcSet={` ${getImageCacheUrl(image_src, { width: 1280, height: 720 })} 2x `}
+        src={itemImage}
+        srcSet={itemImage}
       />
     ) : (
       <div className="no-image" style={mediaFallbackDetails} />

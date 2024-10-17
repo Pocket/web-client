@@ -147,7 +147,7 @@ export const Item = (props) => {
         <CardMedia
           topicName={topicName}
           isUserList={isUserList}
-          image_src={itemImage}
+          itemImage={itemImage}
           title={title}
           id={itemId}
           onOpen={onOpen}
