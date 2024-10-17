@@ -3,15 +3,15 @@
   "version": "1.0.0",
   "dependencies": {
     "@cdktf/provider-archive": "10.2.0",
-    "@cdktf/provider-aws": "19.38.1",
+    "@cdktf/provider-aws": "19.35.0",
     "@cdktf/provider-local": "10.1.1",
     "@cdktf/provider-null": "10.0.1",
-    "@cdktf/provider-pagerduty": "13.12.0",
-    "@pocket-tools/terraform-modules": "5.15.0",
+    "@cdktf/provider-pagerduty": "13.11.6",
+    "@pocket-tools/terraform-modules": "5.14.5",
     "cdktf": "0.20.9",
     "cdktf-cli": "0.20.9",
-    "constructs": "10.4.2",
-    "tslib": "2.8.0"
+    "constructs": "10.3.0",
+    "tslib": "2.7.0"
   },
   "devDependencies": {
     "@config/eslint-config": "workspace:*",
