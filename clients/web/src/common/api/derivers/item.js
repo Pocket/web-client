@@ -202,7 +202,7 @@ export function deriveItemData({
 }) {
   return {
     ...item,
-    authors: itemEnrichment?.authors || item?.authors || false,
+    authors: item?.preview?.authors || itemEnrichment?.authors || item?.authors || false,
     title: title({ item, itemEnrichment, node }),
     thumbnail: thumbnail({ item, itemEnrichment }),
     excerpt: excerpt({ item, itemEnrichment }),
@@ -239,6 +239,7 @@ function title({ item, itemEnrichment, node }) {
   const file = urlToUse?.substring(urlToUse.lastIndexOf('/') + 1)
   const fileName = file ? file.replace(/\.[^/.]+$/, '') : false
   return (
+    item?.preview?.title ||
     node?.title ||
     itemEnrichment?.title ||
     item?.collection?.title ||
@@ -258,8 +259,14 @@ function title({ item, itemEnrichment, node }) {
  * @returns {string:url} The most appropriate image to show as a thumbnail
  */
 function thumbnail({ item, itemEnrichment }) {
+  const previewImage = item?.preview?.image?.cachedImages[0]?.url
   const passedImage =
-    itemEnrichment?.thumbnail || item?.thumbnail || item?.topImageUrl || item?.image?.url || false
+    previewImage ||
+    itemEnrichment?.thumbnail ||
+    item?.thumbnail ||
+    item?.topImageUrl ||
+    item?.image?.url ||
+    false
   if (passedImage) return passedImage
 
   const firstImage = item?.images?.[Object.keys(item?.images)[0]]?.src
@@ -278,6 +285,7 @@ function publisher({ item, itemEnrichment, passedPublisher }) {
   const syndicatedPublisher = item?.syndicatedArticle?.publisher?.name
   //prettier-ignore
   return (
+    item?.preview?.domain?.name ||       // Preview Metadata
     syndicatedPublisher ||        // Syndicated - provided by curation
     passedPublisher ||            // Collections - hardcoded as 'Pocket'
     itemEnrichment?.publisher ||  // Home - curatedInfo: provided by curation || Collection - publisher: provided by curation
@@ -296,7 +304,13 @@ function publisher({ item, itemEnrichment, passedPublisher }) {
  * @returns {string} The most appropriate excerpt to show
  */
 function excerpt({ item, itemEnrichment }) {
-  return itemEnrichment?.excerpt || item?.collection?.excerpt || item?.excerpt || null
+  return (
+    item?.preview?.excerpt ||
+    itemEnrichment?.excerpt ||
+    item?.collection?.excerpt ||
+    item?.excerpt ||
+    null
+  )
 }
 
 /**
@@ -326,7 +340,7 @@ function isReadable({ item }) {
  * @returns {string} The url that opens to a non-pocket site
  */
 function externalUrl({ item, itemEnrichment, utmId = 'pocket_saves' }) {
-  const urlToUse = itemEnrichment?.url || item?.givenUrl || item?.resolvedUrl
+  const urlToUse = item?.preview?.url || itemEnrichment?.url || item?.givenUrl || item?.resolvedUrl
   const linkWithUTM = replaceUTM(urlToUse, utmId)
   return linkWithUTM
 }
@@ -337,7 +351,7 @@ function externalUrl({ item, itemEnrichment, utmId = 'pocket_saves' }) {
  * @returns {string} The url that should be saved or opened
  */
 function saveUrl({ item, itemEnrichment }) {
-  return itemEnrichment?.url || item?.givenUrl || item?.resolvedUrl || false
+  return item?.preview?.url || itemEnrichment?.url || item?.givenUrl || item?.resolvedUrl || false
 }
 
 /** ANALYTICS URL
@@ -346,7 +360,14 @@ function saveUrl({ item, itemEnrichment }) {
  * @returns {string} The url that should be passed to analytics
  */
 function analyticsUrl({ node, item, itemEnrichment }) {
-  return node?.url || item?.givenUrl || item?.resolvedUrl || itemEnrichment?.url || false
+  return (
+    item?.preview?.url ||
+    node?.url ||
+    item?.givenUrl ||
+    item?.resolvedUrl ||
+    itemEnrichment?.url ||
+    false
+  )
 }
 
 /** READ URl
@@ -379,7 +400,7 @@ export function readUrl({ item, node, itemEnrichment, status }) {
   if (!readable) return external
 
   // Otherwise we are gonna open it in reader view
-  const itemId = item?.readerSlug || node?.id || item?.itemId
+  const itemId = item?.shareId || node?.id || item?.itemId
   return `/read/${itemId}`
 }
 

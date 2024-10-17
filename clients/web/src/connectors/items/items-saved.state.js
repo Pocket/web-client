@@ -1,4 +1,4 @@
-import { put, takeEvery } from 'redux-saga/effects'
+import { put, takeEvery, select } from 'redux-saga/effects'
 import { getSavedItems } from 'common/api/queries/get-saved-items'
 import { getSavedItemsTagged } from 'common/api/queries/get-saved-items-tagged'
 import { getSavedItemsSearch } from 'common/api/queries/get-saved-items-search'
@@ -81,14 +81,24 @@ export const itemsSavedSagas = [
   takeEvery(ITEMS_SAVED_UPDATE_REQUEST, savedItemUpdateRequest)
 ]
 
+/** SAGA :: SELECTORS
+ --------------------------------------------------------------- */
+const getFlags = (state) => state.features
+
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
 function* savedItemRequest(action) {
   try {
+    const features = yield select(getFlags)
+    const previewMetaDataFlag = features['preview.metadata'] ?? {}
+    const usePreviewMetaData =
+      (previewMetaDataFlag?.active && previewMetaDataFlag?.assigned) || false
+
     const { actionType, sortOrder, pagination, count } = action
     const { pageInfo, edges, totalCount } = yield getSavedItems({
       actionType,
       sortOrder,
+      usePreviewMetaData,
       count,
       pagination
     }) || {}
@@ -99,7 +109,7 @@ function* savedItemRequest(action) {
     const savedItemIds = edges
       .filter(validateEdge)
       .filter(removeStarterArticle)
-      .map((edge) => edge?.node?.id)
+      .map((edge) => edge?.node?.item?.itemId)
 
     const nodes = edges.reduce(getNodeFromEdge, {})
     const itemsById = edges.reduce(getItemFromEdge, {})
@@ -208,25 +218,25 @@ const getNodeFromEdge = (previous, current) => {
   const cursor = current.cursor
   const { item, ...node } = current.node
   if (node.status === 'DELETED') return previous // REMOVE DELETED ITEMS FROM THE RESPONSE
-  return { ...previous, [node.id]: { cursor, ...node } }
+  return { ...previous, [item.itemId]: { cursor, ...node } }
 }
 
 const getItemFromEdge = (previous, current) => {
   const { item, node } = deriveSavedItem(current.node)
   if (node.status === 'DELETED') return previous
-  return { ...previous, [node.id]: item } // REMOVE DELETED ITEMS FROM THE RESPONSE
+  return { ...previous, [item.itemId]: item } // REMOVE DELETED ITEMS FROM THE RESPONSE
 }
 
 const getSearchNodeFromEdge = (previous, current) => {
   const { item, ...node } = current.node.savedItem
   if (node.status === 'DELETED') return previous
-  return { ...previous, [node.id]: node } // REMOVE DELETED ITEMS FROM THE RESPONSE
+  return { ...previous, [item.itemId]: node } // REMOVE DELETED ITEMS FROM THE RESPONSE
 }
 
 const getSearchItemFromEdge = (previous, current) => {
   const { item, node } = deriveSavedItem(current.node.savedItem)
   if (node.status === 'DELETED') return previous
-  return { ...previous, [node.id]: item } // REMOVE DELETED ITEMS FROM THE RESPONSE
+  return { ...previous, [item.itemId]: item } // REMOVE DELETED ITEMS FROM THE RESPONSE
 }
 
 /**
