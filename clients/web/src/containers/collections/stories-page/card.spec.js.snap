@@ -19,8 +19,8 @@ exports[`ItemCard renders a story 1`] = `
       >
         <img
           alt=""
-          src="https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F914953af-15fd-46b9-ba3c-eed3ed278f9a.jpeg"
-          srcset=" https://pocket-image-cache.com/1280x720/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F914953af-15fd-46b9-ba3c-eed3ed278f9a.jpeg 2x "
+          src="https://pocket-image-cache.com/600x/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F914953af-15fd-46b9-ba3c-eed3ed278f9a.jpeg"
+          srcset="https://pocket-image-cache.com/600x/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F914953af-15fd-46b9-ba3c-eed3ed278f9a.jpeg"
           style="--fallbackBackground: #FCB64380; --fallbackColor: #FCB643; --fallbackLetter: 'I';"
         />
       </a>

@@ -116,7 +116,7 @@ describe('Collection — Story', () => {
     // Derived content
     expect(item.title).toBe('Inside VW’s Campaign of Trickery')
     expect(item.thumbnail).toBe(
-      'https://s3.amazonaws.com/pocket-collectionapi-prod-images/914953af-15fd-46b9-ba3c-eed3ed278f9a.jpeg'
+      'https://pocket-image-cache.com/600x/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F914953af-15fd-46b9-ba3c-eed3ed278f9a.jpeg'
     )
     expect(item.publisher).toBe('New York Times')
     expect(item.excerpt).toBe(

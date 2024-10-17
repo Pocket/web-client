@@ -142,7 +142,7 @@ describe('Discover', () => {
     // Derived content
     expect(item.title).toBe('Apple is ready to admit it was wrong about the future of laptops')
     expect(item.thumbnail).toBe(
-      'https://cdn.vox-cdn.com/thumbor/26f5VRT9jvt6JW6WB4Nohu849cI=/0x137:1911x1138/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/22938855/Apple_MacBook_Pro_Ports_10182021.jpg'
+      'https://pocket-image-cache.com/600x/filters:format(jpg):extract_focal()/https%3A%2F%2Fcdn.vox-cdn.com%2Fthumbor%2F26f5VRT9jvt6JW6WB4Nohu849cI%3D%2F0x137%3A1911x1138%2Ffit-in%2F1200x630%2Fcdn.vox-cdn.com%2Fuploads%2Fchorus_asset%2Ffile%2F22938855%2FApple_MacBook_Pro_Ports_10182021.jpg'
     )
     expect(item.publisher).toBe('The Verge')
     expect(item.excerpt).toBe(

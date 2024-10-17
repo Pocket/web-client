@@ -81,7 +81,7 @@ describe('Collection — Page as Home Item', () => {
     expect(item.title).toBe('Down the Rabbit Hole: Why People Fall for Conspiracy Theories')
     // Expect this to be author image
     expect(item.thumbnail).toBe(
-      'https://pocket-image-cache.com/1200x/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2Fc3d81de1-7e57-4393-ab61-6323c061c2ef.png'
+      'https://pocket-image-cache.com/600x/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2Fc3d81de1-7e57-4393-ab61-6323c061c2ef.png'
     )
     expect(item.publisher).toBe('Pocket')
     expect(item.excerpt).toBe('And how to talk to those who have fallen for falsehoods. \n')

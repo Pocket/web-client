@@ -55,7 +55,7 @@ export const recommendationsFromSlate = {
     ],
     videos: null,
     topImageUrl:
-      'https://pocket-image-cache.com/1200x/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-syndicated-images%2Farticles%2F326%2F1566916077_direct.jpg',
+      'https://pocket-image-cache.com/600x/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-syndicated-images%2Farticles%2F326%2F1566916077_direct.jpg',
     timeToRead: 3,
     givenUrl:
       'http://getpocket.com/explore/item/the-3-minutes-it-takes-to-read-this-will-improve-your-conversations-forever',
@@ -111,7 +111,7 @@ describe('Syndicated', () => {
       'The 3 Minutes It Takes To Read This Will Improve Your Conversations Forever'
     )
     expect(item.thumbnail).toBe(
-      'https://pocket-image-cache.com/1200x/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-syndicated-images%2Farticles%2F326%2F1566916077_direct.jpg'
+      'https://pocket-image-cache.com/600x/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-syndicated-images%2Farticles%2F326%2F1566916077_direct.jpg'
     )
     expect(item.publisher).toBe('Josh Spector')
     expect(item.excerpt).toBe('How to ask better questions.')

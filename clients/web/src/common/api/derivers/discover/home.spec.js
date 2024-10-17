@@ -57,7 +57,7 @@ describe('Home', () => {
       'Exit Interview: I Was a Black, Female Thru-Hiker on the Appalachian Trail'
     )
     expect(item.thumbnail).toBe(
-      'https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/a62a1cf3-360d-4e27-8e57-2d4807d530b3.jpeg'
+      'https://pocket-image-cache.com/600x/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fa62a1cf3-360d-4e27-8e57-2d4807d530b3.jpeg'
     )
     expect(item.publisher).toBe('Atlas Obscura')
     expect(item.excerpt).toBeFalsy()

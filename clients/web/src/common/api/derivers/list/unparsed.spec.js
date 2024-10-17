@@ -95,7 +95,7 @@ describe('Saves - Unparsed', () => {
     // Derived content
     expect(item.title).toBe('Blausee')
     expect(item.thumbnail).toBe(
-      'https://www.myswitzerland.com/-/media/st/gadmin/images/accommodation/summer/typically%20swiss/k-img_5780_2_36163.jpg'
+      'https://pocket-image-cache.com/600x/filters:format(jpg):extract_focal()/https%3A%2F%2Fwww.myswitzerland.com%2F-%2Fmedia%2Fst%2Fgadmin%2Fimages%2Faccommodation%2Fsummer%2Ftypically%2520swiss%2Fk-img_5780_2_36163.jpg'
     )
     expect(item.publisher).toBe('myswitzerland.com')
     expect(item.excerpt).toBe(

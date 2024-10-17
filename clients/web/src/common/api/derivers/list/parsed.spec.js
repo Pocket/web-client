@@ -91,7 +91,7 @@ describe('Saves - Parsed', () => {
     // Derived content
     expect(item.title).toBe('The Secrets of \u2018Cognitive Super-Agers\u2019')
     expect(item.thumbnail).toBe(
-      'https://static01.nyt.com/images/2021/06/22/science/21SCI-BRODY-CENTENARIANS/21SCI-BRODY-CENTENARIANS-facebookJumbo.jpg'
+      'https://pocket-image-cache.com/600x/filters:format(jpg):extract_focal()/https%3A%2F%2Fstatic01.nyt.com%2Fimages%2F2021%2F06%2F22%2Fscience%2F21SCI-BRODY-CENTENARIANS%2F21SCI-BRODY-CENTENARIANS-facebookJumbo.jpg'
     )
     expect(item.publisher).toBe('The New York Times')
     expect(item.excerpt).toBe(

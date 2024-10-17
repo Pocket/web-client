@@ -128,7 +128,7 @@ describe('Collection — Page', () => {
     // Derived content
     expect(item.title).toBe('Making Sense of Cybersecurity in 2021')
     expect(item.thumbnail).toBe(
-      'https://s3.amazonaws.com/pocket-collectionapi-prod-images/10751de5-8574-4802-9988-e958b38ad72c.png'
+      'https://pocket-image-cache.com/600x/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F10751de5-8574-4802-9988-e958b38ad72c.png'
     )
     expect(item.publisher).toBe('Pocket')
     expect(item.excerpt).toBe(
