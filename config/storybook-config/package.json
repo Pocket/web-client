@@ -5,22 +5,22 @@
   "author": "",
   "dependencies": {
     "@ui/styles": "workspace:*",
-    "i18next": "^23.16.0",
+    "i18next": "^23.16.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-i18next": "^15.0.3"
+    "react-i18next": "^15.1.0"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^2.0.2",
-    "@storybook/addon-essentials": "8.3.5",
-    "@storybook/addon-interactions": "8.3.5",
-    "@storybook/addon-links": "8.3.5",
-    "@storybook/addon-onboarding": "8.3.5",
-    "@storybook/blocks": "8.3.5",
-    "@storybook/nextjs": "8.3.5",
-    "@storybook/react": "8.3.5",
-    "@storybook/test": "8.3.5",
-    "storybook": "8.3.5"
+    "@chromatic-com/storybook": "^3.0.0",
+    "@storybook/addon-essentials": "8.3.6",
+    "@storybook/addon-interactions": "8.3.6",
+    "@storybook/addon-links": "8.3.6",
+    "@storybook/addon-onboarding": "8.3.6",
+    "@storybook/blocks": "8.3.6",
+    "@storybook/nextjs": "8.3.6",
+    "@storybook/react": "8.3.6",
+    "@storybook/test": "8.3.6",
+    "storybook": "8.3.6"
   },
   "keywords": [],
   "license": "ISC",

@@ -10,7 +10,7 @@
     "@graphql-codegen/typescript": "4.1.0",
     "@graphql-codegen/typescript-resolvers": "4.3.0",
     "graphql": "16.9.0",
-    "next": "14.2.15",
+    "next": "15.0.1",
     "next-i18next": "15.3.1"
   },
   "keywords": [],
