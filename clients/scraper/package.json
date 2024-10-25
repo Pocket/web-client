@@ -7,7 +7,7 @@
     "@common/types": "workspace:*",
     "@common/utilities": "workspace:*",
     "@types/express": "5.0.0",
-    "@types/node": "22.7.9",
+    "@types/node": "22.8.0",
     "dotenv": "16.4.5",
     "express": "4.21.1",
     "nodemon": "3.1.7",
