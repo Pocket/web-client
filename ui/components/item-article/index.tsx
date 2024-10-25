@@ -4,17 +4,17 @@ import { ItemActions } from '../item-actions'
 import { ItemArticleMedia } from '../item-article-media'
 
 // Types
-import type { Item } from '@common/types'
+import type { PocketMetadata } from '@common/types/pocket'
 
 /**
  * ItemArticle
  * ---
  * A self contained representation of a piece of written content from around the web
  */
-export function ItemArticle({ item }: { item: Item }) {
+export function ItemArticle({ item }: { item: PocketMetadata }) {
   if (!item) return null
 
-  const { id: itemId, title, excerpt, image, publisher, topic, url } = item
+  const { id: itemId, title, excerpt, image, domain, url } = item
   return (
     <article className={style.base} data-testid="item">
       <div>
@@ -23,7 +23,7 @@ export function ItemArticle({ item }: { item: Item }) {
         </figure>
         <div className={style.contentContainer}>
           <div className={style.copy}>
-            <cite>{publisher}</cite>
+            <cite>{domain?.name}</cite>
             <h3>
               <a href={url} target="_blank">
                 {title}

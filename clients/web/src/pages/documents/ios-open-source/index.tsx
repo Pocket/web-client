@@ -13,7 +13,6 @@ async function getMDContent(): Promise<string> {
   const mdContent = readFileSync(join(process.cwd(), 'public/static/docs/ios-oss.md'), 'utf8')
   const mdContentModified = mdContent.replace(/\{:\s?\#(.+\S)\s?\}/gi, '{#$1}')
   const content = marked.parse(
-    // eslint-disable-next-line no-misleading-character-class
     mdContentModified.replace(/^[\u200B\u200C\u200D\u200E\u200F\uFEFF]/, '')
   )
 

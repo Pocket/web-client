@@ -1,7 +1,12 @@
 const path = require('path')
 
 const buildEslintCommand = (filenames) =>
-  `next lint --fix --file ${filenames.map((f) => path.relative(process.cwd(), f)).join(' --file ')}`
+  `next lint --fix --file ${filenames
+    .map((f) => {
+      const modified = f.replaceAll(/[\[\]]/g, '\\$&')
+      return path.relative(process.cwd(), modified)
+    })
+    .join(' --file ')}`
 
 module.exports = {
   '*.ts': [buildEslintCommand, 'prettier --write'],

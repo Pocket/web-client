@@ -19,7 +19,8 @@ type Session = {
 export async function createSession(): Promise<Session> {
   try {
     // Retrieve the access token (if we have one) to fetch a new JWT
-    const accessToken = await cookies().get('accessToken')?.value
+    const storedCookies = await cookies()
+    const accessToken = storedCookies.get('accessToken')?.value
     const bearerResponse = await fetch(
       `https://getpocket.com/v3/jwt?access_token=${accessToken}&consumer_key=${CONSUMER_KEY}&enable_cors=1`
     ).then((response) => response.json())
@@ -30,7 +31,13 @@ export async function createSession(): Promise<Session> {
 
     // Otherwise we will store the new token and pass that valid token back to the function
     // verifying things
-    cookies().set({ name: 'bearerToken', value: bearer, httpOnly: true, secure: true, path: '/' })
+    storedCookies.set({
+      name: 'bearerToken',
+      value: bearer,
+      httpOnly: true,
+      secure: true,
+      path: '/'
+    })
     const { isAuthenticated } = checkToken(bearer)
     return { token: bearer, isAuthenticated }
   } catch (err) {
@@ -47,8 +54,10 @@ export async function createSession(): Promise<Session> {
  */
 export async function verifySession(): Promise<Session> {
   try {
-    const bearerToken = await cookies().get('bearerToken')?.value
-    const accessToken = await cookies().get('accessToken')?.value
+    const storedCookies = await cookies()
+
+    const bearerToken = await storedCookies.get('bearerToken')?.value
+    const accessToken = await storedCookies.get('accessToken')?.value
 
     if (bearerToken) {
       const { isExpired, isAuthenticated } = checkToken(bearerToken)
@@ -58,7 +67,7 @@ export async function verifySession(): Promise<Session> {
       // NOTE: Access tokens do not expire on the server side
       if (isAuthenticated && accessToken && !isExpired) {
         const expires = Date.now() + 30 * 24 * 60 * 60 * 1000 // 30 days from now.
-        cookies().set({
+        storedCookies.set({
           expires,
           name: 'accessToken',
           value: accessToken,
@@ -83,8 +92,9 @@ export async function verifySession(): Promise<Session> {
  * removing any token data we have on hand
  */
 export async function deleteSession(): Promise<void> {
-  cookies().delete('accessToken')
-  cookies().delete('bearerToken')
+  const storedCookies = await cookies()
+  storedCookies.delete('accessToken')
+  storedCookies.delete('bearerToken')
 }
 
 /**
@@ -94,7 +104,8 @@ export async function deleteSession(): Promise<void> {
  *
  */
 export async function getClaims() {
-  const bearerToken = await cookies().get('bearerToken')?.value
+  const storedCookies = await cookies()
+  const bearerToken = storedCookies.get('bearerToken')?.value
   if (bearerToken) {
     const claims = jose.decodeJwt(bearerToken)
     return claims

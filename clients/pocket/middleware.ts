@@ -1,5 +1,6 @@
-import { i18nRouter } from 'next-i18n-router'
 import { I18N_ROUTER_CONFIG } from '@common/localization'
+import { i18nRouter } from 'next-i18n-router'
+
 import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {

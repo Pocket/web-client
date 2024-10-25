@@ -3,7 +3,6 @@
  * it up and running for now.
  * https://github.com/zeit/next.js/blob/canary/examples/with-sentry-simple/pages/_error.js
  */
-import React from 'react'
 import Error from 'next/error'
 import ErrorPage from 'containers/_error/error'
 
@@ -18,7 +17,7 @@ const ClientError = ({ statusCode, hasGetInitialPropsRun, err }) => {
   return <ErrorPage statusCode={statusCode} />
 }
 
-ClientError.getInitialProps = async ({ res, err, asPath }) => {
+ClientError.getInitialProps = async ({ res, err }) => {
   const errorInitialProps = await Error.getInitialProps({ res, err })
 
   // Workaround for https://github.com/zeit/next.js/issues/8592, mark when

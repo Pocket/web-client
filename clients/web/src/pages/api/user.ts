@@ -37,7 +37,7 @@ export default function handler(res: NextApiResponse): Promise<void> | undefined
       .then((response) => {
         res.status(200).json(response)
       })
-  } catch (err) {
+  } catch {
     console.warn('USER API ERROR')
   }
 }

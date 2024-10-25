@@ -9,7 +9,7 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
  * Creates a connected `Card` with the appropriate data and actions
  * @param {object} {id, position} item_id for data and position for analytics
  */
-export function ItemCard({ id, cardShape, className, showExcerpt = false, position, partnerType }) {
+export function ItemCard({ id, showExcerpt = false, position, partnerType }) {
   const dispatch = useDispatch()
   // Get data from state
   const analyticsInitialized = useSelector((state) => state.analytics.initialized)

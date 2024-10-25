@@ -1,18 +1,31 @@
-import { gql, pocketRequest } from '@common/utilities/pocket-request'
-import { getErrorMessage } from '@common/utilities/error-handler'
 import { SUPPORTED_LOCALES } from '@common/localization'
+
+import { getErrorMessage } from '@common/utilities/error-handler'
+import { gql, pocketRequest } from '@common/utilities/pocket-request'
+
 import { FRAGMENT_ITEM_PREVIEW } from '../_fragments/preview'
 
 // Types
-import type { CorpusSlate, CorpusRecommendation, CorpusSlateLineup } from '@common/types/pocket'
-import type { Item } from '@common/types'
+import type {
+  CorpusSlate,
+  CorpusRecommendation,
+  CorpusSlateLineup,
+  PocketMetadata
+} from '@common/types/pocket'
 
-export type HomeQueryResponse = {
-  itemsById: Record<string, Item>
-  slatesById: Record<string, CorpusSlate>
+interface ResponseError {
+  responseError?: string
+}
+
+export type SlateWithRecIds = {
+  recIds: string[]
+} & Omit<CorpusSlate, 'recommendations'>
+
+export interface HomeQueryResponse {
+  itemsById: Record<string, PocketMetadata>
+  slatesById: Record<string, SlateWithRecIds>
   slateArray: string[]
 }
-type ResponseError = { responseError?: string }
 
 /**
  * getHomeQuery
@@ -32,15 +45,10 @@ const getHomeQuery = gql`
           text
         }
         recommendations(count: 12) {
-          id
           corpusItem {
             preview {
               ...ItemPreview
             }
-          }
-          reason {
-            name
-            type
           }
         }
       }
@@ -67,9 +75,8 @@ export async function getHomeSlates(locale: string): Promise<HomeQueryResponse |
     const slates = response?.homeSlateLineup?.slates
     if (!slates) throw new HomeRequestError('No slates were returned')
 
-    const itemsById = slates
-      .map(getItemsFromSlate)
-      .reduce((previous: any, current: any) => ({ ...previous, ...current }), {})
+    const slatesWithItemsById = slates.map(getItemsFromSlate)
+    const itemsById = combineSlateItems(slatesWithItemsById)
 
     const slatesById = slates.reduce(processSlates, {})
     const slateArray = slates.map((slate: CorpusSlate) => slate.id)
@@ -85,29 +92,30 @@ export async function getHomeSlates(locale: string): Promise<HomeQueryResponse |
  * ---
  * We want to store items by ID to normalize things, this gives us back a items by id
  */
-function getItemsFromSlate({ recommendations }: { recommendations: CorpusRecommendation[] }) {
+function getItemsFromSlate({
+  recommendations
+}: {
+  recommendations: CorpusRecommendation[]
+}): Record<string, PocketMetadata> {
   return recommendations.reduce((previous, current) => {
     const corpusItem = current?.corpusItem
     const preview = current?.corpusItem?.preview
-    const topic = current?.reason?.name
-    const corpusRecommendationId = current?.id
+    const id = preview.id
     if (!corpusItem) return previous
-    return {
-      ...previous,
-      [corpusRecommendationId]: {
-        ...preview,
-        externalUrl: preview.url,
-        saveUrl: preview.url,
-        id: corpusRecommendationId,
-        itemId: corpusRecommendationId,
-        topic,
-        corpusRecommendationId,
-        analyticsData: {
-          url: preview.url,
-          corpusRecommendationId
-        }
-      }
-    }
+    return { ...previous, [id]: preview }
+  }, {})
+}
+
+/**
+ * CombineSlateItems
+ * ---
+ * Quick utility to get a single object of items with ids as the key
+ */
+function combineSlateItems(
+  objects: Record<string, PocketMetadata>[]
+): Record<string, PocketMetadata> {
+  return objects.reduce((acc, obj) => {
+    return { ...acc, ...obj }
   }, {})
 }
 
@@ -116,9 +124,12 @@ function getItemsFromSlate({ recommendations }: { recommendations: CorpusRecomme
  * ---
  * We want to store items by ID to normalize things, this gives us back a flattened slates by id
  */
-function processSlates(previous: any, { recommendations, ...slate }: CorpusSlate) {
-  const recIds = recommendations.map((rec) => rec.id)
-  return { ...previous, [slate.id]: { ...slate, recommendations: recIds } }
+function processSlates(
+  previous: Record<string, SlateWithRecIds>,
+  { recommendations, ...slate }: CorpusSlate
+) {
+  const recIds = recommendations.map((rec) => rec?.corpusItem?.preview?.id)
+  return { ...previous, [slate.id]: { ...slate, recIds } }
 }
 
 class HomeRequestError extends Error {

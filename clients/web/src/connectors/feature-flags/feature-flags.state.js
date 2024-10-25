@@ -106,7 +106,7 @@ export async function fetchUnleashData(userId, sessionId, birth, locale, userMod
     const unleashData = arrayToObject(adjustedAssignments, 'name')
 
     return unleashData
-  } catch (error) {
+  } catch {
     console.warn(error)
   }
 }
@@ -149,7 +149,7 @@ async function filterUnleashAssignments(response) {
 function parsePayload(payload) {
   try {
     return JSON.parse(payload)
-  } catch (error) {
+  } catch {
     return {}
   }
 }

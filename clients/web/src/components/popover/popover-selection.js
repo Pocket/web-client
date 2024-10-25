@@ -57,7 +57,7 @@ export const SelectionPopover = ({ anchor, addAnnotation, disablePopup, shareIte
     const isClickOutside = (e) => {
       // only process left-click
       if (e.button !== 0) return () => {}
-      if (!ref.current || !ref.current.contains(e.target)) {
+      if (!ref.current?.contains(e.target)) {
         disablePopup()
       }
     }

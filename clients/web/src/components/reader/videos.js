@@ -5,7 +5,7 @@ import { waitForElement } from 'common/utilities/elements/wait-for-element'
 async function replaceVideo(video) {
   const videoID = video.video_id || video.videoId
   const elementID = `RIL_VIDEO_${videoID}`
-  const element = document.getElementById(elementID) || (await waitForElement(`#${elementID}`))
+  const element = document.getElementById(elementID) ?? (await waitForElement(`#${elementID}`))
 
   if (element) {
     const root = ReactDOM.createRoot(element)

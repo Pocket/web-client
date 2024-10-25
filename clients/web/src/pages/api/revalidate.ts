@@ -51,7 +51,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     res.json({ revalidated: true })
     return
-  } catch (err) {
+  } catch {
     // If there was an error, Next.js will continue
     // to show the last successfully generated page
     res.status(500).send('Error revalidating')

@@ -1,8 +1,6 @@
 import { css } from '@emotion/css'
 import Link from 'next/link'
-import { useTranslation } from 'next-i18next'
 import { getImageCacheUrl } from 'common/utilities/urls/urls'
-import { NewViewIcon } from '@ui/icons/NewViewIcon'
 
 const cardMediaStyles = css`
   --aspect-percent: 56.25%;
@@ -121,7 +119,6 @@ export const CardMedia = function ({
     '--fallbackLetter': `'${letter}'`
   }
 
-  const { t } = useTranslation()
   const linkTarget = openInNewTab ? '_blank' : ''
   const linkRel = openInNewTab ? 'noopener' : ''
 

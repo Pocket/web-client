@@ -80,63 +80,7 @@ module.exports = {
       'warn',
       { vars: 'local', args: 'after-used', ignoreRestSiblings: true }
     ],
-    'perfectionist/sort-exports': 'off',
-    'perfectionist/sort-named-exports': 'off',
-    'perfectionist/sort-jsx-props': 'off',
-    'perfectionist/sort-objects': 'off',
-    'perfectionist/sort-union-types': 'off',
-    'perfectionist/sort-object-types': 'off',
-    'perfectionist/sort-imports': [
-      'error',
-      {
-        type: 'natural',
-        order: 'asc',
-        groups: [
-          'ui-styles',
-          'config',
-          'testing',
-          'testing-setup',
-          'decorators',
-          'icons',
-          ['frameworks', 'builtin', 'external'],
-          'internal',
-          ['parent', 'sibling', 'index'],
-          'object',
-          'state',
-          'data',
-          [
-            'type',
-            'internal-type',
-            'parent-type',
-            'sibling-type',
-            'index-type',
-            'storybook-type',
-            'common-type'
-          ],
-          'unknown'
-        ],
-        'custom-groups': {
-          value: {
-            'ui-styles': ['style', '@ui/styles/**', './style.module.css', '../**/style.module.css'],
-            config: ['@config/env'],
-            frameworks: ['react', 'react-*', 'next/**', '@next/**'],
-            icons: ['react-icons/**'],
-            testing: ['@config/jest', '@testing-library/**'],
-            'testing-setup': ['../__setup__/**', '../__mocks__/**'],
-            data: ['@common/mock-data/**', '*.json'],
-            decorators: '../_decorators/**',
-            'common-type': ['@common/types', '@common/types/**'],
-            state: '@common/state/**'
-          },
-          type: {
-            'common-type': ['@common/types', '@common/types/**'],
-            'storybook-type': '@storybook/react'
-          }
-        },
-        'newlines-between': 'always',
-        'internal-pattern': ['@ui/components/**', '@common/utilities/**']
-      }
-    ],
+
     'jsdoc/informative-docs': 1,
     'jsdoc/require-param': 0, // Generally handled by typescript
     'jsdoc/require-returns': 0, // Generally handled by typescript

@@ -107,11 +107,9 @@ export default function LearnMore() {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const featureState = useSelector((state: any) => state.features)
   const enrolledRebranding = featureFlagActive({ flag: 'fxa.rebranding', featureState })
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const isPremium = useSelector((state: any) => state.user.premium_status === '1')
 
   const handleUpgrade = () => {

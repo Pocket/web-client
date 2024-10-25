@@ -118,14 +118,14 @@ export const postMime = ({ api_url = API_URL, params = {}, path, method = 'POST'
 
 /**
  * requestGQL — Make an API call to the pocket graph
- * 
- * @param {Object} data 
+ *
+ * @param {Object} data
  * @param {string} data.query Query to execute on the graph
  * @param {string} data.operationName Basic name to help identify the request (testing, logging)
  * @param {object} data.variables Variables to use when interpolatin the query
  **/
 export const requestGQL = (data) => {
-  const RELEASE_VERSION = process.env.RELEASE_VERSION || 'v0.0.0'
+  const RELEASE_VERSION = process.env.RELEASE_VERSION ?? 'v0.0.0'
 
   const clientInfo = {
     'apollographql-client-name': 'web-client',

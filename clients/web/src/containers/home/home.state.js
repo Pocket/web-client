@@ -113,7 +113,7 @@ function homeDemotionPersist({ saveUrl }) {
     // to the DL team to impliment properly on the server side
     const today = new Date().setHours(0, 0, 0, 0)
     localStore.setItem('demotedRecsDate', today.toString())
-  } catch (err) {
+  } catch {
     return
   }
 }

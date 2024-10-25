@@ -133,7 +133,7 @@ export async function getReaderItemMeta(slug) {
       shareItem: response.share,
       itemsById: { [derivedShare.itemId]: derivedShare }
     }
-  } catch (err) {
+  } catch {
     return {
       error: 'Bad Response'
     }

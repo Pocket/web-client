@@ -61,7 +61,7 @@ const filterStyle = css`
   }
 `
 
-export function SearchFilterMenu({ subset, filter, total, query }) {
+export function SearchFilterMenu({ filter, total, query }) {
   const { t } = useTranslation()
 
   const filterActive = (filterLink) => {

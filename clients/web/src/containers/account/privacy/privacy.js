@@ -6,7 +6,6 @@ import { AccountClearModal } from 'containers/account/privacy/confirm-clear'
 
 import { accountClear } from './privacy.state'
 import { accountDelete } from './privacy.state'
-import { rssProtect } from './privacy.state'
 
 export const Privacy = () => {
   const dispatch = useDispatch()

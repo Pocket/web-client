@@ -243,18 +243,18 @@ const getSearchItemFromEdge = (previous, current) => {
  * Errors 
  ----------------------------------------------------------------------------*/
 
-class SavedItemsError extends Error {
-  constructor(message) {
-    super(message)
-    this.name = 'SavedItemsError'
-    this.logMessage = message
-  }
-}
+// class SavedItemsError extends Error {
+//   constructor(message) {
+//     super(message)
+//     this.name = 'SavedItemsError'
+//     this.logMessage = message
+//   }
+// }
 
-class SavedItemsTaggedError extends Error {
-  constructor(message) {
-    super(message)
-    this.name = 'SavedItemsTaggedError'
-    this.logMessage = message
-  }
-}
+// class SavedItemsTaggedError extends Error {
+//   constructor(message) {
+//     super(message)
+//     this.name = 'SavedItemsTaggedError'
+//     this.logMessage = message
+//   }
+// }

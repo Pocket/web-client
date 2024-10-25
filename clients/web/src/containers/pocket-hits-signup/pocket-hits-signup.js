@@ -17,6 +17,7 @@ import {
 import PublisherGrid from 'components/pocket-hits-signup/publisher-grid'
 import { pocketHitsSignupRequested } from 'connectors/pocket-hits/pocket-hits.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import Link from 'next/link'
 
 /** STYLES
  ---------------------------------------------------------------------------- */
@@ -302,13 +303,13 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
 
                     <div className={formSubtextWrapper}>
                       <span className={formSubtextLinks}>
-                        <a href="/privacy" rel="noopener">
+                        <Link href="/privacy" rel="noopener">
                           Privacy
-                        </a>
+                        </Link>
                         <span>·</span>
-                        <a href="/tos" rel="noopener">
+                        <Link href="/tos" rel="noopener">
                           Terms
-                        </a>
+                        </Link>
                       </span>
                     </div>
                   </div>

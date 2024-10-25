@@ -41,7 +41,7 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
         destination
       }
     }
-  } catch (err) {
+  } catch {
     // Something went wrong while trying to sort the user out
     // so we are just gonna route them to `/saves` to avoid poor
     // user experience(seeing waypoint)

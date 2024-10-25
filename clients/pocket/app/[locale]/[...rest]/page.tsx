@@ -1,6 +1,8 @@
 import { ErrorNotFound } from '@ui/components/error-not-found'
 
-export default function NotFound({ params: { locale } }: { params: { locale: string } }) {
+export default async function NotFound({ params }: { params: { locale: string } }) {
+  const { locale } = await params
+
   return (
     <>
       <div className="page-container">

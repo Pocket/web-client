@@ -9,7 +9,7 @@ const baseProps = {
   placeholder: 'Storybook placeholder text'
 }
 
-jest.mock('next/router', () => require('next-router-mock'))
+jest.mock('next/router', () => jest.requireActual('next-router-mock'))
 
 describe('GlobalNavSearch', () => {
   mockModal()

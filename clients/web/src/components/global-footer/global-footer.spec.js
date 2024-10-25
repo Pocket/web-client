@@ -2,7 +2,7 @@ import { render } from '@config/jest'
 import '@testing-library/jest-dom'
 
 import { GlobalFooter } from './global-footer'
-jest.mock('next/router', () => require('next-router-mock'))
+jest.mock('next/router', () => jest.requireActual('next-router-mock'))
 
 describe('GlobalFooter', () => {
   it('adds a top border to the footer if props.hasBorder is true', () => {

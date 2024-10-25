@@ -6,6 +6,7 @@
     "@common/localization": "workspace:*",
     "@common/state": "workspace:*",
     "@common/utilities": "workspace:*",
+    "@eslint/compat": "1.2.1",
     "@sentry/nextjs": "^8.35.0",
     "@ui/components": "workspace:*",
     "@ui/styles": "workspace:*",
@@ -13,7 +14,8 @@
     "next": "15.0.1",
     "next-i18n-router": "5.5.1",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "typescript-eslint": "8.11.0"
   },
   "devDependencies": {
     "@common/types": "workspace:*",
@@ -24,6 +26,7 @@
     "@types/react-dom": "^18.3.1",
     "eslint": "^9.13.0",
     "eslint-config-next": "15.0.1",
+    "eslint-config-prettier": "^9.1.0",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-nested": "^6.2.0",
     "postcss-preset-env": "^10.0.8",

@@ -76,8 +76,7 @@ export const CardMedia = function ({
   topicName,
   isUserList,
   openUrl,
-  onOpen,
-  openInNewTab
+  onOpen
 }) {
   /**
    * Fallback images:

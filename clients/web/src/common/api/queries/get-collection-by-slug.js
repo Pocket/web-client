@@ -66,7 +66,7 @@ export function getCollectionBySlug(slug) {
     .catch((error) => console.error(error))
 }
 
-function handleResponse(response, slug) {
+function handleResponse(response) {
   try {
     const { collectionBySlug, errors } = response?.data || {}
     const { stories, ...collectionData } = collectionBySlug || {}

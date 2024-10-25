@@ -1,4 +1,3 @@
-/* eslint-disable -- Third party code for the most part */
 import DiffMatchPatch from 'diff-match-patch'
 
 export function compileAnnotations(highlightList) {
@@ -23,10 +22,7 @@ export function compileAnnotations(highlightList) {
  * @return {RegExp}      [description]
  */
 function highlightRegex(text) {
-  return new RegExp(
-    text.replace(/[.*+?|()[\]{}\\$^]/g, '\\$&').replace(/\s+/g, '\\s+'),
-    'ig'
-  )
+  return new RegExp(text.replace(/[.*+?|()[\]{}\\$^]/g, '\\$&').replace(/\s+/g, '\\s+'), 'ig')
 }
 
 export function highlightAnnotation(annotation, onHover, element, callback) {
@@ -161,26 +157,18 @@ function highlight(node, className, annotation, tapListener, callback) {
     textEnd
 
   if (annotation.version === 2 || annotation.version === '2') {
-    const pktTagRegex = new RegExp(
-      '<pkt_tag_annotation>([\\s\\S]*)</pkt_tag_annotation>'
-    )
+    const pktTagRegex = new RegExp('<pkt_tag_annotation>([\\s\\S]*)</pkt_tag_annotation>')
     which = 1 // Highlight only the part inside parens (in regex-speak: the first group).
     // Use diff-match-patch library.
     const dmp = new DiffMatchPatch()
-    const patchResult = dmp.patch_apply(
-      dmp.patch_fromText(annotation.patch),
-      text
-    )
+    const patchResult = dmp.patch_apply(dmp.patch_fromText(annotation.patch), text)
     if (patchResult[1][0]) {
       matchingText = pktTagRegex.exec(patchResult[0])
     } else {
       // deeper search
       dmp.Match_Distance = 3000
       dmp.Match_Threshold = 0.5
-      const secondPatchResult = dmp.patch_apply(
-        dmp.patch_fromText(annotation.patch),
-        text
-      )
+      const secondPatchResult = dmp.patch_apply(dmp.patch_fromText(annotation.patch), text)
       if (secondPatchResult[1][0]) {
         matchingText = pktTagRegex.exec(secondPatchResult[0])
       }

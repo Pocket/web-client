@@ -12,8 +12,9 @@ export async function GET(request: NextRequest) {
   const accessToken = passedAccessToken ?? storedAccessToken?.value ?? false
   const expires = Date.now() + 30 * 24 * 60 * 60 * 1000 // 30 days from now. Will be refreshed
 
+  const storedCookies = await cookies()
   if (accessToken) {
-    cookies().set({
+    storedCookies.set({
       expires,
       name: 'accessToken',
       value: accessToken,

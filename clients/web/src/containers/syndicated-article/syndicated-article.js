@@ -4,7 +4,7 @@ import Layout from 'layouts/main'
 import MobileLayout from 'layouts/mobile-web'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { BASE_URL } from 'common/constants'
 
 import { contentLayout } from 'components/content-layout/content-layout'
@@ -23,8 +23,6 @@ import { AdRailBottom } from 'components/content-ads/content-ads'
 
 import { ContentParsed } from 'components/content-parsed/content-parsed'
 import { PublisherAttribution } from 'components/content-publisher/publisher-attribution'
-
-import { callGetPong, saveArticleItem, unSaveArticleItem } from './syndicated-article.state'
 
 import { PublisherRecs } from './publisher-recs'
 import { PocketRecs } from './pocket-recs'
