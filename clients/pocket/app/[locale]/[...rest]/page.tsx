@@ -1,6 +1,11 @@
+import { SUPPORTED_LOCALES } from '@common/localization'
 import { ErrorNotFound } from '@ui/components/error-not-found'
 
-export default async function NotFound({ params }: { params: { locale: string } }) {
+export function generateStaticParams() {
+  return SUPPORTED_LOCALES.map((locale) => ({ locale }))
+}
+
+export default async function NotFound({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
 
   return (

@@ -5,14 +5,13 @@ import { COLOR_MODE_PREFIX, CACHE_KEY_COLOR_MODE } from '@common/constants'
 
 // Third-Party
 import { cookies } from 'next/headers'
-
 // UI
 import { NavFooter } from '@ui/components/nav-footer'
+
 import { NavTop } from '@ui/components/nav-top'
 
 // State
 import { HydrateUserSettings } from '@common/state/user-settings/hydrate'
-
 // Types
 import type { UserSettingsState } from '@common/state/user-settings'
 import type { Metadata } from 'next'
@@ -28,9 +27,11 @@ export default async function RootLayout({
   params
 }: Readonly<{
   children: React.ReactNode
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }>) {
+  // The locale passed in for localization
   const { locale } = await params
+
   // Gather some stored user settings
   const storedColorMode = await getColorMode()
 

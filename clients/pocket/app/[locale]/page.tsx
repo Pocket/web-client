@@ -1,14 +1,22 @@
 // API
 import { getHomeSlates, type HomeQueryResponse } from '@api/get-home-feed'
 
+// Constants
+import { SUPPORTED_LOCALES } from '@common/localization'
+
 // UI
 import { Error } from '@ui/components/error'
+
 import { ItemArticle } from '@ui/components/item-article'
 
 // Types
 import type { SlateWithRecIds } from '@api/get-home-feed'
 
-export default async function Home({ params }: { params: { locale: string } }) {
+export function generateStaticParams() {
+  return SUPPORTED_LOCALES.map((locale) => ({ locale }))
+}
+
+export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const response = await getHomeSlates(locale)
 

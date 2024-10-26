@@ -1,6 +1,11 @@
+import { SUPPORTED_LOCALES } from '@common/localization'
 import { Suspense } from 'react'
 
-export default async function About({ params }: { params: { locale: string } }) {
+export function generateStaticParams() {
+  return SUPPORTED_LOCALES.map((locale) => ({ locale }))
+}
+
+export default async function About({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
 
   return (
