@@ -26,6 +26,7 @@ import { useState } from 'react'
 import { SettingTheme } from '../setting-theme'
 
 import { useUserInfo } from '@common/state/user-info'
+import Link from 'next/link'
 
 /**
  * NavTopAccountProfile
@@ -110,28 +111,27 @@ function ProfilePanel() {
         <div className={style.email}>{email}</div>
       </div>
       <hr />
-      <button className={`menu ${style.menuTop}`} type="button">
+      <Link href="/" className={`button menu ${style.menuTop}`} type="button">
         <HomeIcon /> {t('profile:home', 'Home')}
-      </button>
-      <button className="menu" type="button">
+      </Link>
+      <Link href="/saves" className="button menu" type="button">
         <SaveIcon /> {t('profile:saves', 'Saves')}
-      </button>
-      <button className="menu" type="button">
+      </Link>
+      <Link href="/collections" className="button menu" type="button">
         <CollectionsIcon /> {t('profile:collections', 'Collections')}
-      </button>
+      </Link>
+      <Link href="/settings" className="button menu" type="button">
+        <SettingsIcon /> {t('profile:settings', 'Settings')}
+      </Link>
       <button className="menu" type="button">
         <AddCircledIcon /> {t('profile:add', 'Add')}
-      </button>
-      <button className="menu" type="button">
-        <SettingsIcon /> {t('profile:settings', 'Settings')}
       </button>
       <hr />
       <div className={style.themeSelect}>
         <SettingTheme buttonClass={style.themeButton} />
       </div>
-
       <hr />
-      <button className="menu" type="button" onClick={logout}>
+      <button className="button menu" type="button" onClick={logout}>
         <LockIcon /> {t('profile:log-out', 'Log Out')}
       </button>
     </div>

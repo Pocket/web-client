@@ -21,14 +21,15 @@
   box-shadow: var(--shadow-medium);
   min-width: 200px;
   z-index: var(--z-index-menu);
-  button {
+  button,
+  a {
     font-size: 0.9375rem;
-    &:last-of-type {
-      border-radius: 0 0 10px 10px;
-    }
     svg {
       margin-right: 0.5rem;
     }
+  }
+  button:last-of-type {
+    border-radius: 0 0 10px 10px;
   }
 
   .themeButton {
