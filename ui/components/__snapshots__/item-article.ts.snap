@@ -10,12 +10,12 @@ exports[`renders Item with expected data 1`] = `
       <figure>
         <div
           class="base"
-          data-color="coral"
+          data-color="teal"
           data-testid="item-media"
         >
           <img
             alt=""
-            src="https://compote.slate.com/images/2cb1d7b0-e8fa-4d4a-9048-a3db60b81e87.jpeg?width=1560"
+            src="https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fbb0c75a9-4d69-495c-9804-7083ed2afa06.jpeg"
           />
         </div>
       </figure>
@@ -26,18 +26,18 @@ exports[`renders Item with expected data 1`] = `
           class="copy"
         >
           <cite>
-            Slate
+            Quartz
           </cite>
           <h3>
             <a
-              href="https://slate.com/human-interest/2022/09/history-physical-education-kids-sports-inclusive-exercise.html"
+              href="https://getpocket.com/explore/item/the-strongest-predictor-of-men-s-well-being-isn-t-family-or-health"
               target="_blank"
             >
-              Why American Kids Grow Up Hating Exercise
+              The Strongest Predictor of Men’s Well-Being Isn’t Family or Health
             </a>
           </h3>
           <p>
-            Huffing through yet another long run together, my friend and I got to talking about how unlikely it was that the two of us had, one, met at the gym, and two, were now training for a marathon.
+            What makes men happy?
           </p>
         </div>
         <footer>

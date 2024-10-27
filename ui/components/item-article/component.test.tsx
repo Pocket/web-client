@@ -8,14 +8,15 @@ import { localeWrapper as wrapper } from '@config/jest/wrapper'
 import { ItemArticle as Component } from '.'
 
 // Mock Data
-import itemsById from '@common/mock-data/in-state/itemsById.json'
+import previewData from '@common/mock-data/in-state/previewData.json'
 
 // Types
 import { Item } from '@common/types'
+import { PocketMetadata } from '@common/types/pocket'
 
 describe('renders Item', () => {
   it('with expected data', () => {
-    const itemToRender = Object.values(itemsById)[0] as Item
+    const itemToRender = Object.values(previewData)[0] as PocketMetadata
     const rendered = render(<Component item={itemToRender} />, { wrapper })
     const renderedComponent = screen.getByTestId('item')
     expect(renderedComponent).toBeInTheDocument()

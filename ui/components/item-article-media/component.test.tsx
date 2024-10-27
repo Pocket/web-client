@@ -33,9 +33,26 @@ describe('renders ItemMedia', () => {
   })
 
   it('with an image', () => {
-    const imageUrl =
-      'https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-collectionapi-prod-images%2Ff9ec4814-8d77-4bfe-a759-0e6cba7453ab.jpeg'
-    const rendered = render(<Component id="1" imageUrl={imageUrl} />)
+    const image = {
+      caption: null,
+      credit: null,
+      cachedImages: [
+        {
+          url: 'https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fbb0c75a9-4d69-495c-9804-7083ed2afa06.jpeg',
+          id: 'WebP640'
+        },
+        {
+          url: 'https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fbb0c75a9-4d69-495c-9804-7083ed2afa06.jpeg',
+          id: 'WebP320'
+        },
+        {
+          url: 'https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fbb0c75a9-4d69-495c-9804-7083ed2afa06.jpeg',
+          id: 'WebPSquare'
+        }
+      ]
+    }
+
+    const rendered = render(<Component id="1" image={image} />)
     const renderedComponent = screen.getByTestId('item-media')
     expect(renderedComponent).toBeInTheDocument()
     expect(rendered.container).toMatchSnapshot()

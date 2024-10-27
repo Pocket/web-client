@@ -9,7 +9,7 @@ exports[`renders ItemMedia with an image 1`] = `
   >
     <img
       alt=""
-      src="https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-collectionapi-prod-images%2Ff9ec4814-8d77-4bfe-a759-0e6cba7453ab.jpeg"
+      src="https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fbb0c75a9-4d69-495c-9804-7083ed2afa06.jpeg"
     />
   </div>
 </div>

@@ -8,6 +8,7 @@
     "publisher": "Slate",
     "timeToRead": 16,
     "title": "Why American Kids Grow Up Hating Exercise",
+    "source": "POCKET_PARSER",
     "url": "https://slate.com/human-interest/2022/09/history-physical-education-kids-sports-inclusive-exercise.html"
   },
   "test-collection": {
@@ -24,6 +25,7 @@
     "publisher": "Pocket",
     "timeToRead": null,
     "title": "13 Delicious Sandwich Recipes",
+    "source": "POCKET_PARSER",
     "url": "https://getpocket.com/collections/13-delicious-sandwich-recipes"
   },
   "test-is-video": {
@@ -40,6 +42,7 @@
     "publisher": "YouTube",
     "timeToRead": null,
     "title": "THE BEST PUMPKIN PIE RECIPE WITH CLAIRE SAFFITZ | DESSERT PERSON",
+    "source": "POCKET_PARSER",
     "url": "http://www.youtube.com/watch?v=vT4Kk9v3B5Y"
   },
   "test-long-data": {
@@ -52,6 +55,7 @@
     "publisher": "NASA - National Aueronautics and Space Administration",
     "timeToRead": null,
     "title": "NASA’s Webb Sheds Light on Galaxy Evolution, Black Holes - NASA In an enormous new image, NASA’s James Webb Space Telescope reveals never-before-seen details of galaxy group “Stephan’s Quintet”",
+    "source": "POCKET_PARSER",
     "url": "https://www.nasa.gov/image-feature/goddard/2022/nasa-s-webb-sheds-light-on-galaxy-evolution-black-holes"
   },
   "test-long-title": {
@@ -68,6 +72,7 @@
     "publisher": "Inc. Magazine",
     "timeToRead": 5,
     "title": "How People With Very High Emotional Intelligence Use the Fortune Cookie Rule to Become Super-Resilient",
+    "source": "POCKET_PARSER",
     "url": "https://www.inc.com/bill-murphy-jr/how-people-with-highemotionalintelligenceuse-fortune-cookie-rule-to-become-exceptionally-resilient.html"
   },
   "test-bad-image": {
@@ -84,6 +89,7 @@
     "publisher": "psyche.co",
     "timeToRead": 22,
     "title": "How to be kinder to yourself",
+    "source": "POCKET_PARSER",
     "url": "https://psyche.co/guides/how-to-be-kinder-to-yourself-by-practising-self-compassion"
   },
   "06c5ad31-7c58-48ae-bd3c-2a693c1fd7cf": {
@@ -100,6 +106,7 @@
     "publisher": "Elle",
     "timeToRead": 9,
     "title": "There’s Nothing Effortless About Being a Woman",
+    "source": "POCKET_PARSER",
     "topic": "HEALTH_FITNESS",
     "url": "https://getpocket.com/explore/item/there-s-nothing-effortless-about-being-a-woman"
   },
@@ -117,6 +124,7 @@
     "publisher": "The Guardian",
     "timeToRead": 10,
     "title": "How to Talk to Anyone: The Experts’ Guide",
+    "source": "POCKET_PARSER",
     "topic": "SELF_IMPROVEMENT",
     "url": "https://getpocket.com/explore/item/how-to-talk-to-anyone-the-experts-guide"
   },
@@ -134,6 +142,7 @@
     "publisher": "The Washington Post",
     "timeToRead": 5,
     "title": "As the Internet Gets Scarier, More Parents Keep Their Kids’ Photos Offline",
+    "source": "POCKET_PARSER",
     "topic": "PARENTING",
     "url": "https://getpocket.com/explore/item/as-the-internet-gets-scarier-more-parents-keep-their-kids-photos-offline"
   },
@@ -151,6 +160,7 @@
     "publisher": "Narratively",
     "timeToRead": 21,
     "title": "A Super Strange True Love Story: My Disappearing Fiancé",
+    "source": "POCKET_PARSER",
     "topic": "TRAVEL",
     "url": "https://getpocket.com/explore/item/a-super-strange-true-love-story-my-disappearing-fianc"
   },
@@ -168,6 +178,7 @@
     "publisher": "BBC News",
     "timeToRead": 5,
     "title": "Why the World Is Becoming More Allergic to Food",
+    "source": "POCKET_PARSER",
     "topic": "SCIENCE",
     "url": "https://getpocket.com/explore/item/why-the-world-is-becoming-more-allergic-to-food"
   },
@@ -203,6 +214,7 @@
     "publisher": "Rolling Stone",
     "timeToRead": 10,
     "title": "Ronnie Spector: 15 Essential Songs",
+    "source": "POCKET_PARSER",
     "topic": "ENTERTAINMENT",
     "url": "https://getpocket.com/explore/item/ronnie-spector-15-essential-songs"
   },
@@ -220,6 +232,7 @@
     "publisher": "Mental Floss",
     "timeToRead": 4,
     "title": "How An Obscure British Comedy Sketch Became The World’s Most Repeated TV Program",
+    "source": "POCKET_PARSER",
     "topic": "ENTERTAINMENT",
     "url": "https://getpocket.com/explore/item/how-an-obscure-british-comedy-sketch-became-the-world-s-most-repeated-tv-program"
   },
@@ -237,6 +250,7 @@
     "publisher": "Lifehacker",
     "timeToRead": 9,
     "title": "How Not to Care When People Don’t Like You",
+    "source": "POCKET_PARSER",
     "topic": "SELF_IMPROVEMENT",
     "url": "https://getpocket.com/explore/item/how-not-to-care-when-people-don-t-like-you"
   },
@@ -254,6 +268,7 @@
     "publisher": "The Conversation",
     "timeToRead": 4,
     "title": "A Natural Deception: 3 Marketing Myths the Supplement Industry Wants You to Swallow",
+    "source": "POCKET_PARSER",
     "topic": "HEALTH_FITNESS",
     "url": "https://getpocket.com/explore/item/a-natural-deception-3-marketing-myths-the-supplement-industry-wants-you-to-swallow"
   },
@@ -271,6 +286,7 @@
     "publisher": "Nautilus",
     "timeToRead": 10,
     "title": "How to Tell If You’re a Jerk",
+    "source": "POCKET_PARSER",
     "topic": "SELF_IMPROVEMENT",
     "url": "https://getpocket.com/explore/item/how-to-tell-if-you-re-a-jerk"
   }

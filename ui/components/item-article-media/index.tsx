@@ -1,6 +1,7 @@
 import style from './style.module.css'
 
 import { ColorPlanes } from './color-planes'
+import { Image } from '@common/types/pocket'
 
 /**
  * ItemArticleMedia
@@ -8,12 +9,25 @@ import { ColorPlanes } from './color-planes'
  * Media Block that will load an image, handle failure, display a fall back
  * and do your dishes ... one of these statements is not true.  The game is afoot!
  */
-export function ItemArticleMedia({ imageUrl, id = '1' }: { imageUrl?: string | null; id: string }) {
+
+export function ItemArticleMedia({
+  image,
+  id = '1'
+}: {
+  image?: Omit<Image, 'imageId' | 'src' | 'url'> | null
+  id: string
+}) {
   const colorToUse = getColorFromId(id)
   const { width, height } = { width: 640, height: 360 }
+  const imageUrlToUse = image?.cachedImages?.length ? image.cachedImages[0]?.url : false
+
   return (
     <div className={style.base} data-color={colorToUse} data-testid="item-media">
-      {imageUrl ? <img alt="" src={imageUrl} /> : <ColorPlanes height={height} width={width} />}
+      {imageUrlToUse ? (
+        <img alt="" src={imageUrlToUse} />
+      ) : (
+        <ColorPlanes height={height} width={width} />
+      )}
     </div>
   )
 }

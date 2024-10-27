@@ -19,7 +19,7 @@ export function ItemArticle({ item }: { item: PocketMetadata }) {
     <article className={style.base} data-testid="item">
       <div>
         <figure>
-          <ItemArticleMedia id={itemId} imageUrl={image?.url} />
+          <ItemArticleMedia id={itemId} image={image} />
         </figure>
         <div className={style.contentContainer}>
           <div className={style.copy}>
