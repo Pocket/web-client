@@ -1,52 +1,35 @@
 import { gql } from '@common/utilities/pocket-request'
 
 export const FRAGMENT_ITEM_PREVIEW = gql`
-  fragment ItemPreview on PocketMetadata {
-    ... on ItemSummary {
-      id
-      image {
-        caption
-        credit
+  fragment ItemPreviewFragment on PocketMetadata {
+    id
+    authors {
+      name
+    }
+    datePublished
+    domain {
+      name
+    }
+    excerpt
+    title
+    source
+    url
+    image {
+      caption
+      credit
+      cachedImages(
+        imageOptions: [
+          { id: "WebP640", fileType: WEBP, width: 640 }
+          { id: "WebP320", fileType: WEBP, width: 320 }
+          { id: "WebPSquare", fileType: WEBP, width: 260, height: 260 }
+        ]
+      ) {
         url
-        cachedImages(imageOptions: [{ id: "WebPImage", fileType: WEBP, width: 640 }]) {
-          url
-          id
-        }
+        id
       }
-      excerpt
-      title
-      authors {
-        name
-      }
-      domain {
-        name
-      }
-      datePublished
-      url
     }
     ... on OEmbed {
-      id
-      image {
-        caption
-        credit
-        url
-        cachedImages(imageOptions: [{ id: "WebPImage", fileType: WEBP, width: 640 }]) {
-          url
-          id
-        }
-      }
-      excerpt
-      title
-      authors {
-        name
-      }
-      domain {
-        name
-      }
-      datePublished
-      url
       htmlEmbed
-      type
     }
   }
 `

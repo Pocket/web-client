@@ -44,10 +44,11 @@ const getHomeQuery = gql`
           url
           text
         }
+        recommendationReasonType
         recommendations(count: 12) {
           corpusItem {
             preview {
-              ...ItemPreview
+              ...ItemPreviewFragment
             }
           }
         }
@@ -99,9 +100,9 @@ function getItemsFromSlate({
 }): Record<string, PocketMetadata> {
   return recommendations.reduce((previous, current) => {
     const corpusItem = current?.corpusItem
+    if (!corpusItem) return previous
     const preview = current?.corpusItem?.preview
     const id = preview.id
-    if (!corpusItem) return previous
     return { ...previous, [id]: preview }
   }, {})
 }
