@@ -1,4 +1,4 @@
-import { put, takeEvery, select } from 'redux-saga/effects'
+import { put, takeEvery } from 'redux-saga/effects'
 import { getSavedItems } from 'common/api/queries/get-saved-items'
 import { getSavedItemsTagged } from 'common/api/queries/get-saved-items-tagged'
 import { getSavedItemsSearch } from 'common/api/queries/get-saved-items-search'
@@ -81,24 +81,14 @@ export const itemsSavedSagas = [
   takeEvery(ITEMS_SAVED_UPDATE_REQUEST, savedItemUpdateRequest)
 ]
 
-/** SAGA :: SELECTORS
- --------------------------------------------------------------- */
-const getFlags = (state) => state.features
-
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
 function* savedItemRequest(action) {
   try {
-    const features = yield select(getFlags)
-    const previewMetaDataFlag = features['preview.metadata'] ?? {}
-    const usePreviewMetaData =
-      (previewMetaDataFlag?.active && previewMetaDataFlag?.assigned) || false
-
     const { actionType, sortOrder, pagination, count } = action
     const { pageInfo, edges, totalCount } = yield getSavedItems({
       actionType,
       sortOrder,
-      usePreviewMetaData,
       count,
       pagination
     }) || {}
