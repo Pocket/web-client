@@ -1,6 +1,6 @@
 import { requestGQL } from 'common/utilities/request/request'
 import { gql } from 'common/utilities/gql/gql'
-import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
+import { FRAGMENT_ITEM_PREVIEW } from '../fragments/fragment.preview'
 import { itemFiltersFromGraph } from './get-saved-items.filters'
 import { actionToCamelCase } from 'common/utilities/strings/strings'
 
@@ -30,7 +30,17 @@ const searchSavedItemsQuery = gql`
                 name
               }
               item {
-                ...ItemDetails
+                ... on Item {
+                  isArticle
+                  hasImage
+                  hasVideo
+                  timeToRead
+                  shareId: id
+                  itemId
+                  preview {
+                    ...ItemPreview
+                  }
+                }
               }
             }
           }
@@ -45,7 +55,7 @@ const searchSavedItemsQuery = gql`
       }
     }
   }
-  ${FRAGMENT_ITEM}
+  ${FRAGMENT_ITEM_PREVIEW}
 `
 
 /**
@@ -67,8 +77,8 @@ export async function getSavedItemsSearch({
 
   const { filter, sort } = requestDetails
   const variables = { filter: { ...filter }, sort: { ...sort, sortOrder }, term, pagination }
-  if (Object.keys(variables.filter).length == 0){
-    delete variables.filter;
+  if (Object.keys(variables.filter).length == 0) {
+    delete variables.filter
   }
   const operationName = actionToCamelCase(actionType)
 
