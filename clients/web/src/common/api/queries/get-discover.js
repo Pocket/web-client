@@ -13,6 +13,7 @@ import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 import { requestGQL } from 'common/utilities/request/request'
 import { TOPIC_IDS } from 'common/constants'
 import { processLineup } from 'common/api/derivers/lineups'
+import { FRAGMENT_ITEM_PREVIEW } from '../fragments/fragment.preview'
 
 const getDiscoverLineupQuery = gql`
   query GetDiscoverLineup($id: String!, $recommendationCount: Int, $slateCount: Int) {
@@ -47,6 +48,9 @@ const getDiscoverLineupQuery = gql`
                 authors {
                   name
                 }
+                preview {
+                  ...ItemPreview
+                }
               }
             }
           }
@@ -55,6 +59,7 @@ const getDiscoverLineupQuery = gql`
     }
   }
   ${FRAGMENT_ITEM}
+  ${FRAGMENT_ITEM_PREVIEW}
 `
 
 export async function getDiscoverLineup({ recommendationCount = 30, locale }) {
