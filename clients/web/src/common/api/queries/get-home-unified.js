@@ -1,5 +1,6 @@
 import { gql } from 'common/utilities/gql/gql'
 import { requestGQL } from 'common/utilities/request/request'
+import { FRAGMENT_ITEM_PREVIEW } from '../fragments/fragment.preview'
 
 const getHomeQuery = gql`
   query Home($locale: String) {
@@ -26,6 +27,9 @@ const getHomeQuery = gql`
             authors {
               name
             }
+            preview {
+              ...ItemPreview
+            }
           }
           reason {
             name
@@ -35,6 +39,8 @@ const getHomeQuery = gql`
       }
     }
   }
+
+  ${FRAGMENT_ITEM_PREVIEW}
 `
 
 /**
