@@ -3,9 +3,9 @@ const domainPrefix = 'pocket-client'
 const isDev = process.env.NODE_ENV === 'development'
 const environment = isDev ? 'Dev' : 'Prod'
 const domain = isDev ? `${domainPrefix}.getpocket.dev` : `${domainPrefix}.pocket.com`
-const assetsPrefix = isDev ? 
-    'https://pocket-assets-dev.s3-website-us-east-1.amazonaws.com/pocket' :
- 'https://assets.getpocket.com/pocket'
+const assetsPrefix = isDev
+  ? 'https://pocket-assets-dev.s3-website-us-east-1.amazonaws.com/pocket'
+  : 'https://assets.getpocket.com/pocket'
 
 export const config = {
   name,
@@ -18,6 +18,11 @@ export const config = {
   assetsPrefix,
   tags: {
     service: name,
-    environment
+    environment,
+    owner: 'Pocket',
+    costCenter: 'Pocket',
+    app_code: 'pocket',
+    component_code: `pocket-${name.toLowerCase()}`,
+    env_code: isDev ? 'dev' : 'prod'
   }
 }
