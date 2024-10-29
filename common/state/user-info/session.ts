@@ -65,22 +65,26 @@ export async function verifySession(): Promise<Session> {
       // If the token states we are authenticated and not expired
       // AND we have an accessToken, let's refresh it.
       // NOTE: Access tokens do not expire on the server side
-      if (isAuthenticated && accessToken && !isExpired) {
-        const expires = Date.now() + 30 * 24 * 60 * 60 * 1000 // 30 days from now.
-        storedCookies.set({
-          expires,
-          name: 'accessToken',
-          value: accessToken,
-          httpOnly: true,
-          secure: true,
-          path: '/'
-        })
-      }
+      // !! IMPORTANT: This needs to happen in a server action. Need to better understand
+      // !! How nextJS determines a server action. Most likely this will need to be moved
+      // if (isAuthenticated && accessToken && !isExpired) {
+      //   const expires = Date.now() + 30 * 24 * 60 * 60 * 1000 // 30 days from now.
+      //   storedCookies.set({
+      //     expires,
+      //     name: 'accessToken',
+      //     value: accessToken,
+      //     httpOnly: true,
+      //     secure: true,
+      //     path: '/'
+      //   })
+      // }
       if (!isExpired) return { token: bearerToken, isAuthenticated }
     }
+
     const session: Session = await createSession()
     return session
   } catch (err) {
+    console.log(err)
     return { token: undefined, isAuthenticated: false }
   }
 }

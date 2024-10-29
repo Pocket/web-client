@@ -1,3 +1,5 @@
+import type { ResponseError } from '@common/types'
+
 /**
  * https://kentcdodds.com/blog/get-a-catch-block-error-message-with-typescript
  * ---
@@ -36,4 +38,8 @@ function toErrorWithMessage(maybeError: unknown): ErrorWithMessage {
  */
 export function getErrorMessage(error: unknown) {
   return toErrorWithMessage(error).message
+}
+
+export function isError<T extends object>(response: T | ResponseError): response is ResponseError {
+  return 'responseError' in response
 }

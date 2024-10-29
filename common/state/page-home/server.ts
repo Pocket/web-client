@@ -6,6 +6,7 @@ import { gql, pocketRequest } from '@common/utilities/pocket-request'
 import { FRAGMENT_ITEM_PREVIEW } from '../_fragments/preview'
 
 // Types
+import type { ResponseError } from '@common/types'
 import type {
   CorpusSlate,
   CorpusRecommendation,
@@ -13,10 +14,7 @@ import type {
   PocketMetadata
 } from '@common/types/pocket'
 
-interface ResponseError {
-  responseError?: string
-}
-
+// Custom Types for this return
 export type SlateWithRecIds = {
   recIds: string[]
 } & Omit<CorpusSlate, 'recommendations'>

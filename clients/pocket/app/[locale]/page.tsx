@@ -1,16 +1,15 @@
 // API
-import { getHomeSlates, type HomeQueryResponse } from '@api/get-home-feed'
+import { getHomeSlates } from '@common/state/page-home/server'
 
 // Constants
 import { SUPPORTED_LOCALES } from '@common/localization'
 
 // UI
 import { Error } from '@ui/components/error'
-
 import { ItemArticle } from '@ui/components/item-article'
 
 // Types
-import type { SlateWithRecIds } from '@api/get-home-feed'
+import type { SlateWithRecIds, HomeQueryResponse } from '@common/state/page-home/server'
 
 export function generateStaticParams() {
   return SUPPORTED_LOCALES.map((locale) => ({ locale }))

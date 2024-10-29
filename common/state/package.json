@@ -5,6 +5,7 @@
   "author": "",
   "dependencies": {
     "@common/constants": "workspace:*",
+    "@common/localization": "workspace:*",
     "@common/utilities": "workspace:*",
     "jose": "5.9.6",
     "next": "15.0.1",
