@@ -1,13 +1,3 @@
-import { css } from '@emotion/css'
-
-export const GoogleFonts = css`
-  :global() {
-    @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,600,600i');
-    @import url('https://fonts.googleapis.com/css?family=Vollkorn:400,400i,700,700i');
-    @import url('https://fonts.googleapis.com/css?family=Zilla+Slab:400,400i,600,600i');
-  }
-`
-
 export const FONT_TYPES = {
   blanco: {
     family: 'Blanco OSF',
