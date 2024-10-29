@@ -7,7 +7,7 @@ import { FRAGMENT_ITEM_PREVIEW } from '../_fragments/preview'
 import { FRAGMENT_ITEM_SAVED_INFO } from '../_fragments/saved-info'
 
 // Types
-import type { ResponseError } from '@common/types'
+import type { ResponseError, ExcludesFalse } from '@common/types'
 import type {
   Item,
   PageInfo,
@@ -35,6 +35,12 @@ interface UserSavesArguments {
   pagination: PaginationInput
   sort?: SavedItemsSort
   filter?: SavedItemsFilter
+}
+
+type SavedData = Omit<SavedItem, 'item'>
+type ConvertedEdge = {
+  preview: PocketMetadata & { itemId: string }
+  savedData: SavedData
 }
 
 const getUserSavesQuery = gql`
@@ -96,32 +102,45 @@ export async function getUserSaves(
 
     const { edges, pageInfo, totalCount } = savedItems
 
-    const convertedEdges = edges
-      ?.map((edge) => {
+    // If there are no edges for some reason, let's just assume no items
+    if (!edges) {
+      return {
+        itemsById: {},
+        saveDataById: {},
+        savePageIds: [],
+        savePageInfo: { ...pageInfo, totalCount: 0 }
+      }
+    }
+
+    // Let's run a quick consolidation so it's easier to normalize the data
+    const convertedEdges: ConvertedEdge[] = edges
+      .map((edge) => {
         const { item, ...savedData } = edge?.node || {}
 
         // We are gonna filter pending items out
-        // ?? NOTE: Pending item was a future pattern to separate parser response
-        // ?? from metadata.  As it stands, this is not fully implemented, but we
-        // ?? will still handle this case for type safety
         if (item?.__typename === 'PendingItem') return false
 
-        const { preview, itemId, shareId } = item as Item
-        return { preview: { ...preview, itemId }, savedData }
+        const { preview, itemId } = item as Item
+        return { preview: { ...preview, itemId }, savedData } as ConvertedEdge
       })
-      .filter(Boolean)
+      .filter(Boolean as unknown as ExcludesFalse)
+
+    // If something went wrong, let's abandon ship
+    if (!convertedEdges?.length) throw new PageSavesError('Malformed Edges')
 
     const itemsById = convertedEdges.reduce((previous, current) => {
-      const { preview, saveData } = current
+      const { preview } = current as ConvertedEdge
       return { ...previous, [preview.itemId]: preview }
     }, {})
 
     const saveDataById = convertedEdges.reduce((previous, current) => {
-      const { preview, saveData } = current
-      return { ...previous, [preview.itemId]: saveData }
+      const { preview, savedData } = current
+      return { ...previous, [preview.itemId]: savedData }
     }, {})
 
-    const savePageIds = edges.map((edge) => edge?.node?.item?.itemId)
+    const savePageIds = edges
+      .map((edge) => edge?.node?.item?.itemId ?? false)
+      .filter(Boolean as unknown as ExcludesFalse)
 
     return {
       itemsById,

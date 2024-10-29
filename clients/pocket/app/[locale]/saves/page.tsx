@@ -11,9 +11,7 @@ export function generateStaticParams() {
   return SUPPORTED_LOCALES.map((locale) => ({ locale }))
 }
 
-export default async function Saves({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params
-
+export default async function Saves() {
   const sortBy = 'CREATED_AT' as SavedItemsSortBy.CreatedAt
   const sortOrder = 'DESC' as SavedItemsSortOrder.Desc
   const statuses = ['UNREAD' as SavedItemStatusFilter.Unread]
