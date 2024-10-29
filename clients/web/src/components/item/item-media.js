@@ -23,7 +23,7 @@ const cardMediaStyles = css`
     position: absolute;
     object-fit: cover;
     width: 100%;
-    height: auto;
+    height: 100%;
     min-height: var(--aspect-percent);
     transition-property: opacity;
     transition-duration: 0.2s;

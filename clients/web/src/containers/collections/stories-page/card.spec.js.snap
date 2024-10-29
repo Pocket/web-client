@@ -9,7 +9,7 @@ exports[`ItemCard renders a story 1`] = `
     class="media-block"
   >
     <div
-      class="css-dwpxoa media"
+      class="css-14x2fwa media"
     >
       <a
         data-testid="image-link"
