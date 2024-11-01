@@ -1,10 +1,10 @@
 import { getErrorMessage } from '@common/utilities/error-handler'
 import { gql, pocketRequest } from '@common/utilities/pocket-request'
 
-import { getClaims, verifySession } from '../user-info/session'
-
 import { FRAGMENT_ITEM_PREVIEW } from '../_fragments/preview'
+
 import { FRAGMENT_ITEM_SAVED_INFO } from '../_fragments/saved-info'
+import { verifySession } from '../user-info/session'
 
 // Types
 import type { ResponseError, ExcludesFalse } from '@common/types'
@@ -14,9 +14,7 @@ import type {
   PaginationInput,
   PocketMetadata,
   SavedItem,
-  SavedItemConnection,
   SavedItemsFilter,
-  SavedItemsPage,
   SavedItemsSort,
   User
 } from '@common/types/pocket'
@@ -38,7 +36,8 @@ interface UserSavesArguments {
 }
 
 type SavedData = Omit<SavedItem, 'item'>
-type ConvertedEdge = {
+
+interface ConvertedEdge {
   preview: PocketMetadata & { itemId: string }
   savedData: SavedData
 }
@@ -115,7 +114,7 @@ export async function getUserSaves(
     // Let's run a quick consolidation so it's easier to normalize the data
     const convertedEdges: ConvertedEdge[] = edges
       .map((edge) => {
-        const { item, ...savedData } = edge?.node || {}
+        const { item, ...savedData } = edge?.node ?? {}
 
         // We are gonna filter pending items out
         if (item?.__typename === 'PendingItem') return false
@@ -129,7 +128,7 @@ export async function getUserSaves(
     if (!convertedEdges?.length) throw new PageSavesError('Malformed Edges')
 
     const itemsById = convertedEdges.reduce((previous, current) => {
-      const { preview } = current as ConvertedEdge
+      const { preview } = current
       return { ...previous, [preview.itemId]: preview }
     }, {})
 

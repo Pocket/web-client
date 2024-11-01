@@ -13,9 +13,9 @@ export type UserInfoState = {
   responseError?: string
 } & UserDisplayData
 
-type UserInfoActions = {
+interface UserInfoActions {
   getUserData: () => UserInfoState
-  removeUserData: () => void
+  removeUserData: () => Promise<void>
   setUserData: (data: UserInfoState) => void
 }
 

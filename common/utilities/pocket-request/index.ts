@@ -7,7 +7,7 @@ export async function pocketRequest<T extends GraphQlData>(
   token?: string
 ): Promise<T> {
   // Grab current release of the client
-  const RELEASE_VERSION = process.env.RELEASE_VERSION || 'v0.0.0'
+  const RELEASE_VERSION = process.env.RELEASE_VERSION ?? 'v0.0.0'
 
   // API url we will use for all pocket graph requests
   const API_URL = 'https://client-api.getpocket.com/'
@@ -36,7 +36,7 @@ export async function pocketRequest<T extends GraphQlData>(
   }
 
   // Cast the response to the correct type
-  const graphQlRes: GraphQlResponse<T> = await response.json()
+  const graphQlRes = (await response.json()) as GraphQlResponse<T>
 
   // We need some better error handling
   if (graphQlRes.errors) console.log(graphQlRes.errors)

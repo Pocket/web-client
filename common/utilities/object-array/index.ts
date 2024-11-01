@@ -1,3 +1,12 @@
+// Define a type for the key, ensuring it's a key of T
+type KeyOfType<T> = keyof T
+
+// Define a type for the array items, where T must have a key K of type string or number
+type ArrayItem<T, K extends KeyOfType<T>> = Partial<T> & Record<K, string | number>
+
+// Define the output type as a record with string keys and T values
+type ObjectMap<T> = Record<string, T>
+
 /**
  * ARRAY TO OBJECT
  * Takes an array of objects and a key to look for inside those objects which
@@ -17,21 +26,19 @@
  * @param {string} key Name of key to use when converting to keyed object
  * @returns {object}: {key: {...}}
  */
-export function arrayToObject<T extends Record<K, any>, K extends string>(
-  objectArray: Array<Partial<T> | object>, // Use Partial<T> or object to allow flexibility
+export function arrayToObject<T, K extends KeyOfType<T>>(
+  objectArray: ArrayItem<T, K>[],
   key: K
-): Record<string, T> {
-  const result: Record<string, T> = {}
-  objectArray.forEach((item) => {
-    if (typeof item === 'object' && item !== null && key in item) {
-      const keyValue = (item as T)[key]
-      if (
-        keyValue !== undefined &&
-        (typeof keyValue === 'string' || typeof keyValue === 'number')
-      ) {
-        result[keyValue] = item as T
-      }
+): ObjectMap<T> {
+  return objectArray.reduce((result, item) => {
+    // Extract the key value from the current item
+    const keyValue = item[key]
+
+    // Ensure the key value is defined before adding to the result
+    if (keyValue !== undefined) {
+      // Use the key value as a string to index the result object
+      result[String(keyValue)] = item as T
     }
-  })
-  return result
+    return result
+  }, {} as ObjectMap<T>)
 }

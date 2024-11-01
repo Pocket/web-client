@@ -5,7 +5,7 @@ import type { ResponseError } from '@common/types'
  * ---
  * This helps us have a bit more utility when trying to catch an error with TS
  */
-type ErrorWithMessage = {
+interface ErrorWithMessage {
   message: string
 }
 

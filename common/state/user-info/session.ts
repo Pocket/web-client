@@ -5,7 +5,7 @@ import * as jose from 'jose'
 import { cookies } from 'next/headers'
 import 'server-only'
 
-type Session = {
+interface Session {
   token: string | undefined
   isAuthenticated: boolean
 }
@@ -57,7 +57,7 @@ export async function verifySession(): Promise<Session> {
     const storedCookies = await cookies()
 
     const bearerToken = await storedCookies.get('bearerToken')?.value
-    const accessToken = await storedCookies.get('accessToken')?.value
+    // const accessToken = await storedCookies.get('accessToken')?.value
 
     if (bearerToken) {
       const { isExpired, isAuthenticated } = checkToken(bearerToken)

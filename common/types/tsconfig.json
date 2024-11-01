@@ -3,5 +3,5 @@
   "compilerOptions": {
     "strict": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "index.d.ts"]
+  "include": ["**/*.ts", "**/*.tsx", "index.d.ts", "eslint.config.mjs"]
 }

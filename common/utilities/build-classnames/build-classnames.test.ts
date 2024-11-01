@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { buildClassnames } from '.'
 
 describe('buildClassnames function', () => {
@@ -8,15 +7,7 @@ describe('buildClassnames function', () => {
   })
 
   it('should omit falsy values', () => {
-    const classNames = buildClassnames([
-      'something',
-      null,
-      false,
-      1 == 2 && 'bar',
-      undefined,
-      0,
-      ''
-    ])
+    const classNames = buildClassnames(['something', null, false, false && 'bar', undefined, 0, ''])
     expect(classNames).toBe('something')
   })
   it('should ignore truthy values that don‘t make sense', () => {

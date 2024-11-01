@@ -26,6 +26,7 @@
   "scripts": {
     "build": "rm -rf dist && tsc",
     "build:dev": "npm run build && NODE_ENV=development npm run synth",
+    "lint": "eslint",
     "compile": "tsc --pretty",
     "setup": "brew install tfenv && tfenv install 1.8.3 && tfenv use 1.8.3",
     "synth": "cdktf synth",

@@ -1,5 +1,7 @@
-import fs from 'fs-extra'
+// @ts-ignore
+
 import cliProgress from 'cli-progress'
+import fs from 'fs-extra'
 
 const { copySync } = fs
 const { Bar } = cliProgress

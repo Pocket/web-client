@@ -16,10 +16,10 @@ export function buildClassnames(classNameArray: Value[]) {
       // https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates
       .filter((value): value is string => typeof value === 'string')
       // Trim all the whitespace so we don't end up with strange returns
-      .map((value) => value && value.trim())
+      .map((value) => value?.trim())
       // We might still have some empty string after the trim, let's filter them
       .filter((value) => value.length)
-      // Join it all togther with a space
+      // Join it all together with a space
       .join(' ')
   )
 }

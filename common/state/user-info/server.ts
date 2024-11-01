@@ -70,7 +70,7 @@ export async function getStoredUser(): Promise<UserDisplayData> {
       }
     }
     return {}
-  } catch (err) {
+  } catch {
     return {}
   }
 }
