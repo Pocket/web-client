@@ -36,6 +36,7 @@ const getSavedItemsQuery = gql`
                 timeToRead
                 shareId: id
                 itemId
+                givenUrl
                 preview {
                   ...ItemPreview
                 }
