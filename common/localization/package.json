@@ -6,7 +6,7 @@
   "devDependencies": {
     "@config/eslint-config": "workspace:*",
     "@config/typescript-config": "workspace:*",
-    "@types/node": "^22.8.0",
+    "@types/node": "^22.8.6",
     "@types/react": "18.3.12",
     "cli-progress": "^3.12.0",
     "fs-extra": "^11.2.0",
