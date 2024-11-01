@@ -69,6 +69,15 @@ interface BaseError {
   message: String!
 }
 
+"""Input for batch imports"""
+input BatchImportInput {
+  url: Url!
+  createdAt: ISOString!
+  title: String!
+  tags: [String!]
+  status: ImportableStatus
+}
+
 """Input object for creating and deleting highlights using bulk mutation."""
 input BatchWriteHighlightsInput {
   delete: [ID!]
@@ -901,6 +910,23 @@ enum Imageness {
   IS_IMAGE
 }
 
+enum ImportableStatus {
+  ARCHIVED
+  UNREAD
+}
+
+type ImportLimited {
+  message: String!
+  refreshInHours: Int!
+}
+
+"""Services we support file upload imports from."""
+enum ImportType {
+  omnivore
+}
+
+union ImportUploadResponse = PreSignedUrl | ImportLimited
+
 """ISOString custom scalar type"""
 scalar ISOString
 
@@ -1501,6 +1527,12 @@ type Mutation {
   """
   exportList: String
 
+  """
+  Get a presigned URL to upload an export from another service
+  to S3, to be imported into Pocket.
+  """
+  importUploadUrl(importType: ImportType!): ImportUploadResponse
+
   """Refresh an Item's article content."""
   refreshItemArticle(url: String!): Item!
 
@@ -1867,6 +1899,15 @@ enum PremiumStatus {
 
   """User has had premium, but it is expired"""
   EXPIRED
+}
+
+"""A presigned URL for uploading to S3"""
+type PreSignedUrl {
+  """The presigned URL"""
+  url: Url!
+
+  """Time until expiry in seconds after grant"""
+  ttl: Int!
 }
 
 """The publisher that the curation team set for the syndicated article"""
