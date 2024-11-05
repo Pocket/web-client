@@ -226,6 +226,7 @@ const GlobalNav = ({
   onLinkClick = () => {},
   onToolClick = () => {},
   onAccountClick = () => {},
+  onImportClick,
   onLoginClick,
   listMode,
   colorMode,
@@ -343,6 +344,7 @@ const GlobalNav = ({
                 accountEmail={accountEmail}
                 isFxa={isFxa}
                 profileUrl={profileUrl}
+                onImportClick={onImportClick}
                 onLinkClick={onLinkClick}
                 onAccountClick={onAccountClick}
                 userStatus={userStatus}

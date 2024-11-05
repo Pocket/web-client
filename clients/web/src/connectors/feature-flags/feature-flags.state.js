@@ -106,7 +106,7 @@ export async function fetchUnleashData(userId, sessionId, birth, locale, userMod
     const unleashData = arrayToObject(adjustedAssignments, 'name')
 
     return unleashData
-  } catch {
+  } catch (error) {
     console.warn(error)
   }
 }

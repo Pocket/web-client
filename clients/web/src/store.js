@@ -124,6 +124,9 @@ import { mutationListUpdateSagas } from 'connectors/lists/mutation-update.state'
 
 import { mutationListShareReducers } from 'connectors/lists/mutation-share.state'
 
+import { mutationImportReducers } from 'connectors/items/mutation-import.state'
+import { mutationImportSagas } from 'connectors/items/mutation-import.state'
+
 import { pageSearchCorpusIdsReducers } from 'containers/search/corpus/search.corpus.state'
 import { pageSearchCorpusInfoReducers } from 'containers/search/corpus/search.corpus.state'
 import { pageSearchCorpusSagas } from 'containers/search/corpus/search.corpus.state'
@@ -149,7 +152,8 @@ const itemMutations = {
   mutationTagging: mutationTaggingReducers,
   mutationHighlight: mutationHighlightReducers,
   mutationShare: mutationShareReducers,
-  mutationReport: mutationReportReducers
+  mutationReport: mutationReportReducers,
+  mutationImport: mutationImportReducers
 }
 
 const listMutations = {
@@ -261,6 +265,7 @@ function* rootSaga() {
     ...mutationListDeleteSagas,
     ...mutationListUpdateSagas,
     ...mutationListAddSagas,
+    ...mutationImportSagas,
     ...listenSagas,
     ...pageSearchCorpusSagas
   ])
