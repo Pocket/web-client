@@ -78,11 +78,14 @@ function* setupImport() {
       throw new Error(errorMessage)
     }
 
-    const uploadResponse = yield fetch(`/api/import?preSignedUrl=${encodeURIComponent(url)}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/zip' },
-      body: file
-    })
+    const uploadResponse = yield fetch(
+      `/web-client-api/import?preSignedUrl=${encodeURIComponent(url)}`,
+      {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/zip' },
+        body: file
+      }
+    )
 
     if (!uploadResponse.ok) throw new Error(`${response.status}: ${response.statusText}`)
 
