@@ -171,7 +171,8 @@ const GlobalNavAccount = ({
   profileUrl = null,
   onLinkClick = () => {},
   onAccountClick = () => {},
-  onImportClick = null
+  onImportClick = null,
+  showOmnivore = false
 }) => {
   const { t } = useTranslation()
 
@@ -346,7 +347,7 @@ const GlobalNavAccount = ({
             data-testid="account-menu-help-link">
             <Trans i18nKey="nav:get-help">Get help</Trans>
           </PopupMenuItem>
-          {onImportClick ? (
+          {onImportClick && showOmnivore ? (
             <PopupMenuItem
               id="account-menu-help-link"
               onClick={onImportClick}

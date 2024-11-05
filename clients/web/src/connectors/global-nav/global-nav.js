@@ -32,6 +32,7 @@ import { LOGIN_URL } from 'common/constants'
 import { getTopLevelPath } from 'common/utilities/urls/urls'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { itemsImportShow } from 'connectors/items/mutation-import.state'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 import { Banner } from './global-nav-banner'
 
@@ -80,6 +81,9 @@ const GlobalNav = (props) => {
 
   // Has the user migrated to FXA?
   const { isFXA } = useSelector((state) => state.user)
+
+  const featureState = useSelector((state) => state.features)
+  const showOmnivore = featureFlagActive({ flag: 'omnivore', featureState })
 
   const setAppColorMode = (colorMode) => dispatch(setColorMode(colorMode))
   const setListMode = () => dispatch(setListModeList())
@@ -258,6 +262,7 @@ const GlobalNav = (props) => {
       onLoginClick={onLoginClick}
       onLinkClick={onLinkClick}
       onImportClick={onImportClick}
+      showOmnivore={showOmnivore}
       listMode={listMode}
       colorMode={colorMode}
       setColorMode={setAppColorMode}

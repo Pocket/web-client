@@ -227,6 +227,7 @@ const GlobalNav = ({
   onToolClick = () => {},
   onAccountClick = () => {},
   onImportClick,
+  showOmnivore,
   onLoginClick,
   listMode,
   colorMode,
@@ -345,6 +346,7 @@ const GlobalNav = ({
                 isFxa={isFxa}
                 profileUrl={profileUrl}
                 onImportClick={onImportClick}
+                showOmnivore={showOmnivore}
                 onLinkClick={onLinkClick}
                 onAccountClick={onAccountClick}
                 userStatus={userStatus}
