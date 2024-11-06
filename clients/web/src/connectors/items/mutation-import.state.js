@@ -87,7 +87,9 @@ function* setupImport() {
       }
     )
 
-    if (!uploadResponse.ok) throw new Error(`${response.status}: ${response.statusText}`)
+    if (!uploadResponse.ok) {
+      throw new Error(`${uploadResponse.status}: ${uploadResponse.statusText}`)
+    }
 
     // It worked!
     yield put({ type: MUTATION_IMPORT_SUCCESS, uploadResponse })

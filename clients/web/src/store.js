@@ -131,6 +131,9 @@ import { pageSearchCorpusIdsReducers } from 'containers/search/corpus/search.cor
 import { pageSearchCorpusInfoReducers } from 'containers/search/corpus/search.corpus.state'
 import { pageSearchCorpusSagas } from 'containers/search/corpus/search.corpus.state'
 
+import { placardReducers } from 'connectors/placards/placard.state'
+import { placardSagas } from 'connectors/placards/placard.state'
+
 /* REDUCERS
  --------------------------------------------------------------- */
 const itemReducers = {
@@ -207,7 +210,8 @@ const globalReducers = {
   toasts: actionToastsReducers, // Notifications of action results,
   shortcuts: shortcutReducers, // Keyboard shortcuts,
   analytics: snowplowReducers, //Analytics
-  braze: brazeReducers // Braze
+  braze: brazeReducers, // Braze
+  placards: placardReducers // Mozilla Ad Placements
 }
 
 const userAccountReducers = {
@@ -267,7 +271,8 @@ function* rootSaga() {
     ...mutationListAddSagas,
     ...mutationImportSagas,
     ...listenSagas,
-    ...pageSearchCorpusSagas
+    ...pageSearchCorpusSagas,
+    ...placardSagas
   ])
 }
 

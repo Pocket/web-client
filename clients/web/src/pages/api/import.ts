@@ -34,7 +34,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       if (!response.ok) throw new Error('Failed to upload file to presigned URL')
 
-      console.info(response)
       res.status(200).json({ message: 'File uploaded successfully' })
     })
 

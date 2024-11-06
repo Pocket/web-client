@@ -4,7 +4,7 @@ import Layout from 'layouts/main'
 import MobileLayout from 'layouts/mobile-web'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { BASE_URL } from 'common/constants'
 
 import { contentLayout } from 'components/content-layout/content-layout'
@@ -37,6 +37,10 @@ import { ShareToMastodon } from 'components/share-modal/share-mastodon'
 import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'
 import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
 import { CallOutSyndicated } from 'components/call-out/call-out-syndicated'
+
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+import { getPlacards } from 'connectors/placards/placard.state'
+import { Placard } from 'connectors/placards/placards'
 
 // Possible query params passed via url
 const validParams = {
@@ -84,11 +88,22 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   const allowAds = userStatus === 'pending' || isPremiumUser ? false : showAds
   const showCTA = userStatus !== 'valid'
 
-  // Initialize Ads on the page
-  // Turned off for now, but leaving for future BSA work
-  // useEffect(() => {
-  //   dispatch(callGetPong())
-  // }, [dispatch])
+  // Initialize Mozilla Placards on the page
+  const featureState = useSelector((state) => state.features)
+  const showPlacards = featureFlagActive({ flag: 'moz.placards', featureState })
+
+  useEffect(() => {
+    if (!showPlacards) return
+    dispatch(
+      getPlacards([
+        {
+          placement: 'pocket_billboard',
+          count: 2
+        }
+      ])
+    )
+  }, [dispatch, showPlacards])
+
   const { asPath: urlPath } = router
   const targeting = {
     URL: urlPath,
@@ -190,7 +205,11 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
         className={printLayout}>
         <main className={contentLayout}>
           <section>
-            <AdAboveTheFold allowAds={allowAds} targeting={targeting} />
+            {showPlacards ? (
+              <Placard shouldDisplay={showPlacards} placement="pocket_billboard" position={0} />
+            ) : (
+              <AdAboveTheFold allowAds={allowAds} targeting={targeting} />
+            )}
           </section>
           {/* Content header information */}
           <section className="content-section">
@@ -272,7 +291,11 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
           </section>
 
           <section>
-            <AdBelowTheFold allowAds={allowAds} targeting={targeting} />
+            {showPlacards ? (
+              <Placard shouldDisplay={showPlacards} placement="pocket_billboard" position={1} />
+            ) : (
+              <AdBelowTheFold allowAds={allowAds} targeting={targeting} />
+            )}
           </section>
 
           {!isMobileWebView ? (
