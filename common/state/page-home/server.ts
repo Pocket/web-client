@@ -6,7 +6,7 @@ import { gql, pocketRequest } from '@common/utilities/pocket-request'
 import { FRAGMENT_ITEM_PREVIEW } from '../_fragments/preview'
 
 // Types
-import type { ResponseError } from '@common/types'
+import type { ResponseError, Item } from '@common/types'
 import type {
   CorpusSlate,
   CorpusRecommendation,
@@ -20,7 +20,7 @@ export type SlateWithRecIds = {
 } & Omit<CorpusSlate, 'recommendations'>
 
 export interface HomeQueryResponse {
-  itemsById: Record<string, PocketMetadata>
+  itemsById: Record<string, Item>
   slatesById: Record<string, SlateWithRecIds>
   slateArray: string[]
 }
@@ -110,9 +110,7 @@ function getItemsFromSlate({
  * ---
  * Quick utility to get a single object of items with ids as the key
  */
-function combineSlateItems(
-  objects: Record<string, PocketMetadata>[]
-): Record<string, PocketMetadata> {
+function combineSlateItems(objects: Record<string, PocketMetadata>[]): Record<string, Item> {
   return objects.reduce((acc, obj) => {
     return { ...acc, ...obj }
   }, {})

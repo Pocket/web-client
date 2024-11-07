@@ -1,27 +1,6 @@
-export interface Item {
-  id: string
-  authors?: ItemAuthor[]
-  datePublished?: string | null
-  domain?: { name: string }
-  excerpt: string | null
-  title: string | null
-  source: string | null
-  url: string
-  htmlEmbed?: string
-  image?: ItemMedia
-  timeToRead?: number | null
-  topic?: string
-}
+import { PocketMetadata } from '../pocket'
 
-export interface ItemAuthor {
-  name?: string | null
-}
-
-export interface ItemMedia {
-  caption: string | null
-  credit: string | null
-  cachedImages: { id: string; url: string }[]
-}
+export type Item = PocketMetadata
 
 /**
  *   "89062669-3adf-47f9-a27a-66ed637b59f1": {

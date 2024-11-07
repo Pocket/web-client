@@ -14,7 +14,6 @@ async function copyLegalDocs() {
       const destinationFolder = join(destinationDir, basename(dirname(filePath)))
       const fileDestination = basename(filePath)
       const copyPath = `${destinationFolder}/${fileDestination}`
-      console.log(copyPath)
 
       await ensureDir(destinationFolder)
       await copy(filePath, copyPath)

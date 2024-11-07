@@ -14,7 +14,9 @@ import type { Item } from '@common/types'
 export function ItemArticle({ item }: { item: Item }) {
   if (!item) return null
 
-  const { id: itemId, title, excerpt, image, domain, url } = item
+  const { id: itemId, title, excerpt, image, domain } = item
+  const url = item.url as string
+
   return (
     <article className={style.base} data-testid="item">
       <div>
