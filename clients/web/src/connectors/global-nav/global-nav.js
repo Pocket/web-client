@@ -277,7 +277,7 @@ const GlobalNav = (props) => {
       Banner={CurrentBanner}
       flagsReady={flagsReady}>
       {NavTakeover ? (
-        <NavTakeover onClose={resetNav} searchEnrolled={searchEnrolled} fromSaves={fromSaves} />
+        <NavTakeover onClose={resetNav} searchEnrolled={true} fromSaves={fromSaves} />
       ) : null}
     </GlobalNavComponent>
   )
