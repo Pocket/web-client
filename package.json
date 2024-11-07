@@ -65,7 +65,7 @@
     "clean": "pnpm turbo clean && rm -rf pnpm-lock.yaml node_modules",
     "dev": "pnpm turbo dev",
     "dev:snowplow": "pnpm turbo dev:snowplow",
-    "format": "lint-staged",
+    "format": "pnpm turbo format",
     "gen": "turbo gen --config config/generators/config.ts",
     "lint": "pnpm turbo lint",
     "locale:inject": "node ./common/localization/locale-inject.mjs",

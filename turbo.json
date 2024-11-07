@@ -24,6 +24,7 @@
     },
     "test:update": {},
     "lint": {},
+    "format": {},
     "checktypes": {},
     "pocket": {
       "cache": false,

@@ -41,6 +41,7 @@
   "scripts": {
     "clean": "rm -rf .turbo && rm -rf node_modules",
     "lint": "eslint",
+    "format": "lint-staged",
     "test": "jest",
     "test:update": "jest --u"
   }

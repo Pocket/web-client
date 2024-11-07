@@ -102,6 +102,7 @@
   "scripts": {
     "analyze": "ANALYZE=true next build",
     "build": "next build",
+    "format": "lint-staged",
     "checktypes": "tsc --noEmit --incremental false",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf .next",
     "dev": "RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included node ./server.local.js",
