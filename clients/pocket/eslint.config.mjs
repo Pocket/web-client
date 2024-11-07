@@ -1,7 +1,6 @@
 // type-check
 
 import perfectionist from '@config/eslint-config/perfectionist.mjs'
-import { fixupConfigRules } from '@eslint/compat'
 import { FlatCompat } from '@eslint/eslintrc'
 import prettierConfig from 'eslint-config-prettier'
 import path from 'path'
@@ -26,7 +25,7 @@ export default tseslint.config(
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   prettierConfig,
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-  ...fixupConfigRules(compat.extends('next/core-web-vitals')),
+  ...compat.extends('next/core-web-vitals'),
   {
     plugins: {
       '@typescript-eslint': tseslint.plugin

@@ -36,8 +36,6 @@ export function ItemVideoLayout({ children }: PropsWithChildren) {
     setSlidePage(Math.max(0, slidePage - 1))
   }
 
-  const expandCell = () => {}
-
   useEffect(() => {
     setSlidePage(0)
   }, [totalPages])

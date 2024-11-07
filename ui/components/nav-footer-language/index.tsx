@@ -15,7 +15,7 @@ export function LanguageSelector() {
   const locales = Object.keys(LANGUAGE_BY_LOCALE)
   const currentLanguage = 'en'
 
-  const handleChange = async (event: ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const locale = event.currentTarget.value
     console.log(locale)
   }

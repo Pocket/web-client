@@ -17,5 +17,5 @@
       "store": ["src/store.js"]
     }
   },
-  "include": ["**/*.js", "**/*.ts", "**/*.tsx"]
+  "include": ["**/*.js", "**/*.ts", "**/*.tsx", "eslint.config.mjs"]
 }

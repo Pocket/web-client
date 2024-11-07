@@ -16,17 +16,12 @@ import type { Item } from '@common/types'
  */
 export function ItemVideo({ item }: { item: Item }) {
   const videoUrl = item?.url || false
-  const { title, image } = item
 
   return videoUrl ? (
     <div className={style.base} data-testid="item-video">
       <Expand />
       <figure>
-        {['Dailymotion'].includes(item.publisher) ? (
-          <img alt={title} src={image?.url as string} />
-        ) : (
-          <ReactPlayer controls={true} height="100%" loop={true} url={videoUrl} width="100%" />
-        )}
+        <ReactPlayer controls={true} height="100%" loop={true} url={videoUrl} width="100%" />
       </figure>
     </div>
   ) : null

@@ -1,18 +1,18 @@
-import { config } from './config'
-import { Construct } from 'constructs'
-import { App, S3Backend, TerraformStack } from 'cdktf'
-
+import { provider as archiveProvider } from '@cdktf/provider-archive'
 import {
   provider as awsProvider,
   dataAwsRegion,
   dataAwsCallerIdentity,
   dataAwsKmsAlias
 } from '@cdktf/provider-aws'
-import { provider as nullProvider } from '@cdktf/provider-null'
 import { provider as localProvider } from '@cdktf/provider-local'
-import { provider as archiveProvider } from '@cdktf/provider-archive'
+
+import { provider as nullProvider } from '@cdktf/provider-null'
 import { PocketALBApplication } from '@pocket-tools/terraform-modules'
+import { App, S3Backend, TerraformStack } from 'cdktf'
+import { Construct } from 'constructs'
 import * as fs from 'fs'
+import { config } from './config'
 
 class PocketClient extends TerraformStack {
   constructor(scope: Construct, name: string) {

@@ -24,7 +24,7 @@ export const Layout: StoryObj<typeof Component> = {
     return (
       <Component {...args}>
         {Object.keys(itemsById).map((id) => (
-          <ItemSound key={id} item={itemsById[id] as Item} />
+          <ItemSound key={id} item={itemsById[id]!} />
         ))}
       </Component>
     )

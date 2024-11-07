@@ -20,7 +20,7 @@ export function Placard() {
     try {
       const randomClientError = global.window ? window.crypto.randomUUID() : null
       if (randomClientError) throw new PlacardError(randomClientError)
-    } catch (err) {
+    } catch {
       // withScope(function (scope) {
       //   scope.setFingerprint(['Generic ThirdParty Ad Failure'])
       //   captureException(err)

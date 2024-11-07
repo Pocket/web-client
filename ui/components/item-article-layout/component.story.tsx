@@ -28,7 +28,7 @@ export const Layout: StoryObj<ComponentPropsAndCustomArgs> = {
     return (
       <ItemArticleLayout layoutType={args.gridCount}>
         {Object.keys(itemsById).map((id) => (
-          <Component key={id} item={itemsById[id] as Item} />
+          <Component key={id} item={itemsById[id]!} />
         ))}
       </ItemArticleLayout>
     )

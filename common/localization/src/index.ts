@@ -6,15 +6,18 @@ import { initReactI18next } from 'react-i18next'
 
 import { getOptions } from './utilities'
 
+//  eslint-disable-next-line @typescript-eslint/no-floating-promises
 i18next
   .use(initReactI18next)
   .use(
     resourcesToBackend((language, namespace, callback) => {
       import(`../messages/${language}/${namespace}.json`)
         .then(({ default: resources }) => {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           callback(null, resources)
         })
         .catch((error) => {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           callback(error, null)
         })
     })

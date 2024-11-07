@@ -1,5 +1,3 @@
-// @ts-ignore
-
 import cliProgress from 'cli-progress'
 import fs from 'fs-extra'
 

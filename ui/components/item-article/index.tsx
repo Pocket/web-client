@@ -4,14 +4,14 @@ import { ItemActions } from '../item-actions'
 import { ItemArticleMedia } from '../item-article-media'
 
 // Types
-import type { PocketMetadata } from '@common/types/pocket'
+import type { Item } from '@common/types'
 
 /**
  * ItemArticle
  * ---
  * A self contained representation of a piece of written content from around the web
  */
-export function ItemArticle({ item }: { item: PocketMetadata }) {
+export function ItemArticle({ item }: { item: Item }) {
   if (!item) return null
 
   const { id: itemId, title, excerpt, image, domain, url } = item

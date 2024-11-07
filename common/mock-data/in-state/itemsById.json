@@ -1,293 +1,1346 @@
 {
-  "test-common-article": {
-    "excerpt": "Huffing through yet another long run together, my friend and I got to talking about how unlikely it was that the two of us had, one, met at the gym, and two, were now training for a marathon.",
-    "id": "test-common-article",
+  "89062669-3adf-47f9-a27a-66ed637b59f1": {
+    "id": "89062669-3adf-47f9-a27a-66ed637b59f1",
+    "authors": [{ "name": "Kelli Foster" }],
+    "datePublished": null,
+    "domain": { "name": "The Kitchn" },
+    "excerpt": "Easy weeknight cooking at its finest.",
+    "title": "5 Slow Cooker Chicken Dinners with 5 Ingredients",
+    "source": "CURATED_CORPUS",
+    "url": "https://getpocket.com/explore/item/these-5-slow-cooker-recipes-need-only-5-ingredients-and-a-glance",
     "image": {
-      "url": "https://compote.slate.com/images/2cb1d7b0-e8fa-4d4a-9048-a3db60b81e87.jpeg?width=1560"
-    },
-    "publisher": "Slate",
-    "timeToRead": 16,
-    "title": "Why American Kids Grow Up Hating Exercise",
-    "source": "POCKET_PARSER",
-    "url": "https://slate.com/human-interest/2022/09/history-physical-education-kids-sports-inclusive-exercise.html"
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Feffe5d28-b456-4e7d-aec5-289b9ae5dac7.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Feffe5d28-b456-4e7d-aec5-289b9ae5dac7.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Feffe5d28-b456-4e7d-aec5-289b9ae5dac7.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
   },
-  "test-collection": {
-    "authors": [
-      {
-        "name": "Amy Maoz"
-      }
-    ],
-    "excerpt": "Make lunch the most exciting time of the day with a baker's dozen of mouthwatering sandwich recipes, from muffulettas to cubanos to MLTs (and BLTs, too).",
-    "id": "test-collection",
+  "e9e84b2e-03db-4d49-9843-d597bcd34305": {
+    "id": "e9e84b2e-03db-4d49-9843-d597bcd34305",
+    "authors": [{ "name": "SAVEUR Editors" }],
+    "datePublished": null,
+    "domain": { "name": "Saveur" },
+    "excerpt": "The little fish adds a briny, satisfying kick to all kinds of dishes.",
+    "title": "The Best Anchovy Recipes Deliver Deep, Rich Umami Flavor",
+    "source": "CURATED_CORPUS",
+    "url": "https://getpocket.com/explore/item/our-best-anchovy-recipes-deliver-deep-rich-umami-flavor",
     "image": {
-      "url": "https://pocket-image-cache.com/1200x/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F229247af-f201-4a68-914b-5fdb92bef7bd.png"
-    },
-    "publisher": "Pocket",
-    "timeToRead": null,
-    "title": "13 Delicious Sandwich Recipes",
-    "source": "POCKET_PARSER",
-    "url": "https://getpocket.com/collections/13-delicious-sandwich-recipes"
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F9f07b24f-31a4-4350-9717-98bff2fc817f.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F9f07b24f-31a4-4350-9717-98bff2fc817f.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F9f07b24f-31a4-4350-9717-98bff2fc817f.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
   },
-  "test-is-video": {
-    "authors": [
-      {
-        "name": "Claire Saffitz x Dessert Person"
-      }
-    ],
-    "excerpt": "THE BEST PUMPKIN PIE RECIPE WITH CLAIRE SAFFITZ | DESSERT PERSON\nAs a classic Thanksgiving dessert, pumpkin pie really should stay classic. Claire’s recipe amps it up with some brown butter and caramelized honey, but it stays close to home and simply results in the best pumping pie you’re likely",
-    "id": "test-is-video",
+  "42367c26-8bdc-442a-9cc4-ec58f53bdac5": {
+    "id": "42367c26-8bdc-442a-9cc4-ec58f53bdac5",
+    "authors": [{ "name": "Keith Naughton" }],
+    "datePublished": null,
+    "domain": { "name": "Bloomberg Businessweek" },
+    "excerpt": "Soaring prices push buyers to previously owned vehicles, as more than half of new models go to the affluent.",
+    "title": "Even Some High-Income Americans Can’t Afford New Cars Anymore",
+    "source": "CURATED_CORPUS",
+    "url": "https://getpocket.com/explore/item/even-some-high-income-americans-can-t-afford-new-cars-anymore",
     "image": {
-      "url": null
-    },
-    "publisher": "YouTube",
-    "timeToRead": null,
-    "title": "THE BEST PUMPKIN PIE RECIPE WITH CLAIRE SAFFITZ | DESSERT PERSON",
-    "source": "POCKET_PARSER",
-    "url": "http://www.youtube.com/watch?v=vT4Kk9v3B5Y"
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Ff1a402e4-fd9b-4c9a-a938-5abdd3339ad7.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Ff1a402e4-fd9b-4c9a-a938-5abdd3339ad7.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Ff1a402e4-fd9b-4c9a-a938-5abdd3339ad7.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
   },
-  "test-long-data": {
-    "authors": [],
-    "excerpt": "The new image of galaxy group \"Stephan's Quintet\" from NASA's James Webb Space Telescope shows in rare detail how interacting galaxies trigger star formation in each other and how gas in galaxies is being disturbed. The image also shows outflows driven by a black hole in Stephan’s Quintet in a level of detail never seen before.",
-    "id": "test-long-data",
+  "62eda064-3d66-4e11-b3a5-5e89d820d7be": {
+    "id": "62eda064-3d66-4e11-b3a5-5e89d820d7be",
+    "authors": [{ "name": "Chris Baraniuk" }],
+    "datePublished": null,
+    "domain": { "name": "BBC Future" },
+    "excerpt": "Small island communities have often been pioneers for sustainability and climate action. Are they a snapshot of a greener future, or a distraction from bigger problems elsewhere?",
+    "title": "The Tiny Islands Leading the Green Transition",
+    "source": "CURATED_CORPUS",
+    "url": "https://getpocket.com/explore/item/the-tiny-islands-leading-the-green-transition",
     "image": {
-      "url": "https://pocket-image-cache.com/1200x/filters:format(jpg):extract_focal()/https%3A%2F%2Fwww.nasa.gov%2Fwp-content%2Fuploads%2F2023%2F03%2Fmain_image_galaxies_stephans_quintet_sq_nircam_miri_final-5mb.jpg"
-    },
-    "publisher": "NASA - National Aueronautics and Space Administration",
-    "timeToRead": null,
-    "title": "NASA’s Webb Sheds Light on Galaxy Evolution, Black Holes - NASA In an enormous new image, NASA’s James Webb Space Telescope reveals never-before-seen details of galaxy group “Stephan’s Quintet”",
-    "source": "POCKET_PARSER",
-    "url": "https://www.nasa.gov/image-feature/goddard/2022/nasa-s-webb-sheds-light-on-galaxy-evolution-black-holes"
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F036d0ee2-c433-4cee-a353-74252f147858.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F036d0ee2-c433-4cee-a353-74252f147858.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F036d0ee2-c433-4cee-a353-74252f147858.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
   },
-  "test-long-title": {
-    "authors": [
-      {
-        "name": "Bill Murphy Jr."
-      }
-    ],
-    "excerpt": "This is a story about emotional intelligence, building resilience, and (oddly) high school humor. When I was a teenager, some friends and I used to frequent a Chinese restaurant.",
-    "id": "test-long-title",
+  "d9dc0222-fc70-499a-b0a8-e21fb91dccfa": {
+    "id": "d9dc0222-fc70-499a-b0a8-e21fb91dccfa",
+    "authors": [{ "name": "Raven Ishak" }],
+    "datePublished": null,
+    "domain": { "name": "Domino" },
+    "excerpt": "Four signs to look for—and how to fix them.",
+    "title": "Is Your Home Stressing You Out?",
+    "source": "CURATED_CORPUS",
+    "url": "https://getpocket.com/explore/item/is-your-home-stressing-you-out",
     "image": {
-      "url": "https://img-cdn.inc.com/image/upload/w_1024,h_576,c_fill/images/panoramic/GettyImages-1303793807_509111_xefuh5.jpg"
-    },
-    "publisher": "Inc. Magazine",
-    "timeToRead": 5,
-    "title": "How People With Very High Emotional Intelligence Use the Fortune Cookie Rule to Become Super-Resilient",
-    "source": "POCKET_PARSER",
-    "url": "https://www.inc.com/bill-murphy-jr/how-people-with-highemotionalintelligenceuse-fortune-cookie-rule-to-become-exceptionally-resilient.html"
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fa2aaa8f7-4762-4951-9b8c-a151cd0f4a8c.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fa2aaa8f7-4762-4951-9b8c-a151cd0f4a8c.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fa2aaa8f7-4762-4951-9b8c-a151cd0f4a8c.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
   },
-  "test-bad-image": {
-    "authors": [
-      {
-        "name": "Brooke Schwartz"
-      }
-    ],
-    "excerpt": "Imagine you’ve been planning for a high-stakes situation, such as a difficult conversation with a friend, an important sports game, or a presentation for your company’s leadership team. You’ve spent months rehearsing what you’ll say or do.",
-    "id": "test-bad-image",
+  "f153ad30-8ac1-43b2-b423-3ea9564ee458": {
+    "id": "f153ad30-8ac1-43b2-b423-3ea9564ee458",
+    "authors": [{ "name": "Joel Snape" }],
+    "datePublished": null,
+    "domain": { "name": "The Guardian" },
+    "excerpt": "Would you like to strengthen your upper body and core muscles, while improving your flexibility and breathing? Here’s how to do it.",
+    "title": "The Dead Hang Delight: How This Quick, Surprisingly Simple Exercise Can Change Your Life",
+    "source": "CURATED_CORPUS",
+    "url": "https://getpocket.com/explore/item/the-dead-hang-delight-how-this-quick-surprisingly-simple-exercise-can-change-your-life",
     "image": {
-      "url": "https://alpha.aeon.co/images/6a2e7882-0dcb-4111-9701-bfc11f262440/1500x1500.jpg"
-    },
-    "publisher": "psyche.co",
-    "timeToRead": 22,
-    "title": "How to be kinder to yourself",
-    "source": "POCKET_PARSER",
-    "url": "https://psyche.co/guides/how-to-be-kinder-to-yourself-by-practising-self-compassion"
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F40d04888-dc35-4836-acea-93b4a203a74a.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F40d04888-dc35-4836-acea-93b4a203a74a.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F40d04888-dc35-4836-acea-93b4a203a74a.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
   },
-  "06c5ad31-7c58-48ae-bd3c-2a693c1fd7cf": {
-    "authors": [
-      {
-        "name": "Amy S. Choi"
-      }
-    ],
-    "excerpt": "And I’m done pretending otherwise.",
-    "id": "06c5ad31-7c58-48ae-bd3c-2a693c1fd7cf",
+  "b7ad8beb-9c07-43aa-aaac-930a0f17b48b": {
+    "id": "b7ad8beb-9c07-43aa-aaac-930a0f17b48b",
+    "authors": [{ "name": "Arricca Elin Sansone" }],
+    "datePublished": null,
+    "domain": { "name": "Country Living" },
+    "excerpt": "These easy tips will have you growing in no time.",
+    "title": "How to Grow an Avocado Tree from the Pit",
+    "source": "CURATED_CORPUS",
+    "url": "https://getpocket.com/explore/item/how-to-grow-an-avocado-tree-from-the-pit",
     "image": {
-      "url": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/13d82769-5bce-41f9-b4d5-0230eb33637c.jpeg"
-    },
-    "publisher": "Elle",
-    "timeToRead": 9,
-    "title": "There’s Nothing Effortless About Being a Woman",
-    "source": "POCKET_PARSER",
-    "topic": "HEALTH_FITNESS",
-    "url": "https://getpocket.com/explore/item/there-s-nothing-effortless-about-being-a-woman"
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fea95b564-c714-4be1-ae7e-c19359b2f002.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fea95b564-c714-4be1-ae7e-c19359b2f002.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fea95b564-c714-4be1-ae7e-c19359b2f002.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
   },
-  "0db97a42-76a8-4b08-8ac7-c37591c74962": {
-    "authors": [
-      {
-        "name": "Interviews by Rosie Ifould"
-      }
-    ],
-    "excerpt": "Handle awkward date silences, end a conversation with a stranger – plus chat with your children, your parents, and your boss. Our panel shares their secrets.",
-    "id": "0db97a42-76a8-4b08-8ac7-c37591c74962",
+  "2aa8cc21-38e8-4fb0-b9e2-6c88cdf62ee7": {
+    "id": "2aa8cc21-38e8-4fb0-b9e2-6c88cdf62ee7",
+    "authors": [{ "name": "Chloe Gray" }],
+    "datePublished": null,
+    "domain": { "name": "Stylist" },
+    "excerpt": "Less really is more when we’re talking about making change. Here’s why you should break old habits before starting news ones.",
+    "title": "Unlearning Past Habits Is Just as Important as Learning New Ones – Here’s How to Do It",
+    "source": "CURATED_CORPUS",
+    "url": "https://getpocket.com/explore/item/unlearning-past-habits-is-just-as-important-as-learning-new-ones-here-s-how-to-do-it",
     "image": {
-      "url": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/4ab92950-21c1-47fd-b886-ff5be84e9aba.jpeg"
-    },
-    "publisher": "The Guardian",
-    "timeToRead": 10,
-    "title": "How to Talk to Anyone: The Experts’ Guide",
-    "source": "POCKET_PARSER",
-    "topic": "SELF_IMPROVEMENT",
-    "url": "https://getpocket.com/explore/item/how-to-talk-to-anyone-the-experts-guide"
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fc74dd095-9c8e-4e3b-bfa6-98c47c8b4a45.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fc74dd095-9c8e-4e3b-bfa6-98c47c8b4a45.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fc74dd095-9c8e-4e3b-bfa6-98c47c8b4a45.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
   },
-  "26e7e5d9-4ff8-4574-90fa-46dd79b2758b": {
-    "authors": [
-      {
-        "name": "Fortesa Latifi"
-      }
-    ],
-    "excerpt": "Parents are increasingly rethinking what it means to create an online footprint their child can’t actively consent to.",
-    "id": "26e7e5d9-4ff8-4574-90fa-46dd79b2758b",
+  "34718241-99b7-4be9-88d9-6dfdb066df62": {
+    "id": "34718241-99b7-4be9-88d9-6dfdb066df62",
+    "authors": [{ "name": "Will Knight" }],
+    "datePublished": null,
+    "domain": { "name": "MIT Technology Review" },
+    "excerpt": "Combining the latest advances in artificial intelligence with robots could transform manufacturing and warehousing—and take AI to the next level.",
+    "title": "This Is How the Robot Uprising Finally Begins",
+    "source": "CURATED_CORPUS",
+    "url": "https://getpocket.com/explore/item/this-is-how-the-robot-uprising-finally-begins",
     "image": {
-      "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/dcda7542-0f60-4ea5-b5a3-8e8aec612090.jpeg"
-    },
-    "publisher": "The Washington Post",
-    "timeToRead": 5,
-    "title": "As the Internet Gets Scarier, More Parents Keep Their Kids’ Photos Offline",
-    "source": "POCKET_PARSER",
-    "topic": "PARENTING",
-    "url": "https://getpocket.com/explore/item/as-the-internet-gets-scarier-more-parents-keep-their-kids-photos-offline"
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F660bf300-b072-40c0-af85-dffe9b2a2ad2.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F660bf300-b072-40c0-af85-dffe9b2a2ad2.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F660bf300-b072-40c0-af85-dffe9b2a2ad2.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
   },
-  "3cb3ddca-978c-48ad-a825-5c095a67c872": {
-    "authors": [
-      {
-        "name": "Annalisa Merelli"
-      }
-    ],
-    "excerpt": "After years of avoiding love, I found a match that seemed almost too perfect. We were practically walking down the aisle before I realized it really was too good to be true.",
-    "id": "3cb3ddca-978c-48ad-a825-5c095a67c872",
+  "ef0617fa-8e64-4739-8dc8-b54d521e1b76": {
+    "id": "ef0617fa-8e64-4739-8dc8-b54d521e1b76",
+    "authors": [{ "name": "Sarah Todd" }],
+    "datePublished": null,
+    "domain": { "name": "Quartz" },
+    "excerpt": "\"Whenever you cannot decide what you should do, choose the action that represents a change.\"",
+    "title": "An Economist’s Rule for Making Tough Life Decisions",
+    "source": "CURATED_CORPUS",
+    "url": "https://getpocket.com/explore/item/an-economist-s-rule-for-making-tough-life-decisions",
     "image": {
-      "url": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/9020533d-0fe3-4d62-b18a-a74e55dc9394.jpeg"
-    },
-    "publisher": "Narratively",
-    "timeToRead": 21,
-    "title": "A Super Strange True Love Story: My Disappearing Fiancé",
-    "source": "POCKET_PARSER",
-    "topic": "TRAVEL",
-    "url": "https://getpocket.com/explore/item/a-super-strange-true-love-story-my-disappearing-fianc"
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F46502cf0-f02f-423d-bc9b-255bf91de2d9.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F46502cf0-f02f-423d-bc9b-255bf91de2d9.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F46502cf0-f02f-423d-bc9b-255bf91de2d9.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
   },
-  "4ae723f0-0dbb-436f-9b66-de14fc208ace": {
-    "authors": [
-      {
-        "name": "Dr. Alexandra Santos"
-      }
-    ],
-    "excerpt": "Around the world, children are far more likely than ever before to develop food allergies.",
-    "id": "4ae723f0-0dbb-436f-9b66-de14fc208ace",
+  "f182c870-8aef-4b6c-b32a-b833ae7bbddf": {
+    "id": "f182c870-8aef-4b6c-b32a-b833ae7bbddf",
+    "authors": [{ "name": "Pocket Editors" }],
+    "datePublished": null,
+    "domain": { "name": "Pocket Collections" },
+    "excerpt": "How to break up the monotony of a routine stroll, why to give rucking a go, and the strange appeal of reversing your stride.",
+    "title": "Your Daily Walk Deserves an Upgrade",
+    "source": "CURATED_CORPUS",
+    "url": "https://getpocket.com/collections/your-daily-walk-deserves-an-upgrade",
     "image": {
-      "url": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/72f59e0f-a9d5-4451-810a-b8c326322b16.jpeg"
-    },
-    "publisher": "BBC News",
-    "timeToRead": 5,
-    "title": "Why the World Is Becoming More Allergic to Food",
-    "source": "POCKET_PARSER",
-    "topic": "SCIENCE",
-    "url": "https://getpocket.com/explore/item/why-the-world-is-becoming-more-allergic-to-food"
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fdd296298-e1db-467e-b157-ffd1d21004ab.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fdd296298-e1db-467e-b157-ffd1d21004ab.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fdd296298-e1db-467e-b157-ffd1d21004ab.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
   },
-  "884d9598-975d-459d-be5a-dc6a74d58642": {
-    "authors": [
-      {
-        "name": "Jon Dolan"
-      },
-      {
-        "name": "Jon Freeman"
-      },
-      {
-        "name": "Elisabeth Garber-Paul"
-      },
-      {
-        "name": "Kory Grow"
-      },
-      {
-        "name": "Joseph Hudak"
-      },
-      {
-        "name": "Daniel Kreps"
-      },
-      {
-        "name": "Elias Leight"
-      }
-    ],
-    "excerpt": "We survey the full arc of the iconic singer’s five-decade pop odyssey, from her Ronettes classics to team-ups with everyone from Eddie Money to Joey Ramone.",
-    "id": "884d9598-975d-459d-be5a-dc6a74d58642",
+  "cebc55ab-ffa1-420c-a259-fc440ebf761d": {
+    "id": "cebc55ab-ffa1-420c-a259-fc440ebf761d",
+    "authors": [{ "name": "Corrie Evanoff" }],
+    "datePublished": null,
+    "domain": { "name": "Pocket Collections" },
+    "excerpt": "From multiplication shortcuts to the quickest way to calculate a percentage in your head. Plus: Mental tricks to soothe your math anxiety.",
+    "title": "Math Hacks for Math Haters",
+    "source": "CURATED_CORPUS",
+    "url": "https://getpocket.com/collections/math-hacks-for-people-who-dont-like-math",
     "image": {
-      "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/94b62f83-fc1e-46ef-a344-4296f862302e.jpeg"
-    },
-    "publisher": "Rolling Stone",
-    "timeToRead": 10,
-    "title": "Ronnie Spector: 15 Essential Songs",
-    "source": "POCKET_PARSER",
-    "topic": "ENTERTAINMENT",
-    "url": "https://getpocket.com/explore/item/ronnie-spector-15-essential-songs"
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F45f117a3-8f08-48f5-bd5a-f20af33b43e3.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F45f117a3-8f08-48f5-bd5a-f20af33b43e3.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F45f117a3-8f08-48f5-bd5a-f20af33b43e3.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
   },
-  "99080950-0d14-4a08-9ba9-081000b6d659": {
-    "authors": [
-      {
-        "name": "Paul Anthony Jones"
-      }
-    ],
-    "excerpt": "It’s gained a cult audience all over the world—and is especially popular in Germany.",
-    "id": "99080950-0d14-4a08-9ba9-081000b6d659",
+  "a63a51ac-b1cc-4a2d-839a-7311263110ba": {
+    "id": "a63a51ac-b1cc-4a2d-839a-7311263110ba",
+    "authors": [{ "name": "Amy Maoz" }],
+    "datePublished": null,
+    "domain": { "name": "Pocket Collections" },
+    "excerpt": "Proven ways to break your doomscrolling habit—from laughter to re-runs to slime.",
+    "title": "How to De-Stress From the News",
+    "source": "CURATED_CORPUS",
+    "url": "https://getpocket.com/collections/how-to-de-stress-from-the-news",
     "image": {
-      "url": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/e26910f7-1cad-471b-b1d6-a8d3ee3baf44.jpeg"
-    },
-    "publisher": "Mental Floss",
-    "timeToRead": 4,
-    "title": "How An Obscure British Comedy Sketch Became The World’s Most Repeated TV Program",
-    "source": "POCKET_PARSER",
-    "topic": "ENTERTAINMENT",
-    "url": "https://getpocket.com/explore/item/how-an-obscure-british-comedy-sketch-became-the-world-s-most-repeated-tv-program"
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F8ac165cf-7240-4ef2-813e-8b902d0afe7f.png",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F8ac165cf-7240-4ef2-813e-8b902d0afe7f.png",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F8ac165cf-7240-4ef2-813e-8b902d0afe7f.png",
+          "id": "WebPSquare"
+        }
+      ]
+    }
   },
-  "a243b0bb-b6fa-4fc5-a801-0657b7534c50": {
-    "authors": [
-      {
-        "name": "Rebecca Fishbein"
-      }
-    ],
-    "excerpt": "Everyone is disliked by someone. Don’t let it slow you down.",
-    "id": "a243b0bb-b6fa-4fc5-a801-0657b7534c50",
+  "eb2c53ec-4a83-4f92-b838-b032dbc2fcc7": {
+    "id": "eb2c53ec-4a83-4f92-b838-b032dbc2fcc7",
+    "authors": [{ "name": "Alex Dalenberg" }],
+    "datePublished": null,
+    "domain": { "name": "Pocket Collections" },
+    "excerpt": "The surprising politics of why we “fall back” and “spring forward.”",
+    "title": "Daylight Saving and the Politics of Time",
+    "source": "CURATED_CORPUS",
+    "url": "https://getpocket.com/collections/daylight-saving-and-the-politics-of-time",
     "image": {
-      "url": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/e033e729-d784-422c-ad6b-ef4f9288a3e8.jpeg"
-    },
-    "publisher": "Lifehacker",
-    "timeToRead": 9,
-    "title": "How Not to Care When People Don’t Like You",
-    "source": "POCKET_PARSER",
-    "topic": "SELF_IMPROVEMENT",
-    "url": "https://getpocket.com/explore/item/how-not-to-care-when-people-don-t-like-you"
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F54207b4a-06b1-46af-bd6f-cbd2e238fe47.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F54207b4a-06b1-46af-bd6f-cbd2e238fe47.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F54207b4a-06b1-46af-bd6f-cbd2e238fe47.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
   },
-  "d5872d31-8d0c-4711-b11c-b390d32d4b93": {
-    "authors": [
-      {
-        "name": "Katie Suleta"
-      }
-    ],
-    "excerpt": "‘Natural’ isn’t the same thing as healthful.",
-    "id": "d5872d31-8d0c-4711-b11c-b390d32d4b93",
+  "b75ae30c-4f80-4e9d-b6c3-54a8bc768ad4": {
+    "id": "b75ae30c-4f80-4e9d-b6c3-54a8bc768ad4",
+    "authors": [{ "name": "Pocket Editors" }],
+    "datePublished": "2024-11-02T05:00:00.000Z",
+    "domain": { "name": "Pocket Collections" },
+    "excerpt": "A death expert’s insights, the best hamstring stretches, and what’s behind the increase in food recalls.",
+    "title": "Pocket’s Top-Saved Stories of the Week",
+    "source": "CURATED_CORPUS",
+    "url": "https://getpocket.com/collections/pockets-top-saved-stories-of-the-week-november-3-2024",
     "image": {
-      "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/3b6582e4-f253-4978-b6af-ae00dd01a1d6.jpeg"
-    },
-    "publisher": "The Conversation",
-    "timeToRead": 4,
-    "title": "A Natural Deception: 3 Marketing Myths the Supplement Industry Wants You to Swallow",
-    "source": "POCKET_PARSER",
-    "topic": "HEALTH_FITNESS",
-    "url": "https://getpocket.com/explore/item/a-natural-deception-3-marketing-myths-the-supplement-industry-wants-you-to-swallow"
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F52eb37db-0f74-4df1-86ae-1b2075c07a6e.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F52eb37db-0f74-4df1-86ae-1b2075c07a6e.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F52eb37db-0f74-4df1-86ae-1b2075c07a6e.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
   },
-  "ee39248a-4d5d-461b-aa57-0d995c60a807": {
-    "authors": [
-      {
-        "name": "Eric Schwitzgebel"
-      }
-    ],
-    "excerpt": "If you think everyone around you is terrible, the joke may be on you.",
-    "id": "ee39248a-4d5d-461b-aa57-0d995c60a807",
+  "b9fed2cb-b2f9-4a7d-9578-f40f540fabaf": {
+    "id": "b9fed2cb-b2f9-4a7d-9578-f40f540fabaf",
+    "authors": [{ "name": "Pocket Editors" }],
+    "datePublished": null,
+    "domain": { "name": "Pocket Collections" },
+    "excerpt": "Dip, spread, slather, smear, repeat.",
+    "title": "30 Condiments That Are Worth Making at Home",
+    "source": "CURATED_CORPUS",
+    "url": "https://getpocket.com/collections/condiments-that-are-worth-making-at-home",
     "image": {
-      "url": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/afc211e8-631e-43e6-85ff-17051af7003e.jpeg"
-    },
-    "publisher": "Nautilus",
-    "timeToRead": 10,
-    "title": "How to Tell If You’re a Jerk",
-    "source": "POCKET_PARSER",
-    "topic": "SELF_IMPROVEMENT",
-    "url": "https://getpocket.com/explore/item/how-to-tell-if-you-re-a-jerk"
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F03c924c4-9e7e-4582-ad56-3ff8b65d7d56.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F03c924c4-9e7e-4582-ad56-3ff8b65d7d56.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F03c924c4-9e7e-4582-ad56-3ff8b65d7d56.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "d7211a4c-1095-4f4f-9635-c3faeb7552a3": {
+    "id": "d7211a4c-1095-4f4f-9635-c3faeb7552a3",
+    "authors": [{ "name": "Pocket Editors" }],
+    "datePublished": null,
+    "domain": { "name": "Pocket Collections" },
+    "excerpt": "Everything you ever wanted to know about America’s byzantine system for selecting a president.",
+    "title": "Understanding the Electoral College",
+    "source": "CURATED_CORPUS",
+    "url": "https://getpocket.com/collections/understanding-the-electoral-college",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fac27bd8b-6ddb-436b-8b74-566647345e1c.png",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fac27bd8b-6ddb-436b-8b74-566647345e1c.png",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fac27bd8b-6ddb-436b-8b74-566647345e1c.png",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "e2b67186-690c-4f4a-90e4-17c04aaddb46": {
+    "id": "e2b67186-690c-4f4a-90e4-17c04aaddb46",
+    "authors": [{ "name": "Kimi Goffe" }],
+    "datePublished": null,
+    "domain": { "name": "Pocket Collections" },
+    "excerpt": "These autumnal flavors—apples, cranberries, pecans and more—are a perfect addition to any seasonal spread.",
+    "title": "15 Pie Recipes Perfect for Cozy Weather",
+    "source": "CURATED_CORPUS",
+    "url": "https://getpocket.com/collections/15-perfect-pie-recipes-for-cozy-weather",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fb25fbb2a-7943-4244-a50f-c6b5110481a3.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fb25fbb2a-7943-4244-a50f-c6b5110481a3.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fb25fbb2a-7943-4244-a50f-c6b5110481a3.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "84695d93-b6f8-4d0f-9525-c0b6033feaf1": {
+    "id": "84695d93-b6f8-4d0f-9525-c0b6033feaf1",
+    "authors": [{ "name": "Pocket Editors" }],
+    "datePublished": null,
+    "domain": { "name": "Pocket Collections" },
+    "excerpt": "Polling dominates coverage of the U.S. Presidential Election. But just how accurate are they?",
+    "title": "How to Make Sense of the Polls Without Losing Your Mind",
+    "source": "CURATED_CORPUS",
+    "url": "https://getpocket.com/collections/how-to-make-sense-of-the-polls-without-losing-your-mind",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F9c833109-bb33-482e-9652-62054ccf4867.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F9c833109-bb33-482e-9652-62054ccf4867.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F9c833109-bb33-482e-9652-62054ccf4867.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "3eb1c820-1a1f-40da-9eb0-ab59a2521ad6": {
+    "id": "3eb1c820-1a1f-40da-9eb0-ab59a2521ad6",
+    "authors": [{ "name": "Pocket Editors" }],
+    "datePublished": null,
+    "domain": { "name": "Pocket Collections" },
+    "excerpt": "Strega Nona Fall and Goth Girl Autumn have deeper origins than you think.",
+    "title": "Justice for Witches! The Return of the Occult",
+    "source": "CURATED_CORPUS",
+    "url": "https://getpocket.com/collections/justice-for-witches-the-enchanting-appeal-of-the-occult",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fcb1a3920-c15e-4e88-a8b9-78718ff27e96.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fcb1a3920-c15e-4e88-a8b9-78718ff27e96.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fcb1a3920-c15e-4e88-a8b9-78718ff27e96.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "3b3e47b6-9f47-4f83-9986-6659dbfccad3": {
+    "id": "3b3e47b6-9f47-4f83-9986-6659dbfccad3",
+    "authors": [{ "name": "George Packer" }],
+    "datePublished": "2024-11-05T15:00:00.000Z",
+    "domain": { "name": "The Atlantic" },
+    "excerpt": "When I was young and adrift, Thomas Mann’s novel gave me a sense of purpose. Today, its vision is startlingly relevant.",
+    "title": "‘The Magic Mountain’ Saved My Life",
+    "source": "CURATED_CORPUS",
+    "url": "https://www.theatlantic.com/magazine/archive/2024/12/thomas-mann-magic-mountain-cultural-political-relevance/680400/",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fcdn.theatlantic.com%2Fthumbor%2F6k57gpGPaTtV4nkgN6pCci3fyXc%3D%2F0x43%3A2006x1088%2F1200x625%2Fmedia%2Fimg%2F2024%2F10%2FTheAtlantic_ThomasMann_R4_cropped%2Foriginal.jpg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fcdn.theatlantic.com%2Fthumbor%2F6k57gpGPaTtV4nkgN6pCci3fyXc%3D%2F0x43%3A2006x1088%2F1200x625%2Fmedia%2Fimg%2F2024%2F10%2FTheAtlantic_ThomasMann_R4_cropped%2Foriginal.jpg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fcdn.theatlantic.com%2Fthumbor%2F6k57gpGPaTtV4nkgN6pCci3fyXc%3D%2F0x43%3A2006x1088%2F1200x625%2Fmedia%2Fimg%2F2024%2F10%2FTheAtlantic_ThomasMann_R4_cropped%2Foriginal.jpg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "7fb6a9d2-5f79-4b82-a435-08c9a7bb49f8": {
+    "id": "7fb6a9d2-5f79-4b82-a435-08c9a7bb49f8",
+    "authors": [{ "name": "Mark Kingwell" }],
+    "datePublished": "2024-11-06T11:30:06.000Z",
+    "domain": { "name": "The Walrus" },
+    "excerpt": "Our craving for loud, divisive, identity-conferring opinion is poisoning politics.",
+    "title": "We’re Addicted to the Feeling of Being Right",
+    "source": "CURATED_CORPUS",
+    "url": "https://thewalrus.ca/were-addicted-to-being-right/",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fwalrus-assets.s3.amazonaws.com%2Fimg%2FKingwell_Trust_1800.jpg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fwalrus-assets.s3.amazonaws.com%2Fimg%2FKingwell_Trust_1800.jpg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fwalrus-assets.s3.amazonaws.com%2Fimg%2FKingwell_Trust_1800.jpg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "a9f502e1-d95c-40db-b213-de5f11ce2de4": {
+    "id": "a9f502e1-d95c-40db-b213-de5f11ce2de4",
+    "authors": [{ "name": "Jasmin Fox-Skelly" }],
+    "datePublished": "2024-10-22T05:00:00.000Z",
+    "domain": { "name": "BBC" },
+    "excerpt": "Ruins of cities keep turning up in the forests of central America. How have these structures stayed standing for millennia?",
+    "title": "Rubber and Tree Sap: How Ancient Maya Cities Have Withstood the Ravages of Time",
+    "source": "CURATED_CORPUS",
+    "url": "https://www.bbc.com/future/article/20241028-lost-cities-how-maya-ruins-have-withstood-the-test-of-time",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fichef.bbci.co.uk%2Fimages%2Fic%2F1920xn%2Fp0k0rn00.jpg.webp",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fichef.bbci.co.uk%2Fimages%2Fic%2F1920xn%2Fp0k0rn00.jpg.webp",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fichef.bbci.co.uk%2Fimages%2Fic%2F1920xn%2Fp0k0rn00.jpg.webp",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "2fe56574-5000-41c7-afa7-aedc88b4e539": {
+    "id": "2fe56574-5000-41c7-afa7-aedc88b4e539",
+    "authors": [{ "name": "Judith Newman" }],
+    "datePublished": "2023-11-02T17:05:15.000Z",
+    "domain": { "name": "The Cut" },
+    "excerpt": "When plastic surgeon “Dr. Roxy” rose to TikTok fame, her OR seemed busier than ever. Until a record of botched surgeries caught up to her.",
+    "title": "The Rise and Fall of ‘Dr. Roxy’",
+    "source": "CURATED_CORPUS",
+    "url": "https://www.thecut.com/article/dr-roxy-katharine-grawe-tiktok-plastic-surgeon.html",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F5b0abb33-ef7b-452e-9158-ba308850e36c.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F5b0abb33-ef7b-452e-9158-ba308850e36c.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F5b0abb33-ef7b-452e-9158-ba308850e36c.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "db09beab-0c8b-44d1-8546-839581997dce": {
+    "id": "db09beab-0c8b-44d1-8546-839581997dce",
+    "authors": [{ "name": "Data Journalism Team" }],
+    "datePublished": "2024-11-06T16:04:08.000Z",
+    "domain": { "name": "BBC" },
+    "excerpt": "The US exit polls help build a picture of how different groups of people have voted across the nation. ",
+    "title": "The U.S. Election 2024 Results and Exit Polls in Maps and Charts",
+    "source": "CURATED_CORPUS",
+    "url": "https://www.bbc.com/news/articles/c0lp48ldgyeo",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F98d722bd-b6fe-4349-bdf9-9141a38f3c16.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F98d722bd-b6fe-4349-bdf9-9141a38f3c16.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F98d722bd-b6fe-4349-bdf9-9141a38f3c16.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "603025b9-3778-40ba-bb44-724f8fe11cb4": {
+    "id": "603025b9-3778-40ba-bb44-724f8fe11cb4",
+    "authors": [{ "name": "Kim Cross" }],
+    "datePublished": "2024-10-23T17:48:00.000Z",
+    "domain": { "name": "Bicycling" },
+    "excerpt": "They led a cycling revolution in a country where women were forbidden to ride. When the Taliban returned to power, their only hope was a harrowing escape to an uncertain future.",
+    "title": "The Alchemists",
+    "source": "CURATED_CORPUS",
+    "url": "https://www.bicycling.com/culture/a62503930/afghanistan-cyclist-evacuation-taliban-us-troop-withdrawal/",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F845fdcdb-0175-49c4-a4bb-bd3d44d43550.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F845fdcdb-0175-49c4-a4bb-bd3d44d43550.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F845fdcdb-0175-49c4-a4bb-bd3d44d43550.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "f820cec2-718f-4e27-81cb-f70528976461": {
+    "id": "f820cec2-718f-4e27-81cb-f70528976461",
+    "authors": [{ "name": "Josiah Gogarty" }],
+    "datePublished": "2024-11-04T21:22:16.000Z",
+    "domain": { "name": "GQ" },
+    "excerpt": "Starting with getting outside first thing in the morning.",
+    "title": "How to Sleep Better, According to Sleep Experts",
+    "source": "CURATED_CORPUS",
+    "url": "https://www.gq.com/story/how-to-sleep-better-according-to-sleep-experts",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fmedia.gq.com%2Fphotos%2F6729074fbac4e4cb00440f9c%2F16%3A9%2Fw_1280%2Cc_limit%2FGettyImages-668677947.jpg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fmedia.gq.com%2Fphotos%2F6729074fbac4e4cb00440f9c%2F16%3A9%2Fw_1280%2Cc_limit%2FGettyImages-668677947.jpg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fmedia.gq.com%2Fphotos%2F6729074fbac4e4cb00440f9c%2F16%3A9%2Fw_1280%2Cc_limit%2FGettyImages-668677947.jpg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "611ce041-de24-46a8-a8d9-0b5951187804": {
+    "id": "611ce041-de24-46a8-a8d9-0b5951187804",
+    "authors": [{ "name": "Allie Chanthorn Reinmann" }],
+    "datePublished": "2024-11-04T14:30:23.000Z",
+    "domain": { "name": "Lifehacker" },
+    "excerpt": "The queen of set-it-and-forget-it cooking: let the slow cooker assist.",
+    "title": "Lean on Your Slow Cooker for Hands-Off Help This Thanksgiving",
+    "source": "CURATED_CORPUS",
+    "url": "https://lifehacker.com/food-drink/best-thanksgiving-side-dishes-to-make-in-slow-cooker",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Flifehacker.com%2Fimagery%2Farticles%2F01JBF2QF6BJYEDW7PHHVN2E7XE%2Fhero-image.fill.size_1200x675.jpg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Flifehacker.com%2Fimagery%2Farticles%2F01JBF2QF6BJYEDW7PHHVN2E7XE%2Fhero-image.fill.size_1200x675.jpg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Flifehacker.com%2Fimagery%2Farticles%2F01JBF2QF6BJYEDW7PHHVN2E7XE%2Fhero-image.fill.size_1200x675.jpg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "4ec0ee9f-0e03-494f-ae71-8f17d00df65a": {
+    "id": "4ec0ee9f-0e03-494f-ae71-8f17d00df65a",
+    "authors": [{ "name": "Zach Kram" }],
+    "datePublished": "2024-11-05T17:00:00.000Z",
+    "domain": { "name": "The Ringer" },
+    "excerpt": "For a while, it seemed like the 3-point revolution had leveled off. Early in 2024-25, however, it’s clear that the deep ball is on the rise again. And this time, it’s the best young players who are exhibiting the greatest increases.",
+    "title": "It’s Not Just Ant. Almost All the NBA’s Young Stars Are Bombing Away From 3.",
+    "source": "CURATED_CORPUS",
+    "url": "https://www.theringer.com/nba/2024/11/5/24288752/3-pointers-anthony-edwards-young-stars",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fcdn.vox-cdn.com%2Fthumbor%2FCDTjxeQzdu0eYKBaHJ-4DhIPbDw%3D%2F0x86%3A1200x714%2Ffit-in%2F1200x630%2Fcdn.vox-cdn.com%2Fuploads%2Fchorus_asset%2Ffile%2F25716403%2F3pointshooters_getty_ringer.jpg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fcdn.vox-cdn.com%2Fthumbor%2FCDTjxeQzdu0eYKBaHJ-4DhIPbDw%3D%2F0x86%3A1200x714%2Ffit-in%2F1200x630%2Fcdn.vox-cdn.com%2Fuploads%2Fchorus_asset%2Ffile%2F25716403%2F3pointshooters_getty_ringer.jpg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fcdn.vox-cdn.com%2Fthumbor%2FCDTjxeQzdu0eYKBaHJ-4DhIPbDw%3D%2F0x86%3A1200x714%2Ffit-in%2F1200x630%2Fcdn.vox-cdn.com%2Fuploads%2Fchorus_asset%2Ffile%2F25716403%2F3pointshooters_getty_ringer.jpg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "0797d53a-c34b-4f3b-83c5-a33971ada5df": {
+    "id": "0797d53a-c34b-4f3b-83c5-a33971ada5df",
+    "authors": [{ "name": "Willem Marx" }],
+    "datePublished": "2024-11-06T06:00:00.000Z",
+    "domain": { "name": "NPR" },
+    "excerpt": "Leaders from around the world congratulated Donald Trump on his presidential election victory, as governments prepare for his return to the White House and the potential impact that will have.",
+    "title": "What’s the World Saying About Trump’s Win?",
+    "source": "CURATED_CORPUS",
+    "url": "https://www.npr.org/2024/11/06/g-s1-33053/trump-win-world-reaction",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fbbea97ca-b872-4207-a734-4b007e34516e.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fbbea97ca-b872-4207-a734-4b007e34516e.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fbbea97ca-b872-4207-a734-4b007e34516e.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "3200296b-2594-483a-8156-89658a2a84a4": {
+    "id": "3200296b-2594-483a-8156-89658a2a84a4",
+    "authors": [{ "name": "Beth Skwarecki" }],
+    "datePublished": "2024-11-05T17:00:00.000Z",
+    "domain": { "name": "Lifehacker" },
+    "excerpt": "Even if you’ve put your clothes in the drawers.",
+    "title": "How I Pack up a Hotel Room so I Don’t Forget Anything",
+    "source": "CURATED_CORPUS",
+    "url": "https://lifehacker.com/travel/how-to-pack-up-a-hotel-room-without-forgetting-anything",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Flifehacker.com%2Fimagery%2Farticles%2F01JBWFHZDWDS3MA2TWFMZAA8YE%2Fhero-image.fill.size_1200x675.jpg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Flifehacker.com%2Fimagery%2Farticles%2F01JBWFHZDWDS3MA2TWFMZAA8YE%2Fhero-image.fill.size_1200x675.jpg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Flifehacker.com%2Fimagery%2Farticles%2F01JBWFHZDWDS3MA2TWFMZAA8YE%2Fhero-image.fill.size_1200x675.jpg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "56f7a40a-60ba-4ae1-ad80-4b1714f8332f": {
+    "id": "56f7a40a-60ba-4ae1-ad80-4b1714f8332f",
+    "authors": [{ "name": "Hard Science" }],
+    "datePublished": "2024-11-05T15:58:30.000Z",
+    "domain": { "name": "Big Think" },
+    "excerpt": "Why does matter hold together for billions of years? The answer could reshape our understanding of the universe.",
+    "title": "Will Protons Last Forever? Why Scientists Are Searching for Signs of Decay",
+    "source": "CURATED_CORPUS",
+    "url": "https://bigthink.com/hard-science/will-protons-last-forever-why-scientists-are-searching-for-signs-of-decay/",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fbigthink.com%2Fwp-content%2Fuploads%2F2024%2F11%2Fprotons-dont-decay_compressed.jpg%3Fw%3D640",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fbigthink.com%2Fwp-content%2Fuploads%2F2024%2F11%2Fprotons-dont-decay_compressed.jpg%3Fw%3D640",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fbigthink.com%2Fwp-content%2Fuploads%2F2024%2F11%2Fprotons-dont-decay_compressed.jpg%3Fw%3D640",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "6ad4ec22-7a68-4f04-af07-d8556eb7e3d2": {
+    "id": "6ad4ec22-7a68-4f04-af07-d8556eb7e3d2",
+    "authors": [{ "name": "Karina Tsui" }],
+    "datePublished": null,
+    "domain": { "name": "CNN" },
+    "excerpt": "Powerful winds that fueled fast-moving wildfires across Southern California this week are expected to pick up momentum on Thursday –– worsening conditions for firefighters who are already battling limited visibility to save lives.",
+    "title": " 27 Million People in California Face ‘Life-Threatening’ Fire Warning",
+    "source": "CURATED_CORPUS",
+    "url": "https://edition.cnn.com/2024/11/07/us/southern-california-fires-burn-houses-close-schools-hnk/index.html",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fc9b19bdc-4f5a-48d5-8c7a-291d7ad88848.png",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fc9b19bdc-4f5a-48d5-8c7a-291d7ad88848.png",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fc9b19bdc-4f5a-48d5-8c7a-291d7ad88848.png",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "4e7e0f62-4d97-4936-adc8-4f5c396ec9b3": {
+    "id": "4e7e0f62-4d97-4936-adc8-4f5c396ec9b3",
+    "authors": [{ "name": "Lauren Leffer" }],
+    "datePublished": "2024-11-04T14:00:00.000Z",
+    "domain": { "name": "Popular Science" },
+    "excerpt": "‘After every extinction event the place is devastated, but life is so resilient.’",
+    "title": "Without Humans, What Would Happen to Earth?",
+    "source": "CURATED_CORPUS",
+    "url": "https://www.popsci.com/science/earth-without-humans/",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fwww.popsci.com%2Fwp-content%2Fuploads%2F2024%2F11%2Fearth-without-humans.jpg%3Fw%3D2000",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fwww.popsci.com%2Fwp-content%2Fuploads%2F2024%2F11%2Fearth-without-humans.jpg%3Fw%3D2000",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fwww.popsci.com%2Fwp-content%2Fuploads%2F2024%2F11%2Fearth-without-humans.jpg%3Fw%3D2000",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "46232b59-8558-4a77-8ced-d8518eaf3874": {
+    "id": "46232b59-8558-4a77-8ced-d8518eaf3874",
+    "authors": [{ "name": "Andrew Paul" }],
+    "datePublished": "2024-11-05T16:19:00.000Z",
+    "domain": { "name": "Popular Science" },
+    "excerpt": "LignoSat has arrived aboard the ISS.",
+    "title": "World’s First Wooden Satellite Shares Material With Samurai Sword Sheaths",
+    "source": "CURATED_CORPUS",
+    "url": "https://www.popsci.com/technology/wooden-satellite-lignosat/",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fwww.popsci.com%2Fwp-content%2Fuploads%2F2024%2F11%2Fwooden-s.jpg%3Fquality%3D85",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fwww.popsci.com%2Fwp-content%2Fuploads%2F2024%2F11%2Fwooden-s.jpg%3Fquality%3D85",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fwww.popsci.com%2Fwp-content%2Fuploads%2F2024%2F11%2Fwooden-s.jpg%3Fquality%3D85",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "debd304d-a94d-4451-a88d-14af5aec3412": {
+    "id": "debd304d-a94d-4451-a88d-14af5aec3412",
+    "authors": [{ "name": "Kate Abnett and Alison Withers" }],
+    "datePublished": null,
+    "domain": { "name": "Reuters" },
+    "excerpt": "2024 will be first year over 1.5C hotter than pre-industrial period.",
+    "title": "2024 Will Be World’s Hottest on Record, EU Scientists Say",
+    "source": "CURATED_CORPUS",
+    "url": "https://www.reuters.com/business/environment/2024-will-be-worlds-hottest-record-eu-scientists-say-2024-11-07/",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F199e97b4-363f-4d04-86c9-a8e07b77868e.png",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F199e97b4-363f-4d04-86c9-a8e07b77868e.png",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F199e97b4-363f-4d04-86c9-a8e07b77868e.png",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "7dc3e16c-34d6-43e6-9843-5a1b9a638a9a": {
+    "id": "7dc3e16c-34d6-43e6-9843-5a1b9a638a9a",
+    "authors": [{ "name": "Rachel Martin" }],
+    "datePublished": "2024-11-03T05:00:00.000Z",
+    "domain": { "name": "NPR" },
+    "excerpt": "In this week’s Wild Card, Kathryn Hahn says she has more control over her choices and is not as afraid to say what she wants.",
+    "title": "‘I Have More Say’: Why Kathryn Hahn Feels More Powerful Than Ever",
+    "source": "CURATED_CORPUS",
+    "url": "https://www.npr.org/2024/11/01/nx-s1-5173868/agatha-all-along-marvel-wild-card-kathryn-hahn",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fnpr.brightspotcdn.com%2Fdims3%2Fdefault%2Fstrip%2Ffalse%2Fcrop%2F4800x2700%2B0%2B0%2Fresize%2F1400%2Fquality%2F100%2Fformat%2Fjpeg%2F%3Furl%3Dhttp%253A%252F%252Fnpr-brightspot.s3.amazonaws.com%252Fc5%252F1e%252Fa2782b624cb8b3b907ef5840d681%252Fgettyimages-2171744211.jpg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fnpr.brightspotcdn.com%2Fdims3%2Fdefault%2Fstrip%2Ffalse%2Fcrop%2F4800x2700%2B0%2B0%2Fresize%2F1400%2Fquality%2F100%2Fformat%2Fjpeg%2F%3Furl%3Dhttp%253A%252F%252Fnpr-brightspot.s3.amazonaws.com%252Fc5%252F1e%252Fa2782b624cb8b3b907ef5840d681%252Fgettyimages-2171744211.jpg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fnpr.brightspotcdn.com%2Fdims3%2Fdefault%2Fstrip%2Ffalse%2Fcrop%2F4800x2700%2B0%2B0%2Fresize%2F1400%2Fquality%2F100%2Fformat%2Fjpeg%2F%3Furl%3Dhttp%253A%252F%252Fnpr-brightspot.s3.amazonaws.com%252Fc5%252F1e%252Fa2782b624cb8b3b907ef5840d681%252Fgettyimages-2171744211.jpg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "6eee04ee-0af1-4980-9759-955a2ca52320": {
+    "id": "6eee04ee-0af1-4980-9759-955a2ca52320",
+    "authors": [{ "name": "Bridget Bowman" }],
+    "datePublished": "2024-11-06T13:49:20.000Z",
+    "domain": { "name": "NBC News" },
+    "excerpt": "Republicans won the Senate but are looking to stretch their majority. The House is still uncalled. And Trump has won another term as president, NBC News projects.",
+    "title": "Every Uncalled Race Left in the Fight for Control in Washington",
+    "source": "CURATED_CORPUS",
+    "url": "https://www.nbcnews.com/politics/2024-election/house-senate-uncalled-races-election-2024-vote-counting-rcna178604",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F3a48db24-b89b-484a-8de8-51127de8a780.png",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F3a48db24-b89b-484a-8de8-51127de8a780.png",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F3a48db24-b89b-484a-8de8-51127de8a780.png",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "7aa45163-21eb-44e8-a620-2dc1b20fe472": {
+    "id": "7aa45163-21eb-44e8-a620-2dc1b20fe472",
+    "authors": [{ "name": "Max Zahn" }],
+    "datePublished": "2024-11-07T11:04:00.000Z",
+    "domain": { "name": "ABC News" },
+    "excerpt": "The Fed is expected cut interest rates by a quarter of a percentage point.",
+    "title": "Federal Reserve Set to Make Interest Rate Decision",
+    "source": "CURATED_CORPUS",
+    "url": "https://abcnews.go.com/Business/federal-reserve-set-make-interest-rate-decision-days/story?id=115560064",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F9003388e-336b-40c1-b86f-9d16de0e4561.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F9003388e-336b-40c1-b86f-9d16de0e4561.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F9003388e-336b-40c1-b86f-9d16de0e4561.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "4f30a17a-259d-49d7-8e00-822583faaf9b": {
+    "id": "4f30a17a-259d-49d7-8e00-822583faaf9b",
+    "authors": [{ "name": "Kelley Cours Anderson" }, { "name": "Karen Anne Wallach" }],
+    "datePublished": "2024-11-01T12:39:00.000Z",
+    "domain": { "name": "The Conversation" },
+    "excerpt": "Disconnecting from the digital realm from time to time is good for your well-being, but doing so can be difficult. There are steps you can take, however, to get in the habit of putting your phone down.",
+    "title": "How to Overcome Your Device Dependency and Manage a Successful Digital Detox",
+    "source": "CURATED_CORPUS",
+    "url": "https://theconversation.com/how-to-overcome-your-device-dependency-and-manage-a-successful-digital-detox-240613",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F08e48a2b-a50b-4e6d-b505-2c2a9dc1a664.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F08e48a2b-a50b-4e6d-b505-2c2a9dc1a664.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F08e48a2b-a50b-4e6d-b505-2c2a9dc1a664.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "be2d0f44-bdc6-41b9-bba5-f14dcbcf2a14": {
+    "id": "be2d0f44-bdc6-41b9-bba5-f14dcbcf2a14",
+    "authors": [{ "name": "Yasmina Khelifi" }],
+    "datePublished": "2024-11-05T13:25:18.000Z",
+    "domain": { "name": "Harvard Business Review" },
+    "excerpt": "When you’re planning for a vacation, it is essential to hand over work efficiently. ",
+    "title": "A Guide to Handing Off Work Before a Vacation",
+    "source": "CURATED_CORPUS",
+    "url": "https://hbr.org/2024/11/a-guide-to-handing-off-work-before-a-vacation",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F58e9c7bf-1c34-468c-a8dd-963f4435e83c.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F58e9c7bf-1c34-468c-a8dd-963f4435e83c.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F58e9c7bf-1c34-468c-a8dd-963f4435e83c.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "97fdc706-df5f-48af-a0e8-e96e44c74c13": {
+    "id": "97fdc706-df5f-48af-a0e8-e96e44c74c13",
+    "authors": [{ "name": "Zak Vescera" }],
+    "datePublished": "2024-11-05T13:45:48.000Z",
+    "domain": { "name": "Investigative Journalism Foundation" },
+    "excerpt": "In the last days of April, Ben arrived at an RCMP detachment in rural B.C. with a plan to get back his life savings. ",
+    "title": "Canadians Are Being Scammed Out of Their Life Savings. Police Aren’t Keeping Up",
+    "source": "CURATED_CORPUS",
+    "url": "https://theijf.org/fraud-canada-police-investigations",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fbba21152-c20c-4b4e-82f7-d08a3001e0d2.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fbba21152-c20c-4b4e-82f7-d08a3001e0d2.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fbba21152-c20c-4b4e-82f7-d08a3001e0d2.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "6c84709d-64e3-4da9-a529-dcd75c28bd48": {
+    "id": "6c84709d-64e3-4da9-a529-dcd75c28bd48",
+    "authors": [{ "name": "Shannon Sauer-Zavala" }],
+    "datePublished": "2024-11-01T20:46:00.000Z",
+    "domain": { "name": "The Conversation" },
+    "excerpt": "Given the polarized political climate in the US, it’s hard not to be affected by the election. But there are ways to make sure stress and uncertainty don’t send you on a downward spiral.",
+    "title": "3 Science-Backed Strategies to Rein in Election Stress",
+    "source": "CURATED_CORPUS",
+    "url": "https://theconversation.com/election-anxiety-doesnt-need-to-win-here-are-3-science-backed-strategies-from-a-clinical-psychologist-to-rein-in-the-stress-242717",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F905b3f8a-ed62-48a5-ab91-720f776dada2.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F905b3f8a-ed62-48a5-ab91-720f776dada2.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F905b3f8a-ed62-48a5-ab91-720f776dada2.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "6c3b5405-673c-4b90-b8ad-290d10e9baac": {
+    "id": "6c3b5405-673c-4b90-b8ad-290d10e9baac",
+    "authors": [{ "name": "Megan Tatum" }],
+    "datePublished": "2024-10-30T17:25:00.000Z",
+    "domain": { "name": "Men's Health" },
+    "excerpt": "Wearable glucose monitors have become the latest health accessory, but are there benefits to tracking those spikes and dips?",
+    "title": "Are Blood Sugar Spikes Actually Bad for You? We Asked an Expert",
+    "source": "CURATED_CORPUS",
+    "url": "https://www.menshealth.com/uk/nutrition/a62750120/are-blood-sugar-spikes-bad-for-you/",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F327260e2-ee39-4cce-97a0-3f1b1761d24b.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F327260e2-ee39-4cce-97a0-3f1b1761d24b.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F327260e2-ee39-4cce-97a0-3f1b1761d24b.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "865d02b5-db2e-4038-aee9-1658a0470740": {
+    "id": "865d02b5-db2e-4038-aee9-1658a0470740",
+    "authors": [{ "name": "Jenna Ryu" }],
+    "datePublished": "2024-11-01T15:24:09.000Z",
+    "domain": { "name": "SELF" },
+    "excerpt": "If you’re consumed by suspicion, possessiveness, and insecurity, try one of these strategies.",
+    "title": "How to Stop Being Jealous in a Relationship, According to Experts",
+    "source": "CURATED_CORPUS",
+    "url": "https://www.self.com/story/how-to-stop-being-jealous-in-a-relationship",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fc9d67046-1886-4384-806d-f0c7b83e5d5a.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fc9d67046-1886-4384-806d-f0c7b83e5d5a.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fc9d67046-1886-4384-806d-f0c7b83e5d5a.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "1ff5d6ce-4a4c-46d8-9bd0-f4833c5e5735": {
+    "id": "1ff5d6ce-4a4c-46d8-9bd0-f4833c5e5735",
+    "authors": [{ "name": "Clay Skipper" }],
+    "datePublished": "2024-10-28T13:00:00.000Z",
+    "domain": { "name": "Men's Health" },
+    "excerpt": "One chronically overstimulated guy headed to a silent meditation retreat to spend ten days tuning into his psyche. That’s when the real noise began.",
+    "title": "The Silent Expedition Into My Anxious Brain",
+    "source": "CURATED_CORPUS",
+    "url": "https://www.menshealth.com/health/a62468867/silent-meditation-retreat/",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fdfb0af19-06cc-4ecb-a0fe-adab9fc24f8e.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fdfb0af19-06cc-4ecb-a0fe-adab9fc24f8e.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fdfb0af19-06cc-4ecb-a0fe-adab9fc24f8e.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "c3eded4f-6054-461b-aa81-713bb6c90b03": {
+    "id": "c3eded4f-6054-461b-aa81-713bb6c90b03",
+    "authors": [{ "name": "Vass Bednar" }, { "name": "Denise Hearn" }],
+    "datePublished": "2024-10-29T10:30:48.000Z",
+    "domain": { "name": "The Walrus" },
+    "excerpt": "Counterfeits and junk fees are cheapening what you buy—and draining your wallet.",
+    "title": "Online Shopping Can’t Be Trusted",
+    "source": "CURATED_CORPUS",
+    "url": "https://thewalrus.ca/online-shopping-cant-be-trusted/",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F24c2fded-a3e0-4c84-bb38-805619a2d354.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F24c2fded-a3e0-4c84-bb38-805619a2d354.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F24c2fded-a3e0-4c84-bb38-805619a2d354.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
+  },
+  "1c659320-6d07-4f77-a143-3cdb1c22f0b0": {
+    "id": "1c659320-6d07-4f77-a143-3cdb1c22f0b0",
+    "authors": [{ "name": "Editors" }],
+    "datePublished": "2024-11-01T13:55:00.000Z",
+    "domain": { "name": "POPSUGAR" },
+    "excerpt": "Stress hives are the last things you want to deal with when you're already feeling anxious. Here, why they pop up and how to get rid of them fast.",
+    "title": "Why Stress Can Make You Itchy, According to MDs",
+    "source": "CURATED_CORPUS",
+    "url": "https://www.popsugar.com/health/stress-hives-49405497",
+    "image": {
+      "caption": null,
+      "credit": null,
+      "cachedImages": [
+        {
+          "url": "https://pocket-image-cache.com/640x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fa90236b5-2ace-4133-8deb-f4df1b3174f0.jpeg",
+          "id": "WebP640"
+        },
+        {
+          "url": "https://pocket-image-cache.com/320x/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fa90236b5-2ace-4133-8deb-f4df1b3174f0.jpeg",
+          "id": "WebP320"
+        },
+        {
+          "url": "https://pocket-image-cache.com/260x260/filters:format(WEBP):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2Fa90236b5-2ace-4133-8deb-f4df1b3174f0.jpeg",
+          "id": "WebPSquare"
+        }
+      ]
+    }
   }
 }

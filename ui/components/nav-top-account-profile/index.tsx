@@ -21,12 +21,12 @@ import { HomeIcon } from '@ui/icons/HomeIcon'
 import { LockIcon } from '@ui/icons/LockIcon'
 import { SaveIcon } from '@ui/icons/SaveIcon'
 import { SettingsIcon } from '@ui/icons/SettingsIcon'
+import Link from 'next/link'
+
 import { useState } from 'react'
 
-import { SettingTheme } from '../setting-theme'
-
 import { useUserInfo } from '@common/state/user-info'
-import Link from 'next/link'
+import { SettingTheme } from '../setting-theme'
 
 /**
  * NavTopAccountProfile
@@ -70,7 +70,7 @@ export function NavTopAccountProfile() {
           {...getReferenceProps()}
           ref={refs.setReference}
           type="button">
-          <img alt="" src={avatarUrl as string} />
+          <img alt="" src={avatarUrl!} />
         </button>
       </div>
 
@@ -100,7 +100,7 @@ function ProfilePanel() {
   const firstName = useUserInfo((state) => state.firstName)
   const lastName = useUserInfo((state) => state.lastName)
   const email = useUserInfo((state) => state.email)
-  const logout = useUserInfo((state) => state.removeUserData)
+  const removeUserData = useUserInfo((state) => state.removeUserData)
 
   return (
     <div className={style.panel}>
@@ -131,7 +131,7 @@ function ProfilePanel() {
         <SettingTheme buttonClass={style.themeButton} />
       </div>
       <hr />
-      <button className="button menu" type="button" onClick={logout}>
+      <button className="button menu" type="button" onClick={removeUserData}>
         <LockIcon /> {t('profile:log-out', 'Log Out')}
       </button>
     </div>

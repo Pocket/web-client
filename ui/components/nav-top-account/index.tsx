@@ -4,10 +4,10 @@ import style from './style.module.css'
 
 import { useEffect } from 'react'
 
-import { NavTopAccountAuth } from '../nav-top-account-auth'
-import { NavTopAccountProfile } from '../nav-top-account-profile'
-
 import { useUserInfo } from '@common/state/user-info'
+import { NavTopAccountAuth } from '../nav-top-account-auth'
+
+import { NavTopAccountProfile } from '../nav-top-account-profile'
 
 /**
  * NavTopAccount

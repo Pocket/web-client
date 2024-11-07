@@ -15,7 +15,7 @@ export type UserInfoState = {
 
 interface UserInfoActions {
   getUserData: () => UserInfoState
-  removeUserData: () => Promise<void>
+  removeUserData: () => void
   setUserData: (data: UserInfoState) => void
 }
 
@@ -43,11 +43,13 @@ export const useUserInfo = create<UserInfoActions & UserInfoState>()(
       if (retrievedUser) set({ ...retrievedUser, pending: false })
     },
 
-    removeUserData: async () => {
+    removeUserData: () => {
       set({ ...initialState, pending: false })
-      await deleteSession()
+      // We need to catch here so we can handle the promise
+      deleteSession().catch((error) => {
+        console.error(error)
+      })
     },
-
     setUserData: (data) => set({ ...data, pending: false })
   }))
 )

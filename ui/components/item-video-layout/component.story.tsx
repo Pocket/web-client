@@ -25,7 +25,7 @@ export const Layout: StoryObj<typeof Component> = {
       <div className="page-container">
         <Component {...args}>
           {Object.keys(itemsById).map((id) => (
-            <ItemVideo key={id} item={itemsById[id] as Item} />
+            <ItemVideo key={id} item={itemsById[id]!} />
           ))}
         </Component>
       </div>

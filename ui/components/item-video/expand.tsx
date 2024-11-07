@@ -8,7 +8,7 @@ export const Expand = () => {
     if (!buttonRef.current) return
 
     const parent = buttonRef.current.parentElement
-    const className = style.expanded as string
+    const className = style.expanded!
     if (parent) {
       if (parent.classList.contains(className)) parent.classList.remove(className)
       else parent.classList.add(className)

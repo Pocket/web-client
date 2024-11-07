@@ -38,7 +38,7 @@ export function Colors() {
 function getRelevantStyleSheets(): CSSStyleSheet[] {
   return Array.from(document.styleSheets).filter(
     (sheet) => !sheet.href || sheet.href.startsWith(window.location.origin)
-  ) as CSSStyleSheet[]
+  )
 }
 
 /**

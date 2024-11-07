@@ -27,12 +27,12 @@ export const Icons: StoryObj<typeof IconDisplayComponent> = {
  * Display all the icons with the ability to change font sizes
  */
 function IconDisplayComponent({ fontSize }: { fontSize?: number }) {
-  const iconList: string[] = Object.keys(AllIcons).sort()
+  const iconList = Object.keys(AllIcons).sort()
   return (
     <div className={style.iconContainer} style={{ fontSize: `${fontSize}px` }}>
       <div className={style.iconGrid}>
         {iconList.map((iconName) => {
-          const IconToRender = AllIcons[iconName]
+          const IconToRender = AllIcons[iconName as keyof typeof AllIcons]
           return (
             <div key={iconName} className={style.iconBlock}>
               <IconToRender /> {iconName}

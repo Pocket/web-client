@@ -6,7 +6,7 @@ import { ItemArticleLayout, type LayoutType } from '../item-article-layout'
 // Mock Data
 import itemData from '@common/mock-data/in-state/itemsById.json'
 
-import { Item } from '@common/types'
+import type { Item } from '@common/types'
 import type { Meta, StoryObj } from '@storybook/react'
 
 // Storybook Meta
@@ -30,7 +30,7 @@ export const Complete: StoryObj<ComponentPropsAndCustomArgs> = {
     const item = itemsById[itemId]
     return (
       <ItemArticleLayout layoutType={args.gridCount}>
-        <Component item={item as Item} />
+        <Component item={item!} />
       </ItemArticleLayout>
     )
   },

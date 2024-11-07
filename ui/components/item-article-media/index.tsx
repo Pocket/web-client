@@ -19,7 +19,7 @@ export function ItemArticleMedia({
 }) {
   const colorToUse = getColorFromId(id)
   const { width, height } = { width: 640, height: 360 }
-  const imageUrlToUse = image?.cachedImages?.length ? image.cachedImages[0]?.url : false
+  const imageUrlToUse: string | false = (image?.cachedImages?.[0]?.url as string) ?? false
 
   return (
     <div className={style.base} data-color={colorToUse} data-testid="item-media">

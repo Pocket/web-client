@@ -28,7 +28,7 @@ const itemsById: Record<string, Item> = itemData
 
 export const Complete: StoryObj<ComponentPropsAndCustomArgs> = {
   render: (args) => {
-    const item = itemsById[args.id] as Item
+    const item = itemsById[args.id]!
     return <Component item={item} />
   },
   decorators: [(Story, { args }) => inArticleLayout(Story, args.layoutType)],
