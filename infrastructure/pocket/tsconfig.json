@@ -1,5 +1,4 @@
 {
-  "extends": "@config/typescript-config/nextjs.json",
   "compilerOptions": {
     "target": "es2020",
     "module": "commonjs",

@@ -11,7 +11,8 @@ import { ItemArticleMedia } from '../item-article-media'
  * This is our 404 error when the user hits a route that does not exist
  * We use this to escort them to safer waters
  */
-export function ErrorNotFound() {
+export function ErrorNotFound({ locale }: { locale: string }) {
+  console.log(locale)
   return (
     <div className={style.base} data-columns="4" data-testid="error-four">
       <div className={style.copy}>
