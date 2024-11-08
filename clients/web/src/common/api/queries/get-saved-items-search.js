@@ -6,15 +6,31 @@ import { actionToCamelCase } from 'common/utilities/strings/strings'
 
 const searchSavedItemsQuery = gql`
   query SearchSavedItems(
-    $term: String!
     $sort: SearchSortInput
     $pagination: PaginationInput
-    $filter: SearchFilterInput
+    $filter: AdvancedSearchFilters
+    $queryString: String
   ) {
     user {
-      searchSavedItems(term: $term, sort: $sort, pagination: $pagination, filter: $filter) {
+      advancedSearch(
+        filter: $filter
+        queryString: $queryString
+        pagination: $pagination
+        sort: $sort
+      ) {
+        pageInfo {
+          hasNextPage
+          hasPreviousPage
+          startCursor
+          endCursor
+        }
+        totalCount
         edges {
           node {
+            searchHighlights {
+              fullText
+              title
+            }
             savedItem {
               url
               _createdAt
@@ -31,13 +47,13 @@ const searchSavedItemsQuery = gql`
               }
               item {
                 ... on Item {
+                  givenUrl
+                  itemId
                   isArticle
                   hasImage
                   hasVideo
                   timeToRead
                   shareId: id
-                  itemId
-                  givenUrl
                   preview {
                     ...ItemPreview
                   }
@@ -46,13 +62,6 @@ const searchSavedItemsQuery = gql`
             }
           }
         }
-        pageInfo {
-          hasNextPage
-          hasPreviousPage
-          startCursor
-          endCursor
-        }
-        totalCount
       }
     }
   }
@@ -71,15 +80,18 @@ export async function getSavedItemsSearch({
   actionType,
   sortOrder = 'DESC',
   pagination,
-  searchTerm: term
+  searchTerm: queryString
 }) {
   const requestDetails = itemFiltersFromGraph[actionType]
   if (!requestDetails) throw new MalformedItemSearchError()
 
   const { filter, sort } = requestDetails
-  const variables = { filter: { ...filter }, sort: { ...sort, sortOrder }, term, pagination }
-  if (Object.keys(variables.filter).length == 0) {
-    delete variables.filter
+
+  const variables = {
+    ...(filter && { filter }),
+    sort: { ...sort, sortOrder },
+    queryString,
+    pagination
   }
   const operationName = actionToCamelCase(actionType)
 
@@ -89,7 +101,7 @@ export async function getSavedItemsSearch({
 }
 
 function handleResponse(response) {
-  const responseData = response?.data?.user?.searchSavedItems
+  const responseData = response?.data?.user?.advancedSearch
   const { pageInfo, edges, totalCount } = responseData
   return { pageInfo, edges, totalCount }
 }
