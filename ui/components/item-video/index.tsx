@@ -15,7 +15,7 @@ import type { Item } from '@common/types'
  * This is standard video in 16:9 ratio youtube/vimeo/dailymotion and the like
  */
 export function ItemVideo({ item }: { item: Item }) {
-  const videoUrl = item?.url || false
+  const videoUrl = (item?.url as string) ?? false
 
   return videoUrl ? (
     <div className={style.base} data-testid="item-video">

@@ -11,7 +11,7 @@ import type { Item } from '@common/types'
  * This is vertical short video format such as tiktok, reels, or youtube shorts
  */
 export function ItemSound({ item }: { item: Item }) {
-  const soundUrl = item?.url || false
+  const soundUrl = (item?.url as string) ?? false
 
   return soundUrl ? (
     <div className={style.base} data-testid="item-short">

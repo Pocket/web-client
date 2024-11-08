@@ -23,7 +23,10 @@
       "dependsOn": ["^build"]
     },
     "test:update": {},
-    "lint": {},
+    "lint": {
+      "dependsOn": ["compile:icons"]
+    },
+    "compile:icons": {},
     "format": {},
     "checktypes": {},
     "pocket": {
