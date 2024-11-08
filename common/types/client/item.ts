@@ -1,6 +1,6 @@
-import { PocketMetadata } from '../pocket'
+import { OEmbed } from '../pocket'
 
-export type Item = PocketMetadata
+export type Item = OEmbed
 
 /**
  *   "89062669-3adf-47f9-a27a-66ed637b59f1": {

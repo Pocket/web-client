@@ -6,15 +6,9 @@ exports[`renders ItemShort with defaults 1`] = `
   data-testid="item-short"
 >
   <figure>
-    <div
-      style="width: 100%; height: 100%;"
-    >
-      <div
-        style="width: 100%; height: 100%;"
-      >
-        <div />
-      </div>
-    </div>
+    <iframe
+      src="<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@amauryguichon/video/7433452964246818094" data-video-id="7433452964246818094" data-embed-from="oembed" style="max-width:605px; min-width:325px;"> <section> <a target="_blank" title="@amauryguichon" href="https://www.tiktok.com/@amauryguichon?refer=embed">@amauryguichon</a> <p>The Crate of Apples! 🍎 Celebrating the fall season with this new pastry creation! <a title="amauryguichon" target="_blank" href="https://www.tiktok.com/tag/amauryguichon?refer=embed">#amauryguichon</a> <a title="chocolate" target="_blank" href="https://www.tiktok.com/tag/chocolate?refer=embed">#chocolate</a> <a title="apple" target="_blank" href="https://www.tiktok.com/tag/apple?refer=embed">#apple</a> </p> <a target="_blank" title="♬ Little Bitty Pretty One - Bobby Day" href="https://www.tiktok.com/music/Little-Bitty-Pretty-One-6721311316864141313?refer=embed">♬ Little Bitty Pretty One - Bobby Day</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>"
+    />
   </figure>
 </div>
 `;
