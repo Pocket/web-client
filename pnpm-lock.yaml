@@ -109,7 +109,7 @@ importers:
         version: 1.2.2(eslint@9.14.0(jiti@2.4.0))
       '@sentry/nextjs':
         specifier: ^8.36.0
-        version: 8.36.0(@opentelemetry/core@1.27.0(@opentelemetry/api@1.9.0))(@opentelemetry/instrumentation@0.54.2(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.27.0(@opentelemetry/api@1.9.0))(next@15.0.2(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(webpack@5.96.1(@swc/core@1.9.2(@swc/helpers@0.5.13)))
+        version: 8.36.0(@opentelemetry/core@1.27.0(@opentelemetry/api@1.9.0))(@opentelemetry/instrumentation@0.53.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.27.0(@opentelemetry/api@1.9.0))(next@15.0.2(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(webpack@5.96.1(@swc/core@1.9.2(@swc/helpers@0.5.13)))
       '@ui/components':
         specifier: workspace:*
         version: link:../../ui/components
@@ -239,31 +239,31 @@ importers:
         version: 7.114.0
       '@sentry/nextjs':
         specifier: 8.36.0
-        version: 8.36.0(@opentelemetry/core@1.27.0(@opentelemetry/api@1.9.0))(@opentelemetry/instrumentation@0.53.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.27.0(@opentelemetry/api@1.9.0))(next@15.0.2(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(webpack@5.96.1(@swc/core@1.9.2(@swc/helpers@0.5.13)))
+        version: 8.36.0(@opentelemetry/core@1.27.0(@opentelemetry/api@1.9.0))(@opentelemetry/instrumentation@0.54.2(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.27.0(@opentelemetry/api@1.9.0))(next@15.0.2(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(webpack@5.96.1(@swc/core@1.9.2(@swc/helpers@0.5.13)))
       '@snowplow/browser-plugin-button-click-tracking':
-        specifier: 4.0.2
-        version: 4.0.2(@snowplow/browser-tracker@4.0.2)
+        specifier: 3.24.5
+        version: 3.24.5(@snowplow/browser-tracker@3.24.5)
       '@snowplow/browser-plugin-client-hints':
-        specifier: 4.0.2
-        version: 4.0.2(@snowplow/browser-tracker@4.0.2)
+        specifier: 3.24.5
+        version: 3.24.5(@snowplow/browser-tracker@3.24.5)
       '@snowplow/browser-plugin-form-tracking':
-        specifier: 4.0.2
-        version: 4.0.2(@snowplow/browser-tracker@4.0.2)
+        specifier: 3.24.5
+        version: 3.24.5(@snowplow/browser-tracker@3.24.5)
       '@snowplow/browser-plugin-link-click-tracking':
-        specifier: 4.0.2
-        version: 4.0.2(@snowplow/browser-tracker@4.0.2)
+        specifier: 3.24.5
+        version: 3.24.5(@snowplow/browser-tracker@3.24.5)
       '@snowplow/browser-plugin-performance-navigation-timing':
-        specifier: 4.0.2
-        version: 4.0.2(@snowplow/browser-tracker@4.0.2)
+        specifier: 3.24.5
+        version: 3.24.5(@snowplow/browser-tracker@3.24.5)
       '@snowplow/browser-plugin-privacy-sandbox':
-        specifier: 4.0.2
-        version: 4.0.2(@snowplow/browser-tracker@4.0.2)
+        specifier: 3.24.5
+        version: 3.24.5(@snowplow/browser-tracker@3.24.5)
       '@snowplow/browser-plugin-timezone':
-        specifier: 4.0.2
-        version: 4.0.2(@snowplow/browser-tracker@4.0.2)
+        specifier: 3.24.5
+        version: 3.24.5(@snowplow/browser-tracker@3.24.5)
       '@snowplow/browser-tracker':
-        specifier: 4.0.2
-        version: 4.0.2
+        specifier: 3.24.5
+        version: 3.24.5
       '@storybook/react':
         specifier: 8.4.1
         version: 8.4.1(@storybook/test@8.4.1(storybook@8.4.1(prettier@3.3.3)))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.4.1(prettier@3.3.3))(typescript@5.6.3)
@@ -314,7 +314,7 @@ importers:
         version: 15.0.2(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next-i18next:
         specifier: 15.3.1
-        version: 15.3.1(i18next@23.16.5)(next@15.0.2(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-i18next@15.1.1(i18next@23.16.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        version: 15.3.1(i18next@23.16.5)(next@15.0.2(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-i18next@15.1.1(i18next@23.16.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       next-redux-saga:
         specifier: 4.1.2
         version: 4.1.2(redux-saga@1.3.0)
@@ -619,7 +619,7 @@ importers:
         version: 15.0.2(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next-i18next:
         specifier: 15.3.1
-        version: 15.3.1(i18next@23.16.5)(next@15.0.2(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-i18next@15.1.1(i18next@23.16.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        version: 15.3.1(i18next@23.16.5)(next@15.0.2(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-i18next@15.1.1(i18next@23.16.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
 
   common/utilities:
     devDependencies:
@@ -667,7 +667,7 @@ importers:
         version: 8.13.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3)
       '@vercel/style-guide':
         specifier: ^6.0.0
-        version: 6.0.0(eslint@9.14.0(jiti@2.4.0))(jest@29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0))(prettier@3.3.3)(typescript@5.6.3)
+        version: 6.0.0(eslint@9.14.0(jiti@2.4.0))(jest@29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.9.2(@swc/helpers@0.5.13))(@types/node@22.9.0)(typescript@5.6.3)))(prettier@3.3.3)(typescript@5.6.3)
       eslint:
         specifier: ^9.14.0
         version: 9.14.0(jiti@2.4.0)
@@ -685,7 +685,7 @@ importers:
         version: 6.1.0
       eslint-plugin-jest:
         specifier: ^28.6.0
-        version: 28.9.0(@typescript-eslint/eslint-plugin@8.13.0(@typescript-eslint/parser@8.13.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(jest@29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0))(typescript@5.6.3)
+        version: 28.9.0(@typescript-eslint/eslint-plugin@8.13.0(@typescript-eslint/parser@8.13.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(jest@29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.9.2(@swc/helpers@0.5.13))(@types/node@22.9.0)(typescript@5.6.3)))(typescript@5.6.3)
       eslint-plugin-jsdoc:
         specifier: ^50.4.3
         version: 50.4.3(eslint@9.14.0(jiti@2.4.0))
@@ -4213,49 +4213,49 @@ packages:
   '@sinonjs/fake-timers@10.3.0':
     resolution: {integrity: sha512-V4BG07kuYSUkTCSBHG8G8TNhM+F19jXFWnQtzj+we8DrkpSBCee9Z3Ms8yiGer/dlmhe35/Xdgyo3/0rQKg7YA==}
 
-  '@snowplow/browser-plugin-button-click-tracking@4.0.2':
-    resolution: {integrity: sha512-zeHJiPCAthoPkwLipVXlRZmzp69KnlAWhD8r9Du0dNC9IZB/b0w1KFfouq7smLDpB9JamJ0eqkZ757b4R29vSw==}
+  '@snowplow/browser-plugin-button-click-tracking@3.24.5':
+    resolution: {integrity: sha512-fKI4jL/jGwPqyHgOWTBF3im5ZMaUzbAHg0xN2k/P0/nSmdmj4SU3G7Oluy7SOH04cRWesPqa4namWEeHzsn2yg==}
     peerDependencies:
-      '@snowplow/browser-tracker': ~4.0.2
+      '@snowplow/browser-tracker': ~3.24.5
 
-  '@snowplow/browser-plugin-client-hints@4.0.2':
-    resolution: {integrity: sha512-lAQMDmFPSOVeC2YY1IPoSCln+BVAG6xQ/8xeSSweNiQZd3jJiarMl3I0Gu4MnLJ/vIE4tGlMDV3ffyU1CwBFwA==}
+  '@snowplow/browser-plugin-client-hints@3.24.5':
+    resolution: {integrity: sha512-Ltt87EekVjMVlXOidTqVgW46g0c3FpRqQbYyFNU66wWuFxF9Sxm555oWDcZMfQsWXqfraQ2qh0qMkdj5ZaTrkg==}
     peerDependencies:
-      '@snowplow/browser-tracker': ~4.0.2
+      '@snowplow/browser-tracker': ~3.24.5
 
-  '@snowplow/browser-plugin-form-tracking@4.0.2':
-    resolution: {integrity: sha512-+BcRQh2Hjfs+k0mH72DBfsG+ZAeYx1PBzO7j7Is69kl3j0uDrJUVi0sqPm1ljBlSlG9CE2g/85tUE/g7LTWYAA==}
+  '@snowplow/browser-plugin-form-tracking@3.24.5':
+    resolution: {integrity: sha512-fxLOLw6OyGTvooWNZZUCsI6beuonsJo5Rui0+8jPOUpHvdhRIhqpoSI0krrU43/tM6zY2WEvEX6XUFjcpESNXQ==}
     peerDependencies:
-      '@snowplow/browser-tracker': ~4.0.2
+      '@snowplow/browser-tracker': ~3.24.5
 
-  '@snowplow/browser-plugin-link-click-tracking@4.0.2':
-    resolution: {integrity: sha512-5ngq0J2dUvNSacQ5F7+4NIX6X72CWFSxByLHx8dz2by43Vkp/yw84gSvzd7Gzs5QHrm98gMhMYLAaTdb+g2X0g==}
+  '@snowplow/browser-plugin-link-click-tracking@3.24.5':
+    resolution: {integrity: sha512-zfa1jLsvLn+isIF09eI72fwXzkxzsi4/HAhz+P2c1yINjzDQSkSyt+m2rAL6i4TD5v0BRWLT0VsCxIODNWh0qg==}
     peerDependencies:
-      '@snowplow/browser-tracker': ~4.0.2
+      '@snowplow/browser-tracker': ~3.24.5
 
-  '@snowplow/browser-plugin-performance-navigation-timing@4.0.2':
-    resolution: {integrity: sha512-ynMwW7Xzj4yQCMxNHdTxNsE/RxWqvQZA+N7hAo+4qlrtEY8533BtQ0g+0JSZJZqMmzBLqSeg+LaEnOCiRlnnpQ==}
+  '@snowplow/browser-plugin-performance-navigation-timing@3.24.5':
+    resolution: {integrity: sha512-INO4IebMrCjXBS3xORpb9MvYTix+UqHpX4nU4AqIkAm2dep6SVHfDG6r6Fpo71p722P6LhTWMOdufGXNfCkVhg==}
     peerDependencies:
-      '@snowplow/browser-tracker': ~4.0.2
+      '@snowplow/browser-tracker': ~3.24.5
 
-  '@snowplow/browser-plugin-privacy-sandbox@4.0.2':
-    resolution: {integrity: sha512-pv2UYrCqq5Q96j09LNAYuwgx4CdTP4SMY41Ey7k5J7rRXpug1YzDSt0IpFwpSLSqShMdGU1owl3DEAMrpEwh9w==}
+  '@snowplow/browser-plugin-privacy-sandbox@3.24.5':
+    resolution: {integrity: sha512-jxkYdHHowncYVrWXTzrhl6/AaZ+Hdb7ZFT8CnSUTLq5rLddR1BPXdCPZEq979jEOQ1IHHVsgkBPo/0FliNNK9g==}
     peerDependencies:
-      '@snowplow/browser-tracker': ~4.0.2
+      '@snowplow/browser-tracker': ~3.24.5
 
-  '@snowplow/browser-plugin-timezone@4.0.2':
-    resolution: {integrity: sha512-yBtD6eCpeiU4lk4QY03mygNmtUs15E078qV0Mv4ia/PcK3d1gXj9beSVUC/IK7BjIBMrVxM1icjjAYJnRudgpw==}
+  '@snowplow/browser-plugin-timezone@3.24.5':
+    resolution: {integrity: sha512-cd2WjtRZjEyhutgiL0e9C96TTxC9+5A0vhw98x8xoAjvEBMOGo1oliuk6eIbCIjVPfYWXMxpQ3Q7h8LiwFF+Yw==}
     peerDependencies:
-      '@snowplow/browser-tracker': ~4.0.2
+      '@snowplow/browser-tracker': ~3.24.5
 
-  '@snowplow/browser-tracker-core@4.0.2':
-    resolution: {integrity: sha512-5QIwUUi+IkIJGwHuRMA9lV3e7j+vGtSmw0pioJk1on8Ec7r+IBeuwLQ6knpXvImfTZ8HaKiOmRZpjR91JDAJjg==}
+  '@snowplow/browser-tracker-core@3.24.5':
+    resolution: {integrity: sha512-cEbEdu8WfaMuxzCcJRTP88mxGdZDyDVJo+J/fSBo2qFxM+5314i5IDrIVcIiuPUxLycWm7MJx85O6ytnSfrDxw==}
 
-  '@snowplow/browser-tracker@4.0.2':
-    resolution: {integrity: sha512-bpviX0So22IEo7fX/8LVs6KAOTHRSGszpFilJnGU+0gGqzsMV5rf3yfAsfZ6OTgSoh43Q85wVmRZncDpD+MDqA==}
+  '@snowplow/browser-tracker@3.24.5':
+    resolution: {integrity: sha512-RxiTU4niDhZwG0OKrTGiKncIPhN33rXMrHj+kOIAGkYKKT1tYgq4/qBKRN+aDNUisIT+IdxriXoOTuAMxwDyWA==}
 
-  '@snowplow/tracker-core@4.0.2':
-    resolution: {integrity: sha512-acC5wF5c/k3w7tnCDdG3UP2kzKJoK2XnGHTACQeeXTgfkLPl1B9uINtqLcFId6nFg8U2ZXzxmyOZEwNflAm41A==}
+  '@snowplow/tracker-core@3.24.5':
+    resolution: {integrity: sha512-ne0UA6yffY69XmsNsHs/FvsRu9mYZgSmiP3bgA1nMNRzYw52Ulz9p5R8/zshxfXaqcWpcMyt8Y8gslgE7sfe6g==}
 
   '@storybook/addon-actions@8.4.1':
     resolution: {integrity: sha512-D6KohTIA4JCHNol1X7Whp4LpOVU4cS5FfyOorwYo/WIzpHrUYc4Pw/+ex6DOmU/kgrk14mr8d9obVehKW7iNtA==}
@@ -12916,12 +12916,13 @@ packages:
     resolution: {integrity: sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==}
     engines: {node: '>= 0.4.0'}
 
-  uuid@10.0.0:
-    resolution: {integrity: sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==}
-    hasBin: true
-
   uuid@11.0.2:
     resolution: {integrity: sha512-14FfcOJmqdjbBPdDjFQyk/SdT4NySW4eM0zcG+HqbHP5jzuH56xO3J1DGhgs/cEMCfwYi3HQI1gnTO62iaG+tQ==}
+    hasBin: true
+
+  uuid@3.4.0:
+    resolution: {integrity: sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==}
+    deprecated: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
     hasBin: true
 
   uuid@8.3.2:
@@ -16026,7 +16027,7 @@ snapshots:
   '@graphql-tools/optimize@2.0.0(graphql@16.9.0)':
     dependencies:
       graphql: 16.9.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@graphql-tools/prisma-loader@8.0.15(@types/node@22.9.0)(graphql@16.9.0)':
     dependencies:
@@ -16059,7 +16060,7 @@ snapshots:
       '@ardatan/relay-compiler': 12.0.0(graphql@16.9.0)
       '@graphql-tools/utils': 10.5.5(graphql@16.9.0)
       graphql: 16.9.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -17534,7 +17535,7 @@ snapshots:
       '@sentry/utils': 7.118.0
       localforage: 1.10.0
 
-  '@sentry/nextjs@8.36.0(@opentelemetry/core@1.27.0(@opentelemetry/api@1.9.0))(@opentelemetry/instrumentation@0.53.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.27.0(@opentelemetry/api@1.9.0))(next@15.0.2(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(webpack@5.96.1(@swc/core@1.9.2(@swc/helpers@0.5.13)))':
+  '@sentry/nextjs@8.36.0(@opentelemetry/core@1.27.0(@opentelemetry/api@1.9.0))(@opentelemetry/instrumentation@0.53.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.27.0(@opentelemetry/api@1.9.0))(next@15.0.2(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(webpack@5.96.1(@swc/core@1.9.2(@swc/helpers@0.5.13)))':
     dependencies:
       '@opentelemetry/api': 1.9.0
       '@opentelemetry/instrumentation-http': 0.53.0(@opentelemetry/api@1.9.0)
@@ -17563,7 +17564,7 @@ snapshots:
       - supports-color
       - webpack
 
-  '@sentry/nextjs@8.36.0(@opentelemetry/core@1.27.0(@opentelemetry/api@1.9.0))(@opentelemetry/instrumentation@0.54.2(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.27.0(@opentelemetry/api@1.9.0))(next@15.0.2(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(webpack@5.96.1(@swc/core@1.9.2(@swc/helpers@0.5.13)))':
+  '@sentry/nextjs@8.36.0(@opentelemetry/core@1.27.0(@opentelemetry/api@1.9.0))(@opentelemetry/instrumentation@0.54.2(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.27.0(@opentelemetry/api@1.9.0))(next@15.0.2(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(webpack@5.96.1(@swc/core@1.9.2(@swc/helpers@0.5.13)))':
     dependencies:
       '@opentelemetry/api': 1.9.0
       '@opentelemetry/instrumentation-http': 0.53.0(@opentelemetry/api@1.9.0)
@@ -17722,72 +17723,72 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 3.0.1
 
-  '@snowplow/browser-plugin-button-click-tracking@4.0.2(@snowplow/browser-tracker@4.0.2)':
+  '@snowplow/browser-plugin-button-click-tracking@3.24.5(@snowplow/browser-tracker@3.24.5)':
     dependencies:
-      '@snowplow/browser-tracker': 4.0.2
-      '@snowplow/browser-tracker-core': 4.0.2
-      '@snowplow/tracker-core': 4.0.2
+      '@snowplow/browser-tracker': 3.24.5
+      '@snowplow/browser-tracker-core': 3.24.5
+      '@snowplow/tracker-core': 3.24.5
       tslib: 2.8.1
 
-  '@snowplow/browser-plugin-client-hints@4.0.2(@snowplow/browser-tracker@4.0.2)':
+  '@snowplow/browser-plugin-client-hints@3.24.5(@snowplow/browser-tracker@3.24.5)':
     dependencies:
-      '@snowplow/browser-tracker': 4.0.2
-      '@snowplow/browser-tracker-core': 4.0.2
+      '@snowplow/browser-tracker': 3.24.5
+      '@snowplow/browser-tracker-core': 3.24.5
       tslib: 2.8.1
 
-  '@snowplow/browser-plugin-form-tracking@4.0.2(@snowplow/browser-tracker@4.0.2)':
+  '@snowplow/browser-plugin-form-tracking@3.24.5(@snowplow/browser-tracker@3.24.5)':
     dependencies:
-      '@snowplow/browser-tracker': 4.0.2
-      '@snowplow/browser-tracker-core': 4.0.2
-      '@snowplow/tracker-core': 4.0.2
+      '@snowplow/browser-tracker': 3.24.5
+      '@snowplow/browser-tracker-core': 3.24.5
+      '@snowplow/tracker-core': 3.24.5
       tslib: 2.8.1
 
-  '@snowplow/browser-plugin-link-click-tracking@4.0.2(@snowplow/browser-tracker@4.0.2)':
+  '@snowplow/browser-plugin-link-click-tracking@3.24.5(@snowplow/browser-tracker@3.24.5)':
     dependencies:
-      '@snowplow/browser-tracker': 4.0.2
-      '@snowplow/browser-tracker-core': 4.0.2
-      '@snowplow/tracker-core': 4.0.2
+      '@snowplow/browser-tracker': 3.24.5
+      '@snowplow/browser-tracker-core': 3.24.5
+      '@snowplow/tracker-core': 3.24.5
       tslib: 2.8.1
 
-  '@snowplow/browser-plugin-performance-navigation-timing@4.0.2(@snowplow/browser-tracker@4.0.2)':
+  '@snowplow/browser-plugin-performance-navigation-timing@3.24.5(@snowplow/browser-tracker@3.24.5)':
     dependencies:
-      '@snowplow/browser-tracker': 4.0.2
-      '@snowplow/browser-tracker-core': 4.0.2
-      '@snowplow/tracker-core': 4.0.2
+      '@snowplow/browser-tracker': 3.24.5
+      '@snowplow/browser-tracker-core': 3.24.5
+      '@snowplow/tracker-core': 3.24.5
       tslib: 2.8.1
 
-  '@snowplow/browser-plugin-privacy-sandbox@4.0.2(@snowplow/browser-tracker@4.0.2)':
+  '@snowplow/browser-plugin-privacy-sandbox@3.24.5(@snowplow/browser-tracker@3.24.5)':
     dependencies:
-      '@snowplow/browser-tracker': 4.0.2
-      '@snowplow/browser-tracker-core': 4.0.2
-      '@snowplow/tracker-core': 4.0.2
+      '@snowplow/browser-tracker': 3.24.5
+      '@snowplow/browser-tracker-core': 3.24.5
+      '@snowplow/tracker-core': 3.24.5
       tslib: 2.8.1
 
-  '@snowplow/browser-plugin-timezone@4.0.2(@snowplow/browser-tracker@4.0.2)':
+  '@snowplow/browser-plugin-timezone@3.24.5(@snowplow/browser-tracker@3.24.5)':
     dependencies:
-      '@snowplow/browser-tracker': 4.0.2
-      '@snowplow/browser-tracker-core': 4.0.2
-      '@snowplow/tracker-core': 4.0.2
+      '@snowplow/browser-tracker': 3.24.5
+      '@snowplow/browser-tracker-core': 3.24.5
+      '@snowplow/tracker-core': 3.24.5
       jstimezonedetect: 1.0.7
       tslib: 2.8.1
 
-  '@snowplow/browser-tracker-core@4.0.2':
+  '@snowplow/browser-tracker-core@3.24.5':
     dependencies:
-      '@snowplow/tracker-core': 4.0.2
+      '@snowplow/tracker-core': 3.24.5
       sha1: 1.1.1
       tslib: 2.8.1
-      uuid: 10.0.0
+      uuid: 3.4.0
 
-  '@snowplow/browser-tracker@4.0.2':
+  '@snowplow/browser-tracker@3.24.5':
     dependencies:
-      '@snowplow/browser-tracker-core': 4.0.2
-      '@snowplow/tracker-core': 4.0.2
+      '@snowplow/browser-tracker-core': 3.24.5
+      '@snowplow/tracker-core': 3.24.5
       tslib: 2.8.1
 
-  '@snowplow/tracker-core@4.0.2':
+  '@snowplow/tracker-core@3.24.5':
     dependencies:
       tslib: 2.8.1
-      uuid: 10.0.0
+      uuid: 3.4.0
 
   '@storybook/addon-actions@8.4.1(storybook@8.4.1(prettier@3.3.3))':
     dependencies:
@@ -18937,7 +18938,7 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vercel/style-guide@6.0.0(eslint@9.14.0(jiti@2.4.0))(jest@29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0))(prettier@3.3.3)(typescript@5.6.3)':
+  '@vercel/style-guide@6.0.0(eslint@9.14.0(jiti@2.4.0))(jest@29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.9.2(@swc/helpers@0.5.13))(@types/node@22.9.0)(typescript@5.6.3)))(prettier@3.3.3)(typescript@5.6.3)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/eslint-parser': 7.25.9(@babel/core@7.26.0)(eslint@9.14.0(jiti@2.4.0))
@@ -18948,10 +18949,10 @@ snapshots:
       eslint-import-resolver-alias: 1.1.2(eslint-plugin-import@2.31.0)
       eslint-import-resolver-typescript: 3.6.3(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-plugin-import@2.31.0)(eslint@9.14.0(jiti@2.4.0))
       eslint-plugin-eslint-comments: 3.2.0(eslint@9.14.0(jiti@2.4.0))
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-import-resolver-typescript@3.6.3(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-plugin-import@2.31.0)(eslint@9.14.0(jiti@2.4.0)))(eslint@9.14.0(jiti@2.4.0))
-      eslint-plugin-jest: 27.9.0(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(jest@29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0))(typescript@5.6.3)
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.13.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-import-resolver-typescript@3.6.3)(eslint@9.14.0(jiti@2.4.0))
+      eslint-plugin-jest: 27.9.0(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(jest@29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.9.2(@swc/helpers@0.5.13))(@types/node@22.9.0)(typescript@5.6.3)))(typescript@5.6.3)
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.14.0(jiti@2.4.0))
-      eslint-plugin-playwright: 1.8.3(eslint-plugin-jest@27.9.0(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(jest@29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))
+      eslint-plugin-playwright: 1.8.3(eslint-plugin-jest@27.9.0(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(jest@29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.9.2(@swc/helpers@0.5.13))(@types/node@22.9.0)(typescript@5.6.3)))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))
       eslint-plugin-react: 7.37.2(eslint@9.14.0(jiti@2.4.0))
       eslint-plugin-react-hooks: 4.6.2(eslint@9.14.0(jiti@2.4.0))
       eslint-plugin-testing-library: 6.4.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3)
@@ -19814,7 +19815,7 @@ snapshots:
   camel-case@4.1.2:
     dependencies:
       pascal-case: 3.1.2
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   camelcase@5.3.1: {}
 
@@ -19832,7 +19833,7 @@ snapshots:
   capital-case@1.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.6.3
+      tslib: 2.8.1
       upper-case-first: 2.0.2
 
   case-sensitive-paths-webpack-plugin@2.4.0: {}
@@ -19965,7 +19966,7 @@ snapshots:
       path-case: 3.0.4
       sentence-case: 3.0.4
       snake-case: 3.0.4
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   char-regex@1.0.2: {}
 
@@ -20279,7 +20280,7 @@ snapshots:
   constant-case@3.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.6.3
+      tslib: 2.8.1
       upper-case: 2.0.2
 
   constants-browserify@1.0.0: {}
@@ -20995,7 +20996,7 @@ snapshots:
   dot-case@3.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   dot-prop@5.3.0:
     dependencies:
@@ -21333,7 +21334,7 @@ snapshots:
       eslint: 9.14.0(jiti@2.4.0)
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.6.3(@typescript-eslint/parser@8.13.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0)(eslint@9.14.0(jiti@2.4.0))
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.13.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-import-resolver-typescript@3.6.3)(eslint@9.14.0(jiti@2.4.0))
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.12.2(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.14.0(jiti@2.4.0))
       eslint-plugin-react: 7.37.2(eslint@9.14.0(jiti@2.4.0))
       eslint-plugin-react-hooks: 5.0.0(eslint@9.14.0(jiti@2.4.0))
@@ -21371,7 +21372,7 @@ snapshots:
       debug: 4.3.7(supports-color@5.5.0)
       enhanced-resolve: 5.17.1
       eslint: 9.14.0(jiti@2.4.0)
-      eslint-module-utils: 2.12.0(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-plugin-import@2.31.0)(eslint@9.14.0(jiti@2.4.0)))(eslint@9.14.0(jiti@2.4.0))
+      eslint-module-utils: 2.12.0(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3)(eslint@9.14.0(jiti@2.4.0))
       fast-glob: 3.3.2
       get-tsconfig: 4.8.1
       is-bun-module: 1.2.1
@@ -21396,14 +21397,14 @@ snapshots:
       is-bun-module: 1.2.1
       is-glob: 4.0.3
     optionalDependencies:
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.13.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-import-resolver-typescript@3.6.3)(eslint@9.14.0(jiti@2.4.0))
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.12.2(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))
     transitivePeerDependencies:
       - '@typescript-eslint/parser'
       - eslint-import-resolver-node
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-module-utils@2.12.0(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-plugin-import@2.31.0)(eslint@9.14.0(jiti@2.4.0)))(eslint@9.14.0(jiti@2.4.0)):
+  eslint-module-utils@2.12.0(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3)(eslint@9.14.0(jiti@2.4.0)):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
@@ -21436,7 +21437,7 @@ snapshots:
       lodash: 4.17.21
       requireindex: 1.1.0
 
-  eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-import-resolver-typescript@3.6.3(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-plugin-import@2.31.0)(eslint@9.14.0(jiti@2.4.0)))(eslint@9.14.0(jiti@2.4.0)):
+  eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.12.2(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0)):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.8
@@ -21447,7 +21448,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 9.14.0(jiti@2.4.0)
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.0(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-plugin-import@2.31.0)(eslint@9.14.0(jiti@2.4.0)))(eslint@9.14.0(jiti@2.4.0))
+      eslint-module-utils: 2.12.0(@typescript-eslint/parser@8.13.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3)(eslint@9.14.0(jiti@2.4.0))
       hasown: 2.0.2
       is-core-module: 2.15.1
       is-glob: 4.0.3
@@ -21459,7 +21460,7 @@ snapshots:
       string.prototype.trimend: 1.0.8
       tsconfig-paths: 3.15.0
     optionalDependencies:
-      '@typescript-eslint/parser': 7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3)
+      '@typescript-eslint/parser': 8.12.2(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3)
     transitivePeerDependencies:
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
@@ -21494,24 +21495,24 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-plugin-jest@27.9.0(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(jest@29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0))(typescript@5.6.3):
+  eslint-plugin-jest@27.9.0(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(jest@29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.9.2(@swc/helpers@0.5.13))(@types/node@22.9.0)(typescript@5.6.3)))(typescript@5.6.3):
     dependencies:
       '@typescript-eslint/utils': 5.62.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3)
       eslint: 9.14.0(jiti@2.4.0)
     optionalDependencies:
       '@typescript-eslint/eslint-plugin': 7.18.0(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3)
-      jest: 29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0)
+      jest: 29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.9.2(@swc/helpers@0.5.13))(@types/node@22.9.0)(typescript@5.6.3))
     transitivePeerDependencies:
       - supports-color
       - typescript
 
-  eslint-plugin-jest@28.9.0(@typescript-eslint/eslint-plugin@8.13.0(@typescript-eslint/parser@8.13.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(jest@29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0))(typescript@5.6.3):
+  eslint-plugin-jest@28.9.0(@typescript-eslint/eslint-plugin@8.13.0(@typescript-eslint/parser@8.13.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(jest@29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.9.2(@swc/helpers@0.5.13))(@types/node@22.9.0)(typescript@5.6.3)))(typescript@5.6.3):
     dependencies:
       '@typescript-eslint/utils': 8.13.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3)
       eslint: 9.14.0(jiti@2.4.0)
     optionalDependencies:
       '@typescript-eslint/eslint-plugin': 8.13.0(@typescript-eslint/parser@8.13.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3)
-      jest: 29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0)
+      jest: 29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.9.2(@swc/helpers@0.5.13))(@types/node@22.9.0)(typescript@5.6.3))
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -21567,12 +21568,12 @@ snapshots:
       - supports-color
       - typescript
 
-  eslint-plugin-playwright@1.8.3(eslint-plugin-jest@27.9.0(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(jest@29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0)):
+  eslint-plugin-playwright@1.8.3(eslint-plugin-jest@27.9.0(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(jest@29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.9.2(@swc/helpers@0.5.13))(@types/node@22.9.0)(typescript@5.6.3)))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0)):
     dependencies:
       eslint: 9.14.0(jiti@2.4.0)
       globals: 13.24.0
     optionalDependencies:
-      eslint-plugin-jest: 27.9.0(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(jest@29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0))(typescript@5.6.3)
+      eslint-plugin-jest: 27.9.0(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(jest@29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.9.2(@swc/helpers@0.5.13))(@types/node@22.9.0)(typescript@5.6.3)))(typescript@5.6.3)
 
   eslint-plugin-react-hooks@4.6.2(eslint@9.14.0(jiti@2.4.0)):
     dependencies:
@@ -22615,7 +22616,7 @@ snapshots:
   graphql-tag@2.12.6(graphql@16.9.0):
     dependencies:
       graphql: 16.9.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   graphql-ws@5.12.1(graphql@16.9.0):
     dependencies:
@@ -22714,7 +22715,7 @@ snapshots:
   header-case@2.0.4:
     dependencies:
       capital-case: 1.0.4
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   headers-polyfill@4.0.3: {}
 
@@ -23281,7 +23282,7 @@ snapshots:
 
   is-lower-case@2.0.2:
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   is-map@2.0.3: {}
 
@@ -23379,7 +23380,7 @@ snapshots:
 
   is-upper-case@2.0.2:
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   is-valid-domain@0.1.6:
     dependencies:
@@ -23574,26 +23575,6 @@ snapshots:
       - babel-plugin-macros
       - supports-color
       - ts-node
-
-  jest-cli@29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0):
-    dependencies:
-      '@jest/core': 29.7.0(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.9.2(@swc/helpers@0.5.13))(@types/node@22.8.6)(typescript@5.6.3))
-      '@jest/test-result': 29.7.0
-      '@jest/types': 29.6.3
-      chalk: 4.1.2
-      create-jest: 29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.9.2(@swc/helpers@0.5.13))(@types/node@22.9.0)(typescript@5.6.3))
-      exit: 0.1.2
-      import-local: 3.2.0
-      jest-config: 29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.9.2(@swc/helpers@0.5.13))(@types/node@22.9.0)(typescript@5.6.3))
-      jest-util: 29.7.0
-      jest-validate: 29.7.0
-      yargs: 17.7.2
-    transitivePeerDependencies:
-      - '@types/node'
-      - babel-plugin-macros
-      - supports-color
-      - ts-node
-    optional: true
 
   jest-cli@29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.9.2(@swc/helpers@0.5.13))(@types/node@22.9.0)(typescript@5.6.3)):
     dependencies:
@@ -24004,19 +23985,6 @@ snapshots:
       - babel-plugin-macros
       - supports-color
       - ts-node
-
-  jest@29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0):
-    dependencies:
-      '@jest/core': 29.7.0(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.9.2(@swc/helpers@0.5.13))(@types/node@22.8.6)(typescript@5.6.3))
-      '@jest/types': 29.6.3
-      import-local: 3.2.0
-      jest-cli: 29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0)
-    transitivePeerDependencies:
-      - '@types/node'
-      - babel-plugin-macros
-      - supports-color
-      - ts-node
-    optional: true
 
   jest@29.7.0(@types/node@22.9.0)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.9.2(@swc/helpers@0.5.13))(@types/node@22.9.0)(typescript@5.6.3)):
     dependencies:
@@ -24491,13 +24459,13 @@ snapshots:
 
   lower-case-first@2.0.2:
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   lower-case@1.1.4: {}
 
   lower-case@2.0.2:
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   lru-cache@10.4.3: {}
 
@@ -25028,7 +24996,7 @@ snapshots:
       '@formatjs/intl-localematcher': 0.5.7
       negotiator: 0.6.4
 
-  next-i18next@15.3.1(i18next@23.16.5)(next@15.0.2(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-i18next@15.1.1(i18next@23.16.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1):
+  next-i18next@15.3.1(i18next@23.16.5)(next@15.0.2(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-i18next@15.1.1(i18next@23.16.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.26.0
       '@types/hoist-non-react-statics': 3.3.5
@@ -25088,7 +25056,7 @@ snapshots:
   no-case@3.0.4:
     dependencies:
       lower-case: 2.0.2
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   node-abi@3.71.0:
     dependencies:
@@ -25492,7 +25460,7 @@ snapshots:
   param-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   parent-module@1.0.1:
     dependencies:
@@ -25599,7 +25567,7 @@ snapshots:
   pascal-case@3.1.2:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   patch-console@1.0.0: {}
 
@@ -25612,7 +25580,7 @@ snapshots:
   path-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   path-exists@3.0.0: {}
 
@@ -27367,7 +27335,7 @@ snapshots:
   sentence-case@3.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.6.3
+      tslib: 2.8.1
       upper-case-first: 2.0.2
 
   serialize-javascript@6.0.2:
@@ -27561,7 +27529,7 @@ snapshots:
   snake-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   sockjs@0.3.24:
     dependencies:
@@ -27684,7 +27652,7 @@ snapshots:
 
   sponge-case@1.0.1:
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   sprintf-js@1.0.3: {}
 
@@ -27987,7 +27955,7 @@ snapshots:
 
   swap-case@2.0.2:
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   swc-loader@0.2.6(@swc/core@1.9.2(@swc/helpers@0.5.13))(webpack@5.92.1(@swc/core@1.9.2(@swc/helpers@0.5.13))):
     dependencies:
@@ -28181,7 +28149,7 @@ snapshots:
 
   title-case@3.0.3:
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   tmp@0.0.33:
     dependencies:
@@ -28638,13 +28606,13 @@ snapshots:
 
   upper-case-first@2.0.2:
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   upper-case@1.1.3: {}
 
   upper-case@2.0.2:
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   uri-js@4.4.1:
     dependencies:
@@ -28707,9 +28675,9 @@ snapshots:
 
   utils-merge@1.0.1: {}
 
-  uuid@10.0.0: {}
-
   uuid@11.0.2: {}
+
+  uuid@3.4.0: {}
 
   uuid@8.3.2: {}
 
