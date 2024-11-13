@@ -1,0 +1,34 @@
+export function IconSnippets() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="icon">
+      <path
+        d="M14.3886 5.83172C14.4096 7.35412 15.6743 8.57143 17.2133 8.55067C18.7524 8.52991 19.983 7.27894 19.962 5.75654C19.941 4.23415 18.6764 3.01683 17.1373 3.03759C15.5983 3.05835 14.3676 4.30933 14.3886 5.83172Z"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M4.03802 5.97131C4.05901 7.49371 5.32367 8.71102 6.86273 8.69026C8.40178 8.6695 9.63242 7.41852 9.61143 5.89613C9.59044 4.37373 8.32578 3.15642 6.78672 3.17718C5.24767 3.19794 4.01703 4.44891 4.03802 5.97131Z"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M17.5181 20.8798L8.42949 8.18766"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M7.11296 20.8798L15.6332 8.09045"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  )
+}

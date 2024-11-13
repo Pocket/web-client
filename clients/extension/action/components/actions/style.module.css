@@ -1,0 +1,20 @@
+.title {
+  padding: 0.5rem;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19.09px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  margin: 0 0 0.5rem;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  padding: 0 0.5rem;
+
+  button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,76 @@
+:root {
+  --color-white100: #ffffff;
+  --color-grey10: #1a1a1a;
+  --color-grey20: #333333;
+  --color-grey25: #404040;
+  --color-grey30: #4d4d4d;
+  --color-grey35: #595959;
+  --color-grey40: #666666;
+  --color-grey45: #737373;
+  --color-grey55: #8c8c8c;
+  --color-grey65: #a6a6a6;
+  --color-grey80: #cccccc;
+  --color-grey85: #d9d9d9;
+  --color-grey95: #f2f2f2;
+  --color-coral: #ef4056;
+  --color-amber: #fcb643;
+  --color-brandPocket: #ef4056;
+  --font-sans-serif: 'Graphik Web', 'Helvetica Neue', Helvetica, Arial, Sans-Serif;
+
+  --color-canvas: #ffffff;
+  --color-text-primary: #15141a;
+  --color-divider: #f0f0f4;
+  --color-button-neutral: #f0f0f4;
+  --color-button-neutral-text: #15141a;
+
+  @media (prefers-color-scheme: dark) {
+    --color-canvas: #42414d;
+    --color-text-primary: #fbfbfe;
+    --color-divider: #52525e;
+    --color-button-neutral: #2b2a33;
+    --color-button-neutral-text: #fbfbfe;
+  }
+}
+
+html {
+  font-size: 16px;
+  font-family: var(--font-sans-serif);
+}
+
+body {
+  margin: 0px !important;
+  width: 400px;
+  height: 100%;
+  padding: 0.5rem 0.5rem 1rem;
+  background-color: var(--color-canvas);
+  color: var(--color-text-primary);
+}
+
+svg {
+  shape-rendering: geometricPrecision;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 0.625rem;
+}
+
+hr {
+  background: var(--color-divider);
+  border: none;
+  height: 1px;
+  margin: 0.5rem 0;
+  display: block;
+}
+
+button {
+  background-color: var(--color-button-neutral);
+  color: var(--color-button-neutral-text);
+  border-radius: 0.25rem;
+  border-color: transparent;
+  padding: 0.25rem 0.5rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}

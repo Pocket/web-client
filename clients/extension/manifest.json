@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json.schemastore.org/chrome-manifest.json",
+  "manifest_version": 3,
+  "author": "Pocket",
+  "name": "Save to Pocket",
+  "version": "0.0.1",
+  "description": "Save what's important to you an access it anywhere",
+  "icons": {
+    "16": "assets/images/icon-16.png",
+    "48": "assets/images/icon-48.png",
+    "128": "assets/images/icon-128.png"
+  },
+  "permissions": ["activeTab", "contextMenus", "cookies", "storage"],
+  "host_permissions": ["*://getpocket.com/*"],
+  "background": {
+    "chromium:service_worker": "background.ts",
+    "firefox:scripts": ["background.ts"]
+  },
+  "action": {
+    "default_popup": "action/index.html",
+    "default_title": "Save to Pocket",
+    "default_icon": {
+      "38": "assets/images/action-icon.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/scripts.ts"]
+    }
+  ],
+  "commands": {
+    "save-to-pocket-action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+P",
+        "windows": "Ctrl+Shift+P",
+        "mac": "Ctrl+Shift+P",
+        "chromeos": "Ctrl+Shift+P",
+        "linux": "Ctrl+Shift+P"
+      },
+      "description": "Save page to Pocket"
+    }
+  }
+}
