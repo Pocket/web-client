@@ -163,7 +163,6 @@ export const Item = (props) => {
           className="content-block"
           data-testid="content-block"
           target={linkTarget}
-          ref={linkRef}
           rel={linkRel}>
           <div className="content">
             {fromPartner ? <PartnerOverline partnerType={partnerType} /> : null}

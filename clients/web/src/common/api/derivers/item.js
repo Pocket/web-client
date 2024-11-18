@@ -209,6 +209,8 @@ export function deriveItemData({
     publisher: publisher({ item, itemEnrichment, passedPublisher }),
     publisherLogo: item?.domainMetadata?.logo || false,
     externalUrl: externalUrl({ item, itemEnrichment, utmId }),
+    // Temporary fix for the share modal and other possible areas that need the external url
+    resolvedUrl: externalUrl({ item, itemEnrichment, utmId }),
     readUrl: readUrl({ item, node, status: node?.status }),
     itemUrl: node?.url || null,
     saveUrl: saveUrl({ item, itemEnrichment }),

@@ -57,6 +57,7 @@ export const mutationShareSagas = [
  --------------------------------------------------------------- */
 function* getShareableLink({ item, quote, note }) {
   try {
+    //TODO: Ask @collectedmind if this should be externalUrl moving forward
     const target = item.resolvedUrl
     const context = buildContext(quote, note)
     const response = yield shareCreateLink(target, context)
