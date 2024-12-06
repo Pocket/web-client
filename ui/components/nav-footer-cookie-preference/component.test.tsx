@@ -1,8 +1,7 @@
 // Test Utilities
 import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
-
 import { localeWrapper as wrapper } from '@config/jest/wrapper'
+import { render, screen } from '@testing-library/react'
 
 // Components
 import { NavFooterCookiePreference as Component } from '.'

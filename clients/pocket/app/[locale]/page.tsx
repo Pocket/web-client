@@ -1,12 +1,11 @@
-// API
-import { getHomeSlates } from '@common/state/page-home/server'
-
 // Constants
 import { SUPPORTED_LOCALES } from '@common/localization'
 
 // UI
 import { Error } from '@ui/components/error'
 import { ItemArticle } from '@ui/components/item-article'
+
+import { getHomeSlates } from '@common/state/page-home/server'
 
 // Types
 import type { SlateWithRecIds, HomeQueryResponse } from '@common/state/page-home/server'
@@ -21,7 +20,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
   const errorTitle = 'Well that’s not right... '
   if ('responseError' in response)
-    return <Error title={errorTitle} message={response.responseError!} />
+    return <Error title={errorTitle} message={response.responseError ?? ''} />
 
   const { itemsById, slatesById, slateArray } = response as HomeQueryResponse
   const layoutStructure = ['lockup', 'carousel', 3]

@@ -1,14 +1,14 @@
 // Test Utilities
 import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
-
 import { localeWrapper as wrapper } from '@config/jest/wrapper'
 
-// Components
-import { ItemArticle as Component } from '.'
+import { render, screen } from '@testing-library/react'
 
 // Mock Data
 import previewData from '@common/mock-data/in-state/previewData.json'
+
+// Components
+import { ItemArticle as Component } from '.'
 
 // Types
 import { Item } from '@common/types'

@@ -1,9 +1,8 @@
 // Test Utilities
 import '@testing-library/jest-dom'
-import { act, render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-
 import { localeWrapper as wrapper } from '@config/jest/wrapper'
+import userEvent from '@testing-library/user-event'
+import { act, render, screen } from '@testing-library/react'
 
 // Components
 import { ItemActionsOverflow as Component } from '.'

@@ -1,8 +1,7 @@
 // Test Utilities
 import '@testing-library/jest-dom'
-import { act, render, screen } from '@testing-library/react'
-
 import { localeWrapper as wrapper } from '@config/jest/wrapper'
+import { act, render, screen } from '@testing-library/react'
 
 // Components
 import { NavTopAccount as Component } from '.'
