@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@config/eslint-config": "workspace:*",
-    "@types/node": "22.8.6"
+    "@types/node": "22.10.1"
   },
   "engines": {
     "node": "=20.16.0"
