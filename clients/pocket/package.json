@@ -10,7 +10,7 @@
     "@ui/components": "workspace:*",
     "@ui/styles": "workspace:*",
     "jose": "5.9.6",
-    "next": "15.0.2",
+    "next": "15.0.4",
     "next-i18n-router": "5.5.1",
     "react": "^18",
     "react-dom": "^18"
