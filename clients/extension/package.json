@@ -1,13 +1,6 @@
 {
   "name": "@client/extension",
-  "private": true,
   "version": "0.0.1",
-  "scripts": {
-    "dev:extension": "extension dev",
-    "dev:extension:ff": "extension dev --browser=firefox",
-    "start:extension": "extension start",
-    "build:extension": "extension build"
-  },
   "dependencies": {
     "@ui/components": "workspace:*",
     "react": "^18.1.0",
@@ -18,6 +11,13 @@
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "extension": "latest",
-    "typescript": "5.3.3"
+    "typescript": "^5.6.3"
+  },
+  "private": true,
+  "scripts": {
+    "build:extension": "extension build",
+    "dev:extension": "extension dev",
+    "dev:extension:ff": "extension dev --browser=firefox",
+    "start:extension": "extension start"
   }
 }

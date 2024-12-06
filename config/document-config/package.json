@@ -1,18 +1,18 @@
 {
   "name": "@config/document-config",
-  "version": "0.0.0",
   "description": "",
+  "version": "0.0.0",
+  "author": "",
+  "dependencies": {
+    "fs-extra": "11.2.0",
+    "globby": "14.0.2",
+    "legal-docs": "github:mozilla/legal-docs#74eccbd6e11b762ca706f31734ab6c5192273de4"
+  },
+  "keywords": [],
+  "license": "ISC",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "build": "node index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "legal-docs": "github:mozilla/legal-docs#74eccbd6e11b762ca706f31734ab6c5192273de4",
-    "fs-extra": "11.2.0",
-    "globby": "14.0.2"
-  }
+  "type": "module"
 }

@@ -3,6 +3,13 @@
   "description": "",
   "version": "1.0.0",
   "author": "",
+  "dependencies": {
+    "i18next": "^23.16.4",
+    "i18next-browser-languagedetector": "8.0.0",
+    "i18next-resources-to-backend": "1.2.1",
+    "react": "18.3.1",
+    "react-i18next": "^15.1.0"
+  },
   "devDependencies": {
     "@config/eslint-config": "workspace:*",
     "@config/typescript-config": "workspace:*",
@@ -14,24 +21,17 @@
     "ts-node": "^10.9.2",
     "typescript": "5.6.3"
   },
-  "license": "ISC",
-  "main": "src/index.ts",
   "exports": {
     ".": {
       "types": "./src/index.ts",
-      "react-server": "./src/index.react-server.ts",
-      "default": "./src/index.ts"
+      "default": "./src/index.ts",
+      "react-server": "./src/index.react-server.ts"
     }
   },
+  "license": "ISC",
+  "main": "src/index.ts",
   "scripts": {
     "clean": "rm -rf .turbo && rm -rf node_modules",
     "lint": "eslint"
-  },
-  "dependencies": {
-    "i18next": "^23.16.4",
-    "i18next-browser-languagedetector": "8.0.0",
-    "i18next-resources-to-backend": "1.2.1",
-    "react": "18.3.1",
-    "react-i18next": "^15.1.0"
   }
 }

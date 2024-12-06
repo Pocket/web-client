@@ -11,7 +11,6 @@
     "react-i18next": "^15.1.0"
   },
   "devDependencies": {
-    "@types/node": "22.8.6",
     "@chromatic-com/storybook": "^3.2.2",
     "@storybook/addon-essentials": "8.4.1",
     "@storybook/addon-interactions": "8.4.1",
@@ -21,6 +20,7 @@
     "@storybook/nextjs": "8.4.1",
     "@storybook/react": "8.4.1",
     "@storybook/test": "8.4.1",
+    "@types/node": "22.8.6",
     "storybook": "8.4.1"
   },
   "keywords": [],
