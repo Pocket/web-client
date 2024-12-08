@@ -5,7 +5,7 @@
   "author": "",
   "dependencies": {
     "@config/typescript-config": "workspace:*",
-    "@emotion/react": "11.13.3",
+    "@emotion/react": "11.14.0",
     "@testing-library/react": "^16.1.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.10.1",
@@ -13,7 +13,7 @@
     "i18next": "^23.16.4",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "msw": "^2.6.0",
+    "msw": "^2.6.8",
     "next": "^15.0.4",
     "react": "^18.3.1",
     "react-i18next": "^15.1.0",

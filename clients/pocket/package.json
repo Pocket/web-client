@@ -6,7 +6,7 @@
     "@common/localization": "workspace:*",
     "@common/state": "workspace:*",
     "@common/utilities": "workspace:*",
-    "@sentry/nextjs": "^8.36.0",
+    "@sentry/nextjs": "^8.42.0",
     "@ui/components": "workspace:*",
     "@ui/styles": "workspace:*",
     "jose": "5.9.6",
@@ -22,7 +22,7 @@
     "@eslint/compat": "1.2.4",
     "@types/node": "^22.10.1",
     "@types/react": "^19.0.1",
-    "@types/react-dom": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
     "eslint": "^9.14.0",
     "eslint-config-next": "15.0.4",
     "eslint-config-prettier": "^9.1.0",
@@ -30,7 +30,7 @@
     "postcss-nested": "^7.0.2",
     "postcss-preset-env": "^10.0.8",
     "typescript": "^5.7.2",
-    "typescript-eslint": "8.17.0"
+    "typescript-eslint": "8.18.0"
   },
   "engines": {
     "node": "=20.16.0",

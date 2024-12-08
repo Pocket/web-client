@@ -13,7 +13,7 @@ import { Item } from '@common/types'
 
 describe('renders ItemSound', () => {
   it('with defaults', async () => {
-    const itemToRender = Object.values(itemsById)[0] as Item
+    const itemToRender = Object.values(itemsById)[0] as unknown as Item
 
     await act(() => {
       render(<Component item={itemToRender} />)

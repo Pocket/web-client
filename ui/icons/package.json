@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "author": "",
   "dependencies": {
-    "@emotion/react": "11.13.3"
+    "@emotion/react": "11.14.0"
   },
   "devDependencies": {
     "@config/typescript-config": "workspace:*",
