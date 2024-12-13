@@ -1,5 +1,5 @@
-import type { Config } from 'next-i18n-router/dist/types'
 import { SUPPORTED_LOCALES } from '@common/constants'
+import type { Config } from 'next-i18n-router/dist/types'
 
 export const DEFAULT_LOCALE = 'en'
 export const DEFAULT_NS = 'common'

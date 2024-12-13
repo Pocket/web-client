@@ -2,18 +2,12 @@
 
 import '@ui/styles/pocket/global.css' // This is our base styles
 
-import * as Sentry from '@sentry/nextjs'
 import NextError from 'next/error'
-import { useEffect } from 'react'
-
 import { NavFooter } from '@ui/components/nav-footer'
 import { NavTop } from '@ui/components/nav-top'
 
 export default function GlobalError({ error }: { error: Error & { digest?: string } }) {
-  useEffect(() => {
-    Sentry.captureException(error)
-  }, [error])
-
+  console.error(error)
   return (
     <html lang="en">
       <body>

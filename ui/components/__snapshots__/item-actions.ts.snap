@@ -48,5 +48,52 @@ exports[`renders ItemActions with defaults 1`] = `
       </svg>
     </button>
   </div>
+  <button
+    class="action tiny "
+    data-testid="trigger-overflow"
+    type="button"
+  >
+    <svg
+      aria-hidden="true"
+      class="icon "
+      fill="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M14 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0M6 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0M22 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0"
+      />
+    </svg>
+  </button>
+  <div>
+    <button
+      class="save tiny "
+      data-testid="trigger-save"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="icon "
+        fill="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M2 5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2H2m2 0H2v6c0 5.523 4.477 10 10 10s10-4.477 10-10V5h-2v6a8 8 0 1 1-16 0z"
+          fill-rule="evenodd"
+        />
+        <path
+          clip-rule="evenodd"
+          d="M7.293 9.293a1 1 0 0 1 1.414 0L12 12.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414"
+          fill-rule="evenodd"
+        />
+      </svg>
+       
+      <span>
+        Save
+      </span>
+    </button>
+  </div>
 </div>
 `;

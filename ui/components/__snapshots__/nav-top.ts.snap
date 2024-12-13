@@ -53,6 +53,47 @@ exports[`renders NavTop with defaults 1`] = `
         </svg>
       </div>
     </div>
+    <div
+      class="base new"
+      data-testid="nav-top-search"
+    >
+      <input
+        id="search"
+        name="search"
+        placeholder=""
+        type="search"
+      />
+    </div>
+    <div
+      class="loggedOut"
+      data-testid="nav-top-account"
+    >
+      <div
+        class="base"
+        data-testid="nav-top-account-auth"
+      >
+        <a
+          class="button new small outline"
+          data-testid="nav-top-account-signup-link"
+          href="https://getpocket.com/signup?src=web-nav"
+          id="global-nav-signup-link"
+        >
+          <span
+            class="label"
+          >
+            Sign up
+          </span>
+        </a>
+        <a
+          class="button new small primary"
+          data-testid="nav-top-account-login-link"
+          href="https://getpocket.com/ff_signin?direct_route=https://pocket-client.pocket.com/waypoint&consumer_key=94110-6d5ff7a89d72c869766af0e0?src=web-nav"
+          id="global-nav-login-link"
+        >
+          Log in
+        </a>
+      </div>
+    </div>
   </div>
 </header>
 `;

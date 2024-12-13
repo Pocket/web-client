@@ -96,7 +96,7 @@ exports[`renders ItemActionsMenu when opened 1`] = `
     </svg>
      
     <span>
-      Show Similar Items
+      Show Similar
     </span>
   </button>
   <hr />

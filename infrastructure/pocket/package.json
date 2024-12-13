@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "dependencies": {
     "@cdktf/provider-archive": "10.3.0",
-    "@cdktf/provider-aws": "19.46.0",
+    "@cdktf/provider-aws": "19.47.0",
     "@cdktf/provider-local": "10.1.1",
     "@cdktf/provider-null": "10.0.1",
     "@cdktf/provider-pagerduty": "13.14.1",

@@ -6,7 +6,6 @@
     "@common/localization": "workspace:*",
     "@common/state": "workspace:*",
     "@common/utilities": "workspace:*",
-    "@sentry/nextjs": "^8.44.0",
     "@ui/components": "workspace:*",
     "@ui/styles": "workspace:*",
     "jose": "5.9.6",
@@ -28,7 +27,7 @@
     "eslint-config-prettier": "^9.1.0",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-nested": "^7.0.2",
-    "postcss-preset-env": "^10.1.1",
+    "postcss-preset-env": "^10.1.2",
     "typescript": "^5.7.2",
     "typescript-eslint": "8.18.0"
   },

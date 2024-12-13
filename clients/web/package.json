@@ -12,7 +12,7 @@
     "@n8tb1t/use-scroll-position": "2.0.3",
     "@popperjs/core": "2.11.8",
     "@sentry/integrations": "7.114.0",
-    "@sentry/nextjs": "8.44.0",
+    "@sentry/nextjs": "8.45.0",
     "@snowplow/browser-plugin-button-click-tracking": "4.1.0",
     "@snowplow/browser-plugin-client-hints": "4.1.0",
     "@snowplow/browser-plugin-form-tracking": "4.1.0",
@@ -86,7 +86,7 @@
     "next-router-mock": "0.9.13",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-nested": "^7.0.2",
-    "postcss-preset-env": "^10.1.1",
+    "postcss-preset-env": "^10.1.2",
     "prettier": "3.4.2",
     "typescript": "5.7.2"
   },
