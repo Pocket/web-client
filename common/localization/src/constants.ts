@@ -1,26 +1,7 @@
 import type { Config } from 'next-i18n-router/dist/types'
+import { SUPPORTED_LOCALES } from '@common/constants'
 
 export const DEFAULT_LOCALE = 'en'
-export const SUPPORTED_LOCALES = [
-  'zh-TW',
-  'zh',
-  'nl',
-  'en',
-  'en-KE',
-  'fr',
-  'fr-CA',
-  'de',
-  'it',
-  'ja',
-  'ko',
-  'pl',
-  'pt',
-  'pt-BR',
-  'ru',
-  'es',
-  'es-LA'
-]
-
 export const DEFAULT_NS = 'common'
 export const LOCALE_COOKIE_NAME = 'NEXT_LOCALE'
 export const I18N_OPTIONS = {

@@ -1,4 +1,5 @@
-import { DEFAULT_LOCALE, DEFAULT_NS, SUPPORTED_LOCALES } from './constants'
+import { DEFAULT_LOCALE, DEFAULT_NS } from './constants'
+import { SUPPORTED_LOCALES } from '@common/constants'
 
 const allNamespaces = [
   // You must list out all the namespaces here so that the translation engine loads them all

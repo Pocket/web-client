@@ -1,4 +1,4 @@
-import { SUPPORTED_LOCALES } from '@common/localization'
+import { SUPPORTED_LOCALES } from '@common/constants'
 
 import { Error } from '@ui/components/error'
 import { ItemArticle } from '@ui/components/item-article'

@@ -8,9 +8,9 @@
     "@common/localization": "workspace:*",
     "@common/utilities": "workspace:*",
     "jose": "5.9.6",
-    "next": "15.0.4",
-    "react": "18.3.1",
-    "zustand": "5.0.0"
+    "next": "15.1.0",
+    "react": "19.0.0",
+    "zustand": "5.0.2"
   },
   "devDependencies": {
     "@common/types": "workspace:*",
@@ -20,9 +20,9 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.5.2",
-    "@types/eslint": "^9.6.0",
+    "@types/eslint": "^9.6.1",
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.10.1",
+    "@types/node": "^22.10.2",
     "@types/react": "19.0.1",
     "@types/react-dom": "^19.0.2",
     "jest": "29.7.0",

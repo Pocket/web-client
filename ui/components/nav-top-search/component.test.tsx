@@ -7,9 +7,10 @@ import { render, screen } from '@testing-library/react'
 import { NavTopSearch as Component } from '.'
 
 describe('renders NavTopSearch', () => {
-  it('with defaults', () => {
-    const rendered = render(<Component />, { wrapper })
-    const renderedComponent = screen.getByTestId('nav-top-search')
+  it('with defaults', async () => {
+    const rendered = await render(<Component />, { wrapper })
+    const renderedComponent = await screen.findByTestId('nav-top-search')
+
     expect(renderedComponent).toBeInTheDocument()
     expect(rendered.container).toMatchSnapshot()
   })

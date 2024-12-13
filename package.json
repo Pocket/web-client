@@ -10,8 +10,8 @@
     ]
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.5.0",
-    "@commitlint/config-conventional": "^19.5.0",
+    "@commitlint/cli": "^19.6.0",
+    "@commitlint/config-conventional": "^19.6.0",
     "@config/eslint-config": "workspace:*",
     "@config/typescript-config": "workspace:*",
     "@semantic-release/changelog": "6.0.3",

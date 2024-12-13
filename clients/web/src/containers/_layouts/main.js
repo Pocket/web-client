@@ -13,14 +13,14 @@ const noContainerStyle = css`
 `
 
 function mainLayout({
-  metaData,
+  metaData = undefined,
   children,
   title = 'Pocket',
-  canonical,
-  syndicatedFrom,
-  noIndex,
+  canonical = undefined,
+  syndicatedFrom = undefined,
+  noIndex = undefined,
   noNav = false,
-  selectedNavLink,
+  selectedNavLink = undefined,
   isFullWidthLayout = false,
   noContainer = false,
   className = '',

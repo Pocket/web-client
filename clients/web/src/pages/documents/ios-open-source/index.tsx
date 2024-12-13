@@ -8,6 +8,7 @@ import { marked } from 'marked'
 import type { LocalizedProps } from '@common/types'
 import type { GetStaticPropsContext, GetStaticProps } from 'next'
 import { join } from 'node:path'
+import { type JSX } from 'react'
 
 async function getMDContent(): Promise<string> {
   const mdContent = readFileSync(join(process.cwd(), 'public/static/docs/ios-oss.md'), 'utf8')

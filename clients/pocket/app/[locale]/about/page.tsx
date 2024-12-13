@@ -1,4 +1,4 @@
-import { SUPPORTED_LOCALES } from '@common/localization'
+import { SUPPORTED_LOCALES } from '@common/constants'
 import { Suspense } from 'react'
 
 export function generateStaticParams() {

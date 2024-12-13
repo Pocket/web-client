@@ -7,6 +7,7 @@ import { rootReducer, initializeStore } from '../../../clients/web/src/store'
 import { i18n } from './test-i18n'
 import { I18nextProvider } from 'react-i18next'
 
+import { type JSX } from 'react'
 import type { PropsWithChildren, ReactElement } from 'react'
 
 // This type interface extends the default options for render from RTL, as well

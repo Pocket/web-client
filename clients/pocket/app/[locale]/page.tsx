@@ -1,5 +1,5 @@
 // Constants
-import { SUPPORTED_LOCALES } from '@common/localization'
+import { SUPPORTED_LOCALES } from '@common/constants'
 
 // UI
 import { Error } from '@ui/components/error'

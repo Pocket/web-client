@@ -1,4 +1,4 @@
-import { SUPPORTED_LOCALES } from '@common/localization'
+import { SUPPORTED_LOCALES } from '@common/constants'
 import { ErrorNotFound } from '@ui/components/error-not-found'
 
 export function generateStaticParams() {

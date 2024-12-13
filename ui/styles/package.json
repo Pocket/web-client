@@ -10,7 +10,7 @@
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "16.1.0",
     "postcss-nested": "7.0.2",
-    "postcss-preset-env": "^10.0.8"
+    "postcss-preset-env": "^10.1.1"
   },
   "keywords": [],
   "license": "ISC",

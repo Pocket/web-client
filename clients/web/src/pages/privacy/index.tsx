@@ -7,6 +7,7 @@ import { overrideDateTime, customHeadingId } from 'common/utilities/marked-forma
 import { join } from 'node:path'
 
 // Types
+import { type JSX } from 'react'
 import type { LocalizedProps } from '@common/types'
 import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
 

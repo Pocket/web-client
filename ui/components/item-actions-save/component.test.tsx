@@ -2,31 +2,30 @@
 import '@testing-library/jest-dom'
 import { localeWrapper as wrapper } from '@config/jest/wrapper'
 import userEvent from '@testing-library/user-event'
-import { act, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 
 // Components
 import { ItemActionsSave as Component } from '.'
 
 describe('renders ItemActionsSave', () => {
-  it('with defaults', () => {
-    const rendered = render(<Component id="abc123" />, { wrapper })
-    const renderedComponent = screen.getByTestId('trigger-save')
+  it('with defaults', async () => {
+    render(<Component id="abc123" />, { wrapper })
+    const renderedComponent = await screen.findByTestId('trigger-save')
+
     expect(renderedComponent).toBeInTheDocument()
-    expect(rendered.container).toMatchSnapshot()
+    expect(renderedComponent).toMatchSnapshot()
   })
 
   it('with actions', async () => {
-    // Setup user for events
-    const user = userEvent.setup()
-
     render(<Component id="abc123" />, { wrapper })
-    const saveTrigger = screen.getByTestId('trigger-save')
+    const saveTrigger = await screen.findByTestId('trigger-save')
+
     expect(saveTrigger).toBeInTheDocument()
 
     // Click the Trigger
-    await act(() => user.click(saveTrigger))
+    await userEvent.click(saveTrigger)
 
-    const menu = screen.getByTestId('save-menu')
+    const menu = await screen.findByTestId('save-menu')
     expect(menu).toBeInTheDocument()
 
     // Let's make sure the buttons have reset

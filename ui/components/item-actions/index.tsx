@@ -8,6 +8,7 @@ import { LikeIcon } from '@ui/icons/LikeIcon'
 // Components
 import { ItemActionsOverflow } from '../item-actions-overflow'
 import { ItemActionsSave } from '../item-actions-save'
+import { Suspense } from 'react'
 
 /**
  * ItemActions
@@ -27,9 +28,10 @@ export function ItemActions({ id }: { id: string }) {
         </button>
       </div>
 
-      <ItemActionsOverflow id={id} />
-
-      <ItemActionsSave id={id} />
+      <Suspense>
+        <ItemActionsOverflow id={id} />
+        <ItemActionsSave id={id} />
+      </Suspense>
     </div>
   )
 }

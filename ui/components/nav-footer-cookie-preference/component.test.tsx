@@ -7,9 +7,9 @@ import { render, screen } from '@testing-library/react'
 import { NavFooterCookiePreference as Component } from '.'
 
 describe('renders NavFooterCookiePreference', () => {
-  it('with defaults', () => {
+  it('with defaults', async () => {
     const rendered = render(<Component />, { wrapper })
-    const renderedComponent = screen.getByTestId('nav-footer-cookie-preference')
+    const renderedComponent = await screen.findByTestId('nav-footer-cookie-preference')
     expect(renderedComponent).toBeInTheDocument()
     expect(rendered.container).toMatchSnapshot()
   })

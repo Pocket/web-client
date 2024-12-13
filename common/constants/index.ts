@@ -26,3 +26,23 @@ export const LANGUAGE_BY_LOCALE: { [key: string]: string } = {
   es: 'Spanish (Spain)',
   'es-LA': 'Spanish (Latin America)'
 }
+
+export const SUPPORTED_LOCALES = [
+  'zh-TW',
+  'zh',
+  'nl',
+  'en',
+  'en-KE',
+  'fr',
+  'fr-CA',
+  'de',
+  'it',
+  'ja',
+  'ko',
+  'pl',
+  'pt',
+  'pt-BR',
+  'ru',
+  'es',
+  'es-LA'
+]

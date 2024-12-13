@@ -2,15 +2,15 @@
 import '@testing-library/jest-dom'
 import { localeWrapper as wrapper } from '@config/jest/wrapper'
 import userEvent from '@testing-library/user-event'
-import { act, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 
 // Components
 import { ItemActionsOverflow as Component } from '.'
 
 describe('renders ItemActionsMenu', () => {
-  it('with defaults', () => {
+  it('with defaults', async () => {
     render(<Component id="abc123" />, { wrapper })
-    const renderedComponent = screen.getByTestId('trigger-overflow')
+    const renderedComponent = await screen.getByTestId('trigger-overflow')
     expect(renderedComponent).toBeInTheDocument()
     expect(renderedComponent).toMatchSnapshot()
   })
@@ -19,11 +19,11 @@ describe('renders ItemActionsMenu', () => {
     // Setup user for events
     const user = userEvent.setup()
 
-    render(<Component id="abc123" />)
-    const overflowTrigger = screen.getByTestId('trigger-overflow')
+    render(<Component id="abc123" />, { wrapper })
+    const overflowTrigger = await screen.getByTestId('trigger-overflow')
 
     // Click the Trigger
-    await act(() => user.click(overflowTrigger))
+    await user.click(overflowTrigger)
 
     const menu = screen.getByTestId('overflow-menu')
     expect(menu).toBeInTheDocument()
