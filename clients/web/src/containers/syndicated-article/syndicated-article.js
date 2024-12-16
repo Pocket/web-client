@@ -99,6 +99,10 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
         {
           placement: 'pocket_billboard',
           count: 2
+        },
+        {
+          placement: 'pocket_skyscraper',
+          count: 2
         }
       ])
     )
@@ -258,13 +262,21 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
               {showCTA ? (
                 <CallOutSyndicated onVisible={onCTAVisible} handleSignup={onCTASignup} />
               ) : null}
-              <AdRailTop allowAds={allowAds} targeting={targeting} />
+              {showPlacards ? (
+                <Placard shouldDisplay={showPlacards} placement="pocket_skyscraper" position={0} />
+              ) : (
+                <AdRailTop allowAds={allowAds} targeting={targeting} />
+              )}
               <PublisherRecs
                 itemId={originalItemId}
                 publisher={publisher}
                 legacyId={originalItemId}
               />
-              <AdRailBottom allowAds={allowAds} targeting={targeting} />
+              {showPlacards ? (
+                <Placard shouldDisplay={showPlacards} placement="pocket_skyscraper" position={1} />
+              ) : (
+                <AdRailBottom allowAds={allowAds} targeting={targeting} />
+              )}
             </aside>
 
             <div className="content-body">

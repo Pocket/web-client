@@ -33,7 +33,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const payload = await req.body
     const body = JSON.stringify(payload)
-    const adResponse = await fetch('https://ads.allizom.org/v1/ads', {
+    const adResponse = await fetch('https://ads.mozilla.org/v1/ads', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body

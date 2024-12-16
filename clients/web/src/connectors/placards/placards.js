@@ -55,11 +55,13 @@ export function Placard({ placement, position, shouldDisplay }) {
   }
 
   return shouldDisplay ? (
-    <div className={`${style.wrapper} ${style[format]}`} ref={elementRef}>
-      <a href={url} onClick={handleClick}>
-        <img src={image_url} alt={alt_text} />
-      </a>
-      <p className="label">{alt_text}</p>
+    <div>
+      <div className={`${style.wrapper} ${style[format]}`} ref={elementRef}>
+        <a href={url} onClick={handleClick}>
+          <img src={image_url} alt={alt_text} />
+        </a>
+        <p className={style.label}>{alt_text}</p>
+      </div>
     </div>
   ) : null
 }
