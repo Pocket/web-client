@@ -9,7 +9,7 @@
     "@common/state": "workspace:*",
     "@common/types": "workspace:*",
     "@common/utilities": "workspace:*",
-    "@floating-ui/react": "0.27.0",
+    "@floating-ui/react": "0.27.2",
     "@storybook/react": "8.4.7",
     "@ui/icons": "workspace:*",
     "@ui/styles": "workspace:*",
