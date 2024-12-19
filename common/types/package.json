@@ -4,14 +4,14 @@
   "version": "1.0.0",
   "author": "",
   "devDependencies": {
-    "@apollo/rover": "0.26.2",
+    "@apollo/rover": "0.26.3",
     "@config/typescript-config": "workspace:*",
     "@graphql-codegen/cli": "5.0.3",
     "@graphql-codegen/typescript": "4.1.2",
     "@graphql-codegen/typescript-resolvers": "4.4.1",
     "graphql": "16.10.0",
     "next": "15.1.0",
-    "next-i18next": "15.4.0"
+    "next-i18next": "15.4.1"
   },
   "keywords": [],
   "license": "ISC",

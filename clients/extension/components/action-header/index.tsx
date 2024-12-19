@@ -58,7 +58,9 @@ export function ExtensionHeader() {
           fill="white"
         />
       </svg>
-      <button>View My Saves</button>
+      <a className="button" target="_blank" href="https://getpocket.com/saves">
+        View My Saves
+      </a>
     </header>
   )
 }

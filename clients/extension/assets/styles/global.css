@@ -29,6 +29,16 @@
     --color-divider: #52525e;
     --color-button-neutral: #2b2a33;
     --color-button-neutral-text: #fbfbfe;
+    --color-picture-base: #2b2a33;
+
+    .colormode-light {
+      --color-canvas: #ffffff;
+      --color-text-primary: #15141a;
+      --color-divider: #f0f0f4;
+      --color-button-neutral: #f0f0f4;
+      --color-button-neutral-text: #15141a;
+      --color-picture-base: #f0f0f4;
+    }
   }
 }
 
@@ -41,7 +51,8 @@ body {
   margin: 0px !important;
   width: 400px;
   height: 100%;
-  padding: 0.5rem 0.5rem 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
   background-color: var(--color-canvas);
   color: var(--color-text-primary);
 }
@@ -64,7 +75,12 @@ hr {
   display: block;
 }
 
-button {
+button,
+a.button {
+  font-size: 0.875rem;
+  font-weight: 400;
+  font-family: var(--font-sans-serif);
+  text-decoration: none;
   background-color: var(--color-button-neutral);
   color: var(--color-button-neutral-text);
   border-radius: 0.25rem;
@@ -73,4 +89,29 @@ button {
   display: flex;
   align-items: center;
   cursor: pointer;
+}
+
+label {
+  font-size: 0.8125rem;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+input,
+textarea {
+  box-sizing: border-box;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #8f8f9d;
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  min-height: 80px;
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+input {
+  min-height: 24px;
 }

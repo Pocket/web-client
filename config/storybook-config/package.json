@@ -5,7 +5,7 @@
   "author": "",
   "dependencies": {
     "@ui/styles": "workspace:*",
-    "i18next": "^24.1.0",
+    "i18next": "^24.1.2",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-i18next": "^15.2.0"
@@ -28,6 +28,7 @@
   "main": "index.js",
   "scripts": {
     "build-storybook": "storybook build",
-    "storybook": "storybook dev -p 6006 --no-open"
+    "storybook": "storybook dev -p 6006 --no-open",
+    "storybook:ext": "storybook dev -p 6006 --no-open -c .storybook-ext"
   }
 }

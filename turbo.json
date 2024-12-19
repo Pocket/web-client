@@ -58,6 +58,11 @@
       "cache": false,
       "persistent": true
     },
+    "storybook:ext": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "persistent": true
+    },
     "synth": {
       "inputs": ["src/**/*", "package.json", "cdktf.json", ".terraform-version"],
       "outputs": ["cdktf.out/**/*"]

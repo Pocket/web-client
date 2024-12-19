@@ -1,12 +1,7 @@
-import { SaveActions } from './components/actions'
-import { ExtensionHeader } from './components/header'
+import { ActionContainer } from '../components/action-container'
 
 export function App() {
-  return (
-    <div>
-      <ExtensionHeader />
-      <hr />
-      <SaveActions />
-    </div>
-  )
+  const actionUnSave = () => console.log('save')
+
+  return <ActionContainer actionUnSave={actionUnSave} />
 }
