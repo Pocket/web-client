@@ -1,0 +1,31 @@
+{
+  "data": {
+    "upsertSavedItem": {
+      "item": {
+        "preview": {
+          "image": {
+            "cachedImages": [
+              {
+                "url": "https://pocket-image-cache.com/80x80/filters:format(PNG):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fimages.aeonmedia.co%2Fimages%2F5f37bc22-7c66-49bf-9ecb-e0cc34034752%2Fessasy-v2-teieman-rapati-the-aleph-by-borges-5857555491_c5fa3527d2_o.jpg%3Fwidth%3D1200%26quality%3D75%26format%3Dauto",
+                "id": "ext"
+              }
+            ]
+          },
+          "title": "By testing the boundaries of reality, Spanish-language authors have created a sublime counterpart to experimental physics",
+          "domain": {
+            "name": "Aeon"
+          },
+          "url": "https://aeon.co/essays/how-the-novel-became-a-laboratory-for-experimental-physics",
+          "id": "e5cA2gvKd4c02I8cU4piPF7ib9Tbde4dt10x75PX49n2b6D4f0V03y30lq7BU578_1b332dfda92ea5025324c0d9c090deca",
+          "source": "POCKET_PARSER",
+          "authors": [
+            {
+              "id": "79585",
+              "name": "Joshua Roebke"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

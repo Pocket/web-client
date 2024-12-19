@@ -4,11 +4,13 @@ import { SavedNotes } from '../saved-notes'
 import { SavedPreview } from '../saved-preview'
 import { SavedTags } from '../saved-tags'
 
-export function SavedScreen({ actionUnSave }: { actionUnSave: () => void }) {
+import type { ExtItem } from '../../assets/types'
+
+export function SavedScreen({ item, actionUnSave }: { item: ExtItem; actionUnSave: () => void }) {
   return (
     <main>
       <h2 className={style.title}>Saved To Pocket!</h2>
-      <SavedPreview />
+      <SavedPreview item={item} />
       <SavedNotes />
       <SavedTags />
       <div className={style.triggers}>

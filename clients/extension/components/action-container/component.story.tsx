@@ -1,4 +1,5 @@
 // Components
+import upsertResponse from '@common/mock-data/graph-response/upsert-response.json'
 import { ActionContainer as Component } from '.'
 
 // Types
@@ -14,7 +15,8 @@ export default meta
 // Stories
 export const ActionComplete: StoryObj<typeof Component> = {
   render: () => {
-    return <Component actionUnSave={() => console.log('action unsave')} />
+    const item = upsertResponse?.data?.upsertSavedItem?.item
+    return <Component item={item} actionUnSave={() => console.log('action unsave')} />
   },
   args: {}
 }

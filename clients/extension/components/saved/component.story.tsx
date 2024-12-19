@@ -1,4 +1,5 @@
 // Components
+import upsertResponse from '@common/mock-data/graph-response/upsert-response.json'
 import { SavedScreen as Component } from '.'
 
 // Types
@@ -14,7 +15,9 @@ export default meta
 // Stories
 export const SavedComplete: StoryObj<typeof Component> = {
   render: () => {
-    return <Component actionUnSave={() => null} />
+    const item = upsertResponse?.data?.upsertSavedItem?.item
+
+    return <Component item={item} actionUnSave={() => null} />
   },
   args: {}
 }

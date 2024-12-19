@@ -1,7 +1,9 @@
 // Components
+import upsertResponse from '@common/mock-data/graph-response/upsert-response.json'
 import { SavedPreview as Component } from '.'
 
 // Types
+import type { ExtItem } from '../../assets/types'
 import type { Meta, StoryObj } from '@storybook/react'
 
 // Storybook Meta
@@ -14,7 +16,8 @@ export default meta
 // Stories
 export const SavedPreview: StoryObj<typeof Component> = {
   render: () => {
-    return <Component />
+    const item = upsertResponse?.data?.upsertSavedItem?.item as ExtItem
+    return <Component item={item} />
   },
   args: {}
 }
