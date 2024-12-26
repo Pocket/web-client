@@ -1,4 +1,4 @@
-import { OEmbed } from '../pocket'
+import type { OEmbed } from '../pocket'
 
 export type Item = OEmbed
 
