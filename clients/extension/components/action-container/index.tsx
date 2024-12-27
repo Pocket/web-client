@@ -1,19 +1,25 @@
 import { ExtensionHeader } from '../action-header'
 import { SavedScreen } from '../saved'
-import type { ExtItem } from '../../assets/types'
+import { SavedLoader } from '../saved-loader'
+import type { ExtItem } from '@common/types'
 
 export function ActionContainer({
+  isOpen = false,
+  errorMessage,
   item,
   actionUnSave
 }: {
-  item: ExtItem
+  isOpen: boolean
+  errorMessage?: string
+  item?: ExtItem
   actionUnSave: () => void
 }) {
-  return (
+  return isOpen ? (
     <div className="extension">
       <ExtensionHeader />
       <hr />
-      <SavedScreen item={item} actionUnSave={actionUnSave} />
+      {item ? <SavedScreen item={item} actionUnSave={actionUnSave} /> : <SavedLoader />}
+      {errorMessage}
     </div>
-  )
+  ) : null
 }

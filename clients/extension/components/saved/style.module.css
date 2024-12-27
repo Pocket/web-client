@@ -1,8 +1,6 @@
 .title {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 19.09px;
-  letter-spacing: -0.03em;
+  font-size: 1rem;
+  font-weight: 600;
   text-align: left;
   margin: 0 0 0.5rem;
 }
@@ -10,6 +8,6 @@
   margin-top: 1rem;
   display: flex;
   justify-content: flex-end;
-  row-gap: 0.5rem;
+  column-gap: 0.5rem;
   padding: 0;
 }

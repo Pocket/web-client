@@ -1,8 +1,8 @@
 import style from './style.module.css'
-import type { ExtItem, ExtPreviewItem } from '../../assets/types'
+import type { ExtItem, ExtPreviewItem } from '@common/types'
 
 export function SavedPreview({ item }: { item: ExtItem }) {
-  if (item && 'status' in item) return <>Loading</>
+  if (item && 'status' in item) return null
 
   const validItem = item as ExtPreviewItem
   const preview = validItem?.preview

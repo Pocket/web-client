@@ -6,7 +6,7 @@ import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
   {
-    ignores: ['.next/**', 'node_modules/**', 'next.config.mjs', 'postcss.config.js']
+    ignores: ['node_modules/**']
   },
   ...tseslint.configs.recommendedTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,

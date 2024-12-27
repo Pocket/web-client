@@ -18,26 +18,35 @@
   --font-sans-serif: 'Graphik Web', 'Helvetica Neue', Helvetica, Arial, Sans-Serif;
 
   --color-canvas: #ffffff;
+  --color-loader: #42414d;
   --color-text-primary: #15141a;
-  --color-divider: #f0f0f4;
+  --color-divider: var(--color-grey85);
   --color-button-neutral: #f0f0f4;
   --color-button-neutral-text: #15141a;
+  --color-input-base: #ffffff;
+  --color-input-border: var(--color-grey85);
 
   @media (prefers-color-scheme: dark) {
     --color-canvas: #42414d;
+    --color-loader: #15141a;
     --color-text-primary: #fbfbfe;
-    --color-divider: #52525e;
+    --color-divider: #2b2a33;
     --color-button-neutral: #2b2a33;
     --color-button-neutral-text: #fbfbfe;
     --color-picture-base: #2b2a33;
+    --color-input-base: #42414d;
+    --color-input-border: #2b2a33;
 
     .colormode-light {
       --color-canvas: #ffffff;
+      --color-loader: #42414d;
       --color-text-primary: #15141a;
-      --color-divider: #f0f0f4;
+      --color-divider: var(--color-grey85);
       --color-button-neutral: #f0f0f4;
       --color-button-neutral-text: #15141a;
       --color-picture-base: #f0f0f4;
+      --color-input-base: #ffffff;
+      --color-input-border: var(--color-grey85);
     }
   }
 }
@@ -102,11 +111,12 @@ textarea {
   box-sizing: border-box;
   padding: 0.5rem;
   border-radius: 0.25rem;
-  border: 1px solid #8f8f9d;
+  border: 1px solid var(--color-input-border);
   width: 100%;
   max-width: 100%;
   min-width: 100%;
   min-height: 80px;
+  background-color: var(--color-input-base);
   &:focus-visible {
     outline: none;
   }

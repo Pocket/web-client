@@ -1,23 +1,21 @@
 import style from './style.module.css'
-import { IconSave } from '../icons/icon-save'
 import { SavedNotes } from '../saved-notes'
 import { SavedPreview } from '../saved-preview'
 import { SavedTags } from '../saved-tags'
 
-import type { ExtItem } from '../../assets/types'
+import type { ExtItem } from '@common/types'
 
 export function SavedScreen({ item, actionUnSave }: { item: ExtItem; actionUnSave: () => void }) {
-  return (
-    <main>
-      <h2 className={style.title}>Saved To Pocket!</h2>
+  return item ? (
+    <div>
       <SavedPreview item={item} />
+      <hr />
       <SavedNotes />
       <SavedTags />
       <div className={style.triggers}>
-        <button onClick={actionUnSave}>
-          <IconSave /> Remove from Saves
-        </button>
+        <button onClick={actionUnSave}>Remove</button>
+        {/* <button onClick={actionUnSave}>Update</button> */}
       </div>
-    </main>
-  )
+    </div>
+  ) : null
 }

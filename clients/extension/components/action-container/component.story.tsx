@@ -6,6 +6,7 @@ import { ActionContainer as Component } from '.'
 import type { Meta, StoryObj } from '@storybook/react'
 
 // Storybook Meta
+const item = upsertResponse?.data?.upsertSavedItem?.item
 const meta: Meta<typeof Component> = {
   title: 'Action - Complete',
   component: Component
@@ -14,9 +15,20 @@ export default meta
 
 // Stories
 export const ActionComplete: StoryObj<typeof Component> = {
-  render: () => {
-    const item = upsertResponse?.data?.upsertSavedItem?.item
-    return <Component item={item} actionUnSave={() => console.log('action unsave')} />
+  render: (args) => {
+    return (
+      <Component item={args.item} actionUnSave={() => console.log('action unsave')} isOpen={true} />
+    )
   },
-  args: {}
+  argTypes: {
+    item: {
+      options: ['Saved', 'Saving'],
+      mapping: {
+        Saved: item,
+        Saving: undefined
+      },
+      control: { type: 'select' }
+    }
+  },
+  args: { item }
 }

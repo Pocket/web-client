@@ -22,10 +22,10 @@
 .title {
   font-size: 0.875rem;
   font-weight: 500;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   letter-spacing: 0.025rem;
   line-clamp: 3;
-  height: 3.5em;
+  max-height: 3.75em;
   overflow: hidden;
   text-overflow: ellipsis;
   overflow: hidden;

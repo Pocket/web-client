@@ -29,3 +29,16 @@ pnpm start
 ```bash
 pnpm build
 ```
+
+```
+  "content_scripts": [
+    {
+      "matches": ["*://getpocket.com/extension_login_success*"],
+      "js": ["./content/login.ts"]
+    },
+    {
+      "matches": ["*://getpocket.com/logout?e=4"],
+      "js": ["./content/logout.ts"]
+    }
+  ],
+```

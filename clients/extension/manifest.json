@@ -11,10 +11,9 @@
     "128": "assets/images/icon-128.png"
   },
   "permissions": ["activeTab", "contextMenus", "cookies", "storage"],
-  "host_permissions": ["*://getpocket.com/*"],
   "background": {
-    "chromium:service_worker": "background.ts",
-    "firefox:scripts": ["background.ts"]
+    "chromium:service_worker": "./background/index.ts",
+    "firefox:scripts": ["./background/index.ts"]
   },
   "action": {
     "default_popup": "action/index.html",
@@ -23,12 +22,6 @@
       "38": "assets/images/action-icon.png"
     }
   },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content/scripts.ts"]
-    }
-  ],
   "commands": {
     "save-to-pocket-action": {
       "suggested_key": {

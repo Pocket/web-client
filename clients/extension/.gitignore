@@ -29,3 +29,6 @@ yarn-error.log*
 
 # extension.js
 extension-env.d.ts
+
+# keys
+keys.json
