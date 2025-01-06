@@ -66,7 +66,7 @@ const getHomeQuery = gql`
 export async function getHomeSlates(locale: string): Promise<HomeQueryResponse | ResponseError> {
   try {
     const localeToUse = SUPPORTED_LOCALES.includes(locale) ? locale : 'en'
-    const response = await pocketRequest<{ homeSlateLineup: CorpusSlateLineup }>({
+    const response = await pocketRequest<{ homeSlateLineup: CorpusSlateLineup }, null>({
       query: getHomeQuery,
       variables: { locale: localeToUse }
     })

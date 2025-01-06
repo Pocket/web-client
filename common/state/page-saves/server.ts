@@ -88,7 +88,7 @@ export async function getUserSaves(
 
     if (!isAuthenticated) throw new PageSavesError('User not authenticated')
 
-    const response = await pocketRequest<{ user: Pick<User, 'savedItems'> }>(
+    const response = await pocketRequest<{ user: Pick<User, 'savedItems'> }, UserSavesArguments>(
       {
         query: getUserSavesQuery,
         variables

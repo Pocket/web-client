@@ -40,7 +40,7 @@ export async function getUser(): Promise<UserDisplayData | ResponseError> {
     const { token, isAuthenticated } = await verifySession()
     if (!isAuthenticated) throw new UserRequestError('User not authenticated')
 
-    const response = await pocketRequest<{ user: User }>({ query: getUserQuery }, token)
+    const response = await pocketRequest<{ user: User }, null>({ query: getUserQuery }, token)
     const user: User = response?.user
 
     if (!user) throw new UserRequestError('User response was not valid')

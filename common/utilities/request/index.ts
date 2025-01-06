@@ -4,9 +4,9 @@
  * Define the structure of a GraphQL request body
  * `variables` are optional and can be any shape you need.
  */
-interface GraphQLRequestBody {
+interface GraphQLRequestBody<RequestData> {
   query: string
-  variables?: Record<string, unknown>
+  variables?: RequestData | Record<string, unknown>
 }
 
 /**
@@ -42,9 +42,9 @@ export const gql = String.raw
  * It accepts a request body, an optional auth token, and extra headers.
  * The function then returns the typed data (T).
  */
-export async function gqlRequest<T>(
+export async function gqlRequest<T, RequestData>(
   client: string,
-  data: GraphQLRequestBody,
+  data: GraphQLRequestBody<RequestData>,
   token?: string
 ): Promise<T> {
   // Build headers. If an auth token is provided, set the Authorization header.
@@ -87,15 +87,21 @@ export async function gqlRequest<T>(
 /**
  * Convenience function that sets web-client as the client,
  */
-export async function pocketRequest<T>(body: GraphQLRequestBody, token?: string): Promise<T> {
-  return gqlRequest<T>('web-client', body, token)
+export async function pocketRequest<T, RequestData>(
+  body: GraphQLRequestBody<RequestData>,
+  token?: string
+): Promise<T> {
+  return gqlRequest<T, RequestData>('web-client', body, token)
 }
 
 /**
  * Convenience function that sets web-client as the client,
  */
-export async function extensionRequest<T>(body: GraphQLRequestBody, token?: string): Promise<T> {
-  return gqlRequest<T>('web-extension', body, token)
+export async function extensionRequest<T, RequestData>(
+  body: GraphQLRequestBody<RequestData>,
+  token?: string
+): Promise<T> {
+  return gqlRequest<T, RequestData>('web-extension', body, token)
 }
 
 class GraphQLRequestError extends Error {
