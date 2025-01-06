@@ -1,5 +1,5 @@
-import '../../../clients/extension/assets/styles/global.css'
-import '../../../clients/extension/assets/styles/fonts.css'
+import '../../../clients/extension/public/styles/global.css'
+import '../../../clients/extension/public/styles/fonts.css'
 
 import React from 'react'
 import type { Preview } from '@storybook/react'

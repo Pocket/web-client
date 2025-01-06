@@ -36,6 +36,21 @@ enum ApprovedItemGrade {
   C
 }
 
+input ArchiveNoteInput {
+  """
+  The ID of the note to archive or unarchive
+  (depends on mutation).
+  """
+  id: ID!
+
+  """
+  When the note was archived or unarchived. 
+  If not provided, defaults to the server time upon
+  receiving request.
+  """
+  updatedAt: ISOString
+}
+
 type ArticleMarkdown {
   text: String!
   images: [MarkdownImagePosition!]
@@ -669,6 +684,131 @@ input CreateHighlightInput {
   note: String
 }
 
+"""
+Input to create a new Note seeded with copied content from a page.
+The entire content becomes editable and is not able to be "reattached"
+like a traditional highlight.
+"""
+input CreateNoteFromQuoteInput {
+  """Optional title for this Note"""
+  title: String
+
+  """
+  Client-provided UUID for the new Note.
+  If not provided, will be generated on the server.
+  """
+  id: ID
+
+  """
+  The Web Resource where the quote is taken from.
+  This should always be sent by the client where possible,
+  but in some cases (e.g. copying from mobile apps) there may
+  not be an accessible source url.
+  """
+  source: ValidUrl
+
+  """
+  JSON representation of a ProseMirror document, which
+  contains the formatted snipped text. This is used to seed
+  the initial Note document state, and will become editable.
+  """
+  quote: ProseMirrorJson!
+
+  """
+  When this note was created. If not provided, defaults to server time upon
+  receiving request.
+  """
+  createdAt: ISOString
+}
+
+"""
+Input to create a new Note seeded with copied content from a page.
+The entire content becomes editable and is not able to be "reattached"
+like a traditional highlight.
+"""
+input CreateNoteFromQuoteMarkdownInput {
+  """Optional title for this Note"""
+  title: String
+
+  """
+  Client-provided UUID for the new Note.
+  If not provided, will be generated on the server.
+  """
+  id: ID
+
+  """
+  The Web Resource where the quote is taken from.
+  This should always be sent by the client where possible,
+  but in some cases (e.g. copying from mobile apps) there may
+  not be an accessible source url.
+  """
+  source: ValidUrl
+
+  """
+  Commonmark Markdown document, which contains the formatted 
+  snipped text. This is used to seed the initial Note 
+  document state, and will become editable.
+  """
+  quote: Markdown!
+
+  """
+  When this note was created. If not provided, defaults to server time upon
+  receiving request.
+  """
+  createdAt: ISOString
+}
+
+"""Input to create a new Note"""
+input CreateNoteInput {
+  """Optional title for this Note"""
+  title: String
+
+  """
+  Client-provided UUID for the new Note.
+  If not provided, will be generated on the server.
+  """
+  id: ID
+
+  """Optional URL to link this Note to."""
+  source: ValidUrl
+
+  """JSON representation of a ProseMirror document"""
+  docContent: ProseMirrorJson!
+
+  """
+  When this note was created. If not provided, defaults to server time upon
+  receiving request.
+  """
+  createdAt: ISOString
+}
+
+"""
+Input to create a new Note with markdown-formatted
+content string.
+"""
+input CreateNoteMarkdownInput {
+  """Optional title for this Note"""
+  title: String
+
+  """
+  Client-provided UUID for the new Note.
+  If not provided, will be generated on the server.
+  """
+  id: ID
+
+  """Optional URL to link this Note to."""
+  source: ValidUrl
+
+  """The document content in Commonmark Markdown."""
+  docMarkdown: Markdown!
+
+  """
+  When this note was created. If not provided, defaults to server time upon
+  receiving request.
+  """
+  createdAt: ISOString
+}
+
 """Input data for creating a Shareable List."""
 input CreateShareableListInput {
   title: String!
@@ -742,6 +882,17 @@ input DateFilter {
 """A String representing a date in the format of `yyyy-MM-dd HH:mm:ss`"""
 scalar DateString
 
+input DeleteNoteInput {
+  """The ID of the note to delete"""
+  id: ID!
+
+  """
+  When the note was deleted was made. If not provided, defaults to
+  the server time upon receiving request.
+  """
+  deletedAt: ISOString
+}
+
 input DeleteSavedItemTagsInput {
   """The id of the SavedItem from which to delete a Tag association"""
   savedItemId: ID!
@@ -760,6 +911,47 @@ type DomainMetadata {
 
   """Url for the greyscale logo image"""
   logoGreyscale: Url
+}
+
+"""Input for editing the content of a Note (user-generated)"""
+input EditNoteContentInput {
+  """The ID of the note to edit"""
+  noteId: ID!
+
+  """JSON representation of a ProseMirror document"""
+  docContent: ProseMirrorJson!
+
+  """The time this update was made (defaults to server time)"""
+  updatedAt: ISOString
+}
+
+"""
+Input for editing the content of a Note (user-generated),
+providing the content as a Markdown-formatted string.
+"""
+input EditNoteContentMarkdownInput {
+  """The ID of the note to edit"""
+  noteId: ID!
+
+  """Commonmark Markdown string representing the document content."""
+  docMarkdown: Markdown!
+
+  """The time this update was made (defaults to server time)"""
+  updatedAt: ISOString
+}
+
+input EditNoteTitleInput {
+  """The ID of the note to edit"""
+  id: ID!
+
+  """The new title for the note (can be an empty string)"""
+  title: String!
+
+  """
+  When the update was made. If not provided, defaults to the server
+  time upon receiving request.
+  """
+  updatedAt: ISOString
 }
 
 """The reason a user web session is being expired."""
@@ -1533,6 +1725,72 @@ type Mutation {
   """
   importUploadUrl(importType: ImportType!): ImportUploadResponse
 
+  """Create a new note, optionally with title and content"""
+  createNote(input: CreateNoteInput!): Note!
+
+  """Create a new note, optionally with title and markdown content"""
+  createNoteMarkdown(input: CreateNoteMarkdownInput!): Note!
+
+  """
+  Create a new note, with a pre-populated block that contains the quoted and cited text
+  selected by a user.
+  """
+  createNoteFromQuote(input: CreateNoteFromQuoteInput!): Note!
+
+  """
+  Create a new note, with a pre-populated block that contains the quoted and cited text
+  selected by a user.
+  """
+  createNoteFromQuoteMarkdown(input: CreateNoteFromQuoteMarkdownInput!): Note!
+
+  """
+  Edit the title of a Note.
+  If the Note does not exist or is inaccessible for the current user,
+  response will be null and a NOT_FOUND error will be included in the
+  errors array.
+  """
+  editNoteTitle(input: EditNoteTitleInput!): Note
+
+  """
+  Edit the content of a Note.
+  If the Note does not exist or is inaccessible for the current user,
+  response will be null and a NOT_FOUND error will be included in the
+  errors array.
+  """
+  editNoteContent(input: EditNoteContentInput!): Note
+
+  """
+  Edit the content of a Note, providing a markdown document instead
+  of a Prosemirror JSON.
+  If the Note does not exist or is inaccessible for the current user,
+  response will be null and a NOT_FOUND error will be included in the
+  errors array.
+  """
+  editNoteContentMarkdown(input: EditNoteContentMarkdownInput!): Note
+
+  """
+  Delete a note and all attachments. Returns True if the note was successfully
+  deleted. If the note cannot be deleted or does not exist, returns False. 
+  Errors will be included in the errors array if applicable.
+  """
+  deleteNote(input: DeleteNoteInput!): ID!
+
+  """
+  Archive a note.
+  If the Note does not exist or is inaccessible for the current user,
+  response will be null and a NOT_FOUND error will be included in the
+  errors array.
+  """
+  archiveNote(input: ArchiveNoteInput!): Note
+
+  """
+  Unarchive a note.
+  If the Note does not exist or is inaccessible for the current user,
+  response will be null and a NOT_FOUND error will be included in the
+  errors array.
+  """
+  unArchiveNote(input: ArchiveNoteInput!): Note
+
   """Refresh an Item's article content."""
   refreshItemArticle(url: String!): Item!
 
@@ -1640,6 +1898,132 @@ type Mutation {
 
 """A positive integer number."""
 scalar NonNegativeInt
+
+"""
+A Note is an entity which may contain extracted components
+from websites (clippings/snippets), user-generated rich text content,
+and may be linked to a source url.
+"""
+type Note {
+  """This Note's identifier"""
+  id: ID!
+
+  """Title of this note"""
+  title: String
+
+  """
+  JSON representation of a ProseMirror document
+  (compatible with Markdown)
+  """
+  docContent: ProseMirrorJson
+
+  """Markdown representation of the note content"""
+  docMarkdown: Markdown
+
+  """Markdown preview of the note content for summary view."""
+  contentPreview: Markdown
+
+  """When this note was created"""
+  createdAt: ISOString!
+
+  """When this note was last updated"""
+  updatedAt: ISOString!
+
+  """
+  The SavedItem entity this note is attached to (either directly
+  or via a Clipping, if applicable)
+  """
+  savedItem: SavedItem
+
+  """
+  The URL this entity was created from (either directly or via
+  a Clipping, if applicable).
+  """
+  source: ValidUrl
+
+  """
+  Whether this Note has been marked as archived (hide from default view).
+  """
+  archived: Boolean!
+
+  """
+  Whether this Note has been marked for deletion (will be eventually
+  removed from the server). Clients should delete Notes from their local
+  storage if this value is true.
+  """
+  deleted: Boolean!
+}
+
+"""The connection type for Note."""
+type NoteConnection {
+  """A list of edges."""
+  edges: [NoteEdge]
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Identifies the total count of Notes in the connection."""
+  totalCount: Int!
+}
+
+"""An edge in a connection."""
+type NoteEdge {
+  """A cursor for use in pagination."""
+  cursor: String!
+
+  """The Note at the end of the edge."""
+  node: Note
+}
+
+"""Filter for retrieving Notes"""
+input NoteFilterInput {
+  """
+  Filter to show notes which are attached to a source URL
+  directly or via clipping, or are standalone
+  notes. If not provided, notes will not be filtered by source url.
+  """
+  isAttachedToSave: Boolean
+
+  """
+  Filter to retrieve Notes by archived status (true/false).
+  If not provided, notes will not be filtered by archived status.
+  """
+  archived: Boolean
+
+  """Filter to retrieve notes after a timestamp, e.g. for syncing."""
+  since: ISOString
+
+  """
+  Filter to choose whether to include notes marked for server-side
+  deletion in the response (defaults to false).
+  """
+  excludeDeleted: Boolean
+}
+
+"""
+Enum to specify the sort by field (these are the current options, we could add more in the future)
+"""
+enum NoteSortBy {
+  CREATED_AT
+  UPDATED_AT
+}
+
+"""
+Input to sort fetched Notes. If unspecified, defaults to UPDATED_AT, DESC.
+"""
+input NoteSortInput {
+  """The field by which to sort Notes"""
+  sortBy: NoteSortBy!
+
+  """The order in which to sort Notes"""
+  sortOrder: NoteSortOrder!
+}
+
+"""Possible values for sort ordering (ascending/descending)"""
+enum NoteSortOrder {
+  ASC
+  DESC
+}
 
 type NotFound implements BaseError {
   path: String!
@@ -1910,6 +2294,8 @@ type PreSignedUrl {
   ttl: Int!
 }
 
+scalar ProseMirrorJson
+
 """The publisher that the curation team set for the syndicated article"""
 type Publisher {
   """Square logo to use for the publisher"""
@@ -2010,6 +2396,12 @@ type Query {
   ~ If no toggles are found, return an empty list
   """
   unleashAssignments(context: UnleashContext!): UnleashAssignmentList
+
+  """Retrieve a specific Note"""
+  note(id: ID!): Note
+
+  """Retrieve a user's Notes"""
+  notes(sort: NoteSortInput, filter: NoteFilterInput, pagination: PaginationInput): NoteConnection
 
   """Look up Item info by a url."""
   getItemByUrl(url: String!): Item @deprecated(reason: "Use itemByUrl instead")
@@ -2366,6 +2758,12 @@ type SavedItem implements RemoteEntity {
   Unix timestamp of when the entity was deleted, 30 days after this date this entity will be HARD deleted from the database and no longer exist
   """
   _deletedAt: Int
+
+  """
+  The notes associated with this SavedItem, optionally
+  filtered to retrieve after a 'since' parameter.
+  """
+  notes(pagination: PaginationInput, sort: NoteSortInput, filter: SavedItemNoteFilterInput): NoteConnection!
 }
 
 """
@@ -2412,6 +2810,24 @@ type SavedItemEdge {
 All types in this union should implement BaseError, for client fallback
 """
 union SavedItemMutationError = NotFound | SyncConflict
+
+"""Filter for retrieving Notes attached to a SavedItem"""
+input SavedItemNoteFilterInput {
+  """
+  Filter to retrieve Notes by archived status (true/false).
+  If not provided, notes will not be filtered by archived status.
+  """
+  archived: Boolean
+
+  """Filter to retrieve notes after a timestamp, e.g. for syncing."""
+  since: ISOString
+
+  """
+  Filter to choose whether to include notes marked for server-side
+  deletion in the response (defaults to false).
+  """
+  excludeDeleted: Boolean
+}
 
 """
 We don't have official oneOf support, but this will
@@ -3738,4 +4154,7 @@ enum VideoType {
 
   """Brightcove (v3 value is 8)"""
   BRIGHTCOVE
+
+  """Dailymotion (v3 value is 9)"""
+  DAILYMOTION
 }

@@ -5,3 +5,7 @@ export function isSystemLink(link: string) {
     link.startsWith('chrome-search://')
   )
 }
+
+export function isSystemPage(tab?: chrome.tabs.Tab) {
+  return tab && tab.active && tab.url && isSystemLink(tab.url)
+}

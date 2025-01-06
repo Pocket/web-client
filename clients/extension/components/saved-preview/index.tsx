@@ -1,16 +1,14 @@
 import style from './style.module.css'
-import type { ExtItem, ExtPreviewItem } from '@common/types'
+import type { ExtPreview } from '../../types'
 
-export function SavedPreview({ item }: { item: ExtItem }) {
-  if (item && 'status' in item) return null
-
-  const validItem = item as ExtPreviewItem
-  const preview = validItem?.preview
+export function SavedPreview({ preview }: { preview: ExtPreview }) {
+  if (!preview) return null
 
   const cachedImages = preview?.image?.cachedImages
   const image = cachedImages ? cachedImages[0]?.url : false
 
   const title = preview?.title
+  const excerpt = preview?.excerpt
   const domain = preview?.domain?.name
 
   return (
@@ -22,6 +20,7 @@ export function SavedPreview({ item }: { item: ExtItem }) {
       ) : null}
       <div>
         <div className={style.title}>{title}</div>
+        <div className={style.excerpt}>{excerpt}</div>
         <div className={style.domain}>{domain}</div>
       </div>
     </div>

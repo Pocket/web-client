@@ -3,7 +3,7 @@ import upsertResponse from '@common/mock-data/graph-response/upsert-response.jso
 import { SavedPreview as Component } from '.'
 
 // Types
-import type { ExtItem } from '@common/types'
+import type { ExtItem } from '../../types'
 import type { Meta, StoryObj } from '@storybook/react'
 
 // Storybook Meta

@@ -1,7 +1,7 @@
 import { SUPPORTED_LOCALES } from '@common/constants'
 
 import { getErrorMessage } from '@common/utilities/error-handler'
-import { gql, pocketRequest } from '@common/utilities/pocket-request'
+import { gql, pocketRequest } from '@common/utilities/request'
 
 import { FRAGMENT_ITEM_PREVIEW } from '../_fragments/preview'
 

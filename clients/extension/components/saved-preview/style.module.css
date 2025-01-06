@@ -19,8 +19,24 @@
   }
 }
 
-.title {
+.excerpt {
   font-size: 0.875rem;
+  font-weight: 400;
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.025rem;
+  line-clamp: 3;
+  max-height: 3.75em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.title {
+  font-size: 1rem;
   font-weight: 500;
   margin-bottom: 0.25rem;
   letter-spacing: 0.025rem;
@@ -38,4 +54,5 @@
 .domain {
   font-size: 0.8125rem;
   font-weight: 400;
+  font-style: italic;
 }

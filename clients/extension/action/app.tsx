@@ -2,13 +2,16 @@ import { useEffect, useState } from 'react'
 import { EXT_ACTIONS } from '../actions'
 import { ActionContainer } from '../components/action-container'
 
-import type { ExtPreviewItem } from '@common/types'
+import type { ExtItem, ExtMessage, ExtPreview } from '../types'
+import type { NoteEdge } from '@common/types/pocket'
 
 export function App() {
-  const actionUnSave = () => {}
   const [isOpen, setIsOpen] = useState(false)
   const [saveStatus, setSaveStatus] = useState('unsaved')
   const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined)
+  const [preview, setPreview] = useState<ExtPreview | undefined>(undefined)
+  const [tags, setTags] = useState<string[]>([])
+  const [notes, setNotes] = useState<NoteEdge[] | undefined>()
 
   /* Setup Listeners and show popup
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -24,58 +27,74 @@ export function App() {
   /* Send a message on action activating
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
   useEffect(() => {
-    if (isOpen) void chrome.runtime.sendMessage({ action: EXT_ACTIONS.EXTENSION_ACTIVATED })
+    if (isOpen) void chrome.runtime.sendMessage({ action: EXT_ACTIONS.BROWSER_ACTION })
   }, [isOpen])
 
   /* Handle incoming messages
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
-  function handleMessages(message: { action: EXT_ACTIONS; item?: ExtPreviewItem; error?: string }) {
+  function handleMessages(message: ExtMessage) {
     const { action = 'Unknown Action' } = message || {}
-
+    console.log('ACTION:', { message })
     switch (action) {
-      case EXT_ACTIONS.SAVE_TO_POCKET_REQUEST: {
-        setIsOpen(true)
-        return setSaveStatus('saving')
-      }
-
       case EXT_ACTIONS.SAVE_TO_POCKET_SUCCESS: {
-        return setSaveStatus('saved')
+        const item = message?.item as ExtItem
+        const preview = item?.preview
+        const suggestedTags = item?.savedItem?.suggestedTags.map((tag) => tag.name) ?? []
+        const itemNotes = item?.savedItem?.notes
+
+        setPreview(preview)
+        setTags(suggestedTags)
+        setNotes(itemNotes)
+        setSaveStatus('saved')
+        return
       }
 
       case EXT_ACTIONS.SAVE_TO_POCKET_FAILURE: {
         const { error } = message ?? 'Unknown error'
         setErrorMessage(error)
-        return setSaveStatus('save_failed')
+        setSaveStatus('save_failed')
+        return
       }
 
       case EXT_ACTIONS.REMOVE_ITEM_REQUEST: {
-        return setSaveStatus('removing')
+        setSaveStatus('removing')
+        return
       }
 
       case EXT_ACTIONS.REMOVE_ITEM_SUCCESS: {
-        return setSaveStatus('removed')
+        setSaveStatus('removed')
+        return
       }
 
       case EXT_ACTIONS.REMOVE_ITEM_FAILURE: {
-        return setSaveStatus('remove_failed')
+        setSaveStatus('remove_failed')
+        return
       }
 
       case EXT_ACTIONS.TAG_SYNC_REQUEST: {
-        return setSaveStatus('tags_saving')
+        setSaveStatus('tags_saving')
+        return
       }
 
       case EXT_ACTIONS.TAG_SYNC_SUCCESS: {
-        return setSaveStatus('tags_saved')
+        setSaveStatus('tags_saved')
+        return
       }
 
       case EXT_ACTIONS.TAG_SYNC_FAILURE: {
-        return setSaveStatus('tags_failed')
+        setSaveStatus('tags_failed')
+        return
       }
 
       case EXT_ACTIONS.UPDATE_TAG_ERROR: {
         const { error } = message ?? 'Unknown error'
         setErrorMessage(error)
-        return true
+        return
+      }
+
+      case EXT_ACTIONS.AUTH_ERROR: {
+        setErrorMessage('Authorization Error')
+        return
       }
 
       default: {
@@ -84,12 +103,24 @@ export function App() {
     }
   }
 
+  /* Send messages
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  const actionUnSave = () => {}
+
+  const actionLogOut = () => {
+    void chrome.runtime.sendMessage({ action: EXT_ACTIONS.LOGGED_OUT_OF_POCKET })
+  }
+
   return (
     <ActionContainer
-      actionUnSave={actionUnSave}
       errorMessage={errorMessage}
       saveStatus={saveStatus}
       isOpen={isOpen}
+      preview={preview}
+      tags={tags}
+      notes={notes}
+      actionUnSave={actionUnSave}
+      actionLogOut={actionLogOut}
     />
   )
 }
