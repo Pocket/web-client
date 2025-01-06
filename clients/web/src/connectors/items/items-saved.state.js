@@ -99,7 +99,7 @@ function* savedItemRequest(action) {
     const savedItemIds = edges
       .filter(validateEdge)
       .filter(removeStarterArticle)
-      .map((edge) => edge?.node?.item?.itemId)
+      .map((edge) => edge?.node?.item?.itemId ?? edge?.node?.nodeId)
 
     const nodes = edges.reduce(getNodeFromEdge, {})
     const itemsById = edges.reduce(getItemFromEdge, {})
@@ -207,26 +207,30 @@ const removeStarterArticle = (edge) => !STARTER_ARTICLES.includes(edge?.node?.it
 const getNodeFromEdge = (previous, current) => {
   const cursor = current.cursor
   const { item, ...node } = current.node
+  const itemId = node?.item?.itemId ?? node?.nodeId
   if (node.status === 'DELETED') return previous // REMOVE DELETED ITEMS FROM THE RESPONSE
-  return { ...previous, [item.itemId]: { cursor, ...node } }
+  return { ...previous, [itemId]: { cursor, ...node } }
 }
 
 const getItemFromEdge = (previous, current) => {
   const { item, node } = deriveSavedItem(current.node)
+  const itemId = node?.item?.itemId ?? node?.nodeId
   if (node.status === 'DELETED') return previous
-  return { ...previous, [item.itemId]: item } // REMOVE DELETED ITEMS FROM THE RESPONSE
+  return { ...previous, [itemId]: item } // REMOVE DELETED ITEMS FROM THE RESPONSE
 }
 
 const getSearchNodeFromEdge = (previous, current) => {
   const { item, ...node } = current.node.savedItem
+  const itemId = node?.item?.itemId ?? node?.nodeId
   if (node.status === 'DELETED') return previous
-  return { ...previous, [item.itemId]: node } // REMOVE DELETED ITEMS FROM THE RESPONSE
+  return { ...previous, [itemId]: node } // REMOVE DELETED ITEMS FROM THE RESPONSE
 }
 
 const getSearchItemFromEdge = (previous, current) => {
   const { item, node } = deriveSavedItem(current.node.savedItem)
+  const itemId = node?.item?.itemId ?? node?.nodeId
   if (node.status === 'DELETED') return previous
-  return { ...previous, [item.itemId]: item } // REMOVE DELETED ITEMS FROM THE RESPONSE
+  return { ...previous, [itemId]: item } // REMOVE DELETED ITEMS FROM THE RESPONSE
 }
 
 /**
