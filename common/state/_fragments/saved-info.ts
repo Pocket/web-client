@@ -1,4 +1,4 @@
-import { gql } from '@common/utilities/pocket-request'
+import { gql } from '@common/utilities/request'
 
 export const FRAGMENT_ITEM_SAVED_INFO = gql`
   fragment ItemSavedFragment on SavedItem {
