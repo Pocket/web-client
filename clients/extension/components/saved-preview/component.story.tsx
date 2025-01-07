@@ -3,10 +3,10 @@ import upsertResponse from '@common/mock-data/graph-response/upsert-response.jso
 import { SavedPreview as Component } from '.'
 
 // Types
-import type { ExtItem } from '../../types'
 import type { Meta, StoryObj } from '@storybook/react'
 
 // Storybook Meta
+const preview = upsertResponse?.data?.upsertSavedItem?.item?.preview
 const meta: Meta<typeof Component> = {
   title: 'Saved - Preview ',
   component: Component
@@ -15,9 +15,19 @@ export default meta
 
 // Stories
 export const SavedPreview: StoryObj<typeof Component> = {
-  render: () => {
-    const item = upsertResponse?.data?.upsertSavedItem?.item as ExtItem
-    return <Component item={item} />
+  render: (args) => {
+    const preview = args?.preview
+    return <Component preview={preview} />
   },
-  args: {}
+  argTypes: {
+    preview: {
+      options: ['Saved', 'Saving'],
+      mapping: {
+        Saved: preview,
+        Saving: undefined
+      },
+      control: { type: 'select' }
+    }
+  },
+  args: { preview }
 }

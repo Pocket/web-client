@@ -13,8 +13,11 @@ export default meta
 
 // Stories
 export const SavedTags: StoryObj<typeof Component> = {
-  render: () => {
-    return <Component />
+  render: (args) => {
+    const tags = args.tags
+    return <Component tags={tags} />
   },
-  args: {}
+  args: {
+    tags: ['peace', 'love', 'video games']
+  }
 }

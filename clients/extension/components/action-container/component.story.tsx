@@ -22,7 +22,6 @@ export const ActionComplete: StoryObj<typeof Component> = {
         preview={preview}
         isOpen={true}
         actionUnSave={() => console.log('action unsave')}
-        actionLogOut={() => console.log('action logOut')}
       />
     )
   },

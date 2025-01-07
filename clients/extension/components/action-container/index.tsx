@@ -1,4 +1,3 @@
-import { ExtensionFooter } from '../action-footer'
 import { ExtensionHeader } from '../action-header'
 import { SavedScreen } from '../saved'
 import { SavedLoader } from '../saved-loader'
@@ -12,9 +11,7 @@ export function ActionContainer({
   errorMessage,
   preview,
   notes,
-  tags,
-  actionUnSave
-  // actionLogOut
+  tags
 }: {
   isOpen: boolean
   errorMessage?: string
@@ -23,18 +20,13 @@ export function ActionContainer({
   notes?: NoteEdge[]
   tags?: string[]
   actionUnSave: () => void
-  actionLogOut: () => void
 }) {
   return isOpen ? (
     <div className="extension">
       <ExtensionHeader />
       <hr />
-      {preview ? (
-        <SavedScreen preview={preview} notes={notes} tags={tags} actionUnSave={actionUnSave} />
-      ) : (
-        <SavedLoader />
-      )}
-      <ExtensionFooter error={errorMessage} />
+      {preview ? <SavedScreen preview={preview} notes={notes} tags={tags} /> : <SavedLoader />}
+      {errorMessage ? <footer>{errorMessage}</footer> : null}
     </div>
   ) : null
 }

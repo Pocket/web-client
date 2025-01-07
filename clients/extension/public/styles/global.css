@@ -15,6 +15,7 @@
   --color-coral: #ef4056;
   --color-amber: #fcb643;
   --color-brandPocket: #ef4056;
+  --color-error: #e64a4a;
   --font-sans-serif: 'Graphik Web', 'Helvetica Neue', Helvetica, Arial, Sans-Serif;
 
   --color-canvas: #ffffff;
@@ -25,6 +26,10 @@
   --color-button-neutral-text: #15141a;
   --color-input-base: #ffffff;
   --color-input-border: var(--color-grey85);
+  --color-bg-suggested-tag: #f0f0f4;
+  --color-bg-suggested-tag-hover: hsl(240, 15%, 93%);
+  --color-suggested-tag: hsl(250, 13%, 9%);
+  --color-tag-add: hsl(250, 13%, 15%);
 
   @media (prefers-color-scheme: dark) {
     --color-canvas: #42414d;
@@ -36,6 +41,10 @@
     --color-picture-base: #2b2a33;
     --color-input-base: #42414d;
     --color-input-border: #2b2a33;
+    --color-bg-suggested-tag: hsl(247, 10%, 18%);
+    --color-bg-suggested-tag-hover: hsl(247, 10%, 16%);
+    --color-suggested-tag: hsl(240, 60%, 99%);
+    --color-tag-add: hsl(240, 60%, 94%);
 
     .colormode-light {
       --color-canvas: #ffffff;
@@ -47,6 +56,10 @@
       --color-picture-base: #f0f0f4;
       --color-input-base: #ffffff;
       --color-input-border: var(--color-grey85);
+      --color-bg-suggested-tag: hsl(240, 15%, 95%);
+      --color-bg-suggested-tag-hover: hsl(240, 15%, 93%);
+      --color-suggested-tag: #15141a;
+      --color-tag-add: hsl(250, 13%, 15%);
     }
   }
 }

@@ -24,6 +24,7 @@
   "scripts": {
     "build:extension": "extension build",
     "dev:extension": "extension dev --chromium-binary=/Applications/Brave\\ Browser.app/Contents/MacOS/Brave\\ Browser",
+    "dev:extension:ch": "extension dev",
     "dev:extension:ff": "extension dev --browser=firefox",
     "start:extension": "extension start"
   }

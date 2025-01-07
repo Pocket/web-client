@@ -6,6 +6,7 @@ import { SavedScreen as Component } from '.'
 import type { Meta, StoryObj } from '@storybook/react'
 
 // Storybook Meta
+const preview = upsertResponse?.data?.upsertSavedItem?.item?.preview
 const meta: Meta<typeof Component> = {
   title: 'Saved - Complete ',
   component: Component
@@ -14,10 +15,20 @@ export default meta
 
 // Stories
 export const SavedComplete: StoryObj<typeof Component> = {
-  render: () => {
-    const item = upsertResponse?.data?.upsertSavedItem?.item
+  render: (args) => {
+    const preview = args?.preview
 
-    return <Component item={item} actionUnSave={() => null} />
+    return <Component preview={preview} />
   },
-  args: {}
+  argTypes: {
+    preview: {
+      options: ['Saved', 'Saving'],
+      mapping: {
+        Saved: preview,
+        Saving: undefined
+      },
+      control: { type: 'select' }
+    }
+  },
+  args: { preview }
 }
