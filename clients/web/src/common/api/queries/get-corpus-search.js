@@ -65,7 +65,7 @@ function handleResponse(response) {
 
 function getItemsByIdFromEdges(edges) {
   return edges.reduce((previous, current) => {
-    if (!current?.node?.item?.preview?.id) return previous
+    if (!current?.node?.item?.preview?.previewId) return previous
 
     const { item, searchHighlights } = deriveCorpusPreview(current)
     return {

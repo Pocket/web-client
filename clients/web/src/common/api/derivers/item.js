@@ -202,11 +202,12 @@ export function deriveItemData({
 }) {
   return {
     ...item,
+    savedId: node?.savedId || false,
     authors: item?.preview?.authors || itemEnrichment?.authors || item?.authors || false,
     title: title({ item, itemEnrichment, node }),
     thumbnail: thumbnail({ item, itemEnrichment }),
     excerpt: excerpt({ item, itemEnrichment }),
-    publisher: publisher({ item, itemEnrichment, passedPublisher }),
+    publisher: publisher({ item, itemEnrichment, passedPublisher, node }),
     publisherLogo: item?.domainMetadata?.logo || false,
     externalUrl: externalUrl({ item, itemEnrichment, utmId }),
     // Temporary fix for the share modal and other possible areas that need the external url
@@ -278,8 +279,8 @@ function thumbnail({ item, itemEnrichment }) {
  * @param {object} item An item returned from the server
  * @returns {string} The best text to display as the publisher of this item
  */
-function publisher({ item, itemEnrichment, passedPublisher }) {
-  const urlToUse = item?.givenUrl || item?.resolvedUrl
+function publisher({ item, itemEnrichment, passedPublisher, node }) {
+  const urlToUse = item?.givenUrl || item?.resolvedUrl || node?.url
   const derivedDomain = domainForUrl(urlToUse)
   const syndicatedPublisher = item?.syndicatedArticle?.publisher?.name
   //prettier-ignore
