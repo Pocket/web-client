@@ -4,7 +4,7 @@ export const FRAGMENT_SAVED_ITEM = gql`
   fragment SavedItemDetails on SavedItem {
     _createdAt
     _updatedAt
-    id
+    savedId: id
     status
     isFavorite
     favoritedAt

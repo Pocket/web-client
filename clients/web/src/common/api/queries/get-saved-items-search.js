@@ -1,6 +1,7 @@
 import { requestGQL } from 'common/utilities/request/request'
 import { gql } from 'common/utilities/gql/gql'
 import { FRAGMENT_ITEM_PREVIEW } from '../fragments/fragment.preview'
+import { FRAGMENT_SAVED_ITEM } from 'common/api/fragments/fragment.savedItem'
 import { itemFiltersFromGraph } from './get-saved-items.filters'
 import { actionToCamelCase } from 'common/utilities/strings/strings'
 
@@ -32,19 +33,7 @@ const searchSavedItemsQuery = gql`
               title
             }
             savedItem {
-              url
-              _createdAt
-              _updatedAt
-              id
-              status
-              isFavorite
-              favoritedAt
-              isArchived
-              archivedAt
-              tags {
-                id
-                name
-              }
+              ...SavedItemDetails
               item {
                 ... on Item {
                   givenUrl
@@ -65,6 +54,7 @@ const searchSavedItemsQuery = gql`
       }
     }
   }
+  ${FRAGMENT_SAVED_ITEM}
   ${FRAGMENT_ITEM_PREVIEW}
 `
 

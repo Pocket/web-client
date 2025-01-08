@@ -99,7 +99,7 @@ function* savedItemRequest(action) {
     const savedItemIds = edges
       .filter(validateEdge)
       .filter(removeStarterArticle)
-      .map((edge) => edge?.node?.item?.itemId)
+      .map((edge) => edge?.node?.savedId)
 
     const nodes = edges.reduce(getNodeFromEdge, {})
     const itemsById = edges.reduce(getItemFromEdge, {})
@@ -126,7 +126,7 @@ function* savedItemTaggedRequest(action) {
     if (!pageInfo) return yield put({ type: ITEMS_SAVED_PAGE_INFO_FAILURE })
     if (!edges) return yield put({ type: ITEMS_SAVED_FAILURE })
 
-    const savedItemIds = edges.map((edge) => edge.node.id)
+    const savedItemIds = edges.map((edge) => edge.node.savedId)
     const nodes = edges.reduce(getNodeFromEdge, {})
     const itemsById = edges.reduce(getItemFromEdge, {})
     const itemsCount = savedItemIds.length
@@ -152,7 +152,7 @@ function* savedItemSearchRequest(action) {
   if (!pageInfo) return yield put({ type: ITEMS_SAVED_PAGE_INFO_FAILURE })
   if (!edges) return yield put({ type: ITEMS_SAVED_SEARCH_FAILURE })
 
-  const savedItemIds = edges.map((edge) => edge.node.savedItem.id)
+  const savedItemIds = edges.map((edge) => edge.node.savedItem.savedId)
   const nodes = edges.reduce(getSearchNodeFromEdge, {})
   const itemsById = edges.reduce(getSearchItemFromEdge, {})
   const itemsCount = savedItemIds.length
@@ -179,7 +179,7 @@ function* savedItemUpdateRequest(action) {
     const savedItemIds = edges
       .filter(validateEdge)
       .filter(removeStarterArticle)
-      .map((edge) => edge?.node?.id)
+      .map((edge) => edge?.node?.savedId)
 
     const nodes = edges.reduce(getNodeFromEdge, {})
     const itemsById = edges.reduce(getItemFromEdge, {})
@@ -208,25 +208,25 @@ const getNodeFromEdge = (previous, current) => {
   const cursor = current.cursor
   const { item, ...node } = current.node
   if (node.status === 'DELETED') return previous // REMOVE DELETED ITEMS FROM THE RESPONSE
-  return { ...previous, [item.itemId]: { cursor, ...node } }
+  return { ...previous, [node.savedId]: { cursor, ...node } }
 }
 
 const getItemFromEdge = (previous, current) => {
   const { item, node } = deriveSavedItem(current.node)
   if (node.status === 'DELETED') return previous
-  return { ...previous, [item.itemId]: item } // REMOVE DELETED ITEMS FROM THE RESPONSE
+  return { ...previous, [node.savedId]: item } // REMOVE DELETED ITEMS FROM THE RESPONSE
 }
 
 const getSearchNodeFromEdge = (previous, current) => {
   const { item, ...node } = current.node.savedItem
   if (node.status === 'DELETED') return previous
-  return { ...previous, [item.itemId]: node } // REMOVE DELETED ITEMS FROM THE RESPONSE
+  return { ...previous, [node.savedId]: node } // REMOVE DELETED ITEMS FROM THE RESPONSE
 }
 
 const getSearchItemFromEdge = (previous, current) => {
   const { item, node } = deriveSavedItem(current.node.savedItem)
   if (node.status === 'DELETED') return previous
-  return { ...previous, [item.itemId]: item } // REMOVE DELETED ITEMS FROM THE RESPONSE
+  return { ...previous, [node.savedId]: item } // REMOVE DELETED ITEMS FROM THE RESPONSE
 }
 
 /**

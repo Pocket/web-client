@@ -3,6 +3,7 @@ import { gql } from 'common/utilities/gql/gql'
 export const FRAGMENT_ITEM_PREVIEW = gql`
   fragment ItemPreview on PocketMetadata {
     ... on ItemSummary {
+      previewId: id
       id
       image {
         caption
@@ -25,6 +26,7 @@ export const FRAGMENT_ITEM_PREVIEW = gql`
       url
     }
     ... on OEmbed {
+      previewId: id
       id
       image {
         caption
