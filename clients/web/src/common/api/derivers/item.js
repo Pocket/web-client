@@ -205,7 +205,7 @@ export function deriveItemData({
     authors: item?.preview?.authors || itemEnrichment?.authors || item?.authors || false,
     title: title({ item, itemEnrichment, node }),
     thumbnail: thumbnail({ item, itemEnrichment }),
-    excerpt: excerpt({ item, itemEnrichment, node }),
+    excerpt: excerpt({ item, itemEnrichment }),
     publisher: publisher({ item, itemEnrichment, passedPublisher }),
     publisherLogo: item?.domainMetadata?.logo || false,
     externalUrl: externalUrl({ item, itemEnrichment, utmId }),
@@ -302,13 +302,12 @@ function publisher({ item, itemEnrichment, passedPublisher }) {
  * @param {object} curatedInfo Additional information provided by the curation team
  * @returns {string} The most appropriate excerpt to show
  */
-function excerpt({ item, itemEnrichment, node }) {
+function excerpt({ item, itemEnrichment }) {
   return (
     item?.preview?.excerpt ||
     itemEnrichment?.excerpt ||
     item?.collection?.excerpt ||
     item?.excerpt ||
-    node?.url ||
     null
   )
 }
