@@ -8,7 +8,7 @@ export function SavedPreview({ preview }: { preview: ExtPreview }) {
   const image = cachedImages ? cachedImages[0]?.url : false
 
   const title = preview?.title
-  const excerpt = preview?.excerpt
+  const excerpt = title.length < 80 ? preview?.excerpt : undefined
   const domain = preview?.domain?.name
 
   return (
@@ -20,7 +20,7 @@ export function SavedPreview({ preview }: { preview: ExtPreview }) {
       ) : null}
       <div>
         <div className={style.title}>{title}</div>
-        <div className={style.excerpt}>{excerpt}</div>
+        {excerpt ? <div className={style.excerpt}>{excerpt}</div> : null}
         <div className={style.domain}>{domain}</div>
       </div>
     </div>

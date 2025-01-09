@@ -39,6 +39,7 @@ chrome.runtime.onMessage.addListener(messageHandler)
 async function messageHandler(message: ExtMessage, sender: chrome.runtime.MessageSender) {
   const { action = EXT_ACTIONS.UNKNOWN_ACTION } = message || {}
 
+  console.log(message)
   // Messages from `popup action` don't have a sender so we need to query the active tab
   const activeTab = await chrome.tabs.query({ active: true, lastFocusedWindow: true })
 

@@ -6,7 +6,10 @@ import { ActionContainer as Component } from '.'
 import type { Meta, StoryObj } from '@storybook/react'
 
 // Storybook Meta
-const preview = upsertResponse?.data?.upsertSavedItem?.item?.preview
+// Storybook Meta
+const SavedOne = upsertResponse[0]?.data?.upsertSavedItem?.item?.preview
+const SavedTwo = upsertResponse[1]?.data?.upsertSavedItem?.item?.preview
+
 const meta: Meta<typeof Component> = {
   title: 'Action - Complete',
   component: Component
@@ -17,23 +20,27 @@ export default meta
 export const ActionComplete: StoryObj<typeof Component> = {
   render: (args) => {
     const preview = args?.preview
+    const tags = args.tags
     return (
       <Component
         preview={preview}
         isOpen={true}
+        errorMessage={args.errorMessage}
+        tags={tags}
         actionUnSave={() => console.log('action unsave')}
       />
     )
   },
   argTypes: {
     preview: {
-      options: ['Saved', 'Saving'],
+      options: ['SavedOne', 'SavedTwo', 'Saving'],
       mapping: {
-        Saved: preview,
+        SavedOne,
+        SavedTwo,
         Saving: undefined
       },
       control: { type: 'select' }
     }
   },
-  args: { preview }
+  args: { preview: SavedOne, tags: ['peace', 'love', 'video games'], errorMessage: undefined }
 }

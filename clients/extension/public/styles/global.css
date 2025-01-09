@@ -12,6 +12,7 @@
   --color-grey80: #cccccc;
   --color-grey85: #d9d9d9;
   --color-grey95: #f2f2f2;
+
   --color-coral: #ef4056;
   --color-amber: #fcb643;
   --color-brandPocket: #ef4056;
@@ -22,7 +23,8 @@
   --color-loader: #42414d;
   --color-text-primary: #15141a;
   --color-divider: var(--color-grey85);
-  --color-button-neutral: #f0f0f4;
+  --color-button-active: #42414d;
+  --color-button-active-text: #ffffff;
   --color-button-neutral-text: #15141a;
   --color-input-base: #ffffff;
   --color-input-border: var(--color-grey85);
@@ -36,6 +38,8 @@
     --color-loader: #15141a;
     --color-text-primary: #fbfbfe;
     --color-divider: #2b2a33;
+    --color-button-active: #15141a;
+    --color-button-active-text: #fbfbfe;
     --color-button-neutral: #2b2a33;
     --color-button-neutral-text: #fbfbfe;
     --color-picture-base: #2b2a33;
@@ -51,6 +55,8 @@
       --color-loader: #42414d;
       --color-text-primary: #15141a;
       --color-divider: var(--color-grey85);
+      --color-button-active: #42414d;
+      --color-button-active-text: #ffffff;
       --color-button-neutral: #f0f0f4;
       --color-button-neutral-text: #15141a;
       --color-picture-base: #f0f0f4;
@@ -73,7 +79,6 @@ body {
   margin: 0px !important;
   width: 400px;
   height: 100%;
-  padding: 1rem;
   box-sizing: border-box;
   background-color: var(--color-canvas);
   color: var(--color-text-primary);
@@ -103,14 +108,19 @@ a.button {
   font-weight: 400;
   font-family: var(--font-sans-serif);
   text-decoration: none;
-  background-color: var(--color-button-neutral);
+  background-color: var(--color-canvas);
+  border: 1px solid var(--color-divider);
   color: var(--color-button-neutral-text);
   border-radius: 0.25rem;
-  border-color: transparent;
   padding: 0.25rem 0.5rem;
   display: flex;
   align-items: center;
   cursor: pointer;
+
+  &:hover {
+    color: var(--color-button-active-text);
+    background-color: var(--color-button-active);
+  }
 }
 
 label {
@@ -129,6 +139,7 @@ textarea {
   max-width: 100%;
   min-width: 100%;
   min-height: 80px;
+  color: var(--color-text-primary);
   background-color: var(--color-input-base);
   &:focus-visible {
     outline: none;

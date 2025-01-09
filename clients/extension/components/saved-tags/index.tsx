@@ -76,10 +76,15 @@ export function SavedTags({ tags = [] }: { tags?: string[] }) {
 
   return (
     <div className={style.container}>
-      <label htmlFor="tags">Add Tags</label>
       <div className={style.tagInput}>
         <ActiveTags tags={activeTags} action={removeTag} />
-        <input type="text" onKeyDown={handleKeyDown} onChange={handleChange} ref={inputRef} />
+        <input
+          placeholder={activeTags.length ? undefined : 'Add Tags'}
+          type="text"
+          onKeyDown={handleKeyDown}
+          onChange={handleChange}
+          ref={inputRef}
+        />
       </div>
       <SuggestedTags tags={suggestedTags} action={addTag} />
       {errorMessage ? <div className={style.error}>{errorMessage}</div> : null}

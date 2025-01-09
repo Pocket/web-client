@@ -43,7 +43,6 @@ const preview: Preview = {
             margin: '0px !important',
             width: '400px',
             height: '100%',
-            padding: '1rem',
             boxShadow: '0 0 8px rgba(0,0,0,0.8)',
             marginBottom: '30vh'
           }}>

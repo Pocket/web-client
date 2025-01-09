@@ -1,8 +1,8 @@
 import { ExtensionHeader } from '../action-header'
 import { SavedScreen } from '../saved'
-import { SavedLoader } from '../saved-loader'
 
 // Types
+import { ExtensionFooter } from '../action-footer'
 import type { ExtPreview } from '../../types'
 import type { NoteEdge } from '@common/types/pocket'
 
@@ -24,9 +24,12 @@ export function ActionContainer({
   return isOpen ? (
     <div className="extension">
       <ExtensionHeader />
-      <hr />
-      {preview ? <SavedScreen preview={preview} notes={notes} tags={tags} /> : <SavedLoader />}
-      {errorMessage ? <footer>{errorMessage}</footer> : null}
+      {preview ? (
+        <>
+          <SavedScreen preview={preview} notes={notes} tags={tags} />
+          <ExtensionFooter errorMessage={errorMessage} />
+        </>
+      ) : null}
     </div>
   ) : null
 }

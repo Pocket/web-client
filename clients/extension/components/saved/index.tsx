@@ -1,4 +1,5 @@
-import { SavedNotes } from '../saved-notes'
+import style from './style.module.css'
+
 import { SavedPreview } from '../saved-preview'
 import { SavedTags } from '../saved-tags'
 
@@ -7,7 +8,6 @@ import type { NoteEdge } from '@common/types/pocket'
 
 export function SavedScreen({
   preview,
-  notes,
   tags
 }: {
   preview: ExtPreview
@@ -15,10 +15,8 @@ export function SavedScreen({
   tags?: string[]
 }) {
   return preview ? (
-    <div>
+    <div className={style.container}>
       <SavedPreview preview={preview} />
-      <hr />
-      <SavedNotes notes={notes} />
       <SavedTags tags={tags} />
     </div>
   ) : null
