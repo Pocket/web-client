@@ -1,6 +1,5 @@
 import { put, call, takeEvery, select } from 'redux-saga/effects'
-import { renameStoredTag } from 'common/api/_legacy/tags'
-import { deleteStoredTag } from 'common/api/_legacy/tags'
+import { renameTag, deleteTag } from 'common/api/mutations/tags'
 import { getUserTags as getUserTagsGraph } from 'common/api/queries/get-user-tags'
 
 import { USER_TAGS_PIN } from 'actions'
@@ -147,7 +146,7 @@ function* userTagsTogglePin(actions) {
 
 function* userTagsEditConfirm(action) {
   const { new_tag, old_tag, router } = action
-  const data = yield call(renameStoredTag, { new_tag, old_tag })
+  const data = yield call(renameTag, { oldName: old_tag, newName: new_tag })
 
   if (data) {
     const pinnedItems = yield select(getPinnedTags)
@@ -161,7 +160,7 @@ function* userTagsEditConfirm(action) {
 
 function* userTagsDeleteConfirm(action) {
   const { tag, router } = action
-  const data = yield call(deleteStoredTag, tag)
+  const data = yield call(deleteTag, tag)
 
   if (data) {
     const pinnedItems = yield select(getPinnedTags)

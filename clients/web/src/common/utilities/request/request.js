@@ -121,7 +121,7 @@ export const postMime = ({ api_url = API_URL, params = {}, path, method = 'POST'
  *
  * @param {Object} data
  * @param {string} data.query Query to execute on the graph
- * @param {string} data.operationName Basic name to help identify the request (testing, logging)
+ * @param {string} [data.operationName] Basic name to help identify the request (testing, logging)
  * @param {object} data.variables Variables to use when interpolatin the query
  **/
 export const requestGQL = (data) => {
