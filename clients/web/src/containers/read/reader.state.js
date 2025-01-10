@@ -96,7 +96,7 @@ function* readItemRequest({ slug }) {
 
     const { item, savedData, relatedArticlesById } = response
     const derivedItem = deriveReaderItem(item, savedData)
-    const idKey = savedData.id
+    const idKey = derivedItem.savedId
     const relatedArticleIds = Object.keys(relatedArticlesById)
     yield put({
       type: READ_ITEM_SUCCESS,
