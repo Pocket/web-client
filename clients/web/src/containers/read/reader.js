@@ -95,6 +95,8 @@ export default function Reader() {
   const columnWidth = useSelector((state) => state.readerSettings.columnWidth)
   const fontSize = useSelector((state) => state.readerSettings.fontSize)
   const fontFamily = useSelector((state) => state.readerSettings.fontFamily)
+  const fontLink =
+    'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Vollkorn:ital,wght@0,400..900;1,400..900&family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap'
 
   useEffect(() => {
     dispatch(getReadItem(slug))
@@ -186,11 +188,7 @@ export default function Reader() {
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Vollkorn:ital,wght@0,400..900;1,400..900&family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-          rel="stylesheet"
-        />
+        <link href={fontLink} rel="stylesheet" />
       </Head>
 
       {/**
