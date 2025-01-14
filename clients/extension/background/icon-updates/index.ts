@@ -6,7 +6,8 @@ export async function setDefaultIcon() {
 }
 
 export async function setToolbarIcon(tabId: number, isSaved: boolean) {
-  const imageData = isSaved ? savedIcon() : inactiveIcon()
+  // const imageData = isSaved ? savedIcon() : inactiveIcon()
+  const imageData = inactiveIcon()
   await chrome.action.setIcon({ tabId, imageData })
 }
 

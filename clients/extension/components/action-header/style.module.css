@@ -1,6 +1,6 @@
 .header {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 32px auto 32px;
   align-items: center;
   padding: 0.5rem 1rem;
   font-size: 1rem;
@@ -8,4 +8,11 @@
   line-height: 19.09px;
   letter-spacing: -0.03em;
   border-bottom: 1px solid var(--color-divider);
+  min-height: 2.5rem;
+}
+
+.icon {
+  color: var(--color-brandPocket);
+  width: 24px;
+  height: 24px;
 }

@@ -7,7 +7,7 @@ export function ExtensionFooter({ errorMessage }: { errorMessage?: string }) {
   return (
     <footer className={style.footer}>
       <button>
-        <NotesIcon /> Attach Notes
+        <NotesIcon /> Notes
       </button>
       <button>
         <DeleteIcon />

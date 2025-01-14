@@ -7,7 +7,7 @@ import type { NoteEdge } from '@common/types/pocket'
 
 export function App() {
   const [isOpen, setIsOpen] = useState(false)
-  const [saveStatus, setSaveStatus] = useState('unsaved')
+  const [saveStatus, setSaveStatus] = useState('saving')
   const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined)
   const [preview, setPreview] = useState<ExtPreview | undefined>(undefined)
   const [tags, setTags] = useState<string[]>([])

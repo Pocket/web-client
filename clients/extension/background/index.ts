@@ -18,19 +18,18 @@ let saveQueue: ExtSave | null = null
 chrome.runtime.onInstalled.addListener(function () {
   // Use SVG icons over the png for more control
   void setDefaultIcon()
-
   // handle.setContextMenus()
 })
 
 /* Tab Changes
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-chrome.tabs.onUpdated.addListener(tabUpdated)
-function tabUpdated(tabId: number, changeInfo: chrome.tabs.TabChangeInfo) {
-  // if actively loading a new page, unset save state on icon
-  if (changeInfo.status === 'loading' && changeInfo.url) {
-    void setToolbarIcon(tabId, false)
-  }
-}
+// chrome.tabs.onUpdated.addListener(tabUpdated)
+// function tabUpdated(tabId: number, changeInfo: chrome.tabs.TabChangeInfo) {
+//   // if actively loading a new page, unset save state on icon
+//   // if (changeInfo.status === 'loading' && changeInfo.url) {
+//   //   void setToolbarIcon(tabId, false)
+//   // }
+// }
 
 /* Message handling
 –––––––––––––––––––––––––––––––––––––––––––––––––– */

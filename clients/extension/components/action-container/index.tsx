@@ -10,6 +10,7 @@ export function ActionContainer({
   isOpen = false,
   errorMessage,
   preview,
+  saveStatus,
   notes,
   tags
 }: {
@@ -23,7 +24,7 @@ export function ActionContainer({
 }) {
   return isOpen ? (
     <div className="extension">
-      <ExtensionHeader />
+      <ExtensionHeader saveStatus={saveStatus} />
       {preview ? (
         <>
           <SavedScreen preview={preview} notes={notes} tags={tags} />
