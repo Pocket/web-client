@@ -9,21 +9,6 @@ const getSavedItemByIdQuery = gql`
     user {
       savedItemById(id: $id) {
         ...SavedItemDetails
-        annotations {
-          highlights {
-            id
-            quote
-            patch
-            version
-            _createdAt
-            _updatedAt
-            note {
-              text
-              _createdAt
-              _updatedAt
-            }
-          }
-        }
         item {
           ...ItemDetails
           ... on Item {

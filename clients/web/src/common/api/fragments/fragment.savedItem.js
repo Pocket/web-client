@@ -16,5 +16,20 @@ export const FRAGMENT_SAVED_ITEM = gql`
       id
       name
     }
+    annotations {
+      highlights {
+        id
+        quote
+        patch
+        version
+        _createdAt
+        _updatedAt
+        note {
+          text
+          _createdAt
+          _updatedAt
+        }
+      }
+    }
   }
 `

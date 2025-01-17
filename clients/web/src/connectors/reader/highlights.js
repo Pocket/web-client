@@ -11,11 +11,11 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { shareAction } from 'connectors/items/mutation-share.state'
 import { requestAnnotationPatch } from 'components/annotations/utilities'
 
-export const Highlights = ({ children, id }) => {
+export const Highlights = ({ id, highlight }) => {
   const dispatch = useDispatch()
 
   const [annotationLimitModal, setAnnotationLimitModal] = useState(false)
-  const [highlight, setHighlight] = useState(null)
+
   const [highlightHovered, setHighlightHovered] = useState(null)
 
   const isPremium = useSelector((state) => state.user.premium_status === '1')
@@ -26,12 +26,6 @@ export const Highlights = ({ children, id }) => {
   const { analyticsData } = item
   const { annotations } = savedData
   const highlights = annotations?.highlights || []
-
-  const toggleHighlight = () => {
-    const selection = window.getSelection()
-    if (selection.toString()) return setHighlight(selection)
-    if (highlight) return setHighlight(null)
-  }
 
   const toggleHighlightHover = (e) => {
     if (e.type === 'mouseout') return setHighlightHovered(null)
@@ -77,15 +71,14 @@ export const Highlights = ({ children, id }) => {
     dispatch(sendSnowplowEvent(identifier))
   }
 
-  const passedProps = {
-    annotations: highlights,
-    onMouseUp: toggleHighlight,
-    onHighlightHover: toggleHighlightHover
-  }
+  // const passedProps = {
+  //   annotations: highlights,
+  //   onMouseUp: toggleHighlight,
+  //   onHighlightHover: toggleHighlightHover
+  // }
 
   return (
     <>
-      {React.cloneElement(children, passedProps)}
       {highlight ? (
         <SelectionPopover
           anchor={highlight}
