@@ -7,11 +7,8 @@ import { ModalLimitNotice as AnnotationsLimitModal } from 'components/annotation
 import { mutationHighlightItem } from 'connectors/items/mutation-highlight.state'
 import { mutationHighlightDelete } from 'connectors/items/mutation-highlight.state'
 
-import { setHighlightList } from 'containers/read/reader.state'
-
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { shareAction } from 'connectors/items/mutation-share.state'
-import { compileAnnotations } from 'components/annotations/utilities'
 import { requestAnnotationPatch } from 'components/annotations/utilities'
 
 export const Highlights = ({ children, id }) => {
@@ -29,11 +26,6 @@ export const Highlights = ({ children, id }) => {
   const { analyticsData } = item
   const { annotations } = savedData
   const highlights = annotations?.highlights || []
-
-  const buildAnnotations = () => {
-    const compiled = compileAnnotations(highlights)
-    dispatch(setHighlightList(compiled))
-  }
 
   const toggleHighlight = () => {
     const selection = window.getSelection()
@@ -88,8 +80,7 @@ export const Highlights = ({ children, id }) => {
   const passedProps = {
     annotations: highlights,
     onMouseUp: toggleHighlight,
-    onHighlightHover: toggleHighlightHover,
-    annotationsBuilt: buildAnnotations
+    onHighlightHover: toggleHighlightHover
   }
 
   return (

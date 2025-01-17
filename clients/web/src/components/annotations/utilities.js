@@ -1,20 +1,5 @@
 import DiffMatchPatch from 'diff-match-patch'
 
-export function compileAnnotations(highlightList) {
-  const listWithPosition = []
-
-  highlightList.forEach((item) => {
-    const id = item.annotation_id || item.id
-    const el = document.querySelector(`[annotation_id="${id}"]`)
-    listWithPosition.push({
-      ...item,
-      position: Math.round(el.getBoundingClientRect().top + window.pageYOffset)
-    })
-  })
-
-  return listWithPosition
-}
-
 /**
  * Escape regex chars first
  * http://stackoverflow.com/questions/280793/case-insensitive-string-replacement-in-javascript
@@ -156,7 +141,12 @@ function highlight(node, className, annotation, tapListener, callback) {
     textMiddle,
     textEnd
 
-  if (annotation.version === 2 || annotation.version === '2') {
+  // These are problematic unfortunately.  If we want to invest in highlighting, we will need
+  // to revisit using this effectively.  As they are written now, they highlight the wrong things
+  // because we aren't able to guarantee that this will happen in the correct order (ie before we
+  // inject other things that potentially change the patch positions)
+  const usePatch = false
+  if ((annotation.version === 2 || annotation.version === '2') && usePatch) {
     const pktTagRegex = new RegExp('<pkt_tag_annotation>([\\s\\S]*)</pkt_tag_annotation>')
     which = 1 // Highlight only the part inside parens (in regex-speak: the first group).
     // Use diff-match-patch library.
@@ -177,7 +167,7 @@ function highlight(node, className, annotation, tapListener, callback) {
 
   if (!matchingText) {
     // Fallback on a regex matching the quote text exactly.
-    matchingText = highlightRegex(annotation.quote).exec(text)
+    matchingText = highlightRegex(annotation.quote.trim()).exec(text)
     which = 0 // Highlight the entire match.
     if (!matchingText) {
       return
@@ -244,6 +234,7 @@ function highlight(node, className, annotation, tapListener, callback) {
     const id = annotation.annotation_id || annotation.id
     newNode = doc.createElement('span')
     newNode.setAttribute('annotation_id', id)
+    newNode.setAttribute('data-annotation-id', id)
 
     newNode.appendChild(doc.createTextNode(textMiddle))
     newNode.className = className
@@ -270,7 +261,8 @@ function highlight(node, className, annotation, tapListener, callback) {
     // index-node pair, this means this match is completed
     iEntry++
     if (iTextEnd <= indices[iEntry].i) {
-      return callback()
+      if (callback) callback()
+      return
     }
   }
 }

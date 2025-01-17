@@ -72,7 +72,7 @@ export class QuoteList extends Component {
             className={cx(cardStyles, activeCardStyles, active && 'active')}>
             <Quote
               // aria-label={translate('annotations.scrollTo')}
-              onClick={() => onClickEvent(annot.position)}>
+              onClick={() => onClickEvent(id)}>
               {annot.quote}
             </Quote>
             <CreatedDate>{createdAt}</CreatedDate>

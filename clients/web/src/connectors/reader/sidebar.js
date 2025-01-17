@@ -13,7 +13,6 @@ export const SidebarWrapper = ({ id }) => {
   const savedData = useSelector((state) => state.itemsSaved[id])
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const sideBarOpen = useSelector((state) => state.reader.sideBarOpen)
-  const highlightList = useSelector((state) => state.reader.highlightList)
 
   const { analyticsData } = item
   const { annotations } = savedData
@@ -41,8 +40,7 @@ export const SidebarWrapper = ({ id }) => {
         isPremium={isPremium}
         sideBarOpen={sideBarOpen}
         toggleSidebar={handleSidebarToggle}
-        highlightList={highlightList}
-        annotationCount={highlights?.length}
+        highlights={highlights}
         deleteAnnotation={removeAnnotation}
         shareItem={itemShare}
         handleImpression={handleImpression}

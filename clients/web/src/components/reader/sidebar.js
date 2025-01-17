@@ -3,7 +3,7 @@ import { Rail } from 'components/rail/rail'
 import { ChevronLeftIcon } from '@ui/icons/ChevronLeftIcon'
 import { ChevronRightIcon } from '@ui/icons/ChevronRightIcon'
 import { QuoteList } from 'components/annotations/annotations.list'
-import { TicList } from 'components/annotations/annotations.tics'
+// import { TicList } from 'components/annotations/annotations.tics'
 import { useTranslation } from 'next-i18next'
 import { breakpointSmallTablet } from 'common/constants'
 
@@ -66,8 +66,7 @@ const verticallyCentered = css`
 export const Sidebar = ({
   toggleSidebar,
   sideBarOpen,
-  highlightList,
-  annotationCount,
+  highlights,
   shareItem,
   deleteAnnotation,
   isPremium,
@@ -75,12 +74,9 @@ export const Sidebar = ({
 }) => {
   const { t } = useTranslation()
 
-  const handleAnnotationClick = (position) => {
-    window.scrollTo({
-      left: 0,
-      top: position - 100, // scroll 100px above item to offset header
-      behavior: 'smooth'
-    })
+  const handleAnnotationClick = (id) => {
+    const highlight = document.querySelectorAll(`[data-annotation-id="${id}"]`)
+    highlight[0].scrollIntoView({ behavior: 'smooth', inline: 'nearest' })
   }
 
   return (
@@ -90,8 +86,8 @@ export const Sidebar = ({
           isPremium={isPremium}
           visible={sideBarOpen}
           shareItem={shareItem}
-          annotations={highlightList}
-          annotationCount={annotationCount}
+          annotations={highlights}
+          annotationCount={highlights.length}
           deleteAnnotation={deleteAnnotation}
           onClickEvent={handleAnnotationClick}
           handleImpression={handleImpression}
@@ -113,15 +109,15 @@ export const Sidebar = ({
           </div>
         </div>
       </Rail>
-      <TicList
+      {/* <TicList
         isPremium={isPremium}
         visible={!sideBarOpen}
         shareItem={shareItem}
-        annotations={highlightList}
-        annotationCount={annotationCount}
+        annotations={highlights}
+        annotationCount={highlights.length}
         deleteAnnotation={deleteAnnotation}
         onClickEvent={handleAnnotationClick}
-      />
+      /> */}
     </aside>
   )
 }

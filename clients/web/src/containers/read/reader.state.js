@@ -8,7 +8,6 @@ import { READ_ITEM_REQUEST } from 'actions'
 import { READ_ITEM_SUCCESS } from 'actions'
 import { READ_ITEM_FAILURE } from 'actions'
 import { SHARED_ITEM_SUCCESS } from 'actions'
-import { READ_SET_HIGHLIGHTS } from 'actions'
 import { READER_CLEAR_FAILURE } from 'actions'
 import { READ_ITEM_RESOLVED } from 'actions'
 
@@ -18,7 +17,6 @@ import { READER_CLEAR_DELETION } from 'actions'
 /** ACTIONS
  --------------------------------------------------------------- */
 export const getReadItem = (slug) => ({ type: READ_ITEM_REQUEST, slug })
-export const setHighlightList = (highlightList) => ({ type: READ_SET_HIGHLIGHTS, highlightList })
 export const toggleSidebar = () => ({ type: TOGGLE_READER_SIDEBAR })
 export const clearDeletion = () => ({ type: READER_CLEAR_DELETION })
 export const clearFailure = () => ({ type: READER_CLEAR_FAILURE })
@@ -36,11 +34,6 @@ const initialState = {
 
 export const readerReducers = (state = initialState, action) => {
   switch (action.type) {
-    case READ_SET_HIGHLIGHTS: {
-      const { highlightList } = action
-      return { ...state, highlightList }
-    }
-
     case READ_ITEM_RESOLVED: {
       return { ...state, hasResolved: true }
     }

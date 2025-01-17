@@ -1,6 +1,4 @@
-/* eslint-disable -- Legacy behavior -- needs to be updated */
-//!! UPDATE HOOKS / REFACTOR TO TYPESCRIPT
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { cx } from '@emotion/css'
 import DOMPurify from 'dompurify'
 import { loadParsedImages } from './images'
@@ -26,51 +24,43 @@ export const Content = ({
 }) => {
   const articleRef = useRef(null)
   const [loaded, setLoaded] = useState(false)
-  const [linkList, setLinkList] = useState([])
 
-  const processAnnotations = (annotations) => {
-    removeAllHighlights()
-    let itemsProcessed = 0
-    annotations.forEach((highlight, index, array) => {
-      highlightAnnotation(highlight, onHighlightHover, articleRef.current, () => {
-        itemsProcessed++
-        if (itemsProcessed === array.length) {
-          annotationsBuilt()
-        }
-      })
-    })
-  }
-
-  const sendExternalLinkClick = (e) => {
-    const link = e.target.closest('a[href]')
-    const href = link.getAttribute('href')
-
-    externalLinkClick(href)
-  }
-
-  const externalizeLinks = () => {
-    const links = articleRef.current.querySelectorAll('a[href]')
-    links.forEach((link, index) => {
-      link.setAttribute('target', '_blank')
-      link.setAttribute('rel', 'noopener')
-      link.setAttribute('id', `reader.external-link.num-${index}`)
-      link.addEventListener('click', sendExternalLinkClick)
-    })
-
-    setLinkList(links)
-  }
+  // Anti-Pattern that kinda locks these functions in place
+  const buildAnnotations = useCallback(() => {
+    annotationsBuilt()
+  }, [])
+  const highlightHover = useCallback(() => onHighlightHover, [])
 
   useEffect(() => {
+    const sendExternalLinkClick = (e) => {
+      const link = e.target.closest('a[href]')
+      const href = link.getAttribute('href')
+
+      externalLinkClick(href)
+    }
+
+    const externalizeLinks = () => {
+      const links = articleRef.current.querySelectorAll('a[href]')
+      links.forEach((link, index) => {
+        link.setAttribute('target', '_blank')
+        link.setAttribute('rel', 'noopener')
+        link.setAttribute('id', `reader.external-link.num-${index}`)
+        link.addEventListener('click', sendExternalLinkClick)
+      })
+    }
+
     if (content) externalizeLinks()
     if (images) loadParsedImages(images)
     if (videos) loadParsedVideos(videos)
 
+    const cleanupRef = articleRef.current
     return () => {
-      linkList.forEach((link) => {
+      const links = cleanupRef.querySelectorAll('a[href]')
+      links.forEach((link) => {
         link.removeEventListener('click', sendExternalLinkClick)
       })
     }
-  }, [])
+  }, [content, externalLinkClick, images, videos])
 
   useEffect(() => {
     if (annotations) {
@@ -80,8 +70,15 @@ export const Content = ({
       }, timer)
     }
 
+    const processAnnotations = (annotations) => {
+      removeAllHighlights()
+      annotations.forEach((highlight) => {
+        highlightAnnotation(highlight, highlightHover, articleRef.current)
+      })
+    }
+
     setLoaded(true)
-  }, [annotations.length])
+  }, [annotations, loaded, buildAnnotations, highlightHover])
 
   return (
     <article
