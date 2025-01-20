@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { cx } from '@emotion/css'
 import DOMPurify from 'dompurify'
 import { loadParsedImages } from './images'
@@ -17,18 +17,12 @@ export const Content = ({
   images,
   videos,
   annotations = [],
-  annotationsBuilt = () => {},
   onHighlightHover,
   externalLinkClick = () => {},
   ...args
 }) => {
   const articleRef = useRef(null)
-  const [loaded, setLoaded] = useState(false)
 
-  // Anti-Pattern that kinda locks these functions in place
-  const buildAnnotations = useCallback(() => {
-    annotationsBuilt()
-  }, [])
   const highlightHover = useCallback(() => onHighlightHover, [])
 
   useEffect(() => {
@@ -49,9 +43,17 @@ export const Content = ({
       })
     }
 
+    const processAnnotations = (annotations) => {
+      removeAllHighlights()
+      annotations.forEach((highlight) => {
+        highlightAnnotation(highlight, highlightHover, articleRef.current)
+      })
+    }
+
     if (content) externalizeLinks()
     if (images) loadParsedImages(images)
     if (videos) loadParsedVideos(videos)
+    if (annotations) processAnnotations(annotations)
 
     const cleanupRef = articleRef.current
     return () => {
@@ -60,25 +62,7 @@ export const Content = ({
         link.removeEventListener('click', sendExternalLinkClick)
       })
     }
-  }, [content, externalLinkClick, images, videos])
-
-  useEffect(() => {
-    if (annotations) {
-      const timer = !loaded ? 500 : 0
-      setTimeout(() => {
-        processAnnotations(annotations)
-      }, timer)
-    }
-
-    const processAnnotations = (annotations) => {
-      removeAllHighlights()
-      annotations.forEach((highlight) => {
-        highlightAnnotation(highlight, highlightHover, articleRef.current)
-      })
-    }
-
-    setLoaded(true)
-  }, [annotations, loaded, buildAnnotations, highlightHover])
+  }, [annotations, content, externalLinkClick, highlightHover, images, videos])
 
   return (
     <article

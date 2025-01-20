@@ -39,6 +39,7 @@ export function highlightAnnotation(annotation, onHover, element, callback) {
  * @param  {function} tapListener  Function to be called if highlighted
  *                                 section was tapped
  */
+const usePatch = true
 function highlight(node, className, annotation, tapListener, callback) {
   const doc = document
 
@@ -145,7 +146,6 @@ function highlight(node, className, annotation, tapListener, callback) {
   // to revisit using this effectively.  As they are written now, they highlight the wrong things
   // because we aren't able to guarantee that this will happen in the correct order (ie before we
   // inject other things that potentially change the patch positions)
-  const usePatch = false
   if ((annotation.version === 2 || annotation.version === '2') && usePatch) {
     const pktTagRegex = new RegExp('<pkt_tag_annotation>([\\s\\S]*)</pkt_tag_annotation>')
     which = 1 // Highlight only the part inside parens (in regex-speak: the first group).

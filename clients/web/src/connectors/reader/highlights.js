@@ -71,12 +71,6 @@ export const Highlights = ({ id, highlight }) => {
     dispatch(sendSnowplowEvent(identifier))
   }
 
-  // const passedProps = {
-  //   annotations: highlights,
-  //   onMouseUp: toggleHighlight,
-  //   onHighlightHover: toggleHighlightHover
-  // }
-
   return (
     <>
       {highlight ? (
