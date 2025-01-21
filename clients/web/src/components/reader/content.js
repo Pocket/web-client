@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect } from 'react'
 import { cx } from '@emotion/css'
 import DOMPurify from 'dompurify'
 import { loadParsedImages } from './images'
 import { loadParsedVideos } from './videos'
 import { contentStyles, highlightStyles } from './styles'
 import {
-  highlightAnnotation,
+  highlightAnnotations,
   removeAllHighlights
   // removeHighlight
 } from 'components/annotations/utilities'
@@ -13,6 +13,7 @@ import {
 /* EXPORTED COMPONENT
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 export const Content = ({
+  articleRef,
   content,
   images,
   videos,
@@ -21,8 +22,6 @@ export const Content = ({
   externalLinkClick = () => {},
   ...args
 }) => {
-  const articleRef = useRef(null)
-
   const highlightHover = useCallback(() => onHighlightHover, [])
 
   useEffect(() => {
@@ -33,9 +32,9 @@ export const Content = ({
       externalLinkClick(href)
     }
 
-    const externalizeLinks = () => {
+    const externalizeLinks = async () => {
       const links = articleRef.current.querySelectorAll('a[href]')
-      links.forEach((link, index) => {
+      await links.forEach((link, index) => {
         link.setAttribute('target', '_blank')
         link.setAttribute('rel', 'noopener')
         link.setAttribute('id', `reader.external-link.num-${index}`)
@@ -43,11 +42,10 @@ export const Content = ({
       })
     }
 
-    const processAnnotations = (annotations) => {
+    const processAnnotations = async (annotations) => {
       removeAllHighlights()
-      annotations.forEach((highlight) => {
-        highlightAnnotation(highlight, highlightHover, articleRef.current)
-      })
+
+      highlightAnnotations({ annotations, node: articleRef.current })
     }
 
     if (content) externalizeLinks()

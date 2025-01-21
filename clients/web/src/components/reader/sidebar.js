@@ -3,7 +3,7 @@ import { Rail } from 'components/rail/rail'
 import { ChevronLeftIcon } from '@ui/icons/ChevronLeftIcon'
 import { ChevronRightIcon } from '@ui/icons/ChevronRightIcon'
 import { QuoteList } from 'components/annotations/annotations.list'
-// import { TicList } from 'components/annotations/annotations.tics'
+import { TicList } from 'components/annotations/annotations.tics'
 import { useTranslation } from 'next-i18next'
 import { breakpointSmallTablet } from 'common/constants'
 
@@ -53,6 +53,10 @@ const buttonRail = css`
   height: 100%;
   transition: opacity 150ms ease-in-out;
   opacity: 0;
+  pointer-events: none;
+  button {
+    pointer-events: all;
+  }
 `
 
 const verticallyCentered = css`
@@ -109,7 +113,7 @@ export const Sidebar = ({
           </div>
         </div>
       </Rail>
-      {/* <TicList
+      <TicList
         isPremium={isPremium}
         visible={!sideBarOpen}
         shareItem={shareItem}
@@ -117,7 +121,7 @@ export const Sidebar = ({
         annotationCount={highlights.length}
         deleteAnnotation={deleteAnnotation}
         onClickEvent={handleAnnotationClick}
-      /> */}
+      />
     </aside>
   )
 }

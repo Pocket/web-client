@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { SelectionPopover } from 'components/popover/popover-selection'
 import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
@@ -11,12 +11,12 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { shareAction } from 'connectors/items/mutation-share.state'
 import { requestAnnotationPatch } from 'components/annotations/utilities'
 
-export const Highlights = ({ id, highlight }) => {
+export const Highlights = ({ id, articleRef }) => {
   const dispatch = useDispatch()
 
   const [annotationLimitModal, setAnnotationLimitModal] = useState(false)
-
-  const [highlightHovered, setHighlightHovered] = useState(null)
+  const [highlight, setHighlight] = useState(null)
+  // const [highlightHovered, setHighlightHovered] = useState(null)
 
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const item = useSelector((state) => state.itemsDisplay[id])
@@ -27,19 +27,25 @@ export const Highlights = ({ id, highlight }) => {
   const { annotations } = savedData
   const highlights = annotations?.highlights || []
 
-  const toggleHighlightHover = (e) => {
-    if (e.type === 'mouseout') return setHighlightHovered(null)
+  // const toggleHighlightHover = (e) => {
+  //   if (e.type === 'mouseout') return setHighlightHovered(null)
 
-    setHighlightHovered({
-      id: e.target.getAttribute('annotation_id'),
-      event: e
-    })
-  }
+  //   setHighlightHovered({
+  //     id: e.target.getAttribute('annotation_id'),
+  //     event: e
+  //   })
+  // }
 
   const clearSelection = () => {
     window.getSelection().removeAllRanges()
     toggleHighlight()
   }
+
+  const toggleHighlight = useCallback(() => {
+    const selection = window.getSelection()
+    if (selection.toString()) return setHighlight(selection)
+    if (highlight) return setHighlight(null)
+  }, [highlight])
 
   const addAnnotation = () => {
     if (!highlight.toString()) return
@@ -71,6 +77,12 @@ export const Highlights = ({ id, highlight }) => {
     dispatch(sendSnowplowEvent(identifier))
   }
 
+  useEffect(() => {
+    if (!articleRef.current) return
+
+    articleRef.current.addEventListener('mouseup', toggleHighlight)
+  }, [articleRef, toggleHighlight])
+
   return (
     <>
       {highlight ? (
@@ -84,7 +96,7 @@ export const Highlights = ({ id, highlight }) => {
       {highlightList ? (
         <HighlightInlineMenu
           highlightList={highlightList}
-          highlightHovered={highlightHovered}
+          highlightHovered={() => {}}
           annotationCount={highlights.length}
           shareItem={itemShare}
           isPremium={isPremium}

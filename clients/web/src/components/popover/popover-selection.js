@@ -10,6 +10,7 @@ const popupContainer = css`
   position: absolute;
   left: 0;
   top: 0;
+  z-index: 10000;
 `
 
 const popupWrapper = css`
@@ -20,6 +21,7 @@ const popupWrapper = css`
   font-family: 'Graphik Web';
   font-size: 16px;
   font-weight: 500;
+  z-index: 10000;
   &:before {
     content: '';
     position: absolute;

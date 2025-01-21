@@ -1,270 +1,374 @@
 import DiffMatchPatch from 'diff-match-patch'
 
-/**
- * Escape regex chars first
- * http://stackoverflow.com/questions/280793/case-insensitive-string-replacement-in-javascript
- * @param  {string} text [description]
- * @return {RegExp}      [description]
- */
-function highlightRegex(text) {
-  return new RegExp(text.replace(/[.*+?|()[\]{}\\$^]/g, '\\$&').replace(/\s+/g, '\\s+'), 'ig')
-}
+// Flag to determine whether to use the diff-match-patch library
+const usePatch = true
 
 export function highlightAnnotation(annotation, onHover, element, callback) {
   highlight(element, 'highlight', annotation, onHover, callback)
 }
 
-/**
- * Author: Raymond Hill
- * Version: 2011-01-17
- * Title: HTML text hilighter
- * Permalink: http://www.raymondhill.net/blog/?p=272
- * Purpose: Hilight portions of text inside a specified element, according to a search expression.
- * Key feature: Can safely hilight text across HTML tags.
- * History:
- *   2012-01-29
- *     fixed a bug which caused special regex characters in the
- *     search string to break the highlighter
- *   2018-02-21
- *     use diff-match-patch library to find text to highlight
- *
- * @param  {Mixed}    node         A reference to the DOM node, or a string
- *                                 representing the id of a DOM node which
- *                                 contains the text to highlight.
- * @param  {string}   className    The class name to assign to the portions
- *                                 of text to highlight.
- * @param  {object}   annotation   An Annotation object, which will
- *                                 be used in searching for portions of text
- *                                 to highlight.
- * @param  {function} tapListener  Function to be called if highlighted
- *                                 section was tapped
- */
-const usePatch = true
-function highlight(node, className, annotation, tapListener, callback) {
+// Main highlight function accepting an array of annotations
+export function highlightAnnotations({ node, annotations }) {
+  const tapListener = () => {}
+  const callback = () => {}
+
+  const className = 'highlight'
   const doc = document
 
-  if (!node) {
-    return
-  }
+  if (!node) return
 
-  // normalize node argument
-  if (typeof node === 'string') {
-    node = doc.getElementById(node)
-  }
+  // Normalize node argument without mutation
+  const normalizedNode = normalizeNode(node, doc)
+  if (!normalizedNode) return
 
-  // initialize root loop
+  // Collect text and index-node pairs without mutation
+  const { text, indices } = collectTextAndIndices(normalizedNode)
+  if (!indices.length) return
+
+  // Combine text array into a single string
+  const combinedText = text.join('')
+
+  // Add sentinel to indices immutably
+  const updatedIndices = [...indices, { i: combinedText.length }]
+
+  // Collect all matches from all annotations
+  const allMatches = annotations
+    .map((annotation) => {
+      const match = findMatchingText(combinedText, annotation)
+      if (match) {
+        const { start, end } = calculateMatchIndices(match, combinedText)
+        return { start, end, annotation }
+      }
+      return null
+    })
+    .filter((match) => match !== null)
+
+  if (allMatches.length === 0) return
+
+  // Sort all matches by their start index
+  const sortedMatches = allMatches.sort((a, b) => a.start - b.start)
+
+  // Merge overlapping matches or handle conflicts as per requirements
+  const mergedMatches = mergeOverlappingMatches(sortedMatches)
+
+  // Apply all highlights to the DOM
+  applyHighlights({
+    indices: updatedIndices,
+    matches: mergedMatches.reverse(),
+    className,
+    tapListener,
+    doc,
+    callback
+  })
+}
+
+// Helper Functions
+
+/**
+ * Normalizes the node argument. If it's a string, treats it as an ID and retrieves the DOM node.
+ * Returns a new reference without mutating the original input.
+ * @param {Mixed} node - The DOM node or string ID.
+ * @param {Document} doc - The document object.
+ * @returns {Node|null} - The normalized DOM node or null if not found.
+ */
+const normalizeNode = (node, doc) => {
+  return typeof node === 'string' ? doc.getElementById(node) : node
+}
+
+/**
+ * Traverses the DOM tree to collect all text nodes and their corresponding indices.
+ * Returns new arrays without mutating any existing data structures.
+ * @param {Node} node - The root DOM node to traverse.
+ * @returns {Object} - An object containing the concatenated text and indices array.
+ */
+const collectTextAndIndices = (node) => {
   const indices = []
   const stack = []
+  const text = []
+  let textLength = 0
 
-  let text = [], // will be morphed into a string later
-    iNode = 0,
-    nNodes = node.childNodes.length,
-    nodeText,
-    textLength = 0,
-    child,
-    nChildren,
-    state
+  let currentNode = node
+  let iNode = 0
+  let nNodes = currentNode?.childNodes?.length
 
-  // collect text and index-node pairs
-  for (;;) {
+  if (!nNodes) return { indices, text }
+
+  // Cycle until we say stop
+  while (true) {
     while (iNode < nNodes) {
-      child = node.childNodes[iNode++]
-      // text: collect and save index-node pair
-      if (child.nodeType === 3) {
+      const child = currentNode.childNodes[iNode++]
+
+      if (child.nodeType === Node.TEXT_NODE) {
         indices.push({ i: textLength, n: child })
-        nodeText = child.nodeValue
+        const nodeText = child.nodeValue
         text.push(nodeText)
         textLength += nodeText.length
-      }
-      // element: collect text of child elements,
-      // except from script or style tags
-      else if (child.nodeType === 1) {
-        // skip style/script tags
-        if (child.tagName.search(/^(script|style)$/i) >= 0) {
-          continue
-        }
-        // add extra space for tags which fall naturally on word boundaries
+      } else if (child.nodeType === Node.ELEMENT_NODE) {
+        if (/^(script|style)$/i.test(child.tagName)) continue
+
         if (
-          child.tagName.search(
-            /^(a|b|basefont|bdo|big|em|font|i|s|small|span|strike|strong|su[bp]|tt|u)$/i
-          ) < 0
+          !/^(a|b|basefont|bdo|big|em|font|i|s|small|span|strike|strong|su[bp]|tt|u)$/i.test(
+            child.tagName
+          )
         ) {
           text.push(' ')
           textLength++
         }
-        // save parent's loop state
-        nChildren = child.childNodes.length
+
+        const nChildren = child.childNodes.length
         if (nChildren) {
-          stack.push({ n: node, l: nNodes, i: iNode })
-          // initialize child's loop
-          node = child
+          stack.push({ node: currentNode, nNodes, iNode })
+          currentNode = child
           nNodes = nChildren
           iNode = 0
         }
       }
     }
-    // restore parent's loop state
-    if (!stack.length) {
-      break
-    }
-    state = stack.pop()
-    node = state.n
-    nNodes = state.l
-    iNode = state.i
-  }
-  // quit if found nothing
-  if (!indices.length) {
-    return
+
+    if (stack.length === 0) break
+
+    const state = stack.pop()
+    currentNode = state.node
+    nNodes = state.nNodes
+    iNode = state.iNode
   }
 
-  // morph array of text into contiguous text
-  text = text.join('')
+  return { text, indices }
+}
 
-  // sentinel
-  indices.push({ i: text.length })
-
-  // find and hilight all matches
-  let iMatch,
-    matchingText,
-    which,
-    iTextStart,
-    i,
-    iLeft,
-    iRight,
-    iEntry,
-    entry,
-    parentNode,
-    nextNode,
-    newNode,
-    iNodeTextStart,
-    iNodeTextEnd,
-    textStart,
-    textMiddle,
-    textEnd
-
-  // These are problematic unfortunately.  If we want to invest in highlighting, we will need
-  // to revisit using this effectively.  As they are written now, they highlight the wrong things
-  // because we aren't able to guarantee that this will happen in the correct order (ie before we
-  // inject other things that potentially change the patch positions)
+/**
+ * Finds the matching text based on the annotation using diff-match-patch or regex.
+ * Returns an object containing start and end indices if a match is found, else null.
+ * @param {string} text - The combined text from the DOM.
+ * @param {object} annotation - The annotation object containing patch or quote.
+ * @returns {Object|null} - The match result with start and end indices or null.
+ */
+const findMatchingText = (text, annotation) => {
+  let matchingText = null
   if ((annotation.version === 2 || annotation.version === '2') && usePatch) {
-    const pktTagRegex = new RegExp('<pkt_tag_annotation>([\\s\\S]*)</pkt_tag_annotation>')
-    which = 1 // Highlight only the part inside parens (in regex-speak: the first group).
-    // Use diff-match-patch library.
+    const pktTagRegex = /<pkt_tag_annotation>([\s\S]*)<\/pkt_tag_annotation>/
     const dmp = new DiffMatchPatch()
-    const patchResult = dmp.patch_apply(dmp.patch_fromText(annotation.patch), text)
-    if (patchResult[1][0]) {
-      matchingText = pktTagRegex.exec(patchResult[0])
+    const patch = dmp.patch_fromText(annotation.patch)
+    const [patchedText, results] = dmp.patch_apply(patch, text)
+    if (results[0]) {
+      const execResult = pktTagRegex.exec(patchedText)
+      if (execResult && execResult[1] === annotation.quote) matchingText = execResult
     } else {
-      // deeper search
-      dmp.Match_Distance = 3000
-      dmp.Match_Threshold = 0.5
-      const secondPatchResult = dmp.patch_apply(dmp.patch_fromText(annotation.patch), text)
-      if (secondPatchResult[1][0]) {
-        matchingText = pktTagRegex.exec(secondPatchResult[0])
+      // Deeper search with adjusted parameters
+      const newDmp = new DiffMatchPatch()
+      newDmp.Match_Distance = 1000
+      newDmp.Match_Threshold = 0.2
+      const secondPatch = newDmp.patch_fromText(annotation.patch)
+      const [secondPatchedText, secondResults] = newDmp.patch_apply(secondPatch, text)
+      if (secondResults[0]) {
+        const execResult = pktTagRegex.exec(secondPatchedText)
+        if (execResult) matchingText = execResult
       }
     }
   }
 
   if (!matchingText) {
-    // Fallback on a regex matching the quote text exactly.
-    matchingText = highlightRegex(annotation.quote.trim()).exec(text)
-    which = 0 // Highlight the entire match.
-    if (!matchingText) {
-      return
-    }
+    // Fallback to regex matching the exact quote
+    const regex = highlightRegex(annotation.quote.trim())
+    const execResult = regex.exec(text)
+    if (execResult) matchingText = execResult
   }
 
-  // calculate a span from the absolute indices
-  // for start and end of match
-  iTextStart = matchingText.index
-  for (iMatch = 1; iMatch < which; iMatch++) {
-    iTextStart += matchingText[iMatch].length
+  return matchingText
+}
+
+/**
+ * Calculates the start and end indices of the match within the text.
+ * @param {RegExpExecArray} matchingText - The regex match result.
+ * @param {string} text - The combined text from the DOM.
+ * @returns {Object} - An object containing start and end indices of the match.
+ */
+const calculateMatchIndices = (matchingText) => {
+  if (!matchingText) return { start: 0, end: 0 }
+
+  let iTextStart = matchingText.index
+  const which = matchingText.length > 1 ? 1 : 0 // Adjust based on capturing groups
+  for (let i = 1; i < which; i++) {
+    iTextStart += matchingText[i].length
   }
   const iTextEnd = iTextStart + matchingText[which].length
 
-  // find entry in indices array (using binary search)
-  iLeft = 0
-  iRight = indices.length
+  return { start: iTextStart, end: iTextEnd }
+}
+
+/**
+ * Merges overlapping matches to prevent conflicts.
+ * You can customize the merging strategy as needed.
+ * @param {Array} matches - Array of match objects with start, end, and annotation.
+ * @returns {Array} - Array of merged match objects.
+ */
+const mergeOverlappingMatches = (matches) => {
+  if (matches.length === 0) return []
+
+  // Sort matches by start index
+  const sorted = matches.sort((a, b) => a.start - b.start)
+
+  const merged = [sorted[0]]
+
+  for (let i = 1; i < sorted.length; i++) {
+    const last = merged[merged.length - 1]
+    const current = sorted[i]
+
+    if (current.start <= last.end) {
+      // Overlapping match found
+      // Decide on merging strategy:
+      // Here, we'll merge them and keep the earlier annotation
+      merged[merged.length - 1] = {
+        start: last.start,
+        end: Math.max(last.end, current.end),
+        annotation: last.annotation // Prioritize the first annotation
+      }
+    } else {
+      merged.push(current)
+    }
+  }
+
+  return merged
+}
+
+/**
+ * Performs a binary search on the indices array to find the entry containing the start index.
+ * Returns the index of the matching entry.
+ * @param {Array} indices - The array of index-node pairs.
+ * @param {number} iTextStart - The start index of the match.
+ * @returns {number} - The index of the matching entry.
+ */
+const binarySearchIndices = (indices, iTextStart) => {
+  let iLeft = 0
+  let iRight = indices.length
+
   while (iLeft < iRight) {
-    i = (iLeft + iRight) >> 1
+    const i = Math.floor((iLeft + iRight) / 2)
     if (iTextStart < indices[i].i) {
       iRight = i
-    } else if (iTextStart >= indices[i + 1].i) {
+    } else if (iTextStart >= indices[i + 1]?.i) {
       iLeft = i + 1
     } else {
-      iLeft = iRight = i
+      return i
     }
   }
-  iEntry = iLeft
 
-  // for every entry which intersect with the span of the
-  // match, extract the intersecting text, and put it into
-  // a span tag with specified class
+  return iLeft
+}
 
-  while (iEntry < indices.length) {
-    entry = indices[iEntry]
-    node = entry.n
-    nodeText = node.nodeValue
-    parentNode = node.parentNode
-    nextNode = node.nextSibling
-    iNodeTextStart = iTextStart - entry.i
-    iNodeTextEnd = Math.min(iTextEnd, indices[iEntry + 1].i) - entry.i
+/**
+ * Applies all highlights to the DOM based on the matched indices.
+ * Processes matches in order to prevent overlapping highlights.
+ * @param {Object} params - Parameters required for applying highlights.
+ */
+const applyHighlights = ({ indices, matches, className, tapListener, doc, callback }) => {
+  // To handle multiple highlights without interfering with each other,
+  // it's best to apply them from the end to the start of the text.
+  // This prevents earlier modifications from affecting the indices of later matches.
 
-    // slice of text before hilighted slice
-    textStart = null
-    if (iNodeTextStart > 0) {
-      textStart = nodeText.substring(0, iNodeTextStart)
-    }
+  // Create a DocumentFragment to batch insertions
+  const insertionFragment = doc.createDocumentFragment()
 
-    // hilighted slice
-    textMiddle = nodeText.substring(iNodeTextStart, iNodeTextEnd)
+  // Iterate through matches in reverse order
+  for (let m = matches.length - 1; m >= 0; m--) {
+    const match = matches[m]
+    const { start, end, annotation } = match
 
-    // slice of text after hilighted slice
-    textEnd = null
-    if (iNodeTextEnd < nodeText.length) {
-      textEnd = nodeText.substr(iNodeTextEnd)
-    }
+    // Find the starting and ending indices in the indices array
+    const startEntry = binarySearchIndices(indices, start)
+    const endEntry = binarySearchIndices(indices, end)
 
-    // update DOM according to found slices of text
-    if (textStart) {
-      node.nodeValue = textStart
-    } else {
-      parentNode.removeChild(node)
-    }
-    const id = annotation.annotation_id || annotation.id
-    newNode = doc.createElement('span')
-    newNode.setAttribute('annotation_id', id)
-    newNode.setAttribute('data-annotation-id', id)
+    // Iterate through the relevant entries
+    for (let i = startEntry; i <= endEntry; i++) {
+      const entry = indices[i]
+      const node = entry.n
+      const nodeText = node.nodeValue
+      const parentNode = node.parentNode
+      const iNodeTextStart = start - entry.i
+      const iNodeTextEnd = end - entry.i
 
-    newNode.appendChild(doc.createTextNode(textMiddle))
-    newNode.className = className
-    parentNode.insertBefore(newNode, nextNode)
+      const textStart = iNodeTextStart > 0 ? nodeText.substring(0, iNodeTextStart) : null
+      const textMiddle = nodeText.substring(iNodeTextStart, iNodeTextEnd)
+      const textEnd = iNodeTextEnd < nodeText.length ? nodeText.substring(iNodeTextEnd) : null
 
-    if (typeof tapListener !== 'undefined') {
-      try {
-        newNode.addEventListener('mouseover', tapListener, false)
-        newNode.addEventListener('mouseout', tapListener, false)
-        newNode.addEventListener('touchstart', tapListener, false)
-        // newNode.addEventListener('touchend', tapListener, false)
-      } catch (e) {
-        console.warn(e)
+      // Create new nodes without mutating existing nodes
+      const newNodes = []
+
+      if (textStart) {
+        newNodes.push(doc.createTextNode(textStart))
       }
-    }
-    // return;
-    if (textEnd) {
-      newNode = doc.createTextNode(textEnd)
-      parentNode.insertBefore(newNode, nextNode)
-      indices[iEntry] = { n: newNode, i: iTextEnd } // important: make a copy, do not overwrite
-    }
 
-    // if the match doesn't intersect with the following
-    // index-node pair, this means this match is completed
-    iEntry++
-    if (iTextEnd <= indices[iEntry].i) {
-      if (callback) callback()
-      return
+      const id = annotation.annotation_id || annotation.id
+      const newSpan = createHighlightSpan(doc, textMiddle, className, id, tapListener)
+      newNodes.push(newSpan)
+
+      if (textEnd) newNodes.push(doc.createTextNode(textEnd))
+
+      newNodes.forEach((newNode) => insertionFragment.appendChild(newNode))
+
+      // Replace the original node with the new nodes
+      parentNode.replaceChild(insertionFragment, node)
     }
   }
+
+  if (callback) callback()
+}
+
+/**
+ * Creates a span element for the highlighted text without mutating any inputs.
+ * @param {Document} doc - The document object.
+ * @param {string} text - The text to highlight.
+ * @param {string} className - The CSS class for highlighting.
+ * @param {string|number} id - The annotation ID.
+ * @param {function} tapListener - The event listener for interactions.
+ * @returns {HTMLElement} - The created span element.
+ */
+const createHighlightSpan = (doc, text, className, id, tapListener) => {
+  const span = doc.createElement('span')
+  span.setAttribute('annotation_id', id)
+  span.setAttribute('data-annotation-id', id)
+  span.className = className
+  span.textContent = text
+
+  if (tapListener) {
+    attachTapListeners(span, tapListener)
+  }
+
+  return span
+}
+
+/**
+ * Attaches event listeners to the span for user interactions without mutating any external state.
+ * @param {HTMLElement} element - The span element.
+ * @param {function} tapListener - The event listener function.
+ */
+const attachTapListeners = (element, tapListener) => {
+  try {
+    element.addEventListener('mouseover', tapListener, false)
+    element.addEventListener('mouseout', tapListener, false)
+    element.addEventListener('touchstart', tapListener, false)
+  } catch (e) {
+    console.warn(e)
+  }
+}
+
+/**
+ * Creates a regex to highlight exact match, escaping special characters.
+ * @param {string} quote - The exact text to match.
+ * @returns {RegExp} - The constructed regex.
+ */
+const highlightRegex = (quote) => {
+  const escapedQuote = escapeRegExp(quote)
+  return new RegExp(escapedQuote, 'g')
+}
+
+/**
+ * Escapes special regex characters in a string.
+ * @param {string} string - The string to escape.
+ * @returns {string} - The escaped string.
+ */
+const escapeRegExp = (string) => {
+  return string.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&')
 }
 
 /**

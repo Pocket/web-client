@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Content } from 'components/reader/content'
 import { Highlights } from './highlights'
@@ -6,6 +6,7 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const ContentWrapper = ({ id }) => {
   const dispatch = useDispatch()
+  const articleRef = useRef(null)
 
   const item = useSelector((state) => state.itemsDisplay[id])
   const { article, images, videos } = item
@@ -18,23 +19,11 @@ export const ContentWrapper = ({ id }) => {
     dispatch(sendSnowplowEvent('reader.external-link', data))
   }
 
-  // const [highlight, setHighlight] = useState(null)
-  useEffect(() => {
-    const toggleHighlight = () => {
-      const selection = window.getSelection()
-      console.log(selection)
-      // if (selection.toString()) return setHighlight(selection)
-      // if (highlight) return setHighlight(null)
-    }
-
-    document.addEventListener('mouseup', toggleHighlight)
-    return () => document.removeEventListener('mouseup', toggleHighlight)
-  }, [])
-
   return (
     <>
-      <Highlights id={id} />
+      <Highlights id={id} articleRef={articleRef} />
       <Content
+        articleRef={articleRef}
         annotations={highlights}
         images={images}
         videos={videos}
