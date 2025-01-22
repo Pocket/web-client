@@ -6,7 +6,7 @@ import { mutationHighlightDelete } from 'connectors/items/mutation-highlight.sta
 import { shareAction } from 'connectors/items/mutation-share.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
-export const SidebarWrapper = ({ id, articleRef }) => {
+export const SidebarWrapper = ({ id, articleRef, annotationsProcessed }) => {
   const dispatch = useDispatch()
 
   const item = useSelector((state) => state.itemsDisplay[id])
@@ -41,6 +41,7 @@ export const SidebarWrapper = ({ id, articleRef }) => {
         isPremium={isPremium}
         sideBarOpen={sideBarOpen}
         toggleSidebar={handleSidebarToggle}
+        annotationsProcessed={annotationsProcessed}
         highlights={highlights}
         deleteAnnotation={removeAnnotation}
         shareItem={itemShare}

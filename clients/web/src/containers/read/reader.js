@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { css, cx } from '@emotion/css'
 
@@ -82,6 +82,12 @@ export default function Reader() {
   const { slug } = router.query
 
   const articleRef = useRef(null)
+
+  const [annotationsProcessed, setAnnotationsProcessed] = useState(false)
+  const annotationsCallback = useCallback(() => {
+    if (annotationsProcessed) return
+    setAnnotationsProcessed(true)
+  }, [annotationsProcessed])
 
   // Item Data
   const itemId = useSelector((state) => state.idMap[slug])
@@ -203,10 +209,18 @@ export default function Reader() {
           <Toolbar id={itemId} />
 
           <main className={articleWrapperStyles}>
-            <SidebarWrapper id={itemId} articleRef={articleRef} />
+            <SidebarWrapper
+              id={itemId}
+              articleRef={articleRef}
+              annotationsProcessed={annotationsProcessed}
+            />
             <article className={articleClasses} style={customStyles}>
               <Header id={itemId} />
-              <ContentWrapper id={itemId} articleRef={articleRef} />
+              <ContentWrapper
+                id={itemId}
+                articleRef={articleRef}
+                annotationsCallback={annotationsCallback}
+              />
             </article>
           </main>
 

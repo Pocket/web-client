@@ -73,6 +73,7 @@ export const Sidebar = ({
   highlights,
   articleRef,
   shareItem,
+  annotationsProcessed,
   deleteAnnotation,
   isPremium,
   handleImpression
@@ -120,6 +121,7 @@ export const Sidebar = ({
         visible={!sideBarOpen}
         shareItem={shareItem}
         annotations={highlights}
+        annotationsProcessed={annotationsProcessed}
         annotationCount={highlights.length}
         deleteAnnotation={deleteAnnotation}
         onClickEvent={handleAnnotationClick}

@@ -69,26 +69,12 @@ const flyAwayWrapper = css`
 `
 
 const menuWrapper = css`
-  min-width: 200px;
   list-style-type: none;
   padding-left: 0;
-  transform: translate(-24px, -20px);
   position: absolute;
-  bottom: 0;
-  right: -32px;
+  bottom: 18px;
+  right: 24px;
   z-index: var(--zIndexModal);
-
-  button {
-    box-shadow: none;
-  }
-  button .icon {
-    margin-top: -5px;
-  }
-
-  & > div {
-    right: 0;
-    text-align: right;
-  }
 `
 
 const floatingCardStyles = css`

@@ -3,7 +3,7 @@ import { Content } from 'components/reader/content'
 import { Highlights } from './highlights'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
-export const ContentWrapper = ({ id, articleRef }) => {
+export const ContentWrapper = ({ id, articleRef, annotationsProcessed, annotationsCallback }) => {
   const dispatch = useDispatch()
 
   const item = useSelector((state) => state.itemsDisplay[id])
@@ -19,13 +19,14 @@ export const ContentWrapper = ({ id, articleRef }) => {
 
   return (
     <>
-      <Highlights id={id} articleRef={articleRef} />
+      <Highlights id={id} articleRef={articleRef} annotationsProcessed={annotationsProcessed} />
       <Content
         articleRef={articleRef}
         annotations={highlights}
         images={images}
         videos={videos}
         content={article}
+        annotationsCallback={annotationsCallback}
         externalLinkClick={externalLinkClick}
         style={{ padding: '40px' }}
       />

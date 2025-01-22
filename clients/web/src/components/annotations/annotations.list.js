@@ -57,7 +57,15 @@ export class QuoteList extends Component {
     const { annotations, onClickEvent, shareItem, deleteAnnotation, handleImpression } = this.props
     const cards = []
 
-    annotations
+    const annotationsWithPositon = annotations.map((annotation) => {
+      const id = annotation.id
+      const nodeList = document.querySelectorAll(`[data-annotation-id="${id}"]`)
+      const node = nodeList[0]
+      if (!node) return annotation
+      return { ...annotation, position: node.offsetTop }
+    })
+
+    annotationsWithPositon
       .sort((a, b) => a.position - b.position)
       .forEach((annot) => {
         // const active = annot.coordY > viewPort.top && annot.coordY < viewPort.bottom

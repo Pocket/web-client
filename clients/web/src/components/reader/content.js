@@ -17,6 +17,7 @@ export const Content = ({
   content,
   images,
   videos,
+  annotationsCallback,
   annotations = [],
   onHighlightHover,
   externalLinkClick = () => {},
@@ -44,8 +45,7 @@ export const Content = ({
 
     const processAnnotations = async (annotations) => {
       removeAllHighlights()
-
-      highlightAnnotations({ annotations, node: articleRef.current })
+      highlightAnnotations({ annotations, node: articleRef.current, annotationsCallback })
     }
 
     if (content) externalizeLinks()
@@ -60,7 +60,16 @@ export const Content = ({
         link.removeEventListener('click', sendExternalLinkClick)
       })
     }
-  }, [annotations, content, externalLinkClick, highlightHover, images, videos])
+  }, [
+    annotations,
+    content,
+    externalLinkClick,
+    highlightHover,
+    annotationsCallback,
+    images,
+    videos,
+    articleRef
+  ])
 
   return (
     <article

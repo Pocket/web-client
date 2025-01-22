@@ -8,7 +8,7 @@ export function highlightAnnotation(annotation, onHover, element, callback) {
 }
 
 // Main highlight function accepting an array of annotations
-export function highlightAnnotations({ node, annotations }) {
+export function highlightAnnotations({ node, annotations, annotationsCallback }) {
   const tapListener = () => {}
   const callback = () => {}
 
@@ -60,6 +60,8 @@ export function highlightAnnotations({ node, annotations }) {
     doc,
     callback
   })
+
+  if (annotationsCallback) annotationsCallback()
 }
 
 // Helper Functions

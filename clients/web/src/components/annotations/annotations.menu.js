@@ -44,7 +44,7 @@ const relativeWrapper = css`
       color: var(--color-textPrimary);
       background-color: var(--color-actionPrimarySubdued);
     }
-    .icon {
+    & > .icon {
       margin-right: 0;
       transform: translateY(0);
     }
