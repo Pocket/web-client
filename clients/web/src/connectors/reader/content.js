@@ -1,12 +1,10 @@
-import { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Content } from 'components/reader/content'
 import { Highlights } from './highlights'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
-export const ContentWrapper = ({ id }) => {
+export const ContentWrapper = ({ id, articleRef }) => {
   const dispatch = useDispatch()
-  const articleRef = useRef(null)
 
   const item = useSelector((state) => state.itemsDisplay[id])
   const { article, images, videos } = item

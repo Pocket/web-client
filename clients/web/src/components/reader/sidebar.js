@@ -71,6 +71,7 @@ export const Sidebar = ({
   toggleSidebar,
   sideBarOpen,
   highlights,
+  articleRef,
   shareItem,
   deleteAnnotation,
   isPremium,
@@ -114,6 +115,7 @@ export const Sidebar = ({
         </div>
       </Rail>
       <TicList
+        articleRef={articleRef}
         isPremium={isPremium}
         visible={!sideBarOpen}
         shareItem={shareItem}

@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { css, cx } from '@emotion/css'
 
@@ -80,6 +80,8 @@ export default function Reader() {
   const dispatch = useDispatch()
   const router = useRouter()
   const { slug } = router.query
+
+  const articleRef = useRef(null)
 
   // Item Data
   const itemId = useSelector((state) => state.idMap[slug])
@@ -201,10 +203,10 @@ export default function Reader() {
           <Toolbar id={itemId} />
 
           <main className={articleWrapperStyles}>
-            <SidebarWrapper id={itemId} />
+            <SidebarWrapper id={itemId} articleRef={articleRef} />
             <article className={articleClasses} style={customStyles}>
               <Header id={itemId} />
-              <ContentWrapper id={itemId} />
+              <ContentWrapper id={itemId} articleRef={articleRef} />
             </article>
           </main>
 

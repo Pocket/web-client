@@ -52,7 +52,9 @@ const anchorWrapper = css`
 const flyAwayWrapper = css`
   padding: 0 20px;
   position: absolute;
-  transition: transform 150ms ease-in-out, opacity 125ms ease-in-out 0ms;
+  transition:
+    transform 150ms ease-in-out,
+    opacity 125ms ease-in-out 0ms;
   transform: translate(250px, -40px);
   pointer-events: none;
   opacity: 0;
@@ -60,7 +62,9 @@ const flyAwayWrapper = css`
     transform: translate(350px, -40px);
     opacity: 1;
     pointer-events: auto;
-    transition: transform 150ms ease-in-out, opacity 100ms ease-in-out 50ms;
+    transition:
+      transform 150ms ease-in-out,
+      opacity 100ms ease-in-out 50ms;
   }
 `
 
@@ -155,7 +159,7 @@ const HighlightIndex = ({
 
   const onItemClick = (e) => {
     e.stopPropagation()
-    onClickEvent(annotation.position)
+    onClickEvent(annotation.annotationId)
   }
 
   const onScreen = false
@@ -186,13 +190,15 @@ const HighlightIndex = ({
 }
 
 export const TicList = ({
-  onClickEvent,
+  articleRef,
   annotations,
-  annotationCount,
+  onClickEvent,
   shareItem,
   deleteAnnotation,
   visible
 }) => {
+  if (!articleRef.current || !annotations?.length) return null
+
   const renderTics = () => {
     const body = document.body
     const html = document.documentElement
@@ -210,18 +216,25 @@ export const TicList = ({
 
     const tics = []
 
-    annotations.forEach((annot, index) => {
-      const percent = annot.position / docHeight
+    annotations.forEach((annotation, index) => {
+      const id = annotation.id
+      const nodeList = document.querySelectorAll(`[data-annotation-id="${id}"]`)
+      const node = nodeList[0]
+      if (!node) return
+
+      const percent = node.offsetTop / docHeight
       const top = Math.round(percent * screenHeight) + 85 // top padding
+
+      const handleClick = () => onClickEvent(id)
 
       tics.push(
         <HighlightIndex
           key={index}
           // yCoord={key}
-          annotationId={annot.id}
+          annotationId={id}
           top={top}
-          annotation={annot}
-          onClickEvent={onClickEvent}
+          annotation={annotation}
+          onClickEvent={handleClick}
           shareItem={shareItem}
           deleteAnnotation={deleteAnnotation}
           // disabled={!visible || firstTime}
@@ -232,7 +245,7 @@ export const TicList = ({
     return tics
   }
 
-  return annotations && annotationCount > 0 ? (
+  return annotations && annotations.length > 0 ? (
     <div className={cx(ticTray, visible && 'visible')}>{renderTics()}</div>
   ) : null
 }
