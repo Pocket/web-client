@@ -5,7 +5,7 @@
   "author": "",
   "devDependencies": {
     "@config/typescript-config": "workspace:*",
-    "typescript": "5.7.2"
+    "typescript": "5.7.3"
   },
   "keywords": [],
   "license": "ISC",
