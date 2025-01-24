@@ -1,20 +1,28 @@
 // Components
-import { SavedNotes as Component } from '.'
+import { Notes as Component } from '.'
+import type { SetStateAction } from 'react'
 
 // Types
 import type { Meta, StoryObj } from '@storybook/react'
 
 // Storybook Meta
 const meta: Meta<typeof Component> = {
-  title: 'Saved - Notes ',
+  title: 'Notes - Complete',
   component: Component
 }
 export default meta
 
 // Stories
-export const SavedNotes: StoryObj<typeof Component> = {
+export const NotesComplete: StoryObj<typeof Component> = {
   render: () => {
-    return <Component />
+    return (
+      <Component
+        setShowNotes={function (value: SetStateAction<boolean>): void {
+          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+          throw new Error(`Function not implemented. ${value}`)
+        }}
+      />
+    )
   },
   args: {}
 }

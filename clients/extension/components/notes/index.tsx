@@ -1,20 +1,33 @@
 import style from './style.module.css'
-import type { Note, NoteEdge } from '@common/types/pocket'
+import { useRef } from 'react'
+import { NotesAdd } from '../notes-add'
+import { NotesFooter } from '../notes-footer'
+import { NotesList } from '../notes-list'
 
-export function SavedNotes({ notes }: { notes?: NoteEdge[] }) {
+// Types
+import type { NoteEdge } from '@common/types/pocket'
+import type { Dispatch, SetStateAction } from 'react'
+
+export function Notes({
+  notes,
+  setShowNotes
+}: {
+  notes?: NoteEdge[]
+  setShowNotes: Dispatch<SetStateAction<boolean>>
+}) {
+  const textRef = useRef<HTMLTextAreaElement | null>(null)
+  const handleAddNote = () => {
+    if (!textRef.current) return
+    console.log(textRef.current.value)
+  }
   return (
-    <div className={style.notes}>
-      <label htmlFor="note">Add note</label>
-      <textarea name="note" id="note"></textarea>
-      {Array.isArray(notes) && notes.length
-        ? notes.map((note) => <Note key={note?.cursor} note={note} />)
-        : null}
+    <div>
+      <div className={style.container}>
+        <NotesList notes={notes} />
+        <hr />
+        <NotesAdd textRef={textRef} />
+      </div>
+      <NotesFooter setShowNotes={setShowNotes} handleAddNote={handleAddNote} />
     </div>
   )
-}
-
-function Note({ note }: { note?: NoteEdge }) {
-  const node = note?.node
-  const contentPreview = node?.contentPreview as string
-  return contentPreview ? <div>{contentPreview}</div> : null
 }

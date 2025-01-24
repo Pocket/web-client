@@ -17,6 +17,13 @@ export const SavedTags: StoryObj<typeof Component> = {
     const tags = args.tags
     return <Component tags={tags} />
   },
+  decorators: [
+    (Story) => (
+      <div style={{ padding: '1rem' }}>
+        <Story />
+      </div>
+    )
+  ],
   args: {
     tags: ['peace', 'love', 'video games']
   }

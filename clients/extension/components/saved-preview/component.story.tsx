@@ -21,6 +21,13 @@ export const SavedPreview: StoryObj<typeof Component> = {
     const preview = args?.preview
     return <Component preview={preview} />
   },
+  decorators: [
+    (Story) => (
+      <div style={{ padding: '1rem' }}>
+        <Story />
+      </div>
+    )
+  ],
   argTypes: {
     preview: {
       options: ['SavedOne', 'SavedTwo', 'Saving'],

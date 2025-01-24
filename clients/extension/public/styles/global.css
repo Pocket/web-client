@@ -22,6 +22,7 @@
   --color-canvas: #ffffff;
   --color-loader: #42414d;
   --color-text-primary: #15141a;
+  --color-text-secondary: #333;
   --color-divider: var(--color-grey85);
   --color-button-active: #42414d;
   --color-button-active-text: #ffffff;
@@ -37,6 +38,7 @@
     --color-canvas: #42414d;
     --color-loader: #15141a;
     --color-text-primary: #fbfbfe;
+    --color-text-secondary: var(--color-grey85);
     --color-divider: #2b2a33;
     --color-button-active: #15141a;
     --color-button-active-text: #fbfbfe;
@@ -54,6 +56,7 @@
       --color-canvas: #ffffff;
       --color-loader: #42414d;
       --color-text-primary: #15141a;
+      --color-text-secondary: #333;
       --color-divider: var(--color-grey85);
       --color-button-active: #42414d;
       --color-button-active-text: #ffffff;

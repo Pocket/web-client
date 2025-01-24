@@ -3,23 +3,20 @@ import style from './style.module.css'
 import { DeleteIcon } from '../icons/DeleteIcon'
 import { NotesIcon } from '../icons/NotesIcon'
 
-export function ExtensionFooter({ errorMessage }: { errorMessage?: string }) {
+// Types
+import type { Dispatch, SetStateAction } from 'react'
+
+export function SavedFooter({ setShowNotes }: { setShowNotes: Dispatch<SetStateAction<boolean>> }) {
+  const handleNoteClick = () => setShowNotes(true)
   return (
     <footer className={style.footer}>
-      <button>
+      <button onClick={handleNoteClick}>
         <NotesIcon /> Notes
       </button>
       <button>
         <DeleteIcon />
         UnSave
       </button>
-
-      {errorMessage ? (
-        <div className={style.error}>
-          <hr />
-          {errorMessage}
-        </div>
-      ) : null}
     </footer>
   )
 }

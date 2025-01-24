@@ -1,8 +1,11 @@
+import { useState } from 'react'
+import { ExtensionError } from '../action-error'
 import { ExtensionHeader } from '../action-header'
+import { Notes } from '../notes'
 import { SavedScreen } from '../saved'
+import { SavedLoader } from '../saved-loader'
 
 // Types
-import { ExtensionFooter } from '../action-footer'
 import type { ExtPreview } from '../../types'
 import type { NoteEdge } from '@common/types/pocket'
 
@@ -10,7 +13,6 @@ export function ActionContainer({
   isOpen = false,
   errorMessage,
   preview,
-  saveStatus,
   notes,
   tags
 }: {
@@ -22,15 +24,28 @@ export function ActionContainer({
   tags?: string[]
   actionUnSave: () => void
 }) {
+  const [showNotes, setShowNotes] = useState<boolean>(false)
+
   return isOpen ? (
     <div className="extension">
-      <ExtensionHeader saveStatus={saveStatus} />
+      <ExtensionHeader />
       {preview ? (
         <>
-          <SavedScreen preview={preview} notes={notes} tags={tags} />
-          <ExtensionFooter errorMessage={errorMessage} />
+          {showNotes ? (
+            <Notes notes={notes} setShowNotes={setShowNotes} />
+          ) : (
+            <SavedScreen
+              preview={preview}
+              tags={tags}
+              errorMessage={errorMessage}
+              setShowNotes={setShowNotes}
+            />
+          )}
         </>
-      ) : null}
+      ) : (
+        <SavedLoader />
+      )}
+      {errorMessage ? <ExtensionError errorMessage={errorMessage} /> : null}
     </div>
   ) : null
 }
