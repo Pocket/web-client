@@ -643,72 +643,6 @@ export type CreateHighlightInput = {
   version: Scalars['Int']['input'];
 };
 
-/**
- * Input to create a new Note seeded with copied content from a page.
- * The entire content becomes editable and is not able to be "reattached"
- * like a traditional highlight.
- */
-export type CreateNoteFromQuoteInput = {
-  /**
-   * When this note was created. If not provided, defaults to server time upon
-   * receiving request.
-   */
-  createdAt?: InputMaybe<Scalars['ISOString']['input']>;
-  /**
-   * Client-provided UUID for the new Note.
-   * If not provided, will be generated on the server.
-   */
-  id?: InputMaybe<Scalars['ID']['input']>;
-  /**
-   * JSON representation of a ProseMirror document, which
-   * contains the formatted snipped text. This is used to seed
-   * the initial Note document state, and will become editable.
-   */
-  quote: Scalars['ProseMirrorJson']['input'];
-  /**
-   * The Web Resource where the quote is taken from.
-   * This should always be sent by the client where possible,
-   * but in some cases (e.g. copying from mobile apps) there may
-   * not be an accessible source url.
-   */
-  source?: InputMaybe<Scalars['ValidUrl']['input']>;
-  /** Optional title for this Note */
-  title?: InputMaybe<Scalars['String']['input']>;
-};
-
-/**
- * Input to create a new Note seeded with copied content from a page.
- * The entire content becomes editable and is not able to be "reattached"
- * like a traditional highlight.
- */
-export type CreateNoteFromQuoteMarkdownInput = {
-  /**
-   * When this note was created. If not provided, defaults to server time upon
-   * receiving request.
-   */
-  createdAt?: InputMaybe<Scalars['ISOString']['input']>;
-  /**
-   * Client-provided UUID for the new Note.
-   * If not provided, will be generated on the server.
-   */
-  id?: InputMaybe<Scalars['ID']['input']>;
-  /**
-   * Commonmark Markdown document, which contains the formatted
-   * snipped text. This is used to seed the initial Note
-   * document state, and will become editable.
-   */
-  quote: Scalars['Markdown']['input'];
-  /**
-   * The Web Resource where the quote is taken from.
-   * This should always be sent by the client where possible,
-   * but in some cases (e.g. copying from mobile apps) there may
-   * not be an accessible source url.
-   */
-  source?: InputMaybe<Scalars['ValidUrl']['input']>;
-  /** Optional title for this Note */
-  title?: InputMaybe<Scalars['String']['input']>;
-};
-
 /** Input to create a new Note */
 export type CreateNoteInput = {
   /**
@@ -869,8 +803,11 @@ export type EditNoteContentMarkdownInput = {
 export type EditNoteTitleInput = {
   /** The ID of the note to edit */
   id: Scalars['ID']['input'];
-  /** The new title for the note (can be an empty string) */
-  title: Scalars['String']['input'];
+  /**
+   * The new title for the note. If null, sets the title
+   * field to null (deletes it).
+   */
+  title?: InputMaybe<Scalars['String']['input']>;
   /**
    * When the update was made. If not provided, defaults to the server
    * time upon receiving request.
@@ -1384,16 +1321,6 @@ export type Mutation = {
   createHighlightByUrl: Highlight;
   /** Create a new note, optionally with title and content */
   createNote: Note;
-  /**
-   * Create a new note, with a pre-populated block that contains the quoted and cited text
-   * selected by a user.
-   */
-  createNoteFromQuote: Note;
-  /**
-   * Create a new note, with a pre-populated block that contains the quoted and cited text
-   * selected by a user.
-   */
-  createNoteFromQuoteMarkdown: Note;
   /** Create a new note, optionally with title and markdown content */
   createNoteMarkdown: Note;
   /** Create new highlight note. Returns the data for the created Highlight note. */
@@ -1732,18 +1659,6 @@ export type MutationCreateHighlightByUrlArgs = {
 /** Default Mutation Type */
 export type MutationCreateNoteArgs = {
   input: CreateNoteInput;
-};
-
-
-/** Default Mutation Type */
-export type MutationCreateNoteFromQuoteArgs = {
-  input: CreateNoteFromQuoteInput;
-};
-
-
-/** Default Mutation Type */
-export type MutationCreateNoteFromQuoteMarkdownArgs = {
-  input: CreateNoteFromQuoteMarkdownInput;
 };
 
 

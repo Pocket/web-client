@@ -684,80 +684,6 @@ input CreateHighlightInput {
   note: String
 }
 
-"""
-Input to create a new Note seeded with copied content from a page.
-The entire content becomes editable and is not able to be "reattached"
-like a traditional highlight.
-"""
-input CreateNoteFromQuoteInput {
-  """Optional title for this Note"""
-  title: String
-
-  """
-  Client-provided UUID for the new Note.
-  If not provided, will be generated on the server.
-  """
-  id: ID
-
-  """
-  The Web Resource where the quote is taken from.
-  This should always be sent by the client where possible,
-  but in some cases (e.g. copying from mobile apps) there may
-  not be an accessible source url.
-  """
-  source: ValidUrl
-
-  """
-  JSON representation of a ProseMirror document, which
-  contains the formatted snipped text. This is used to seed
-  the initial Note document state, and will become editable.
-  """
-  quote: ProseMirrorJson!
-
-  """
-  When this note was created. If not provided, defaults to server time upon
-  receiving request.
-  """
-  createdAt: ISOString
-}
-
-"""
-Input to create a new Note seeded with copied content from a page.
-The entire content becomes editable and is not able to be "reattached"
-like a traditional highlight.
-"""
-input CreateNoteFromQuoteMarkdownInput {
-  """Optional title for this Note"""
-  title: String
-
-  """
-  Client-provided UUID for the new Note.
-  If not provided, will be generated on the server.
-  """
-  id: ID
-
-  """
-  The Web Resource where the quote is taken from.
-  This should always be sent by the client where possible,
-  but in some cases (e.g. copying from mobile apps) there may
-  not be an accessible source url.
-  """
-  source: ValidUrl
-
-  """
-  Commonmark Markdown document, which contains the formatted 
-  snipped text. This is used to seed the initial Note 
-  document state, and will become editable.
-  """
-  quote: Markdown!
-
-  """
-  When this note was created. If not provided, defaults to server time upon
-  receiving request.
-  """
-  createdAt: ISOString
-}
-
 """Input to create a new Note"""
 input CreateNoteInput {
   """Optional title for this Note"""
@@ -944,8 +870,11 @@ input EditNoteTitleInput {
   """The ID of the note to edit"""
   id: ID!
 
-  """The new title for the note (can be an empty string)"""
-  title: String!
+  """
+  The new title for the note. If null, sets the title
+  field to null (deletes it).
+  """
+  title: String
 
   """
   When the update was made. If not provided, defaults to the server
@@ -1730,18 +1659,6 @@ type Mutation {
 
   """Create a new note, optionally with title and markdown content"""
   createNoteMarkdown(input: CreateNoteMarkdownInput!): Note!
-
-  """
-  Create a new note, with a pre-populated block that contains the quoted and cited text
-  selected by a user.
-  """
-  createNoteFromQuote(input: CreateNoteFromQuoteInput!): Note!
-
-  """
-  Create a new note, with a pre-populated block that contains the quoted and cited text
-  selected by a user.
-  """
-  createNoteFromQuoteMarkdown(input: CreateNoteFromQuoteMarkdownInput!): Note!
 
   """
   Edit the title of a Note.
