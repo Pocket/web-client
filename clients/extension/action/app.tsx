@@ -8,6 +8,7 @@ import type { ExtItem, ExtMessage } from '../types'
 export function App() {
   const [isOpen, setIsOpen] = useState(false)
   const [saveStatus, setSaveStatus] = useState('saving')
+  const [noteStatus, setNoteStatus] = useState<string | undefined>(undefined)
   const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined)
   const [item, setItem] = useState<ExtItem | undefined>(undefined)
 
@@ -38,6 +39,7 @@ export function App() {
       case EXT_ACTIONS.SAVE_TO_POCKET_SUCCESS: {
         const item = message?.item as ExtItem
         setItem(item)
+        setNoteStatus(undefined)
         setSaveStatus('saved')
         return
       }
@@ -51,6 +53,7 @@ export function App() {
 
       case EXT_ACTIONS.ADD_NOTE_FAILURE: {
         const { error } = message ?? 'Unknown error'
+        setNoteStatus(undefined)
         setErrorMessage(error)
         return
       }
@@ -114,6 +117,8 @@ export function App() {
     <ActionContainer
       errorMessage={errorMessage}
       saveStatus={saveStatus}
+      noteStatus={noteStatus}
+      setNoteStatus={setNoteStatus}
       isOpen={isOpen}
       item={item}
       actionUnSave={actionUnSave}

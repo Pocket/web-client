@@ -12,14 +12,19 @@ import type { Dispatch, SetStateAction } from 'react'
 
 export function Notes({
   notes,
+  noteStatus,
+  setNoteStatus,
   setShowNotes,
   setErrorText
 }: {
   notes?: NoteEdge[]
+  noteStatus?: string | undefined
+  setNoteStatus: Dispatch<SetStateAction<string | undefined>>
   setErrorText: Dispatch<SetStateAction<string | undefined>>
   setShowNotes: Dispatch<SetStateAction<boolean>>
 }) {
   const textRef = useRef<HTMLTextAreaElement | null>(null)
+
   const handleAddNote = () => {
     // Get the value of our textarea
     if (!textRef.current) return
@@ -31,17 +36,22 @@ export function Notes({
       return setErrorText('Text is require to create a note')
     }
 
-    void sendMessage({ action: EXT_ACTIONS.ADD_NOTE_REQUEST, noteData: { docMarkdown } })
     textRef.current.value = ''
+    setNoteStatus('saving note')
+    void sendMessage({ action: EXT_ACTIONS.ADD_NOTE_REQUEST, noteData: { docMarkdown } })
   }
 
   return (
     <div>
       <div className={style.container}>
         <NotesList notes={notes} />
-        <NotesAdd textRef={textRef} setErrorText={setErrorText} />
+        <NotesAdd noteStatus={noteStatus} textRef={textRef} setErrorText={setErrorText} />
       </div>
-      <NotesFooter setShowNotes={setShowNotes} handleAddNote={handleAddNote} />
+      <NotesFooter
+        noteStatus={noteStatus}
+        setShowNotes={setShowNotes}
+        handleAddNote={handleAddNote}
+      />
     </div>
   )
 }

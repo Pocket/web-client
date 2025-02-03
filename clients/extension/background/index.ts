@@ -79,7 +79,7 @@ async function messageHandler(message: ExtMessage, sender: chrome.runtime.Messag
 
     case EXT_ACTIONS.ADD_NOTE_REQUEST: {
       const { noteData } = message
-      if (noteData && tab.url) await saveNote(noteData, tab.url)
+      if (noteData && tab?.url) await saveNote(noteData, tab.url)
       return true
     }
 
