@@ -1,7 +1,7 @@
 import style from './style.module.css'
 
-import { DeleteIcon } from '../icons/DeleteIcon'
-import { NotesIcon } from '../icons/NotesIcon'
+import { DeleteIcon } from '@ui/icons/DeleteIcon'
+import { NotesIcon } from '@ui/icons/NotesIcon'
 
 // Types
 import type { Dispatch, SetStateAction } from 'react'

@@ -1,5 +1,5 @@
 import style from './style.module.css'
-import { OverflowMenuIcon } from '../icons/OverflowMenuIcon'
+import { OverflowMenuIcon } from '@ui/icons/OverflowMenuIcon'
 import { PocketLogo } from '../icons/Pocket'
 // import { SaveFilledIcon } from '../icons/SaveFilledIcon'
 // import { SaveIcon } from '../icons/SaveIcon'

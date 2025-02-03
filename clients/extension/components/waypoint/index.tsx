@@ -1,6 +1,6 @@
 import style from './style.module.css'
-import { IconSave } from '../icons/icon-save'
-import { IconSnippets } from '../icons/icon-snippets'
+import { SaveIcon } from '@ui/icons/SaveIcon'
+import { SnippetsIcon } from '@ui/icons/SnippetsIcon'
 
 export function SaveActions({ actionSave }: { actionSave: () => void }) {
   return (
@@ -8,10 +8,10 @@ export function SaveActions({ actionSave }: { actionSave: () => void }) {
       <h2 className={style.title}>Save To Pocket</h2>
       <div className={style.actions}>
         <button onClick={actionSave}>
-          <IconSave /> Save Url
+          <SaveIcon /> Save Url
         </button>
         <button>
-          <IconSnippets /> Add Clipping
+          <SnippetsIcon /> Add Clipping
         </button>
       </div>
     </main>

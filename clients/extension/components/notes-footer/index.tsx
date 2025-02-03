@@ -1,6 +1,6 @@
 import style from './style.module.css'
-import { AddNoteIcon } from '../icons/AddNoteIcon'
-import { ChevronLeftIcon } from '../icons/ChevronLeftIcon'
+import { AddNoteIcon } from '@ui/icons/AddNoteIcon'
+import { ChevronLeftIcon } from '@ui/icons/ChevronLeftIcon'
 
 // Types
 import type { Dispatch, SetStateAction } from 'react'
