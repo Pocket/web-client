@@ -21,6 +21,7 @@ export function ActionContainer({
   actionUnSave: () => void
 }) {
   const [showNotes, setShowNotes] = useState<boolean>(false)
+  const [errorText, setErrorText] = useState<string | undefined>(errorMessage)
 
   const preview = item?.preview
   const notes = item?.savedItem?.notes
@@ -33,7 +34,7 @@ export function ActionContainer({
       {item?.preview ? (
         <>
           {showNotes ? (
-            <Notes notes={notes?.edges} setShowNotes={setShowNotes} />
+            <Notes notes={notes?.edges} setShowNotes={setShowNotes} setErrorText={setErrorText} />
           ) : (
             <SavedScreen
               preview={preview!}
@@ -46,7 +47,7 @@ export function ActionContainer({
       ) : (
         <SavedLoader />
       )}
-      {errorMessage ? <ExtensionError errorMessage={errorMessage} /> : null}
+      {errorText ? <ExtensionError errorMessage={errorText} /> : null}
     </div>
   ) : null
 }

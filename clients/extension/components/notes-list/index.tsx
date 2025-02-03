@@ -1,5 +1,5 @@
 import style from './style.module.css'
-import { AndroidOverflowMenuIcon } from '@ui/icons/AndroidOverflowMenuIcon'
+import { CrossIcon } from '@ui/icons/CrossIcon'
 import ReactMarkdown from 'react-markdown'
 
 // Types
@@ -31,7 +31,7 @@ function Note({ note }: { note?: NoteEdge }) {
       </div>
       <div className={style.actions}>
         <button>
-          <AndroidOverflowMenuIcon />
+          <CrossIcon />
         </button>
       </div>
     </div>

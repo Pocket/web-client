@@ -16,7 +16,7 @@ export default meta
 export const NotesAdd: StoryObj<typeof Component> = {
   render: () => {
     const textRef = useRef<HTMLTextAreaElement | null>(null)
-    return <Component textRef={textRef} />
+    return <Component setErrorText={() => null} textRef={textRef} />
   },
   args: {}
 }
