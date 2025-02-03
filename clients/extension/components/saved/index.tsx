@@ -4,27 +4,27 @@ import { SavedFooter } from '../saved-footer'
 import { SavedPreview } from '../saved-preview'
 import { SavedTags } from '../saved-tags'
 
-//TYpes
+//Types
 import type { ExtPreview } from '../../types'
+import type { Tag } from '@common/types/pocket'
 import type { Dispatch, SetStateAction } from 'react'
 
 export function SavedScreen({
   preview,
-  errorMessage,
   tags,
+  suggestedTags,
   setShowNotes
 }: {
   preview: ExtPreview
-  tags?: string[]
-  errorMessage?: string
+  tags?: Tag[]
+  suggestedTags?: Tag[]
   setShowNotes: Dispatch<SetStateAction<boolean>>
 }) {
-  console.log(errorMessage)
   return preview ? (
     <div>
       <div className={style.container}>
         <SavedPreview preview={preview} />
-        <SavedTags tags={tags} />
+        <SavedTags tags={tags} suggestedTags={suggestedTags} />
       </div>
       <SavedFooter setShowNotes={setShowNotes} />
     </div>

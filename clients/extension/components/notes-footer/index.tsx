@@ -13,12 +13,13 @@ export function NotesFooter({
   handleAddNote: () => void
 }) {
   const handleBackClick = () => setShowNotes(false)
+  const handleAddClick = () => handleAddNote()
   return (
     <footer className={style.footer}>
       <button onClick={handleBackClick}>
         <ChevronLeftIcon className={style.backIcon} /> Back
       </button>
-      <button onClick={handleAddNote}>
+      <button onClick={handleAddClick}>
         <AddNoteIcon /> Add Note
       </button>
     </footer>

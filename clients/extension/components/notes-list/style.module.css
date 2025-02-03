@@ -1,8 +1,60 @@
 .notes {
-  padding: 1rem;
+  font-size: 0.825rem;
+  max-height: 344px;
+  overflow-y: auto;
+  border-bottom: 1px solid var(--color-divider);
+}
+
+.container {
+  padding: 1rem 0.5rem 1rem 1rem;
+  border-bottom: 1px solid var(--color-divider);
+  display: grid;
+  grid-template-columns: auto 42px;
+  column-gap: 1rem;
+  &:last-child {
+    border-bottom: none;
+  }
+  .actions {
+    visibility: hidden;
+    color: var(--color-text-secondary);
+    button {
+      border: 0;
+    }
+    svg {
+      margin-right: 0;
+    }
+  }
+  &:hover .actions {
+    visibility: visible;
+  }
+}
+.note {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+    padding: 0 0 0.25rem;
+  }
+  p {
+    margin: 0 0 0.25rem;
+  }
+  a {
+    color: var(--color-text-secondary);
+    &:hover {
+      color: var(--color-text-secondary);
+    }
+  }
+  blockquote {
+    margin: 0;
+  }
 }
 
 .noNotes {
+  padding: 1rem;
   font-size: 0.825rem;
   font-style: italic;
   color: var(--color-text-secondary);

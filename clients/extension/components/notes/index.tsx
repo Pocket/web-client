@@ -1,5 +1,7 @@
 import style from './style.module.css'
 import { useRef } from 'react'
+import { EXT_ACTIONS } from '../../actions'
+import { sendMessage } from '../../utilities/send-message'
 import { NotesAdd } from '../notes-add'
 import { NotesFooter } from '../notes-footer'
 import { NotesList } from '../notes-list'
@@ -18,13 +20,17 @@ export function Notes({
   const textRef = useRef<HTMLTextAreaElement | null>(null)
   const handleAddNote = () => {
     if (!textRef.current) return
-    console.log(textRef.current.value)
+    const docMarkdown = textRef.current.value
+    if (docMarkdown) {
+      void sendMessage({ action: EXT_ACTIONS.ADD_NOTE_REQUEST, noteData: { docMarkdown } })
+      textRef.current.value = ''
+    }
   }
+
   return (
     <div>
       <div className={style.container}>
         <NotesList notes={notes} />
-        <hr />
         <NotesAdd textRef={textRef} />
       </div>
       <NotesFooter setShowNotes={setShowNotes} handleAddNote={handleAddNote} />

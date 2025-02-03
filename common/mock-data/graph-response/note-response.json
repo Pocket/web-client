@@ -1,0 +1,116 @@
+{
+  "data": {
+    "createNoteMarkdown": {
+      "archived": false,
+      "contentPreview": "### Important\n\n* Be kind to yourself",
+      "createdAt": "2025-01-30T20:38:20.000Z",
+      "deleted": false,
+      "docMarkdown": "### Important\n\n* Be kind to yourself",
+      "id": "53f27f0e-7f07-49f2-a287-ebcf2c24ba76",
+      "source": "https://aeon.co/essays/we-can-still-get-out-of-the-climate-hellocene-and-into-the-clear",
+      "title": null,
+      "updatedAt": "2025-01-30T20:38:20.304Z",
+      "savedItem": {
+        "savedId": "4162978036",
+        "id": "4162978036",
+        "suggestedTags": [
+          {
+            "id": "cGh5c2ljc19feHBrdHh0YWd4X18=",
+            "name": "physics"
+          },
+          {
+            "id": "c2NpZW5jZV9feHBrdHh0YWd4X18=",
+            "name": "science"
+          },
+          {
+            "id": "eW91dHViZV9feHBrdHh0YWd4X18=",
+            "name": "youtube"
+          }
+        ],
+        "tags": [],
+        "notes": {
+          "edges": [
+            {
+              "cursor": "dXBkYXRlZEF0PTIwMjUtMDEtMzBUMjA6Mzg6MjAuMzA0WiZpZD05MQ",
+              "node": {
+                "archived": false,
+                "createdAt": "2025-01-30T20:38:20.000Z",
+                "deleted": false,
+                "id": "53f27f0e-7f07-49f2-a287-ebcf2c24ba76",
+                "updatedAt": "2025-01-30T20:38:20.304Z",
+                "title": null,
+                "contentPreview": "### Important\n\n* Be kind to yourself"
+              }
+            },
+            {
+              "cursor": "dXBkYXRlZEF0PTIwMjUtMDEtMzBUMTg6MTg6NTkuMTUwWiZpZD05MA",
+              "node": {
+                "archived": false,
+                "createdAt": "2025-01-30T18:18:59.000Z",
+                "deleted": false,
+                "id": "3a33269c-2de5-4a38-80eb-1f239e7f5b38",
+                "updatedAt": "2025-01-30T18:18:59.150Z",
+                "title": null,
+                "contentPreview": "Another note to add"
+              }
+            },
+            {
+              "cursor": "dXBkYXRlZEF0PTIwMjUtMDEtMjhUMTc6NTQ6NTUuODA2WiZpZD04Mw",
+              "node": {
+                "archived": false,
+                "createdAt": "2025-01-28T17:54:56.000Z",
+                "deleted": false,
+                "id": "140397ad-ea87-4aa4-9ae0-9b04e32c482f",
+                "updatedAt": "2025-01-28T17:54:55.806Z",
+                "title": "Musings",
+                "contentPreview": "Also random musings that we might be interested in"
+              }
+            },
+            {
+              "cursor": "dXBkYXRlZEF0PTIwMjUtMDEtMjhUMTc6NTQ6MzQuNTM3WiZpZD04Mg",
+              "node": {
+                "archived": false,
+                "createdAt": "2025-01-28T17:54:35.000Z",
+                "deleted": false,
+                "id": "44a85c28-a548-43b9-9e78-17c31ac9f7d9",
+                "updatedAt": "2025-01-28T17:54:34.537Z",
+                "title": null,
+                "contentPreview": "Basic notes to add"
+              }
+            }
+          ]
+        },
+        "item": {
+          "preview": {
+            "previewId": "d33a1b43-069b-4b14-a5d4-81bbeeae3675",
+            "id": "d33a1b43-069b-4b14-a5d4-81bbeeae3675",
+            "image": {
+              "caption": null,
+              "credit": null,
+              "url": "https://s3.us-east-1.amazonaws.com/pocket-curatedcorpusapi-prod-images/425c99d0-cfa0-41e1-a4db-3b9eb1848845.jpeg",
+              "cachedImages": [
+                {
+                  "url": "https://pocket-image-cache.com/80x80/filters:format(PNG):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F425c99d0-cfa0-41e1-a4db-3b9eb1848845.jpeg",
+                  "id": "ext"
+                }
+              ]
+            },
+            "excerpt": "Despite decades of inaction we can avert the climate Hellocene and restore the atmosphere to keep our world habitable.",
+            "title": "The Planetary Fix",
+            "authors": [
+              {
+                "name": "Rob Jackson"
+              }
+            ],
+            "domain": {
+              "name": "Aeon"
+            },
+            "datePublished": "2018-03-07T06:00:00.000Z",
+            "url": "https://aeon.co/essays/we-can-still-get-out-of-the-climate-hellocene-and-into-the-clear",
+            "source": "CURATED_CORPUS"
+          }
+        }
+      }
+    }
+  }
+}

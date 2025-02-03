@@ -13,7 +13,7 @@
               ]
             },
             "title": "By testing the boundaries of reality, Spanish-language authors have created a sublime counterpart to experimental physics",
-            "excerpt": "In this tech-vexed age, our life on screens prevents us from experiencing the mysteries and transformative wonder of life.",
+            "excerpt": "In September 1961, Richard Feynman gave the first in a series of lectures on basic physics at the California Institute of Technology.",
             "domain": {
               "name": "Aeon"
             },
@@ -26,6 +26,26 @@
                 "name": "Joshua Roebke"
               }
             ]
+          },
+          "savedItem": {
+            "suggestedTags": [
+              {
+                "id": "cGh5c2ljc19feHBrdHh0YWd4X18=",
+                "name": "physics"
+              },
+              {
+                "id": "c2NpZW5jZV9feHBrdHh0YWd4X18=",
+                "name": "science"
+              },
+              {
+                "id": "eW91dHViZV9feHBrdHh0YWd4X18=",
+                "name": "youtube"
+              }
+            ],
+            "tags": [],
+            "notes": {
+              "edges": []
+            }
           }
         }
       }
@@ -39,40 +59,170 @@
             "image": {
               "cachedImages": [
                 {
-                  "url": "https://pocket-image-cache.com/80x80/filters:format(PNG):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F4b7a6900-1be3-42dd-b654-41174041afa7.jpeg",
+                  "url": "https://pocket-image-cache.com/80x80/filters:format(PNG):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fimages.aeonmedia.co%2Fimages%2F5f37bc22-7c66-49bf-9ecb-e0cc34034752%2Fessasy-v2-teieman-rapati-the-aleph-by-borges-5857555491_c5fa3527d2_o.jpg%3Fwidth%3D1200%26quality%3D75%26format%3Dauto",
                   "id": "ext"
                 }
               ]
             },
-            "title": "Threads of Resistance",
-            "excerpt": "Knitting and embroidery are laden with stereotypes of domestic femininity – and the subversive potential for protest.",
+            "title": "By testing the boundaries of reality, Spanish-language authors have created a sublime counterpart to experimental physics",
+            "excerpt": "In September 1961, Richard Feynman gave the first in a series of lectures on basic physics at the California Institute of Technology.",
             "domain": {
               "name": "Aeon"
             },
-            "url": "https://aeon.co/essays/when-womens-needlework-becomes-an-act-of-subversive-protest",
-            "id": "2ffac5db-2daf-454b-9df6-283608a62963",
-            "source": "CURATED_CORPUS",
+            "url": "https://aeon.co/essays/how-the-novel-became-a-laboratory-for-experimental-physics",
+            "id": "e5cA2gvKd4c02I8cU4piPF7ib9Tbde4dt10x75PX49n2b6D4f0V03y30lq7BU578_1b332dfda92ea5025324c0d9c090deca",
+            "source": "POCKET_PARSER",
             "authors": [
               {
-                "id": "0",
-                "name": "Gemma McKenzie"
+                "id": "79585",
+                "name": "Joshua Roebke"
               }
             ]
           },
           "savedItem": {
             "suggestedTags": [
               {
+                "id": "cGh5c2ljc19feHBrdHh0YWd4X18=",
+                "name": "physics"
+              },
+              {
+                "id": "c2NpZW5jZV9feHBrdHh0YWd4X18=",
+                "name": "science"
+              },
+              {
+                "id": "eW91dHViZV9feHBrdHh0YWd4X18=",
                 "name": "youtube"
-              },
-              {
-                "name": "rss"
-              },
-              {
-                "name": "newsletter"
               }
             ],
+            "tags": [],
             "notes": {
-              "edges": []
+              "edges": [
+                {
+                  "cursor": "dXBkYXRlZEF0PTIwMjUtMDEtMjhUMTc6NDc6NDkuODI1WiZpZD04MQ",
+                  "node": {
+                    "archived": false,
+                    "createdAt": "2025-01-28T17:47:50.000Z",
+                    "deleted": false,
+                    "id": "dcbecad1-59e9-4f85-8394-1558e4101eab",
+                    "updatedAt": "2025-01-28T17:47:49.825Z",
+                    "title": "A long note",
+                    "contentPreview": "# Sample Markdown\n\nThis is some basic, sample markdown.\n\n## Second Heading\n\n* Unordered lists, and:\n\n1. One\n2. Two\n3. Three\n\n* More\n\n> Blockquote\n\nAnd **bold**, *italics*, and even *italics and later **bold***. Even \\~\\~strikethrough\\~\\~. [A link](https://markdowntohtml.com) to somewhere."
+                  }
+                },
+                {
+                  "cursor": "dXBkYXRlZEF0PTIwMjUtMDEtMjhUMTc6NDE6NTIuODI4WiZpZD04MA",
+                  "node": {
+                    "archived": false,
+                    "createdAt": "2025-01-28T17:41:53.000Z",
+                    "deleted": false,
+                    "id": "0eb9dfd5-708b-4f19-8c28-cb21a0793562",
+                    "updatedAt": "2025-01-28T17:41:52.828Z",
+                    "title": "A long note",
+                    "contentPreview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lobortis tellus quis lectus auctor maximus. Aenean eleifend elementum nunc, sit amet pulvinar eros lobortis in. Cras tempus libero eu tortor ultrices volutpat. Fusce sed enim et nulla dapibus posuere id non ipsum. Suspendisse posuere mollis diam viverra pulvinar. Nunc suscipit odio nec nunc sollicitudin aliquam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec rutrum bibendum lorem quis imperdiet. Sed tempor finibus lorem, eget bibendum lectus volutpat in. Nunc volutpat massa sed pharetra scelerisque. Integer consectetur nulla ac elementum posuere. Nunc ornare, felis non dapibus cursus, justo urna tincidunt purus, quis facilisis urna nisl sit amet metus."
+                  }
+                },
+                {
+                  "cursor": "dXBkYXRlZEF0PTIwMjUtMDEtMjhUMTc6NDE6MTUuOTEwWiZpZD03OQ",
+                  "node": {
+                    "archived": false,
+                    "createdAt": "2025-01-28T17:41:16.000Z",
+                    "deleted": false,
+                    "id": "cdb907e5-0c68-48ee-b3b8-0ec1aafe1355",
+                    "updatedAt": "2025-01-28T17:41:15.910Z",
+                    "title": "A simple note",
+                    "contentPreview": "A simple text note"
+                  }
+                },
+                {
+                  "cursor": "dXBkYXRlZEF0PTIwMjUtMDEtMjhUMTc6NDA6NDguMzMxWiZpZD03OA",
+                  "node": {
+                    "archived": false,
+                    "createdAt": "2025-01-28T17:40:48.000Z",
+                    "deleted": false,
+                    "id": "a04eda7c-6643-49e0-91e4-8007dac757c5",
+                    "updatedAt": "2025-01-28T17:40:48.331Z",
+                    "title": "Content with list",
+                    "contentPreview": "1. Some content\n\n2.More content"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "data": {
+      "upsertSavedItem": {
+        "item": {
+          "preview": {
+            "image": {
+              "cachedImages": [
+                {
+                  "url": "https://pocket-image-cache.com/80x80/filters:format(PNG):quality(100):no_upscale():strip_exif()/https%3A%2F%2Fs3.us-east-1.amazonaws.com%2Fpocket-curatedcorpusapi-prod-images%2F425c99d0-cfa0-41e1-a4db-3b9eb1848845.jpeg",
+                  "id": "ext"
+                }
+              ]
+            },
+            "title": "The Planetary Fix",
+            "excerpt": "Despite decades of inaction we can avert the climate Hellocene and restore the atmosphere to keep our world habitable.",
+            "domain": {
+              "name": "Aeon"
+            },
+            "url": "https://aeon.co/essays/we-can-still-get-out-of-the-climate-hellocene-and-into-the-clear",
+            "id": "d33a1b43-069b-4b14-a5d4-81bbeeae3675",
+            "source": "CURATED_CORPUS",
+            "authors": [
+              {
+                "id": "0",
+                "name": "Rob Jackson"
+              }
+            ]
+          },
+          "savedItem": {
+            "suggestedTags": [
+              {
+                "id": "cGh5c2ljc19feHBrdHh0YWd4X18=",
+                "name": "physics"
+              },
+              {
+                "id": "c2NpZW5jZV9feHBrdHh0YWd4X18=",
+                "name": "science"
+              },
+              {
+                "id": "eW91dHViZV9feHBrdHh0YWd4X18=",
+                "name": "youtube"
+              }
+            ],
+            "tags": [],
+            "notes": {
+              "edges": [
+                {
+                  "cursor": "dXBkYXRlZEF0PTIwMjUtMDEtMjhUMTc6NTQ6NTUuODA2WiZpZD04Mw",
+                  "node": {
+                    "archived": false,
+                    "createdAt": "2025-01-28T17:54:56.000Z",
+                    "deleted": false,
+                    "id": "140397ad-ea87-4aa4-9ae0-9b04e32c482f",
+                    "updatedAt": "2025-01-28T17:54:55.806Z",
+                    "title": "Musings",
+                    "contentPreview": "Also random musings that we might be interested in"
+                  }
+                },
+                {
+                  "cursor": "dXBkYXRlZEF0PTIwMjUtMDEtMjhUMTc6NTQ6MzQuNTM3WiZpZD04Mg",
+                  "node": {
+                    "archived": false,
+                    "createdAt": "2025-01-28T17:54:35.000Z",
+                    "deleted": false,
+                    "id": "44a85c28-a548-43b9-9e78-17c31ac9f7d9",
+                    "updatedAt": "2025-01-28T17:54:34.537Z",
+                    "title": null,
+                    "contentPreview": "Basic notes to add"
+                  }
+                }
+              ]
             }
           }
         }

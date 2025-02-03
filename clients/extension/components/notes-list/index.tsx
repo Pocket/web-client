@@ -1,4 +1,6 @@
 import style from './style.module.css'
+import { AndroidOverflowMenuIcon } from '@ui/icons/AndroidOverflowMenuIcon'
+import ReactMarkdown from 'react-markdown'
 
 // Types
 import type { Note, NoteEdge } from '@common/types/pocket'
@@ -17,8 +19,23 @@ export function NotesList({ notes }: { notes?: NoteEdge[] }) {
 
 function Note({ note }: { note?: NoteEdge }) {
   const node = note?.node
+  const title = node?.title
   const contentPreview = node?.contentPreview as string
-  return contentPreview ? <div>{contentPreview}</div> : null
+  return contentPreview ? (
+    <div className={style.container}>
+      <div className={style.note}>
+        {title ? <h3>{title}</h3> : null}
+        <ReactMarkdown allowedElements={['div']} unwrapDisallowed={true}>
+          {contentPreview}
+        </ReactMarkdown>
+      </div>
+      <div className={style.actions}>
+        <button>
+          <AndroidOverflowMenuIcon />
+        </button>
+      </div>
+    </div>
+  ) : null
 }
 
 function NoNotes() {

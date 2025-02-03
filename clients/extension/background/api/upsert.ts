@@ -1,6 +1,8 @@
 import { extensionRequest } from '../../utilities/request'
 import { verifySession } from '../auth'
 
+import { FRAGMENT_ITEM_PREVIEW } from './fragments/preview'
+import { FRAGMENT_SAVED_ITEM } from './fragments/saved-item'
 import type { ExtSave, ExtItemResponse, ExtItem } from '../../types'
 
 interface upsertSavedItem {
@@ -9,46 +11,23 @@ interface upsertSavedItem {
 
 const gql = String.raw
 const query = gql`
-  mutation ItemUpsert($input: SavedItemUpsertInput!, $imageOptions: [CachedImageInput!]!) {
+  mutation ItemUpsert($input: SavedItemUpsertInput!) {
     upsertSavedItem(input: $input) {
       item {
         ... on Item {
           preview {
-            image {
-              cachedImages(imageOptions: $imageOptions) {
-                url
-                id
-              }
-            }
-            title
-            excerpt
-            domain {
-              name
-            }
-            url
-            id
-            source
-            authors {
-              id
-              name
-            }
+            ...ItemPreview
           }
           savedItem {
-            suggestedTags {
-              name
-            }
-            notes {
-              edges {
-                node {
-                  contentPreview
-                }
-              }
-            }
+            ...ItemSaved
           }
         }
       }
     }
   }
+
+  ${FRAGMENT_SAVED_ITEM}
+  ${FRAGMENT_ITEM_PREVIEW}
 `
 
 export async function upsertItem(saveData: ExtSave) {
@@ -59,8 +38,7 @@ export async function upsertItem(saveData: ExtSave) {
   const token = await verifySession()
 
   // Set up the variables we need for this request
-  const imageOptions = [{ width: 80, id: 'ext', height: 80, fileType: 'PNG' }]
-  const data = { variables: { input: { url }, imageOptions }, query }
+  const data = { variables: { input: { url } }, query }
 
   // Make the request and return it
   const response = await extensionRequest<{ upsertSavedItem: upsertSavedItem }>(data, token)

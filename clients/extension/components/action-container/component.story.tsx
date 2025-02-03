@@ -3,12 +3,13 @@ import upsertResponse from '@common/mock-data/graph-response/upsert-response.jso
 import { ActionContainer as Component } from '.'
 
 // Types
+import type { ExtItem } from '../../types'
 import type { Meta, StoryObj } from '@storybook/react'
 
 // Storybook Meta
-// Storybook Meta
-const SavedOne = upsertResponse[0]?.data?.upsertSavedItem?.item?.preview
-const SavedTwo = upsertResponse[1]?.data?.upsertSavedItem?.item?.preview
+const SavedOne: ExtItem = upsertResponse[0]?.data?.upsertSavedItem?.item
+const SavedTwo: ExtItem = upsertResponse[1]?.data?.upsertSavedItem?.item
+const SavedThree: ExtItem = upsertResponse[2]?.data?.upsertSavedItem?.item
 
 const meta: Meta<typeof Component> = {
   title: 'Action - Complete',
@@ -19,28 +20,27 @@ export default meta
 // Stories
 export const ActionComplete: StoryObj<typeof Component> = {
   render: (args) => {
-    const preview = args?.preview
-    const tags = args.tags
     return (
       <Component
-        preview={preview}
+        item={args.item}
         isOpen={true}
         errorMessage={args.errorMessage}
-        tags={tags}
         actionUnSave={() => console.log('action unsave')}
+        actionLogOut={() => console.log('action log out')}
       />
     )
   },
   argTypes: {
-    preview: {
-      options: ['SavedOne', 'SavedTwo', 'Saving'],
+    item: {
+      options: ['No Notes', 'Simple Notes', 'Complex Notes', 'Saving'],
       mapping: {
-        SavedOne,
-        SavedTwo,
+        'No Notes': SavedOne,
+        'Simple Notes': SavedThree,
+        'Complex Notes': SavedTwo,
         Saving: undefined
       },
       control: { type: 'select' }
     }
   },
-  args: { preview: SavedOne, tags: ['peace', 'love', 'video games'], errorMessage: undefined }
+  args: { item: SavedOne, errorMessage: undefined }
 }

@@ -1,15 +1,17 @@
 import { EXT_ACTIONS } from '../actions'
 import { POCKET_SAVES, POCKET_HOME } from '../constants'
+import { getErrorMessage } from '../utilities/error'
 import { isSystemPage } from '../utilities/is-system'
 import { sendMessage } from '../utilities/send-message'
 import { getSetting } from '../utilities/storage'
+import { addNote } from './api/add-note'
 import { upsertItem } from './api/upsert'
 import { setAuth, logIn } from './auth'
 import { setDefaultIcon, setToolbarIcon } from './icon-updates'
 
 // Types
-import { getErrorMessage } from '../utilities/error'
 import type { ExtMessage, ExtSave } from '../types'
+import type { ExtNote } from '../types/note'
 
 let saveQueue: ExtSave | null = null
 
@@ -38,7 +40,6 @@ chrome.runtime.onMessage.addListener(messageHandler)
 async function messageHandler(message: ExtMessage, sender: chrome.runtime.MessageSender) {
   const { action = EXT_ACTIONS.UNKNOWN_ACTION } = message || {}
 
-  console.log(message)
   // Messages from `popup action` don't have a sender so we need to query the active tab
   const activeTab = await chrome.tabs.query({ active: true, lastFocusedWindow: true })
 
@@ -73,6 +74,12 @@ async function messageHandler(message: ExtMessage, sender: chrome.runtime.Messag
         ...(selection && { note: selection })
       })
 
+      return true
+    }
+
+    case EXT_ACTIONS.ADD_NOTE_REQUEST: {
+      const { noteData } = message
+      if (noteData && tab.url) await saveNote(noteData, tab.url)
       return true
     }
 
@@ -140,16 +147,26 @@ async function save(saveData: ExtSave) {
 
     // send a message so the popup can display the preview
     sendMessage({ action: EXT_ACTIONS.SAVE_TO_POCKET_SUCCESS, item })
-
-    // Set the toolbar icon to saved
-    // ?? Since we generally can't track this, it feels problematic to
-    // ?? maintain it in a reasonable fashion.  However, it is the way at the moment.
-    await setToolbarIcon(id, true)
   } catch (error) {
     // Things have gone awry.  Let's send the error along
     const message = getErrorMessage(error)
     sendMessage({ action: EXT_ACTIONS.SAVE_TO_POCKET_FAILURE, error: message })
     if (id) await setToolbarIcon(id, true)
+    return false
+  }
+}
+
+async function saveNote(noteData: ExtNote, source?: string) {
+  try {
+    // Let's add our note
+    const item = await addNote({ ...noteData, source })
+
+    // send a message so the popup can display the preview
+    sendMessage({ action: EXT_ACTIONS.ADD_NOTE_SUCCESS, item })
+  } catch (error) {
+    // Things have gone awry.  Let's send the error along
+    const message = getErrorMessage(error)
+    sendMessage({ action: EXT_ACTIONS.ADD_NOTE_FAILURE, error: message })
     return false
   }
 }

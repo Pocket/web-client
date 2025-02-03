@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react'
 import { EXT_ACTIONS } from '../actions'
 import { ActionContainer } from '../components/action-container'
+import { sendMessage } from '../utilities/send-message'
 
-import type { ExtItem, ExtMessage, ExtPreview } from '../types'
-import type { NoteEdge } from '@common/types/pocket'
+import type { ExtItem, ExtMessage } from '../types'
 
 export function App() {
   const [isOpen, setIsOpen] = useState(false)
   const [saveStatus, setSaveStatus] = useState('saving')
   const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined)
-  const [preview, setPreview] = useState<ExtPreview | undefined>(undefined)
-  const [tags, setTags] = useState<string[]>([])
-  const [notes, setNotes] = useState<NoteEdge[] | undefined>()
+  const [item, setItem] = useState<ExtItem | undefined>(undefined)
 
   /* Setup Listeners and show popup
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -27,24 +25,19 @@ export function App() {
   /* Send a message on action activating
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
   useEffect(() => {
-    if (isOpen) void chrome.runtime.sendMessage({ action: EXT_ACTIONS.BROWSER_ACTION })
+    if (isOpen) void sendMessage({ action: EXT_ACTIONS.BROWSER_ACTION })
   }, [isOpen])
 
   /* Handle incoming messages
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
   function handleMessages(message: ExtMessage) {
     const { action = 'Unknown Action' } = message || {}
-    console.log('ACTION:', { message })
+
     switch (action) {
+      case EXT_ACTIONS.ADD_NOTE_SUCCESS:
       case EXT_ACTIONS.SAVE_TO_POCKET_SUCCESS: {
         const item = message?.item as ExtItem
-        const preview = item?.preview
-        const suggestedTags = item?.savedItem?.suggestedTags.map((tag) => tag.name) ?? []
-        const itemNotes = item?.savedItem?.notes
-
-        setPreview(preview)
-        setTags(suggestedTags)
-        setNotes(itemNotes)
+        setItem(item)
         setSaveStatus('saved')
         return
       }
@@ -53,6 +46,12 @@ export function App() {
         const { error } = message ?? 'Unknown error'
         setErrorMessage(error)
         setSaveStatus('save_failed')
+        return
+      }
+
+      case EXT_ACTIONS.ADD_NOTE_FAILURE: {
+        const { error } = message ?? 'Unknown error'
+        setErrorMessage(error)
         return
       }
 
@@ -108,7 +107,7 @@ export function App() {
   const actionUnSave = () => {}
 
   const actionLogOut = () => {
-    void chrome.runtime.sendMessage({ action: EXT_ACTIONS.LOGGED_OUT_OF_POCKET })
+    void sendMessage({ action: EXT_ACTIONS.LOGGED_OUT_OF_POCKET })
   }
 
   return (
@@ -116,9 +115,7 @@ export function App() {
       errorMessage={errorMessage}
       saveStatus={saveStatus}
       isOpen={isOpen}
-      preview={preview}
-      tags={tags}
-      notes={notes}
+      item={item}
       actionUnSave={actionUnSave}
       actionLogOut={actionLogOut}
     />

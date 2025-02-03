@@ -6,38 +6,39 @@ import { SavedScreen } from '../saved'
 import { SavedLoader } from '../saved-loader'
 
 // Types
-import type { ExtPreview } from '../../types'
-import type { NoteEdge } from '@common/types/pocket'
+import type { ExtItem } from '../../types'
 
 export function ActionContainer({
   isOpen = false,
   errorMessage,
-  preview,
-  notes,
-  tags
+  item
 }: {
   isOpen: boolean
   errorMessage?: string
   saveStatus?: string
-  preview?: ExtPreview
-  notes?: NoteEdge[]
-  tags?: string[]
+  item?: ExtItem
+  actionLogOut: () => void
   actionUnSave: () => void
 }) {
   const [showNotes, setShowNotes] = useState<boolean>(false)
 
+  const preview = item?.preview
+  const notes = item?.savedItem?.notes
+  const tags = item?.savedItem?.tags
+  const suggestedTags = item?.savedItem?.suggestedTags
+
   return isOpen ? (
     <div className="extension">
       <ExtensionHeader />
-      {preview ? (
+      {item?.preview ? (
         <>
           {showNotes ? (
-            <Notes notes={notes} setShowNotes={setShowNotes} />
+            <Notes notes={notes?.edges} setShowNotes={setShowNotes} />
           ) : (
             <SavedScreen
-              preview={preview}
+              preview={preview!}
               tags={tags}
-              errorMessage={errorMessage}
+              suggestedTags={suggestedTags}
               setShowNotes={setShowNotes}
             />
           )}

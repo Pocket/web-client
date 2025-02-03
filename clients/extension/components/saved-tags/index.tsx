@@ -1,14 +1,23 @@
 import style from './style.module.css'
 import { useState, useRef } from 'react'
 
+import type { Tag } from '@common/types/pocket'
 import type { ChangeEvent, KeyboardEvent } from 'react'
 
-export function SavedTags({ tags = [] }: { tags?: string[] }) {
+export function SavedTags({
+  tags = [],
+  suggestedTags = []
+}: {
+  tags?: Tag[]
+  suggestedTags?: Tag[]
+}) {
   const inputRef = useRef<HTMLInputElement>(null)
-  const [activeTags, setActiveTags] = useState<string[]>([])
+  const [activeTags, setActiveTags] = useState<string[]>(tags.map((tag) => tag.name))
   const [errorMessage, setErrorMessage] = useState<string | undefined>()
 
-  const suggestedTags = tags.filter((tag) => !activeTags.includes(tag))
+  const filteredTags = suggestedTags
+    .map((tag) => tag.name)
+    .filter((tag) => !activeTags.includes(tag))
 
   function addTag(tag: string) {
     const updatedTags = Array.from(new Set([...activeTags, tag]))
@@ -86,7 +95,7 @@ export function SavedTags({ tags = [] }: { tags?: string[] }) {
           ref={inputRef}
         />
       </div>
-      <SuggestedTags tags={suggestedTags} action={addTag} />
+      <SuggestedTags tags={filteredTags} action={addTag} />
       {errorMessage ? <div className={style.error}>{errorMessage}</div> : null}
     </div>
   )

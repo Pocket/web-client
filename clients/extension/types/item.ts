@@ -1,15 +1,8 @@
-import type { Maybe, PendingItem, NoteEdge } from '@common/types/pocket'
-
-export interface SuggestedTag {
-  name: string
-}
+import type { Maybe, PendingItem, Tag, NoteEdge } from '@common/types/pocket'
 
 export interface ExtItem {
   preview: ExtPreview
-  savedItem: {
-    suggestedTags: SuggestedTag[]
-    notes: NoteEdge[]
-  }
+  savedItem: ExtSavedItem
 }
 
 export interface ExtPreview {
@@ -21,6 +14,17 @@ export interface ExtPreview {
   id: string
   source: string
   authors: { id: string; name: string }[]
+}
+
+export interface ExtSavedItem {
+  suggestedTags: Tag[]
+  tags?: Tag[]
+  notes: {
+    edges: NoteEdge[]
+  }
+  item?: {
+    preview: ExtPreview
+  }
 }
 
 export type ExtItemResponse = Maybe<PendingItem | ExtItem>

@@ -25,6 +25,10 @@ export const SavedTags: StoryObj<typeof Component> = {
     )
   ],
   args: {
-    tags: ['peace', 'love', 'video games']
+    tags: [
+      { id: '1', name: 'peace' },
+      { id: '2', name: 'love' },
+      { id: '3', name: 'video games' }
+    ]
   }
 }
