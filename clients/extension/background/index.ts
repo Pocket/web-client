@@ -5,6 +5,7 @@ import { isSystemPage } from '../utilities/is-system'
 import { sendMessage } from '../utilities/send-message'
 import { getSetting } from '../utilities/storage'
 import { addNote } from './api/add-note'
+import { removeNote } from './api/remove-note'
 import { upsertItem } from './api/upsert'
 import { setAuth, logIn } from './auth'
 import { setDefaultIcon, setToolbarIcon } from './icon-updates'
@@ -50,6 +51,8 @@ async function messageHandler(message: ExtMessage, sender: chrome.runtime.Messag
   const tab = senderTab ?? activeTab[0]
   const tabId = tab?.id
 
+  console.log({ message })
+
   switch (action) {
     case EXT_ACTIONS.BROWSER_ACTION: {
       // No tab was sent
@@ -80,6 +83,12 @@ async function messageHandler(message: ExtMessage, sender: chrome.runtime.Messag
     case EXT_ACTIONS.ADD_NOTE_REQUEST: {
       const { noteData } = message
       if (noteData && tab?.url) await saveNote(noteData, tab.url)
+      return true
+    }
+
+    case EXT_ACTIONS.DELETE_NOTE_REQUEST: {
+      const { noteId } = message
+      if (noteId) await deleteNote(noteId)
       return true
     }
 
@@ -167,6 +176,19 @@ async function saveNote(noteData: ExtNote, source?: string) {
     // Things have gone awry.  Let's send the error along
     const message = getErrorMessage(error)
     sendMessage({ action: EXT_ACTIONS.ADD_NOTE_FAILURE, error: message })
+    return false
+  }
+}
+
+async function deleteNote(noteId: string) {
+  try {
+    await removeNote(noteId)
+    // send a message so the popup can display the preview
+    sendMessage({ action: EXT_ACTIONS.DELETE_NOTE_SUCCESS, noteId })
+  } catch (error) {
+    // Things have gone awry.  Let's send the error along
+    const message = getErrorMessage(error)
+    sendMessage({ action: EXT_ACTIONS.DELETE_NOTE_FAILURE, error: message })
     return false
   }
 }

@@ -41,10 +41,15 @@ export function Notes({
     void sendMessage({ action: EXT_ACTIONS.ADD_NOTE_REQUEST, noteData: { docMarkdown } })
   }
 
+  const handleNoteDelete = (id: string) => {
+    setNoteStatus('deleting note')
+    void sendMessage({ action: EXT_ACTIONS.DELETE_NOTE_REQUEST, noteId: id })
+  }
+
   return (
     <div>
       <div className={style.container}>
-        <NotesList notes={notes} />
+        <NotesList notes={notes} handleNoteDelete={handleNoteDelete} />
         <NotesAdd noteStatus={noteStatus} textRef={textRef} setErrorText={setErrorText} />
       </div>
       <NotesFooter

@@ -6,11 +6,20 @@ import ReactMarkdown from 'react-markdown'
 // Types
 import type { Note, NoteEdge } from '@common/types/pocket'
 
-export function NotesList({ notes }: { notes?: NoteEdge[] }) {
+export function NotesList({
+  notes,
+  handleNoteDelete
+}: {
+  notes?: NoteEdge[]
+  handleNoteDelete: (id: string) => void
+}) {
+  const validNotes = notes?.filter((note) => !note?.node?.deleted) ?? []
   return (
     <div className={style.notes}>
       {Array.isArray(notes) && notes.length ? (
-        notes.map((note) => <Note key={note?.cursor} note={note} />)
+        validNotes.map((note) => (
+          <Note key={note?.cursor} note={note} handleNoteDelete={handleNoteDelete} />
+        ))
       ) : (
         <NoNotes />
       )}
@@ -18,11 +27,18 @@ export function NotesList({ notes }: { notes?: NoteEdge[] }) {
   )
 }
 
-function Note({ note }: { note?: NoteEdge }) {
+function Note({
+  note,
+  handleNoteDelete
+}: {
+  note?: NoteEdge
+  handleNoteDelete: (id: string) => void
+}) {
   const [confirmDelete, setConfirmDelete] = useState<boolean>(false)
   const noteRef = useRef<HTMLDivElement>(null)
 
   const node = note?.node
+  const noteId = node?.id
   const title = node?.title
   const contentPreview = node?.contentPreview as string
 
@@ -31,6 +47,11 @@ function Note({ note }: { note?: NoteEdge }) {
     setConfirmDelete(true)
   }
   const handleCancelClick = () => setConfirmDelete(false)
+
+  const handleConfirmClick = () => {
+    setConfirmDelete(false)
+    if (noteId) handleNoteDelete(noteId)
+  }
 
   return contentPreview ? (
     <div className={`${style.container} ${confirmDelete && style.active}`} ref={noteRef}>
@@ -47,15 +68,26 @@ function Note({ note }: { note?: NoteEdge }) {
           </button>
         ) : null}
       </div>
-      {confirmDelete ? <NoteDeleteConfirm handleCancelClick={handleCancelClick} /> : null}
+      {confirmDelete ? (
+        <NoteDeleteConfirm
+          handleCancelClick={handleCancelClick}
+          handleConfirmClick={handleConfirmClick}
+        />
+      ) : null}
     </div>
   ) : null
 }
 
-function NoteDeleteConfirm({ handleCancelClick }: { handleCancelClick: () => void }) {
+function NoteDeleteConfirm({
+  handleCancelClick,
+  handleConfirmClick
+}: {
+  handleCancelClick: () => void
+  handleConfirmClick: () => void
+}) {
   return (
     <div className={style.confirm}>
-      <button>Delete this note</button>
+      <button onClick={handleConfirmClick}>Delete this note</button>
       <button onClick={handleCancelClick}>Cancel</button>
     </div>
   )

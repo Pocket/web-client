@@ -12,4 +12,5 @@ export interface ExtMessage {
   error?: string
   saveData?: ExtSave
   noteData?: ExtNote
+  noteId?: string
 }
