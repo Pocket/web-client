@@ -18,12 +18,13 @@
   "license": "ISC",
   "main": "index.js",
   "publishConfig": {
-    "directory": "dist",
+    "directory": "build",
     "linkDirectory": true
   },
   "scripts": {
     "build": "ts-node build.ts",
     "clean": "rm -rf dist node_modules .turbo",
-    "compile:icons": "ts-node build.ts"
+    "compile:icons": "ts-node build.ts",
+    "preinstall": "ts-node build.ts"
   }
 }
