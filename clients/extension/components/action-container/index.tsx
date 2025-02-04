@@ -7,6 +7,7 @@ import { SavedScreen } from '../saved'
 
 // Types
 import type { ExtItem } from '../../types'
+import type { NoteEdge } from '@common/types/pocket'
 import type { Dispatch, SetStateAction } from 'react'
 
 export function ActionContainer({
@@ -14,6 +15,7 @@ export function ActionContainer({
   errorMessage,
   noteStatus,
   setNoteStatus,
+  notes,
   item
 }: {
   isOpen: boolean
@@ -21,6 +23,7 @@ export function ActionContainer({
   saveStatus?: string
   noteStatus?: string
   item?: ExtItem
+  notes: NoteEdge[] | []
   setNoteStatus: Dispatch<SetStateAction<string | undefined>>
   actionLogOut: () => void
   actionUnSave: () => void
@@ -29,7 +32,6 @@ export function ActionContainer({
   const [errorText, setErrorText] = useState<string | undefined>(errorMessage)
 
   const preview = item?.preview
-  const notes = item?.savedItem?.notes
   const tags = item?.savedItem?.tags
   const suggestedTags = item?.savedItem?.suggestedTags
 
@@ -41,7 +43,7 @@ export function ActionContainer({
           {showNotes ? (
             <Notes
               noteStatus={noteStatus}
-              notes={notes?.edges}
+              notes={notes}
               setShowNotes={setShowNotes}
               setNoteStatus={setNoteStatus}
               setErrorText={setErrorText}

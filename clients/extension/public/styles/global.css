@@ -21,6 +21,7 @@
 
   --color-canvas: #ffffff;
   --color-canvas-active: hsl(0, 0%, 90%);
+  --color-canvas-darker: hsl(0, 0%, 95%);
   --color-loader: #42414d;
   --color-text-primary: #15141a;
   --color-text-secondary: #333;
@@ -38,6 +39,7 @@
   @media (prefers-color-scheme: dark) {
     --color-canvas: #42414d;
     --color-canvas-active: hsl(245, 8%, 38%);
+    --color-canvas-darker: hsl(245, 8%, 24%);
     --color-loader: #15141a;
     --color-text-primary: #fbfbfe;
     --color-text-secondary: var(--color-grey85);
@@ -57,6 +59,7 @@
     .colormode-light {
       --color-canvas: #ffffff;
       --color-canvas-active: hsl(0, 0%, 90%);
+      --color-canvas-darker: hsl(0, 0%, 95%);
       --color-loader: #42414d;
       --color-text-primary: #15141a;
       --color-text-secondary: #333;

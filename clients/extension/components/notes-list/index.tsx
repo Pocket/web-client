@@ -40,6 +40,12 @@ function Note({
   const node = note?.node
   const noteId = node?.id
   const title = node?.title
+  const date = new Date(node?.createdAt as string)
+  const dateString = date.toLocaleString(undefined, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  })
   const contentPreview = node?.contentPreview as string
 
   const handleDeleteClick = () => {
@@ -57,6 +63,7 @@ function Note({
     <div className={`${style.container} ${confirmDelete && style.active}`} ref={noteRef}>
       <div className={style.note}>
         {title ? <h3>{title}</h3> : null}
+        <div className={style.date}>{dateString}</div>
         <ReactMarkdown allowedElements={['div']} unwrapDisallowed={true}>
           {contentPreview}
         </ReactMarkdown>

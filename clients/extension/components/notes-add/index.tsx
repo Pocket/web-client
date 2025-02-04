@@ -6,9 +6,11 @@ import type { Dispatch, SetStateAction } from 'react'
 
 export function NotesAdd({
   textRef,
+  titleRef,
   noteStatus,
   setErrorText
 }: {
+  titleRef?: RefObject<HTMLInputElement | null>
   textRef?: RefObject<HTMLTextAreaElement | null>
   noteStatus?: string
   setErrorText: Dispatch<SetStateAction<string | undefined>>
@@ -20,7 +22,16 @@ export function NotesAdd({
       {noteStatus ? (
         <ActionLoader />
       ) : (
-        <textarea onFocus={resetError} name="note" id="note" ref={textRef}></textarea>
+        <>
+          <input
+            type="text"
+            ref={titleRef}
+            name="noteTitle"
+            id="noteTitle"
+            placeholder="Title (optional)"
+          />
+          <textarea onFocus={resetError} name="note" id="note" ref={textRef}></textarea>
+        </>
       )}
     </div>
   )

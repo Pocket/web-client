@@ -24,11 +24,15 @@ export function Notes({
   setShowNotes: Dispatch<SetStateAction<boolean>>
 }) {
   const textRef = useRef<HTMLTextAreaElement | null>(null)
+  const titleRef = useRef<HTMLInputElement | null>(null)
 
   const handleAddNote = () => {
     // Get the value of our textarea
     if (!textRef.current) return
     const docMarkdown = textRef.current.value.trim()
+
+    // Let's sort out the optional title
+    const title = titleRef.current ? titleRef.current.value.trim() : false
 
     // Let's not add empty notes
     if (!docMarkdown?.length) {
@@ -36,9 +40,16 @@ export function Notes({
       return setErrorText('Text is require to create a note')
     }
 
+    // Need to reset the input fields
+    if (titleRef.current) titleRef.current.value = ''
     textRef.current.value = ''
+
+    // Let's
     setNoteStatus('saving note')
-    void sendMessage({ action: EXT_ACTIONS.ADD_NOTE_REQUEST, noteData: { docMarkdown } })
+    void sendMessage({
+      action: EXT_ACTIONS.ADD_NOTE_REQUEST,
+      noteData: { docMarkdown, ...(title && { title }) }
+    })
   }
 
   const handleNoteDelete = (id: string) => {
@@ -50,7 +61,12 @@ export function Notes({
     <div>
       <div className={style.container}>
         <NotesList notes={notes} handleNoteDelete={handleNoteDelete} />
-        <NotesAdd noteStatus={noteStatus} textRef={textRef} setErrorText={setErrorText} />
+        <NotesAdd
+          noteStatus={noteStatus}
+          textRef={textRef}
+          titleRef={titleRef}
+          setErrorText={setErrorText}
+        />
       </div>
       <NotesFooter
         noteStatus={noteStatus}

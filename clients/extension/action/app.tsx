@@ -4,6 +4,7 @@ import { ActionContainer } from '../components/action-container'
 import { sendMessage } from '../utilities/send-message'
 
 import type { ExtItem, ExtMessage } from '../types'
+import type { NoteEdge } from '@common/types/pocket'
 
 export function App() {
   const [isOpen, setIsOpen] = useState(false)
@@ -11,6 +12,7 @@ export function App() {
   const [noteStatus, setNoteStatus] = useState<string | undefined>(undefined)
   const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined)
   const [item, setItem] = useState<ExtItem | undefined>(undefined)
+  const [notes, setNotes] = useState<NoteEdge[] | []>([])
 
   /* Setup Listeners and show popup
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -39,6 +41,7 @@ export function App() {
       case EXT_ACTIONS.SAVE_TO_POCKET_SUCCESS: {
         const item = message?.item as ExtItem
         setItem(item)
+        setNotes(item.savedItem.notes.edges)
         setNoteStatus(undefined)
         setSaveStatus('saved')
         return
@@ -55,6 +58,17 @@ export function App() {
         const { error } = message ?? 'Unknown error'
         setNoteStatus(undefined)
         setErrorMessage(error)
+        return
+      }
+
+      case EXT_ACTIONS.DELETE_NOTE_SUCCESS: {
+        const { noteId } = message
+        if (noteId) {
+          setNoteStatus(undefined)
+          setNotes((notes) => {
+            return notes.filter((note) => note?.node?.id !== noteId)
+          })
+        }
         return
       }
 
@@ -118,6 +132,7 @@ export function App() {
       errorMessage={errorMessage}
       saveStatus={saveStatus}
       noteStatus={noteStatus}
+      notes={notes}
       setNoteStatus={setNoteStatus}
       isOpen={isOpen}
       item={item}

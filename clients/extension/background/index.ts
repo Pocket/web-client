@@ -51,8 +51,6 @@ async function messageHandler(message: ExtMessage, sender: chrome.runtime.Messag
   const tab = senderTab ?? activeTab[0]
   const tabId = tab?.id
 
-  console.log({ message })
-
   switch (action) {
     case EXT_ACTIONS.BROWSER_ACTION: {
       // No tab was sent
@@ -82,7 +80,7 @@ async function messageHandler(message: ExtMessage, sender: chrome.runtime.Messag
 
     case EXT_ACTIONS.ADD_NOTE_REQUEST: {
       const { noteData } = message
-      if (noteData && tab?.url) await saveNote(noteData, tab.url)
+      if (noteData) await saveNote(noteData, tab?.url)
       return true
     }
 
@@ -167,6 +165,8 @@ async function save(saveData: ExtSave) {
 
 async function saveNote(noteData: ExtNote, source?: string) {
   try {
+    if (!source) throw new Error('Error attaching note!')
+
     // Let's add our note
     const item = await addNote({ ...noteData, source })
 
@@ -182,6 +182,8 @@ async function saveNote(noteData: ExtNote, source?: string) {
 
 async function deleteNote(noteId: string) {
   try {
+    if (!noteId) throw new Error('Error finding noteId')
+
     await removeNote(noteId)
     // send a message so the popup can display the preview
     sendMessage({ action: EXT_ACTIONS.DELETE_NOTE_SUCCESS, noteId })

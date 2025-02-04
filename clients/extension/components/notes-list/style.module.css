@@ -18,6 +18,8 @@
     border-bottom: none;
   }
   .actions {
+    display: flex;
+    align-items: center;
     visibility: hidden;
     color: var(--color-text-secondary);
     button {
@@ -77,4 +79,11 @@
     padding: 0.5rem;
     width: 100%;
   }
+}
+
+.date {
+  font-size: 0.75rem;
+  font-style: italic;
+  padding: 0 0 0.5rem 0;
+  color: var(--color-text-secondary);
 }
