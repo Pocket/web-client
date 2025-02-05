@@ -2,8 +2,8 @@
   "name": "@client/extension",
   "version": "0.0.1",
   "dependencies": {
-    "@storybook/react": "8.5.1",
-    "@types/node": "22.10.9",
+    "@storybook/react": "8.5.3",
+    "@types/node": "22.13.1",
     "@ui/components": "workspace:*",
     "@ui/icons": "workspace:*",
     "jose": "5.9.6",

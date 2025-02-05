@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "dependencies": {
     "@cdktf/provider-archive": "10.3.0",
-    "@cdktf/provider-aws": "19.50.0",
+    "@cdktf/provider-aws": "19.51.0",
     "@cdktf/provider-local": "10.1.1",
     "@cdktf/provider-null": "10.0.1",
-    "@cdktf/provider-pagerduty": "13.15.1",
+    "@cdktf/provider-pagerduty": "13.15.3",
     "@pocket-tools/terraform-modules": "5.19.1",
     "cdktf": "0.20.11",
     "cdktf-cli": "0.20.11",
@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@config/eslint-config": "workspace:*",
-    "@types/node": "22.10.9"
+    "@types/node": "22.13.1"
   },
   "engines": {
     "node": "=20.16.0"

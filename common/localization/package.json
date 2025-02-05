@@ -5,7 +5,7 @@
   "author": "",
   "dependencies": {
     "@common/constants": "workspace:*",
-    "i18next": "^24.2.1",
+    "i18next": "^24.2.2",
     "i18next-browser-languagedetector": "8.0.2",
     "i18next-resources-to-backend": "1.2.1",
     "react": "19.0.0",
@@ -14,7 +14,7 @@
   "devDependencies": {
     "@config/eslint-config": "workspace:*",
     "@config/typescript-config": "workspace:*",
-    "@types/node": "^22.10.9",
+    "@types/node": "^22.13.1",
     "@types/react": "19.0.8",
     "cli-progress": "^3.12.0",
     "fs-extra": "^11.3.0",
