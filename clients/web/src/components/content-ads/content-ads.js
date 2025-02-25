@@ -1,5 +1,7 @@
 import { css } from '@emotion/css'
-import { AdSlot } from 'components/programmatic-ad/freestar-ad-slot'
+import { AdSlot } from 'components/programmatic-ad/mozads-ad-slot'
+
+import { IABFixedSize } from '@mozilla-services/ads-sdk/dist/core'
 
 const aboveTheFoldStyle = css`
   margin-bottom: var(--spacing250);
@@ -18,10 +20,10 @@ const belowTheFoldStyle = css`
   margin-top: 4rem;
 `
 // Syndicated Article Freestar placement IDs
-const ABOVE_THE_FOLD = 'getpocket_leaderboard_atf'
-const BELOW_THE_FOLD = 'getpocket_leaderboard_btf'
-const RIGHT_RAIL_1_ID = 'getpocket_right_rail_1'
-const RIGHT_RAIL_2_ID = 'getpocket_right_rail_2'
+const ABOVE_THE_FOLD = IABFixedSize.Billboard
+const BELOW_THE_FOLD = IABFixedSize.Billboard
+const RIGHT_RAIL_1_ID = IABFixedSize.Skyscaper
+const RIGHT_RAIL_2_ID = IABFixedSize.Skyscaper
 
 export function AdAboveTheFold({ allowAds, targeting }) {
   return allowAds ? (
