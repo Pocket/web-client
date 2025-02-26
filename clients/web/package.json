@@ -9,7 +9,7 @@
     "@emotion/css": "11.13.5",
     "@emotion/react": "11.14.0",
     "@freestar/pubfig-adslot-react-component": "3.6.2",
-    "@mozilla-services/ads-sdk": "git+https://git@github.com:mozilla-services/ads-sdk.git",
+    "@mozilla-services/ads-sdk": "git+ssh://git@github.com:mozilla-services/ads-sdk.git",
     "@n8tb1t/use-scroll-position": "2.0.3",
     "@popperjs/core": "2.11.8",
     "@sentry/integrations": "7.114.0",
