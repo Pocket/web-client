@@ -1,7 +1,7 @@
 import { css } from '@emotion/css'
 import { AdSlot } from 'components/programmatic-ad/mozads-ad-slot'
 
-import { IABFixedSize } from '@mozilla-services/ads-sdk/dist/core'
+import { IABFixedSize } from '@mozilla-services/ads-sdk/core'
 
 const aboveTheFoldStyle = css`
   margin-bottom: var(--spacing250);
