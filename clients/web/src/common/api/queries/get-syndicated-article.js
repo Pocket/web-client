@@ -1,5 +1,6 @@
 import { gql } from 'common/utilities/gql/gql'
 import { requestGQL } from 'common/utilities/request/request'
+import { IABLookup } from 'common/iab'
 
 const getSyndicatedArticleQuery = gql`
   query GetSyndicatedArticle($slug: String!, $count: Int) {
@@ -80,5 +81,18 @@ export async function getSyndicatedArticle(slug) {
     variables
   })
     .then((response) => response?.data?.syndicatedArticleBySlug)
+    .then(reverseLookupIAB)
     .catch((error) => console.error(error))
+}
+
+function reverseLookupIAB(syndicatedArticleBySlug) {
+  const { iabSubCategory, iabTopCategory } = syndicatedArticleBySlug
+  const iabSubCategoryId = findKeyByLabel(iabSubCategory.trim())
+  const iabTopCategoryId = findKeyByLabel(iabTopCategory.trim())
+  return { ...syndicatedArticleBySlug, iabSubCategoryId, iabTopCategoryId }
+}
+
+function findKeyByLabel(labelToFind) {
+  const entry = IABLookup.find((item) => item.formatted === labelToFind)
+  return entry ? entry.id : null
 }

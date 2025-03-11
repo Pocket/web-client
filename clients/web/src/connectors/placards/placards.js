@@ -7,7 +7,8 @@ export function Placard({ placement, position, shouldDisplay }) {
   const placements = useSelector((state) => state.placards.placements)
   const placementForThisPlacard = placements ? placements[placement] : null
 
-  const data = placementForThisPlacard ? placementForThisPlacard[position] : {}
+  const data = placementForThisPlacard ? (placementForThisPlacard[position] ?? {}) : {}
+
   const { format, url, callbacks, image_url, alt_text, block_key } = data
   const { click, impression } = callbacks ?? {}
 

@@ -75,6 +75,8 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
     slug,
     iabTopCategory,
     iabSubCategory,
+    iabTopCategoryId,
+    iabSubCategoryId,
     showAds
   } = articleData || {}
 
@@ -94,6 +96,8 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
 
   useEffect(() => {
     if (!showPlacards) return
+
+    console.info({ iabTopCategoryId, iabSubCategoryId })
     dispatch(
       getPlacards([
         {
@@ -106,7 +110,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
         }
       ])
     )
-  }, [dispatch, showPlacards])
+  }, [dispatch, iabSubCategoryId, iabTopCategoryId, showPlacards])
 
   const { asPath: urlPath } = router
   const targeting = {
