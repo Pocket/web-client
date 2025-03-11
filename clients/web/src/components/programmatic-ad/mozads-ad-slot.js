@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/css'
 import { useTranslation } from 'next-i18next'
 
-import { MozAdsPlacement } from '@mozilla-services/ads-sdk/react'
+import { MozAdsPlacement } from '@mozilla-services/ads-sdk/dist/react'
 
 const programmaticAdWrapperStyles = css`
   display: flex;
