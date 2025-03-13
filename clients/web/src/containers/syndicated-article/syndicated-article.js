@@ -97,7 +97,6 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   useEffect(() => {
     if (!showPlacards) return
 
-    console.info({ iabTopCategoryId, iabSubCategoryId })
     dispatch(
       getPlacards([
         {

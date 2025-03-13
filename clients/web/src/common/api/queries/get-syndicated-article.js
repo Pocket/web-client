@@ -87,8 +87,8 @@ export async function getSyndicatedArticle(slug) {
 
 function reverseLookupIAB(syndicatedArticleBySlug) {
   const { iabSubCategory, iabTopCategory } = syndicatedArticleBySlug
-  const iabSubCategoryId = findKeyByLabel(iabSubCategory.trim())
-  const iabTopCategoryId = findKeyByLabel(iabTopCategory.trim())
+  const iabSubCategoryId = iabSubCategory ? findKeyByLabel(iabSubCategory.trim()) : null
+  const iabTopCategoryId = iabTopCategory ? findKeyByLabel(iabTopCategory.trim()) : null
   return { ...syndicatedArticleBySlug, iabSubCategoryId, iabTopCategoryId }
 }
 
