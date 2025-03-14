@@ -19,16 +19,24 @@ const adRailStyle = css`
 const belowTheFoldStyle = css`
   margin-top: 4rem;
 `
-// Syndicated Article Freestar placement IDs
-const ABOVE_THE_FOLD = IABFixedSize.Billboard
-const BELOW_THE_FOLD = IABFixedSize.Billboard
-const RIGHT_RAIL_1_ID = IABFixedSize.Skyscaper
-const RIGHT_RAIL_2_ID = IABFixedSize.Skyscaper
+
+// Syndicated Article MozAds placements
+const ABOVE_THE_FOLD_MARS_ID = "pocket_billboard_1"
+const BELOW_THE_FOLD_MARS_ID = "pocket_billboard_2"
+const RIGHT_RAIL_1_MARS_ID = "pocket_skyscraper_1"
+const RIGHT_RAIL_2_MARS_ID = "pocket_skyscraper_2"
+
+let placements = {}
+placements[ABOVE_THE_FOLD_MARS_ID] = IABFixedSize.Billboard,
+placements[BELOW_THE_FOLD_MARS_ID] = IABFixedSize.Billboard,
+placements[RIGHT_RAIL_1_MARS_ID] = IABFixedSize.Skyscaper,
+placements[RIGHT_RAIL_2_MARS_ID] = IABFixedSize.Skyscaper
 
 export function AdAboveTheFold({ allowAds, targeting }) {
   return allowAds ? (
     <AdSlot
-      placementName={ABOVE_THE_FOLD}
+      placementId={ABOVE_THE_FOLD_MARS_ID}
+      placementName={placements[ABOVE_THE_FOLD_MARS_ID]}
       targeting={targeting}
       instanceStyles={aboveTheFoldStyle}
     />
@@ -38,7 +46,8 @@ export function AdAboveTheFold({ allowAds, targeting }) {
 export function AdBelowTheFold({ allowAds, targeting }) {
   return allowAds ? (
     <AdSlot
-      placementName={BELOW_THE_FOLD}
+      placementId={BELOW_THE_FOLD_MARS_ID}
+      placementName={placements[BELOW_THE_FOLD_MARS_ID]}
       targeting={targeting}
       instanceStyles={belowTheFoldStyle}
     />
@@ -48,7 +57,10 @@ export function AdBelowTheFold({ allowAds, targeting }) {
 export function AdRailTop({ allowAds, targeting }) {
   return allowAds ? (
     <div className={adRailStyle}>
-      <AdSlot placementName={RIGHT_RAIL_1_ID} targeting={targeting} />
+      <AdSlot
+        placementId={RIGHT_RAIL_1_MARS_ID}
+        placementName={placements[RIGHT_RAIL_1_MARS_ID]}
+        targeting={targeting} />
     </div>
   ) : null
 }
@@ -56,7 +68,10 @@ export function AdRailTop({ allowAds, targeting }) {
 export function AdRailBottom({ allowAds, targeting }) {
   return allowAds ? (
     <div className={adRailStyle}>
-      <AdSlot placementName={RIGHT_RAIL_2_ID} targeting={targeting} />
+      <AdSlot
+        placementId={RIGHT_RAIL_2_MARS_ID}
+        placementName={placements[RIGHT_RAIL_2_MARS_ID]}
+        targeting={targeting} />
     </div>
   ) : null
 }
