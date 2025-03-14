@@ -21,14 +21,14 @@ const programmaticAdWrapperStyles = css`
   }
 `
 
-export function AdSlot({ placementName, targeting, instanceStyles }) {
+export function AdSlot({ placementId, placementName, targeting, instanceStyles }) {
   const { t } = useTranslation()
   const adLabel = t('ad:label', 'Advertisement')
 
   return (
     <div className={`${programmaticAdWrapperStyles} 'syndication-ad' ${instanceStyles}`}>
       <MozAdsPlacement
-        placementId="pocket_billboard_1"
+        placementId={placementId}
         iabContentCategoryIds={targeting.Category}
         fixedSize={placementName}
       />
