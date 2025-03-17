@@ -16,8 +16,10 @@ import { ArticleActions } from 'components/content-actions/article-actions'
 import { SaveArticleTop } from 'components/content-saving/save-article'
 import { SaveArticleBottom } from 'components/content-saving/save-article'
 
-import { AdAboveTheFold } from 'components/content-ads/content-ads'
-import { AdBelowTheFold } from 'components/content-ads/content-ads'
+import { BillboardAboveTheFold } from 'components/content-ads/content-ads'
+import { BillboardBelowTheFold } from 'components/content-ads/content-ads'
+import { RectangleAboveTheFold } from 'components/content-ads/content-ads'
+import { RectangleBelowTheFold } from 'components/content-ads/content-ads'
 import { AdRailTop } from 'components/content-ads/content-ads'
 import { AdRailBottom } from 'components/content-ads/content-ads'
 
@@ -138,6 +140,10 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   const noIndex = publisher?.attributeCanonicalToPublisher
   const syndicatedFrom = publisherUrl ? publisherUrl : false
   const ArticleLayout = isMobileWebView ? MobileLayout : Layout
+
+  // Prepare the correct ad format for the viewport size
+  const AdAboveTheFold = isMobileWebView ? RectangleAboveTheFold : BillboardAboveTheFold
+  const AdBelowTheFold = isMobileWebView ? RectangleBelowTheFold : BillboardBelowTheFold
 
   // Prep save action
   const onSave = (url, value) => {
