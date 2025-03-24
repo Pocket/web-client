@@ -82,7 +82,9 @@ export const Sidebar = ({
 
   const handleAnnotationClick = (id) => {
     const highlight = document.querySelectorAll(`[data-annotation-id="${id}"]`)
-    highlight[0].scrollIntoView({ behavior: 'smooth', inline: 'nearest' })
+    const node = highlight[0]
+
+    if (node) node.scrollIntoView({ behavior: 'smooth', inline: 'nearest' })
   }
 
   return (
