@@ -3,7 +3,6 @@ import { breakpointLargeTablet } from 'common/constants'
 import { breakpointSmallHandset } from 'common/constants'
 import { breakpointLargeHandset } from 'common/constants'
 import { useTranslation } from 'next-i18next'
-import Link from 'next/link'
 import { savedItemsSetSortOrder } from 'containers/saves/saved-items/saved-items.state'
 import { savedItemsSetSortBy } from 'containers/saves/saved-items/saved-items.state'
 import { SearchFilterMenu } from 'components/list-filter-menu/search-filter-menu'
@@ -72,15 +71,7 @@ const searchStyles = css`
   }
 `
 
-export const SearchPageHeader = ({
-  total,
-  loading,
-  query,
-  searchType,
-  filter,
-  sortOrder,
-  isPremium
-}) => {
+export const SearchPageHeader = ({ total, loading, query, filter, sortOrder, isPremium }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
@@ -103,35 +94,23 @@ export const SearchPageHeader = ({
       </h1>
       <div className="sourceBar">
         <div>
-          <Link className={searchType === 'all' ? 'active' : ''} href={`/search?q=${query}&st=all`}>
-            All of Pocket
-          </Link>{' '}
-          <Link
-            className={searchType === 'saves' ? 'active' : ''}
-            href={`/search?q=${query}&st=saves`}>
-            Only My Saves
-          </Link>
-          {searchType === 'saves' ? (
-            <SearchFilterMenu
-              subset="search"
-              query={query}
-              filter={filter}
-              sortOrder={sortOrder}
-              total={total}
-            />
-          ) : null}
-        </div>
-        {searchType === 'saves' ? (
-          <ListSort
+          <SearchFilterMenu
+            subset="search"
             query={query}
             filter={filter}
-            showRelevance={isPremium}
             sortOrder={sortOrder}
-            handleNewest={handleNewest}
-            handleOldest={handleOldest}
-            handleRelevance={handleRelevance}
+            total={total}
           />
-        ) : null}
+        </div>
+        <ListSort
+          query={query}
+          filter={filter}
+          showRelevance={isPremium}
+          sortOrder={sortOrder}
+          handleNewest={handleNewest}
+          handleOldest={handleOldest}
+          handleRelevance={handleRelevance}
+        />
       </div>
     </header>
   ) : null

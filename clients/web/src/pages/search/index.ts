@@ -10,11 +10,10 @@ export const getServerSideProps: GetServerSideProps<LocalizedProps> = async ({
   locale = 'en',
   query
 }) => {
-  const validSearchTypes = ['all', 'saves']
   const validFilters = ['unread', 'archive']
 
   // https://opensearch.org/docs/latest/query-dsl/full-text/simple-query-string/
-  const { q, st, ft } = query
+  const { q, ft } = query
   const defaultProps = { ...(await serverSideTranslations(locale, [...LOCALE_COMMON])), locale }
 
   // We need something here to redirect to home or something of that nature
@@ -27,9 +26,8 @@ export const getServerSideProps: GetServerSideProps<LocalizedProps> = async ({
     }
 
   // Light validation
-  const searchType = typeof st === 'string' && validSearchTypes.includes(st) ? st : false
   const filter = typeof ft === 'string' && validFilters.includes(ft) ? ft : false
-  return { props: { ...defaultProps, query: q, searchType, filter } }
+  return { props: { ...defaultProps, query: q, searchType: 'saves', filter } }
 }
 
 export default Search

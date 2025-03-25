@@ -10,7 +10,6 @@ const filterStyle = css`
   position: relative;
   font-style: normal;
   font-weight: 300;
-  padding-left: 1.5rem;
   display: inline-flex;
   vertical-align: center;
   align-items: center;
