@@ -25,6 +25,7 @@
     "@types/jest": "^29.5.14",
     "@ui/icons": "workspace:*",
     "@ui/styles": "workspace:*",
+    "@mozilla-services/ads-sdk": "git+ssh://git@github.com:mozilla-services/ads-sdk.git",
     "body-scroll-lock": "4.0.0-beta.0",
     "clipboard-copy": "4.0.1",
     "dayjs": "1.11.13",
