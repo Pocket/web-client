@@ -1,8 +1,8 @@
 import { css } from '@emotion/css'
 import { useTranslation } from 'next-i18next'
 
-import { MozAdsPlacement } from '@mozilla-services/ads-sdk/dist/react'
-import { IABFixedSize, MozAdsSize } from '@mozilla-services/ads-sdk/dist/core'
+import { MozAdsPlacement } from '@mozilla-services/majc/dist/react'
+import { IABFixedSize, MozAdsSize } from '@mozilla-services/majc/dist/core'
 
 const programmaticAdWrapperStyles = css`
   display: flex;
@@ -23,12 +23,12 @@ const programmaticAdWrapperStyles = css`
 
 // Syndicated Article MozAds placements
 export enum Placements {
-  ABOVE_THE_FOLD = 'pocket_billboard_1',
-  BELOW_THE_FOLD = 'pocket_billboard_2',
-  ABOVE_THE_FOLD_MOBILE = 'pocket_mrec_1',
-  BELOW_THE_FOLD_MOBILE = 'pocket_mrec_2',
-  RIGHT_RAIL_1 = 'pocket_skyscraper_1',
-  RIGHT_RAIL_2 = 'pocket_skyscraper_2'
+  ABOVE_THE_FOLD = 'mock_pocket_billboard_1',
+  BELOW_THE_FOLD = 'mock_pocket_billboard_2',
+  ABOVE_THE_FOLD_MOBILE = 'mock_pocket_mrec_1',
+  BELOW_THE_FOLD_MOBILE = 'mock_pocket_mrec_2',
+  RIGHT_RAIL_1 = 'mock_pocket_skyscraper_1',
+  RIGHT_RAIL_2 = 'mock_pocket_skyscraper_2'
 }
 
 const placementSizes: Record<string, MozAdsSize> = {
