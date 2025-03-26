@@ -4,7 +4,7 @@ import Layout from 'layouts/main'
 import MobileLayout from 'layouts/mobile-web'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { BASE_URL } from 'common/constants'
 
 import { contentLayout } from 'components/content-layout/content-layout'
@@ -18,8 +18,6 @@ import { SaveArticleBottom } from 'components/content-saving/save-article'
 
 import { BillboardAboveTheFold } from 'components/content-ads/content-ads'
 import { BillboardBelowTheFold } from 'components/content-ads/content-ads'
-import { RectangleAboveTheFold } from 'components/content-ads/content-ads'
-import { RectangleBelowTheFold } from 'components/content-ads/content-ads'
 import { AdRailTop } from 'components/content-ads/content-ads'
 import { AdRailBottom } from 'components/content-ads/content-ads'
 
@@ -39,10 +37,6 @@ import { ShareToMastodon } from 'components/share-modal/share-mastodon'
 import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'
 import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
 import { CallOutSyndicated } from 'components/call-out/call-out-syndicated'
-
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
-import { getPlacards } from 'connectors/placards/placard.state'
-import { Placard } from 'connectors/placards/placards'
 
 // Possible query params passed via url
 const validParams = {
@@ -88,36 +82,18 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   // modify rendered elements when query params are passed in
   const { mobile_web_view, premium_user } = queryParams
   const isMobileWebView = mobile_web_view === 'true'
-  const isPremiumUser = premium_user === 'true' || isPremium === '1'
+  const isPremiumUser = premium_user === 'true' || (isPremium === '1' && 1 === 2)
   const allowAds = userStatus === 'pending' || isPremiumUser ? false : showAds
   const showCTA = userStatus !== 'valid'
-
-  // Initialize Mozilla Placards on the page
-  const featureState = useSelector((state) => state.features)
-  const showPlacards = featureFlagActive({ flag: 'moz.placards', featureState })
-
-  useEffect(() => {
-    if (!showPlacards) return
-
-    dispatch(
-      getPlacards([
-        {
-          placement: 'pocket_billboard',
-          count: 2
-        },
-        {
-          placement: 'pocket_skyscraper',
-          count: 2
-        }
-      ])
-    )
-  }, [dispatch, iabSubCategoryId, iabTopCategoryId, showPlacards])
+  const resolved = userStatus !== 'pending'
 
   const { asPath: urlPath } = router
   const targeting = {
     URL: urlPath,
     Category: iabTopCategory,
     SubCategory: iabSubCategory,
+    iabTopCategoryId,
+    iabSubCategoryId,
     ArticleID: originalItemId
   }
   // If there is no article data, turn back until it's loaded
@@ -140,10 +116,6 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   const noIndex = publisher?.attributeCanonicalToPublisher
   const syndicatedFrom = publisherUrl ? publisherUrl : false
   const ArticleLayout = isMobileWebView ? MobileLayout : Layout
-
-  // Prepare the correct ad format for the viewport size
-  const AdAboveTheFold = isMobileWebView ? RectangleAboveTheFold : BillboardAboveTheFold
-  const AdBelowTheFold = isMobileWebView ? RectangleBelowTheFold : BillboardBelowTheFold
 
   // Prep save action
   const onSave = (url, value) => {
@@ -218,11 +190,12 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
         className={printLayout}>
         <main className={contentLayout}>
           <section>
-            {showPlacards ? (
-              <Placard shouldDisplay={showPlacards} placement="pocket_billboard" position={0} />
-            ) : (
-              <AdAboveTheFold allowAds={allowAds} targeting={targeting} />
-            )}
+            <BillboardAboveTheFold
+              isMobile={isMobileWebView}
+              allowAds={allowAds}
+              targeting={targeting}
+              resolved={resolved}
+            />
           </section>
           {/* Content header information */}
           <section className="content-section">
@@ -271,21 +244,14 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
               {showCTA ? (
                 <CallOutSyndicated onVisible={onCTAVisible} handleSignup={onCTASignup} />
               ) : null}
-              {showPlacards ? (
-                <Placard shouldDisplay={showPlacards} placement="pocket_skyscraper" position={0} />
-              ) : (
-                <AdRailTop allowAds={allowAds} targeting={targeting} />
-              )}
+              <AdRailTop allowAds={allowAds} targeting={targeting} />
               <PublisherRecs
                 itemId={originalItemId}
                 publisher={publisher}
                 legacyId={originalItemId}
               />
-              {showPlacards ? (
-                <Placard shouldDisplay={showPlacards} placement="pocket_skyscraper" position={1} />
-              ) : (
-                <AdRailBottom allowAds={allowAds} targeting={targeting} />
-              )}
+
+              <AdRailBottom allowAds={allowAds} targeting={targeting} />
             </aside>
 
             <div className="content-body">
@@ -312,11 +278,11 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
           </section>
 
           <section>
-            {showPlacards ? (
-              <Placard shouldDisplay={showPlacards} placement="pocket_billboard" position={1} />
-            ) : (
-              <AdBelowTheFold allowAds={allowAds} targeting={targeting} />
-            )}
+            <BillboardBelowTheFold
+              isMobile={isMobileWebView}
+              allowAds={allowAds}
+              targeting={targeting}
+            />
           </section>
 
           {!isMobileWebView ? (
