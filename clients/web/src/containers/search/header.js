@@ -75,6 +75,7 @@ const searchStyles = css`
 export const SearchPageHeader = ({
   total,
   loading,
+  locale,
   query,
   searchType,
   filter,
@@ -87,6 +88,8 @@ export const SearchPageHeader = ({
   const handleNewest = () => dispatch(savedItemsSetSortOrder('DESC'))
   const handleOldest = () => dispatch(savedItemsSetSortOrder('ASC'))
   const handleRelevance = () => dispatch(savedItemsSetSortBy('RELEVANCE'))
+
+  const disallowCorpusSearch = ['es', 'es-ES'].includes(locale)
 
   return query ? (
     <header className={searchStyles}>
@@ -103,9 +106,13 @@ export const SearchPageHeader = ({
       </h1>
       <div className="sourceBar">
         <div>
-          <Link className={searchType === 'all' ? 'active' : ''} href={`/search?q=${query}&st=all`}>
-            All of Pocket
-          </Link>{' '}
+          {!disallowCorpusSearch ? (
+            <Link
+              className={searchType === 'all' ? 'active' : ''}
+              href={`/search?q=${query}&st=all`}>
+              All of Pocket
+            </Link>
+          ) : null}
           <Link
             className={searchType === 'saves' ? 'active' : ''}
             href={`/search?q=${query}&st=saves`}>

@@ -10,9 +10,10 @@ export const Search = ({ query, locale, searchType, filter }) => {
   const searchTypeFromAppMode = appMode === 'discovery' ? 'all' : 'saves'
   const pageToShow = searchType ? searchType : searchTypeFromAppMode
 
+  const disallowCorpusSearch = ['es', 'es-ES'].includes(locale)
   return (
     <Layout>
-      {pageToShow === 'all' ? (
+      {pageToShow === 'all' && !disallowCorpusSearch ? (
         <SearchCorpus query={query} locale={locale} />
       ) : (
         <SearchSaves query={query} locale={locale} filter={filter} />

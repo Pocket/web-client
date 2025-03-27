@@ -15,7 +15,13 @@ export const SearchCorpus = ({ query, locale }) => {
 
   return (
     <>
-      <SearchPageHeader query={query} total={total} loading={loading} searchType="all" />
+      <SearchPageHeader
+        locale={locale}
+        query={query}
+        total={total}
+        loading={loading}
+        searchType="all"
+      />
       <ListOfCorpusItems query={query} locale={locale} />
     </>
   )

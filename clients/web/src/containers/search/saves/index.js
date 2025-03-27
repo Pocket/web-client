@@ -29,6 +29,7 @@ export const SearchSaves = ({ query, locale, filter }) => {
   return (
     <>
       <SearchPageHeader
+        locale={locale}
         query={query}
         total={total}
         loading={loading}

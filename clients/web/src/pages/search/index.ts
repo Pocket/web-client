@@ -10,7 +10,8 @@ export const getServerSideProps: GetServerSideProps<LocalizedProps> = async ({
   locale = 'en',
   query
 }) => {
-  const validSearchTypes = ['all', 'saves']
+  const disallowCorpusSearch = ['es', 'es-ES'].includes(locale)
+  const validSearchTypes = disallowCorpusSearch ? ['saves'] : ['all', 'saves']
   const validFilters = ['unread', 'archive']
 
   // https://opensearch.org/docs/latest/query-dsl/full-text/simple-query-string/
