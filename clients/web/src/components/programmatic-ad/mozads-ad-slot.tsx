@@ -25,8 +25,8 @@ const programmaticAdWrapperStyles = css`
 export enum Placements {
   ABOVE_THE_FOLD = 'mock_pocket_billboard_1',
   BELOW_THE_FOLD = 'mock_pocket_billboard_2',
-  ABOVE_THE_FOLD_MOBILE = 'mock_pocket_mrec_1',
-  BELOW_THE_FOLD_MOBILE = 'mock_pocket_mrec_2',
+  ABOVE_THE_FOLD_MOBILE = 'mock_pocket_rectangle_1',
+  BELOW_THE_FOLD_MOBILE = 'mock_pocket_rectangle_2',
   RIGHT_RAIL_1 = 'mock_pocket_skyscraper_1',
   RIGHT_RAIL_2 = 'mock_pocket_skyscraper_2'
 }
