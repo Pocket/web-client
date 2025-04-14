@@ -46,7 +46,7 @@ export function AdSlot({
   instanceStyles
 }: {
   placement: Placements
-  targeting?: string[]
+  targeting?: any
   instanceStyles?: string
 }) {
   const placementId = placement.toString()
@@ -58,7 +58,7 @@ export function AdSlot({
     <div className={`${programmaticAdWrapperStyles} syndication-ad ${instanceStyles}`}>
       <MozAdsPlacement
         placementId={placementId}
-        iabContentCategoryIds={targeting}
+        iabContent={{taxonomy: 'IAB-1.0', categoryIds: [targeting.iabTopCategoryId, targeting.iabSubCategoryId]}}
         fixedSize={fixedSize}
       />
       <p className="label">{adLabel}</p>
