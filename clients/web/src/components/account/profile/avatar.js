@@ -1,6 +1,6 @@
 import { css } from '@emotion/css'
-import { buttonReset } from 'components/buttons/button-reset'
-import { useTranslation } from 'next-i18next'
+// import { buttonReset } from 'components/buttons/button-reset'
+// import { useTranslation } from 'next-i18next'
 
 const avatarStyle = css`
   grid-column: 8 / 11;
@@ -38,16 +38,16 @@ const avatarPreviewStyle = css`
   }
 `
 
-export const Avatar = ({ avatarSrc, onChangePhoto }) => {
-  const { t } = useTranslation()
+export const Avatar = ({ avatarSrc }) => {
+  // const { t } = useTranslation()
 
   return (
     <div className={avatarStyle}>
       <div className="avatarBody">
         <AvatarPreview avatarSrc={avatarSrc} />
-        <button onClick={onChangePhoto} className={`${buttonReset} updateLink`}>
+        {/* <button onClick={onChangePhoto} className={`${buttonReset} updateLink`}>
           {t('account:change-photo', 'Change photo')}
-        </button>
+        </button> */}
       </div>
     </div>
   )
