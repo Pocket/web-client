@@ -256,8 +256,8 @@ importers:
         specifier: 3.6.2
         version: 3.6.2(prop-types@15.8.1)(react@19.0.0)
       '@mozilla-services/majc':
-        specifier: https://github.com/mozilla-services/majc
-        version: https://codeload.github.com/mozilla-services/majc/tar.gz/50047a7ed03149e05426c27bd9a302175904bf11
+        specifier: https://github.com/mozilla-services/majc#v0.1.0
+        version: https://codeload.github.com/mozilla-services/majc/tar.gz/09d877ce53681284e1d8e50d20f2b5a8deb7ff33
       '@n8tb1t/use-scroll-position':
         specifier: 2.0.3
         version: 2.0.3(@types/react@19.0.8)(react@19.0.0)
@@ -3327,8 +3327,8 @@ packages:
   '@microsoft/tsdoc@0.14.2':
     resolution: {integrity: sha512-9b8mPpKrfeGRuhFH5iO1iwCLeIIsV6+H1sRfxbkoGXIyQE2BTsPd9zqSqQJ+pv5sJ/hT5M1zvOFL02MnEezFug==}
 
-  '@mozilla-services/majc@https://codeload.github.com/mozilla-services/majc/tar.gz/50047a7ed03149e05426c27bd9a302175904bf11':
-    resolution: {tarball: https://codeload.github.com/mozilla-services/majc/tar.gz/50047a7ed03149e05426c27bd9a302175904bf11}
+  '@mozilla-services/majc@https://codeload.github.com/mozilla-services/majc/tar.gz/09d877ce53681284e1d8e50d20f2b5a8deb7ff33':
+    resolution: {tarball: https://codeload.github.com/mozilla-services/majc/tar.gz/09d877ce53681284e1d8e50d20f2b5a8deb7ff33}
     version: 0.1.0
 
   '@mswjs/interceptors@0.37.6':
@@ -16983,7 +16983,7 @@ snapshots:
 
   '@microsoft/tsdoc@0.14.2': {}
 
-  '@mozilla-services/majc@https://codeload.github.com/mozilla-services/majc/tar.gz/50047a7ed03149e05426c27bd9a302175904bf11':
+  '@mozilla-services/majc@https://codeload.github.com/mozilla-services/majc/tar.gz/09d877ce53681284e1d8e50d20f2b5a8deb7ff33':
     dependencies:
       '@hey-api/client-fetch': 0.8.4
       react: 19.0.0
