@@ -75,7 +75,14 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   if (statusCode) return <ErrorPage statusCode={statusCode} />
 
   const { title, intro, excerpt, authors, imageUrl, pageSaveStatus, partnership } = data
-  const { showAds = true, IABParentCategory, IABChildCategory, externalId } = data
+  const {
+    showAds = true,
+    IABParentCategory,
+    IABChildCategory,
+    iabTopCategoryId,
+    iabSubCategoryId,
+    externalId
+  } = data
   const authorNames = authors?.map((author) => author.name)
 
   const allowAds =
@@ -87,6 +94,8 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
     URL: urlPath,
     Category: IABParentCategory?.slug,
     SubCategory: IABChildCategory?.slug,
+    iabTopCategoryId,
+    iabSubCategoryId,
     ArticleID: externalId
   }
 

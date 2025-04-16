@@ -3,6 +3,7 @@ import { requestGQL } from 'common/utilities/request/request'
 import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 import { deriveCollection, deriveStory } from 'common/api/derivers/item'
 import { arrayToObject } from 'common/utilities/object-array/object-array'
+import { IABLookup } from 'common/iab'
 
 const getCollectionBySlugQuery = gql`
   query GetCollectionBySlug($getCollectionBySlugSlug: String!) {
@@ -74,7 +75,8 @@ function handleResponse(response) {
     if (errors) throw new CollectionBySlugRequestError(errors)
     if (!stories?.length) throw new CollectionBySlugStoriesError(stories)
 
-    const derivedCollection = deriveCollection(collectionData)
+    const collectionWithIab = reverseLookupIAB(collectionData)
+    const derivedCollection = deriveCollection(collectionWithIab)
     const derivedCollectionBySlug = { [derivedCollection?.slug]: derivedCollection }
     const derivedStories = stories?.filter(validateStory).map(deriveStory)
 
@@ -93,6 +95,18 @@ function validateStory(story) {
   return story?.item?.itemId?.length && story?.url?.length
 }
 
+function reverseLookupIAB(data) {
+  const iabSubCategory = data.IABChildCategory.slug
+  const iabTopCategory = data.IABParentCategory.slug
+  const iabSubCategoryId = iabSubCategory ? findKeyByLabel(iabSubCategory.trim()) : null
+  const iabTopCategoryId = iabTopCategory ? findKeyByLabel(iabTopCategory.trim()) : null
+  return { ...data, iabSubCategoryId, iabTopCategoryId }
+}
+
+function findKeyByLabel(labelToFind) {
+  const entry = IABLookup.find((item) => item.formatted === labelToFind)
+  return entry ? entry.id : null
+}
 /** ERRORS
  --------------------------------------------------------------- */
 class CollectionBySlugRequestError extends Error {
