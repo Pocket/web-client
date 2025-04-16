@@ -25,12 +25,12 @@ const programmaticAdWrapperStyles = css`
 
 // Syndicated Article MozAds placements
 export enum Placements {
-  ABOVE_THE_FOLD = 'mock_pocket_billboard_1',
-  BELOW_THE_FOLD = 'mock_pocket_billboard_2',
-  ABOVE_THE_FOLD_MOBILE = 'mock_pocket_rectangle_1',
-  BELOW_THE_FOLD_MOBILE = 'mock_pocket_rectangle_2',
-  RIGHT_RAIL_1 = 'mock_pocket_skyscraper_1',
-  RIGHT_RAIL_2 = 'mock_pocket_skyscraper_2'
+  ABOVE_THE_FOLD = 'pocket_billboard_1',
+  BELOW_THE_FOLD = 'pocket_billboard_2',
+  ABOVE_THE_FOLD_MOBILE = 'pocket_rectangle_1',
+  BELOW_THE_FOLD_MOBILE = 'pocket_rectangle_2',
+  RIGHT_RAIL_1 = 'pocket_skyscraper_1',
+  RIGHT_RAIL_2 = 'pocket_skyscraper_2'
 }
 
 const placementSizes: Record<string, MozAdsSize> = {
@@ -45,13 +45,15 @@ const placementSizes: Record<string, MozAdsSize> = {
 export function AdSlot({
   placement,
   targeting,
-  instanceStyles
+  instanceStyles,
+  isMock = true
 }: {
   placement: Placements
   targeting?: any
   instanceStyles?: string
+  isMock: boolean
 }) {
-  const placementId = placement.toString()
+  const placementId = `${isMock ? 'mock_' : ''}${placement.toString()}`
   const { t } = useTranslation()
   const adLabel = t('ad:label', 'Advertisement')
   const fixedSize = placementSizes[placementId]
@@ -60,7 +62,10 @@ export function AdSlot({
     <div className={`${programmaticAdWrapperStyles} syndication-ad ${instanceStyles}`}>
       <MozAdsPlacement
         placementId={placementId}
-        iabContent={{taxonomy: 'IAB-1.0', categoryIds: [targeting.iabTopCategoryId, targeting.iabSubCategoryId]}}
+        iabContent={{
+          taxonomy: 'IAB-1.0',
+          categoryIds: [targeting.iabTopCategoryId, targeting.iabSubCategoryId]
+        }}
         fixedSize={fixedSize}
       />
       <p className="label">{adLabel}</p>
