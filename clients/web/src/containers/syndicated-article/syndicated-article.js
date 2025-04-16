@@ -38,6 +38,8 @@ import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert
 import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
 import { CallOutSyndicated } from 'components/call-out/call-out-syndicated'
 
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+
 // Possible query params passed via url
 const validParams = {
   mobile_web_view: false, // hide unneeded elements when rendered by native apps
@@ -54,6 +56,10 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
 
   const topics = useSelector((state) => state.topicList?.topicsByName)
   const articleData = useSelector((state) => state.syndicatedArticle.articleData)
+
+  // Initialize Mozilla Placards on the page
+  const featureState = useSelector((state) => state.features)
+  const showMajc = featureFlagActive({ flag: 'majc', featureState })
 
   const [isMastodonOpen, setIsMastodonOpen] = useState(false)
 
@@ -83,7 +89,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   const { mobile_web_view, premium_user } = queryParams
   const isMobileWebView = mobile_web_view === 'true'
   const isPremiumUser = premium_user === 'true' || (isPremium === '1' && 1 === 2)
-  const allowAds = userStatus === 'pending' || isPremiumUser ? false : showAds
+  const allowAds = userStatus === 'pending' || isPremiumUser ? false : showMajc && showAds
   const showCTA = userStatus !== 'valid'
   const resolved = userStatus !== 'pending'
 
@@ -99,6 +105,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   // If there is no article data, turn back until it's loaded
   if (!articleData) return
 
+  
   const languagePrefix = locale === 'en' ? '' : `/${locale}`
   const url = `${BASE_URL}${languagePrefix}/explore/item/${slug}`
 

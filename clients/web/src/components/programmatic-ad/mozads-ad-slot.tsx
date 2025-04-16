@@ -1,3 +1,5 @@
+'use client'
+
 import { css } from '@emotion/css'
 import { useTranslation } from 'next-i18next'
 

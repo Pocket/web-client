@@ -5,7 +5,7 @@ import Mousetrap from 'mousetrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { devModeToggle } from 'connectors/app/app.state'
 import { Features } from 'connectors/dev-tools/features'
-import { Links } from 'connectors/dev-tools/links'
+// import { Links } from 'connectors/dev-tools/links'
 import { Resets } from 'connectors/dev-tools/resets'
 import { Toasts } from 'connectors/dev-tools/toasts'
 
@@ -41,7 +41,7 @@ export function QaModal() {
       <ModalBody>
         <Features />
         <Resets />
-        <Links toggleDevMode={toggleDevMode} />
+        {/* <Links toggleDevMode={toggleDevMode} /> */}
         <Toasts />
       </ModalBody>
     </Modal>
