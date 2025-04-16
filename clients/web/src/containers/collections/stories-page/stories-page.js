@@ -15,10 +15,12 @@ import { AuthorByline } from 'components/content-author/author-byline'
 import { ArticleActions } from 'components/content-actions/article-actions'
 import { SaveArticleTop } from 'components/content-saving/save-article'
 import { SaveArticleBottom } from 'components/content-saving/save-article'
-import { AdAboveTheFold } from 'components/content-ads/content-ads'
-import { AdBelowTheFold } from 'components/content-ads/content-ads'
+
+import { BillboardAboveTheFold } from 'components/content-ads/content-ads'
+import { BillboardBelowTheFold } from 'components/content-ads/content-ads'
 import { AdRailTop } from 'components/content-ads/content-ads'
 import { AdRailBottom } from 'components/content-ads/content-ads'
+
 import { ContentIntro } from 'components/content-intro/content-intro'
 import { AuthorBio } from 'components/content-author/author-bio'
 import { Partner } from 'components/content-partner/partner'
@@ -34,6 +36,8 @@ import ErrorPage from 'pages/_error'
 
 import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'
 import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
+
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 const newsroomUrls = [
   'https://getpocket.com/collections/the-american-journalism-project',
@@ -60,6 +64,11 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   const showTopics = locale === 'en'
   const saveItemId = useSelector((state) => state.itemsTransitions[slug])
 
+  // Initialize MAJC on the page
+  const featureState = useSelector((state) => state.features)
+  const showMajc = featureFlagActive({ flag: 'majc', featureState })
+  const resolved = userStatus !== 'pending'
+
   const [isMastodonOpen, setIsMastodonOpen] = useState(false)
 
   // Show error page if things have gone awry
@@ -69,7 +78,8 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   const { showAds = true, IABParentCategory, IABChildCategory, externalId } = data
   const authorNames = authors?.map((author) => author.name)
 
-  const allowAds = userStatus === 'pending' || isPremium ? false : showAds
+  const allowAds =
+    userStatus === 'pending' || (isPremium === '1' && 1 === 2) ? false : showMajc && showAds
 
   // Initialize Ads on the page
   const { asPath: urlPath } = router
@@ -146,7 +156,12 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
         className={printLayout}>
         <main className={contentLayout}>
           <section>
-            <AdAboveTheFold allowAds={allowAds} targeting={targeting} />
+            <BillboardAboveTheFold
+              isMobile={isMobileWebView}
+              allowAds={allowAds}
+              targeting={targeting}
+              resolved={resolved}
+            />
           </section>
           {/* Content header information */}
           <section className="content-section">
@@ -233,13 +248,19 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
                 saveStatus={saveStatus}
                 url={url}
               />
-
-              <AdBelowTheFold allowAds={allowAds} targeting={targeting} />
-
-              {showTopics ? (
-                <TopicsBubbles topics={topics} className="no-border" track={topicClick} />
-              ) : null}
             </footer>
+          </section>
+          <section>
+            <BillboardBelowTheFold
+              isMobile={isMobileWebView}
+              allowAds={allowAds}
+              targeting={targeting}
+            />
+          </section>
+          <section>
+            {showTopics ? (
+              <TopicsBubbles topics={topics} className="no-border" track={topicClick} />
+            ) : null}
           </section>
         </main>
         <ShareToMastodon

@@ -57,7 +57,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   const topics = useSelector((state) => state.topicList?.topicsByName)
   const articleData = useSelector((state) => state.syndicatedArticle.articleData)
 
-  // Initialize Mozilla Placards on the page
+  // Initialize MAJC on the page
   const featureState = useSelector((state) => state.features)
   const showMajc = featureFlagActive({ flag: 'majc', featureState })
 
@@ -105,7 +105,6 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   // If there is no article data, turn back until it's loaded
   if (!articleData) return
 
-  
   const languagePrefix = locale === 'en' ? '' : `/${locale}`
   const url = `${BASE_URL}${languagePrefix}/explore/item/${slug}`
 
