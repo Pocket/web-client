@@ -88,8 +88,10 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   // modify rendered elements when query params are passed in
   const { mobile_web_view, premium_user } = queryParams
   const isMobileWebView = mobile_web_view === 'true'
-  const isPremiumUser = premium_user === 'true' || (isPremium === '1' && 1 === 2)
-  const allowAds = userStatus === 'pending' || isPremiumUser ? false : showMajc && showAds
+  const isPremiumUser = premium_user === 'true' || isPremium === '1'
+  const shouldSeeAds = userStatus === 'pending' || isPremiumUser ? false : showAds
+  const allowAds = shouldSeeAds || showMajc
+
   const showCTA = userStatus !== 'valid'
   const resolved = userStatus !== 'pending'
 

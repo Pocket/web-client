@@ -84,9 +84,8 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
     externalId
   } = data
   const authorNames = authors?.map((author) => author.name)
-
-  const allowAds =
-    userStatus === 'pending' || (isPremium === '1' && 1 === 2) ? false : showMajc && showAds
+  const shouldSeeAds = userStatus === 'pending' || isPremium === '1' ? false : showAds
+  const allowAds = shouldSeeAds || showMajc
 
   // Initialize Ads on the page
   const { asPath: urlPath } = router

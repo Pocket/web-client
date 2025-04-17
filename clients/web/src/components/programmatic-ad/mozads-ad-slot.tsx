@@ -46,7 +46,7 @@ export function AdSlot({
   placement,
   targeting,
   instanceStyles,
-  isMock = true
+  isMock = false
 }: {
   placement: Placements
   targeting?: any
