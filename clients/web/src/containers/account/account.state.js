@@ -8,6 +8,8 @@ import { setCookie } from 'nookies'
 import { USER_REQUEST } from 'actions'
 import { USER_SUCCESS } from 'actions'
 import { USER_FAILURE } from 'actions'
+import { USER_TOGGLE_PREMIUM } from 'actions'
+
 import { SESS_GUID_HYDRATE } from 'actions'
 
 import { userProfileReducers, userProfileSagas } from 'containers/account/profile/profile.state'
@@ -28,6 +30,7 @@ const yearInMs = 60 * 60 * 24 * 365
  --------------------------------------------------------------- */
 export const setUser = (newVisitor) => ({ type: USER_REQUEST, newVisitor}) //prettier-ignore
 export const sessGuidHydrate = (sess_guid) => ({type: SESS_GUID_HYDRATE,sess_guid}) //prettier-ignore
+export const togglePremium = () => ({type: USER_TOGGLE_PREMIUM}) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -50,6 +53,11 @@ export const userReducers = (state = initialState, action) => {
         user_status: 'invalid',
         auth: false // force auth to false
       }
+    }
+
+    case USER_TOGGLE_PREMIUM: {
+      const premium_status = state.premium_status === '1' ? '0' : '1'
+      return { ...state, premium_status }
     }
 
     case SESS_GUID_HYDRATE: {
@@ -97,11 +105,11 @@ function* userRequest(action) {
   const { user } = response
   const { username, first_name, last_name, profile, email, aliases, friend, is_fxa, ...rest } = user
   const isFXA = getBool(is_fxa)
-  
+
   if (user)
     return yield put({
       type: USER_SUCCESS,
-      user: {...rest, isFXA},
+      user: { ...rest, isFXA },
       profile: { username, first_name, last_name, ...profile },
       aliases,
       email,

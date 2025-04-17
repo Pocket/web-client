@@ -10,6 +10,7 @@ import { Resets } from 'connectors/dev-tools/resets'
 import { Toasts } from 'connectors/dev-tools/toasts'
 
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+import { PremiumToggle } from './premium-toggle'
 
 export function QaModal() {
   const dispatch = useDispatch()
@@ -39,6 +40,7 @@ export function QaModal() {
       screenReaderLabel="QA Tools"
       handleClose={toggleDevMode}>
       <ModalBody>
+        <PremiumToggle />
         <Features />
         <Resets />
         {/* <Links toggleDevMode={toggleDevMode} /> */}
