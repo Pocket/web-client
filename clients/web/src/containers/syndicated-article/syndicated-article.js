@@ -86,11 +86,12 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   const saveStatus = saveItemId ? 'saved' : 'unsaved'
 
   // modify rendered elements when query params are passed in
-  const { mobile_web_view, premium_user } = queryParams
+  const { mobile_web_view } = queryParams
   const isMobileWebView = mobile_web_view === 'true'
-  const isPremiumUser = premium_user === 'true' || isPremium === '1'
+
+  const isPremiumUser = isPremium === '1'
   const shouldSeeAds = userStatus === 'pending' || isPremiumUser ? false : showAds
-  const allowAds = shouldSeeAds || showMajc
+  const allowAds = shouldSeeAds && showMajc
 
   const showCTA = userStatus !== 'valid'
   const resolved = userStatus !== 'pending'
