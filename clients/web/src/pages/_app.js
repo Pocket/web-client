@@ -118,9 +118,28 @@ function PocketWebClient({ Component, pageProps, err }) {
 
   // Hydrate user features/settings
   useEffect(() => {
+    // Sets up feature flags for this user
+    const hydrateFeatures = async () => {
+      try {
+        const locale = navigator.languages
+          ? navigator.languages[0]
+          : navigator.language || navigator.userLanguage
+
+        const response = await fetchUnleashData(user_id, sess_guid, birth, locale)
+        const features = response ? response : {}
+        if (features) dispatch(featuresHydrate(features))
+      } catch {
+        dispatch(featuresHydrate({}))
+      }
+    }
+
+    const requestListsPilotStatus = async () => {
+      dispatch(checkListsPilotStatus())
+    }
+
     if (user_status === 'pending' || flagsReady) return () => {}
     if (user_status === 'invalid') {
-      dispatch(featuresHydrate({}))
+      hydrateFeatures()
       dispatch(hydrateSettings())
       return () => {}
     }
@@ -128,21 +147,6 @@ function PocketWebClient({ Component, pageProps, err }) {
     // Set up defaults/user pref in state
     dispatch(appSetPreferences())
     dispatch(hydrateSettings())
-
-    // Sets up feature flags for this user
-    const hydrateFeatures = async () => {
-      const locale = navigator.languages
-        ? navigator.languages[0]
-        : navigator.language || navigator.userLanguage
-
-      const response = await fetchUnleashData(user_id, sess_guid, birth, locale)
-      const features = response ? response : {}
-      if (features) dispatch(featuresHydrate(features))
-    }
-
-    const requestListsPilotStatus = async () => {
-      dispatch(checkListsPilotStatus())
-    }
 
     hydrateFeatures()
     requestListsPilotStatus()
