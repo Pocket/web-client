@@ -1,5 +1,3 @@
-/* Global freestar googletag*/
-import Head from 'next/head'
 import { BASE_URL } from 'common/constants'
 import Layout from 'layouts/main'
 import MobileLayout from 'layouts/mobile-web'
@@ -89,7 +87,6 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   const shouldSeeAds = userStatus === 'pending' || isPremiumUser ? false : showAds
   const allowAds = shouldSeeAds && showMajc
 
-
   // Initialize Ads on the page
   const { asPath: urlPath } = router
   const targeting = {
@@ -145,20 +142,6 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
 
   return (
     <>
-      <Head>
-        {/* These preconnect are in place for Freestar Ads */}
-        <link rel="preconnect" href="https://a.pub.network/" crossOrigin />
-        <link rel="preconnect" href="https://b.pub.network/" crossOrigin />
-        <link rel="preconnect" href="https://c.pub.network/" crossOrigin />
-        <link rel="preconnect" href="https://d.pub.network/" crossOrigin />
-        <link rel="preconnect" href="https://btloader.com/" crossOrigin />
-        <link rel="preconnect" href="https://api.btloader.com/" crossOrigin />
-        <link
-          rel="preconnect"
-          href="https://confiant-integrations.global.ssl.fastly.net"
-          crossOrigin
-        />
-      </Head>
       <ArticleLayout
         forceWebView={true}
         title={metaData.title}

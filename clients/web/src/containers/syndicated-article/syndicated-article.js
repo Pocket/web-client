@@ -1,5 +1,3 @@
-/* Global freestar googletag*/
-import Head from 'next/head'
 import Layout from 'layouts/main'
 import MobileLayout from 'layouts/mobile-web'
 import { useRouter } from 'next/router'
@@ -176,20 +174,6 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
 
   return (
     <>
-      <Head>
-        {/* These preconnect are in place for Freestar Ads */}
-        <link rel="preconnect" href="https://a.pub.network/" crossOrigin />
-        <link rel="preconnect" href="https://b.pub.network/" crossOrigin />
-        <link rel="preconnect" href="https://c.pub.network/" crossOrigin />
-        <link rel="preconnect" href="https://d.pub.network/" crossOrigin />
-        <link rel="preconnect" href="https://btloader.com/" crossOrigin />
-        <link rel="preconnect" href="https://api.btloader.com/" crossOrigin />
-        <link
-          rel="preconnect"
-          href="https://confiant-integrations.global.ssl.fastly.net"
-          crossOrigin
-        />
-      </Head>
       <ArticleLayout
         title={title}
         metaData={articleMetaData}
