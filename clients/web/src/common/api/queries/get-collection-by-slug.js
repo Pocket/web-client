@@ -96,8 +96,8 @@ function validateStory(story) {
 }
 
 function reverseLookupIAB(data) {
-  const iabSubCategory = data.IABChildCategory.slug
-  const iabTopCategory = data.IABParentCategory.slug
+  const iabSubCategory = data.IABChildCategory?.slug
+  const iabTopCategory = data.IABParentCategory?.slug
   const iabSubCategoryId = iabSubCategory ? findKeyByLabel(iabSubCategory.trim()) : null
   const iabTopCategoryId = iabTopCategory ? findKeyByLabel(iabTopCategory.trim()) : null
   return { ...data, iabSubCategoryId, iabTopCategoryId }
