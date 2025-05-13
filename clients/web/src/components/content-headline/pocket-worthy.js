@@ -36,8 +36,7 @@ export function PocketWorthy() {
 
   return (
     <div className={PocketWorthyWrapper}>
-      {t('discover:pocket-worthy', 'Pocket worthy')}
-      <span>{t('discover:stories-to-fuel-your-mind', 'Stories to fuel your mind.')}</span>
+      {t('discover:stories-to-fuel-your-mind', 'Stories to fuel your mind.')}
     </div>
   )
 }

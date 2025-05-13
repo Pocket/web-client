@@ -1,16 +1,8 @@
 import { css, cx } from '@emotion/css'
-import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { MailIcon } from '@ui/icons/MailIcon'
 import { MastodonIcon } from '@ui/icons/MastodonIcon'
 import { breakpointMediumTablet } from 'common/constants'
 import { SocialButton } from 'components/social-button/social-button'
-
-const saveButton = css`
-  min-width: 0;
-  svg {
-    margin-right: 0;
-  }
-`
 
 const shareContainer = css`
   display: flex;
@@ -132,18 +124,14 @@ function buildEmailUrl(shareUrl, title, excerpt) {
 }
 
 export const ArticleActions = function ({
-  isAuthenticated,
-  onSave = () => {},
   onShare = () => {},
   onShareMastodon = () => {},
-  saveStatus,
   excerpt = '',
   title,
   url,
   className
 }) {
   const emailUrl = buildEmailUrl(url, title, excerpt)
-  const saveAction = () => onSave(url, 'save-story-side')
   const emailAction = () => {
     onShare('email')
     window.location.href = emailUrl
@@ -157,17 +145,6 @@ export const ArticleActions = function ({
   return (
     <div className={cx(shareContainer, className)}>
       <div className="social-actions">
-        <div className="pocket-share">
-          <SaveToPocket
-            saveAction={saveAction}
-            isAuthenticated={isAuthenticated}
-            saveStatus={saveStatus}
-            hideCopy={true}
-            className={saveButton}
-            id="sidebar"
-          />
-        </div>
-
         <div className="facebook-share">
           <SocialButton
             network="facebook"

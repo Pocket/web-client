@@ -16,7 +16,7 @@ const Heading = () => {
   const { t } = useTranslation()
   return (
     <h3 className={cx('h6', headingStyles)} data-testid="pocket-recs-heading">
-      {t('discover:more-stories-from-pocket', 'More Stories from Pocket')}
+      {t('discover:recommended-stories', 'Recommended Stories')}
     </h3>
   )
 }

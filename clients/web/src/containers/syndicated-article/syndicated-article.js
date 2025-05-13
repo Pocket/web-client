@@ -2,7 +2,6 @@ import Layout from 'layouts/main'
 import MobileLayout from 'layouts/mobile-web'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
-import { useState } from 'react'
 import { BASE_URL } from 'common/constants'
 
 import { contentLayout } from 'components/content-layout/content-layout'
@@ -10,32 +9,17 @@ import { printLayout } from 'components/content-layout/print-layout'
 import { PocketWorthy } from 'components/content-headline/pocket-worthy'
 import { ParsedHeadline } from 'components/content-headline/parsed-headline'
 import { AuthorByline } from 'components/content-author/author-byline'
-import { ArticleActions } from 'components/content-actions/article-actions'
-import { SaveArticleTop } from 'components/content-saving/save-article'
-import { SaveArticleBottom } from 'components/content-saving/save-article'
 
 import { BillboardAboveTheFold } from 'components/content-ads/content-ads'
 import { BillboardBelowTheFold } from 'components/content-ads/content-ads'
 import { AdRailTop } from 'components/content-ads/content-ads'
 import { AdRailBottom } from 'components/content-ads/content-ads'
-
 import { ContentParsed } from 'components/content-parsed/content-parsed'
 import { PublisherAttribution } from 'components/content-publisher/publisher-attribution'
-
 import { PublisherRecs } from './publisher-recs'
 import { PocketRecs } from './pocket-recs'
-
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-
-import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
 import { Toasts } from 'connectors/toasts/toast-list'
-import { ListenLogin as Listen } from 'connectors/listen/listen-login'
-import { ShareToMastodon } from 'components/share-modal/share-mastodon'
-
-import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'
-import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
-import { CallOutSyndicated } from 'components/call-out/call-out-syndicated'
-
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 // Possible query params passed via url
@@ -48,21 +32,16 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const isAuthenticated = useSelector((state) => state.user?.auth)
   const isPremium = useSelector((state) => state.user?.premium_status)
   const userStatus = useSelector((state) => state.user.user_status)
 
-  const topics = useSelector((state) => state.topicList?.topicsByName)
   const articleData = useSelector((state) => state.syndicatedArticle.articleData)
 
   // Initialize MAJC on the page
   const featureState = useSelector((state) => state.features)
   const showMajc = featureFlagActive({ flag: 'majc', featureState })
 
-  const [isMastodonOpen, setIsMastodonOpen] = useState(false)
-
   const {
-    itemId,
     originalItemId,
     title,
     excerpt,
@@ -80,9 +59,6 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
     showAds
   } = articleData || {}
 
-  const saveItemId = useSelector((state) => state.itemsTransitions[slug])
-  const saveStatus = saveItemId ? 'saved' : 'unsaved'
-
   // modify rendered elements when query params are passed in
   const { mobile_web_view } = queryParams
   const isMobileWebView = mobile_web_view === 'true'
@@ -91,7 +67,6 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   const shouldSeeAds = userStatus === 'pending' || isPremiumUser ? false : showAds
   const allowAds = shouldSeeAds && showMajc
 
-  const showCTA = userStatus !== 'valid'
   const resolved = userStatus !== 'pending'
 
   const { asPath: urlPath } = router
@@ -125,35 +100,6 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   const ArticleLayout = isMobileWebView ? MobileLayout : Layout
 
   // Prep save action
-  const onSave = (url, value) => {
-    dispatch(sendSnowplowEvent('syndicated.article.save', { url, value }))
-    dispatch(mutationUpsertTransitionalItem(url, slug))
-  }
-
-  const onUnSave = (url, value) => {
-    dispatch(sendSnowplowEvent('syndicated.article.unsave', { url, value }))
-    dispatch(mutationDeleteTransitionalItem(saveItemId, slug))
-  }
-
-  const saveAction = saveItemId ? onUnSave : onSave
-
-  const shareAction = (platform) => {
-    const analyticsData = { url }
-    dispatch(sendSnowplowEvent(`syndicated.share.${platform}`, analyticsData))
-  }
-
-  const toggleMastodon = () => {
-    setIsMastodonOpen(!isMastodonOpen)
-  }
-
-  const confirmMastodon = (instance) => {
-    dispatch(sendSnowplowEvent('share.mastodon.confirm', { value: instance }))
-  }
-
-  const topicClick = (topic) => {
-    dispatch(sendSnowplowEvent('syndicated.topic.click', { label: topic }))
-  }
-
   const publisherImpression = (label) => {
     dispatch(sendSnowplowEvent('syndicated.attribution.impression', { label }))
   }
@@ -162,19 +108,12 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
     dispatch(sendSnowplowEvent('syndicated.attribution.click', { label }))
   }
 
-  const onCTAVisible = () => {
-    dispatch(sendSnowplowEvent('syndicated.signup.impression'))
-  }
-
-  const onCTASignup = () => {
-    dispatch(sendSnowplowEvent('syndicated.signup.click'))
-  }
-
   const showAuthors = authorNames?.length > 0
 
   return (
     <>
       <ArticleLayout
+        shutdown={true}
         title={title}
         metaData={articleMetaData}
         syndicatedFrom={syndicatedFrom}
@@ -203,40 +142,16 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
                   authorNames={authorNames}
                 />
               ) : null}
-              <SaveArticleTop
-                isAuthenticated={isAuthenticated}
-                saveAction={saveAction}
-                saveStatus={saveStatus}
-                url={url}
-              />
-              <Listen itemId={itemId} path={url} />
             </header>
           </section>
 
           {/* Content body like a syndicated article or collection */}
           <section className="content-section">
             {/* Left side content actions */}
-            <aside className="left-aside">
-              <ArticleActions
-                isMobileWebView={isMobileWebView}
-                title={title}
-                url={url}
-                excerpt={excerpt}
-                onSave={saveAction}
-                onShare={shareAction}
-                onShareMastodon={toggleMastodon}
-                saveStatus={saveStatus}
-                isAuthenticated={isAuthenticated}
-                className="sticky"
-                slug={slug}
-              />
-            </aside>
+            <aside className="left-aside"></aside>
 
             {/* Right aside content such as ads and recs */}
             <aside className="right-aside">
-              {showCTA ? (
-                <CallOutSyndicated onVisible={onCTAVisible} handleSignup={onCTASignup} />
-              ) : null}
               <AdRailTop allowAds={allowAds} targeting={targeting} />
               <PublisherRecs
                 itemId={originalItemId}
@@ -255,12 +170,6 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
 
           <section className="content-section">
             <footer>
-              <SaveArticleBottom
-                isAuthenticated={isAuthenticated}
-                saveAction={saveAction}
-                saveStatus={saveStatus}
-                url={url}
-              />
               <PublisherAttribution
                 publisher={publisher}
                 publishedAt={publishedAt}
@@ -282,17 +191,10 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
             <section className="content-section">
               <footer>
                 <PocketRecs itemId={originalItemId} legacyId={originalItemId} />
-                <TopicsBubbles topics={topics} className="no-border" track={topicClick} />
               </footer>
             </section>
           ) : null}
         </main>
-        <ShareToMastodon
-          showModal={isMastodonOpen}
-          cancelShare={toggleMastodon}
-          shareAction={confirmMastodon}
-          url={url}
-        />
         <Toasts />
       </ArticleLayout>
     </>
