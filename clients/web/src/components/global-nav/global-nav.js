@@ -331,7 +331,7 @@ const GlobalNav = ({
                 />
               </div>
 
-              <div className={cx(toolsStyle, isPremium && 'is-premium')}>
+              <div className={toolsStyle}>
                 <GlobalNavTools tools={tools} onToolClick={onToolClick} />
               </div>
 

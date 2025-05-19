@@ -6,9 +6,6 @@ import { breakpointTinyTablet } from 'common/constants'
 import { breakpointLargeHandset } from 'common/constants'
 import { breakpointTinyHandset } from 'common/constants'
 import { PageContainer } from 'components/page-container/page-container'
-import { FacebookMonoIcon } from '@ui/icons/FacebookMonoIcon'
-import { TwitterMonoIcon } from '@ui/icons/TwitterMonoIcon'
-import { InstagramMonoIcon } from '@ui/icons/InstagramMonoIcon'
 import { Trans, useTranslation } from 'next-i18next'
 import { Languages } from 'connectors/languages/languages'
 import { PREMIUM_URL } from 'common/constants'
@@ -425,6 +422,9 @@ export const GlobalFooter = (props) => {
                 &copy; {new Date().getFullYear()}{' '}
                 {t('global-footer:read-it-later-inc', 'Read It Later, Inc.')}
               </span>
+              <a href="https://help.getpocket.com/?src=footer_v2">
+                {t('global-footer:get-help', 'Get help')}
+              </a>
               <a href="https://getpocket.com/privacy?src=footer_v2">
                 {t('global-footer:privacy-policy', 'Privacy policy')}
               </a>
@@ -445,32 +445,6 @@ export const GlobalFooter = (props) => {
                 {t('global-footer:language', 'Language')}
                 <div className="languages">
                   <Languages />
-                </div>
-              </div>
-              <div className="social-wrapper">
-                {t('global-footer:follow-pocket', 'Follow Pocket')}
-                <div className="social">
-                  <a href="https://facebook.com/pocket" rel="noopener">
-                    <FacebookMonoIcon
-                      id="facebook-footer-icon"
-                      title="Facebook"
-                      description={t('global-footer:visit-facebook', 'Visit our Facebook page')}
-                    />
-                  </a>
-                  <a href="https://twitter.com/pocket" rel="noopener">
-                    <TwitterMonoIcon
-                      id="twitter-footer-icon"
-                      title="Twitter"
-                      description={t('global-footer:view-twitter', 'View our Twitter profile')}
-                    />
-                  </a>
-                  <a href="https://instagram.com/pocket" rel="noopener">
-                    <InstagramMonoIcon
-                      id="instagram-footer-icon"
-                      title="Instagram"
-                      description={t('global-footer:view-instagram', 'Find us on Instagram')}
-                    />
-                  </a>
                 </div>
               </div>
             </div>

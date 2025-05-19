@@ -4,18 +4,15 @@ import PropTypes from 'prop-types'
 import { css, cx } from '@emotion/css'
 import { Trans, useTranslation } from 'next-i18next'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
-import { KEYS, PREMIUM_URL } from 'common/constants'
-import { SIGNUP_URL, LOGIN_URL } from 'common/constants'
+import { KEYS } from 'common/constants'
+import { LOGIN_URL } from 'common/constants'
 import { NewViewIcon } from '@ui/icons/NewViewIcon'
 import { breakpointLargeHandset } from 'common/constants'
-import { ProfileIcon } from '@ui/icons/ProfileIcon'
-import { PremiumIcon } from '@ui/icons/PremiumIcon'
 import { AvatarButton } from 'components/avatar/avatar-button'
 import { PopupMenu, PopupMenuGroup, PopupMenuItem } from 'components/popup-menu/popup-menu'
 import { bottomTooltip } from 'components/tooltip/tooltip'
 import { ThemeSettings } from 'components/display-settings/theme'
 import { ListSettings } from 'components/display-settings/list-modes'
-import { useInView } from 'react-intersection-observer'
 import { FloatingNotification } from './notification'
 import { clearUserData } from '@snowplow/browser-tracker'
 
@@ -73,57 +70,6 @@ const accountLinkStyle = css`
   }
 `
 
-const signupLinkStyle = css`
-  font-weight: 500;
-  vertical-align: middle;
-
-  .icon {
-    display: none;
-  }
-
-  ${breakpointLargeHandset} {
-    // needed specificity to override secondary variant styles
-    &.secondary {
-      border: none;
-
-      &:hover {
-        background: none;
-        color: var(--color-textLinkHover);
-      }
-
-      &:active {
-        color: var(--color-textLinkPressed);
-      }
-
-      .label {
-        position: absolute;
-        left: -99999px;
-      }
-
-      .icon {
-        height: var(--fontSize150);
-        display: inline-block;
-        margin-top: 0;
-      }
-    }
-  }
-`
-
-const upgradeLinkStyle = css`
-  ${breakpointLargeHandset} {
-    margin-right: var(--spacing075);
-
-    .icon {
-      margin-right: 0;
-    }
-
-    .label {
-      position: absolute;
-      left: -99999px;
-    }
-  }
-`
-
 const avatarWrapper = css`
   position: relative;
   display: inline-block;
@@ -160,10 +106,8 @@ const GlobalNavAccount = ({
   setListMode,
   setGridMode,
   setDetailMode,
-  sendImpression,
   showNotification,
   isLoggedIn = false,
-  isPremium = false,
   isFxa,
   avatarSrc = null,
   accountName = 'You',
@@ -185,12 +129,6 @@ const GlobalNavAccount = ({
   const [menuOpen, setMenuOpen] = useState(false)
   const [focus, setFocus] = useState(false)
 
-  const [viewRef] = useInView({
-    triggerOnce: true,
-    threshold: 0.5,
-    onChange: (inView) => inView && sendImpression('global-nav.upgrade-link')
-  })
-
   useCorrectEffect(() => {
     if (!focus || !menuOpen) return
 
@@ -209,8 +147,6 @@ const GlobalNavAccount = ({
     }
   }
 
-  const handleSignupCase = () => onLinkClick('signup')
-  const handlePremiumCase = () => onLinkClick('premium')
   const handleViewProfileCase = () => onLinkClick('view-profile')
   const handleManageAccountCase = () => onLinkClick('manage-account')
   const handleHelpCase = () => onLinkClick('help')
@@ -243,34 +179,9 @@ const GlobalNavAccount = ({
         data-testid="login-link">
         <Trans i18nKey="nav:log-in">Log in</Trans>
       </a>
-      <a
-        href={`${SIGNUP_URL}?src=web-nav&utm_source=${global.location.href}`}
-        id="global-nav-signup-link"
-        className={cx(signupLinkStyle, 'button secondary')}
-        onClick={handleSignupCase}
-        data-testid="signup-link">
-        <ProfileIcon />
-        <span className="label">
-          <Trans i18nKey="nav:sign-up">Sign up</Trans>
-        </span>
-      </a>
     </div>
   ) : (
     <div ref={menuRef}>
-      {!isPremium ? (
-        <a
-          href={`${PREMIUM_URL}&utm_campaign=global-nav&src=navbar`}
-          id="global-nav.upgrade-link"
-          className={`${accountLinkStyle} ${upgradeLinkStyle}`}
-          onClick={handlePremiumCase}
-          data-testid="upgrade-link"
-          ref={viewRef}>
-          <PremiumIcon />
-          <span className="label">
-            <Trans i18nKey="nav:upgrade">Upgrade</Trans>
-          </span>
-        </a>
-      ) : null}
       <div className={cx(avatarWrapper, bottomTooltip)} data-tooltip={t('nav:account', 'Account')}>
         <AvatarButton
           aria-label={t('nav:open-account-menu', 'Open Account Menu')}
