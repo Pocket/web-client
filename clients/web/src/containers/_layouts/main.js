@@ -1,12 +1,19 @@
 import PropTypes from 'prop-types'
 import { GlobalFooter } from 'components/global-footer/global-footer'
 import { PageContainer } from 'components/page-container/page-container'
+import { breakpointLargeTablet } from 'common/constants'
 import GlobalNav from 'connectors/global-nav/global-nav'
 import { css, cx } from '@emotion/css'
 import { PocketHead } from 'containers/_layouts/_head'
 
 const fixedNavContainer = css`
   padding-top: 65px;
+  &.withBanner {
+    padding-top: 120px;
+    ${breakpointLargeTablet} {
+      padding-top: 172px;
+    }
+  }
 `
 const noContainerStyle = css`
   padding-bottom: 65px;
@@ -24,7 +31,8 @@ function mainLayout({
   isFullWidthLayout = false,
   noContainer = false,
   className = '',
-  forceWebView = false
+  forceWebView = false,
+  bannerCampaign = 'goodbye'
 }) {
   return (
     <>
@@ -36,8 +44,14 @@ function mainLayout({
         metaData={metaData}
         forceWebView={forceWebView}
       />
-      <GlobalNav selectedLink={selectedNavLink} noNav={noNav} />
-      <div className={cx(fixedNavContainer, noContainer && noContainerStyle, className)}>
+      <GlobalNav selectedLink={selectedNavLink} noNav={noNav} bannerCampaign={bannerCampaign} />
+      <div
+        className={cx(
+          fixedNavContainer,
+          noContainer && noContainerStyle,
+          bannerCampaign && 'withBanner',
+          className
+        )}>
         {isFullWidthLayout ? children : <PageContainer>{children}</PageContainer>}
       </div>
       {noNav ? null : <GlobalFooter />}

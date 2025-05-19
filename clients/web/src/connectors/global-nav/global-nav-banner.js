@@ -1,4 +1,5 @@
 import { BannerNewsroom } from 'components/banner/newsroom'
+import { BannerGoodbye } from 'components/banner/goodbye'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { useDispatch } from 'react-redux'
 
@@ -15,6 +16,10 @@ export const Banner = ({ bannerCampaign }) => {
 
   if (bannerCampaign === 'newsroom') {
     return <BannerNewsroom sendImpression={sendImpression} handleClick={handleClick} />
+  }
+
+  if (bannerCampaign === 'goodbye') {
+    return <BannerGoodbye />
   }
 
   return null

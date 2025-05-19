@@ -39,7 +39,10 @@ const savesContainer = css`
 const fixedNavContainer = css`
   padding-top: 65px;
   &.withBanner {
-    padding-top: 172px;
+    padding-top: 120px;
+    ${breakpointLargeTablet} {
+      padding-top: 172px;
+    }
   }
 `
 
@@ -52,7 +55,7 @@ function mainLayout({
   tag,
   selectedNavLink,
   isFullWidthLayout = false,
-  bannerCampaign,
+  bannerCampaign = 'goodbye',
   noNav = false
 }) {
   return (
