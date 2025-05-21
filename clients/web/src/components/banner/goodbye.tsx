@@ -5,6 +5,7 @@ import { breakpointTinyTablet } from 'common/constants'
 import { breakpointLargeHandset } from 'common/constants'
 import { useTranslation } from 'next-i18next'
 import { ArrowRightIcon } from '@ui/icons/ArrowRightIcon'
+import Link from 'next/link'
 const bannerBackground = css`
   width: 100%;
   background: #008078;
@@ -57,8 +58,10 @@ const bannerBackground = css`
 `
 
 export const BannerGoodbye = () => {
-  const { t } = useTranslation()
-  return (
+  const { t, i18n } = useTranslation()
+  const currentLanguage = i18n.language.toLowerCase()
+  const showBanner = currentLanguage === 'en' || currentLanguage === 'en-us'
+  return showBanner ? (
     <div className={bannerBackground}>
       <div className="inner page-container">
         <h3>{t('shutdown:banner-header', 'Pocket is shutting down')}</h3>
@@ -68,12 +71,12 @@ export const BannerGoodbye = () => {
               'shutdown:banner-copy',
               'After much thought, we’ve made the difficult decision to close Pocket. Thanks for being part of the journey. Find out about refunds and how to export your content in our support article.'
             )}
-            <a className="call-to-action" href="">
+            <Link className="call-to-action" href="/farewell">
               <ArrowRightIcon /> {t('shutdown:banner-readmore', 'Read more')}
-            </a>
+            </Link>
           </p>
         </div>
       </div>
     </div>
-  )
+  ) : null
 }

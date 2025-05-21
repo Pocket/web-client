@@ -8,17 +8,6 @@ describe('GlobalNavAccount', () => {
   it('renders properly when the user is signed out', () => {
     const { getByTestId } = render(<GlobalNavAccount {...baseProps} isLoggedIn={false} />)
     expect(getByTestId('login-link'))
-    expect(getByTestId('signup-link'))
-  })
-
-  it('renders an upgrade link if the user is signed in but not a premium account', () => {
-    const { getByTestId } = render(<GlobalNavAccount {...baseProps} isLoggedIn isPremium={false} />)
-    expect(getByTestId('upgrade-link'))
-  })
-
-  it('does not render an upgrade link if the user is signed and a premium account', () => {
-    const { queryByTestId } = render(<GlobalNavAccount {...baseProps} isLoggedIn isPremium />)
-    expect(queryByTestId('upgrade-link')).toBeFalsy()
   })
 
   it('renders the user’s avatar when signed in, using props.avatarSrc', () => {
@@ -60,17 +49,6 @@ describe('GlobalNavAccount', () => {
     )
     fireEvent.click(getByTestId('login-link'))
     expect(onLoginClick).toHaveBeenCalled()
-  })
-
-  it('calls the onLinkClick callback when a login is clicked, passing name through', () => {
-    const onLinkClick = jest.fn()
-
-    const { getByTestId } = render(
-      <GlobalNavAccount {...baseProps} isLoggedIn={false} onLinkClick={onLinkClick} />
-    )
-
-    fireEvent.click(getByTestId('signup-link'))
-    expect(onLinkClick).toHaveBeenCalledWith('signup')
   })
 
   it('calls the onAccountClick callback when the account menu is opened', () => {

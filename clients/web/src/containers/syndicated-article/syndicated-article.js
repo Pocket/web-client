@@ -119,6 +119,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
         syndicatedFrom={syndicatedFrom}
         canonical={canonical}
         noIndex={noIndex}
+        bannerCampaign={false}
         className={printLayout}>
         <main className={contentLayout}>
           <section>
