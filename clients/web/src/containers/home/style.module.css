@@ -1,4 +1,9 @@
 .spacer {
+  padding-top: 172px !important;
+
+  @media (max-width: 1023px) {
+    padding-top: 192px !important;
+  }
 }
 
 div.search {
