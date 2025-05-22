@@ -69,8 +69,8 @@ export const BannerGoodbye = () => {
         <div className="content">
           <p>
             {t(
-              'shutdown:banner-copy',
-              'After much thought, we’ve made the difficult decision to close Pocket. Thanks for being part of the journey. Find out about refunds and how to export your content in our support article.'
+              'shutdown:banner-copy-short',
+              'After much thought, we’ve made the difficult decision to close Pocket. Thanks for being part of the journey.'
             )}
             {linkToFarewell ? (
               <Link className="call-to-action" href="/farewell">
