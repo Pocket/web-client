@@ -60,8 +60,9 @@ const bannerBackground = css`
 export const BannerGoodbye = () => {
   const { t, i18n } = useTranslation()
   const currentLanguage = i18n.language.toLowerCase()
-  const showBanner = currentLanguage === 'en' || currentLanguage === 'en-us'
-  return showBanner ? (
+  const linkToFarewell = currentLanguage === 'en' || currentLanguage === 'en-us'
+
+  return (
     <div className={bannerBackground}>
       <div className="inner page-container">
         <h3>{t('shutdown:banner-header', 'Pocket is shutting down')}</h3>
@@ -71,12 +72,18 @@ export const BannerGoodbye = () => {
               'shutdown:banner-copy',
               'After much thought, we’ve made the difficult decision to close Pocket. Thanks for being part of the journey. Find out about refunds and how to export your content in our support article.'
             )}
-            <Link className="call-to-action" href="/farewell">
-              <ArrowRightIcon /> {t('shutdown:banner-readmore', 'Read more')}
-            </Link>
+            {linkToFarewell ? (
+              <Link className="call-to-action" href="/farewell">
+                <ArrowRightIcon /> {t('shutdown:banner-readmore', 'Read more')}
+              </Link>
+            ) : (
+              <a href="https://support.mozilla.org/en-US/kb/future-of-pocket">
+                <ArrowRightIcon /> {t('shutdown:banner-readmore', 'Read more')}
+              </a>
+            )}
           </p>
         </div>
       </div>
     </div>
-  ) : null
+  )
 }
