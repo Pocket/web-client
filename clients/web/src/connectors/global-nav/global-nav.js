@@ -18,6 +18,7 @@ import { SaveIcon } from '@ui/icons/SaveIcon'
 import { SearchIcon } from '@ui/icons/SearchIcon'
 import { LinkCopyIcon } from '@ui/icons/LinkCopyIcon'
 import { EditIcon } from '@ui/icons/EditIcon'
+import { ExportIcon } from '@ui/icons/ExportIcon'
 import { FavoriteIcon } from '@ui/icons/FavoriteIcon'
 import { HighlightIcon } from '@ui/icons/HighlightIcon'
 import { TagIcon } from '@ui/icons/TagIcon'
@@ -129,6 +130,13 @@ const GlobalNav = (props) => {
       label: t('nav:collections', 'Collections'),
       url: '/collections?src=navbar',
       icon: <CollectionsIcon />
+    },
+    {
+      name: 'export',
+      id: 'global-nav-export-link',
+      label: t('nav:export', 'Export'),
+      url: 'https://getpocket.com/export',
+      icon: <ExportIcon />
     }
   ]
 

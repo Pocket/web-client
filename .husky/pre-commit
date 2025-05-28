@@ -1,4 +1,10 @@
 #!/usr/bin/env sh
+# Load nvm if it exists (for GUI clients)
+[ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
+
+# Ensure we're using the right Node version
+[ -f ".nvmrc" ] && nvm use
+
 local_branch_name="$(git rev-parse --abbrev-ref HEAD)"
 
 valid_branch_regex='^((feat|fix|refactor|build|docs|test|chore)\/[a-zA-Z0-9\-]+)$'
