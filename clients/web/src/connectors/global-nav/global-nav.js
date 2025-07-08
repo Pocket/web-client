@@ -12,21 +12,7 @@ import GlobalNavSearch from './global-nav-search'
 import GlobalNavAdd from './global-nav-add'
 import GlobalNavBulkMutations from './global-nav-bulk-mutations'
 
-import { HomeIcon } from '@ui/icons/HomeIcon'
-import { DiscoverIcon } from '@ui/icons/DiscoverIcon'
-import { SaveIcon } from '@ui/icons/SaveIcon'
-import { SearchIcon } from '@ui/icons/SearchIcon'
-import { LinkCopyIcon } from '@ui/icons/LinkCopyIcon'
-import { EditIcon } from '@ui/icons/EditIcon'
 import { ExportIcon } from '@ui/icons/ExportIcon'
-import { FavoriteIcon } from '@ui/icons/FavoriteIcon'
-import { HighlightIcon } from '@ui/icons/HighlightIcon'
-import { TagIcon } from '@ui/icons/TagIcon'
-import { ArticleIcon } from '@ui/icons/ArticleIcon'
-import { ArchiveIcon } from '@ui/icons/ArchiveIcon'
-import { VideoIcon } from '@ui/icons/VideoIcon'
-import { CollectionsIcon } from '@ui/icons/CollectionsIcon'
-import { ListViewAltIcon } from '@ui/icons/ListViewAltIcon'
 
 import { BASE_URL } from 'common/constants'
 import { LOGIN_URL } from 'common/constants'
@@ -69,7 +55,7 @@ const GlobalNav = (props) => {
   const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false)
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const retrievedAvatar = useSelector((state) => state?.userProfile?.avatar_url)
-  const pocketLogoOutboundUrl = isLoggedIn ? '/saves' : 'https://getpocket.com'
+  const pocketLogoOutboundUrl = isLoggedIn ? '/home' : 'https://getpocket.com'
 
   const avatarSrc = enforceDefaultAvatar(retrievedAvatar)
   const accountName = useSelector((state) => state?.userProfile?.first_name)
@@ -93,44 +79,7 @@ const GlobalNav = (props) => {
 
   const sendImpressionEvent = (identifier) => dispatch(sendSnowplowEvent(identifier))
 
-  const pinnedTags = useSelector((state) => state.settings.pinnedTags)
-  const pinnedLinks = pinnedTags.map((pin) => {
-    return {
-      label: pin,
-      name: pin,
-      url: `/saves/tags/${pin}`
-    }
-  })
-
   const links = [
-    {
-      name: 'home',
-      id: 'global-nav-home-link',
-      label: t('nav:home', 'Home'),
-      url: '/home?src=navbar',
-      icon: <HomeIcon />
-    },
-    {
-      name: 'saves',
-      id: 'global-nav-saves-link',
-      label: t('nav:saves', 'Saves'),
-      url: '/saves?src=navbar',
-      icon: <SaveIcon />
-    },
-    {
-      name: 'discover',
-      id: 'global-nav-discover-link',
-      label: t('nav:discover', 'Discover'),
-      url: '/explore?src=navbar',
-      icon: <DiscoverIcon />
-    },
-    {
-      name: 'collections',
-      id: 'global-nav-collections-link',
-      label: t('nav:collections', 'Collections'),
-      url: '/collections?src=navbar',
-      icon: <CollectionsIcon />
-    },
     {
       name: 'export',
       id: 'global-nav-export-link',
@@ -140,81 +89,13 @@ const GlobalNav = (props) => {
     }
   ]
 
-  const subLinks = [
-    {
-      name: 'lists',
-      icon: <ListViewAltIcon />,
-      label: t('nav:all-lists', 'All Lists'),
-      url: '/lists'
-    },
-    {
-      name: 'archive',
-      icon: <ArchiveIcon />,
-      label: t('nav:archive', 'Archive'),
-      url: '/saves/archive'
-    },
-    {
-      name: 'favorites',
-      icon: <FavoriteIcon />,
-      label: t('nav:favorites', 'Favorites'),
-      url: '/saves/favorites'
-    },
-    {
-      name: 'highlights',
-      icon: <HighlightIcon />,
-      label: t('nav:highlights', 'Highlights'),
-      url: '/saves/highlights'
-    },
-    {
-      name: 'articles',
-      icon: <ArticleIcon />,
-      label: t('nav:articles', 'Articles'),
-      url: '/saves/articles'
-    },
-    {
-      name: 'videos',
-      icon: <VideoIcon />,
-      label: t('nav:videos', 'Videos'),
-      url: '/saves/videos'
-    },
-    {
-      name: 'tags',
-      icon: <TagIcon />,
-      label: t('nav:all-tags', 'All Tags'),
-      url: '/saves/tags'
-    },
-    ...pinnedLinks
-  ]
+  const subLinks = []
 
   /**
    * Tools are what we use on Saves
    */
   const fromSaves = topLevelPath === 'saves' && isLoggedIn
-  const tools = fromSaves
-    ? [
-        {
-          name: 'add-item',
-          label: t('nav:save', 'Save a URL'),
-          icon: <LinkCopyIcon />
-        },
-        {
-          name: 'bulk-edit',
-          label: t('nav:bulk-edit', 'Bulk Edit'),
-          icon: <EditIcon />
-        },
-        {
-          name: 'search',
-          label: t('nav:search', 'Search'),
-          icon: <SearchIcon />
-        }
-      ]
-    : [
-        {
-          name: 'search',
-          label: t('nav:search', 'Search'),
-          icon: <SearchIcon />
-        }
-      ]
+  const tools = fromSaves ? [] : []
 
   const onLinkClick = (label) => dispatch(sendSnowplowEvent('global-nav', { label }))
 

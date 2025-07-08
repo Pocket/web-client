@@ -110,9 +110,7 @@ const GlobalNavAccount = ({
   isLoggedIn = false,
   isFxa,
   avatarSrc = null,
-  accountName = 'You',
   accountEmail,
-  profileUrl = null,
   onLinkClick = () => {},
   onAccountClick = () => {}
 }) => {
@@ -145,8 +143,6 @@ const GlobalNavAccount = ({
     }
   }
 
-  const handleViewProfileCase = () => onLinkClick('view-profile')
-  const handleManageAccountCase = () => onLinkClick('manage-account')
   const handleHelpCase = () => onLinkClick('help')
   const handleLogoutCase = () => {
     onLinkClick('logout')
@@ -216,21 +212,10 @@ const GlobalNavAccount = ({
         <PopupMenuGroup>
           <PopupMenuItem
             external={true}
-            href={profileUrl}
-            helperText={t('nav:view-profile', 'View Profile')}
-            id="account-menu-profile-link"
-            onClick={handleViewProfileCase}
-            data-testid="account-menu-profile-link">
-            {accountName}
-          </PopupMenuItem>
-        </PopupMenuGroup>
-        <PopupMenuGroup>
-          <PopupMenuItem
-            href="/account?src=navbar"
-            id="account-menu-manage-account-link"
-            onClick={handleManageAccountCase}
-            data-testid="account-menu-manage-account-link">
-            <Trans i18nKey="nav:manage-profile">Manage profile</Trans>
+            href="/export?src=navbar"
+            id="account-menu-export-link"
+            data-testid="account-menu-manage-export">
+            <Trans i18nKey="nav:export">Export</Trans>
           </PopupMenuItem>
           {isFxa ? (
             <PopupMenuItem
