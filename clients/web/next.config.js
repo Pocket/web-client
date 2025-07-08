@@ -47,7 +47,12 @@ const nextOptions = {
           'https://help.getpocket.com/article/1081-listening-to-articles-in-pocket-with-text-to-speech',
         permanent: false,
         basePath: false
-      }
+      },
+      { source: '/saves', destination: '/home', permanent: false },
+      { source: '/collections', destination: '/home', permanent: false },
+      { source: '/explore', destination: '/home', permanent: false },
+      { source: '/discover', destination: '/home', permanent: false },
+      { source: '/farewell', destination: '/home', permanent: false }
     ]
   },
   async headers() {

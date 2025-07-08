@@ -65,12 +65,12 @@ export const BannerGoodbye = () => {
   return (
     <div className={bannerBackground}>
       <div className="inner page-container">
-        <h3>{t('shutdown:banner-header', 'Pocket is shutting down')}</h3>
+        <h3>{t('shutdown:banner-header', 'Pocket has shut down')}</h3>
         <div className="content">
           <p>
             {t(
               'shutdown:banner-copy-short',
-              'After much thought, we’ve made the difficult decision to close Pocket. Thanks for being part of the journey.'
+              'After much thought, we made the difficult decision to close Pocket. Thanks for being part of the journey.'
             )}
             {linkToFarewell ? (
               <Link className="call-to-action" href="/farewell">

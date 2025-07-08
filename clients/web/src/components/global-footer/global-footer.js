@@ -199,7 +199,7 @@ export const GlobalFooter = (props) => {
                 &copy; {new Date().getFullYear()}{' '}
                 {t('global-footer:read-it-later-inc', 'Read It Later, Inc.')}
               </span>
-              <a href="https://help.getpocket.com/?src=footer_v2">
+              <a href="https://support.mozilla.org/en-US/kb/future-of-pocket">
                 {t('global-footer:get-help', 'Get help')}
               </a>
               <a href="https://getpocket.com/privacy?src=footer_v2">
