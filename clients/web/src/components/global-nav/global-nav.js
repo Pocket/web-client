@@ -142,7 +142,7 @@ const navStyle = css`
 
 const linksStyle = css`
   flex-grow: 2;
-  justify-content: flex-start;
+  justify-content: flex-end;
   display: flex;
   font-family: var(--fontSansSerif);
   line-height: 1;
