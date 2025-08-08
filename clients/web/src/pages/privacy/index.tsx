@@ -82,6 +82,7 @@ export const getServerSideProps: GetServerSideProps<LocalizedProps> =
     const localeToUse: string = localeMap[locale] ?? locale
     const content: string = await getMDContent(localeToUse, isEU)
 
+    // Forcing an update on privacy.  This is a post closure update test.
     return {
       props: {
         ...(await serverSideTranslations(locale, [...LOCALE_COMMON])),
