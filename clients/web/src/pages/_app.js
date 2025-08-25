@@ -35,6 +35,7 @@ import { loadPolyfills } from 'common/setup/polyfills'
 
 import { Shortcuts } from 'connectors/shortcuts/shortcuts'
 import { DevTools } from 'connectors/dev-tools/dev-tools'
+import { MozAdsConfigProvider } from '@mozilla-services/majc/dist/react'
 
 /** App
  --------------------------------------------------------------- */
@@ -188,7 +189,9 @@ function AppWithStore({ Component, ...rest }) {
   const { store, props } = wrapper.useWrappedStore(rest)
   return (
     <Provider store={store}>
-      <PocketWebClient Component={Component} {...props} />
+      <MozAdsConfigProvider config={{ gppEnabled: true }}>
+        <PocketWebClient Component={Component} {...props} />
+      </MozAdsConfigProvider>
       <ConfirmItemsImport />
     </Provider>
   )
