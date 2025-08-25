@@ -210,6 +210,7 @@ export const GlobalFooter = (props) => {
               </a>
               <button
                 onClick={oneTrustClickHandler}
+                suppressHydrationWarning
                 id="ot-sdk-btn"
                 className="ot-sdk-show-settings">
                 {t('global-footer:cookie-preferences', 'Cookie preferences')}
