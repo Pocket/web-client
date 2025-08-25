@@ -11,8 +11,8 @@
     "jose": "5.9.6",
     "next": "15.2.3",
     "next-i18n-router": "5.5.1",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@common/types": "workspace:*",
