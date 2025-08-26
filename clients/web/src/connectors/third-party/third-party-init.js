@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux'
 import Script from 'next/script'
 
 import { pageview } from 'common/utilities/analytics/ga'
-import { loadOptinMonster } from 'common/utilities/third-party/opt-in-monster'
 import { ONETRUST_EMPTY_DEFAULT } from 'common/constants'
 import { trackPageView } from 'connectors/snowplow/snowplow.state'
 import { initializeSnowplow } from 'common/setup/snowplow'
@@ -153,12 +152,6 @@ export function ThirdPartyInit() {
     // cookie preferences
     analyticsInitSet(true)
   }, [oneTrustReady, analyticsCookie, analyticsInit, dispatch, user_status, sess_guid, user_id])
-
-  // Load Opt In Monster for marketing/conversion adventurers ... but not during dev
-  useEffect(() => {
-    if (!isProduction) return () => {}
-    loadOptinMonster()
-  }, [isProduction])
 
   // Track Snowplow Page Views
   useEffect(() => {
