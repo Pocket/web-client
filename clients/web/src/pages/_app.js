@@ -175,12 +175,14 @@ function PocketWebClient({ Component, pageProps, err }) {
 
   return (
     <ViewportProvider>
-      <ThirdPartyInit />
-      <DevTools />
-      <Shortcuts />
-      <CacheProvider value={cache}>
-        {shouldRender ? <Component {...pageProps} err={err} /> : null}
-      </CacheProvider>
+      <MozAdsConfigProvider config={{ gppEnabled: true }}>
+        <ThirdPartyInit />
+        <DevTools />
+        <Shortcuts />
+        <CacheProvider value={cache}>
+          {shouldRender ? <Component {...pageProps} err={err} /> : null}
+        </CacheProvider>
+      </MozAdsConfigProvider>
     </ViewportProvider>
   )
 }
@@ -189,9 +191,7 @@ function AppWithStore({ Component, ...rest }) {
   const { store, props } = wrapper.useWrappedStore(rest)
   return (
     <Provider store={store}>
-      <MozAdsConfigProvider config={{ gppEnabled: true }}>
-        <PocketWebClient Component={Component} {...props} />
-      </MozAdsConfigProvider>
+      <PocketWebClient Component={Component} {...props} />
       <ConfirmItemsImport />
     </Provider>
   )

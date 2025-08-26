@@ -9,7 +9,7 @@
     "@emotion/css": "11.13.5",
     "@emotion/react": "11.14.0",
     "@freestar/pubfig-adslot-react-component": "3.6.2",
-    "@mozilla-services/majc": "https://github.com/mozilla-services/majc#v0.1.5",
+    "@mozilla-services/majc": "https://github.com/mozilla-services/majc#v0.1.6",
     "@n8tb1t/use-scroll-position": "2.0.3",
     "@popperjs/core": "2.11.8",
     "@sentry/integrations": "7.114.0",
