@@ -6,7 +6,7 @@
   "dependencies": {
     "fs-extra": "11.3.0",
     "globby": "14.0.2",
-    "legal-docs": "github:mozilla/legal-docs#74eccbd6e11b762ca706f31734ab6c5192273de4"
+    "legal-docs": "github:mozilla/legal-docs#35d7743e466813c21e39745a76db7c566ae5063b"
   },
   "keywords": [],
   "license": "ISC",
