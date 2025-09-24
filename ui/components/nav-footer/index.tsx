@@ -9,10 +9,8 @@ import { FacebookMonoIcon } from '@ui/icons/FacebookMonoIcon'
 import { InstagramMonoIcon } from '@ui/icons/InstagramMonoIcon'
 import { TwitterMonoIcon } from '@ui/icons/TwitterMonoIcon'
 import Link from 'next/link'
-import { Suspense } from 'react'
 
 // Components
-import { NavFooterCookiePreference } from '../nav-footer-cookie-preference'
 import { LanguageSelector } from '../nav-footer-language'
 import { NavFooterTheme } from '../nav-footer-theme'
 
@@ -74,11 +72,6 @@ export async function NavFooter({ locale }: { locale: string }) {
                 <Link href="/tos?src=footer_v2">
                   {t('global-footer:terms-of-service', 'Terms of service')}
                 </Link>
-              </li>
-              <li>
-                <Suspense>
-                  <NavFooterCookiePreference />
-                </Suspense>
               </li>
             </ul>
           </nav>
