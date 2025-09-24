@@ -1,5 +1,4 @@
 import '@ui/styles/legacy/global.css'
-import { GOOGLE_ANALYTICS_ID } from 'common/constants'
 import { LOGIN_URL } from 'common/constants'
 
 import createCache from '@emotion/cache'
@@ -65,17 +64,6 @@ function PocketWebClient({ Component, pageProps, err }) {
 
     // Load any relevant polyfills
     loadPolyfills()
-  }, [])
-
-  // Google Analytics
-  useEffect(() => {
-    window.gtag =
-      window.gtag ||
-      function () {
-        window.dataLayer.push(arguments)
-      }
-    window.gtag('js', new Date())
-    window.gtag('config', GOOGLE_ANALYTICS_ID)
   }, [])
 
   // Check user status with cookies

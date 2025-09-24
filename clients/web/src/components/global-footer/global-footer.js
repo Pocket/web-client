@@ -171,8 +171,6 @@ export const GlobalFooter = (props) => {
   const { hasBorder = true, hasColorBorder = false, minimal, anchored } = props
   const { t } = useTranslation()
 
-  const oneTrustClickHandler = () => window.OneTrust?.ToggleInfoDisplay()
-
   return (
     <footer
       className={cx(
@@ -208,13 +206,6 @@ export const GlobalFooter = (props) => {
               <a href="https://getpocket.com/tos?src=footer_v2">
                 {t('global-footer:terms-of-service', 'Terms of service')}
               </a>
-              <button
-                onClick={oneTrustClickHandler}
-                suppressHydrationWarning
-                id="ot-sdk-btn"
-                className="ot-sdk-show-settings">
-                {t('global-footer:cookie-preferences', 'Cookie preferences')}
-              </button>
             </nav>
           </div>
           {minimal ? null : (

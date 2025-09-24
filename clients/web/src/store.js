@@ -9,7 +9,6 @@ import { homeSetupReducers } from 'containers/home/setup/setup.state'
 import { homeSetupSagas } from 'containers/home/setup/setup.state'
 
 import { appReducers, appSagas } from 'connectors/app/app.state'
-import { oneTrustReducers } from 'connectors/third-party/one-trust.state'
 import { brazeReducers } from 'connectors/third-party/braze.state'
 import { brazeSagas } from 'connectors/third-party/braze.state'
 
@@ -203,7 +202,6 @@ const marketingReducers = {
 const globalReducers = {
   app: appReducers, // App wide (mostly example at this time)
   homeSetup: homeSetupReducers,
-  oneTrust: oneTrustReducers, // One Trust Readiness
   settings: settingsReducers, // User defined settings
   features: featureReducers, // Feature flags (very basic start)
   topicList: topicListReducers, // Valid topics list and active topic

@@ -76,16 +76,6 @@ exports[`renders NavFooter with defaults 1`] = `
               Terms of service
             </a>
           </li>
-          <li>
-            <button
-              class="text"
-              data-testid="nav-footer-cookie-preference"
-              id="ot-sdk-btn"
-              type="button"
-            >
-              Cookie preferences
-            </button>
-          </li>
         </ul>
       </nav>
     </section>

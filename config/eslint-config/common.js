@@ -30,9 +30,7 @@ module.exports = {
   globals: {
     React: true,
     JSX: true,
-    snowplow: true,
-    OneTrust: true,
-    gtag: true
+    snowplow: true
   },
   settings: {
     'import/resolver': {
