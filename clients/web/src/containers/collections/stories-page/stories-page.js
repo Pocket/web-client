@@ -1,7 +1,6 @@
 import { BASE_URL } from 'common/constants'
 import Layout from 'layouts/main'
 import MobileLayout from 'layouts/mobile-web'
-import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 
@@ -13,11 +12,6 @@ import { AuthorByline } from 'components/content-author/author-byline'
 import { ArticleActions } from 'components/content-actions/article-actions'
 import { SaveArticleTop } from 'components/content-saving/save-article'
 import { SaveArticleBottom } from 'components/content-saving/save-article'
-
-import { BillboardAboveTheFold } from 'components/content-ads/content-ads'
-import { BillboardBelowTheFold } from 'components/content-ads/content-ads'
-import { AdRailTop } from 'components/content-ads/content-ads'
-import { AdRailBottom } from 'components/content-ads/content-ads'
 
 import { ContentIntro } from 'components/content-intro/content-intro'
 import { AuthorBio } from 'components/content-author/author-bio'
@@ -35,8 +29,6 @@ import ErrorPage from 'pages/_error'
 import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'
 import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
 
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
-
 const newsroomUrls = [
   'https://getpocket.com/collections/the-american-journalism-project',
   'https://getpocket.com/collections/ajp-systemic-injustice',
@@ -47,25 +39,17 @@ const newsroomUrls = [
 
 export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   const dispatch = useDispatch()
-  const router = useRouter()
 
   const { mobile_web_view: isMobileWebView } = queryParams
   const ArticleLayout = isMobileWebView ? MobileLayout : Layout
 
   const isAuthenticated = useSelector((state) => state.user?.auth)
-  const isPremium = useSelector((state) => state.user?.premium_status)
 
   const data = useSelector((state) => state.itemsDisplay[slug]) || {}
   const storyIds = useSelector((state) => state.pageCollectionStories[slug])
   const topics = useSelector((state) => state.topicList?.topicsByName)
-  const userStatus = useSelector((state) => state.user.user_status)
   const showTopics = locale === 'en'
   const saveItemId = useSelector((state) => state.itemsTransitions[slug])
-
-  // Initialize MAJC on the page
-  const featureState = useSelector((state) => state.features)
-  const showMajc = featureFlagActive({ flag: 'majc', featureState })
-  const resolved = userStatus !== 'pending'
 
   const [isMastodonOpen, setIsMastodonOpen] = useState(false)
 
@@ -73,36 +57,10 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   if (statusCode) return <ErrorPage statusCode={statusCode} />
 
   const { title, intro, excerpt, authors, imageUrl, pageSaveStatus, partnership } = data
-  const {
-    showAds = true,
-    IABParentCategory,
-    IABChildCategory,
-    iabTopCategoryId,
-    iabSubCategoryId,
-    externalId
-  } = data
   const authorNames = authors?.map((author) => author.name)
-
-  const isPremiumUser = isPremium === '1'
-  const shouldSeeAds = userStatus === 'pending' || isPremiumUser ? false : showAds
-  const allowAds = shouldSeeAds && showMajc
-
-  // Initialize Ads on the page
-  const { asPath: urlPath } = router
-  const targeting = {
-    URL: urlPath,
-    Category: IABParentCategory?.slug,
-    SubCategory: IABChildCategory?.slug,
-    iabTopCategoryId,
-    iabSubCategoryId,
-    ArticleID: externalId
-  }
 
   const heroImage = getImageCacheUrl(imageUrl, { width: 648 }, 'png')
 
-  // const count = urls?.length
-  // const saveCollectionTop = () => dispatch(saveCollection(slug))
-  // const saveCollectionBottom = () => dispatch(saveCollection(slug))
   const languagePrefix = locale === 'en' ? '' : `/${locale}`
   const canonical = `${BASE_URL}${languagePrefix}/collections/${slug}`
   const url = canonical
@@ -149,14 +107,6 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
         metaData={metaData}
         className={printLayout}>
         <main className={contentLayout}>
-          <section>
-            <BillboardAboveTheFold
-              isMobile={isMobileWebView}
-              allowAds={allowAds}
-              targeting={targeting}
-              resolved={resolved}
-            />
-          </section>
           {/* Content header information */}
           <section className="content-section">
             <header>
@@ -202,10 +152,7 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
             {newsroomUrls.includes(url) ? (
               <CallOutNewsroom />
             ) : (
-              <aside className="right-aside">
-                <AdRailTop allowAds={allowAds} targeting={targeting} />
-                <AdRailBottom allowAds={allowAds} targeting={targeting} />
-              </aside>
+              <aside className="right-aside"></aside>
             )}
 
             <div className="content-body">
@@ -243,13 +190,6 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
                 url={url}
               />
             </footer>
-          </section>
-          <section>
-            <BillboardBelowTheFold
-              isMobile={isMobileWebView}
-              allowAds={allowAds}
-              targeting={targeting}
-            />
           </section>
           <section>
             {showTopics ? (

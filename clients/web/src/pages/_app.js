@@ -34,7 +34,6 @@ import { loadPolyfills } from 'common/setup/polyfills'
 
 import { Shortcuts } from 'connectors/shortcuts/shortcuts'
 import { DevTools } from 'connectors/dev-tools/dev-tools'
-import { MozAdsConfigProvider } from '@mozilla-services/majc/dist/react'
 
 /** App
  --------------------------------------------------------------- */
@@ -163,14 +162,12 @@ function PocketWebClient({ Component, pageProps, err }) {
 
   return (
     <ViewportProvider>
-      <MozAdsConfigProvider config={{ gppEnabled: true }}>
-        <ThirdPartyInit />
-        <DevTools />
-        <Shortcuts />
-        <CacheProvider value={cache}>
-          {shouldRender ? <Component {...pageProps} err={err} /> : null}
-        </CacheProvider>
-      </MozAdsConfigProvider>
+      <ThirdPartyInit />
+      <DevTools />
+      <Shortcuts />
+      <CacheProvider value={cache}>
+        {shouldRender ? <Component {...pageProps} err={err} /> : null}
+      </CacheProvider>
     </ViewportProvider>
   )
 }
