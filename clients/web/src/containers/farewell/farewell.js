@@ -42,7 +42,7 @@ export function Farewell() {
           </div>
           <div>
             <Trans t={t} i18nKey="goodbye:why">
-              <h3>Why is Pocket shutting down?</h3>
+              <h3>Why has Pocket shut down?</h3>
               <p>
                 Pocket has helped millions save articles and discover stories worth reading. But the
                 way people save and consume content on the web has evolved, so we’re channeling our
@@ -97,7 +97,7 @@ export function Farewell() {
             <Trans t={t} i18nKey="goodbye:mozilla-commitment">
               <h3>Mozilla’s commitment to high-quality content recommendations</h3>
               <p>
-                While Pocket is shutting down, Mozilla continues with our commitment to high-quality
+                While Pocket has shut down, Mozilla continues with our commitment to high-quality
                 content recommendations in Firefox. We take an “algotorial” approach to curating the
                 best of the web for the millions of users who make Firefox their window to the
                 internet. We use machine learning algorithms to scour the internet for high quality
@@ -113,69 +113,13 @@ export function Farewell() {
         </section>
 
         <section className={`page-container ${style.whatsNext}`}>
-          <Trans t={t} i18nKey="goodbye:what-happens-next">
-            <h2>What happens next?</h2>
-
-            <div>
-              <h4>Saves Export</h4>
-              <ul>
-                <li>
-                  You can{' '}
-                  <a href="https://support.mozilla.org/kb/exporting-your-pocket-list">export</a>{' '}
-                  saves anytime until October 8, 2025, after which all user data will be permanently
-                  deleted.
-                </li>
-                <li>
-                  For account support and enquiries, please visit the{' '}
-                  <a href="https://support.mozilla.org/products/pocket">Pocket support page.</a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4>Premium User Subscriptions</h4>
-              <ul>
-                <li>
-                  Premium monthly subscriptions will be cancelled automatically before their next
-                  billing cycle.
-                </li>
-                <li>
-                  Premium annual subscriptions will be cancelled on July 8, and users will receive a
-                  prorated refund automatically. The refund will be based on how much time is left
-                  in their subscription after July 8, 2025.
-                </li>
-                <li>
-                  We’ve arranged refunds to users’ original payment method based on their
-                  subscription type.
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4>Pocket Hits </h4>
-              <ul>
-                <li>
-                  The Pocket email newsletter “Pocket Hits”, which offers readers daily and weekly
-                  curation of engaging content from trustworthy sources, will be renamed mid-June
-                  2025, to “Ten Tabs ”. All readers will be notified about these changes in the
-                  email newsletter.
-                </li>
-                <li>
-                  Readers will continue receiving the same high-quality content in the usual format,
-                  curated by the same editorial team, but now powered by Firefox. Those who no
-                  longer wish to receive the newsletter can opt out via the unsubscribe link at the
-                  bottom of the email.
-                </li>
-              </ul>
-            </div>
-
-            <div className={style.additional}>
-              <a
-                className="button secondary large"
-                href="https://support.mozilla.org/en-US/kb/future-of-pocket">
-                Additional details
-              </a>
-            </div>
-          </Trans>
+          <div className={style.additional}>
+            <a
+              className="button secondary large"
+              href="https://support.mozilla.org/en-US/kb/future-of-pocket">
+              {t('additional-details', 'Additional details')}
+            </a>
+          </div>
         </section>
 
         <section className={`page-container ${style.footer}`}>
