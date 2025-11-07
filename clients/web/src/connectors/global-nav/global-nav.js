@@ -21,8 +21,6 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { itemsImportShow } from 'connectors/items/mutation-import.state'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
-import { Banner } from './global-nav-banner'
-
 // check empty avatar value coming from endpoint (sample default avatar url to overwrite https://pocket-profile-images.s3.amazonaws.com/profileBlue.png)
 export const enforceDefaultAvatar = (avatarUrl = '') => {
   const DISALLOWED_PROFILE_IMGS = ['profileBlue.png'] // file names of default urls returned by BE. If a user avatar url contains one of these, we prefer to return an empty string, in order to use the Web UI's Avatar default image instead
@@ -42,7 +40,7 @@ export const enforceDefaultAvatar = (avatarUrl = '') => {
  * provided to it to the GlobalNav component.
  */
 const GlobalNav = (props) => {
-  const { selectedLink: selected, subset, tag, noNav, bannerCampaign, onlyLogout } = props
+  const { selectedLink: selected, subset, tag, bannerCampaign, onlyLogout } = props
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const router = useRouter()
@@ -115,7 +113,6 @@ const GlobalNav = (props) => {
   }
 
   const NavTakeover = navChildren[appMode]
-  const hideNav = noNav
 
   const onLoginClick = (event) => {
     event.preventDefault()
@@ -126,8 +123,6 @@ const GlobalNav = (props) => {
   const onImportClick = () => {
     dispatch(itemsImportShow())
   }
-
-  const CurrentBanner = bannerCampaign ? Banner : null
 
   return (
     <GlobalNavComponent
@@ -160,10 +155,9 @@ const GlobalNav = (props) => {
       setDetailMode={setDetailMode}
       sendImpression={sendImpressionEvent}
       tools={tools}
-      noNav={hideNav}
+      noNav={true}
       onlyLogout={onlyLogout}
       bannerCampaign={bannerCampaign}
-      Banner={CurrentBanner}
       flagsReady={flagsReady}>
       {NavTakeover ? (
         <NavTakeover onClose={resetNav} searchEnrolled={true} fromSaves={fromSaves} />
