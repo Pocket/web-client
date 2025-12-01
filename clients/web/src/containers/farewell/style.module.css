@@ -76,6 +76,7 @@
     }
 
     &.whatsNext {
+      margin-bottom: 10rem;
       grid-template-columns: 1fr 1fr 1fr;
       align-items: flex-start;
       @media (max-width: 1024px) {

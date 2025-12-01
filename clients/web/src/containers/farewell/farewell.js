@@ -121,17 +121,6 @@ export function Farewell() {
             </a>
           </div>
         </section>
-
-        <section className={`page-container ${style.footer}`}>
-          <Trans t={t} i18nKey="goodbye:thank-you">
-            <h2>Thank you for being a part of this journey</h2>
-            <hr />
-            <p>
-              Contact us for press inquiries at{' '}
-              <a href="mailto:press@getpocket.com">press@getpocket.com</a>.
-            </p>
-          </Trans>
-        </section>
       </main>
     </Layout>
   )
