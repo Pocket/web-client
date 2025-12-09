@@ -19,7 +19,7 @@
     "@config/eslint-config": "workspace:*",
     "@config/jest": "workspace:*",
     "@eslint/compat": "1.2.6",
-    "@types/node": "^22.13.1",
+    "@types/node": "^24.10.2",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "eslint": "^9.19.0",
