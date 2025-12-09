@@ -28,7 +28,7 @@
     "typescript": "5.7.3"
   },
   "engines": {
-    "node": "=24.11.0",
+    "node": ">=24.11.0",
     "pnpm": ">=9"
   },
   "homepage": "https://github.com/Pocket/web-client#readme",
@@ -68,7 +68,6 @@
     "extension:ff": "pnpm turbo dev:extension:ff",
     "format": "pnpm turbo format",
     "gen": "turbo gen --config config/generators/config.ts",
-    "lint": "pnpm turbo lint",
     "locale:inject": "node ./common/localization/locale-inject.mjs",
     "locale:parse": "i18next",
     "pocket": "pnpm turbo pocket",
