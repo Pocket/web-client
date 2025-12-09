@@ -17,7 +17,7 @@ import { ConfirmTagging } from 'connectors/confirm/tagging'
 import { ConfirmShare } from 'connectors/confirm/share'
 import { Toasts } from 'connectors/toasts/toast-list'
 
-import { GoogleFonts, FONT_TYPES } from 'components/fonts/fonts'
+import { FONT_TYPES } from 'components/fonts/fonts'
 import { ReaderFonts } from 'components/reader/fonts'
 
 import { Loader, LoaderCentered } from 'components/loader/loader'

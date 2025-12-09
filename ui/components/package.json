@@ -14,8 +14,8 @@
     "@ui/icons": "workspace:*",
     "@ui/styles": "workspace:*",
     "match-sorter": "8.0.0",
-    "next": "15.2.3",
-    "react": "19.1.0",
+    "next": "16.0.8",
+    "react": "19.2.1",
     "react-player": "2.16.0"
   },
   "devDependencies": {
