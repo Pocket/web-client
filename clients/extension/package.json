@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "@storybook/react": "8.5.3",
-    "@types/node": "22.13.1",
+    "@types/node": "24.10.2",
     "@ui/components": "workspace:*",
     "@ui/icons": "workspace:*",
     "jose": "5.9.6",
