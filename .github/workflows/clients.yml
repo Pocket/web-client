@@ -66,28 +66,5 @@ jobs:
         release-version: ${{needs.semantic-release.outputs.release-version}}
         assets-prefix: 'web-client'
       secrets: inherit
-    
-    pocket-client-infrastructure:
-        uses: pocket/pocket-monorepo/.github/workflows/reuse-infrastructure.yml@main
-        with:
-            scope: pocket-client-cdk
-            stack-output-path: infrastructure/pocket/cdktf.out/stacks/pocket-client
-        secrets: inherit
-
- 
-    # we are building on branch to make sure there are no build errors
-    pocket:
-      uses: ./.github/workflows/build-app.yml
-      needs: 
-        - pocket-client-infrastructure
-        - semantic-release
-      with:
-        terraform-output: ${{needs.pocket-client-infrastructure.outputs.terraform-output}}
-        app-path: 'pocket'
-        scope: '@client/pocket'
-        docker-repo-name: 'pocketclient'
-        release-version: ${{needs.semantic-release.outputs.release-version}}
-        assets-prefix: 'pocket'
-      secrets: inherit
 
   
