@@ -92,7 +92,7 @@
     "typescript": "5.7.3"
   },
   "engines": {
-    "node": "=24.11.0",
+    "node": ">=24.11.0",
     "pnpm": ">=9"
   },
   "jest-junit": {
@@ -108,7 +108,6 @@
     "dev": "RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included node ./server.local.js",
     "dev:snowplow": "TEST_SNOWPLOW=included pnpm dev",
     "format": "lint-staged",
-    "lint": "next lint",
     "locale:inject": "node ./common/localization/locale-inject.mjs",
     "locale:parse": "cd common/localization/ && pnpm extract",
     "start": "next start -p 80",

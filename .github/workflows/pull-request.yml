@@ -3,16 +3,6 @@ on:
     pull_request:
 
 jobs:
-    # lint all the files
-    lint:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4 
-            - name: Install PNPM & Node
-              uses: pocket/pocket-monorepo/.github/actions/install-pnpm-and-node@main
-            - name: Eslint
-              run: pnpm lint
     
     # unit test all the files
     unit-tests:
