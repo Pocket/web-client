@@ -3,9 +3,6 @@
 import { css } from '@emotion/css'
 import { useTranslation } from 'next-i18next'
 
-import { MozAdsPlacement } from '@mozilla-services/majc/dist/react'
-import { IABFixedSize, MozAdsSize } from '@mozilla-services/majc/dist/core'
-
 const programmaticAdWrapperStyles = css`
   display: flex;
   flex-direction: column;
@@ -33,41 +30,20 @@ export enum Placements {
   RIGHT_RAIL_2 = 'pocket_skyscraper_2'
 }
 
-const placementSizes: Record<string, MozAdsSize> = {
-  pocket_billboard_1: IABFixedSize.Billboard,
-  pocket_billboard_2: IABFixedSize.Billboard,
-  pocket_mrec_1: IABFixedSize.MediumRectangle,
-  pocket_mrec_2: IABFixedSize.MediumRectangle,
-  pocket_skyscraper_1: IABFixedSize.Skyscraper,
-  pocket_skyscraper_2: IABFixedSize.Skyscraper
-}
 
 export function AdSlot({
-  placement,
-  targeting,
   instanceStyles,
-  isMock = false
 }: {
-  placement: Placements
+  placement?: Placements
   targeting?: any
   instanceStyles?: string
-  isMock: boolean
+  isMock?: boolean
 }) {
-  const placementId = `${isMock ? 'mock_' : ''}${placement.toString()}`
   const { t } = useTranslation()
   const adLabel = t('ad:label', 'Advertisement')
-  const fixedSize = placementSizes[placementId]
 
   return (
     <div className={`${programmaticAdWrapperStyles} syndication-ad ${instanceStyles}`}>
-      <MozAdsPlacement
-        placementId={placementId}
-        iabContent={{
-          taxonomy: 'IAB-1.0',
-          categoryIds: [targeting.iabTopCategoryId, targeting.iabSubCategoryId]
-        }}
-        fixedSize={fixedSize}
-      />
       <p className="label">{adLabel}</p>
     </div>
   )
