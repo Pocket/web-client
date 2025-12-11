@@ -1,7 +1,0 @@
-.error {
-  border-top: 1px solid var(--color-divider);
-  padding: 1rem;
-  font-size: 0.85rem;
-  font-style: italic;
-  color: var(--color-error);
-}
