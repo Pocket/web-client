@@ -15,7 +15,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "msw": "^2.7.0",
     "next": "^16.0.8",
-    "react": "^19.2.1",
+    "react": "^19.2.3",
     "react-i18next": "^15.4.0",
     "react-redux": "9.2.0",
     "redux": "5.0.1",
