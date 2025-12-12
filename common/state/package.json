@@ -9,7 +9,7 @@
     "@common/utilities": "workspace:*",
     "jose": "5.9.6",
     "next": "16.0.8",
-    "react": "19.2.1",
+    "react": "19.2.3",
     "zustand": "5.0.3"
   },
   "devDependencies": {
