@@ -25,9 +25,6 @@ export const Listen = ({ itemId, path }) => {
     threshold: 0.5,
     onChange: (inView) => {
       if (inView) {
-        import('common/utilities/braze/braze-lazy-load').then(({ logCustomEvent }) =>
-          logCustomEvent('listen.impression', analyticsData)
-        )
         dispatch(sendSnowplowEvent('listen.impression', analyticsData))
       }
     }
@@ -35,30 +32,18 @@ export const Listen = ({ itemId, path }) => {
 
   // Events
   const playEvent = () => {
-    import('common/utilities/braze/braze-lazy-load').then(({ logCustomEvent }) =>
-      logCustomEvent('listen.play', analyticsData)
-    )
     dispatch(sendSnowplowEvent('listen.play', analyticsData))
   }
 
   const pauseEvent = () => {
-    import('common/utilities/braze/braze-lazy-load').then(({ logCustomEvent }) =>
-      logCustomEvent('listen.pause', analyticsData)
-    )
     dispatch(sendSnowplowEvent('listen.pause', analyticsData))
   }
 
   const rateChangeEvent = (rate) => {
-    import('common/utilities/braze/braze-lazy-load').then(({ logCustomEvent }) =>
-      logCustomEvent('listen.rate', { ...analyticsData, value: rate })
-    )
     dispatch(sendSnowplowEvent('listen.rate', { ...analyticsData, value: rate }))
   }
 
   const endEvent = () => {
-    import('common/utilities/braze/braze-lazy-load').then(({ logCustomEvent }) =>
-      logCustomEvent('listen.end', analyticsData)
-    )
     dispatch(sendSnowplowEvent('listen.end', analyticsData))
   }
 

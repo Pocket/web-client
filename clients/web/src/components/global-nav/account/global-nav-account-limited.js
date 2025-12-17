@@ -67,8 +67,6 @@ const GlobalNavAccountLimited = ({
 }) => {
   const { t } = useTranslation()
 
-  const brazeInitialized = useSelector((state) => state?.braze?.initialized)
-
   const accountMenuTriggerRef = useRef(null)
   const menuRef = useRef(null)
 
@@ -96,9 +94,6 @@ const GlobalNavAccountLimited = ({
   const handleHelpCase = () => onLinkClick('help')
   const handleLogoutCase = () => {
     onLinkClick('logout')
-    // Fire for all users when Braze launches
-    if (brazeInitialized)
-      import('common/utilities/braze/braze-lazy-load').then(({ destroy }) => destroy())
   }
 
   const updateFocus = (e) => {

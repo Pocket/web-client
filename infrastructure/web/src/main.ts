@@ -105,10 +105,6 @@ class WebClient extends TerraformStack {
               valueFrom: `arn:aws:ssm:${region.name}:${caller.accountId}:parameter/${config.name}/${config.environment}/SENTRY_DSN`
             },
             {
-              name: 'BRAZE_PRIVATE_KEY',
-              valueFrom: `arn:aws:ssm:${region.name}:${caller.accountId}:parameter/${config.name}/${config.environment}/BRAZE_PRIVATE_KEY`
-            },
-            {
               name: 'REVALIDATION_TOKEN',
               valueFrom: `arn:aws:ssm:${region.name}:${caller.accountId}:parameter/${config.name}/${config.environment}/REVALIDATION_TOKEN`
             }

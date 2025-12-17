@@ -18,8 +18,6 @@ import { USER_TAGS_PINS_SET } from 'actions'
 
 import { PINNED_TOPICS_SET } from 'actions'
 
-import { TOGGLE_BRAZE } from 'actions'
-
 import { CACHE_KEY_HOME_STORED_TOPICS } from 'common/constants'
 
 const initialState = {
@@ -79,15 +77,13 @@ export const settingsSagas = [
   takeLatest(USER_TAGS_EDIT_SUCCESS, saveSettings),
   takeLatest(USER_TAGS_DELETE_SUCCESS, saveSettings),
   takeLatest(USER_TAGS_PINS_SET, saveSettings),
-  takeLatest(PINNED_TOPICS_SET, saveSettings),
-  takeLatest(TOGGLE_BRAZE, saveSettings)
+  takeLatest(PINNED_TOPICS_SET, saveSettings)
 ]
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
 const getSettings = (state) => state.settings
 const getHomeOnboarding = (state) => state.homeOnboarding
-const getBraze = (state) => state.braze?.brazeSubscribed
 const getSetupState = (state) => state.homeSetup
 
 function* fetchSettings() {
@@ -105,12 +101,10 @@ function* saveSettings() {
   try {
     const storedSettings = yield select(getSettings)
     const homeOnboarding = yield select(getHomeOnboarding)
-    const brazeSubscribed = yield select(getBraze)
     const { setupStatus, userTopics } = yield select(getSetupState)
     const settings = {
       ...storedSettings,
       homeOnboarding,
-      brazeSubscribed,
       setupStatus,
       userTopics
     }

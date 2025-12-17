@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { QaModal } from 'connectors/dev-tools/qa-modal'
-import { BrazeModal } from 'connectors/dev-tools/braze-modal'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { featuresAssign } from 'connectors/feature-flags/feature-flags.state'
@@ -47,7 +46,6 @@ export function DevTools() {
   return (
     <>
       <QaModal />
-      <BrazeModal />
     </>
   )
 }
