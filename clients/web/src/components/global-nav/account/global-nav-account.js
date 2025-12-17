@@ -116,7 +116,6 @@ const GlobalNavAccount = ({
 }) => {
   const { t } = useTranslation()
 
-  const brazeInitialized = useSelector((state) => state?.braze?.initialized)
   const analyticsInitialized = useSelector((state) => state?.analytics?.initialized)
 
   const accountMenuTriggerRef = useRef(null)
@@ -146,9 +145,6 @@ const GlobalNavAccount = ({
   const handleHelpCase = () => onLinkClick('help')
   const handleLogoutCase = () => {
     onLinkClick('logout')
-    // Fire for all users when Braze launches
-    if (brazeInitialized)
-      import('common/utilities/braze/braze-lazy-load').then(({ destroy }) => destroy())
     if (analyticsInitialized) clearUserData()
   }
   const updateFocus = (e) => {

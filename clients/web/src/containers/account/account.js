@@ -6,7 +6,6 @@ import { accountStyles } from 'components/account/account'
 import { Premium } from 'components/account/premium/premium'
 import { Profile } from 'containers/account/profile/profile'
 import { Email } from 'containers/account/email/email'
-import { Braze } from 'containers/account/braze/braze'
 import { ConnectedServices } from 'containers/account/connections/connections'
 import { Privacy } from 'containers/account/privacy/privacy'
 import { useTranslation } from 'next-i18next'
@@ -32,7 +31,6 @@ export const Account = () => {
         <Premium isPremium={isPremium} onPremiumImpression={onPremiumImpression} />
         <Profile />
         <Email />
-        <Braze />
         <ConnectedServices />
         <Privacy />
       </main>

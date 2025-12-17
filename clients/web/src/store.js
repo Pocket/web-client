@@ -9,8 +9,6 @@ import { homeSetupReducers } from 'containers/home/setup/setup.state'
 import { homeSetupSagas } from 'containers/home/setup/setup.state'
 
 import { appReducers, appSagas } from 'connectors/app/app.state'
-import { brazeReducers } from 'connectors/third-party/braze.state'
-import { brazeSagas } from 'connectors/third-party/braze.state'
 
 import { userReducers, userSagas, accountReducers } from 'containers/account/account.state'
 
@@ -208,7 +206,6 @@ const globalReducers = {
   toasts: actionToastsReducers, // Notifications of action results,
   shortcuts: shortcutReducers, // Keyboard shortcuts,
   analytics: snowplowReducers, //Analytics
-  braze: brazeReducers, // Braze
   placards: placardReducers // Mozilla Ad Placements
 }
 
@@ -249,7 +246,6 @@ function* rootSaga() {
     ...pageHomeSaga,
     ...userSearchSagas,
     ...shortcutSagas,
-    ...brazeSagas,
     ...pageSavedIdsSagas,
     ...itemsSavedSagas,
     ...pageListsInfoSagas,

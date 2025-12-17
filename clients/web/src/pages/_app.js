@@ -25,7 +25,6 @@ import { appSetPreferences } from 'connectors/app/app.state'
 import { hydrateSettings } from 'connectors/settings/settings.state'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
-import { ThirdPartyInit } from 'connectors/third-party/third-party-init'
 import { ConfirmItemsImport } from 'connectors/confirm/items-import'
 
 /** Setup Files
@@ -162,7 +161,6 @@ function PocketWebClient({ Component, pageProps, err }) {
 
   return (
     <ViewportProvider>
-      <ThirdPartyInit />
       <DevTools />
       <Shortcuts />
       <CacheProvider value={cache}>

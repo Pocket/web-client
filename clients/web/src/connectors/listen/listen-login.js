@@ -6,7 +6,6 @@ import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 import { LOGIN_URL } from 'common/constants'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { ListenIcon } from '@ui/icons/ListenIcon'
-import { BRAZE_LISTEN } from 'common/utilities/braze/feature-flags'
 
 const loggedOutStyle = css`
   padding: 16px 18px;
@@ -36,28 +35,13 @@ const loggedOutStyle = css`
 export const ListenLogin = ({ itemId, path }) => {
   const dispatch = useDispatch()
   const [listenEnrolled, setListenEnrolled] = useState(false)
-  const brazeInitialized = useSelector((state) => state?.braze?.initialized)
   const userStatus = useSelector((state) => state.user.user_status)
   const featureState = useSelector((state) => state.features)
   const listenLab = featureFlagActive({ flag: 'lab.listen', featureState })
 
-  useEffect(() => {
-    if (!brazeInitialized) return () => {}
-    import('common/utilities/braze/braze-lazy-load').then(
-      ({ logFeatureFlagImpression, getFeatureFlag }) => {
-        const flag = getFeatureFlag(BRAZE_LISTEN)
-        if (flag?.enabled) setListenEnrolled(true)
-        logFeatureFlagImpression(BRAZE_LISTEN)
-      }
-    )
-  }, [brazeInitialized])
-
   const showListen = listenLab || listenEnrolled
 
   const signUpEvent = () => {
-    import('common/utilities/braze/braze-lazy-load').then(({ logCustomEvent }) =>
-      logCustomEvent('listen.signup')
-    )
     dispatch(sendSnowplowEvent('listen.signup'))
   }
 

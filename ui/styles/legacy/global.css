@@ -495,13 +495,3 @@ a[data-tooltip-position=top]:after,button[data-tooltip-position=top]:after{botto
 a[data-tooltip-position=top]:hover:after,a[data-tooltip-position=top]:hover:before,button[data-tooltip-position=top]:hover:after,button[data-tooltip-position=top]:hover:before{animation-name:tooltipFadeawayTop;transform-origin:bottom}
 
 a[data-tooltip-delay]:hover:after,a[data-tooltip-delay]:hover:before,button[data-tooltip-delay]:hover:after,button[data-tooltip-delay]:hover:before{animation-delay:1s}
-
-/* BRAZE STYLES --------------------------------------------- */
-
-.ab-iam-root .ab-in-app-message.ab-background{background-color:var(--color-canvas)!important;border:1px solid rgba(0,0,0,.12)!important;border-radius:var(--borderRadius)!important;box-shadow:0 8px 24px rgba(0,0,0,.12)!important}
-
-.ab-iam-root .ab-message-text{color:var(--color-textPrimary)!important;font-family:var(--fontSansSerif)!important;font-weight:400!important}
-
-.ab-iam-root .ab-close-button svg path{fill:var(--color-textPrimary)!important}
-
-.ab-iam-root .ab-close-button:hover svg path{fill:var(--color-textLinkHover)!important}

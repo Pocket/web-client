@@ -31,11 +31,6 @@ export const CAPTCHA_SITE_KEY = '6LfIpyYUAAAAAPtNSKafudr16odFL1eQte0vR0Py' // AP
 export const GOOGLE_ANALYTICS_ID = 'UA-370613-9'
 export const FACEBOOK_APP_ID = '131450656879143'
 
-// BRAZE
-export const BRAZE_API_KEY_DEV = '76e48d24-506c-4e7e-bec2-c0f262ebbcd5' // API key for Pocket (Dev) - Web
-export const BRAZE_API_KEY_PROD = '4fee55ff-f105-4a61-843b-856c583b109e' // API key for Pocket - Web (THIS IS PRODUCTION)
-export const BRAZE_SDK_ENDPOINT = 'sdk.iad-05.braze.com' // SDK endpoint for Pocket (Dev) - Web (same for both dev & prod)
-
 // SNOWPLOW
 export const API_USER_ID = 89624 // Pocket backend identifier for an API user used in Snowplow analytic events
 export const SNOWPLOW_SCHEMA_VENDOR = 'com.pocket'
